@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Argz Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Argz-and-Envz-Vectors.html#Argz-and-Envz-Vectors" title="Argz and Envz Vectors">
+<link rel="next" href="Envz-Functions.html#Envz-Functions" title="Envz Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Argz%20Functions">Argz Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Envz-Functions.html#Envz%20Functions">Envz Functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Argz-and-Envz-Vectors.html#Argz%20and%20Envz%20Vectors">Argz and Envz Vectors</a>
-<hr><br>
+<a name="Argz-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Envz-Functions.html#Envz-Functions">Envz Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argz-and-Envz-Vectors.html#Argz-and-Envz-Vectors">Argz and Envz Vectors</a>
+<hr>
 </div>
 
-<h3 class="subsection">Argz Functions</h4>
+<h4 class="subsection">5.12.1 Argz Functions</h4>
 
 <p>Each argz vector is represented by a pointer to the first element, of
 type <code>char *</code>, and a size, of type <code>size_t</code>, both of which can
@@ -37,74 +44,47 @@ be freed by using <code>free</code>; conversely, any argz function that may
 grow a string expects that string to have been allocated using
 <code>malloc</code> (those argz functions that only examine their arguments or
 modify them in place will work on any sort of memory). 
-See <a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>.
+See <a href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>.
 
    <p>All argz functions that do memory allocation have a return type of
 <code>error_t</code>, and return <code>0</code> for success, and <code>ENOMEM</code> if an
 allocation error occurs.
 
-   <p>These functions are declared in the standard include file <code>argz.h</code>.
+   <p><a name="index-argz_002eh-583"></a>These functions are declared in the standard include file <samp><span class="file">argz.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_create</b><i> </i>(<i>char *const </i><var>argv</var><i></i>[<i></i>]<i>, char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_create</code> function converts the Unix-style argument vector
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_create</b> (<var>char *const argv</var>[]<var>, char **argz, size_t *argz_len</var>)<var><a name="index-argz_005fcreate-584"></a></var><br>
+<blockquote><p>The <code>argz_create</code> function converts the Unix-style argument vector
 <var>argv</var> (a vector of pointers to normal C strings, terminated by
-<code>(char *)0</code>; see <a href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>) into an argz vector with
+<code>(char *)0</code>; see <a href="Program-Arguments.html#Program-Arguments">Program Arguments</a>) into an argz vector with
 the same elements, which is returned in <var>argz</var> and <var>argz_len</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_create_sep</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>sep</var><i>, char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_create_sep</code> function converts the null-terminated string
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_create_sep</b> (<var>const char *string, int sep, char **argz, size_t *argz_len</var>)<var><a name="index-argz_005fcreate_005fsep-585"></a></var><br>
+<blockquote><p>The <code>argz_create_sep</code> function converts the null-terminated string
 <var>string</var> into an argz vector (returned in <var>argz</var> and
 <var>argz_len</var>) by splitting it into elements at every occurrence of the
 character <var>sep</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>argz_count</b><i> </i>(<i>const char *</i><var>argz</var><i>, size_t </i><var>arg_len</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Returns the number of elements in the argz vector <var>argz</var> and
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: size_t <b>argz_count</b> (<var>const char *argz, size_t arg_len</var>)<var><a name="index-argz_005fcount-586"></a></var><br>
+<blockquote><p>Returns the number of elements in the argz vector <var>argz</var> and
 <var>argz_len</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>argz_extract</b><i> </i>(<i>char *</i><var>argz</var><i>, size_t </i><var>argz_len</var><i>, char **</i><var>argv</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_extract</code> function converts the argz vector <var>argz</var> and
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>argz_extract</b> (<var>char *argz, size_t argz_len, char **argv</var>)<var><a name="index-argz_005fextract-587"></a></var><br>
+<blockquote><p>The <code>argz_extract</code> function converts the argz vector <var>argz</var> and
 <var>argz_len</var> into a Unix-style argument vector stored in <var>argv</var>,
 by putting pointers to every element in <var>argz</var> into successive
 positions in <var>argv</var>, followed by a terminator of <code>0</code>. 
@@ -112,146 +92,96 @@ positions in <var>argv</var>, followed by a terminator of <code>0</code>.
 elements in <var>argz</var> plus the terminating <code>(char *)0</code>
 (<code>(argz_count (</code><var>argz</var><code>, </code><var>argz_len</var><code>) + 1) * sizeof (char *)</code>
 bytes should be enough).  Note that the string pointers stored into
-<var>argv</var> point into <var>argz</var>--they are not copies--and so
+<var>argv</var> point into <var>argz</var>&mdash;they are not copies&mdash;and so
 <var>argz</var> must be copied if it will be changed while <var>argv</var> is
 still active.  This function is useful for passing the elements in
-<var>argz</var> to an exec function (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>). 
-</td></tr>
-</table>
+<var>argz</var> to an exec function (see <a href="Executing-a-File.html#Executing-a-File">Executing a File</a>). 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>argz_stringify</b><i> </i>(<i>char *</i><var>argz</var><i>, size_t </i><var>len</var><i>, int </i><var>sep</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_stringify</code> converts <var>argz</var> into a normal string with
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>argz_stringify</b> (<var>char *argz, size_t len, int sep</var>)<var><a name="index-argz_005fstringify-588"></a></var><br>
+<blockquote><p>The <code>argz_stringify</code> converts <var>argz</var> into a normal string with
 the elements separated by the character <var>sep</var>, by replacing each
 <code>'\0'</code> inside <var>argz</var> (except the last one, which terminates the
 string) with <var>sep</var>.  This is handy for printing <var>argz</var> in a
 readable manner. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_add</b><i> </i>(<i>char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i>, const char *</i><var>str</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_add</code> function adds the string <var>str</var> to the end of the
-argz vector <code>*</code><var>argz</var><code></code>, and updates <code>*</code><var>argz</var><code></code> and
-<code>*</code><var>argz_len</var><code></code> accordingly. 
-</td></tr>
-</table>
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_add</b> (<var>char **argz, size_t *argz_len, const char *str</var>)<var><a name="index-argz_005fadd-589"></a></var><br>
+<blockquote><p>The <code>argz_add</code> function adds the string <var>str</var> to the end of the
+argz vector <code>*</code><var>argz</var>, and updates <code>*</code><var>argz</var> and
+<code>*</code><var>argz_len</var> accordingly. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_add_sep</b><i> </i>(<i>char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i>, const char *</i><var>str</var><i>, int </i><var>delim</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_add_sep</code> function is similar to <code>argz_add</code>, but
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_add_sep</b> (<var>char **argz, size_t *argz_len, const char *str, int delim</var>)<var><a name="index-argz_005fadd_005fsep-590"></a></var><br>
+<blockquote><p>The <code>argz_add_sep</code> function is similar to <code>argz_add</code>, but
 <var>str</var> is split into separate elements in the result at occurrences of
 the character <var>delim</var>.  This is useful, for instance, for
 adding the components of a Unix search path to an argz vector, by using
 a value of <code>':'</code> for <var>delim</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_append</b><i> </i>(<i>char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i>, const char *</i><var>buf</var><i>, size_t </i><var>buf_len</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_append</code> function appends <var>buf_len</var> bytes starting at
-<var>buf</var> to the argz vector <code>*</code><var>argz</var><code></code>, reallocating
-<code>*</code><var>argz</var><code></code> to accommodate it, and adding <var>buf_len</var> to
-<code>*</code><var>argz_len</var><code></code>. 
-</td></tr>
-</table>
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_append</b> (<var>char **argz, size_t *argz_len, const char *buf, size_t buf_len</var>)<var><a name="index-argz_005fappend-591"></a></var><br>
+<blockquote><p>The <code>argz_append</code> function appends <var>buf_len</var> bytes starting at
+<var>buf</var> to the argz vector <code>*</code><var>argz</var>, reallocating
+<code>*</code><var>argz</var> to accommodate it, and adding <var>buf_len</var> to
+<code>*</code><var>argz_len</var>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_delete</b><i> </i>(<i>char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i>, char *</i><var>entry</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-If <var>entry</var> points to the beginning of one of the elements in the
-argz vector <code>*</code><var>argz</var><code></code>, the <code>argz_delete</code> function will
-remove this entry and reallocate <code>*</code><var>argz</var><code></code>, modifying
-<code>*</code><var>argz</var><code></code> and <code>*</code><var>argz_len</var><code></code> accordingly.  Note that as
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_delete</b> (<var>char **argz, size_t *argz_len, char *entry</var>)<var><a name="index-argz_005fdelete-592"></a></var><br>
+<blockquote><p>If <var>entry</var> points to the beginning of one of the elements in the
+argz vector <code>*</code><var>argz</var>, the <code>argz_delete</code> function will
+remove this entry and reallocate <code>*</code><var>argz</var>, modifying
+<code>*</code><var>argz</var> and <code>*</code><var>argz_len</var> accordingly.  Note that as
 destructive argz functions usually reallocate their argz argument,
 pointers into argz vectors such as <var>entry</var> will then become invalid. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_insert</b><i> </i>(<i>char **</i><var>argz</var><i>, size_t *</i><var>argz_len</var><i>, char *</i><var>before</var><i>, const char *</i><var>entry</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_insert</code> function inserts the string <var>entry</var> into the
-argz vector <code>*</code><var>argz</var><code></code> at a point just before the existing
-element pointed to by <var>before</var>, reallocating <code>*</code><var>argz</var><code></code> and
-updating <code>*</code><var>argz</var><code></code> and <code>*</code><var>argz_len</var><code></code>.  If <var>before</var>
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_insert</b> (<var>char **argz, size_t *argz_len, char *before, const char *entry</var>)<var><a name="index-argz_005finsert-593"></a></var><br>
+<blockquote><p>The <code>argz_insert</code> function inserts the string <var>entry</var> into the
+argz vector <code>*</code><var>argz</var> at a point just before the existing
+element pointed to by <var>before</var>, reallocating <code>*</code><var>argz</var> and
+updating <code>*</code><var>argz</var> and <code>*</code><var>argz_len</var>.  If <var>before</var>
 is <code>0</code>, <var>entry</var> is added to the end instead (as if by
 <code>argz_add</code>).  Since the first element is in fact the same as
-<code>*</code><var>argz</var><code></code>, passing in <code>*</code><var>argz</var><code></code> as the value of
+<code>*</code><var>argz</var>, passing in <code>*</code><var>argz</var> as the value of
 <var>before</var> will result in <var>entry</var> being inserted at the beginning. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>argz_next</b><i> </i>(<i>char *</i><var>argz</var><i>, size_t </i><var>argz_len</var><i>, const char *</i><var>entry</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>argz_next</code> function provides a convenient way of iterating
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>argz_next</b> (<var>char *argz, size_t argz_len, const char *entry</var>)<var><a name="index-argz_005fnext-594"></a></var><br>
+<blockquote><p>The <code>argz_next</code> function provides a convenient way of iterating
 over the elements in the argz vector <var>argz</var>.  It returns a pointer
 to the next element in <var>argz</var> after the element <var>entry</var>, or
 <code>0</code> if there are no elements following <var>entry</var>.  If <var>entry</var>
 is <code>0</code>, the first element of <var>argz</var> is returned.
 
-     <p>This behavior suggests two styles of iteration:
+        <p>This behavior suggests two styles of iteration:
 
      <pre class="smallexample">              char *entry = 0;
               while ((entry = argz_next (<var>argz</var>, <var>argz_len</var>, entry)))
                 <var>action</var>;
-          </pre>
-
-     <p>(the double parentheses are necessary to make some C compilers shut up
+     </pre>
+        <p>(the double parentheses are necessary to make some C compilers shut up
 about what they consider a questionable <code>while</code>-test) and:
 
      <pre class="smallexample">              char *entry;
@@ -259,30 +189,21 @@ about what they consider a questionable <code>while</code>-test) and:
                    entry;
                    entry = argz_next (<var>argz</var>, <var>argz_len</var>, entry))
                 <var>action</var>;
-          </pre>
-
-     <p>Note that the latter depends on <var>argz</var> having a value of <code>0</code> if
+     </pre>
+        <p>Note that the latter depends on <var>argz</var> having a value of <code>0</code> if
 it is empty (rather than a pointer to an empty block of memory); this
 invariant is maintained for argz vectors created by the functions here. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">error_t <b>argz_replace</b><i> </i>(<i>char&nbsp;**</i><var>argz</var><i>,&nbsp;size_t&nbsp;*</i><var>argz_len</var><i>, const&nbsp;char&nbsp;*</i><var>str</var><i>,&nbsp;const&nbsp;char&nbsp;*</i><var>with</var><i>, unsigned&nbsp;*</i><var>replace_count</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Replace any occurrences of the string <var>str</var> in <var>argz</var> with
+<!-- argz.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: error_t <b>argz_replace</b> (<var>char&nbsp;**argz,&nbsp;size_t&nbsp;*argz_len<!-- /@w -->, const&nbsp;char&nbsp;*str,&nbsp;const&nbsp;char&nbsp;*with<!-- /@w -->, unsigned&nbsp;*replace_count<!-- /@w --></var>)<var><a name="index-argz_005freplace-595"></a></var><br>
+<blockquote><p>Replace any occurrences of the string <var>str</var> in <var>argz</var> with
 <var>with</var>, reallocating <var>argz</var> as necessary.  If
-<var>replace_count</var> is non-zero, <code>*</code><var>replace_count</var><code></code> will be
+<var>replace_count</var> is non-zero, <code>*</code><var>replace_count</var> will be
 incremented by number of replacements performed. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

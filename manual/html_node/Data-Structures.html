@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Data Structures - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Implementing-a-Shell.html#Implementing-a-Shell" title="Implementing a Shell">
+<link rel="next" href="Initializing-the-Shell.html#Initializing-the-Shell" title="Initializing the Shell">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Data%20Structures">Data Structures</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
-<hr><br>
+<a name="Data-Structures"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Initializing-the-Shell.html#Initializing-the-Shell">Initializing the Shell</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing-a-Shell">Implementing a Shell</a>
+<hr>
 </div>
 
-<h3 class="subsection">Data Structures for the Shell</h4>
+<h4 class="subsection">27.6.1 Data Structures for the Shell</h4>
 
 <p>All of the program examples included in this chapter are part of
 a simple shell program.  This section presents data structures
@@ -35,37 +42,36 @@ set of subprocesses linked together with pipes.  The <code>process</code> type
 holds information about a single subprocess.  Here are the relevant
 data structure declarations:
 
-<pre class="smallexample">     /* A process is a single process.  */
+<pre class="smallexample">     /* <span class="roman">A process is a single process.</span>  */
      typedef struct process
      {
-       struct process *next;       /* next process in pipeline */
-       char **argv;                /* for exec */
-       pid_t pid;                  /* process ID */
-       char completed;             /* true if process has completed */
-       char stopped;               /* true if process has stopped */
-       int status;                 /* reported status value */
+       struct process *next;       /* <span class="roman">next process in pipeline</span> */
+       char **argv;                /* <span class="roman">for exec</span> */
+       pid_t pid;                  /* <span class="roman">process ID</span> */
+       char completed;             /* <span class="roman">true if process has completed</span> */
+       char stopped;               /* <span class="roman">true if process has stopped</span> */
+       int status;                 /* <span class="roman">reported status value</span> */
      } process;
      
-     /* A job is a pipeline of processes.  */
+     /* <span class="roman">A job is a pipeline of processes.</span>  */
      typedef struct job
      {
-       struct job *next;           /* next active job */
-       char *command;              /* command line, used for messages */
-       process *first_process;     /* list of processes in this job */
-       pid_t pgid;                 /* process group ID */
-       char notified;              /* true if user told about stopped job */
-       struct termios tmodes;      /* saved terminal modes */
-       int stdin, stdout, stderr;  /* standard i/o channels */
+       struct job *next;           /* <span class="roman">next active job</span> */
+       char *command;              /* <span class="roman">command line, used for messages</span> */
+       process *first_process;     /* <span class="roman">list of processes in this job</span> */
+       pid_t pgid;                 /* <span class="roman">process group ID</span> */
+       char notified;              /* <span class="roman">true if user told about stopped job</span> */
+       struct termios tmodes;      /* <span class="roman">saved terminal modes</span> */
+       int stdin, stdout, stderr;  /* <span class="roman">standard i/o channels</span> */
      } job;
      
-     /* The active jobs are linked into a list.  This is its head.   */
+     /* <span class="roman">The active jobs are linked into a list.  This is its head.</span>   */
      job *first_job = NULL;
-     </pre>
-
+</pre>
    <p>Here are some utility functions that are used for operating on <code>job</code>
 objects.
 
-<pre class="smallexample">     /* Find the active job with the indicated <var>pgid</var>.  */
+<pre class="smallexample">     /* <span class="roman">Find the active job with the indicated </span><var>pgid</var><span class="roman">.</span>  */
      job *
      find_job (pid_t pgid)
      {
@@ -77,7 +83,7 @@ objects.
        return NULL;
      }
      
-     /* Return true if all processes in the job have stopped or completed.  */
+     /* <span class="roman">Return true if all processes in the job have stopped or completed.</span>  */
      int
      job_is_stopped (job *j)
      {
@@ -89,7 +95,7 @@ objects.
        return 1;
      }
      
-     /* Return true if all processes in the job have completed.  */
+     /* <span class="roman">Return true if all processes in the job have completed.</span>  */
      int
      job_is_completed (job *j)
      {
@@ -100,7 +106,6 @@ objects.
            return 0;
        return 1;
      }
-     </pre>
-
+</pre>
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Interpreting the traces - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Allocation-Debugging.html#Allocation-Debugging" title="Allocation Debugging">
+<link rel="prev" href="Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger" title="Tips for the Memory Debugger">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Interpreting%20the%20traces">Interpreting the traces</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Tips-for-the-Memory-Debugger.html#Tips%20for%20the%20Memory%20Debugger">Tips for the Memory Debugger</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>
-<hr><br>
+<a name="Interpreting-the-traces"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger">Tips for the Memory Debugger</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation-Debugging">Allocation Debugging</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Interpreting the traces</h5>
+<h5 class="subsubsection">3.2.3.4 Interpreting the traces</h5>
 
 <p>If you take a look at the output it will look similar to this:
 
@@ -36,8 +43,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation%20
       [0x80481eb] + 0x8064c78 0x14
       [0x80481eb] + 0x8064c90 0x14
      = End
-     </pre>
-
+</pre>
    <p>What this all means is not really important since the trace file is not
 meant to be read by a human.  Therefore no attention is given to
 readability.  Instead there is a program which comes with the GNU C
@@ -50,10 +56,9 @@ the program which generated the trace.
 
 <pre class="example">     drepper$ mtrace tst-mtrace log
      No memory leaks.
-     </pre>
-
+</pre>
    <p>In this case the program <code>tst-mtrace</code> was run and it produced a
-trace file <code>log</code>.  The message printed by <code>mtrace</code> shows there
+trace file <samp><span class="file">log</span></samp>.  The message printed by <code>mtrace</code> shows there
 are no problems with the code, all allocated memory was freed
 afterwards.
 
@@ -72,8 +77,7 @@ different outout:
      0x08064c60     0x14  at 0x80481eb
      0x08064c78     0x14  at 0x80481eb
      0x08064c90     0x14  at 0x80481eb
-     </pre>
-
+</pre>
    <p>We have called <code>mtrace</code> with only one argument and so the script
 has no chance to find out what is meant with the addresses given in the
 trace.  We can do better:
@@ -90,8 +94,7 @@ trace.  We can do better:
      0x08064c60     0x14  at /home/drepper/tst.c:33
      0x08064c78     0x14  at /home/drepper/tst.c:33
      0x08064c90     0x14  at /home/drepper/tst.c:33
-     </pre>
-
+</pre>
    <p>Suddenly the output makes much more sense and the user can see
 immediately where the function calls causing the trouble can be found.
 
@@ -106,7 +109,7 @@ normally crashes.
    <p>The other situation which is much harder to detect are memory leaks.  As
 you can see in the output the <code>mtrace</code> function collects all this
 information and so can say that the program calls an allocation function
-from line 33 in the source file <code>/home/drepper/tst-mtrace.c</code> four
+from line 33 in the source file <samp><span class="file">/home/drepper/tst-mtrace.c</span></samp> four
 times without freeing this memory before the program terminates. 
 Whether this is a real problem remains to be investigated.
 

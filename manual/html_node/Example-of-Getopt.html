@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Example of Getopt - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Getopt.html#Getopt" title="Getopt">
+<link rel="prev" href="Using-Getopt.html#Using-Getopt" title="Using Getopt">
+<link rel="next" href="Getopt-Long-Options.html#Getopt-Long-Options" title="Getopt Long Options">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Example%20of%20Getopt">Example of Getopt</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Getopt-Long-Options.html#Getopt%20Long%20Options">Getopt Long Options</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Using-Getopt.html#Using%20Getopt">Using Getopt</a>,
+<a name="Example-of-Getopt"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Getopt-Long-Options.html#Getopt-Long-Options">Getopt Long Options</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Using-Getopt.html#Using-Getopt">Using Getopt</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Example of Parsing Arguments with <code>getopt</code></h4>
+<h4 class="subsection">25.2.2 Example of Parsing Arguments with <code>getopt</code></h4>
 
 <p>Here is an example showing how <code>getopt</code> is typically used.  The
 key points to notice are:
@@ -40,9 +48,7 @@ is used later in the program.
      <li>A second loop is used to process the remaining non-option arguments. 
 </ul>
 
-<pre class="smallexample">
-
-     #include &lt;unistd.h&gt;
+<pre class="smallexample">     #include &lt;unistd.h&gt;
      #include &lt;stdio.h&gt;
      
      int
@@ -87,8 +93,7 @@ is used later in the program.
          printf ("Non-option argument %s\n", argv[index]);
        return 0;
      }
-     </pre>
-
+</pre>
    <p>Here are some examples showing what this program prints with different
 combinations of arguments:
 
@@ -126,7 +131,6 @@ combinations of arguments:
      % testopt -a -
      aflag = 1, bflag = 0, cvalue = (null)
      Non-option argument -
-     </pre>
-
+</pre>
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Socket Concepts - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Sockets.html#Sockets" title="Sockets">
+<link rel="next" href="Communication-Styles.html#Communication-Styles" title="Communication Styles">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,32 +16,35 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Socket%20Concepts">Socket Concepts</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>,
+<a name="Socket-Concepts"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Communication-Styles.html#Communication-Styles">Communication Styles</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Sockets.html#Sockets">Sockets</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Socket Concepts</h3>
+<h3 class="section">16.1 Socket Concepts</h3>
 
-<p>When you create a socket, you must specify the style of communication
+<p><a name="index-communication-style-_0028of-a-socket_0029-1619"></a><a name="index-style-of-communication-_0028of-a-socket_0029-1620"></a>When you create a socket, you must specify the style of communication
 you want to use and the type of protocol that should implement it. 
 The <dfn>communication style</dfn> of a socket defines the user-level
 semantics of sending and receiving data on the socket.  Choosing a
 communication style specifies the answers to questions such as these:
 
      <ul>
-<li><strong>What are the units of data transmission?</strong>  Some communication
+<li><a name="index-packet-1621"></a><a name="index-byte-stream-1622"></a><a name="index-stream-_0028sockets_0029-1623"></a><strong>What are the units of data transmission?</strong>  Some communication
 styles regard the data as a sequence of bytes with no larger
 structure; others group the bytes into records (which are known in
 this context as <dfn>packets</dfn>).
 
-     <li><strong>Can data be lost during normal operation?</strong>  Some communication
+     <li><a name="index-loss-of-data-on-sockets-1624"></a><a name="index-data-loss-on-sockets-1625"></a><strong>Can data be lost during normal operation?</strong>  Some communication
 styles guarantee that all the data sent arrives in the order it was
 sent (barring system or network crashes); other styles occasionally
 lose data as a normal part of operation, and may sometimes deliver
@@ -47,28 +54,28 @@ packets more than once or in the wrong order.
 involves taking precautions to detect lost or misordered packets and
 to retransmit data as needed.
 
-     </p><li><strong>Is communication entirely with one partner?</strong>  Some
-communication styles are like a telephone call--you make a
+     <li><strong>Is communication entirely with one partner?</strong>  Some
+communication styles are like a telephone call&mdash;you make a
 <dfn>connection</dfn> with one remote socket and then exchange data
-freely.  Other styles are like mailing letters--you specify a
+freely.  Other styles are like mailing letters&mdash;you specify a
 destination address for each message you send. 
 </ul>
 
-   <p>You must also choose a <dfn>namespace</dfn> for naming the socket.  A socket
-name ("address") is meaningful only in the context of a particular
+   <p><a name="index-namespace-_0028of-socket_0029-1626"></a><a name="index-domain-_0028of-socket_0029-1627"></a><a name="index-socket-namespace-1628"></a><a name="index-socket-domain-1629"></a>You must also choose a <dfn>namespace</dfn> for naming the socket.  A socket
+name (&ldquo;address&rdquo;) is meaningful only in the context of a particular
 namespace.  In fact, even the data type to use for a socket name may
-depend on the namespace.  Namespaces are also called "domains", but we
+depend on the namespace.  Namespaces are also called &ldquo;domains&rdquo;, but we
 avoid that word as it can be confused with other usage of the same
-term.  Each namespace has a symbolic name that starts with <code>PF_</code>. 
-A corresponding symbolic name starting with <code>AF_</code> designates the
+term.  Each namespace has a symbolic name that starts with `<samp><span class="samp">PF_</span></samp>'. 
+A corresponding symbolic name starting with `<samp><span class="samp">AF_</span></samp>' designates the
 address format for that namespace.
 
-   <p>Finally you must choose the <dfn>protocol</dfn> to carry out the
+   <p><a name="index-network-protocol-1630"></a><a name="index-protocol-_0028of-socket_0029-1631"></a><a name="index-socket-protocol-1632"></a><a name="index-protocol-family-1633"></a>Finally you must choose the <dfn>protocol</dfn> to carry out the
 communication.  The protocol determines what low-level mechanism is used
 to transmit and receive data.  Each protocol is valid for a particular
 namespace and communication style; a namespace is sometimes called a
 <dfn>protocol family</dfn> because of this, which is why the namespace names
-start with <code>PF_</code>.
+start with `<samp><span class="samp">PF_</span></samp>'.
 
    <p>The rules of a protocol apply to the data passing between two programs,
 perhaps on different computers; most of these rules are handled by the
@@ -86,7 +93,7 @@ communication and the Internet namespace.
 
      <li>For each combination of style and namespace there is a <dfn>default
 protocol</dfn>, which you can request by specifying 0 as the protocol
-number.  And that's what you should normally do--use the default. 
+number.  And that's what you should normally do&mdash;use the default. 
 </ul>
 
    <p>Throughout the following description at various places

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Selecting the Conversion - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion" title="Restartable multibyte conversion">
+<link rel="next" href="Keeping-the-state.html#Keeping-the-state" title="Keeping the state">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Selecting%20the%20Conversion">Selecting the Conversion</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Keeping-the-state.html#Keeping%20the%20state">Keeping the state</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable%20multibyte%20conversion">Restartable multibyte conversion</a>
-<hr><br>
+<a name="Selecting-the-Conversion"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Keeping-the-state.html#Keeping-the-state">Keeping the state</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion">Restartable multibyte conversion</a>
+<hr>
 </div>
 
-<h3 class="subsection">Selecting the conversion and its properties</h4>
+<h4 class="subsection">6.3.1 Selecting the conversion and its properties</h4>
 
 <p>We already said above that the currently selected locale for the
 <code>LC_CTYPE</code> category decides about the conversion that is performed
@@ -36,45 +43,31 @@ character set always is UCS-4, at least on GNU systems.
 of bytes that can be necessary to represent one character.  This
 information is quite important when writing code that uses the
 conversion functions (as shown in the examples below). 
-The ISO&nbsp;C standard defines two macros that provide this information.
+The ISO&nbsp;C<!-- /@w --> standard defines two macros that provide this information.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>MB_LEN_MAX</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>MB_LEN_MAX</code> specifies the maximum number of bytes in the multibyte
+<!-- limits.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>MB_LEN_MAX</b><var><a name="index-MB_005fLEN_005fMAX-626"></a></var><br>
+<blockquote><p><code>MB_LEN_MAX</code> specifies the maximum number of bytes in the multibyte
 sequence for a single character in any of the supported locales.  It is
-a compile-time constant and is defined in <code>limits.h</code>. 
-</td></tr>
-</table>
+a compile-time constant and is defined in <samp><span class="file">limits.h</span></samp>. 
+<a name="index-limits_002eh-627"></a></p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>MB_CUR_MAX</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>MB_CUR_MAX</code> expands into a positive integer expression that is the
+<!-- stdlib.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>MB_CUR_MAX</b><var><a name="index-MB_005fCUR_005fMAX-628"></a></var><br>
+<blockquote><p><code>MB_CUR_MAX</code> expands into a positive integer expression that is the
 maximum number of bytes in a multibyte character in the current locale. 
 The value is never greater than <code>MB_LEN_MAX</code>.  Unlike
 <code>MB_LEN_MAX</code> this macro need not be a compile-time constant, and in
 the GNU C library it is not.
 
-     <p><code>MB_CUR_MAX</code> is defined in <code>stdlib.h</code>. 
-</td></tr>
-</table>
+        <p><a name="index-stdlib_002eh-629"></a><code>MB_CUR_MAX</code> is defined in <samp><span class="file">stdlib.h</span></samp>. 
+</p></blockquote></div>
 
-   <p>Two different macros are necessary since strictly ISO&nbsp;C90 compilers
+   <p>Two different macros are necessary since strictly ISO&nbsp;C90<!-- /@w --> compilers
 do not allow variable length array definitions, but still it is desirable
 to avoid dynamic allocation.  This incomplete piece of code shows the
 problem:
@@ -86,12 +79,11 @@ problem:
        while (! feof (fp))
          {
            fread (&amp;buf[len], 1, MB_CUR_MAX - len, fp);
-           /* <small class="dots">...</small> process buf */
+           /* <span class="roman">... process</span> buf */
            len -= used;
          }
      }
-     </pre>
-
+</pre>
    <p>The code in the inner loop is expected to have always enough bytes in
 the array <var>buf</var> to convert one multibyte character.  The array
 <var>buf</var> has to be sized statically since many compilers do not allow a

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Hyperbolic Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematics.html#Mathematics" title="Mathematics">
+<link rel="prev" href="Exponents-and-Logarithms.html#Exponents-and-Logarithms" title="Exponents and Logarithms">
+<link rel="next" href="Special-Functions.html#Special-Functions" title="Special Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,430 +17,211 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Hyperbolic%20Functions">Hyperbolic Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Special-Functions.html#Special%20Functions">Special Functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>,
+<a name="Hyperbolic-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Special-Functions.html#Special-Functions">Special Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Exponents-and-Logarithms.html#Exponents-and-Logarithms">Exponents and Logarithms</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Hyperbolic Functions</h3>
+<h3 class="section">19.5 Hyperbolic Functions</h3>
 
-<p>The functions in this section are related to the exponential functions;
-see <a href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>.
+<p><a name="index-hyperbolic-functions-2187"></a>
+The functions in this section are related to the exponential functions;
+see <a href="Exponents-and-Logarithms.html#Exponents-and-Logarithms">Exponents and Logarithms</a>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>sinh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>sinhf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>sinhl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the hyperbolic sine of <var>x</var>, defined
-mathematically as <code>(exp&nbsp;(</code><var>x</var><code>)&nbsp;-&nbsp;exp&nbsp;(-</code><var>x</var><code>))&nbsp;/&nbsp;2</code>.  They
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: double <b>sinh</b> (<var>double x</var>)<var><a name="index-sinh-2188"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>sinhf</b> (<var>float x</var>)<var><a name="index-sinhf-2189"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>sinhl</b> (<var>long double x</var>)<var><a name="index-sinhl-2190"></a></var><br>
+<blockquote><p>These functions return the hyperbolic sine of <var>x</var>, defined
+mathematically as <code>(exp&nbsp;(</code><var>x</var><code>)&nbsp;-&nbsp;exp&nbsp;(-</code><var>x</var><code>))&nbsp;/&nbsp;2</code><!-- /@w -->.  They
 may signal overflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>cosh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>coshf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>coshl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These function return the hyperbolic cosine of <var>x</var>,
-defined mathematically as <code>(exp&nbsp;(</code><var>x</var><code>)&nbsp;+&nbsp;exp&nbsp;(-</code><var>x</var><code>))&nbsp;/&nbsp;2</code>. 
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: double <b>cosh</b> (<var>double x</var>)<var><a name="index-cosh-2191"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>coshf</b> (<var>float x</var>)<var><a name="index-coshf-2192"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>coshl</b> (<var>long double x</var>)<var><a name="index-coshl-2193"></a></var><br>
+<blockquote><p>These function return the hyperbolic cosine of <var>x</var>,
+defined mathematically as <code>(exp&nbsp;(</code><var>x</var><code>)&nbsp;+&nbsp;exp&nbsp;(-</code><var>x</var><code>))&nbsp;/&nbsp;2</code><!-- /@w -->. 
 They may signal overflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>tanh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>tanhf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>tanhl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the hyperbolic tangent of <var>x</var>,
-defined mathematically as <code>sinh&nbsp;(</code><var>x</var><code>)&nbsp;/&nbsp;cosh&nbsp;(</code><var>x</var><code>)</code>. 
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: double <b>tanh</b> (<var>double x</var>)<var><a name="index-tanh-2194"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>tanhf</b> (<var>float x</var>)<var><a name="index-tanhf-2195"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>tanhl</b> (<var>long double x</var>)<var><a name="index-tanhl-2196"></a></var><br>
+<blockquote><p>These functions return the hyperbolic tangent of <var>x</var>,
+defined mathematically as <code>sinh&nbsp;(</code><var>x</var><code>)&nbsp;/&nbsp;cosh&nbsp;(</code><var>x</var><code>)</code><!-- /@w -->. 
 They may signal overflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-   <p>There are counterparts for the hyperbolic functions which take
+   <p><a name="index-hyperbolic-functions-2197"></a>
+There are counterparts for the hyperbolic functions which take
 complex arguments.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>csinh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
+<!-- complex.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: complex double <b>csinh</b> (<var>complex double z</var>)<var><a name="index-csinh-2198"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>csinhf</b> (<var>complex float z</var>)<var><a name="index-csinhf-2199"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>csinhl</b> (<var>complex long double z</var>)<var><a name="index-csinhl-2200"></a></var><br>
+<blockquote><p>These functions return the complex hyperbolic sine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(</code><var>z</var><code>)&nbsp;-&nbsp;exp&nbsp;(-</code><var>z</var><code>))&nbsp;/&nbsp;2</code><!-- /@w -->. 
+</p></blockquote></div>
 
-<tr>
-<td align="left">complex float <b>csinhf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
+<!-- complex.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: complex double <b>ccosh</b> (<var>complex double z</var>)<var><a name="index-ccosh-2201"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>ccoshf</b> (<var>complex float z</var>)<var><a name="index-ccoshf-2202"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>ccoshl</b> (<var>complex long double z</var>)<var><a name="index-ccoshl-2203"></a></var><br>
+<blockquote><p>These functions return the complex hyperbolic cosine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(</code><var>z</var><code>)&nbsp;+&nbsp;exp&nbsp;(-</code><var>z</var><code>))&nbsp;/&nbsp;2</code><!-- /@w -->. 
+</p></blockquote></div>
 
-<tr>
-<td align="left">complex long double <b>csinhl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the complex hyperbolic sine of <var>z</var>, defined
-mathematically as <code>(exp&nbsp;(</code><var>z</var><code>)&nbsp;-&nbsp;exp&nbsp;(-</code><var>z</var><code>))&nbsp;/&nbsp;2</code>. 
-</td></tr>
-</table>
+<!-- complex.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: complex double <b>ctanh</b> (<var>complex double z</var>)<var><a name="index-ctanh-2204"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>ctanhf</b> (<var>complex float z</var>)<var><a name="index-ctanhf-2205"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>ctanhl</b> (<var>complex long double z</var>)<var><a name="index-ctanhl-2206"></a></var><br>
+<blockquote><p>These functions return the complex hyperbolic tangent of <var>z</var>,
+defined mathematically as <code>csinh&nbsp;(</code><var>z</var><code>)&nbsp;/&nbsp;ccosh&nbsp;(</code><var>z</var><code>)</code><!-- /@w -->. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>ccosh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
+   <p><a name="index-inverse-hyperbolic-functions-2207"></a>
+<!-- math.h -->
+<!-- ISO -->
 
-<tr>
-<td align="left">complex float <b>ccoshf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex long double <b>ccoshl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the complex hyperbolic cosine of <var>z</var>, defined
-mathematically as <code>(exp&nbsp;(</code><var>z</var><code>)&nbsp;+&nbsp;exp&nbsp;(-</code><var>z</var><code>))&nbsp;/&nbsp;2</code>. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>ctanh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex float <b>ctanhf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex long double <b>ctanhl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the complex hyperbolic tangent of <var>z</var>,
-defined mathematically as <code>csinh&nbsp;(</code><var>z</var><code>)&nbsp;/&nbsp;ccosh&nbsp;(</code><var>z</var><code>)</code>. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>asinh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>asinhf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>asinhl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse hyperbolic sine of <var>x</var>--the
+<div class="defun">
+&mdash; Function: double <b>asinh</b> (<var>double x</var>)<var><a name="index-asinh-2208"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>asinhf</b> (<var>float x</var>)<var><a name="index-asinhf-2209"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>asinhl</b> (<var>long double x</var>)<var><a name="index-asinhl-2210"></a></var><br>
+<blockquote><p>These functions return the inverse hyperbolic sine of <var>x</var>&mdash;the
 value whose hyperbolic sine is <var>x</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>acosh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>acoshf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>acoshl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse hyperbolic cosine of <var>x</var>--the
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: double <b>acosh</b> (<var>double x</var>)<var><a name="index-acosh-2211"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>acoshf</b> (<var>float x</var>)<var><a name="index-acoshf-2212"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>acoshl</b> (<var>long double x</var>)<var><a name="index-acoshl-2213"></a></var><br>
+<blockquote><p>These functions return the inverse hyperbolic cosine of <var>x</var>&mdash;the
 value whose hyperbolic cosine is <var>x</var>.  If <var>x</var> is less than
 <code>1</code>, <code>acosh</code> signals a domain error. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>atanh</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>atanhf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>atanhl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse hyperbolic tangent of <var>x</var>--the
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: double <b>atanh</b> (<var>double x</var>)<var><a name="index-atanh-2214"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: float <b>atanhf</b> (<var>float x</var>)<var><a name="index-atanhf-2215"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- ISO -->
+&mdash; Function: long double <b>atanhl</b> (<var>long double x</var>)<var><a name="index-atanhl-2216"></a></var><br>
+<blockquote><p>These functions return the inverse hyperbolic tangent of <var>x</var>&mdash;the
 value whose hyperbolic tangent is <var>x</var>.  If the absolute value of
 <var>x</var> is greater than <code>1</code>, <code>atanh</code> signals a domain error;
 if it is equal to 1, <code>atanh</code> returns infinity. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>casinh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
+   <p><a name="index-inverse-complex-hyperbolic-functions-2217"></a>
+<!-- complex.h -->
+<!-- ISO -->
 
-<tr>
-<td align="left">complex float <b>casinhf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
+<div class="defun">
+&mdash; Function: complex double <b>casinh</b> (<var>complex double z</var>)<var><a name="index-casinh-2218"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>casinhf</b> (<var>complex float z</var>)<var><a name="index-casinhf-2219"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>casinhl</b> (<var>complex long double z</var>)<var><a name="index-casinhl-2220"></a></var><br>
+<blockquote><p>These functions return the inverse complex hyperbolic sine of
+<var>z</var>&mdash;the value whose complex hyperbolic sine is <var>z</var>. 
+</p></blockquote></div>
 
-<tr>
-<td align="left">complex long double <b>casinhl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse complex hyperbolic sine of
-<var>z</var>--the value whose complex hyperbolic sine is <var>z</var>. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>cacosh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex float <b>cacoshf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex long double <b>cacoshl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse complex hyperbolic cosine of
-<var>z</var>--the value whose complex hyperbolic cosine is <var>z</var>.  Unlike
+<!-- complex.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: complex double <b>cacosh</b> (<var>complex double z</var>)<var><a name="index-cacosh-2221"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>cacoshf</b> (<var>complex float z</var>)<var><a name="index-cacoshf-2222"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>cacoshl</b> (<var>complex long double z</var>)<var><a name="index-cacoshl-2223"></a></var><br>
+<blockquote><p>These functions return the inverse complex hyperbolic cosine of
+<var>z</var>&mdash;the value whose complex hyperbolic cosine is <var>z</var>.  Unlike
 the real-valued functions, there are no restrictions on the value of <var>z</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">complex double <b>catanh</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex float <b>catanhf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">complex long double <b>catanhl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions return the inverse complex hyperbolic tangent of
-<var>z</var>--the value whose complex hyperbolic tangent is <var>z</var>.  Unlike
+<!-- complex.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: complex double <b>catanh</b> (<var>complex double z</var>)<var><a name="index-catanh-2224"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex float <b>catanhf</b> (<var>complex float z</var>)<var><a name="index-catanhf-2225"></a></var><br>
+<blockquote><!-- complex.h -->
+<!-- ISO -->
+&mdash; Function: complex long double <b>catanhl</b> (<var>complex long double z</var>)<var><a name="index-catanhl-2226"></a></var><br>
+<blockquote><p>These functions return the inverse complex hyperbolic tangent of
+<var>z</var>&mdash;the value whose complex hyperbolic tangent is <var>z</var>.  Unlike
 the real-valued functions, there are no restrictions on the value of
 <var>z</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

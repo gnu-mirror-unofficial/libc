@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Exit Status - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Program-Termination.html#Program-Termination" title="Program Termination">
+<link rel="prev" href="Normal-Termination.html#Normal-Termination" title="Normal Termination">
+<link rel="next" href="Cleanups-on-Exit.html#Cleanups-on-Exit" title="Cleanups on Exit">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Exit%20Status">Exit Status</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Cleanups-on-Exit.html#Cleanups%20on%20Exit">Cleanups on Exit</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Normal-Termination.html#Normal%20Termination">Normal Termination</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Program-Termination.html#Program%20Termination">Program Termination</a>
-<hr><br>
+<a name="Exit-Status"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Cleanups-on-Exit.html#Cleanups-on-Exit">Cleanups on Exit</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Normal-Termination.html#Normal-Termination">Normal Termination</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Program-Termination.html#Program-Termination">Program Termination</a>
+<hr>
 </div>
 
-<h3 class="subsection">Exit Status</h4>
+<h4 class="subsection">25.6.2 Exit Status</h4>
 
-<p>When a program exits, it can return to the parent process a small
+<p><a name="index-exit-status-3114"></a>
+When a program exits, it can return to the parent process a small
 amount of information about the cause of termination, using the
 <dfn>exit status</dfn>.  This is a value between 0 and 255 that the exiting
 process passes as an argument to <code>exit</code>.
@@ -53,58 +62,45 @@ status.  This is actually not very useful; a parent process would
 generally not care how many errors occurred.  Worse than that, it does
 not work, because the status value is truncated to eight bits. 
 Thus, if the program tried to report 256 errors, the parent would
-receive a report of 0 errors--that is, success.
+receive a report of 0 errors&mdash;that is, success.
 
    <p>For the same reason, it does not work to use the value of <code>errno</code>
-as the exit status--these can exceed 255.
+as the exit status&mdash;these can exceed 255.
 
    <p><strong>Portability note:</strong> Some non-POSIX systems use different
 conventions for exit status values.  For greater portability, you can
 use the macros <code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> for the
 conventional status value for success and failure, respectively.  They
-are declared in the file <code>stdlib.h</code>.
+are declared in the file <samp><span class="file">stdlib.h</span></samp>. 
+<a name="index-stdlib_002eh-3115"></a>
+<!-- stdlib.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>EXIT_SUCCESS</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro can be used with the <code>exit</code> function to indicate
+<div class="defun">
+&mdash; Macro: int <b>EXIT_SUCCESS</b><var><a name="index-EXIT_005fSUCCESS-3116"></a></var><br>
+<blockquote><p>This macro can be used with the <code>exit</code> function to indicate
 successful program completion.
 
-     <p>On POSIX systems, the value of this macro is <code>0</code>.  On other
+        <p>On POSIX systems, the value of this macro is <code>0</code>.  On other
 systems, the value might be some other (possibly non-constant) integer
 expression. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>EXIT_FAILURE</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro can be used with the <code>exit</code> function to indicate
+<!-- stdlib.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>EXIT_FAILURE</b><var><a name="index-EXIT_005fFAILURE-3117"></a></var><br>
+<blockquote><p>This macro can be used with the <code>exit</code> function to indicate
 unsuccessful program completion in a general sense.
 
-     <p>On POSIX systems, the value of this macro is <code>1</code>.  On other
+        <p>On POSIX systems, the value of this macro is <code>1</code>.  On other
 systems, the value might be some other (possibly non-constant) integer
 expression.  Other nonzero status values also indicate failures.  Certain
 programs use different nonzero status values to indicate particular
 kinds of "non-success".  For example, <code>diff</code> uses status value
 <code>1</code> to mean that the files are different, and <code>2</code> or more to
 mean that there was difficulty in opening the files. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>Don't confuse a program's exit status with a process' termination status. 
 There are lots of ways a process can terminate besides having it's program

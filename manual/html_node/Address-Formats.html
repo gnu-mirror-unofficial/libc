@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Address Formats - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Socket-Addresses.html#Socket-Addresses" title="Socket Addresses">
+<link rel="next" href="Setting-Address.html#Setting-Address" title="Setting Address">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Address%20Formats">Address Formats</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Setting-Address.html#Setting%20Address">Setting Address</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>
-<hr><br>
+<a name="Address-Formats"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Setting-Address.html#Setting-Address">Setting Address</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Socket-Addresses.html#Socket-Addresses">Socket Addresses</a>
+<hr>
 </div>
 
-<h3 class="subsection">Address Formats</h4>
+<h4 class="subsection">16.3.1 Address Formats</h4>
 
 <p>The functions <code>bind</code> and <code>getsockname</code> use the generic data
 type <code>struct sockaddr *</code> to represent a pointer to a socket
@@ -39,74 +46,71 @@ when you call <code>bind</code> or <code>getsockname</code>.
 sockaddr</code> data type is the <dfn>address format designator</dfn>.  This tells
 you which data type to use to understand the address fully.
 
-   <p>The symbols in this section are defined in the header file
-<code>sys/socket.h</code>.
+   <p><a name="index-sys_002fsocket_002eh-1642"></a>The symbols in this section are defined in the header file
+<samp><span class="file">sys/socket.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct sockaddr</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>struct sockaddr</code> type itself has the following members:
+<!-- sys/socket.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Data Type: <b>struct sockaddr</b><var><a name="index-struct-sockaddr-1643"></a></var><br>
+<blockquote><p>The <code>struct sockaddr</code> type itself has the following members:
 
           <dl>
-<dt><code>short int sa_family</code>
-          <dd>This is the code for the address format of this address.  It
+<dt><code>short int sa_family</code><dd>This is the code for the address format of this address.  It
 identifies the format of the data which follows.
 
-          <br><dt><code>char sa_data[14]</code>
-          <dd>This is the actual socket address data, which is format-dependent.  Its
+          <br><dt><code>char sa_data[14]</code><dd>This is the actual socket address data, which is format-dependent.  Its
 length also depends on the format, and may well be more than 14.  The
 length 14 of <code>sa_data</code> is essentially arbitrary. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-   <p>Each address format has a symbolic name which starts with <code>AF_</code>. 
-Each of them corresponds to a <code>PF_</code> symbol which designates the
+   <p>Each address format has a symbolic name which starts with `<samp><span class="samp">AF_</span></samp>'. 
+Each of them corresponds to a `<samp><span class="samp">PF_</span></samp>' symbol which designates the
 corresponding namespace.  Here is a list of address format names:
 
      <dl>
-<dt><code>AF_LOCAL</code>
-     <dd>This designates the address format that goes with the local namespace. 
-(<code>PF_LOCAL</code> is the name of that namespace.)  See <a href="Local-Namespace-Details.html#Local%20Namespace%20Details">Local Namespace Details</a>, for information about this address format.
+<!-- sys/socket.h -->
+<!-- POSIX -->
+<dt><code>AF_LOCAL</code><dd><a name="index-AF_005fLOCAL-1644"></a>This designates the address format that goes with the local namespace. 
+(<code>PF_LOCAL</code> is the name of that namespace.)  See <a href="Local-Namespace-Details.html#Local-Namespace-Details">Local Namespace Details</a>, for information about this address format.
 
-     <br><dt><code>AF_UNIX</code>
-     <dd>This is a synonym for <code>AF_LOCAL</code>.  Although <code>AF_LOCAL</code> is
+     <!-- sys/socket.h -->
+<!-- BSD, Unix98 -->
+<br><dt><code>AF_UNIX</code><dd><a name="index-AF_005fUNIX-1645"></a>This is a synonym for <code>AF_LOCAL</code>.  Although <code>AF_LOCAL</code> is
 mandated by POSIX.1g, <code>AF_UNIX</code> is portable to more systems. 
 <code>AF_UNIX</code> was the traditional name stemming from BSD, so even most
 POSIX systems support it.  It is also the name of choice in the Unix98
 specification. (The same is true for <code>PF_UNIX</code>
 vs. <code>PF_LOCAL</code>).
 
-     <br><dt><code>AF_FILE</code>
-     <dd>This is another synonym for <code>AF_LOCAL</code>, for compatibility. 
+     <!-- sys/socket.h -->
+<!-- GNU -->
+<br><dt><code>AF_FILE</code><dd><a name="index-AF_005fFILE-1646"></a>This is another synonym for <code>AF_LOCAL</code>, for compatibility. 
 (<code>PF_FILE</code> is likewise a synonym for <code>PF_LOCAL</code>.)
 
-     <br><dt><code>AF_INET</code>
-     <dd>This designates the address format that goes with the Internet
+     <!-- sys/socket.h -->
+<!-- BSD -->
+<br><dt><code>AF_INET</code><dd><a name="index-AF_005fINET-1647"></a>This designates the address format that goes with the Internet
 namespace.  (<code>PF_INET</code> is the name of that namespace.) 
-See <a href="Internet-Address-Formats.html#Internet%20Address%20Formats">Internet Address Formats</a>.
+See <a href="Internet-Address-Formats.html#Internet-Address-Formats">Internet Address Formats</a>.
 
-     <br><dt><code>AF_INET6</code>
-     <dd>This is similar to <code>AF_INET</code>, but refers to the IPv6 protocol. 
+     <!-- sys/socket.h -->
+<!-- IPv6 Basic API -->
+<br><dt><code>AF_INET6</code><dd>This is similar to <code>AF_INET</code>, but refers to the IPv6 protocol. 
 (<code>PF_INET6</code> is the name of the corresponding namespace.)
 
-     <br><dt><code>AF_UNSPEC</code>
-     <dd>This designates no particular address format.  It is used only in rare
+     <!-- sys/socket.h -->
+<!-- BSD -->
+<br><dt><code>AF_UNSPEC</code><dd><a name="index-AF_005fUNSPEC-1648"></a>This designates no particular address format.  It is used only in rare
 cases, such as to clear out the default destination address of a
-"connected" datagram socket.  See <a href="Sending-Datagrams.html#Sending%20Datagrams">Sending Datagrams</a>.
+&ldquo;connected&rdquo; datagram socket.  See <a href="Sending-Datagrams.html#Sending-Datagrams">Sending Datagrams</a>.
 
      <p>The corresponding namespace designator symbol <code>PF_UNSPEC</code> exists
 for completeness, but there is no reason to use it in a program. 
 </dl>
 
-   <p><code>sys/socket.h</code> defines symbols starting with <code>AF_</code> for many
+   <p><samp><span class="file">sys/socket.h</span></samp> defines symbols starting with `<samp><span class="samp">AF_</span></samp>' for many
 different kinds of networks, most or all of which are not actually
 implemented.  We will document those that really work as we receive
 information about how to use them.

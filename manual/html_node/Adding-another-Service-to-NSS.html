@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Adding another Service to NSS - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Extending-NSS.html#Extending-NSS" title="Extending NSS">
+<link rel="prev" href="Extending-NSS.html#Extending-NSS" title="Extending NSS">
+<link rel="next" href="NSS-Module-Function-Internals.html#NSS-Module-Function-Internals" title="NSS Module Function Internals">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Adding%20another%20Service%20to%20NSS">Adding another Service to NSS</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="NSS-Module-Function-Internals.html#NSS%20Module%20Function%20Internals">NSS Module Function Internals</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Extending-NSS.html#Extending%20NSS">Extending NSS</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Extending-NSS.html#Extending%20NSS">Extending NSS</a>
-<hr><br>
+<a name="Adding-another-Service-to-NSS"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="NSS-Module-Function-Internals.html#NSS-Module-Function-Internals">NSS Module Function Internals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Extending-NSS.html#Extending-NSS">Extending NSS</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Extending-NSS.html#Extending-NSS">Extending NSS</a>
+<hr>
 </div>
 
-<h3 class="subsection">Adding another Service to NSS</h4>
+<h4 class="subsection">28.4.1 Adding another Service to NSS</h4>
 
 <p>The sources for a new service need not (and should not) be part of the
 GNU C Library itself.  The developer retains complete control over the
@@ -45,9 +53,8 @@ Object Name) must also have this number.  Building a module from a bunch
 of object files on an ELF system using GNU CC could be done like this:
 
 <pre class="smallexample">     gcc -shared -o libnss_NAME.so.2 -Wl,-soname,libnss_NAME.so.2 OBJECTS
-     </pre>
-
-<a href="../gcc/Link-Options.html#Link%20Options">Options for Linking</a>, to learn
+</pre>
+   <p class="noindent"><a href="../gcc/Link-Options.html#Link-Options">Options for Linking</a>, to learn
 more about this command line.
 
    <p>To use the new module the library must be able to find it.  This can be
@@ -60,7 +67,7 @@ done by adding the wanted directory to the value of
 under IDs which do not belong to the user) ignore this variable. 
 Therefore the stable version of the module should be placed into a
 directory which is searched by the dynamic linker.  Normally this should
-be the directory <code>$prefix/lib</code>, where <code>$prefix</code> corresponds to
+be the directory <samp><span class="file">$prefix/lib</span></samp>, where <samp><span class="file">$prefix</span></samp> corresponds to
 the value given to configure using the <code>--prefix</code> option.  But be
 careful: this should only be done if it is clear the module does not
 cause any harm.  System administrators should be careful.

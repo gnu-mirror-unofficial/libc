@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>FP Function Optimizations - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematics.html#Mathematics" title="Mathematics">
+<link rel="prev" href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers" title="Pseudo-Random Numbers">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="FP%20Function%20Optimizations">FP Function Optimizations</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>,
+<a name="FP-Function-Optimizations"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers">Pseudo-Random Numbers</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Is Fast Code or Small Code preferred?</h3>
+<h3 class="section">19.9 Is Fast Code or Small Code preferred?</h3>
 
-<p>If an application uses many floating point functions it is often the case
+<p><a name="index-Optimization-2306"></a>
+If an application uses many floating point functions it is often the case
 that the cost of the function calls themselves is not negligible. 
 Modern processors can often execute the operations themselves
 very fast, but the function call disrupts the instruction pipeline.
@@ -54,10 +62,11 @@ included.  This will ensure that only library functions are used.  Of
 course, it can be determined for each file in the project whether
 giving this option is preferable or not.
 
-   <p>Not all hardware implements the entire IEEE&nbsp;754 standard, and even
+   <p>Not all hardware implements the entire IEEE&nbsp;754<!-- /@w --> standard, and even
 if it does there may be a substantial performance penalty for using some
 of its features.  For example, enabling traps on some processors forces
-the FPU to run un-pipelined, which can more than double calculation time.
+the FPU to run un-pipelined, which can more than double calculation time. 
+<!-- ***Add explanation of -lieee, -mieee. -->
 
    </body></html>
 

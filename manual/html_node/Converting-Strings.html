@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Converting Strings - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion" title="Restartable multibyte conversion">
+<link rel="prev" href="Converting-a-Character.html#Converting-a-Character" title="Converting a Character">
+<link rel="next" href="Multibyte-Conversion-Example.html#Multibyte-Conversion-Example" title="Multibyte Conversion Example">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,40 +17,37 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Converting%20Strings">Converting Strings</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Multibyte-Conversion-Example.html#Multibyte%20Conversion%20Example">Multibyte Conversion Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Converting-a-Character.html#Converting%20a%20Character">Converting a Character</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable%20multibyte%20conversion">Restartable multibyte conversion</a>
-<hr><br>
+<a name="Converting-Strings"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Multibyte-Conversion-Example.html#Multibyte-Conversion-Example">Multibyte Conversion Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Converting-a-Character.html#Converting-a-Character">Converting a Character</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion">Restartable multibyte conversion</a>
+<hr>
 </div>
 
-<h3 class="subsection">Converting Multibyte and Wide Character Strings</h4>
+<h4 class="subsection">6.3.4 Converting Multibyte and Wide Character Strings</h4>
 
 <p>The functions described in the previous section only convert a single
 character at a time.  Most operations to be performed in real-world
-programs include strings and therefore the ISO&nbsp;C standard also
+programs include strings and therefore the ISO&nbsp;C<!-- /@w --> standard also
 defines conversions on entire strings.  However, the defined set of
 functions is quite limited; therefore, the GNU C library contains a few
 extensions that can help in some important situations.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>mbsrtowcs</b><i> </i>(<i>wchar_t *restrict </i><var>dst</var><i>, const char **restrict </i><var>src</var><i>, size_t </i><var>len</var><i>, mbstate_t *restrict </i><var>ps</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>mbsrtowcs</code> function ("multibyte string restartable to wide
-character string") converts an NUL-terminated multibyte character
-string at <code>*</code><var>src</var><code></code> into an equivalent wide character string,
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: size_t <b>mbsrtowcs</b> (<var>wchar_t *restrict dst, const char **restrict src, size_t len, mbstate_t *restrict ps</var>)<var><a name="index-mbsrtowcs-647"></a></var><br>
+<blockquote><p>The <code>mbsrtowcs</code> function (&ldquo;multibyte string restartable to wide
+character string&rdquo;) converts an NUL-terminated multibyte character
+string at <code>*</code><var>src</var> into an equivalent wide character string,
 including the NUL wide character at the end.  The conversion is started
 using the state information from the object pointed to by <var>ps</var> or
 from an internal object of <code>mbsrtowcs</code> if <var>ps</var> is a null
@@ -53,29 +55,32 @@ pointer.  Before returning, the state object is updated to match the state
 after the last converted character.  The state is the initial state if the
 terminating NUL byte is reached and converted.
 
-     <p>If <var>dst</var> is not a null pointer, the result is stored in the array
+        <p>If <var>dst</var> is not a null pointer, the result is stored in the array
 pointed to by <var>dst</var>; otherwise, the conversion result is not
 available since it is stored in an internal buffer.
 
-     <p>If <var>len</var> wide characters are stored in the array <var>dst</var> before
+        <p>If <var>len</var> wide characters are stored in the array <var>dst</var> before
 reaching the end of the input string, the conversion stops and <var>len</var>
 is returned.  If <var>dst</var> is a null pointer, <var>len</var> is never checked.
 
-     <p>Another reason for a premature return from the function call is if the
+        <p>Another reason for a premature return from the function call is if the
 input string contains an invalid multibyte sequence.  In this case the
 global variable <code>errno</code> is set to <code>EILSEQ</code> and the function
 returns <code>(size_t) -1</code>.
 
-     <p>In all other cases the function returns the number of wide characters
+     <!-- XXX The ISO C9x draft seems to have a problem here.  It says that PS -->
+<!-- is not updated if DST is NULL.  This is not said straightforward and -->
+<!-- none of the other functions is described like this.  It would make sense -->
+<!-- to define the function this way but I don't think it is meant like this. -->
+<p>In all other cases the function returns the number of wide characters
 converted during this call.  If <var>dst</var> is not null, <code>mbsrtowcs</code>
 stores in the pointer pointed to by <var>src</var> either a null pointer (if
 the NUL byte in the input string was reached) or the address of the byte
 following the last converted multibyte character.
 
-     <p><code>mbsrtowcs</code> was introduced in Amendment&nbsp;1 to ISO&nbsp;C90 and is
-declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p><a name="index-wchar_002eh-648"></a><code>mbsrtowcs</code> was introduced in Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w --> and is
+declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
    <p>The definition of the <code>mbsrtowcs</code> function has one important
 limitation.  The requirement that <var>dst</var> has to be a NUL-terminated
@@ -94,7 +99,7 @@ parameter <var>len</var> to any specific value.  Since it is not known how
 many bytes each multibyte character sequence is in length, one can only
 guess.
 
-   <p>There is still a problem with the method of NUL-terminating a line right
+   <p><a name="index-stateful-649"></a>There is still a problem with the method of NUL-terminating a line right
 after the newline character, which could lead to very strange results. 
 As said in the description of the <code>mbsrtowcs</code> function above the
 conversion state is guaranteed to be in the initial shift state after
@@ -105,12 +110,12 @@ initial shift state and therefore the first character of the next line
 is encoded using this state).  But the state in question is never
 accessible to the user since the conversion stops after the NUL byte
 (which resets the state).  Most stateful character sets in use today
-require that the shift state after a newline be the initial state-but
+require that the shift state after a newline be the initial state&ndash;but
 this is not a strict guarantee.  Therefore, simply NUL-terminating a
 piece of a running text is not always an adequate solution and,
 therefore, should never be used in generally used code.
 
-   <p>The generic conversion interface (see <a href="Generic-Charset-Conversion.html#Generic%20Charset%20Conversion">Generic Charset Conversion</a>)
+   <p>The generic conversion interface (see <a href="Generic-Charset-Conversion.html#Generic-Charset-Conversion">Generic Charset Conversion</a>)
 does not have this limitation (it simply works on buffers, not
 strings), and the GNU C library contains a set of functions that take
 additional parameters specifying the maximal number of bytes that are
@@ -118,19 +123,13 @@ consumed from the input string.  This way the problem of
 <code>mbsrtowcs</code>'s example above could be solved by determining the line
 length and passing this length to the function.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>wcsrtombs</b><i> </i>(<i>char *restrict </i><var>dst</var><i>, const wchar_t **restrict </i><var>src</var><i>, size_t </i><var>len</var><i>, mbstate_t *restrict </i><var>ps</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wcsrtombs</code> function ("wide character string restartable to
-multibyte string") converts the NUL-terminated wide character string at
-<code>*</code><var>src</var><code></code> into an equivalent multibyte character string and
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: size_t <b>wcsrtombs</b> (<var>char *restrict dst, const wchar_t **restrict src, size_t len, mbstate_t *restrict ps</var>)<var><a name="index-wcsrtombs-650"></a></var><br>
+<blockquote><p>The <code>wcsrtombs</code> function (&ldquo;wide character string restartable to
+multibyte string&rdquo;) converts the NUL-terminated wide character string at
+<code>*</code><var>src</var> into an equivalent multibyte character string and
 stores the result in the array pointed to by <var>dst</var>.  The NUL wide
 character is also converted.  The conversion starts in the state
 described in the object pointed to by <var>ps</var> or by a state object
@@ -140,18 +139,18 @@ result is not available.  If all characters of the input string were
 successfully converted and if <var>dst</var> is not a null pointer, the
 pointer pointed to by <var>src</var> gets assigned a null pointer.
 
-     <p>If one of the wide characters in the input string has no valid multibyte
+        <p>If one of the wide characters in the input string has no valid multibyte
 character equivalent, the conversion stops early, sets the global
 variable <code>errno</code> to <code>EILSEQ</code>, and returns <code>(size_t) -1</code>.
 
-     <p>Another reason for a premature stop is if <var>dst</var> is not a null
+        <p>Another reason for a premature stop is if <var>dst</var> is not a null
 pointer and the next converted character would require more than
 <var>len</var> bytes in total to the array <var>dst</var>.  In this case (and if
 <var>dest</var> is not a null pointer) the pointer pointed to by <var>src</var> is
 assigned a value pointing to the wide character right after the last one
 successfully converted.
 
-     <p>Except in the case of an encoding error the return value of the
+        <p>Except in the case of an encoding error the return value of the
 <code>wcsrtombs</code> function is the number of bytes in all the multibyte
 character sequences stored in <var>dst</var>.  Before returning the state in
 the object pointed to by <var>ps</var> (or the internal object in case
@@ -159,10 +158,9 @@ the object pointed to by <var>ps</var> (or the internal object in case
 last conversion.  The state is the initial shift state in case the
 terminating NUL wide character was converted.
 
-     <p>The <code>wcsrtombs</code> function was introduced in Amendment&nbsp;1 to
-ISO&nbsp;C90 and is declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p><a name="index-wchar_002eh-651"></a>The <code>wcsrtombs</code> function was introduced in Amendment&nbsp;1<!-- /@w --> to
+ISO&nbsp;C90<!-- /@w --> and is declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
    <p>The restriction mentioned above for the <code>mbsrtowcs</code> function applies
 here also.  There is no possibility of directly controlling the number of
@@ -170,32 +168,25 @@ input characters.  One has to place the NUL wide character at the correct
 place or control the consumed input indirectly via the available output
 array size (the <var>len</var> parameter).
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>mbsnrtowcs</b><i> </i>(<i>wchar_t *restrict </i><var>dst</var><i>, const char **restrict </i><var>src</var><i>, size_t </i><var>nmc</var><i>, size_t </i><var>len</var><i>, mbstate_t *restrict </i><var>ps</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>mbsnrtowcs</code> function is very similar to the <code>mbsrtowcs</code>
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: size_t <b>mbsnrtowcs</b> (<var>wchar_t *restrict dst, const char **restrict src, size_t nmc, size_t len, mbstate_t *restrict ps</var>)<var><a name="index-mbsnrtowcs-652"></a></var><br>
+<blockquote><p>The <code>mbsnrtowcs</code> function is very similar to the <code>mbsrtowcs</code>
 function.  All the parameters are the same except for <var>nmc</var>, which is
 new.  The return value is the same as for <code>mbsrtowcs</code>.
 
-     <p>This new parameter specifies how many bytes at most can be used from the
+        <p>This new parameter specifies how many bytes at most can be used from the
 multibyte character string.  In other words, the multibyte character
-string <code>*</code><var>src</var><code></code> need not be NUL-terminated.  But if a NUL byte
+string <code>*</code><var>src</var> need not be NUL-terminated.  But if a NUL byte
 is found within the <var>nmc</var> first bytes of the string, the conversion
 stops here.
 
-     <p>This function is a GNU extension.  It is meant to work around the
+        <p>This function is a GNU extension.  It is meant to work around the
 problems mentioned above.  Now it is possible to convert a buffer with
 multibyte character text piece for piece without having to care about
 inserting NUL bytes and the effect of NUL bytes on the conversion state. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>A function to convert a multibyte string into a wide character string
 and display it could be written like this (this is not a really useful
@@ -213,7 +204,7 @@ example):
            const char *endp = strchr (src, '\n');
            size_t n;
      
-           /* Exit if there is no more line.  */
+           /* <span class="roman">Exit if there is no more line.</span>  */
            if (endp == NULL)
              break;
      
@@ -222,38 +213,30 @@ example):
            fprintf (fp, "line %d: \"%S\"\n", linebuf);
          }
      }
-     </pre>
-
+</pre>
    <p>There is no problem with the state after a call to <code>mbsnrtowcs</code>. 
 Since we don't insert characters in the strings that were not in there
 right from the beginning and we use <var>state</var> only for the conversion
 of the given buffer, there is no problem with altering the state.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>wcsnrtombs</b><i> </i>(<i>char *restrict </i><var>dst</var><i>, const wchar_t **restrict </i><var>src</var><i>, size_t </i><var>nwc</var><i>, size_t </i><var>len</var><i>, mbstate_t *restrict </i><var>ps</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wcsnrtombs</code> function implements the conversion from wide
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: size_t <b>wcsnrtombs</b> (<var>char *restrict dst, const wchar_t **restrict src, size_t nwc, size_t len, mbstate_t *restrict ps</var>)<var><a name="index-wcsnrtombs-653"></a></var><br>
+<blockquote><p>The <code>wcsnrtombs</code> function implements the conversion from wide
 character strings to multibyte character strings.  It is similar to
 <code>wcsrtombs</code> but, just like <code>mbsnrtowcs</code>, it takes an extra
 parameter, which specifies the length of the input string.
 
-     <p>No more than <var>nwc</var> wide characters from the input string
-<code>*</code><var>src</var><code></code> are converted.  If the input string contains a NUL
+        <p>No more than <var>nwc</var> wide characters from the input string
+<code>*</code><var>src</var> are converted.  If the input string contains a NUL
 wide character in the first <var>nwc</var> characters, the conversion stops at
 this place.
 
-     <p>The <code>wcsnrtombs</code> function is a GNU extension and just like
+        <p>The <code>wcsnrtombs</code> function is a GNU extension and just like
 <code>mbsnrtowcs</code> helps in situations where no NUL-terminated input
 strings are available. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

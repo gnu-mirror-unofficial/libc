@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Initializing the Shell - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Implementing-a-Shell.html#Implementing-a-Shell" title="Implementing a Shell">
+<link rel="prev" href="Data-Structures.html#Data-Structures" title="Data Structures">
+<link rel="next" href="Launching-Jobs.html#Launching-Jobs" title="Launching Jobs">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Initializing%20the%20Shell">Initializing the Shell</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Data-Structures.html#Data%20Structures">Data Structures</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
-<hr><br>
+<a name="Initializing-the-Shell"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Launching-Jobs.html#Launching-Jobs">Launching Jobs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Data-Structures.html#Data-Structures">Data Structures</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing-a-Shell">Implementing a Shell</a>
+<hr>
 </div>
 
-<h3 class="subsection">Initializing the Shell</h4>
+<h4 class="subsection">27.6.2 Initializing the Shell</h4>
 
-<p>When a shell program that normally performs job control is started, it
+<p><a name="index-job-control_002c-enabling-3192"></a><a name="index-subshell-3193"></a>
+When a shell program that normally performs job control is started, it
 has to be careful in case it has been invoked from another shell that is
 already doing its own job control.
 
@@ -44,7 +53,7 @@ tell the parent shell to do this.  If the subshell is continued again,
 it should repeat the check and stop itself again if it is still not in
 the foreground.
 
-   <p>Once the subshell has been placed into the foreground by its parent
+   <p><a name="index-job-control_002c-enabling-3194"></a>Once the subshell has been placed into the foreground by its parent
 shell, it can enable its own job control.  It does this by calling
 <code>setpgid</code> to put itself into its own process group, and then
 calling <code>tcsetpgrp</code> to place this process group into the
@@ -59,13 +68,13 @@ You can do this by setting the action for all the stop signals to
 control.  It must leave all processes it creates in the same process
 group as the shell itself; this allows the non-interactive shell and its
 child processes to be treated as a single job by the parent shell.  This
-is easy to do--just don't use any of the job control primitives--but
+is easy to do&mdash;just don't use any of the job control primitives&mdash;but
 you must remember to make the shell do it.
 
    <p>Here is the initialization code for the sample shell that shows how to
 do all of this.
 
-<pre class="smallexample">     /* Keep track of attributes of the shell.  */
+<pre class="smallexample">     /* <span class="roman">Keep track of attributes of the shell.</span>  */
      
      #include &lt;sys/types.h&gt;
      #include &lt;termios.h&gt;
@@ -77,24 +86,24 @@ do all of this.
      int shell_is_interactive;
      
      
-     /* Make sure the shell is running interactively as the foreground job
-        before proceeding. */
+     /* <span class="roman">Make sure the shell is running interactively as the foreground job</span>
+        <span class="roman">before proceeding.</span> */
      
      void
      init_shell ()
      {
      
-       /* See if we are running interactively.  */
+       /* <span class="roman">See if we are running interactively.</span>  */
        shell_terminal = STDIN_FILENO;
        shell_is_interactive = isatty (shell_terminal);
      
        if (shell_is_interactive)
          {
-           /* Loop until we are in the foreground.  */
+           /* <span class="roman">Loop until we are in the foreground.</span>  */
            while (tcgetpgrp (shell_terminal) != (shell_pgid = getpgrp ()))
              kill (- shell_pgid, SIGTTIN);
      
-           /* Ignore interactive and job-control signals.  */
+           /* <span class="roman">Ignore interactive and job-control signals.</span>  */
            signal (SIGINT, SIG_IGN);
            signal (SIGQUIT, SIG_IGN);
            signal (SIGTSTP, SIG_IGN);
@@ -102,7 +111,7 @@ do all of this.
            signal (SIGTTOU, SIG_IGN);
            signal (SIGCHLD, SIG_IGN);
      
-           /* Put ourselves in our own process group.  */
+           /* <span class="roman">Put ourselves in our own process group.</span>  */
            shell_pgid = getpid ();
            if (setpgid (shell_pgid, shell_pgid) &lt; 0)
              {
@@ -110,14 +119,13 @@ do all of this.
                exit (1);
              }
      
-           /* Grab control of the terminal.  */
+           /* <span class="roman">Grab control of the terminal.</span>  */
            tcsetpgrp (shell_terminal, shell_pgid);
      
-           /* Save default terminal attributes for shell.  */
+           /* <span class="roman">Save default terminal attributes for shell.</span>  */
            tcgetattr (shell_terminal, &amp;shell_tmodes);
          }
      }
-     </pre>
-
+</pre>
    </body></html>
 

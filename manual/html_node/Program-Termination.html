@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Program Termination - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Program-Basics.html#Program-Basics" title="Program Basics">
+<link rel="prev" href="System-Calls.html#System-Calls" title="System Calls">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Program%20Termination">Program Termination</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="System-Calls.html#System%20Calls">System Calls</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Program-Basics.html#Program%20Basics">Program Basics</a>
-<hr><br>
+<a name="Program-Termination"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="System-Calls.html#System-Calls">System Calls</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Program-Basics.html#Program-Basics">Program Basics</a>
+<hr>
 </div>
 
-<h3 class="section">Program Termination</h3>
+<h3 class="section">25.6 Program Termination</h3>
 
-<p>The usual way for a program to terminate is simply for its <code>main</code>
+<p><a name="index-program-termination-3110"></a><a name="index-process-termination-3111"></a>
+<a name="index-exit-status-value-3112"></a>The usual way for a program to terminate is simply for its <code>main</code>
 function to return.  The <dfn>exit status value</dfn> returned from the
 <code>main</code> function is used to report information back to the process's
 parent process or shell.
@@ -34,19 +42,19 @@ parent process or shell.
 function.
 
    <p>In addition, programs can be terminated by signals; this is discussed in
-more detail in <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.  The <code>abort</code> function causes
+more detail in <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>.  The <code>abort</code> function causes
 a signal that kills the program.
 
 <ul class="menu">
-<li><a accesskey="1" href="Normal-Termination.html#Normal%20Termination">Normal Termination</a>:           If a program calls <code>exit</code>, a
+<li><a accesskey="1" href="Normal-Termination.html#Normal-Termination">Normal Termination</a>:           If a program calls <code>exit</code>, a
                                  process terminates normally. 
-<li><a accesskey="2" href="Exit-Status.html#Exit%20Status">Exit Status</a>:                  The <code>exit status</code> provides information
+<li><a accesskey="2" href="Exit-Status.html#Exit-Status">Exit Status</a>:                  The <code>exit status</code> provides information
                                  about why the process terminated. 
-<li><a accesskey="3" href="Cleanups-on-Exit.html#Cleanups%20on%20Exit">Cleanups on Exit</a>:             A process can run its own cleanup
+<li><a accesskey="3" href="Cleanups-on-Exit.html#Cleanups-on-Exit">Cleanups on Exit</a>:             A process can run its own cleanup
                                  functions upon normal termination. 
-<li><a accesskey="4" href="Aborting-a-Program.html#Aborting%20a%20Program">Aborting a Program</a>:           The <code>abort</code> function causes
+<li><a accesskey="4" href="Aborting-a-Program.html#Aborting-a-Program">Aborting a Program</a>:           The <code>abort</code> function causes
                                  abnormal program termination. 
-<li><a accesskey="5" href="Termination-Internals.html#Termination%20Internals">Termination Internals</a>:        What happens when a process terminates. 
+<li><a accesskey="5" href="Termination-Internals.html#Termination-Internals">Termination Internals</a>:        What happens when a process terminates. 
 </ul>
 
    </body></html>

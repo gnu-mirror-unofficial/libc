@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Table of Output Conversions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatted-Output.html#Formatted-Output" title="Formatted Output">
+<link rel="prev" href="Output-Conversion-Syntax.html#Output-Conversion-Syntax" title="Output Conversion Syntax">
+<link rel="next" href="Integer-Conversions.html#Integer-Conversions" title="Integer Conversions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,84 +17,72 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Table%20of%20Output%20Conversions">Table of Output Conversions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-Conversion-Syntax.html#Output%20Conversion%20Syntax">Output Conversion Syntax</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
-<hr><br>
+<a name="Table-of-Output-Conversions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Integer-Conversions.html#Integer-Conversions">Integer Conversions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-Conversion-Syntax.html#Output-Conversion-Syntax">Output Conversion Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted-Output">Formatted Output</a>
+<hr>
 </div>
 
-<h3 class="subsection">Table of Output Conversions</h4>
+<h4 class="subsection">12.12.3 Table of Output Conversions</h4>
 
-<p>Here is a table summarizing what all the different conversions do:
+<p><a name="index-output-conversions_002c-for-_0040code_007bprintf_007d-1017"></a>
+Here is a table summarizing what all the different conversions do:
 
      <dl>
-<dt><code>%d</code>, <code>%i</code>
-     <dd>Print an integer as a signed decimal number.  See <a href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>, for details.  <code>%d</code> and <code>%i</code> are synonymous for
+<dt>`<samp><span class="samp">%d</span></samp>', `<samp><span class="samp">%i</span></samp>'<dd>Print an integer as a signed decimal number.  See <a href="Integer-Conversions.html#Integer-Conversions">Integer Conversions</a>, for details.  `<samp><span class="samp">%d</span></samp>' and `<samp><span class="samp">%i</span></samp>' are synonymous for
 output, but are different when used with <code>scanf</code> for input
-(see <a href="Table-of-Input-Conversions.html#Table%20of%20Input%20Conversions">Table of Input Conversions</a>).
+(see <a href="Table-of-Input-Conversions.html#Table-of-Input-Conversions">Table of Input Conversions</a>).
 
-     <br><dt><code>%o</code>
-     <dd>Print an integer as an unsigned octal number.  See <a href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%o</span></samp>'<dd>Print an integer as an unsigned octal number.  See <a href="Integer-Conversions.html#Integer-Conversions">Integer Conversions</a>, for details.
 
-     <br><dt><code>%u</code>
-     <dd>Print an integer as an unsigned decimal number.  See <a href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%u</span></samp>'<dd>Print an integer as an unsigned decimal number.  See <a href="Integer-Conversions.html#Integer-Conversions">Integer Conversions</a>, for details.
 
-     <br><dt><code>%x</code>, <code>%X</code>
-     <dd>Print an integer as an unsigned hexadecimal number.  <code>%x</code> uses
-lower-case letters and <code>%X</code> uses upper-case.  See <a href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%x</span></samp>', `<samp><span class="samp">%X</span></samp>'<dd>Print an integer as an unsigned hexadecimal number.  `<samp><span class="samp">%x</span></samp>' uses
+lower-case letters and `<samp><span class="samp">%X</span></samp>' uses upper-case.  See <a href="Integer-Conversions.html#Integer-Conversions">Integer Conversions</a>, for details.
 
-     <br><dt><code>%f</code>
-     <dd>Print a floating-point number in normal (fixed-point) notation. 
-See <a href="Floating-Point-Conversions.html#Floating-Point%20Conversions">Floating-Point Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%f</span></samp>'<dd>Print a floating-point number in normal (fixed-point) notation. 
+See <a href="Floating_002dPoint-Conversions.html#Floating_002dPoint-Conversions">Floating-Point Conversions</a>, for details.
 
-     <br><dt><code>%e</code>, <code>%E</code>
-     <dd>Print a floating-point number in exponential notation.  <code>%e</code> uses
-lower-case letters and <code>%E</code> uses upper-case.  See <a href="Floating-Point-Conversions.html#Floating-Point%20Conversions">Floating-Point Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%e</span></samp>', `<samp><span class="samp">%E</span></samp>'<dd>Print a floating-point number in exponential notation.  `<samp><span class="samp">%e</span></samp>' uses
+lower-case letters and `<samp><span class="samp">%E</span></samp>' uses upper-case.  See <a href="Floating_002dPoint-Conversions.html#Floating_002dPoint-Conversions">Floating-Point Conversions</a>, for details.
 
-     <br><dt><code>%g</code>, <code>%G</code>
-     <dd>Print a floating-point number in either normal or exponential notation,
-whichever is more appropriate for its magnitude.  <code>%g</code> uses
-lower-case letters and <code>%G</code> uses upper-case.  See <a href="Floating-Point-Conversions.html#Floating-Point%20Conversions">Floating-Point Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%g</span></samp>', `<samp><span class="samp">%G</span></samp>'<dd>Print a floating-point number in either normal or exponential notation,
+whichever is more appropriate for its magnitude.  `<samp><span class="samp">%g</span></samp>' uses
+lower-case letters and `<samp><span class="samp">%G</span></samp>' uses upper-case.  See <a href="Floating_002dPoint-Conversions.html#Floating_002dPoint-Conversions">Floating-Point Conversions</a>, for details.
 
-     <br><dt><code>%a</code>, <code>%A</code>
-     <dd>Print a floating-point number in a hexadecimal fractional notation which
-the exponent to base 2 represented in decimal digits.  <code>%a</code> uses
-lower-case letters and <code>%A</code> uses upper-case.  See <a href="Floating-Point-Conversions.html#Floating-Point%20Conversions">Floating-Point Conversions</a>, for details.
+     <br><dt>`<samp><span class="samp">%a</span></samp>', `<samp><span class="samp">%A</span></samp>'<dd>Print a floating-point number in a hexadecimal fractional notation which
+the exponent to base 2 represented in decimal digits.  `<samp><span class="samp">%a</span></samp>' uses
+lower-case letters and `<samp><span class="samp">%A</span></samp>' uses upper-case.  See <a href="Floating_002dPoint-Conversions.html#Floating_002dPoint-Conversions">Floating-Point Conversions</a>, for details.
 
-     <br><dt><code>%c</code>
-     <dd>Print a single character.  See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>.
+     <br><dt>`<samp><span class="samp">%c</span></samp>'<dd>Print a single character.  See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>.
 
-     <br><dt><code>%C</code>
-     <dd>This is an alias for <code>%lc</code> which is supported for compatibility
+     <br><dt>`<samp><span class="samp">%C</span></samp>'<dd>This is an alias for `<samp><span class="samp">%lc</span></samp>' which is supported for compatibility
 with the Unix standard.
 
-     <br><dt><code>%s</code>
-     <dd>Print a string.  See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>.
+     <br><dt>`<samp><span class="samp">%s</span></samp>'<dd>Print a string.  See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>.
 
-     <br><dt><code>%S</code>
-     <dd>This is an alias for <code>%ls</code> which is supported for compatibility
+     <br><dt>`<samp><span class="samp">%S</span></samp>'<dd>This is an alias for `<samp><span class="samp">%ls</span></samp>' which is supported for compatibility
 with the Unix standard.
 
-     <br><dt><code>%p</code>
-     <dd>Print the value of a pointer.  See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>.
+     <br><dt>`<samp><span class="samp">%p</span></samp>'<dd>Print the value of a pointer.  See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>.
 
-     <br><dt><code>%n</code>
-     <dd>Get the number of characters printed so far.  See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>. 
+     <br><dt>`<samp><span class="samp">%n</span></samp>'<dd>Get the number of characters printed so far.  See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>. 
 Note that this conversion specification never produces any output.
 
-     <br><dt><code>%m</code>
-     <dd>Print the string corresponding to the value of <code>errno</code>. 
+     <br><dt>`<samp><span class="samp">%m</span></samp>'<dd>Print the string corresponding to the value of <code>errno</code>. 
 (This is a GNU extension.) 
-See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>.
+See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>.
 
-     <br><dt><code>%%</code>
-     <dd>Print a literal <code>%</code> character.  See <a href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>. 
+     <br><dt>`<samp><span class="samp">%%</span></samp>'<dd>Print a literal `<samp><span class="samp">%</span></samp>' character.  See <a href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>. 
 </dl>
 
    <p>If the syntax of a conversion specification is invalid, unpredictable

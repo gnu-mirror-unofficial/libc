@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Process Creation Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Processes.html#Processes" title="Processes">
+<link rel="prev" href="BSD-Wait-Functions.html#BSD-Wait-Functions" title="BSD Wait Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,22 +16,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Process%20Creation%20Example">Process Creation Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="BSD-Wait-Functions.html#BSD%20Wait%20Functions">BSD Wait Functions</a>,
+<a name="Process-Creation-Example"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BSD-Wait-Functions.html#BSD-Wait-Functions">BSD Wait Functions</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Process Creation Example</h3>
+<h3 class="section">26.9 Process Creation Example</h3>
 
 <p>Here is an example program showing how you might write a function
 similar to the built-in <code>system</code>.  It executes its <var>command</var>
-argument using the equivalent of <code>sh -c </code><var>command</var><code></code>.
+argument using the equivalent of `<samp><span class="samp">sh -c </span><var>command</var></samp>'.
 
 <pre class="smallexample">     #include &lt;stddef.h&gt;
      #include &lt;stdlib.h&gt;
@@ -35,7 +42,7 @@ argument using the equivalent of <code>sh -c </code><var>command</var><code></co
      #include &lt;sys/types.h&gt;
      #include &lt;sys/wait.h&gt;
      
-     /* Execute the command using this shell program.  */
+     /* <span class="roman">Execute the command using this shell program.</span>  */
      #define SHELL "/bin/sh"
      
      int
@@ -47,22 +54,22 @@ argument using the equivalent of <code>sh -c </code><var>command</var><code></co
        pid = fork ();
        if (pid == 0)
          {
-           /* This is the child process.  Execute the shell command. */
+           /* <span class="roman">This is the child process.  Execute the shell command.</span> */
            execl (SHELL, SHELL, "-c", command, NULL);
            _exit (EXIT_FAILURE);
          }
        else if (pid &lt; 0)
-         /* The fork failed.  Report failure.  */
+         /* <span class="roman">The fork failed.  Report failure.</span>  */
          status = -1;
        else
-         /* This is the parent process.  Wait for the child to complete.  */
+         /* <span class="roman">This is the parent process.  Wait for the child to complete.</span>  */
          if (waitpid (pid, &amp;status, 0) != pid)
            status = -1;
        return status;
      }
-     </pre>
-
-   <p>There are a couple of things you should pay attention to in this
+</pre>
+   <!-- Yes, this example has been tested. -->
+<p>There are a couple of things you should pay attention to in this
 example.
 
    <p>Remember that the first <code>argv</code> argument supplied to the program
@@ -82,7 +89,7 @@ instead of <code>exit</code> is to avoid flushing fully buffered streams such
 as <code>stdout</code>.  The buffers of these streams probably contain data
 that was copied from the parent process by the <code>fork</code>, data that
 will be output eventually by the parent process.  Calling <code>exit</code> in
-the child would output the data twice.  See <a href="Termination-Internals.html#Termination%20Internals">Termination Internals</a>.
+the child would output the data twice.  See <a href="Termination-Internals.html#Termination-Internals">Termination Internals</a>.
 
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>File Name Portability - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="File-Names.html#File-Names" title="File Names">
+<link rel="prev" href="File-Name-Errors.html#File-Name-Errors" title="File Name Errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,23 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="File%20Name%20Portability">File Name Portability</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="File-Names.html#File%20Names">File Names</a>
-<hr><br>
+<a name="File-Name-Portability"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Name-Errors.html#File-Name-Errors">File Name Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Names.html#File-Names">File Names</a>
+<hr>
 </div>
 
-<h3 class="subsection">Portability of File Names</h4>
+<h4 class="subsection">11.2.4 Portability of File Names</h4>
 
-<p>The rules for the syntax of file names discussed in <a href="File-Names.html#File%20Names">File Names</a>,
+<p>The rules for the syntax of file names discussed in <a href="File-Names.html#File-Names">File Names</a>,
 are the rules normally used by the GNU system and by other POSIX
 systems.  However, other operating systems may use other conventions.
 
@@ -45,7 +52,7 @@ operating system over a network, or read and write disks in formats used
 by other operating systems. 
 </ul>
 
-   <p>The ISO&nbsp;C standard says very little about file name syntax, only that
+   <p>The ISO&nbsp;C<!-- /@w --> standard says very little about file name syntax, only that
 file names are strings.  In addition to varying restrictions on the
 length of file names and what characters can validly appear in a file
 name, different operating systems use different conventions and syntax

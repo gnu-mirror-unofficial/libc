@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Signal and Sigaction - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Signal-Actions.html#Signal-Actions" title="Signal Actions">
+<link rel="prev" href="Advanced-Signal-Handling.html#Advanced-Signal-Handling" title="Advanced Signal Handling">
+<link rel="next" href="Sigaction-Function-Example.html#Sigaction-Function-Example" title="Sigaction Function Example">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Signal%20and%20Sigaction">Signal and Sigaction</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Sigaction-Function-Example.html#Sigaction%20Function%20Example">Sigaction Function Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
-<hr><br>
+<a name="Signal-and-Sigaction"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Sigaction-Function-Example.html#Sigaction-Function-Example">Sigaction Function Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Advanced-Signal-Handling.html#Advanced-Signal-Handling">Advanced Signal Handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal-Actions">Signal Actions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Interaction of <code>signal</code> and <code>sigaction</code></h4>
+<h4 class="subsection">24.3.3 Interaction of <code>signal</code> and <code>sigaction</code></h4>
 
 <p>It's possible to use both the <code>signal</code> and <code>sigaction</code>
 functions within a single program, but you have to be careful because
@@ -54,7 +62,7 @@ problem never happens on the GNU system.
 consistently within a single program.
 
    <p><strong>Portability Note:</strong> The basic <code>signal</code> function is a feature
-of ISO&nbsp;C, while <code>sigaction</code> is part of the POSIX.1 standard.  If
+of ISO&nbsp;C<!-- /@w -->, while <code>sigaction</code> is part of the POSIX.1 standard.  If
 you are concerned about portability to non-POSIX systems, then you
 should use the <code>signal</code> function instead.
 

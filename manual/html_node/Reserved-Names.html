@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Reserved Names - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Using-the-Library.html#Using-the-Library" title="Using the Library">
+<link rel="prev" href="Macro-Definitions.html#Macro-Definitions" title="Macro Definitions">
+<link rel="next" href="Feature-Test-Macros.html#Feature-Test-Macros" title="Feature Test Macros">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,22 +17,26 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Reserved%20Names">Reserved Names</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Macro-Definitions.html#Macro%20Definitions">Macro Definitions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Using-the-Library.html#Using%20the%20Library">Using the Library</a>
-<hr><br>
+<a name="Reserved-Names"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Macro-Definitions.html#Macro-Definitions">Macro Definitions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Using-the-Library.html#Using-the-Library">Using the Library</a>
+<hr>
 </div>
 
-<h3 class="subsection">Reserved Names</h4>
+<h4 class="subsection">1.3.3 Reserved Names</h4>
 
-<p>The names of all library types, macros, variables and functions that
-come from the ISO&nbsp;C standard are reserved unconditionally; your program
+<p><a name="index-reserved-names-26"></a><a name="index-name-space-27"></a>
+The names of all library types, macros, variables and functions that
+come from the ISO&nbsp;C<!-- /@w --> standard are reserved unconditionally; your program
 <strong>may not</strong> redefine these names.  All other library names are
 reserved if your program explicitly includes the header file that
 defines or declares them.  There are several reasons for these
@@ -47,8 +56,8 @@ were allowed, those other functions would not work properly.
      <li>It allows the compiler to do whatever special optimizations it pleases
 on calls to these functions, without the possibility that they may have
 been redefined by the user.  Some library facilities, such as those for
-dealing with variadic arguments (see <a href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>)
-and non-local exits (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>), actually require a
+dealing with variadic arguments (see <a href="Variadic-Functions.html#Variadic-Functions">Variadic Functions</a>)
+and non-local exits (see <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits">Non-Local Exits</a>), actually require a
 considerable amount of cooperation on the part of the C compiler, and
 with respect to the implementation, it might be easier for the compiler
 to treat these as built-in parts of the language. 
@@ -56,7 +65,7 @@ to treat these as built-in parts of the language.
 
    <p>In addition to the names documented in this manual, reserved names
 include all external identifiers (global functions and variables) that
-begin with an underscore (<code>_</code>) and all identifiers regardless of
+begin with an underscore (`<samp><span class="samp">_</span></samp>') and all identifiers regardless of
 use that begin with either two underscores or an underscore followed by
 a capital letter are reserved names.  This is so that the library and
 header files can define functions, variables, and macros for internal
@@ -69,33 +78,33 @@ raise the possibility of conflict with future versions of the C
 or POSIX standards, so you should avoid these names.
 
      <ul>
-<li>Names beginning with a capital <code>E</code> followed a digit or uppercase
-letter may be used for additional error code names.  See <a href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>.
+<li>Names beginning with a capital `<samp><span class="samp">E</span></samp>' followed a digit or uppercase
+letter may be used for additional error code names.  See <a href="Error-Reporting.html#Error-Reporting">Error Reporting</a>.
 
-     <li>Names that begin with either <code>is</code> or <code>to</code> followed by a
+     <li>Names that begin with either `<samp><span class="samp">is</span></samp>' or `<samp><span class="samp">to</span></samp>' followed by a
 lowercase letter may be used for additional character testing and
-conversion functions.  See <a href="Character-Handling.html#Character%20Handling">Character Handling</a>.
+conversion functions.  See <a href="Character-Handling.html#Character-Handling">Character Handling</a>.
 
-     <li>Names that begin with <code>LC_</code> followed by an uppercase letter may be
+     <li>Names that begin with `<samp><span class="samp">LC_</span></samp>' followed by an uppercase letter may be
 used for additional macros specifying locale attributes. 
 See <a href="Locales.html#Locales">Locales</a>.
 
      <li>Names of all existing mathematics functions (see <a href="Mathematics.html#Mathematics">Mathematics</a>)
-suffixed with <code>f</code> or <code>l</code> are reserved for corresponding
+suffixed with `<samp><span class="samp">f</span></samp>' or `<samp><span class="samp">l</span></samp>' are reserved for corresponding
 functions that operate on <code>float</code> and <code>long double</code> arguments,
 respectively.
 
-     <li>Names that begin with <code>SIG</code> followed by an uppercase letter are
-reserved for additional signal names.  See <a href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>.
+     <li>Names that begin with `<samp><span class="samp">SIG</span></samp>' followed by an uppercase letter are
+reserved for additional signal names.  See <a href="Standard-Signals.html#Standard-Signals">Standard Signals</a>.
 
-     <li>Names that begin with <code>SIG_</code> followed by an uppercase letter are
-reserved for additional signal actions.  See <a href="Basic-Signal-Handling.html#Basic%20Signal%20Handling">Basic Signal Handling</a>.
+     <li>Names that begin with `<samp><span class="samp">SIG_</span></samp>' followed by an uppercase letter are
+reserved for additional signal actions.  See <a href="Basic-Signal-Handling.html#Basic-Signal-Handling">Basic Signal Handling</a>.
 
-     <li>Names beginning with <code>str</code>, <code>mem</code>, or <code>wcs</code> followed by a
+     <li>Names beginning with `<samp><span class="samp">str</span></samp>', `<samp><span class="samp">mem</span></samp>', or `<samp><span class="samp">wcs</span></samp>' followed by a
 lowercase letter are reserved for additional string and array functions. 
-See <a href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>.
+See <a href="String-and-Array-Utilities.html#String-and-Array-Utilities">String and Array Utilities</a>.
 
-     <li>Names that end with <code>_t</code> are reserved for additional type names. 
+     <li>Names that end with `<samp><span class="samp">_t</span></samp>' are reserved for additional type names. 
 </ul>
 
    <p>In addition, some individual header files reserve names beyond
@@ -103,30 +112,32 @@ those that they actually define.  You only need to worry about these
 restrictions if your program includes that particular header file.
 
      <ul>
-<li>The header file <code>dirent.h</code> reserves names prefixed with
-<code>d_</code>.
+<li>The header file <samp><span class="file">dirent.h</span></samp> reserves names prefixed with
+`<samp><span class="samp">d_</span></samp>'. 
+<a name="index-dirent_002eh-28"></a>
+<li>The header file <samp><span class="file">fcntl.h</span></samp> reserves names prefixed with
+`<samp><span class="samp">l_</span></samp>', `<samp><span class="samp">F_</span></samp>', `<samp><span class="samp">O_</span></samp>', and `<samp><span class="samp">S_</span></samp>'. 
+<a name="index-fcntl_002eh-29"></a>
+<li>The header file <samp><span class="file">grp.h</span></samp> reserves names prefixed with `<samp><span class="samp">gr_</span></samp>'. 
+<a name="index-grp_002eh-30"></a>
+<li>The header file <samp><span class="file">limits.h</span></samp> reserves names suffixed with `<samp><span class="samp">_MAX</span></samp>'. 
+<a name="index-limits_002eh-31"></a>
+<li>The header file <samp><span class="file">pwd.h</span></samp> reserves names prefixed with `<samp><span class="samp">pw_</span></samp>'. 
+<a name="index-pwd_002eh-32"></a>
+<li>The header file <samp><span class="file">signal.h</span></samp> reserves names prefixed with `<samp><span class="samp">sa_</span></samp>'
+and `<samp><span class="samp">SA_</span></samp>'. 
+<a name="index-signal_002eh-33"></a>
+<li>The header file <samp><span class="file">sys/stat.h</span></samp> reserves names prefixed with `<samp><span class="samp">st_</span></samp>'
+and `<samp><span class="samp">S_</span></samp>'. 
+<a name="index-sys_002fstat_002eh-34"></a>
+<li>The header file <samp><span class="file">sys/times.h</span></samp> reserves names prefixed with `<samp><span class="samp">tms_</span></samp>'. 
+<a name="index-sys_002ftimes_002eh-35"></a>
+<li>The header file <samp><span class="file">termios.h</span></samp> reserves names prefixed with `<samp><span class="samp">c_</span></samp>',
+`<samp><span class="samp">V</span></samp>', `<samp><span class="samp">I</span></samp>', `<samp><span class="samp">O</span></samp>', and `<samp><span class="samp">TC</span></samp>'; and names prefixed with
+`<samp><span class="samp">B</span></samp>' followed by a digit. 
+<a name="index-termios_002eh-36"></a></ul>
 
-     <li>The header file <code>fcntl.h</code> reserves names prefixed with
-<code>l_</code>, <code>F_</code>, <code>O_</code>, and <code>S_</code>.
-
-     <li>The header file <code>grp.h</code> reserves names prefixed with <code>gr_</code>.
-
-     <li>The header file <code>limits.h</code> reserves names suffixed with <code>_MAX</code>.
-
-     <li>The header file <code>pwd.h</code> reserves names prefixed with <code>pw_</code>.
-
-     <li>The header file <code>signal.h</code> reserves names prefixed with <code>sa_</code>
-and <code>SA_</code>.
-
-     <li>The header file <code>sys/stat.h</code> reserves names prefixed with <code>st_</code>
-and <code>S_</code>.
-
-     <li>The header file <code>sys/times.h</code> reserves names prefixed with <code>tms_</code>.
-
-     <li>The header file <code>termios.h</code> reserves names prefixed with <code>c_</code>,
-<code>V</code>, <code>I</code>, <code>O</code>, and <code>TC</code>; and names prefixed with
-<code>B</code> followed by a digit. 
-</ul>
-
-   </body></html>
+<!-- Include the section on Creature Nest Macros. -->
+<!-- It is in a separate file so it can be formatted into ../NOTES. -->
+</body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Merged Signals - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Defining-Handlers.html#Defining-Handlers" title="Defining Handlers">
+<link rel="prev" href="Signals-in-Handler.html#Signals-in-Handler" title="Signals in Handler">
+<link rel="next" href="Nonreentrancy.html#Nonreentrancy" title="Nonreentrancy">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Merged%20Signals">Merged Signals</a>,
+<a name="Merged-Signals"></a>
 Next:&nbsp;<a rel="next" accesskey="n" href="Nonreentrancy.html#Nonreentrancy">Nonreentrancy</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Signals-in-Handler.html#Signals%20in%20Handler">Signals in Handler</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
-<hr><br>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Signals-in-Handler.html#Signals-in-Handler">Signals in Handler</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Defining-Handlers.html#Defining-Handlers">Defining Handlers</a>
+<hr>
 </div>
 
-<h3 class="subsection">Signals Close Together Merge into One</h4>
+<h4 class="subsection">24.4.5 Signals Close Together Merge into One</h4>
 
-<p>If multiple signals of the same type are delivered to your process
+<p><a name="index-handling-multiple-signals-2912"></a><a name="index-successive-signals-2913"></a><a name="index-merging-of-signals-2914"></a>
+If multiple signals of the same type are delivered to your process
 before your signal handler has a chance to be invoked at all, the
 handler may only be invoked once, as if only a single signal had
 arrived.  In effect, the signals merge into one.  This situation can
@@ -45,30 +54,28 @@ of all the child processes with a chain of structures as follows:
 <pre class="smallexample">     struct process
      {
        struct process *next;
-       /* The process ID of this child.  */
+       /* <span class="roman">The process ID of this child.</span>  */
        int pid;
-       /* The descriptor of the pipe or pseudo terminal
-          on which output comes from this child.  */
+       /* <span class="roman">The descriptor of the pipe or pseudo terminal</span>
+          <span class="roman">on which output comes from this child.</span>  */
        int input_descriptor;
-       /* Nonzero if this process has stopped or terminated.  */
+       /* <span class="roman">Nonzero if this process has stopped or terminated.</span>  */
        sig_atomic_t have_status;
-       /* The status of this child; 0 if running,
-          otherwise a status value from <code>waitpid</code>.  */
+       /* <span class="roman">The status of this child; 0 if running,</span>
+          <span class="roman">otherwise a status value from </span><code>waitpid</code><span class="roman">.</span>  */
        int status;
      };
      
      struct process *process_list;
-     </pre>
-
+</pre>
    <p>This example also uses a flag to indicate whether signals have arrived
-since some time in the past--whenever the program last cleared it to
+since some time in the past&mdash;whenever the program last cleared it to
 zero.
 
-<pre class="smallexample">     /* Nonzero means some child's status has changed
-        so look at <code>process_list</code> for the details.  */
+<pre class="smallexample">     /* <span class="roman">Nonzero means some child's status has changed</span>
+        <span class="roman">so look at </span><code>process_list</code><span class="roman"> for the details.</span>  */
      int process_status_change;
-     </pre>
-
+</pre>
    <p>Here is the handler itself:
 
 <pre class="smallexample">     void
@@ -81,7 +88,7 @@ zero.
          int w;
          struct process *p;
      
-         /* Keep asking for a status until we get a definitive result.  */
+         /* <span class="roman">Keep asking for a status until we get a definitive result.</span>  */
          do
            {
              errno = 0;
@@ -90,37 +97,36 @@ zero.
          while (pid &lt;= 0 &amp;&amp; errno == EINTR);
      
          if (pid &lt;= 0) {
-           /* A real failure means there are no more
-              stopped or terminated child processes, so return.  */
+           /* <span class="roman">A real failure means there are no more</span>
+              <span class="roman">stopped or terminated child processes, so return.</span>  */
            errno = old_errno;
            return;
          }
      
-         /* Find the process that signaled us, and record its status.  */
+         /* <span class="roman">Find the process that signaled us, and record its status.</span>  */
      
          for (p = process_list; p; p = p-&gt;next)
            if (p-&gt;pid == pid) {
              p-&gt;status = w;
-             /* Indicate that the <code>status</code> field
-                has data to look at.  We do this only after storing it.  */
+             /* <span class="roman">Indicate that the </span><code>status</code><span class="roman"> field</span>
+                <span class="roman">has data to look at.  We do this only after storing it.</span>  */
              p-&gt;have_status = 1;
      
-             /* If process has terminated, stop waiting for its output.  */
+             /* <span class="roman">If process has terminated, stop waiting for its output.</span>  */
              if (WIFSIGNALED (w) || WIFEXITED (w))
                if (p-&gt;input_descriptor)
                  FD_CLR (p-&gt;input_descriptor, &amp;input_wait_mask);
      
-             /* The program should check this flag from time to time
-                to see if there is any news in <code>process_list</code>.  */
+             /* <span class="roman">The program should check this flag from time to time</span>
+                <span class="roman">to see if there is any news in </span><code>process_list</code><span class="roman">.</span>  */
              ++process_status_change;
            }
      
-         /* Loop around to handle all the processes
-            that have something to tell us.  */
+         /* <span class="roman">Loop around to handle all the processes</span>
+            <span class="roman">that have something to tell us.</span>  */
        }
      }
-     </pre>
-
+</pre>
    <p>Here is the proper way to check the flag <code>process_status_change</code>:
 
 <pre class="smallexample">     if (process_status_change) {
@@ -128,12 +134,11 @@ zero.
        process_status_change = 0;
        for (p = process_list; p; p = p-&gt;next)
          if (p-&gt;have_status) {
-           ... Examine <code>p-&gt;status</code> ...
+           ... <span class="roman">Examine </span><code>p-&gt;status</code> ...
          }
      }
-     </pre>
-
-<p>It is vital to clear the flag before examining the list; otherwise, if a
+</pre>
+   <p class="noindent">It is vital to clear the flag before examining the list; otherwise, if a
 signal were delivered just before the clearing of the flag, and after
 the appropriate element of the process list had been checked, the status
 change would go unnoticed until the next signal arrived to set the flag
@@ -146,7 +151,7 @@ until it sees that status has been validly stored.  This is to make sure
 that the status cannot change in the middle of accessing it.  Once
 <code>p-&gt;have_status</code> is set, it means that the child process is stopped
 or terminated, and in either case, it cannot stop or terminate again
-until the program has taken notice.  See <a href="Atomic-Usage.html#Atomic%20Usage">Atomic Usage</a>, for more
+until the program has taken notice.  See <a href="Atomic-Usage.html#Atomic-Usage">Atomic Usage</a>, for more
 information about coping with interruptions during accesses of a
 variable.
 
@@ -170,11 +175,10 @@ has been a signal since that part last checked.
          struct process *p;
          for (p = process_list; p; p = p-&gt;next)
            if (p-&gt;have_status) {
-             ... Examine <code>p-&gt;status</code> ...
+             ... <span class="roman">Examine </span><code>p-&gt;status</code> ...
            }
        }
      }
-     </pre>
-
+</pre>
    </body></html>
 

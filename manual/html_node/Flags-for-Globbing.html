@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Flags for Globbing - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Globbing.html#Globbing" title="Globbing">
+<link rel="prev" href="Calling-Glob.html#Calling-Glob" title="Calling Glob">
+<link rel="next" href="More-Flags-for-Globbing.html#More-Flags-for-Globbing" title="More Flags for Globbing">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +17,31 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Flags%20for%20Globbing">Flags for Globbing</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="More-Flags-for-Globbing.html#More%20Flags%20for%20Globbing">More Flags for Globbing</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Calling-Glob.html#Calling%20Glob">Calling Glob</a>,
+<a name="Flags-for-Globbing"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="More-Flags-for-Globbing.html#More-Flags-for-Globbing">More Flags for Globbing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Calling-Glob.html#Calling-Glob">Calling Glob</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Globbing.html#Globbing">Globbing</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Flags for Globbing</h4>
+<h4 class="subsection">10.2.2 Flags for Globbing</h4>
 
 <p>This section describes the flags that you can specify in the
 <var>flags</var> argument to <code>glob</code>.  Choose the flags you want,
 and combine them with the C bitwise OR operator <code>|</code>.
 
      <dl>
-<dt><code>GLOB_APPEND</code>
-     <dd>Append the words from this expansion to the vector of words produced by
+<!-- glob.h -->
+<!-- POSIX.2 -->
+<dt><code>GLOB_APPEND</code><a name="index-GLOB_005fAPPEND-852"></a><dd>Append the words from this expansion to the vector of words produced by
 previous calls to <code>glob</code>.  This way you can effectively expand
 several words as if they were concatenated with spaces between them.
 
@@ -47,13 +56,15 @@ have relocated the vector.  So always fetch <code>gl_pathv</code> from the
 <code>glob_t</code> structure after each <code>glob</code> call; <strong>never</strong> save
 the pointer across calls.
 
-     <br><dt><code>GLOB_DOOFFS</code>
-     <dd>Leave blank slots at the beginning of the vector of words. 
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_DOOFFS</code><a name="index-GLOB_005fDOOFFS-853"></a><dd>Leave blank slots at the beginning of the vector of words. 
 The <code>gl_offs</code> field says how many slots to leave. 
 The blank slots contain null pointers.
 
-     <br><dt><code>GLOB_ERR</code>
-     <dd>Give up right away and report an error if there is any difficulty
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_ERR</code><a name="index-GLOB_005fERR-854"></a><dd>Give up right away and report an error if there is any difficulty
 reading the directories that must be read in order to expand <var>pattern</var>
 fully.  Such difficulties might include a directory in which you don't
 have the requisite access.  Normally, <code>glob</code> tries its best to keep
@@ -66,38 +77,41 @@ right away when it can't read a directory; instead, it calls
 <var>errfunc</var> with two arguments, like this:
 
      <pre class="smallexample">          (*<var>errfunc</var>) (<var>filename</var>, <var>error-code</var>)
-          </pre>
-
-     <p>The argument <var>filename</var> is the name of the directory that
+     </pre>
+     <p class="noindent">The argument <var>filename</var> is the name of the directory that
 <code>glob</code> couldn't open or couldn't read, and <var>error-code</var> is the
 <code>errno</code> value that was reported to <code>glob</code>.
 
      <p>If the error handler function returns nonzero, then <code>glob</code> gives up
 right away.  Otherwise, it continues.
 
-     <br><dt><code>GLOB_MARK</code>
-     <dd>If the pattern matches the name of a directory, append <code>/</code> to the
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_MARK</code><a name="index-GLOB_005fMARK-855"></a><dd>If the pattern matches the name of a directory, append `<samp><span class="samp">/</span></samp>' to the
 directory's name when returning it.
 
-     <br><dt><code>GLOB_NOCHECK</code>
-     <dd>If the pattern doesn't match any file names, return the pattern itself
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_NOCHECK</code><a name="index-GLOB_005fNOCHECK-856"></a><dd>If the pattern doesn't match any file names, return the pattern itself
 as if it were a file name that had been matched.  (Normally, when the
 pattern doesn't match anything, <code>glob</code> returns that there were no
 matches.)
 
-     <br><dt><code>GLOB_NOSORT</code>
-     <dd>Don't sort the file names; return them in no particular order. 
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_NOSORT</code><a name="index-GLOB_005fNOSORT-857"></a><dd>Don't sort the file names; return them in no particular order. 
 (In practice, the order will depend on the order of the entries in
 the directory.)  The only reason <em>not</em> to sort is to save time.
 
-     <br><dt><code>GLOB_NOESCAPE</code>
-     <dd>Don't treat the <code>\</code> character specially in patterns.  Normally,
-<code>\</code> quotes the following character, turning off its special meaning
+     <!-- glob.h -->
+<!-- POSIX.2 -->
+<br><dt><code>GLOB_NOESCAPE</code><a name="index-GLOB_005fNOESCAPE-858"></a><dd>Don't treat the `<samp><span class="samp">\</span></samp>' character specially in patterns.  Normally,
+`<samp><span class="samp">\</span></samp>' quotes the following character, turning off its special meaning
 (if any) so that it matches only itself.  When quoting is enabled, the
-pattern <code>\?</code> matches only the string <code>?</code>, because the question
+pattern `<samp><span class="samp">\?</span></samp>' matches only the string `<samp><span class="samp">?</span></samp>', because the question
 mark in the pattern acts like an ordinary character.
 
-     <p>If you use <code>GLOB_NOESCAPE</code>, then <code>\</code> is an ordinary character.
+     <p>If you use <code>GLOB_NOESCAPE</code>, then `<samp><span class="samp">\</span></samp>' is an ordinary character.
 
      <p><code>glob</code> does its work by calling the function <code>fnmatch</code>
 repeatedly.  It handles the flag <code>GLOB_NOESCAPE</code> by turning on the

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Portable Positioning - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="I_002fO-on-Streams.html#I_002fO-on-Streams" title="I/O on Streams">
+<link rel="prev" href="File-Positioning.html#File-Positioning" title="File Positioning">
+<link rel="next" href="Stream-Buffering.html#Stream-Buffering" title="Stream Buffering">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,24 +17,27 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Portable%20Positioning">Portable Positioning</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Positioning.html#File%20Positioning">File Positioning</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
-<hr><br>
+<a name="Portable-Positioning"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Stream-Buffering.html#Stream-Buffering">Stream Buffering</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Positioning.html#File-Positioning">File Positioning</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>
+<hr>
 </div>
 
-<h3 class="section">Portable File-Position Functions</h3>
+<h3 class="section">12.19 Portable File-Position Functions</h3>
 
 <p>On the GNU system, the file position is truly a character count.  You
 can specify any character count value as an argument to <code>fseek</code> or
 <code>fseeko</code> and get reliable results for any random access file. 
-However, some ISO&nbsp;C systems do not represent file positions in this
+However, some ISO&nbsp;C<!-- /@w --> systems do not represent file positions in this
 way.
 
    <p>On some systems where text streams truly differ from binary streams, it
@@ -73,139 +81,98 @@ file positions, it is better to use the functions <code>fgetpos</code> and
 using the data type <code>fpos_t</code>, whose internal representation varies
 from system to system.
 
-   <p>These symbols are declared in the header file <code>stdio.h</code>.
+   <p>These symbols are declared in the header file <samp><span class="file">stdio.h</span></samp>. 
+<a name="index-stdio_002eh-1116"></a>
+<!-- stdio.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>fpos_t</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the type of an object that can encode information about the
+<div class="defun">
+&mdash; Data Type: <b>fpos_t</b><var><a name="index-fpos_005ft-1117"></a></var><br>
+<blockquote><p>This is the type of an object that can encode information about the
 file position of a stream, for use by the functions <code>fgetpos</code> and
 <code>fsetpos</code>.
 
-     <p>In the GNU system, <code>fpos_t</code> is an opaque data structure that
+        <p>In the GNU system, <code>fpos_t</code> is an opaque data structure that
 contains internal data to represent file offset and conversion state
 information.  In other systems, it might have a different internal
 representation.
 
-     <p>When compiling with <code>_FILE_OFFSET_BITS == 64</code> on a 32 bit machine
+        <p>When compiling with <code>_FILE_OFFSET_BITS == 64</code> on a 32 bit machine
 this type is in fact equivalent to <code>fpos64_t</code> since the LFS
 interface transparently replaces the old interface. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>fpos64_t</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the type of an object that can encode information about the
+<!-- stdio.h -->
+<!-- Unix98 -->
+<div class="defun">
+&mdash; Data Type: <b>fpos64_t</b><var><a name="index-fpos64_005ft-1118"></a></var><br>
+<blockquote><p>This is the type of an object that can encode information about the
 file position of a stream, for use by the functions <code>fgetpos64</code> and
 <code>fsetpos64</code>.
 
-     <p>In the GNU system, <code>fpos64_t</code> is an opaque data structure that
+        <p>In the GNU system, <code>fpos64_t</code> is an opaque data structure that
 contains internal data to represent file offset and conversion state
 information.  In other systems, it might have a different internal
 representation. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fgetpos</b><i> </i>(<i>FILE *</i><var>stream</var><i>, fpos_t *</i><var>position</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function stores the value of the file position indicator for the
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fgetpos</b> (<var>FILE *stream, fpos_t *position</var>)<var><a name="index-fgetpos-1119"></a></var><br>
+<blockquote><p>This function stores the value of the file position indicator for the
 stream <var>stream</var> in the <code>fpos_t</code> object pointed to by
 <var>position</var>.  If successful, <code>fgetpos</code> returns zero; otherwise
 it returns a nonzero value and stores an implementation-defined positive
 value in <code>errno</code>.
 
-     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+        <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
 32 bit system the function is in fact <code>fgetpos64</code>.  I.e., the LFS
 interface transparently replaces the old interface. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fgetpos64</b><i> </i>(<i>FILE *</i><var>stream</var><i>, fpos64_t *</i><var>position</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>fgetpos</code> but the file position is
+<!-- stdio.h -->
+<!-- Unix98 -->
+<div class="defun">
+&mdash; Function: int <b>fgetpos64</b> (<var>FILE *stream, fpos64_t *position</var>)<var><a name="index-fgetpos64-1120"></a></var><br>
+<blockquote><p>This function is similar to <code>fgetpos</code> but the file position is
 returned in a variable of type <code>fpos64_t</code> to which <var>position</var>
 points.
 
-     <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+        <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
 bits machine this function is available under the name <code>fgetpos</code>
 and so transparently replaces the old interface. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fsetpos</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const fpos_t *</i><var>position</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function sets the file position indicator for the stream <var>stream</var>
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fsetpos</b> (<var>FILE *stream, const fpos_t *position</var>)<var><a name="index-fsetpos-1121"></a></var><br>
+<blockquote><p>This function sets the file position indicator for the stream <var>stream</var>
 to the position <var>position</var>, which must have been set by a previous
 call to <code>fgetpos</code> on the same stream.  If successful, <code>fsetpos</code>
 clears the end-of-file indicator on the stream, discards any characters
-that were "pushed back" by the use of <code>ungetc</code>, and returns a value
+that were &ldquo;pushed back&rdquo; by the use of <code>ungetc</code>, and returns a value
 of zero.  Otherwise, <code>fsetpos</code> returns a nonzero value and stores
 an implementation-defined positive value in <code>errno</code>.
 
-     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+        <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
 32 bit system the function is in fact <code>fsetpos64</code>.  I.e., the LFS
 interface transparently replaces the old interface. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fsetpos64</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const fpos64_t *</i><var>position</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>fsetpos</code> but the file position used
+<!-- stdio.h -->
+<!-- Unix98 -->
+<div class="defun">
+&mdash; Function: int <b>fsetpos64</b> (<var>FILE *stream, const fpos64_t *position</var>)<var><a name="index-fsetpos64-1122"></a></var><br>
+<blockquote><p>This function is similar to <code>fsetpos</code> but the file position used
 for positioning is provided in a variable of type <code>fpos64_t</code> to
 which <var>position</var> points.
 
-     <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+        <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
 bits machine this function is available under the name <code>fsetpos</code>
 and so transparently replaces the old interface. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

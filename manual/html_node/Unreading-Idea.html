@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Unreading Idea - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Unreading.html#Unreading" title="Unreading">
+<link rel="next" href="How-Unread.html#How-Unread" title="How Unread">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,50 +16,54 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Unreading%20Idea">Unreading Idea</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="How-Unread.html#How%20Unread">How Unread</a>,
+<a name="Unreading-Idea"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="How-Unread.html#How-Unread">How Unread</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Unreading.html#Unreading">Unreading</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">What Unreading Means</h4>
+<h4 class="subsection">12.10.1 What Unreading Means</h4>
 
 <p>Here is a pictorial explanation of unreading.  Suppose you have a
 stream reading a file that contains just six characters, the letters
-<code>foobar</code>.  Suppose you have read three characters so far.  The
+`<samp><span class="samp">foobar</span></samp>'.  Suppose you have read three characters so far.  The
 situation looks like this:
 
 <pre class="smallexample">     f  o  o  b  a  r
               ^
-     </pre>
+</pre>
+   <p class="noindent">so the next input character will be `<samp><span class="samp">b</span></samp>'.
 
-<p>so the next input character will be <code>b</code>.
-
-   <p>If instead of reading <code>b</code> you unread the letter <code>o</code>, you get a
+<!-- @group   Invalid outside @example -->
+<p>If instead of reading `<samp><span class="samp">b</span></samp>' you unread the letter `<samp><span class="samp">o</span></samp>', you get a
 situation like this:
 
 <pre class="smallexample">     f  o  o  b  a  r
               |
            o--
            ^
-     </pre>
+</pre>
+   <p class="noindent">so that the next input characters will be `<samp><span class="samp">o</span></samp>' and `<samp><span class="samp">b</span></samp>'. 
+<!-- @end group -->
 
-<p>so that the next input characters will be <code>o</code> and <code>b</code>.
-
-   <p>If you unread <code>9</code> instead of <code>o</code>, you get this situation:
+<!-- @group -->
+<p>If you unread `<samp><span class="samp">9</span></samp>' instead of `<samp><span class="samp">o</span></samp>', you get this situation:
 
 <pre class="smallexample">     f  o  o  b  a  r
               |
            9--
            ^
-     </pre>
-
-<p>so that the next input characters will be <code>9</code> and <code>b</code>.
+</pre>
+   <p class="noindent">so that the next input characters will be `<samp><span class="samp">9</span></samp>' and `<samp><span class="samp">b</span></samp>'. 
+<!-- @end group -->
 
    </body></html>
 

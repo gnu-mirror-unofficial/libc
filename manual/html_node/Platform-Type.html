@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Platform Type - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-Management.html#System-Management" title="System Management">
+<link rel="prev" href="Host-Identification.html#Host-Identification" title="Host Identification">
+<link rel="next" href="Filesystem-Handling.html#Filesystem-Handling" title="Filesystem Handling">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,56 +17,49 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Platform%20Type">Platform Type</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Filesystem-Handling.html#Filesystem%20Handling">Filesystem Handling</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Host-Identification.html#Host%20Identification">Host Identification</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="System-Management.html#System%20Management">System Management</a>
-<hr><br>
+<a name="Platform-Type"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Filesystem-Handling.html#Filesystem-Handling">Filesystem Handling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Host-Identification.html#Host-Identification">Host Identification</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Management.html#System-Management">System Management</a>
+<hr>
 </div>
 
-<h3 class="section">Platform Type Identification</h3>
+<h3 class="section">30.2 Platform Type Identification</h3>
 
 <p>You can use the <code>uname</code> function to find out some information about
 the type of computer your program is running on.  This function and the
 associated data type are declared in the header file
-<code>sys/utsname.h</code>.
-
-   <p>As a bonus, <code>uname</code> also gives some information identifying the
+<samp><span class="file">sys/utsname.h</span></samp>. 
+<a name="index-sys_002futsname_002eh-3434"></a>
+As a bonus, <code>uname</code> also gives some information identifying the
 particular system your program is running on.  This is the same information
 which you can get with functions targetted to this purpose described in
-<a href="Host-Identification.html#Host%20Identification">Host Identification</a>.
+<a href="Host-Identification.html#Host-Identification">Host Identification</a>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct utsname</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>utsname</code> structure is used to hold information returned
+<!-- sys/utsname.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Data Type: <b>struct utsname</b><var><a name="index-struct-utsname-3435"></a></var><br>
+<blockquote><p>The <code>utsname</code> structure is used to hold information returned
 by the <code>uname</code> function.  It has the following members:
 
           <dl>
-<dt><code>char sysname[]</code>
-          <dd>This is the name of the operating system in use.
+<dt><code>char sysname[]</code><dd>This is the name of the operating system in use.
 
-          <br><dt><code>char release[]</code>
-          <dd>This is the current release level of the operating system implementation.
+          <br><dt><code>char release[]</code><dd>This is the current release level of the operating system implementation.
 
-          <br><dt><code>char version[]</code>
-          <dd>This is the current version level within the release of the operating
+          <br><dt><code>char version[]</code><dd>This is the current version level within the release of the operating
 system.
 
-          <br><dt><code>char machine[]</code>
-          <dd>This is a description of the type of hardware that is in use.
+          <br><dt><code>char machine[]</code><dd>This is a description of the type of hardware that is in use.
 
           <p>Some systems provide a mechanism to interrogate the kernel directly for
 this information.  On systems without such a mechanism, the GNU C
@@ -77,7 +75,7 @@ any particular GNU program.
 
           <p>Since the value in <code>machine</code> is supposed to describe just the
 hardware, it consists of the first two parts of the configuration name:
-<code></code><var>cpu</var><code>-</code><var>manufacturer</var><code></code>.  For example, it might be one of these:
+`<samp><var>cpu</var><span class="samp">-</span><var>manufacturer</var></samp>'.  For example, it might be one of these:
 
           <blockquote>
 <code>"sparc-sun"</code>,
@@ -88,42 +86,33 @@ hardware, it consists of the first two parts of the configuration name:
 <code>"mips-dec"</code>
 </blockquote>
 
-          <br><dt><code>char nodename[]</code>
-          <dd>This is the host name of this particular computer.  In the GNU C
+          <br><dt><code>char nodename[]</code><dd>This is the host name of this particular computer.  In the GNU C
 library, the value is the same as that returned by <code>gethostname</code>;
-see <a href="Host-Identification.html#Host%20Identification">Host Identification</a>.
+see <a href="Host-Identification.html#Host-Identification">Host Identification</a>.
 
           <p>gethostname() is implemented with a call to uname().
 
-          <br><dt><code>char domainname[]</code>
-          <dd>This is the NIS or YP domain name.  It is the same value returned by
-<code>getdomainname</code>; see <a href="Host-Identification.html#Host%20Identification">Host Identification</a>.  This element
+          <br><dt><code>char domainname[]</code><dd>This is the NIS or YP domain name.  It is the same value returned by
+<code>getdomainname</code>; see <a href="Host-Identification.html#Host-Identification">Host Identification</a>.  This element
 is a relatively recent invention and use of it is not as portable as
 use of the rest of the structure.
 
-     </dl>
-     </td></tr>
-</table>
+          <!-- getdomainname() is implemented with a call to uname(). -->
+</dl>
+        </p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>uname</b><i> </i>(<i>struct utsname *</i><var>info</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>uname</code> function fills in the structure pointed to by
+<!-- sys/utsname.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Function: int <b>uname</b> (<var>struct utsname *info</var>)<var><a name="index-uname-3436"></a></var><br>
+<blockquote><p>The <code>uname</code> function fills in the structure pointed to by
 <var>info</var> with information about the operating system and host machine. 
 A non-negative value indicates that the data was successfully stored.
 
-     <p><code>-1</code> as the value indicates an error.  The only error possible is
+        <p><code>-1</code> as the value indicates an error.  The only error possible is
 <code>EFAULT</code>, which we normally don't mention as it is always a
 possibility. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

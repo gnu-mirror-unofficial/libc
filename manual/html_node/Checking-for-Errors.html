@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Checking for Errors - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Error-Reporting.html#Error-Reporting" title="Error Reporting">
+<link rel="next" href="Error-Codes.html#Error-Codes" title="Error Codes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Checking%20for%20Errors">Checking for Errors</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Error-Codes.html#Error%20Codes">Error Codes</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>
-<hr><br>
+<a name="Checking-for-Errors"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Error-Codes.html#Error-Codes">Error Codes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Error-Reporting.html#Error-Reporting">Error Reporting</a>
+<hr>
 </div>
 
-<h3 class="section">Checking for Errors</h3>
+<h3 class="section">2.1 Checking for Errors</h3>
 
 <p>Most library functions return a special value to indicate that they have
 failed.  The special value is typically <code>-1</code>, a null pointer, or a
@@ -31,28 +38,23 @@ constant such as <code>EOF</code> that is defined for that purpose.  But this
 return value tells you only that an error has occurred.  To find out
 what kind of error it was, you need to look at the error code stored in the
 variable <code>errno</code>.  This variable is declared in the header file
-<code>errno.h</code>.
+<samp><span class="file">errno.h</span></samp>. 
+<a name="index-errno_002eh-59"></a>
+<!-- errno.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">volatile int <b>errno</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The variable <code>errno</code> contains the system error number.  You can
+<div class="defun">
+&mdash; Variable: volatile int <b>errno</b><var><a name="index-errno-60"></a></var><br>
+<blockquote><p>The variable <code>errno</code> contains the system error number.  You can
 change the value of <code>errno</code>.
 
-     <p>Since <code>errno</code> is declared <code>volatile</code>, it might be changed
-asynchronously by a signal handler; see <a href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>. 
+        <p>Since <code>errno</code> is declared <code>volatile</code>, it might be changed
+asynchronously by a signal handler; see <a href="Defining-Handlers.html#Defining-Handlers">Defining Handlers</a>. 
 However, a properly written signal handler saves and restores the value
 of <code>errno</code>, so you generally do not need to worry about this
 possibility except when writing signal handlers.
 
-     <p>The initial value of <code>errno</code> at program startup is zero.  Many
+        <p>The initial value of <code>errno</code> at program startup is zero.  Many
 library functions are guaranteed to set it to certain nonzero values
 when they encounter certain kinds of errors.  These error conditions are
 listed for each function.  These functions do not change <code>errno</code>
@@ -62,30 +64,29 @@ determine <em>whether</em> a call failed.  The proper way to do that is
 documented for each function.  <em>If</em> the call failed, you can
 examine <code>errno</code>.
 
-     <p>Many library functions can set <code>errno</code> to a nonzero value as a
+        <p>Many library functions can set <code>errno</code> to a nonzero value as a
 result of calling other library functions which might fail.  You should
 assume that any library function might alter <code>errno</code> when the
 function returns an error.
 
-     <p><strong>Portability Note:</strong> ISO&nbsp;C specifies <code>errno</code> as a
-"modifiable lvalue" rather than as a variable, permitting it to be
+        <p><strong>Portability Note:</strong> ISO&nbsp;C<!-- /@w --> specifies <code>errno</code> as a
+&ldquo;modifiable lvalue&rdquo; rather than as a variable, permitting it to be
 implemented as a macro.  For example, its expansion might involve a
-function call, like <code>*_errno&nbsp;()</code>.  In fact, that is what it is
+function call, like <code>*_errno&nbsp;()</code><!-- /@w -->.  In fact, that is what it is
 on the GNU system itself.  The GNU library, on non-GNU systems, does
 whatever is right for the particular system.
 
-     <p>There are a few library functions, like <code>sqrt</code> and <code>atan</code>,
+        <p>There are a few library functions, like <code>sqrt</code> and <code>atan</code>,
 that return a perfectly legitimate value in case of an error, but also
 set <code>errno</code>.  For these functions, if you want to check to see
 whether an error occurred, the recommended method is to set <code>errno</code>
 to zero before calling the function, and then check its value afterward. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-   <p>All the error codes have symbolic names; they are macros defined in
-<code>errno.h</code>.  The names start with <code>E</code> and an upper-case
+   <p><a name="index-errno_002eh-61"></a>All the error codes have symbolic names; they are macros defined in
+<samp><span class="file">errno.h</span></samp>.  The names start with `<samp><span class="samp">E</span></samp>' and an upper-case
 letter or digit; you should consider names of this form to be
-reserved names.  See <a href="Reserved-Names.html#Reserved%20Names">Reserved Names</a>.
+reserved names.  See <a href="Reserved-Names.html#Reserved-Names">Reserved Names</a>.
 
    <p>The error code values are all positive integers and are all distinct,
 with one exception: <code>EWOULDBLOCK</code> and <code>EAGAIN</code> are the same. 

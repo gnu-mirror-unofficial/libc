@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Advantages of Alloca - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Variable-Size-Automatic.html#Variable-Size-Automatic" title="Variable Size Automatic">
+<link rel="prev" href="Alloca-Example.html#Alloca-Example" title="Alloca Example">
+<link rel="next" href="Disadvantages-of-Alloca.html#Disadvantages-of-Alloca" title="Disadvantages of Alloca">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Advantages%20of%20Alloca">Advantages of Alloca</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>
-<hr><br>
+<a name="Advantages-of-Alloca"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Disadvantages-of-Alloca.html#Disadvantages-of-Alloca">Disadvantages of Alloca</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Alloca-Example.html#Alloca-Example">Alloca Example</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Variable-Size-Automatic.html#Variable-Size-Automatic">Variable Size Automatic</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Advantages of <code>alloca</code></h5>
+<h5 class="subsubsection">3.2.5.2 Advantages of <code>alloca</code></h5>
 
 <p>Here are the reasons why <code>alloca</code> may be preferable to <code>malloc</code>:
 
@@ -36,7 +44,7 @@ open-coded by the GNU C compiler.)
 block, space used for any size block can be reused for any other size. 
 <code>alloca</code> does not cause memory fragmentation.
 
-     <li>Nonlocal exits done with <code>longjmp</code> (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>)
+     <li><a name="index-longjmp-338"></a>Nonlocal exits done with <code>longjmp</code> (see <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits">Non-Local Exits</a>)
 automatically free the space allocated with <code>alloca</code> when they exit
 through the function that called <code>alloca</code>.  This is the most
 important reason to use <code>alloca</code>.
@@ -46,7 +54,7 @@ important reason to use <code>alloca</code>.
 <code>open</code>, if it succeeds, but does not return to its caller if it
 fails.  If the file cannot be opened, it prints an error message and
 jumps out to the command level of your program using <code>longjmp</code>. 
-Let's change <code>open2</code> (see <a href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>) to use this
+Let's change <code>open2</code> (see <a href="Alloca-Example.html#Alloca-Example">Alloca Example</a>) to use this
 subroutine:
 
      <pre class="smallexample">          int
@@ -56,9 +64,8 @@ subroutine:
             stpcpy (stpcpy (name, str1), str2);
             return open_or_report_error (name, flags, mode);
           }
-          </pre>
-
-     <p>Because of the way <code>alloca</code> works, the memory it allocates is
+     </pre>
+     <p class="noindent">Because of the way <code>alloca</code> works, the memory it allocates is
 freed even when an error occurs, with no special effort required.
 
      <p>By contrast, the previous definition of <code>open2</code> (which uses

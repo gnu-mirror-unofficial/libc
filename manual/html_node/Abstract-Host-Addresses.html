@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Abstract Host Addresses - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Host-Addresses.html#Host-Addresses" title="Host Addresses">
+<link rel="next" href="Host-Address-Data-Type.html#Host-Address-Data-Type" title="Host Address Data Type">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Abstract%20Host%20Addresses">Abstract Host Addresses</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Host-Address-Data-Type.html#Host%20Address%20Data%20Type">Host Address Data Type</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>
-<hr><br>
+<a name="Abstract-Host-Addresses"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Host-Address-Data-Type.html#Host-Address-Data-Type">Host Address Data Type</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Host-Addresses.html#Host-Addresses">Host Addresses</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Internet Host Addresses</h5>
+<h5 class="subsubsection">16.6.2.1 Internet Host Addresses</h5>
 
-<p>An IPv4 Internet host address is a number containing four bytes of data. 
+<p><a name="index-host-address_002c-Internet-1674"></a><a name="index-Internet-host-address-1675"></a>
+
+   <p><a name="index-network-number-1676"></a><a name="index-local-network-address-number-1677"></a>An IPv4 Internet host address is a number containing four bytes of data. 
 Historically these are divided into two parts, a <dfn>network number</dfn> and a
 <dfn>local network address number</dfn> within that network.  In the
 mid-1990s classless addresses were introduced which changed this
@@ -38,7 +47,7 @@ the following paragraphs don't apply.
 three bytes; the rest of the bytes are the local address.
 
    <p>IPv4 network numbers are registered with the Network Information Center
-(NIC), and are divided into three classes--A, B and C.  The local
+(NIC), and are divided into three classes&mdash;A, B and C.  The local
 network address numbers of individual machines are registered with the
 administrator of the particular network.
 
@@ -57,41 +66,39 @@ to all hosts in that network.  These uses are obsolete now but for
 compatibility reasons you shouldn't use network 0 and host number 0.
 
    <p>The Class A network 127 is reserved for loopback; you can always use
-the Internet address <code>127.0.0.1</code> to refer to the host machine.
+the Internet address `<samp><span class="samp">127.0.0.1</span></samp>' to refer to the host machine.
 
    <p>Since a single machine can be a member of multiple networks, it can
 have multiple Internet host addresses.  However, there is never
 supposed to be more than one machine with the same host address.
 
-   <p>There are four forms of the <dfn>standard numbers-and-dots notation</dfn>
+<!-- !!! this section could document the IN_CLASS* macros in <netinet/in.h>. -->
+<!-- No, it shouldn't since they're obsolete. -->
+<p><a name="index-standard-dot-notation_002c-for-Internet-addresses-1678"></a><a name="index-dot-notation_002c-for-Internet-addresses-1679"></a>There are four forms of the <dfn>standard numbers-and-dots notation</dfn>
 for Internet addresses:
 
      <dl>
-<dt><code></code><var>a</var><code>.</code><var>b</var><code>.</code><var>c</var><code>.</code><var>d</var><code></code>
-     <dd>This specifies all four bytes of the address individually and is the
+<dt><var>a</var><code>.</code><var>b</var><code>.</code><var>c</var><code>.</code><var>d</var><dd>This specifies all four bytes of the address individually and is the
 commonly used representation.
 
-     <br><dt><code></code><var>a</var><code>.</code><var>b</var><code>.</code><var>c</var><code></code>
-     <dd>The last part of the address, <var>c</var>, is interpreted as a 2-byte quantity. 
+     <br><dt><var>a</var><code>.</code><var>b</var><code>.</code><var>c</var><dd>The last part of the address, <var>c</var>, is interpreted as a 2-byte quantity. 
 This is useful for specifying host addresses in a Class B network with
-network address number <code></code><var>a</var><code>.</code><var>b</var><code></code>.
+network address number <var>a</var><code>.</code><var>b</var>.
 
-     <br><dt><code></code><var>a</var><code>.</code><var>b</var><code></code>
-     <dd>The last part of the address, <var>b</var>, is interpreted as a 3-byte quantity. 
+     <br><dt><var>a</var><code>.</code><var>b</var><dd>The last part of the address, <var>b</var>, is interpreted as a 3-byte quantity. 
 This is useful for specifying host addresses in a Class A network with
 network address number <var>a</var>.
 
-     <br><dt><code></code><var>a</var><code></code>
-     <dd>If only one part is given, this corresponds directly to the host address
+     <br><dt><var>a</var><dd>If only one part is given, this corresponds directly to the host address
 number. 
 </dl>
 
    <p>Within each part of the address, the usual C conventions for specifying
-the radix apply.  In other words, a leading <code>0x</code> or <code>0X</code> implies
-hexadecimal radix; a leading <code>0</code> implies octal; and otherwise decimal
+the radix apply.  In other words, a leading `<samp><span class="samp">0x</span></samp>' or `<samp><span class="samp">0X</span></samp>' implies
+hexadecimal radix; a leading `<samp><span class="samp">0</span></samp>' implies octal; and otherwise decimal
 radix is assumed.
 
-<h3 class="subsubheading">Classless Addresses</h5>
+<h5 class="subsubheading">Classless Addresses</h5>
 
 <p>IPv4 addresses (and IPv6 addresses also) are now considered classless;
 the distinction between classes A, B and C can be ignored.  Instead an
@@ -101,19 +108,19 @@ host part.  The network part is contiguous from the left, with the
 remaining bits representing the host.  As a consequence, the netmask can
 simply be specified as the number of set bits.  Classes A, B and C are
 just special cases of this general rule.  For example, class A addresses
-have a netmask of <code>255.0.0.0</code> or a prefix length of 8.
+have a netmask of `<samp><span class="samp">255.0.0.0</span></samp>' or a prefix length of 8.
 
    <p>Classless IPv4 network addresses are written in numbers-and-dots
 notation with the prefix length appended and a slash as separator.  For
-example the class A network 10 is written as <code>10.0.0.0/8</code>.
+example the class A network 10 is written as `<samp><span class="samp">10.0.0.0/8</span></samp>'.
 
-<h3 class="subsubheading">IPv6 Addresses</h5>
+<h5 class="subsubheading">IPv6 Addresses</h5>
 
 <p>IPv6 addresses contain 128 bits (IPv4 has 32 bits) of data.  A host
 address is usually written as eight 16-bit hexadecimal numbers that are
 separated by colons.  Two colons are used to abbreviate strings of
 consecutive zeros.  For example, the IPv6 loopback address
-<code>0:0:0:0:0:0:0:1</code> can just be written as <code>::1</code>.
+`<samp><span class="samp">0:0:0:0:0:0:0:1</span></samp>' can just be written as `<samp><span class="samp">::1</span></samp>'.
 
    </body></html>
 

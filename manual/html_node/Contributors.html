@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Contributors - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Maintenance.html#Maintenance" title="Maintenance">
+<link rel="next" href="Free-Manuals.html#Free-Manuals" title="Free Manuals">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +16,23 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Contributors">Contributors</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Free-Manuals.html#Free%20Manuals">Free Manuals</a>,
+<a name="Contributors"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Free-Manuals.html#Free-Manuals">Free Manuals</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="Maintenance.html#Maintenance">Maintenance</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr><br>
+<hr>
 </div>
 
-<h2 class="appendix">Contributors to the GNU C Library</h2>
+<!-- %MENU% Who wrote what parts of the GNU C library -->
+<h2 class="appendix">Appendix E Contributors to the GNU C Library</h2>
 
 <p>The GNU C library was written originally by Roland McGrath, and is
 currently maintained by Ulrich Drepper.  Some parts of the library were
@@ -32,7 +40,7 @@ contributed or worked on by other people.
 
      <ul>
 <li>The <code>getopt</code> function and related code was written by
-Richard Stallman, David&nbsp;J. MacKenzie, and Roland&nbsp;McGrath.
+Richard Stallman, David&nbsp;J.<!-- /@w --> MacKenzie, and Roland&nbsp;McGrath<!-- /@w -->.
 
      <li>The merge sort function <code>qsort</code> was written by Michael J. Haertel.
 
@@ -41,12 +49,12 @@ by Douglas C. Schmidt.
 
      <li>The memory allocation functions <code>malloc</code>, <code>realloc</code> and
 <code>free</code> and related code were written by Michael J. Haertel,
-Wolfram&nbsp;Gloger, and Doug&nbsp;Lea.
+Wolfram&nbsp;Gloger<!-- /@w -->, and Doug&nbsp;Lea<!-- /@w -->.
 
      <li>Fast implementations of many of the string functions (<code>memcpy</code>,
 <code>strlen</code>, etc.) were written by Torbj&ouml;rn Granlund.
 
-     <li>The <code>tar.h</code> header file was written by David J. MacKenzie.
+     <li>The <samp><span class="file">tar.h</span></samp> header file was written by David J. MacKenzie.
 
      <li>The port to the MIPS DECStation running Ultrix 4
 (<code>mips-dec-ultrix4</code>)
@@ -86,12 +94,12 @@ GNU MP, which was contributed by Torbj&ouml;rn Granlund.
      <li>The internationalization support in the library, and the support
 programs <code>locale</code> and <code>localedef</code>, were written by Ulrich
 Drepper.  Ulrich Drepper adapted the support code for message catalogs
-(<code>libintl.h</code>, etc.) from the GNU <code>gettext</code> package, which he
+(<samp><span class="file">libintl.h</span></samp>, etc.) from the GNU <code>gettext</code> package, which he
 also wrote.  He also contributed the <code>catgets</code> support and the
 entire suite of multi-byte and wide-character support functions
-(<code>wctype.h</code>, <code>wchar.h</code>, etc.).
+(<samp><span class="file">wctype.h</span></samp>, <samp><span class="file">wchar.h</span></samp>, etc.).
 
-     <li>The implementations of the <code>nsswitch.conf</code> mechanism and the files
+     <li>The implementations of the <samp><span class="file">nsswitch.conf</span></samp> mechanism and the files
 and DNS backends for it were designed and written by Ulrich Drepper and
 Roland McGrath, based on a backend interface defined by Peter Eriksson.
 
@@ -121,7 +129,7 @@ interfaces.
      <li>Stephen R. van den Berg contributed a highly-optimized <code>strstr</code> function.
 
      <li>Ulrich Drepper contributed the <code>hsearch</code> and <code>drand48</code>
-families of functions; reentrant <code>..._r</code> versions of the
+families of functions; reentrant `<samp><span class="samp">...</span><code>_r</code></samp>' versions of the
 <code>random</code> family; System V shared memory and IPC support code; and
 several highly-optimized string functions for i<var>x</var>86 processors.
 
@@ -133,7 +141,7 @@ Ulrich Drepper, Andreas Schwab, and Roland McGrath.
 some platforms was written by Per Bothner and modified by Ulrich Drepper.
 
      <li>Eric Youngdale and Ulrich Drepper implemented versioning of objects on
-the symbol level.
+ symbol level.
 
      <li>Thorsten Kukuk provided an implementation for NIS (YP) and NIS+,
 securelevel 0, 1 and 2.
@@ -151,44 +159,233 @@ securelevel 0, 1 and 2.
 
      <li>Mark Kettenis provided a Hesiod NSS module.
 
-     <li>The Internet-related code (most of the <code>inet</code> subdirectory) and
+     <li>The Internet-related code (most of the <samp><span class="file">inet</span></samp> subdirectory) and
 several other miscellaneous functions and header files have been
-included from 4.4 BSD with little or no modification.  The copying
-permission notice for this code can be found in the file <code>LICENSES</code>
-in the source distribution.
+included from 4.4 BSD with little or no modification.
+
+     <p>All code incorporated from 4.4 BSD is under the following copyright:
+
+     <blockquote>
+          <pre class="display">               Copyright &copy; 1991 Regents of the University of California.
+               All rights reserved.
+          </pre>
+          <p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+               <ol type=1 start=1>
+<li>Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer. 
+<li>Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution. 
+<li>[This condition was removed.] 
+<li>Neither the name of the University nor the names of its contributors
+may be used to endorse or promote products derived from this software
+without specific prior written permission.
+               </ol>
+
+          <p><span class="sc">this software is provided by the regents and contributors &ldquo;as is&rdquo; and
+any express or implied warranties, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular purpose
+are disclaimed.  in no event shall the regents or contributors be liable
+for any direct, indirect, incidental, special, exemplary, or consequential
+damages (including, but not limited to, procurement of substitute goods
+or services; loss of use, data, or profits; or business interruption)
+however caused and on any theory of liability, whether in contract, strict
+liability, or tort (including negligence or otherwise) arising in any way
+out of the use of this software, even if advised of the possibility of
+such damage.</span>
+</blockquote>
 
      <li>The random number generation functions <code>random</code>, <code>srandom</code>,
 <code>setstate</code> and <code>initstate</code>, which are also the basis for the
 <code>rand</code> and <code>srand</code> functions, were written by Earl T. Cohen
 for the University of California at Berkeley and are copyrighted by the
 Regents of the University of California.  They have undergone minor
-changes to fit into the GNU C library and to fit the ISO&nbsp;C standard,
+changes to fit into the GNU C library and to fit the ISO&nbsp;C<!-- /@w --> standard,
 but the functional code is Berkeley's.
 
-     <li>The DNS resolver code is taken directly from BIND 4.9.5, which
-includes copyrighted code from UC Berkeley and from Digital Equipment
-Corporation.  See the file <code>LICENSES</code> for the text of the DEC license.
+     <li>The DNS resolver code is taken directly from BIND 4.9.5, which is
+under both the Berkeley copyright above and also:
+
+     <blockquote>
+Portions Copyright &copy; 1993 by Digital Equipment Corporation.
+
+          <p>Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies, and
+that the name of Digital Equipment Corporation not be used in
+advertising or publicity pertaining to distribution of the document or
+software without specific, written prior permission.
+
+          <p><span class="sc">the software is provided &ldquo;as is&rdquo; and digital equipment corp. 
+disclaims all warranties with regard to this software, including all
+implied warranties of merchantability and fitness.  in no event shall
+digital equipment corporation be liable for any special, direct,
+indirect, or consequential damages or any damages whatsoever resulting
+from loss of use, data or profits, whether in an action of contract,
+negligence or other tortious action, arising out of or in connection
+with the use or performance of this software.</span>
+</blockquote>
 
      <li>The code to support Sun RPC is taken verbatim from Sun's
-<small>RPCSRC-4.0</small> distribution; see the file <code>LICENSES</code> for the
-text of the license.
+<span class="sc">rpcsrc-4.0</span><!-- /@w --> distribution, and is covered by this copyright:
 
-     <li>Some of the support code for Mach is taken from Mach 3.0 by CMU;
-the file if_ppp.h is also copyright by CMU, but under a different license;
-see the file <code>LICENSES</code> for the text of the licenses.
+     <blockquote>
+          <pre class="display">               Copyright &copy; 1984, Sun Microsystems, Inc.
+          </pre>
+          <p>Sun RPC is a product of Sun Microsystems, Inc. and is provided for
+unrestricted use provided that this legend is included on all tape media
+and as a part of the software program in whole or part.  Users may copy
+or modify Sun RPC without charge, but are not authorized to license or
+distribute it to anyone else except as part of a product or program
+developed by the user.
 
-     <li>Many of the IA64 math functions are taken from a collection of
-"Highly Optimized Mathematical Functions for Itanium" that Intel
-makes available under a free license; see the file <code>LICENSES</code> for
-details.
+          <p><span class="sc">sun rpc is provided as is with no warranties of any kind including the
+warranties of design, merchantibility and fitness for a particular
+purpose, or arising from a course of dealing, usage or trade practice.</span>
 
-     <li>The <code>getaddrinfo</code> and <code>getnameinfo</code> functions and supporting
-code were written by Craig Metz; see the file <code>LICENSES</code> for
-details on their licensing.
+          <p>Sun RPC is provided with no support and without any obligation on the
+part of Sun Microsystems, Inc. to assist in its use, correction,
+modification or enhancement.
 
-     <li>Many of the IEEE 64-bit double precision math functions
-(in the <code>sysdeps/ieee754/dbl-64</code> subdirectory) come
-from the IBM Accurate Mathematical Library, contributed by IBM.
+          <p><span class="sc">sun microsystems, inc. shall have no liability with respect to the
+infringement of copyrights, trade secrets or any patents by sun rpc
+or any part thereof.</span>
+
+          <p>In no event will Sun Microsystems, Inc. be liable for any lost revenue
+or profits or other special, indirect and consequential damages, even if
+Sun has been advised of the possibility of such damages.
+
+          <pre class="display">               Sun Microsystems, Inc.
+               2550 Garcia Avenue
+               Mountain View, California  94043
+          </pre>
+     </blockquote>
+
+     <li>Some of the support code for Mach is taken from Mach 3.0 by CMU,
+and is under the following copyright terms:
+
+     <blockquote>
+          <pre class="display">               Mach Operating System
+               Copyright &copy; 1991,1990,1989 Carnegie Mellon University
+               All Rights Reserved.
+          </pre>
+          <p>Permission to use, copy, modify and distribute this software and its
+documentation is hereby granted, provided that both the copyright
+notice and this permission notice appear in all copies of the
+software, derivative works or modified versions, and any portions
+thereof, and that both notices appear in supporting documentation.
+
+          <p><span class="sc">carnegie mellon allows free use of this software in its &ldquo;as is&rdquo;
+condition.  carnegie mellon disclaims any liability of any kind for
+any damages whatsoever resulting from the use of this software.</span>
+
+          <p>Carnegie Mellon requests users of this software to return to
+
+          <pre class="display">                Software Distribution Coordinator
+                School of Computer Science
+                Carnegie Mellon University
+                Pittsburgh PA 15213-3890
+          </pre>
+          <p class="noindent">or <a href="mailto:Software.Distribution@CS.CMU.EDU">Software.Distribution@CS.CMU.EDU</a> any improvements or
+extensions that they make and grant Carnegie Mellon the rights to
+redistribute these changes. 
+</blockquote>
+
+     <li>The code for the database library <samp><span class="file">libdb</span></samp> comes from the 2.3
+release of Berkeley DB. That code is under the same copyright as 4.4 BSD
+and also:
+
+     <blockquote>
+          <pre class="display">               Copyright &copy; 1990, 1993, 1994, 1995, 1996, 1997
+               Sleepycat Software.  All rights reserved.
+          </pre>
+          <p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+               <ol type=1 start=1>
+<li>Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer. 
+<li>Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution. 
+<li>Redistributions in any form must be accompanied by information on
+how to obtain complete source code for the DB software and any
+accompanying software that uses the DB software.  The source code
+must either be included in the distribution or be available for no
+more than the cost of distribution plus a nominal fee, and must be
+freely redistributable under reasonable conditions.  For an
+executable file, complete source code means the source code for all
+modules it contains.  It does not mean source code for modules or
+files that typically accompany the operating system on which the
+executable file runs, e.g., standard library modules or system
+header files.
+               </ol>
+
+          <p><span class="sc">this software is provided by sleepycat software &ldquo;as is&rdquo; and
+any express or implied warranties, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular purpose
+are disclaimed.  in no event shall sleepycat software be liable
+for any direct, indirect, incidental, special, exemplary, or consequential
+damages (including, but not limited to, procurement of substitute goods
+or services; loss of use, data, or profits; or business interruption)
+however caused and on any theory of liability, whether in contract, strict
+liability, or tort (including negligence or otherwise) arising in any way
+out of the use of this software, even if advised of the possibility of
+such damage.</span>
+
+          <pre class="display">               Portions copyright &copy; 1995, 1996
+               The President and Fellows of Harvard University.
+               All rights reserved.
+          </pre>
+          <p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+               <ol type=1 start=1>
+<li>Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer. 
+<li>Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution. 
+<li>All advertising materials mentioning features or use of this software
+must display the following acknowledgement:
+<blockquote>
+ This product includes software developed by Harvard University
+ and its contributors. 
+</blockquote>
+               <li>Neither the name of the University nor the names of its contributors
+may be used to endorse or promote products derived from this software
+without specific prior written permission.
+               </ol>
+
+          <p><span class="sc">this software is provided by harvard and its contributors &ldquo;as is&rdquo; and
+any express or implied warranties, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular purpose
+are disclaimed.  in no event shall harvard or its contributors be liable
+for any direct, indirect, incidental, special, exemplary, or consequential
+damages (including, but not limited to, procurement of substitute goods
+or services; loss of use, data, or profits; or business interruption)
+however caused and on any theory of liability, whether in contract, strict
+liability, or tort (including negligence or otherwise) arising in any way
+out of the use of this software, even if advised of the possibility of
+such damage.</span>
+
+          <p class="noindent">For a license to use, redistribute or sell DB software under conditions
+other than those described above, or to purchase support for this
+software, please contact Sleepycat Software at
+
+          <pre class="display">                Sleepycat Software
+                394 E. Riding Dr.
+                Carlisle, MA 01741
+                USA
+                +1-508-287-4781
+          </pre>
+          <p>or <a href="mailto:db@sleepycat.com">db@sleepycat.com</a>.
+
+     </blockquote>
 
    </ul>
 

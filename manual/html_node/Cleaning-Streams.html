@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Cleaning Streams - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" title="Stream/Descriptor Precautions">
+<link rel="prev" href="Independent-Channels.html#Independent-Channels" title="Independent Channels">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,37 +16,33 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Cleaning%20Streams">Cleaning Streams</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
-<hr><br>
+<a name="Cleaning-Streams"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Independent-Channels.html#Independent-Channels">Independent Channels</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions">Stream/Descriptor Precautions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Cleaning Streams</h4>
+<h4 class="subsection">13.5.3 Cleaning Streams</h4>
 
 <p>On the GNU system, you can clean up any stream with <code>fclean</code>:
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fclean</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Clean up the stream <var>stream</var> so that its buffer is empty.  If
+<!-- stdio.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: int <b>fclean</b> (<var>FILE *stream</var>)<var><a name="index-fclean-1241"></a></var><br>
+<blockquote><p>Clean up the stream <var>stream</var> so that its buffer is empty.  If
 <var>stream</var> is doing output, force it out.  If <var>stream</var> is doing
 input, give the data in the buffer back to the system, arranging to
 reread it. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>On other systems, you can use <code>fflush</code> to clean a stream in most
 cases.
@@ -51,8 +51,7 @@ cases.
 is already clean.  A stream is clean whenever its buffer is empty.  For
 example, an unbuffered stream is always clean.  An input stream that is
 at end-of-file is clean.  A line-buffered stream is clean when the last
-character output was a newline.  However, a just-opened input stream
-might not be clean, as its input buffer might not be empty.
+character output was a newline.
 
    <p>There is one case in which cleaning a stream is impossible on most
 systems.  This is when the stream is doing input from a file that is not
@@ -72,11 +71,11 @@ input stream does <code>fclean</code>.
 operations such as setting terminal modes; these operations don't affect
 the file position and are not affected by it.  You can use any
 descriptor for these operations, and all channels are affected
-simultaneously.  However, text already "output" to a stream but still
+simultaneously.  However, text already &ldquo;output&rdquo; to a stream but still
 buffered by the stream will be subject to the new terminal modes when
-subsequently flushed.  To make sure "past" output is covered by the
+subsequently flushed.  To make sure &ldquo;past&rdquo; output is covered by the
 terminal settings that were in effect at the time, flush the output
-streams for that terminal before setting the modes.  See <a href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>.
+streams for that terminal before setting the modes.  See <a href="Terminal-Modes.html#Terminal-Modes">Terminal Modes</a>.
 
    </body></html>
 

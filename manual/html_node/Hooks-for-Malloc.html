@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Hooks for Malloc - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Unconstrained-Allocation.html#Unconstrained-Allocation" title="Unconstrained Allocation">
+<link rel="prev" href="Heap-Consistency-Checking.html#Heap-Consistency-Checking" title="Heap Consistency Checking">
+<link rel="next" href="Statistics-of-Malloc.html#Statistics-of-Malloc" title="Statistics of Malloc">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,118 +17,91 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Hooks%20for%20Malloc">Hooks for Malloc</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Statistics-of-Malloc.html#Statistics%20of%20Malloc">Statistics of Malloc</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Heap-Consistency-Checking.html#Heap%20Consistency%20Checking">Heap Consistency Checking</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
-<hr><br>
+<a name="Hooks-for-Malloc"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Statistics-of-Malloc.html#Statistics-of-Malloc">Statistics of Malloc</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Heap-Consistency-Checking.html#Heap-Consistency-Checking">Heap Consistency Checking</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Memory Allocation Hooks</h5>
+<h5 class="subsubsection">3.2.2.10 Memory Allocation Hooks</h5>
 
-<p>The GNU C library lets you modify the behavior of <code>malloc</code>,
+<p><a name="index-allocation-hooks_002c-for-_0040code_007bmalloc_007d-277"></a>
+The GNU C library lets you modify the behavior of <code>malloc</code>,
 <code>realloc</code>, and <code>free</code> by specifying appropriate hook
 functions.  You can use these hooks to help you debug programs that use
 dynamic memory allocation, for example.
 
-   <p>The hook variables are declared in <code>malloc.h</code>.
+   <p>The hook variables are declared in <samp><span class="file">malloc.h</span></samp>. 
+<a name="index-malloc_002eh-278"></a>
+<!-- malloc.h -->
+<!-- GNU -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>__malloc_hook</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The value of this variable is a pointer to the function that
+<div class="defun">
+&mdash; Variable: <b>__malloc_hook</b><var><a name="index-g_t_005f_005fmalloc_005fhook-279"></a></var><br>
+<blockquote><p>The value of this variable is a pointer to the function that
 <code>malloc</code> uses whenever it is called.  You should define this
 function to look like <code>malloc</code>; that is, like:
 
      <pre class="smallexample">          void *<var>function</var> (size_t <var>size</var>, const void *<var>caller</var>)
-          </pre>
-
-     <p>The value of <var>caller</var> is the return address found on the stack when
+     </pre>
+        <p>The value of <var>caller</var> is the return address found on the stack when
 the <code>malloc</code> function was called.  This value allows you to trace
 the memory consumption of the program. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>__realloc_hook</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The value of this variable is a pointer to function that <code>realloc</code>
+<!-- malloc.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: <b>__realloc_hook</b><var><a name="index-g_t_005f_005frealloc_005fhook-280"></a></var><br>
+<blockquote><p>The value of this variable is a pointer to function that <code>realloc</code>
 uses whenever it is called.  You should define this function to look
 like <code>realloc</code>; that is, like:
 
      <pre class="smallexample">          void *<var>function</var> (void *<var>ptr</var>, size_t <var>size</var>, const void *<var>caller</var>)
-          </pre>
-
-     <p>The value of <var>caller</var> is the return address found on the stack when
+     </pre>
+        <p>The value of <var>caller</var> is the return address found on the stack when
 the <code>realloc</code> function was called.  This value allows you to trace the
 memory consumption of the program. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>__free_hook</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The value of this variable is a pointer to function that <code>free</code>
+<!-- malloc.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: <b>__free_hook</b><var><a name="index-g_t_005f_005ffree_005fhook-281"></a></var><br>
+<blockquote><p>The value of this variable is a pointer to function that <code>free</code>
 uses whenever it is called.  You should define this function to look
 like <code>free</code>; that is, like:
 
      <pre class="smallexample">          void <var>function</var> (void *<var>ptr</var>, const void *<var>caller</var>)
-          </pre>
-
-     <p>The value of <var>caller</var> is the return address found on the stack when
+     </pre>
+        <p>The value of <var>caller</var> is the return address found on the stack when
 the <code>free</code> function was called.  This value allows you to trace the
 memory consumption of the program. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>__memalign_hook</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The value of this variable is a pointer to function that <code>memalign</code>
+<!-- malloc.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: <b>__memalign_hook</b><var><a name="index-g_t_005f_005fmemalign_005fhook-282"></a></var><br>
+<blockquote><p>The value of this variable is a pointer to function that <code>memalign</code>
 uses whenever it is called.  You should define this function to look
 like <code>memalign</code>; that is, like:
 
-     <pre class="smallexample">          void *<var>function</var> (size_t <var>alignment</var>, size_t <var>size</var>, const void *<var>caller</var>)
-          </pre>
-
-     <p>The value of <var>caller</var> is the return address found on the stack when
+     <pre class="smallexample">          void *<var>function</var> (size_t <var>size</var>, size_t <var>alignment</var>, const void *<var>caller</var>)
+     </pre>
+        <p>The value of <var>caller</var> is the return address found on the stack when
 the <code>memalign</code> function was called.  This value allows you to trace the
 memory consumption of the program. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>You must make sure that the function you install as a hook for one of
 these functions does not call that function recursively without restoring
@@ -133,25 +111,18 @@ should make sure to restore all the hooks to their previous value.  When
 coming back from the recursive call, all the hooks should be resaved
 since a hook might modify itself.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>__malloc_initialize_hook</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The value of this variable is a pointer to a function that is called
+<!-- malloc.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: <b>__malloc_initialize_hook</b><var><a name="index-g_t_005f_005fmalloc_005finitialize_005fhook-283"></a></var><br>
+<blockquote><p>The value of this variable is a pointer to a function that is called
 once when the malloc implementation is initialized.  This is a weak
 variable, so it can be overridden in the application with a definition
 like the following:
 
      <pre class="smallexample">          void (*<var>__malloc_initialize_hook</var>) (void) = my_init_hook;
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
    <p>An issue to look out for is the time at which the malloc hook functions
 can be safely installed.  If the hook functions call the malloc-related
@@ -165,7 +136,7 @@ un-hooked malloc may later be handed to <code>__free_hook</code>, for example.
 
    <p>In both cases, the problem can be solved by setting up the hooks from
 within a user-defined function pointed to by
-<code>__malloc_initialize_hook</code>--then the hooks will be set up safely
+<code>__malloc_initialize_hook</code>&mdash;then the hooks will be set up safely
 at the right time.
 
    <p>Here is an example showing how to use <code>__malloc_hook</code> and
@@ -206,7 +177,7 @@ program.
        /* Save underlying hooks */
        old_malloc_hook = __malloc_hook;
        old_free_hook = __free_hook;
-       /* <code>printf</code> might call <code>malloc</code>, so protect it too. */
+       /* <code>printf</code><span class="roman"> might call </span><code>malloc</code><span class="roman">, so protect it too.</span> */
        printf ("malloc (%u) returns %p\n", (unsigned int) size, result);
        /* Restore our own hooks */
        __malloc_hook = my_malloc_hook;
@@ -225,7 +196,7 @@ program.
        /* Save underlying hooks */
        old_malloc_hook = __malloc_hook;
        old_free_hook = __free_hook;
-       /* <code>printf</code> might call <code>free</code>, so protect it too. */
+       /* <code>printf</code><span class="roman"> might call </span><code>free</code><span class="roman">, so protect it too.</span> */
        printf ("freed pointer %p\n", ptr);
        /* Restore our own hooks */
        __malloc_hook = my_malloc_hook;
@@ -236,10 +207,11 @@ program.
      {
        ...
      }
-     </pre>
-
-   <p>The <code>mcheck</code> function (see <a href="Heap-Consistency-Checking.html#Heap%20Consistency%20Checking">Heap Consistency Checking</a>) works by
+</pre>
+   <p>The <code>mcheck</code> function (see <a href="Heap-Consistency-Checking.html#Heap-Consistency-Checking">Heap Consistency Checking</a>) works by
 installing such hooks.
 
-   </body></html>
+<!-- __morecore, __after_morecore_hook are undocumented -->
+<!-- It's not clear whether to document them. -->
+</body></html>
 

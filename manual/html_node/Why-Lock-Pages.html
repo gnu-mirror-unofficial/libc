@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Why Lock Pages - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Locking-Pages.html#Locking-Pages" title="Locking Pages">
+<link rel="next" href="Locked-Memory-Details.html#Locked-Memory-Details" title="Locked Memory Details">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,38 +16,40 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Why%20Lock%20Pages">Why Lock Pages</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Locked-Memory-Details.html#Locked%20Memory%20Details">Locked Memory Details</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Locking-Pages.html#Locking%20Pages">Locking Pages</a>
-<hr><br>
+<a name="Why-Lock-Pages"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Locked-Memory-Details.html#Locked-Memory-Details">Locked Memory Details</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locking-Pages.html#Locking-Pages">Locking Pages</a>
+<hr>
 </div>
 
-<h3 class="subsection">Why Lock Pages</h4>
+<h4 class="subsection">3.4.1 Why Lock Pages</h4>
 
 <p>Because page faults cause paged out pages to be paged in transparently,
 a process rarely needs to be concerned about locking pages.  However,
 there are two reasons people sometimes are:
 
      <ul>
-
-     <li>Speed.  A page fault is transparent only insofar as the process is not
+<li>Speed.  A page fault is transparent only insofar as the process is not
 sensitive to how long it takes to do a simple memory access.  Time-critical
 processes, especially realtime processes, may not be able to wait or
-may not be able to tolerate variance in execution speed.
-
-     <p>A process that needs to lock pages for this reason probably also needs
+may not be able to tolerate variance in execution speed. 
+<a name="index-realtime-processing-347"></a><a name="index-speed-of-execution-348"></a>
+A process that needs to lock pages for this reason probably also needs
 priority among other processes for use of the CPU.  See <a href="Priority.html#Priority">Priority</a>.
 
      <p>In some cases, the programmer knows better than the system's demand
 paging allocator which pages should remain in real memory to optimize
 system performance.  In this case, locking pages can help.
 
-     </p><li>Privacy.  If you keep secrets in virtual memory and that virtual memory
+     <li>Privacy.  If you keep secrets in virtual memory and that virtual memory
 gets paged out, that increases the chance that the secrets will get out. 
 If a password gets written out to disk swap space, for example, it might
 still be there long after virtual and real memory have been wiped clean.

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Inet Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Internet-Namespace.html#Internet-Namespace" title="Internet Namespace">
+<link rel="prev" href="Byte-Order.html#Byte-Order" title="Byte Order">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Inet%20Example">Inet Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Byte-Order.html#Byte%20Order">Byte Order</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>
-<hr><br>
+<a name="Inet-Example"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Byte-Order.html#Byte-Order">Byte Order</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Internet-Namespace.html#Internet-Namespace">Internet Namespace</a>
+<hr>
 </div>
 
-<h3 class="subsection">Internet Socket Example</h4>
+<h4 class="subsection">16.6.7 Internet Socket Example</h4>
 
 <p>Here is an example showing how to create and name a socket in the
 Internet namespace.  The newly created socket exists on the machine that
@@ -31,9 +38,7 @@ the program is running on.  Rather than finding and using the machine's
 Internet address, this example specifies <code>INADDR_ANY</code> as the host
 address; the system replaces that with the machine's actual address.
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      #include &lt;sys/socket.h&gt;
      #include &lt;netinet/in.h&gt;
@@ -44,7 +49,7 @@ address; the system replaces that with the machine's actual address.
        int sock;
        struct sockaddr_in name;
      
-       /* Create the socket. */
+       /* <span class="roman">Create the socket.</span> */
        sock = socket (PF_INET, SOCK_STREAM, 0);
        if (sock &lt; 0)
          {
@@ -52,7 +57,7 @@ address; the system replaces that with the machine's actual address.
            exit (EXIT_FAILURE);
          }
      
-       /* Give the socket a name. */
+       /* <span class="roman">Give the socket a name.</span> */
        name.sin_family = AF_INET;
        name.sin_port = htons (port);
        name.sin_addr.s_addr = htonl (INADDR_ANY);
@@ -64,14 +69,11 @@ address; the system replaces that with the machine's actual address.
      
        return sock;
      }
-     </pre>
-
+</pre>
    <p>Here is another example, showing how you can fill in a <code>sockaddr_in</code>
 structure, given a host name string and a port number:
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      #include &lt;sys/socket.h&gt;
      #include &lt;netinet/in.h&gt;
@@ -94,7 +96,6 @@ structure, given a host name string and a port number:
          }
        name-&gt;sin_addr = *(struct in_addr *) hostinfo-&gt;h_addr;
      }
-     </pre>
-
+</pre>
    </body></html>
 

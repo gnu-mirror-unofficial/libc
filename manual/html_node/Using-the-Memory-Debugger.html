@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Using the Memory Debugger - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Allocation-Debugging.html#Allocation-Debugging" title="Allocation Debugging">
+<link rel="prev" href="Tracing-malloc.html#Tracing-malloc" title="Tracing malloc">
+<link rel="next" href="Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger" title="Tips for the Memory Debugger">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Using%20the%20Memory%20Debugger">Using the Memory Debugger</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Tips-for-the-Memory-Debugger.html#Tips%20for%20the%20Memory%20Debugger">Tips for the Memory Debugger</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Tracing-malloc.html#Tracing%20malloc">Tracing malloc</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>
-<hr><br>
+<a name="Using-the-Memory-Debugger"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Tips-for-the-Memory-Debugger.html#Tips-for-the-Memory-Debugger">Tips for the Memory Debugger</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Tracing-malloc.html#Tracing-malloc">Tracing malloc</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation-Debugging">Allocation Debugging</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Example program excerpts</h5>
+<h5 class="subsubsection">3.2.3.2 Example program excerpts</h5>
 
 <p>Even though the tracing functionality does not influence the runtime
 behavior of the program it is not a good idea to call <code>mtrace</code> in
@@ -44,8 +52,7 @@ compiled for debugging.  A program could therefore start like this:
      #endif
        ...
      }
-     </pre>
-
+</pre>
    <p>This is all what is needed if you want to trace the calls during the
 whole runtime of the program.  Alternatively you can stop the tracing at
 any time with a call to <code>muntrace</code>.  It is even possible to restart

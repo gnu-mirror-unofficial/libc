@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Absolute Priority - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Priority.html#Priority" title="Priority">
+<link rel="next" href="Realtime-Scheduling.html#Realtime-Scheduling" title="Realtime Scheduling">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,53 +16,57 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Absolute%20Priority">Absolute Priority</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Realtime-Scheduling.html#Realtime%20Scheduling">Realtime Scheduling</a>,
+<a name="Absolute-Priority"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Realtime-Scheduling.html#Realtime-Scheduling">Realtime Scheduling</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Priority.html#Priority">Priority</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Absolute Priority</h4>
+<h4 class="subsection">22.3.1 Absolute Priority</h4>
 
-<p>Every process has an absolute priority, and it is represented by a number. 
+<p><a name="index-absolute-priority-2725"></a><a name="index-priority_002c-absolute-2726"></a>
+Every process has an absolute priority, and it is represented by a number. 
 The higher the number, the higher the absolute priority.
 
-   <p>On systems of the past, and most systems today, all processes have
+   <p><a name="index-realtime-CPU-scheduling-2727"></a>On systems of the past, and most systems today, all processes have
 absolute priority 0 and this section is irrelevant.  In that case,
-See <a href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a>.  Absolute priorities were invented to
+See <a href="Traditional-Scheduling.html#Traditional-Scheduling">Traditional Scheduling</a>.  Absolute priorities were invented to
 accommodate realtime systems, in which it is vital that certain processes
 be able to respond to external events happening in real time, which
 means they cannot wait around while some other process that <em>wants
 to</em>, but doesn't <em>need to</em> run occupies the CPU.
 
-   <p>When two processes are in contention to use the CPU at any instant, the
+   <p><a name="index-ready-to-run-2728"></a><a name="index-preemptive-scheduling-2729"></a>When two processes are in contention to use the CPU at any instant, the
 one with the higher absolute priority always gets it.  This is true even if the
 process with the lower priority is already using the CPU (i.e. the
 scheduling is preemptive).  Of course, we're only talking about
-processes that are running or "ready to run," which means they are
+processes that are running or &ldquo;ready to run,&rdquo; which means they are
 ready to execute instructions right now.  When a process blocks to wait
 for something like I/O, its absolute priority is irrelevant.
 
-   <p><strong>Note:</strong>  The term "runnable" is a synonym for "ready to run."
+   <p><a name="index-runnable-process-2730"></a><strong>Note:</strong>  The term &ldquo;runnable&rdquo; is a synonym for &ldquo;ready to run.&rdquo;
 
    <p>When two processes are running or ready to run and both have the same
 absolute priority, it's more interesting.  In that case, who gets the
 CPU is determined by the scheduling policy.  If the processes have
 absolute priority 0, the traditional scheduling policy described in
-<a href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a> applies.  Otherwise, the policies described
-in <a href="Realtime-Scheduling.html#Realtime%20Scheduling">Realtime Scheduling</a> apply.
+<a href="Traditional-Scheduling.html#Traditional-Scheduling">Traditional Scheduling</a> applies.  Otherwise, the policies described
+in <a href="Realtime-Scheduling.html#Realtime-Scheduling">Realtime Scheduling</a> apply.
 
    <p>You normally give an absolute priority above 0 only to a process that
 can be trusted not to hog the CPU.  Such processes are designed to block
 (or terminate) after relatively short CPU runs.
 
    <p>A process begins life with the same absolute priority as its parent
-process.  Functions described in <a href="Basic-Scheduling-Functions.html#Basic%20Scheduling%20Functions">Basic Scheduling Functions</a> can
+process.  Functions described in <a href="Basic-Scheduling-Functions.html#Basic-Scheduling-Functions">Basic Scheduling Functions</a> can
 change it.
 
    <p>Only a privileged process can change a process' absolute priority to
@@ -71,7 +79,7 @@ Linux, they are 1 through 99.  The functions
 <code>sched_get_priority_max</code> and <code>sched_set_priority_min</code> portably
 tell you what the range is on a particular system.
 
-<h3 class="subsubsection">Using Absolute Priority</h5>
+<h5 class="subsubsection">22.3.1.1 Using Absolute Priority</h5>
 
 <p>One thing you must keep in mind when designing real time applications is
 that having higher absolute priority than any other process doesn't
@@ -115,8 +123,8 @@ privileged process constantly monitors the process' CPU usage and raises
 its absolute priority when the process isn't getting its entitled share
 and lowers it when the process is exceeding it.
 
-   <p><strong>Note:</strong>  The absolute priority is sometimes called the "static
-priority."  We don't use that term in this manual because it misses the
+   <p><strong>Note:</strong>  The absolute priority is sometimes called the &ldquo;static
+priority.&rdquo;  We don't use that term in this manual because it misses the
 most important feature of the absolute priority:  its absoluteness.
 
    </body></html>

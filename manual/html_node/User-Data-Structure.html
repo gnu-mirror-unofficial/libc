@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>User Data Structure - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Database.html#User-Database" title="User Database">
+<link rel="next" href="Lookup-User.html#Lookup-User" title="Lookup User">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,63 +16,53 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="User%20Data%20Structure">User Data Structure</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-User.html#Lookup%20User">Lookup User</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Database.html#User%20Database">User Database</a>
-<hr><br>
+<a name="User-Data-Structure"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-User.html#Lookup-User">Lookup User</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Database.html#User-Database">User Database</a>
+<hr>
 </div>
 
-<h3 class="subsection">The Data Structure that Describes a User</h4>
+<h4 class="subsection">29.13.1 The Data Structure that Describes a User</h4>
 
 <p>The functions and data structures for accessing the system user database
-are declared in the header file <code>pwd.h</code>.
+are declared in the header file <samp><span class="file">pwd.h</span></samp>. 
+<a name="index-pwd_002eh-3370"></a>
+<!-- pwd.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct passwd</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>passwd</code> data structure is used to hold information about
+<div class="defun">
+&mdash; Data Type: <b>struct passwd</b><var><a name="index-struct-passwd-3371"></a></var><br>
+<blockquote><p>The <code>passwd</code> data structure is used to hold information about
 entries in the system user data base.  It has at least the following members:
 
           <dl>
-<dt><code>char *pw_name</code>
-          <dd>The user's login name.
+<dt><code>char *pw_name</code><dd>The user's login name.
 
-          <br><dt><code>char *pw_passwd.</code>
-          <dd>The encrypted password string.
+          <br><dt><code>char *pw_passwd.</code><dd>The encrypted password string.
 
-          <br><dt><code>uid_t pw_uid</code>
-          <dd>The user ID number.
+          <br><dt><code>uid_t pw_uid</code><dd>The user ID number.
 
-          <br><dt><code>gid_t pw_gid</code>
-          <dd>The user's default group ID number.
+          <br><dt><code>gid_t pw_gid</code><dd>The user's default group ID number.
 
-          <br><dt><code>char *pw_gecos</code>
-          <dd>A string typically containing the user's real name, and possibly other
+          <br><dt><code>char *pw_gecos</code><dd>A string typically containing the user's real name, and possibly other
 information such as a phone number.
 
-          <br><dt><code>char *pw_dir</code>
-          <dd>The user's home directory, or initial working directory.  This might be
+          <br><dt><code>char *pw_dir</code><dd>The user's home directory, or initial working directory.  This might be
 a null pointer, in which case the interpretation is system-dependent.
 
-          <br><dt><code>char *pw_shell</code>
-          <dd>The user's default shell, or the initial program run when the user logs in. 
+          <br><dt><code>char *pw_shell</code><dd>The user's default shell, or the initial program run when the user logs in. 
 This might be a null pointer, indicating that the system default should
 be used. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    </body></html>
 

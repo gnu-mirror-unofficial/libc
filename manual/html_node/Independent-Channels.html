@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Independent Channels - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" title="Stream/Descriptor Precautions">
+<link rel="prev" href="Linked-Channels.html#Linked-Channels" title="Linked Channels">
+<link rel="next" href="Cleaning-Streams.html#Cleaning-Streams" title="Cleaning Streams">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Independent%20Channels">Independent Channels</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Cleaning-Streams.html#Cleaning%20Streams">Cleaning Streams</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Linked-Channels.html#Linked%20Channels">Linked Channels</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
-<hr><br>
+<a name="Independent-Channels"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Cleaning-Streams.html#Cleaning-Streams">Cleaning Streams</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Linked-Channels.html#Linked-Channels">Linked Channels</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions">Stream/Descriptor Precautions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Independent Channels</h4>
+<h4 class="subsection">13.5.2 Independent Channels</h4>
 
-<p>When you open channels (streams or descriptors) separately on a seekable
+<p><a name="index-independent-channels-1240"></a>
+When you open channels (streams or descriptors) separately on a seekable
 file, each channel has its own file position.  These are called
 <dfn>independent channels</dfn>.
 
@@ -58,7 +67,7 @@ were using, if it is a stream.
 file that doesn't support random access.  Thus, channels for reading or
 writing such files are always linked, never independent.  Append-type
 channels are also always linked.  For these channels, follow the rules
-for linked channels; see <a href="Linked-Channels.html#Linked%20Channels">Linked Channels</a>.
+for linked channels; see <a href="Linked-Channels.html#Linked-Channels">Linked Channels</a>.
 
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Integers - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Arithmetic.html#Arithmetic" title="Arithmetic">
+<link rel="next" href="Integer-Division.html#Integer-Division" title="Integer Division">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,25 +16,29 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Integers">Integers</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Integer-Division.html#Integer%20Division">Integer Division</a>,
+<a name="Integers"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Integer-Division.html#Integer-Division">Integer Division</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Integers</h3>
+<h3 class="section">20.1 Integers</h3>
 
-<p>The C language defines several integer data types: integer, short integer,
+<p><a name="index-integer-2307"></a>
+The C language defines several integer data types: integer, short integer,
 long integer, and character, all in both signed and unsigned varieties. 
 The GNU C compiler extends the language to contain long long integers
-as well.
-
-   <p>The C integer types were intended to allow code to be portable among
+as well. 
+<a name="index-signedness-2308"></a>
+The C integer types were intended to allow code to be portable among
 machines with different inherent data sizes (word sizes), so each type
 may have different ranges on different machines.  The problem with
 this is that a program often needs to be written for a particular range
@@ -42,9 +50,9 @@ you can use to declare integers that meet your exact needs.  Because the
 GNU C library header files are customized to a specific machine, your
 program source code doesn't have to be.
 
-   <p>These <code>typedef</code>s are in <code>stdint.h</code>.
-
-   <p>If you require that an integer be represented in exactly N bits, use one
+   <p>These <code>typedef</code>s are in <samp><span class="file">stdint.h</span></samp>. 
+<a name="index-stdint_002eh-2309"></a>
+If you require that an integer be represented in exactly N bits, use one
 of the following types, with the obvious mapping to bit size and signedness:
 
      <ul>
@@ -106,10 +114,10 @@ minimum possible values for each integer data type.  The macro names
 follow these examples: <code>INT32_MAX</code>, <code>UINT8_MAX</code>,
 <code>INT_FAST32_MIN</code>, <code>INT_LEAST64_MIN</code>, <code>UINTMAX_MAX</code>,
 <code>INTMAX_MAX</code>, <code>INTMAX_MIN</code>.  Note that there are no macros for
-unsigned integer minima.  These are always zero.
-
-   <p>There are similar macros for use with C's built in integer types which
-should come with your C compiler.  These are described in <a href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>.
+unsigned integer minima.  These are always zero. 
+<a name="index-maximum-possible-integer-2310"></a><a name="index-minimum-possible-integer-2311"></a>
+There are similar macros for use with C's built in integer types which
+should come with your C compiler.  These are described in <a href="Data-Type-Measurements.html#Data-Type-Measurements">Data Type Measurements</a>.
 
    <p>Don't forget you can use the C <code>sizeof</code> function with any of these
 data types to get the number of bytes of storage each uses.

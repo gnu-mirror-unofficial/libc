@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Array Sort Function - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Searching-and-Sorting.html#Searching-and-Sorting" title="Searching and Sorting">
+<link rel="prev" href="Array-Search-Function.html#Array-Search-Function" title="Array Search Function">
+<link rel="next" href="Search_002fSort-Example.html#Search_002fSort-Example" title="Search/Sort Example">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,57 +17,56 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Array%20Sort%20Function">Array Sort Function</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Search-Sort-Example.html#Search%2fSort%20Example">Search/Sort Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Array-Search-Function.html#Array%20Search%20Function">Array Search Function</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
-<hr><br>
+<a name="Array-Sort-Function"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Search_002fSort-Example.html#Search_002fSort-Example">Search/Sort Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Array-Search-Function.html#Array-Search-Function">Array Search Function</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Searching-and-Sorting.html#Searching-and-Sorting">Searching and Sorting</a>
+<hr>
 </div>
 
-<h3 class="section">Array Sort Function</h3>
+<h3 class="section">9.3 Array Sort Function</h3>
 
-<p>To sort an array using an arbitrary comparison function, use the
+<p><a name="index-sort-function-_0028for-arrays_0029-820"></a><a name="index-quick-sort-function-_0028for-arrays_0029-821"></a><a name="index-array-sort-function-822"></a>
+To sort an array using an arbitrary comparison function, use the
 <code>qsort</code> function.  The prototype for this function is in
-<code>stdlib.h</code>.
+<samp><span class="file">stdlib.h</span></samp>. 
+<a name="index-stdlib_002eh-823"></a>
+<!-- stdlib.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>qsort</b><i> </i>(<i>void *</i><var>array</var><i>, size_t </i><var>count</var><i>, size_t </i><var>size</var><i>, comparison_fn_t </i><var>compare</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <var>qsort</var> function sorts the array <var>array</var>.  The array contains
+<div class="defun">
+&mdash; Function: void <b>qsort</b> (<var>void *array, size_t count, size_t size, comparison_fn_t compare</var>)<var><a name="index-qsort-824"></a></var><br>
+<blockquote><p>The <var>qsort</var> function sorts the array <var>array</var>.  The array contains
 <var>count</var> elements, each of which is of size <var>size</var>.
 
-     <p>The <var>compare</var> function is used to perform the comparison on the
+        <p>The <var>compare</var> function is used to perform the comparison on the
 array elements.  This function is called with two pointer arguments and
 should return an integer less than, equal to, or greater than zero
 corresponding to whether its first argument is considered less than,
 equal to, or greater than its second argument.
 
-     <p><strong>Warning:</strong> If two objects compare as equal, their order after
+        <p><a name="index-stable-sorting-825"></a><strong>Warning:</strong> If two objects compare as equal, their order after
 sorting is unpredictable.  That is to say, the sorting is not stable. 
 This can make a difference when the comparison considers only part of
 the elements.  Two elements with the same sort key may differ in other
 respects.
 
-     <p>If you want the effect of a stable sort, you can get this result by
+        <p>If you want the effect of a stable sort, you can get this result by
 writing the comparison function so that, lacking other reason
 distinguish between two elements, it compares them by their addresses. 
 Note that doing this may make the sorting algorithm less efficient, so
 do it only if necessary.
 
-     <p>Here is a simple example of sorting an array of doubles in numerical
-order, using the comparison function defined above (see <a href="Comparison-Functions.html#Comparison%20Functions">Comparison Functions</a>):
+        <p>Here is a simple example of sorting an array of doubles in numerical
+order, using the comparison function defined above (see <a href="Comparison-Functions.html#Comparison-Functions">Comparison Functions</a>):
 
      <pre class="smallexample">          {
             double *array;
@@ -70,16 +74,14 @@ order, using the comparison function defined above (see <a href="Comparison-Func
             ...
             qsort (array, size, sizeof (double), compare_doubles);
           }
-          </pre>
+     </pre>
+        <p>The <code>qsort</code> function derives its name from the fact that it was
+originally implemented using the &ldquo;quick sort&rdquo; algorithm.
 
-     <p>The <code>qsort</code> function derives its name from the fact that it was
-originally implemented using the "quick sort" algorithm.
-
-     <p>The implementation of <code>qsort</code> in this library might not be an
+        <p>The implementation of <code>qsort</code> in this library might not be an
 in-place sort and might thereby use an extra amount of memory to store
 the array. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Printf Extension Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Customizing-Printf.html#Customizing-Printf" title="Customizing Printf">
+<link rel="prev" href="Defining-the-Output-Handler.html#Defining-the-Output-Handler" title="Defining the Output Handler">
+<link rel="next" href="Predefined-Printf-Handlers.html#Predefined-Printf-Handlers" title="Predefined Printf Handlers">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,30 +17,31 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Printf%20Extension%20Example">Printf Extension Example</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Predefined-Printf-Handlers.html#Predefined%20Printf%20Handlers">Predefined Printf Handlers</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Defining-the-Output-Handler.html#Defining%20the%20Output%20Handler">Defining the Output Handler</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Customizing-Printf.html#Customizing%20Printf">Customizing Printf</a>
-<hr><br>
+<a name="Printf-Extension-Example"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Predefined-Printf-Handlers.html#Predefined-Printf-Handlers">Predefined Printf Handlers</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Defining-the-Output-Handler.html#Defining-the-Output-Handler">Defining the Output Handler</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Customizing-Printf.html#Customizing-Printf">Customizing Printf</a>
+<hr>
 </div>
 
-<h3 class="subsection"><code>printf</code> Extension Example</h4>
+<h4 class="subsection">12.13.4 <code>printf</code> Extension Example</h4>
 
 <p>Here is an example showing how to define a <code>printf</code> handler function. 
 This program defines a data structure called a <code>Widget</code> and
-defines the <code>%W</code> conversion to print information about <code>Widget&nbsp;*</code>
+defines the `<samp><span class="samp">%W</span></samp>' conversion to print information about <code>Widget&nbsp;*</code><!-- /@w -->
 arguments, including the pointer value and the name stored in the data
-structure.  The <code>%W</code> conversion supports the minimum field width and
+structure.  The `<samp><span class="samp">%W</span></samp>' conversion supports the minimum field width and
 left-justification options, but ignores everything else.
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      #include &lt;printf.h&gt;
      
@@ -54,18 +60,18 @@ left-justification options, but ignores everything else.
        char *buffer;
        int len;
      
-       /* Format the output into a string. */
+       /* <span class="roman">Format the output into a string.</span> */
        w = *((const Widget **) (args[0]));
        len = asprintf (&amp;buffer, "&lt;Widget %p: %s&gt;", w, w-&gt;name);
        if (len == -1)
          return -1;
      
-       /* Pad to the minimum field width and print to the stream. */
+       /* <span class="roman">Pad to the minimum field width and print to the stream.</span> */
        len = fprintf (stream, "%*s",
                       (info-&gt;left ? -info-&gt;width : info-&gt;width),
                       buffer);
      
-       /* Clean up and return. */
+       /* <span class="roman">Clean up and return.</span> */
        free (buffer);
        return len;
      }
@@ -75,8 +81,8 @@ left-justification options, but ignores everything else.
      print_widget_arginfo (const struct printf_info *info, size_t n,
                            int *argtypes)
      {
-       /* We always take exactly one argument and this is a pointer to the
-          structure.. */
+       /* <span class="roman">We always take exactly one argument and this is a pointer to the
+          structure..</span> */
        if (n &gt; 0)
          argtypes[0] = PA_POINTER;
        return 1;
@@ -86,28 +92,26 @@ left-justification options, but ignores everything else.
      int
      main (void)
      {
-       /* Make a widget to print. */
+       /* <span class="roman">Make a widget to print.</span> */
        Widget mywidget;
        mywidget.name = "mywidget";
      
-       /* Register the print function for widgets. */
+       /* <span class="roman">Register the print function for widgets.</span> */
        register_printf_function ('W', print_widget, print_widget_arginfo);
      
-       /* Now print the widget. */
+       /* <span class="roman">Now print the widget.</span> */
        printf ("|%W|\n", &amp;mywidget);
        printf ("|%35W|\n", &amp;mywidget);
        printf ("|%-35W|\n", &amp;mywidget);
      
        return 0;
      }
-     </pre>
-
+</pre>
    <p>The output produced by this program looks like:
 
 <pre class="smallexample">     |&lt;Widget 0xffeffb7c: mywidget&gt;|
      |      &lt;Widget 0xffeffb7c: mywidget&gt;|
      |&lt;Widget 0xffeffb7c: mywidget&gt;      |
-     </pre>
-
+</pre>
    </body></html>
 

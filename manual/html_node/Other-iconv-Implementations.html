@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Other iconv Implementations - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Generic-Charset-Conversion.html#Generic-Charset-Conversion" title="Generic Charset Conversion">
+<link rel="prev" href="iconv-Examples.html#iconv-Examples" title="iconv Examples">
+<link rel="next" href="glibc-iconv-Implementation.html#glibc-iconv-Implementation" title="glibc iconv Implementation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Other%20iconv%20Implementations">Other iconv Implementations</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="glibc-iconv-Implementation.html#glibc%20iconv%20Implementation">glibc iconv Implementation</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="iconv-Examples.html#iconv%20Examples">iconv Examples</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Generic-Charset-Conversion.html#Generic%20Charset%20Conversion">Generic Charset Conversion</a>
-<hr><br>
+<a name="Other-iconv-Implementations"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="glibc-iconv-Implementation.html#glibc-iconv-Implementation">glibc iconv Implementation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="iconv-Examples.html#iconv-Examples">iconv Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Generic-Charset-Conversion.html#Generic-Charset-Conversion">Generic Charset Conversion</a>
+<hr>
 </div>
 
-<h3 class="subsection">Some Details about other <code>iconv</code> Implementations</h4>
+<h4 class="subsection">6.5.3 Some Details about other <code>iconv</code> Implementations</h4>
 
 <p>This is not really the place to discuss the <code>iconv</code> implementation
 of other systems but it is necessary to know a bit about them to write
@@ -49,7 +57,7 @@ that many different variants of the table-processing functions must be
 developed.  In addition, the generic nature of these functions make them
 slower than specifically implemented functions.
 
-     </p><li>The C library only contains a framework that can dynamically load
+     <li>The C library only contains a framework that can dynamically load
 object files and execute the conversion functions contained therein.
 
      <p>This solution provides much more flexibility.  The C library itself
@@ -97,9 +105,8 @@ the problem we assume to write a program that has to convert from
 A to C.  A call like
 
 <pre class="smallexample">     cd = iconv_open ("C", "A");
-     </pre>
-
-<p>fails according to the assumption above.  But what does the program
+</pre>
+   <p class="noindent">fails according to the assumption above.  But what does the program
 do now?  The conversion is necessary; therefore, simply giving up is not
 an option.
 
@@ -109,18 +116,16 @@ to character set B, first the two <code>iconv_open</code>
 calls
 
 <pre class="smallexample">     cd1 = iconv_open ("B", "A");
-     </pre>
-
-<p>and
+</pre>
+   <p class="noindent">and
 
 <pre class="smallexample">     cd2 = iconv_open ("C", "B");
-     </pre>
-
-<p>will succeed, but how to find B?
+</pre>
+   <p class="noindent">will succeed, but how to find B?
 
    <p>Unfortunately, the answer is: there is no general solution.  On some
 systems guessing might help.  On those systems most character sets can
-convert to and from UTF-8 encoded ISO&nbsp;10646 or Unicode text. Beside
+convert to and from UTF-8 encoded ISO&nbsp;10646<!-- /@w --> or Unicode text. Beside
 this only some very system-specific methods can help.  Since the
 conversion functions come from loadable modules and these modules must
 be stored somewhere in the filesystem, one <em>could</em> try to find them

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Errors in Math Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematics.html#Mathematics" title="Mathematics">
+<link rel="prev" href="Special-Functions.html#Special-Functions" title="Special Functions">
+<link rel="next" href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers" title="Pseudo-Random Numbers">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,30 +17,33 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Errors%20in%20Math%20Functions">Errors in Math Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Special-Functions.html#Special%20Functions">Special Functions</a>,
+<a name="Errors-in-Math-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Pseudo_002dRandom-Numbers.html#Pseudo_002dRandom-Numbers">Pseudo-Random Numbers</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Special-Functions.html#Special-Functions">Special Functions</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Known Maximum Errors in Math Functions</h3>
+<h3 class="section">19.7 Known Maximum Errors in Math Functions</h3>
 
-<p>This section lists the known errors of the functions in the math
-library.  Errors are measured in "units of the last place".  This is a
+<p><a name="index-math-errors-2267"></a><a name="index-ulps-2268"></a>
+This section lists the known errors of the functions in the math
+library.  Errors are measured in &ldquo;units of the last place&rdquo;.  This is a
 measure for the relative error.  For a number z with the
 representation d.d<small class="dots">...</small>d&amp;middot;2^e (we assume IEEE
 floating-point numbers with base 2) the ULP is represented by
 
 <pre class="smallexample">     |d.d...d - (z / 2^e)| / 2^(p - 1)
-     </pre>
-
-<p>where p is the number of bits in the mantissa of the
+</pre>
+   <p class="noindent">where p is the number of bits in the mantissa of the
 floating-point number representation.  Ideally the error for all
 functions is always less than 0.5ulps.  Using rounding bits this is also
 possible and normally implemented for the basic operations.  To achieve
@@ -53,7 +61,8 @@ architectures have different results since their hardware support for
 floating-point operations varies and also the existing hardware support
 is different.
 
-   <p><table><tr align="left"><td valign="top">Function  </td><td valign="top">Alpha </td><td valign="top">ARM </td><td valign="top">Generic </td><td valign="top">ix86 </td><td valign="top">IA64
+<!-- This multitable does not fit on a single page -->
+<p><table summary=""><tr align="left"><td valign="top">Function  </td><td valign="top">Alpha </td><td valign="top">ARM </td><td valign="top">Generic </td><td valign="top">ix86 </td><td valign="top">IA64
 <br></td></tr><tr align="left"><td valign="top">acosf  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acos  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acosl  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">1150 </td><td valign="top">-
@@ -319,7 +328,7 @@ is different.
 <br></td></tr><tr align="left"><td valign="top">yn  </td><td valign="top">3 </td><td valign="top">3 </td><td valign="top">- </td><td valign="top">6 </td><td valign="top">3
 <br></td></tr><tr align="left"><td valign="top">ynl  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">7 </td><td valign="top">7
    <br></td></tr></table>
-   <p><table><tr align="left"><td valign="top">Function  </td><td valign="top">M68k </td><td valign="top">MIPS </td><td valign="top">PowerPC </td><td valign="top">S/390 </td><td valign="top">SH4
+   <p><table summary=""><tr align="left"><td valign="top">Function  </td><td valign="top">M68k </td><td valign="top">MIPS </td><td valign="top">PowerPC </td><td valign="top">S/390 </td><td valign="top">SH4
 <br></td></tr><tr align="left"><td valign="top">acosf  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acos  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acosl  </td><td valign="top">1 </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
@@ -585,7 +594,7 @@ is different.
 <br></td></tr><tr align="left"><td valign="top">yn  </td><td valign="top">6 </td><td valign="top">3 </td><td valign="top">3 </td><td valign="top">3 </td><td valign="top">3
 <br></td></tr><tr align="left"><td valign="top">ynl  </td><td valign="top">7 </td><td valign="top">- </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
    <br></td></tr></table>
-   <p><table><tr align="left"><td valign="top">Function  </td><td valign="top">Sparc 32-bit </td><td valign="top">Sparc 64-bit </td><td valign="top">x86_64/fpu
+   <p><table summary=""><tr align="left"><td valign="top">Function  </td><td valign="top">Sparc 32-bit </td><td valign="top">Sparc 64-bit </td><td valign="top">x86_64/fpu
 <br></td></tr><tr align="left"><td valign="top">acosf  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acos  </td><td valign="top">- </td><td valign="top">- </td><td valign="top">-
 <br></td></tr><tr align="left"><td valign="top">acosl  </td><td valign="top">- </td><td valign="top">1 </td><td valign="top">-

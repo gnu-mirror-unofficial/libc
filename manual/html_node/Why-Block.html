@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Why Block - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Blocking-Signals.html#Blocking-Signals" title="Blocking Signals">
+<link rel="next" href="Signal-Sets.html#Signal-Sets" title="Signal Sets">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Why%20Block">Why Block</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
-<hr><br>
+<a name="Why-Block"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Signal-Sets.html#Signal-Sets">Signal Sets</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking-Signals">Blocking Signals</a>
+<hr>
 </div>
 
-<h3 class="subsection">Why Blocking Signals is Useful</h4>
+<h4 class="subsection">24.7.1 Why Blocking Signals is Useful</h4>
 
 <p>Temporary blocking of signals with <code>sigprocmask</code> gives you a way to
 prevent interrupts during critical parts of your code.  If signals
@@ -32,13 +39,13 @@ unblock them.
 
    <p>One example where this is useful is for sharing data between a signal
 handler and the rest of the program.  If the type of the data is not
-<code>sig_atomic_t</code> (see <a href="Atomic-Data-Access.html#Atomic%20Data%20Access">Atomic Data Access</a>), then the signal
+<code>sig_atomic_t</code> (see <a href="Atomic-Data-Access.html#Atomic-Data-Access">Atomic Data Access</a>), then the signal
 handler could run when the rest of the program has only half finished
 reading or writing the data.  This would lead to confusing consequences.
 
    <p>To make the program reliable, you can prevent the signal handler from
 running while the rest of the program is examining or modifying that
-data--by blocking the appropriate signal around the parts of the
+data&mdash;by blocking the appropriate signal around the parts of the
 program that touch the data.
 
    <p>Blocking signals is also necessary when you want to perform a certain

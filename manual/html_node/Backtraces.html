@@ -1,9 +1,12 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Backtraces - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Debugging-Support.html#Debugging-Support" title="Debugging Support">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,112 +15,95 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Backtraces">Backtraces</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Debugging-Support.html#Debugging%20Support">Debugging Support</a>
-<hr><br>
+<a name="Backtraces"></a>
+Up:&nbsp;<a rel="up" accesskey="u" href="Debugging-Support.html#Debugging-Support">Debugging Support</a>
+<hr>
 </div>
 
-<h3 class="section">Backtraces</h3>
+<h3 class="section">33.1 Backtraces</h3>
 
-<p>A <dfn>backtrace</dfn> is a list of the function calls that are currently
+<p><a name="index-backtrace-3672"></a><a name="index-backtrace_005fsymbols-3673"></a><a name="index-backtrace_005ffd-3674"></a>A <dfn>backtrace</dfn> is a list of the function calls that are currently
 active in a thread.  The usual way to inspect a backtrace of a program
 is to use an external debugger such as gdb.  However, sometimes it is
-useful to obtain a backtrace programmatically from within a program,
+useful to obtain a backtrace programatically from within a program,
 e.g., for the purposes of logging or diagnostics.
 
-   <p>The header file <code>execinfo.h</code> declares three functions that obtain
-and manipulate backtraces of the current thread.
+   <p>The header file <samp><span class="file">execinfo.h</span></samp> declares three functions that obtain
+and manipulate backtraces of the current thread. 
+<a name="index-execinfo_002eh-3675"></a>
+<!-- execinfo.h -->
+<!-- GNU -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>backtrace</b><i> </i>(<i>void **</i><var>buffer</var><i>, int </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>backtrace</code> function obtains a backtrace for the current
+<div class="defun">
+&mdash; Function: int <b>backtrace</b> (<var>void **buffer, int size</var>)<var><a name="index-backtrace-3676"></a></var><br>
+<blockquote><p>The <code>backtrace</code> function obtains a backtrace for the current
 thread, as a list of pointers, and places the information into
 <var>buffer</var>.  The argument <var>size</var> should be the number of
-<code>void&nbsp;*</code> elements that will fit into <var>buffer</var>.  The return
+<code>void&nbsp;*</code><!-- /@w --> elements that will fit into <var>buffer</var>.  The return
 value is the actual number of entries of <var>buffer</var> that are obtained,
 and is at most <var>size</var>.
 
-     <p>The pointers placed in <var>buffer</var> are actually return addresses
+        <p>The pointers placed in <var>buffer</var> are actually return addresses
 obtained by inspecting the stack, one return address per stack frame.
 
-     <p>Note that certain compiler optimizations may interfere with obtaining a
+        <p>Note that certain compiler optimizations may interfere with obtaining a
 valid backtrace.  Function inlining causes the inlined function to not
 have a stack frame; tail call optimization replaces one stack frame with
 another; frame pointer elimination will stop <code>backtrace</code> from
 interpreting the stack contents correctly. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char ** <b>backtrace_symbols</b><i> </i>(<i>void *const *</i><var>buffer</var><i>, int </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>backtrace_symbols</code> function translates the information
+<!-- execinfo.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char ** <b>backtrace_symbols</b> (<var>void *const *buffer, int size</var>)<var><a name="index-backtrace_005fsymbols-3677"></a></var><br>
+<blockquote><p>The <code>backtrace_symbols</code> function translates the information
 obtained from the <code>backtrace</code> function into an array of strings. 
 The argument <var>buffer</var> should be a pointer to an array of addresses
 obtained via the <code>backtrace</code> function, and <var>size</var> is the number
 of entries in that array (the return value of <code>backtrace</code>).
 
-     <p>The return value is a pointer to an array of strings, which has
+        <p>The return value is a pointer to an array of strings, which has
 <var>size</var> entries just like the array <var>buffer</var>.  Each string
 contains a printable representation of the corresponding element of
 <var>buffer</var>.  It includes the function name (if this can be
 determined), an offset into the function, and the actual return address
 (in hexadecimal).
 
-     <p>Currently, the function name and offset only be obtained on systems that
+        <p>Currently, the function name and offset only be obtained on systems that
 use the ELF binary format for programs and libraries.  On other systems,
 only the hexadecimal return address will be present.  Also, you may need
 to pass additional flags to the linker to make the function names
 available to the program.  (For example, on systems using GNU ld, you
 must pass (<code>-rdynamic</code>.)
 
-     <p>The return value of <code>backtrace_symbols</code> is a pointer obtained via
+        <p>The return value of <code>backtrace_symbols</code> is a pointer obtained via
 the <code>malloc</code> function, and it is the responsibility of the caller
 to <code>free</code> that pointer.  Note that only the return value need be
 freed, not the individual strings.
 
-     <p>The return value is <code>NULL</code> if sufficient memory for the strings
+        <p>The return value is <code>NULL</code> if sufficient memory for the strings
 cannot be obtained. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>backtrace_symbols_fd</b><i> </i>(<i>void *const *</i><var>buffer</var><i>, int </i><var>size</var><i>, int </i><var>fd</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>backtrace_symbols_fd</code> function performs the same translation
+<!-- execinfo.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>backtrace_symbols_fd</b> (<var>void *const *buffer, int size, int fd</var>)<var><a name="index-backtrace_005fsymbols_005ffd-3678"></a></var><br>
+<blockquote><p>The <code>backtrace_symbols_fd</code> function performs the same translation
 as the function <code>backtrace_symbols</code> function.  Instead of returning
 the strings to the caller, it writes the strings to the file descriptor
 <var>fd</var>, one per line.  It does not use the <code>malloc</code> function, and
 can therefore be used in situations where that function might fail. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>The following program illustrates the use of these functions.  Note that
 the array to contain the return addresses returned by <code>backtrace</code>
@@ -129,13 +115,11 @@ addresses is normally not very large.  Even complicated programs rather
 seldom have a nesting level of more than, say, 50 and with 200 possible
 entries probably all programs should be covered.
 
-<pre class="smallexample">
-
-     #include &lt;execinfo.h&gt;
+<pre class="smallexample">     #include &lt;execinfo.h&gt;
      #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      
-     /* Obtain a backtrace and print it to <code>stdout</code>. */
+     /* <span class="roman">Obtain a backtrace and print it to </span><code>stdout</code><span class="roman">.</span> */
      void
      print_trace (void)
      {
@@ -155,7 +139,7 @@ entries probably all programs should be covered.
        free (strings);
      }
      
-     /* A dummy function to make the backtrace more interesting. */
+     /* <span class="roman">A dummy function to make the backtrace more interesting.</span> */
      void
      dummy_function (void)
      {
@@ -168,7 +152,7 @@ entries probably all programs should be covered.
        dummy_function ();
        return 0;
      }
-     </pre>
-
-   </body></html>
+</pre>
+   <!-- This node must have no pointers. -->
+</body></html>
 

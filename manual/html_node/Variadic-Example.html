@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Variadic Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Variadic-Functions.html#Variadic-Functions" title="Variadic Functions">
+<link rel="prev" href="How-Variadic.html#How-Variadic" title="How Variadic">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Variadic%20Example">Variadic Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="How-Variadic.html#How%20Variadic">How Variadic</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>
-<hr><br>
+<a name="Variadic-Example"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="How-Variadic.html#How-Variadic">How Variadic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Variadic-Functions.html#Variadic-Functions">Variadic Functions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Example of a Variadic Function</h4>
+<h4 class="subsection">A.2.3 Example of a Variadic Function</h4>
 
 <p>Here is a complete sample function that accepts a variable number of
 arguments.  The first argument to the function is the count of remaining
@@ -31,9 +38,8 @@ arguments, which are added up and the result returned.  While trivial,
 this function is sufficient to illustrate how to use the variable
 arguments facility.
 
-<pre class="smallexample">
-
-     #include &lt;stdarg.h&gt;
+<!-- Yes, this example has been tested. -->
+<pre class="smallexample">     #include &lt;stdarg.h&gt;
      #include &lt;stdio.h&gt;
      
      int
@@ -42,28 +48,27 @@ arguments facility.
        va_list ap;
        int i, sum;
      
-       va_start (ap, count);         /* Initialize the argument list. */
+       va_start (ap, count);         /* <span class="roman">Initialize the argument list.</span> */
      
        sum = 0;
        for (i = 0; i &lt; count; i++)
-         sum += va_arg (ap, int);    /* Get the next argument value. */
+         sum += va_arg (ap, int);    /* <span class="roman">Get the next argument value.</span> */
      
-       va_end (ap);                  /* Clean up. */
+       va_end (ap);                  /* <span class="roman">Clean up.</span> */
        return sum;
      }
      
      int
      main (void)
      {
-       /* This call prints 16. */
+       /* <span class="roman">This call prints 16.</span> */
        printf ("%d\n", add_em_up (3, 5, 5, 6));
      
-       /* This call prints 55. */
+       /* <span class="roman">This call prints 55.</span> */
        printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
      
        return 0;
      }
-     </pre>
-
+</pre>
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Byte Stream Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Connections.html#Connections" title="Connections">
+<link rel="prev" href="Transferring-Data.html#Transferring-Data" title="Transferring Data">
+<link rel="next" href="Server-Example.html#Server-Example" title="Server Example">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Byte%20Stream%20Example">Byte Stream Example</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Server-Example.html#Server%20Example">Server Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>,
+<a name="Byte-Stream-Example"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Server-Example.html#Server-Example">Server Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Transferring-Data.html#Transferring-Data">Transferring Data</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Connections.html#Connections">Connections</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Byte Stream Socket Example</h4>
+<h4 class="subsection">16.9.6 Byte Stream Socket Example</h4>
 
 <p>Here is an example client program that makes a connection for a byte
 stream socket in the Internet namespace.  It doesn't do anything
@@ -32,11 +40,9 @@ particularly interesting once it has connected to the server; it just
 sends a text string to the server and exits.
 
    <p>This program uses <code>init_sockaddr</code> to set up the socket address; see
-<a href="Inet-Example.html#Inet%20Example">Inet Example</a>.
+<a href="Inet-Example.html#Inet-Example">Inet Example</a>.
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;errno.h&gt;
      #include &lt;stdlib.h&gt;
      #include &lt;unistd.h&gt;
@@ -72,7 +78,7 @@ sends a text string to the server and exits.
        int sock;
        struct sockaddr_in servername;
      
-       /* Create the socket. */
+       /* <span class="roman">Create the socket.</span> */
        sock = socket (PF_INET, SOCK_STREAM, 0);
        if (sock &lt; 0)
          {
@@ -80,7 +86,7 @@ sends a text string to the server and exits.
            exit (EXIT_FAILURE);
          }
      
-       /* Connect to the server. */
+       /* <span class="roman">Connect to the server.</span> */
        init_sockaddr (&amp;servername, SERVERHOST, PORT);
        if (0 &gt; connect (sock,
                         (struct sockaddr *) &amp;servername,
@@ -90,12 +96,11 @@ sends a text string to the server and exits.
            exit (EXIT_FAILURE);
          }
      
-       /* Send data to the server. */
+       /* <span class="roman">Send data to the server.</span> */
        write_to_server (sock);
        close (sock);
        exit (EXIT_SUCCESS);
      }
-     </pre>
-
+</pre>
    </body></html>
 

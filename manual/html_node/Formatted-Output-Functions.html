@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Formatted Output Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatted-Output.html#Formatted-Output" title="Formatted Output">
+<link rel="prev" href="Other-Output-Conversions.html#Other-Output-Conversions" title="Other Output Conversions">
+<link rel="next" href="Dynamic-Output.html#Dynamic-Output" title="Dynamic Output">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,216 +17,170 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Formatted%20Output%20Functions">Formatted Output Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Dynamic-Output.html#Dynamic%20Output">Dynamic Output</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
-<hr><br>
+<a name="Formatted-Output-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Dynamic-Output.html#Dynamic-Output">Dynamic Output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-Output-Conversions.html#Other-Output-Conversions">Other Output Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted-Output">Formatted Output</a>
+<hr>
 </div>
 
-<h3 class="subsection">Formatted Output Functions</h4>
+<h4 class="subsection">12.12.7 Formatted Output Functions</h4>
 
 <p>This section describes how to call <code>printf</code> and related functions. 
-Prototypes for these functions are in the header file <code>stdio.h</code>. 
+Prototypes for these functions are in the header file <samp><span class="file">stdio.h</span></samp>. 
 Because these functions take a variable number of arguments, you
 <em>must</em> declare prototypes for them before using them.  Of course,
 the easiest way to make sure you have all the right prototypes is to
-just include <code>stdio.h</code>.
+just include <samp><span class="file">stdio.h</span></samp>. 
+<a name="index-stdio_002eh-1018"></a>
+<!-- stdio.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>printf</b><i> </i>(<i>const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>printf</code> function prints the optional arguments under the
+<div class="defun">
+&mdash; Function: int <b>printf</b> (<var>const char *template, <small class="dots">...</small></var>)<var><a name="index-printf-1019"></a></var><br>
+<blockquote><p>The <code>printf</code> function prints the optional arguments under the
 control of the template string <var>template</var> to the stream
 <code>stdout</code>.  It returns the number of characters printed, or a
 negative value if there was an output error. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>wprintf</b><i> </i>(<i>const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wprintf</code> function prints the optional arguments under the
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>wprintf</b> (<var>const wchar_t *template, <small class="dots">...</small></var>)<var><a name="index-wprintf-1020"></a></var><br>
+<blockquote><p>The <code>wprintf</code> function prints the optional arguments under the
 control of the wide template string <var>template</var> to the stream
 <code>stdout</code>.  It returns the number of wide characters printed, or a
 negative value if there was an output error. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fprintf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is just like <code>printf</code>, except that the output is
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fprintf</b> (<var>FILE *stream, const char *template, <small class="dots">...</small></var>)<var><a name="index-fprintf-1021"></a></var><br>
+<blockquote><p>This function is just like <code>printf</code>, except that the output is
 written to the stream <var>stream</var> instead of <code>stdout</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fwprintf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is just like <code>wprintf</code>, except that the output is
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fwprintf</b> (<var>FILE *stream, const wchar_t *template, <small class="dots">...</small></var>)<var><a name="index-fwprintf-1022"></a></var><br>
+<blockquote><p>This function is just like <code>wprintf</code>, except that the output is
 written to the stream <var>stream</var> instead of <code>stdout</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>sprintf</b><i> </i>(<i>char *</i><var>s</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is like <code>printf</code>, except that the output is stored in the character
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>sprintf</b> (<var>char *s, const char *template, <small class="dots">...</small></var>)<var><a name="index-sprintf-1023"></a></var><br>
+<blockquote><p>This is like <code>printf</code>, except that the output is stored in the character
 array <var>s</var> instead of written to a stream.  A null character is written
 to mark the end of the string.
 
-     <p>The <code>sprintf</code> function returns the number of characters stored in
+        <p>The <code>sprintf</code> function returns the number of characters stored in
 the array <var>s</var>, not including the terminating null character.
 
-     <p>The behavior of this function is undefined if copying takes place
-between objects that overlap--for example, if <var>s</var> is also given
-as an argument to be printed under control of the <code>%s</code> conversion. 
-See <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>.
+        <p>The behavior of this function is undefined if copying takes place
+between objects that overlap&mdash;for example, if <var>s</var> is also given
+as an argument to be printed under control of the `<samp><span class="samp">%s</span></samp>' conversion. 
+See <a href="Copying-and-Concatenation.html#Copying-and-Concatenation">Copying and Concatenation</a>.
 
-     <p><strong>Warning:</strong> The <code>sprintf</code> function can be <strong>dangerous</strong>
+        <p><strong>Warning:</strong> The <code>sprintf</code> function can be <strong>dangerous</strong>
 because it can potentially output more characters than can fit in the
 allocation size of the string <var>s</var>.  Remember that the field width
 given in a conversion specification is only a <em>minimum</em> value.
 
-     <p>To avoid this problem, you can use <code>snprintf</code> or <code>asprintf</code>,
+        <p>To avoid this problem, you can use <code>snprintf</code> or <code>asprintf</code>,
 described below. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>swprintf</b><i> </i>(<i>wchar_t *</i><var>s</var><i>, size_t </i><var>size</var><i>, const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is like <code>wprintf</code>, except that the output is stored in the
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: int <b>swprintf</b> (<var>wchar_t *s, size_t size, const wchar_t *template, <small class="dots">...</small></var>)<var><a name="index-swprintf-1024"></a></var><br>
+<blockquote><p>This is like <code>wprintf</code>, except that the output is stored in the
 wide character array <var>ws</var> instead of written to a stream.  A null
 wide character is written to mark the end of the string.  The <var>size</var>
 argument specifies the maximum number of characters to produce.  The
 trailing null character is counted towards this limit, so you should
 allocate at least <var>size</var> wide characters for the string <var>ws</var>.
 
-     <p>The return value is the number of characters generated for the given
+        <p>The return value is the number of characters generated for the given
 input, excluding the trailing null.  If not all output fits into the
 provided buffer a negative value is returned.  You should try again with
 a bigger output string.  <em>Note:</em> this is different from how
 <code>snprintf</code> handles this situation.
 
-     <p>Note that the corresponding narrow stream function takes fewer
+        <p>Note that the corresponding narrow stream function takes fewer
 parameters.  <code>swprintf</code> in fact corresponds to the <code>snprintf</code>
 function.  Since the <code>sprintf</code> function can be dangerous and should
-be avoided the ISO&nbsp;C committee refused to make the same mistake
+be avoided the ISO&nbsp;C<!-- /@w --> committee refused to make the same mistake
 again and decided to not define an function exactly corresponding to
 <code>sprintf</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>snprintf</b><i> </i>(<i>char *</i><var>s</var><i>, size_t </i><var>size</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>snprintf</code> function is similar to <code>sprintf</code>, except that
+<!-- stdio.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: int <b>snprintf</b> (<var>char *s, size_t size, const char *template, <small class="dots">...</small></var>)<var><a name="index-snprintf-1025"></a></var><br>
+<blockquote><p>The <code>snprintf</code> function is similar to <code>sprintf</code>, except that
 the <var>size</var> argument specifies the maximum number of characters to
 produce.  The trailing null character is counted towards this limit, so
 you should allocate at least <var>size</var> characters for the string <var>s</var>.
 
-     <p>The return value is the number of characters which would be generated
+        <p>The return value is the number of characters which would be generated
 for the given input, excluding the trailing null.  If this value is
 greater or equal to <var>size</var>, not all characters from the result have
 been stored in <var>s</var>.  You should try again with a bigger output
 string.  Here is an example of doing this:
 
-     <pre class="smallexample">          /* Construct a message describing the value of a variable
-             whose name is <var>name</var> and whose value is <var>value</var>. */
+     <pre class="smallexample">          /* <span class="roman">Construct a message describing the value of a variable</span>
+             <span class="roman">whose name is </span><var>name</var><span class="roman"> and whose value is </span><var>value</var><span class="roman">.</span> */
           char *
           make_message (char *name, char *value)
           {
-            /* Guess we need no more than 100 chars of space. */
+            /* <span class="roman">Guess we need no more than 100 chars of space.</span> */
             int size = 100;
             char *buffer = (char *) xmalloc (size);
             int nchars;
             if (buffer == NULL)
               return NULL;
           
-           /* Try to print in the allocated space. */
+           /* <span class="roman">Try to print in the allocated space.</span> */
             nchars = snprintf (buffer, size, "value of %s is %s",
                                name, value);
             if (nchars &gt;= size)
               {
-                /* Reallocate buffer now that we know
-                   how much space is needed. */
+                /* <span class="roman">Reallocate buffer now that we know
+                   how much space is needed.</span> */
                 buffer = (char *) xrealloc (buffer, nchars + 1);
           
                 if (buffer != NULL)
-                  /* Try again. */
+                  /* <span class="roman">Try again.</span> */
                   snprintf (buffer, size, "value of %s is %s",
                             name, value);
               }
-            /* The last call worked, return the string. */
+            /* <span class="roman">The last call worked, return the string.</span> */
             return buffer;
           }
-          </pre>
+     </pre>
+        <p>In practice, it is often easier just to use <code>asprintf</code>, below.
 
-     <p>In practice, it is often easier just to use <code>asprintf</code>, below.
-
-     <p><strong>Attention:</strong> In versions of the GNU C library prior to 2.1 the
+        <p><strong>Attention:</strong> In versions of the GNU C library prior to 2.1 the
 return value is the number of characters stored, not including the
 terminating null; unless there was not enough space in <var>s</var> to
 store the result in which case <code>-1</code> is returned.  This was
-changed in order to comply with the ISO&nbsp;C99 standard. 
-</td></tr>
-</table>
+changed in order to comply with the ISO&nbsp;C99<!-- /@w --> standard. 
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Setting Modes - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Terminal-Modes.html#Terminal-Modes" title="Terminal Modes">
+<link rel="prev" href="Mode-Functions.html#Mode-Functions" title="Mode Functions">
+<link rel="next" href="Input-Modes.html#Input-Modes" title="Input Modes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Setting%20Modes">Setting Modes</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Input-Modes.html#Input%20Modes">Input Modes</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
-<hr><br>
+<a name="Setting-Modes"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Input-Modes.html#Input-Modes">Input Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mode-Functions.html#Mode-Functions">Mode Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal-Modes">Terminal Modes</a>
+<hr>
 </div>
 
-<h3 class="subsection">Setting Terminal Modes Properly</h4>
+<h4 class="subsection">17.4.3 Setting Terminal Modes Properly</h4>
 
 <p>When you set terminal modes, you should call <code>tcgetattr</code> first to
 get the current modes of the particular terminal device, modify only
@@ -70,12 +78,11 @@ data in the structure:
        result = tcsetattr (desc, TCSANOW, &amp;settings);
        if (result &lt; 0)
          {
-           perror ("error in tcsetattr");
-           return 0;
+           perror ("error in tcgetattr");
+           return;
         }
        return 1;
      }
-     </pre>
-
+</pre>
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Local Socket Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Local-Namespace.html#Local-Namespace" title="Local Namespace">
+<link rel="prev" href="Local-Namespace-Details.html#Local-Namespace-Details" title="Local Namespace Details">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,29 +16,29 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Local%20Socket%20Example">Local Socket Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Local-Namespace-Details.html#Local%20Namespace%20Details">Local Namespace Details</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>
-<hr><br>
+<a name="Local-Socket-Example"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Local-Namespace-Details.html#Local-Namespace-Details">Local Namespace Details</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Local-Namespace.html#Local-Namespace">Local Namespace</a>
+<hr>
 </div>
 
-<h3 class="subsection">Example of Local-Namespace Sockets</h4>
+<h4 class="subsection">16.5.3 Example of Local-Namespace Sockets</h4>
 
 <p>Here is an example showing how to create and name a socket in the local
 namespace.
 
-<pre class="smallexample">
-
-     #include &lt;stddef.h&gt;
+<pre class="smallexample">     #include &lt;stddef.h&gt;
      #include &lt;stdio.h&gt;
      #include &lt;errno.h&gt;
      #include &lt;stdlib.h&gt;
-     #include &lt;string.h&gt;
      #include &lt;sys/socket.h&gt;
      #include &lt;sys/un.h&gt;
      
@@ -45,7 +49,7 @@ namespace.
        int sock;
        size_t size;
      
-       /* Create the socket. */
+       /* <span class="roman">Create the socket.</span> */
        sock = socket (PF_LOCAL, SOCK_DGRAM, 0);
        if (sock &lt; 0)
          {
@@ -53,18 +57,17 @@ namespace.
            exit (EXIT_FAILURE);
          }
      
-       /* Bind a name to the socket. */
+       /* <span class="roman">Bind a name to the socket.</span> */
        name.sun_family = AF_LOCAL;
        strncpy (name.sun_path, filename, sizeof (name.sun_path));
-       name.sun_path[sizeof (name.sun_path) - 1] = '\0';
      
-       /* The size of the address is
+       /* <span class="roman">The size of the address is
           the offset of the start of the filename,
           plus its length,
           plus one for the terminating null byte.
           Alternatively you can just do:
           size = SUN_LEN (&amp;name);
-      */
+     </span> */
        size = (offsetof (struct sockaddr_un, sun_path)
                + strlen (name.sun_path) + 1);
      
@@ -76,7 +79,6 @@ namespace.
      
        return sock;
      }
-     </pre>
-
+</pre>
    </body></html>
 

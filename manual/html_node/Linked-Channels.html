@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Linked Channels - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions" title="Stream/Descriptor Precautions">
+<link rel="next" href="Independent-Channels.html#Independent-Channels" title="Independent Channels">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Linked%20Channels">Linked Channels</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
-<hr><br>
+<a name="Linked-Channels"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Independent-Channels.html#Independent-Channels">Independent Channels</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream_002fDescriptor-Precautions.html#Stream_002fDescriptor-Precautions">Stream/Descriptor Precautions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Linked Channels</h4>
+<h4 class="subsection">13.5.1 Linked Channels</h4>
 
-<p>Channels that come from a single opening share the same file position;
+<p><a name="index-linked-channels-1238"></a>
+Channels that come from a single opening share the same file position;
 we call them <dfn>linked</dfn> channels.  Linked channels result when you
 make a stream from a descriptor using <code>fdopen</code>, when you get a
 descriptor from a stream with <code>fileno</code>, when you copy a descriptor
@@ -35,11 +43,10 @@ terminals and pipes, <em>all</em> channels are effectively linked.  On
 random-access files, all append-type output streams are effectively
 linked to each other.
 
-   <p>If you have been using a stream for I/O (or have just opened the stream),
-and you want to do I/O using
+   <p><a name="index-cleaning-up-a-stream-1239"></a>If you have been using a stream for I/O, and you want to do I/O using
 another channel (either a stream or a descriptor) that is linked to it,
 you must first <dfn>clean up</dfn> the stream that you have been using. 
-See <a href="Cleaning-Streams.html#Cleaning%20Streams">Cleaning Streams</a>.
+See <a href="Cleaning-Streams.html#Cleaning-Streams">Cleaning Streams</a>.
 
    <p>Terminating a process, or executing a new program in the process,
 destroys all the streams in the process.  If descriptors linked to these

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Tools for Compilation - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Installation.html#Installation" title="Installation">
+<link rel="prev" href="Running-make-install.html#Running-make-install" title="Running make install">
+<link rel="next" href="Supported-Configurations.html#Supported-Configurations" title="Supported Configurations">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,92 +17,105 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Tools%20for%20Compilation">Tools for Compilation</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Supported-Configurations.html#Supported%20Configurations">Supported Configurations</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Running-make-install.html#Running%20make%20install">Running make install</a>,
+<a name="Tools-for-Compilation"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Supported-Configurations.html#Supported-Configurations">Supported Configurations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Running-make-install.html#Running-make-install">Running make install</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="appendixsec">Recommended Tools for Compilation</h3>
+<h3 class="appendixsec">C.3 Recommended Tools for Compilation</h3>
 
-<p>We recommend installing the following GNU tools before attempting to
+<p><a name="index-installation-tools-3793"></a><a name="index-tools_002c-for-installing-library-3794"></a>
+We recommend installing the following GNU tools before attempting to
 build the GNU C library:
 
      <ul>
 <li>GNU <code>make</code> 3.79 or newer
 
      <p>You need the latest version of GNU <code>make</code>.  Modifying the GNU C
-Library to work with other <code>make</code> programs would be so difficult that
-we recommend you port GNU <code>make</code> instead.  <strong>Really.</strong>  We
-recommend GNU <code>make</code> version 3.79.  All earlier versions have severe
-bugs or lack features.
+Library to work with other <code>make</code> programs would be so difficult that we
+recommend you port GNU <code>make</code> instead.  <strong>Really.</strong>  We
+recommend version GNU <code>make</code> version 3.79.  All earlier
+versions have severe bugs or lack features.
 
-     </p><li>GCC 3.2 or newer
+     <li>GCC 2.95 or newer
 
      <p>The GNU C library can only be compiled with the GNU C compiler family. 
-As of the 2.3 release, GCC 3.2 or higher is required.  As of this
-writing, GCC 3.2 is the compiler we advise to use.
+As of the 2.2 release, GCC 2.95.2 or higher is required.  As of this
+writing, GCC 2.95.3 is the compiler we advise to use.
 
      <p>You can use whatever compiler you like to compile programs that use GNU
 libc, but be aware that both GCC 2.7 and 2.8 have bugs in their
 floating-point support that may be triggered by the math library.
 
-     <p>Check the FAQ for any special compiler issues on particular platforms.
+     <p>For PPC you might need some patches even on top of the last GCC version. 
+See the FAQ.
 
-     </p><li>GNU <code>binutils</code> 2.13 or later
+     <li>GNU <code>binutils</code> 2.10.1 or later
 
-     <p>You must use GNU <code>binutils</code> (as and ld) to build the GNU C library. 
-No other assembler or linker has the necessary functionality at the
-moment.
+     <p>You must use GNU binutils (as and ld) if you want to build a shared
+library.  Even if you don't, we recommend you use them anyway.  No one
+has tested compilation with non-GNU binutils in a long time.
 
-     </p><li>GNU <code>texinfo</code> 3.12f
+     <p>The quality of binutils releases has varied a bit recently.  The bugs
+are in obscure features, but glibc uses quite a few of those.  2.10.1
+and later releases are known to work.  Versions after 2.8.1.0.23 may or
+may not work.  Older versions definitely don't.
+
+     <p>For PPC you might need some patches even on top of the last binutils
+version.  See the FAQ.
+
+     <li>GNU <code>texinfo</code> 3.12f
 
      <p>To correctly translate and install the Texinfo documentation you need
 this version of the <code>texinfo</code> package.  Earlier versions do not
 understand all the tags used in the document, and the installation
 mechanism for the info files is not present or works differently.
 
-     </p><li>GNU <code>awk</code> 3.0, or some other POSIX awk
+     <li>GNU <code>awk</code> 3.0, or some other POSIX awk
 
-     <p><code>Awk</code> is used in several places to generate files.  The scripts
-should work with any POSIX-compliant <code>awk</code> implementation;
-<code>gawk</code> 3.0 and <code>mawk</code> 1.3 are known to work.
+     <p>Awk is used in several places to generate files.  The scripts should
+work with any POSIX-compliant awk implementation; <code>gawk</code> 3.0 and
+<code>mawk</code> 1.3 are known to work.
 
      <li>Perl 5
 
      <p>Perl is not required, but it is used if present to test the
 installation.  We may decide to use it elsewhere in the future.
 
-     </p><li>GNU <code>sed</code> 3.02 or newer
+     <li>GNU <code>sed</code> 3.02 or newer
 
-     <p><code>Sed</code> is used in several places to generate files.  Most scripts work
-with any version of <code>sed</code>.  The known exception is the script
+     <p>Sed is used in several places to generate files.  Most scripts work with
+any version of <code>sed</code>.  The known exception is the script
 <code>po2test.sed</code> in the <code>intl</code> subdirectory which is used to
-generate <code>msgs.h</code> for the test suite.  This script works correctly
-only with GNU <code>sed</code> 3.02.  If you like to run the test suite, you
+generate <code>msgs.h</code> for the testsuite.  This script works correctly
+only with GNU <code>sed</code> 3.02.  If you like to run the testsuite, you
 should definitely upgrade <code>sed</code>.
 
    </ul>
 
-<p>If you change any of the <code>configure.in</code> files you will also need
+<p class="noindent">If you change any of the <samp><span class="file">configure.in</span></samp> files you will also need
 
      <ul>
-<li>GNU <code>autoconf</code> 2.53 or higher
+<li>GNU <code>autoconf</code> 2.12 or higher
 </ul>
 
-<p>and if you change any of the message translation files you will need
+<p class="noindent">and if you change any of the message translation files you will need
 
      <ul>
 <li>GNU <code>gettext</code> 0.10.36 or later
 </ul>
 
-<p>You may also need these packages if you upgrade your source tree using
+<p class="noindent">You may also need these packages if you upgrade your source tree using
 patches, although we try to avoid this.
 
    </body></html>

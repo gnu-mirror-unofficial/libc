@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Error Messages - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Error-Reporting.html#Error-Reporting" title="Error Reporting">
+<link rel="prev" href="Error-Codes.html#Error-Codes" title="Error Codes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,106 +16,88 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Error%20Messages">Error Messages</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Error-Codes.html#Error%20Codes">Error Codes</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>
-<hr><br>
+<a name="Error-Messages"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Error-Codes.html#Error-Codes">Error Codes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Error-Reporting.html#Error-Reporting">Error Reporting</a>
+<hr>
 </div>
 
-<h3 class="section">Error Messages</h3>
+<h3 class="section">2.3 Error Messages</h3>
 
 <p>The library has functions and variables designed to make it easy for
 your program to report informative error messages in the customary
 format about the failure of a library call.  The functions
 <code>strerror</code> and <code>perror</code> give you the standard error message
 for a given error code; the variable
-<code>program_invocation_short_name</code> gives you convenient access to the
+<code>program_invocation_short_name</code><!-- /@w --> gives you convenient access to the
 name of the program that encountered the error.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strerror</b><i> </i>(<i>int </i><var>errnum</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>strerror</code> function maps the error code (see <a href="Checking-for-Errors.html#Checking%20for%20Errors">Checking for Errors</a>) specified by the <var>errnum</var> argument to a descriptive error
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: char * <b>strerror</b> (<var>int errnum</var>)<var><a name="index-strerror-203"></a></var><br>
+<blockquote><p>The <code>strerror</code> function maps the error code (see <a href="Checking-for-Errors.html#Checking-for-Errors">Checking for Errors</a>) specified by the <var>errnum</var> argument to a descriptive error
 message string.  The return value is a pointer to this string.
 
-     <p>The value <var>errnum</var> normally comes from the variable <code>errno</code>.
+        <p>The value <var>errnum</var> normally comes from the variable <code>errno</code>.
 
-     <p>You should not modify the string returned by <code>strerror</code>.  Also, if
+        <p>You should not modify the string returned by <code>strerror</code>.  Also, if
 you make subsequent calls to <code>strerror</code>, the string might be
 overwritten.  (But it's guaranteed that no library function ever calls
 <code>strerror</code> behind your back.)
 
-     <p>The function <code>strerror</code> is declared in <code>string.h</code>. 
-</td></tr>
-</table>
+        <p>The function <code>strerror</code> is declared in <samp><span class="file">string.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strerror_r</b><i> </i>(<i>int </i><var>errnum</var><i>, char *</i><var>buf</var><i>, size_t </i><var>n</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>strerror_r</code> function works like <code>strerror</code> but instead of
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>strerror_r</b> (<var>int errnum, char *buf, size_t n</var>)<var><a name="index-strerror_005fr-204"></a></var><br>
+<blockquote><p>The <code>strerror_r</code> function works like <code>strerror</code> but instead of
 returning the error message in a statically allocated buffer shared by
 all threads in the process, it returns a private copy for the
 thread. This might be either some permanent global data or a message
 string in the user supplied buffer starting at <var>buf</var> with the
 length of <var>n</var> bytes.
 
-     <p>At most <var>n</var> characters are written (including the NUL byte) so it is
+        <p>At most <var>n</var> characters are written (including the NUL byte) so it is
 up to the user to select the buffer large enough.
 
-     <p>This function should always be used in multi-threaded programs since
+        <p>This function should always be used in multi-threaded programs since
 there is no way to guarantee the string returned by <code>strerror</code>
 really belongs to the last call of the current thread.
 
-     <p>This function <code>strerror_r</code> is a GNU extension and it is declared in
-<code>string.h</code>. 
-</td></tr>
-</table>
+        <p>This function <code>strerror_r</code> is a GNU extension and it is declared in
+<samp><span class="file">string.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>perror</b><i> </i>(<i>const char *</i><var>message</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function prints an error message to the stream <code>stderr</code>;
-see <a href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>.  The orientation of <code>stderr</code> is not
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: void <b>perror</b> (<var>const char *message</var>)<var><a name="index-perror-205"></a></var><br>
+<blockquote><p>This function prints an error message to the stream <code>stderr</code>;
+see <a href="Standard-Streams.html#Standard-Streams">Standard Streams</a>.  The orientation of <code>stderr</code> is not
 changed.
 
-     <p>If you call <code>perror</code> with a <var>message</var> that is either a null
+        <p>If you call <code>perror</code> with a <var>message</var> that is either a null
 pointer or an empty string, <code>perror</code> just prints the error message
 corresponding to <code>errno</code>, adding a trailing newline.
 
-     <p>If you supply a non-null <var>message</var> argument, then <code>perror</code>
+        <p>If you supply a non-null <var>message</var> argument, then <code>perror</code>
 prefixes its output with this string.  It adds a colon and a space
 character to separate the <var>message</var> from the error string corresponding
 to <code>errno</code>.
 
-     <p>The function <code>perror</code> is declared in <code>stdio.h</code>. 
-</td></tr>
-</table>
+        <p>The function <code>perror</code> is declared in <samp><span class="file">stdio.h</span></samp>. 
+</p></blockquote></div>
 
    <p><code>strerror</code> and <code>perror</code> produce the exact same message for any
 given error code; the precise text varies from system to system.  On the
@@ -120,48 +106,34 @@ messages or embedded newlines.  Each error message begins with a capital
 letter and does not include any terminating punctuation.
 
    <p><strong>Compatibility Note:</strong> The <code>strerror</code> function was introduced
-in ISO&nbsp;C89.  Many older C systems do not support this function yet.
+in ISO&nbsp;C89<!-- /@w -->.  Many older C systems do not support this function yet.
 
-   <p>Many programs that don't read input from the terminal are designed to
+   <p><a name="index-program-name-206"></a><a name="index-name-of-running-program-207"></a>Many programs that don't read input from the terminal are designed to
 exit if any system call fails.  By convention, the error message from
 such a program should start with the program's name, sans directories. 
 You can find that name in the variable
 <code>program_invocation_short_name</code>; the full file name is stored the
 variable <code>program_invocation_name</code>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>program_invocation_name</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This variable's value is the name that was used to invoke the program
+<!-- errno.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: char * <b>program_invocation_name</b><var><a name="index-program_005finvocation_005fname-208"></a></var><br>
+<blockquote><p>This variable's value is the name that was used to invoke the program
 running in the current process.  It is the same as <code>argv[0]</code>.  Note
 that this is not necessarily a useful file name; often it contains no
-directory names.  See <a href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>. 
-</td></tr>
-</table>
+directory names.  See <a href="Program-Arguments.html#Program-Arguments">Program Arguments</a>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>program_invocation_short_name</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This variable's value is the name that was used to invoke the program
+<!-- errno.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: char * <b>program_invocation_short_name</b><var><a name="index-program_005finvocation_005fshort_005fname-209"></a></var><br>
+<blockquote><p>This variable's value is the name that was used to invoke the program
 running in the current process, with directory names removed.  (That is
 to say, it is the same as <code>program_invocation_name</code> minus
 everything up to the last slash, if any.) 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>The library initialization code sets up both of these variables before
 calling <code>main</code>.
@@ -205,10 +177,9 @@ functions might overwrite <code>errno</code> in the meantime.
        else
          return stream;
      }
-     </pre>
-
+</pre>
    <p>Using <code>perror</code> has the advantage that the function is portable and
-available on all systems implementing ISO&nbsp;C.  But often the text
+available on all systems implementing ISO&nbsp;C<!-- /@w -->.  But often the text
 <code>perror</code> generates is not what is wanted and there is no way to
 extend or change what <code>perror</code> does.  The GNU coding standard, for
 instance, requires error messages to be preceded by the program name and
@@ -216,19 +187,13 @@ programs which read some input files should should provide information
 about the input file name and the line number in case an error is
 encountered while reading the file.  For these occasions there are two
 functions available which are widely used throughout the GNU project. 
-These functions are declared in <code>error.h</code>.
+These functions are declared in <samp><span class="file">error.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>error</b><i> </i>(<i>int </i><var>status</var><i>, int </i><var>errnum</var><i>, const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>error</code> function can be used to report general problems during
+<!-- error.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>error</b> (<var>int status, int errnum, const char *format, <small class="dots">...</small></var>)<var><a name="index-error-210"></a></var><br>
+<blockquote><p>The <code>error</code> function can be used to report general problems during
 program execution.  The <var>format</var> argument is a format string just
 like those given to the <code>printf</code> family of functions.  The
 arguments required for the format can follow the <var>format</var> parameter. 
@@ -239,7 +204,7 @@ the problem mentioned above that the error reporting function must be
 called immediately after the function causing the error since otherwise
 <code>errno</code> might have a different value.
 
-     <p>The <code>error</code> prints first the program name.  If the application
+        <p>The <code>error</code> prints first the program name.  If the application
 defined a global variable <code>error_print_progname</code> and points it to a
 function this function will be called to print the program name. 
 Otherwise the string from the global variable <code>program_name</code> is
@@ -249,117 +214,88 @@ is followed by the output produced by the format string.  If the
 by a colon and a space, followed by the error message for the error code
 <var>errnum</var>.  In any case is the output terminated with a newline.
 
-     <p>The output is directed to the <code>stderr</code> stream.  If the
+        <p>The output is directed to the <code>stderr</code> stream.  If the
 <code>stderr</code> wasn't oriented before the call it will be narrow-oriented
 afterwards.
 
-     <p>The function will return unless the <var>status</var> parameter has a
+        <p>The function will return unless the <var>status</var> parameter has a
 non-zero value.  In this case the function will call <code>exit</code> with
 the <var>status</var> value for its parameter and therefore never return.  If
 <code>error</code> returns the global variable <code>error_message_count</code> is
 incremented by one to keep track of the number of errors reported. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>error_at_line</b><i> </i>(<i>int </i><var>status</var><i>, int </i><var>errnum</var><i>, const char *</i><var>fname</var><i>, unsigned int </i><var>lineno</var><i>, const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-     <p>The <code>error_at_line</code> function is very similar to the <code>error</code>
+<!-- error.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>error_at_line</b> (<var>int status, int errnum, const char *fname, unsigned int lineno, const char *format, <small class="dots">...</small></var>)<var><a name="index-error_005fat_005fline-211"></a></var><br>
+<blockquote>
+<p>The <code>error_at_line</code> function is very similar to the <code>error</code>
 function.  The only difference are the additional parameters <var>fname</var>
 and <var>lineno</var>.  The handling of the other parameters is identical to
 that of <code>error</code> except that between the program name and the string
 generated by the format string additional text is inserted.
 
-     <p>Directly following the program name a colon, followed by the file name
+        <p>Directly following the program name a colon, followed by the file name
 pointer to by <var>fname</var>, another colon, and a value of <var>lineno</var> is
 printed.
 
-     <p>This additional output of course is meant to be used to locate an error
+        <p>This additional output of course is meant to be used to locate an error
 in an input file (like a programming language source code file etc).
 
-     <p>If the global variable <code>error_one_per_line</code> is set to a non-zero
+        <p>If the global variable <code>error_one_per_line</code> is set to a non-zero
 value <code>error_at_line</code> will avoid printing consecutive messages for
 the same file anem line.  Repetition which are not directly following
 each other are not caught.
 
-     <p>Just like <code>error</code> this function only returned if <var>status</var> is
+        <p>Just like <code>error</code> this function only returned if <var>status</var> is
 zero.  Otherwise <code>exit</code> is called with the non-zero value.  If
 <code>error</code> returns the global variable <code>error_message_count</code> is
 incremented by one to keep track of the number of errors reported. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>As mentioned above the <code>error</code> and <code>error_at_line</code> functions
 can be customized by defining a variable named
 <code>error_print_progname</code>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void (* <b>error_print_progname</b><i> </i>)<i> </i>(<i>void</i>)<i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-If the <code>error_print_progname</code> variable is defined to a non-zero
+<!-- error.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: void (* <b>error_print_progname</b> ) (<var>void</var>)<var><a name="index-error_005fprint_005fprogname-212"></a></var><br>
+<blockquote><p>If the <code>error_print_progname</code> variable is defined to a non-zero
 value the function pointed to is called by <code>error</code> or
 <code>error_at_line</code>.  It is expected to print the program name or do
 something similarly useful.
 
-     <p>The function is expected to be print to the <code>stderr</code> stream and
+        <p>The function is expected to be print to the <code>stderr</code> stream and
 must be able to handle whatever orientation the stream has.
 
-     <p>The variable is global and shared by all threads. 
-</td></tr>
-</table>
+        <p>The variable is global and shared by all threads. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">unsigned int <b>error_message_count</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>error_message_count</code> variable is incremented whenever one of
+<!-- error.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: unsigned int <b>error_message_count</b><var><a name="index-error_005fmessage_005fcount-213"></a></var><br>
+<blockquote><p>The <code>error_message_count</code> variable is incremented whenever one of
 the functions <code>error</code> or <code>error_at_line</code> returns.  The
 variable is global and shared by all threads. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>error_one_per_line</b><i>
-     </i></td>
-<td align="right">Variable</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>error_one_per_line</code> variable influences only
+<!-- error.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Variable: int <b>error_one_per_line</b><var><a name="index-error_005fone_005fper_005fline-214"></a></var><br>
+<blockquote><p>The <code>error_one_per_line</code> variable influences only
 <code>error_at_line</code>.  Normally the <code>error_at_line</code> function
 creates output for every invocation.  If <code>error_one_per_line</code> is
 set to a non-zero value <code>error_at_line</code> keeps track of the last
 file name and line number for which an error was reported and avoid
 directly following messages for the same file and line.  This variable
 is global and shared by all threads. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>A program which read some input file and reports errors in it could look
+<p class="noindent">A program which read some input file and reports errors in it could look
 like this:
 
 <pre class="smallexample">     {
@@ -372,14 +308,14 @@ like this:
          {
            ssize_t n = getline (&amp;line, &amp;len, fp);
            if (n &lt;= 0)
-             /* End of file or error.  */
+             /* <span class="roman">End of file or error.</span>  */
              break;
            ++lineno;
      
-           /* Process the line.  */
+           /* <span class="roman">Process the line.</span>  */
            ...
      
-           if (Detect error in line)
+           if (<span class="roman">Detect error in line</span>)
              error_at_line (0, errval, filename, lineno,
                             "some error text %s", some_variable);
          }
@@ -387,157 +323,96 @@ like this:
        if (error_message_count != 0)
          error (EXIT_FAILURE, 0, "%u errors found", error_message_count);
      }
-     </pre>
-
+</pre>
    <p><code>error</code> and <code>error_at_line</code> are clearly the functions of
 choice and enable the programmer to write applications which follow the
 GNU coding standard.  The GNU libc additionally contains functions which
 are used in BSD for the same purpose.  These functions are declared in
-<code>err.h</code>.  It is generally advised to not use these functions.  They
+<samp><span class="file">err.h</span></samp>.  It is generally advised to not use these functions.  They
 are included only for compatibility.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>warn</b><i> </i>(<i>const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>warn</code> function is roughly equivalent to a call like
-     <pre class="smallexample">            error (0, errno, format, the parameters)
-          </pre>
-
-     <p>except that the global variables <code>error</code> respects and modifies
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>warn</b> (<var>const char *format, <small class="dots">...</small></var>)<var><a name="index-warn-215"></a></var><br>
+<blockquote><p>The <code>warn</code> function is roughly equivalent to a call like
+     <pre class="smallexample">            error (0, errno, format, <span class="roman">the parameters</span>)
+     </pre>
+        <p class="noindent">except that the global variables <code>error</code> respects and modifies
 are not used. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>vwarn</b><i> </i>(<i>const char *</i><var>format</var><i>, va_list</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>vwarn</code> function is just like <code>warn</code> except that the
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>vwarn</b> (<var>const char *format, va_list</var>)<var><a name="index-vwarn-216"></a></var><br>
+<blockquote><p>The <code>vwarn</code> function is just like <code>warn</code> except that the
 parameters for the handling of the format string <var>format</var> are passed
 in as an value of type <code>va_list</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>warnx</b><i> </i>(<i>const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>warnx</code> function is roughly equivalent to a call like
-     <pre class="smallexample">            error (0, 0, format, the parameters)
-          </pre>
-
-     <p>except that the global variables <code>error</code> respects and modifies
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>warnx</b> (<var>const char *format, <small class="dots">...</small></var>)<var><a name="index-warnx-217"></a></var><br>
+<blockquote><p>The <code>warnx</code> function is roughly equivalent to a call like
+     <pre class="smallexample">            error (0, 0, format, <span class="roman">the parameters</span>)
+     </pre>
+        <p class="noindent">except that the global variables <code>error</code> respects and modifies
 are not used.  The difference to <code>warn</code> is that no error number
 string is printed. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>vwarnx</b><i> </i>(<i>const char *</i><var>format</var><i>, va_list</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>vwarnx</code> function is just like <code>warnx</code> except that the
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>vwarnx</b> (<var>const char *format, va_list</var>)<var><a name="index-vwarnx-218"></a></var><br>
+<blockquote><p>The <code>vwarnx</code> function is just like <code>warnx</code> except that the
 parameters for the handling of the format string <var>format</var> are passed
 in as an value of type <code>va_list</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>err</b><i> </i>(<i>int </i><var>status</var><i>, const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>err</code> function is roughly equivalent to a call like
-     <pre class="smallexample">            error (status, errno, format, the parameters)
-          </pre>
-
-     <p>except that the global variables <code>error</code> respects and modifies
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>err</b> (<var>int status, const char *format, <small class="dots">...</small></var>)<var><a name="index-err-219"></a></var><br>
+<blockquote><p>The <code>err</code> function is roughly equivalent to a call like
+     <pre class="smallexample">            error (status, errno, format, <span class="roman">the parameters</span>)
+     </pre>
+        <p class="noindent">except that the global variables <code>error</code> respects and modifies
 are not used and that the program is exited even if <var>status</var> is zero. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>verr</b><i> </i>(<i>int </i><var>status</var><i>, const char *</i><var>format</var><i>, va_list</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>verr</code> function is just like <code>err</code> except that the
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>verr</b> (<var>int status, const char *format, va_list</var>)<var><a name="index-verr-220"></a></var><br>
+<blockquote><p>The <code>verr</code> function is just like <code>err</code> except that the
 parameters for the handling of the format string <var>format</var> are passed
 in as an value of type <code>va_list</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>errx</b><i> </i>(<i>int </i><var>status</var><i>, const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>errx</code> function is roughly equivalent to a call like
-     <pre class="smallexample">            error (status, 0, format, the parameters)
-          </pre>
-
-     <p>except that the global variables <code>error</code> respects and modifies
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>errx</b> (<var>int status, const char *format, <small class="dots">...</small></var>)<var><a name="index-errx-221"></a></var><br>
+<blockquote><p>The <code>errx</code> function is roughly equivalent to a call like
+     <pre class="smallexample">            error (status, 0, format, <span class="roman">the parameters</span>)
+     </pre>
+        <p class="noindent">except that the global variables <code>error</code> respects and modifies
 are not used and that the program is exited even if <var>status</var>
 is zero.  The difference to <code>err</code> is that no error number
 string is printed. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>verrx</b><i> </i>(<i>int </i><var>status</var><i>, const char *</i><var>format</var><i>, va_list</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>verrx</code> function is just like <code>errx</code> except that the
+<!-- err.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>verrx</b> (<var>int status, const char *format, va_list</var>)<var><a name="index-verrx-222"></a></var><br>
+<blockquote><p>The <code>verrx</code> function is just like <code>errx</code> except that the
 parameters for the handling of the format string <var>format</var> are passed
 in as an value of type <code>va_list</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

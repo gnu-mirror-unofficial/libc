@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>NSS Module Function Internals - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Extending-NSS.html#Extending-NSS" title="Extending NSS">
+<link rel="prev" href="Adding-another-Service-to-NSS.html#Adding-another-Service-to-NSS" title="Adding another Service to NSS">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="NSS%20Module%20Function%20Internals">NSS Module Function Internals</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Adding-another-Service-to-NSS.html#Adding%20another%20Service%20to%20NSS">Adding another Service to NSS</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Extending-NSS.html#Extending%20NSS">Extending NSS</a>
-<hr><br>
+<a name="NSS-Module-Function-Internals"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Adding-another-Service-to-NSS.html#Adding-another-Service-to-NSS">Adding another Service to NSS</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Extending-NSS.html#Extending-NSS">Extending NSS</a>
+<hr>
 </div>
 
-<h3 class="subsection">Internals of the NSS Module Functions</h4>
+<h4 class="subsection">28.4.2 Internals of the NSS Module Functions</h4>
 
 <p>Until now we only provided the syntactic interface for the functions in
 the NSS module.  In fact there is not much more we can say since the
@@ -36,28 +43,25 @@ the interface.  All derive from the traditional ones for system databases.
 database (e.g., it is <code>pw</code> for the password database).
 
      <dl>
-<dt><code>enum nss_status _nss_</code><var>database</var><code>_set</code><var>db</var><code>ent (void)</code>
-     <dd>This function prepares the service for following operations.  For a
+<dt><code>enum nss_status _nss_</code><var>database</var><code>_set</code><var>db</var><code>ent (void)</code><dd>This function prepares the service for following operations.  For a
 simple file based lookup this means files could be opened, for other
 services this function simply is a noop.
 
      <p>One special case for this function is that it takes an additional
 argument for some <var>database</var>s (i.e., the interface is
-<code>int set</code><var>db</var><code>ent (int)</code>).  <a href="Host-Names.html#Host%20Names">Host Names</a>, which describes the
+<code>int set</code><var>db</var><code>ent (int)</code>).  <a href="Host-Names.html#Host-Names">Host Names</a>, which describes the
 <code>sethostent</code> function.
 
      <p>The return value should be <var>NSS_STATUS_SUCCESS</var> or according to the
-table above in case of an error (see <a href="NSS-Modules-Interface.html#NSS%20Modules%20Interface">NSS Modules Interface</a>).
+table above in case of an error (see <a href="NSS-Modules-Interface.html#NSS-Modules-Interface">NSS Modules Interface</a>).
 
-     <br><dt><code>enum nss_status _nss_</code><var>database</var><code>_end</code><var>db</var><code>ent (void)</code>
-     <dd>This function simply closes all files which are still open or removes
+     <br><dt><code>enum nss_status _nss_</code><var>database</var><code>_end</code><var>db</var><code>ent (void)</code><dd>This function simply closes all files which are still open or removes
 buffer caches.  If there are no files or buffers to remove this is again
 a simple noop.
 
      <p>There normally is no return value different to <var>NSS_STATUS_SUCCESS</var>.
 
-     <br><dt><code>enum nss_status _nss_</code><var>database</var><code>_get</code><var>db</var><code>ent_r (</code><var>STRUCTURE</var><code> *result, char *buffer, size_t buflen, int *errnop)</code>
-     <dd>Since this function will be called several times in a row to retrieve
+     <br><dt><code>enum nss_status _nss_</code><var>database</var><code>_get</code><var>db</var><code>ent_r (</code><var>STRUCTURE</var><code> *result, char *buffer, size_t buflen, int *errnop)</code><dd>Since this function will be called several times in a row to retrieve
 one entry after the other it must keep some kind of state.  But this
 also means the functions are not really reentrant.  They are reentrant
 only in that simultaneous calls to this function will not try to
@@ -90,8 +94,7 @@ returned.  When the service was not formerly initialized by a call to
 <code>_nss_</code><var>DATABASE</var><code>_set</code><var>db</var><code>ent</code> all return value allowed for
 this function can also be returned here.
 
-     <br><dt><code>enum nss_status _nss_</code><var>DATABASE</var><code>_get</code><var>db</var><code>by</code><var>XX</var><code>_r (</code><var>PARAMS</var><code>, </code><var>STRUCTURE</var><code> *result, char *buffer, size_t buflen, int *errnop)</code>
-     <dd>This function shall return the entry from the database which is
+     <br><dt><code>enum nss_status _nss_</code><var>DATABASE</var><code>_get</code><var>db</var><code>by</code><var>XX</var><code>_r (</code><var>PARAMS</var><code>, </code><var>STRUCTURE</var><code> *result, char *buffer, size_t buflen, int *errnop)</code><dd>This function shall return the entry from the database which is
 addressed by the <var>PARAMS</var>.  The type and number of these arguments
 vary.  It must be individually determined by looking to the user-level
 interface functions.  All arguments given to the non-reentrant version
@@ -115,7 +118,7 @@ statically linked programs.
 <code>host</code> and <code>networks</code> database.
 
      <p>The return value should as always follow the rules given above
-(see <a href="NSS-Modules-Interface.html#NSS%20Modules%20Interface">NSS Modules Interface</a>).
+(see <a href="NSS-Modules-Interface.html#NSS-Modules-Interface">NSS Modules Interface</a>).
 
    </dl>
 

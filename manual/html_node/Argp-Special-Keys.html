@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Argp Special Keys - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Argp-Parser-Functions.html#Argp-Parser-Functions" title="Argp Parser Functions">
+<link rel="next" href="Argp-Parsing-State.html#Argp-Parsing-State" title="Argp Parsing State">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +16,31 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Argp%20Special%20Keys">Argp Special Keys</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Parsing-State.html#Argp%20Parsing%20State">Argp Parsing State</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>
-<hr><br>
+<a name="Argp-Special-Keys"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Parsing-State.html#Argp-Parsing-State">Argp Parsing State</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Parser-Functions.html#Argp-Parser-Functions">Argp Parser Functions</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Special Keys for Argp Parser Functions</h5>
+<h5 class="subsubsection">25.3.5.1 Special Keys for Argp Parser Functions</h5>
 
 <p>In addition to key values corresponding to user options, the <var>key</var>
 argument to argp parser functions may have a number of other special
 values.  In the following example <var>arg</var> and <var>state</var> refer to
-parser function arguments.  See <a href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>.
+parser function arguments.  See <a href="Argp-Parser-Functions.html#Argp-Parser-Functions">Argp Parser Functions</a>.
 
      <dl>
-<dt><code>ARGP_KEY_ARG</code>
-     <dd>This is not an option at all, but rather a command line argument, whose
+<!-- argp.h -->
+<!-- GNU -->
+<dt><code>ARGP_KEY_ARG</code><a name="index-ARGP_005fKEY_005fARG-3029"></a><dd>This is not an option at all, but rather a command line argument, whose
 value is pointed to by <var>arg</var>.
 
      <p>When there are multiple parser functions in play due to argp parsers
@@ -49,16 +57,17 @@ decrements the <code>next</code> field of its <var>state</var> argument, the opt
 won't be considered processed; this is to allow you to actually modify
 the argument, perhaps into an option, and have it processed again.
 
-     <br><dt><code>ARGP_KEY_ARGS</code>
-     <dd>If a parser function returns <code>ARGP_ERR_UNKNOWN</code> for
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_ARGS</code><a name="index-ARGP_005fKEY_005fARGS-3030"></a><dd>If a parser function returns <code>ARGP_ERR_UNKNOWN</code> for
 <code>ARGP_KEY_ARG</code>, it is immediately called again with the key
 <code>ARGP_KEY_ARGS</code>, which has a similar meaning, but is slightly more
 convenient for consuming all remaining arguments.  <var>arg</var> is 0, and
-the tail of the argument vector may be found at <code></code><var>state</var><code>-&gt;argv
+the tail of the argument vector may be found at <var>state</var><code>-&gt;argv
 + </code><var>state</var><code>-&gt;next</code>.  If success is returned for this key, and
-<code></code><var>state</var><code>-&gt;next</code> is unchanged, all remaining arguments are
+<var>state</var><code>-&gt;next</code> is unchanged, all remaining arguments are
 considered to have been consumed.  Otherwise, the amount by which
-<code></code><var>state</var><code>-&gt;next</code> has been adjusted indicates how many were used. 
+<var>state</var><code>-&gt;next</code> has been adjusted indicates how many were used. 
 Here's an example that uses both, for different args:
 
      <pre class="smallexample">          ...
@@ -74,36 +83,41 @@ Here's an example that uses both, for different args:
             remaining_args = <var>state</var>-&gt;argv + <var>state</var>-&gt;next;
             num_remaining_args = <var>state</var>-&gt;argc - <var>state</var>-&gt;next;
             break;
-          </pre>
-
-     <br><dt><code>ARGP_KEY_END</code>
-     <dd>This indicates that there are no more command line arguments.  Parser
+     </pre>
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_END</code><a name="index-ARGP_005fKEY_005fEND-3031"></a><dd>This indicates that there are no more command line arguments.  Parser
 functions are called in a different order, children first.  This allows
 each parser to clean up its state for the parent.
 
-     <br><dt><code>ARGP_KEY_NO_ARGS</code>
-     <dd>Because it's common to do some special processing if there aren't any
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_NO_ARGS</code><a name="index-ARGP_005fKEY_005fNO_005fARGS-3032"></a><dd>Because it's common to do some special processing if there aren't any
 non-option args, parser functions are called with this key if they
 didn't successfully process any non-option arguments.  This is called
 just before <code>ARGP_KEY_END</code>, where more general validity checks on
 previously parsed arguments take place.
 
-     <br><dt><code>ARGP_KEY_INIT</code>
-     <dd>This is passed in before any parsing is done.  Afterwards, the values of
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_INIT</code><a name="index-ARGP_005fKEY_005fINIT-3033"></a><dd>This is passed in before any parsing is done.  Afterwards, the values of
 each element of the <code>child_input</code> field of <var>state</var>, if any, are
 copied to each child's state to be the initial value of the <code>input</code>
 when <em>their</em> parsers are called.
 
-     <br><dt><code>ARGP_KEY_SUCCESS</code>
-     <dd>Passed in when parsing has successfully been completed, even if
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_SUCCESS</code><a name="index-ARGP_005fKEY_005fSUCCESS-3034"></a><dd>Passed in when parsing has successfully been completed, even if
 arguments remain.
 
-     <br><dt><code>ARGP_KEY_ERROR</code>
-     <dd>Passed in if an error has occurred and parsing is terminated.  In this
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_ERROR</code><a name="index-ARGP_005fKEY_005fERROR-3035"></a><dd>Passed in if an error has occurred and parsing is terminated.  In this
 case a call with a key of <code>ARGP_KEY_SUCCESS</code> is never made.
 
-     <br><dt><code>ARGP_KEY_FINI</code>
-     <dd>The final key ever seen by any parser, even after
+     <!-- argp.h -->
+<!-- GNU -->
+<br><dt><code>ARGP_KEY_FINI</code><a name="index-ARGP_005fKEY_005fFINI-3036"></a><dd>The final key ever seen by any parser, even after
 <code>ARGP_KEY_SUCCESS</code> and <code>ARGP_KEY_ERROR</code>.  Any resources
 allocated by <code>ARGP_KEY_INIT</code> may be freed here.  At times, certain
 resources allocated are to be returned to the caller after a successful
@@ -118,16 +132,13 @@ in one the following orders.  <var>opt</var> refers to an arbitrary option
 key:
 
      <dl>
-<dt><var>opt</var><small class="dots">...</small> <code>ARGP_KEY_NO_ARGS</code> <code>ARGP_KEY_END</code> <code>ARGP_KEY_SUCCESS</code>
-     <dd>The arguments being parsed did not contain any non-option arguments.
+<dt><var>opt</var><small class="dots">...</small> <code>ARGP_KEY_NO_ARGS</code> <code>ARGP_KEY_END</code> <code>ARGP_KEY_SUCCESS</code><dd>The arguments being parsed did not contain any non-option arguments.
 
-     <br><dt>( <var>opt</var> | <code>ARGP_KEY_ARG</code> )<small class="dots">...</small> <code>ARGP_KEY_END</code> <code>ARGP_KEY_SUCCESS</code>
-     <dd>All non-option arguments were successfully handled by a parser
+     <br><dt>( <var>opt</var> | <code>ARGP_KEY_ARG</code> )<small class="dots">...</small> <code>ARGP_KEY_END</code> <code>ARGP_KEY_SUCCESS</code><dd>All non-option arguments were successfully handled by a parser
 function.  There may be multiple parser functions if multiple argp
 parsers were combined.
 
-     <br><dt>( <var>opt</var> | <code>ARGP_KEY_ARG</code> )<small class="dots">...</small> <code>ARGP_KEY_SUCCESS</code>
-     <dd>Some non-option argument went unrecognized.
+     <br><dt>( <var>opt</var> | <code>ARGP_KEY_ARG</code> )<small class="dots">...</small> <code>ARGP_KEY_SUCCESS</code><dd>Some non-option argument went unrecognized.
 
      <p>This occurs when every parser function returns <code>ARGP_KEY_UNKNOWN</code>
 for an argument, in which case parsing stops at that argument if

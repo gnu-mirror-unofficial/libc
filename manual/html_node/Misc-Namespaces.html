@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Misc Namespaces - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Sockets.html#Sockets" title="Sockets">
+<link rel="prev" href="Internet-Namespace.html#Internet-Namespace" title="Internet Namespace">
+<link rel="next" href="Open_002fClose-Sockets.html#Open_002fClose-Sockets" title="Open/Close Sockets">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,25 +17,28 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Misc%20Namespaces">Misc Namespaces</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>,
+<a name="Misc-Namespaces"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Open_002fClose-Sockets.html#Open_002fClose-Sockets">Open/Close Sockets</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Internet-Namespace.html#Internet-Namespace">Internet Namespace</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Sockets.html#Sockets">Sockets</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Other Namespaces</h3>
+<h3 class="section">16.7 Other Namespaces</h3>
 
-<p>Certain other namespaces and associated protocol families are supported
+<p><a name="index-PF_005fNS-1754"></a><a name="index-PF_005fISO-1755"></a><a name="index-PF_005fCCITT-1756"></a><a name="index-PF_005fIMPLINK-1757"></a><a name="index-PF_005fROUTE-1758"></a>Certain other namespaces and associated protocol families are supported
 but not documented yet because they are not often used.  <code>PF_NS</code>
 refers to the Xerox Network Software protocols.  <code>PF_ISO</code> stands
 for Open Systems Interconnect.  <code>PF_CCITT</code> refers to protocols from
-CCITT.  <code>socket.h</code> defines these symbols and others naming protocols
+CCITT.  <samp><span class="file">socket.h</span></samp> defines these symbols and others naming protocols
 not actually implemented.
 
    <p><code>PF_IMPLINK</code> is used for communicating between hosts and Internet

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Syslog - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface" title="Low-Level Terminal Interface">
+<link rel="next" href="Mathematics.html#Mathematics" title="Mathematics">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +16,31 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Syslog">Syslog</a>,
+<a name="Syslog"></a>
 Next:&nbsp;<a rel="next" accesskey="n" href="Mathematics.html#Mathematics">Mathematics</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface">Low-Level Terminal Interface</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr><br>
+<hr>
 </div>
 
-<h2 class="chapter">Syslog</h2>
+<!-- %MENU% System logging and messaging -->
+<h2 class="chapter">18 Syslog</h2>
 
 <p>This chapter describes facilities for issuing and logging messages of
 system administration interest.  This chapter has nothing to do with
 programs issuing messages to their own users or keeping private logs
 (One would typically do that with the facilities described in
-<a href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>).
+<a href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>).
 
-   <p>Most systems have a facility called "Syslog" that allows programs to
+   <p>Most systems have a facility called &ldquo;Syslog&rdquo; that allows programs to
 submit messages of interest to system administrators and can be
 configured to pass these messages on in various ways, such as printing
 on the console, mailing to a particular person, or recording in a log
@@ -41,8 +49,8 @@ file for future reference.
    <p>A program uses the facilities in this chapter to submit such messages.
 
 <ul class="menu">
-<li><a accesskey="1" href="Overview-of-Syslog.html#Overview%20of%20Syslog">Overview of Syslog</a>:            Overview of a system's Syslog facility
-<li><a accesskey="2" href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>:    Functions to submit messages to Syslog
+<li><a accesskey="1" href="Overview-of-Syslog.html#Overview-of-Syslog">Overview of Syslog</a>:            Overview of a system's Syslog facility
+<li><a accesskey="2" href="Submitting-Syslog-Messages.html#Submitting-Syslog-Messages">Submitting Syslog Messages</a>:    Functions to submit messages to Syslog
 </ul>
 
    </body></html>

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Initial Signal Actions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Signal-Actions.html#Signal-Actions" title="Signal Actions">
+<link rel="prev" href="Flags-for-Sigaction.html#Flags-for-Sigaction" title="Flags for Sigaction">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,22 +16,26 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Initial%20Signal%20Actions">Initial Signal Actions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-Sigaction.html#Flags%20for%20Sigaction">Flags for Sigaction</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
-<hr><br>
+<a name="Initial-Signal-Actions"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-Sigaction.html#Flags-for-Sigaction">Flags for Sigaction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal-Actions">Signal Actions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Initial Signal Actions</h4>
+<h4 class="subsection">24.3.6 Initial Signal Actions</h4>
 
-<p>When a new process is created (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>), it inherits
+<p><a name="index-initial-signal-actions-2908"></a>
+When a new process is created (see <a href="Creating-a-Process.html#Creating-a-Process">Creating a Process</a>), it inherits
 handling of signals from its parent process.  However, when you load a
-new process image using the <code>exec</code> function (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>), any signals that you've defined your own handlers for revert to
+new process image using the <code>exec</code> function (see <a href="Executing-a-File.html#Executing-a-File">Executing a File</a>), any signals that you've defined your own handlers for revert to
 their <code>SIG_DFL</code> handling.  (If you think about it a little, this
 makes sense; the handler functions from the old program are specific to
 that program, and aren't even present in the address space of the new
@@ -54,7 +62,6 @@ not if <code>SIGHUP</code> is currently ignored:
          sigemptyset (&amp;temp.sa_mask);
          sigaction (SIGHUP, &amp;temp, NULL);
        }
-     </pre>
-
+</pre>
    </body></html>
 

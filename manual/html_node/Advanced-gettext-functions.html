@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Advanced gettext functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext" title="Message catalogs with gettext">
+<link rel="prev" href="Locating-gettext-catalog.html#Locating-gettext-catalog" title="Locating gettext catalog">
+<link rel="next" href="Charset-conversion-in-gettext.html#Charset-conversion-in-gettext" title="Charset conversion in gettext">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Advanced%20gettext%20functions">Advanced gettext functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Charset-conversion-in-gettext.html#Charset%20conversion%20in%20gettext">Charset conversion in gettext</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Locating-gettext-catalog.html#Locating%20gettext%20catalog">Locating gettext catalog</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-with-gettext.html#Message%20catalogs%20with%20gettext">Message catalogs with gettext</a>
-<hr><br>
+<a name="Advanced-gettext-functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Charset-conversion-in-gettext.html#Charset-conversion-in-gettext">Charset conversion in gettext</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Locating-gettext-catalog.html#Locating-gettext-catalog">Locating gettext catalog</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext">Message catalogs with gettext</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Additional functions for more complicated situations</h5>
+<h5 class="subsubsection">8.2.1.3 Additional functions for more complicated situations</h5>
 
 <p>The functions of the <code>gettext</code> family described so far (and all the
 <code>catgets</code> functions as well) have one problem in the real world
@@ -36,9 +44,8 @@ internationalization (and, sadly, even afterwards) one can often find
 code similar to the following:
 
 <pre class="smallexample">        printf ("%d file%s deleted", n, n == 1 ? "" : "s");
-     </pre>
-
-<p>After the first complaints from people internationalizing the code people
+</pre>
+   <p class="noindent">After the first complaints from people internationalizing the code people
 either completely avoided formulations like this or used strings like
 <code>"file(s)"</code>.  Both look unnatural and should be avoided.  First
 tries to solve the problem correctly looked like this:
@@ -47,8 +54,7 @@ tries to solve the problem correctly looked like this:
           printf ("%d file deleted", n);
         else
           printf ("%d files deleted", n);
-     </pre>
-
+</pre>
    <p>But this does not solve the problem.  It helps languages where the
 plural form of a noun is not simply constructed by adding an `s' but
 that is all.  Once again people fell into the trap of believing the
@@ -94,17 +100,11 @@ GNU package and the coding standards for the GNU project require program
 being written in English, this solution nevertheless fulfills its
 purpose.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>ngettext</b><i> </i>(<i>const char *</i><var>msgid1</var><i>, const char *</i><var>msgid2</var><i>, unsigned long int </i><var>n</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>ngettext</code> function is similar to the <code>gettext</code> function
+<!-- libintl.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>ngettext</b> (<var>const char *msgid1, const char *msgid2, unsigned long int n</var>)<var><a name="index-ngettext-805"></a></var><br>
+<blockquote><p>The <code>ngettext</code> function is similar to the <code>gettext</code> function
 as it finds the message catalogs in the same way.  But it takes two
 extra arguments.  The <var>msgid1</var> parameter must contain the singular
 form of the string to be converted.  It is also used as the key for the
@@ -113,52 +113,36 @@ The parameter <var>n</var> is used to determine the plural form.  If no
 message catalog is found <var>msgid1</var> is returned if <code>n == 1</code>,
 otherwise <code>msgid2</code>.
 
-     <p>An example for the us of this function is:
+        <p>An example for the us of this function is:
 
      <pre class="smallexample">            printf (ngettext ("%d file removed", "%d files removed", n), n);
-          </pre>
-
-     <p>Please note that the numeric value <var>n</var> has to be passed to the
+     </pre>
+        <p>Please note that the numeric value <var>n</var> has to be passed to the
 <code>printf</code> function as well.  It is not sufficient to pass it only to
 <code>ngettext</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>dngettext</b><i> </i>(<i>const char *</i><var>domain</var><i>, const char *</i><var>msgid1</var><i>, const char *</i><var>msgid2</var><i>, unsigned long int </i><var>n</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>dngettext</code> is similar to the <code>dgettext</code> function in the
+<!-- libintl.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>dngettext</b> (<var>const char *domain, const char *msgid1, const char *msgid2, unsigned long int n</var>)<var><a name="index-dngettext-806"></a></var><br>
+<blockquote><p>The <code>dngettext</code> is similar to the <code>dgettext</code> function in the
 way the message catalog is selected.  The difference is that it takes
 two extra parameter to provide the correct plural form.  These two
 parameters are handled in the same way <code>ngettext</code> handles them. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>dcngettext</b><i> </i>(<i>const char *</i><var>domain</var><i>, const char *</i><var>msgid1</var><i>, const char *</i><var>msgid2</var><i>, unsigned long int </i><var>n</var><i>, int </i><var>category</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>dcngettext</code> is similar to the <code>dcgettext</code> function in the
+<!-- libintl.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>dcngettext</b> (<var>const char *domain, const char *msgid1, const char *msgid2, unsigned long int n, int category</var>)<var><a name="index-dcngettext-807"></a></var><br>
+<blockquote><p>The <code>dcngettext</code> is similar to the <code>dcgettext</code> function in the
 way the message catalog is selected.  The difference is that it takes
 two extra parameter to provide the correct plural form.  These two
 parameters are handled in the same way <code>ngettext</code> handles them. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<h3 class="subsubheading">The problem of plural forms</h5>
+<h5 class="subsubheading">The problem of plural forms</h5>
 
 <p>A description of the problem can be found at the beginning of the last
 section.  Now there is the question how to solve it.  Without the input
@@ -180,8 +164,7 @@ header entry (the one with the empty (<code>msgid</code> string).  It looks
 like this:
 
 <pre class="smallexample">     Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;
-     </pre>
-
+</pre>
    <p>The <code>nplurals</code> value must be a decimal number which specifies how
 many different plural forms exist for this language.  The string
 following <code>plural</code> is an expression which is using the C language
@@ -194,179 +177,119 @@ of the variable <code>n</code> in the expression.  The resulting value then
 must be greater or equal to zero and smaller than the value given as the
 value of <code>nplurals</code>.
 
-<p>The following rules are known at this point.  The language with families
+<p class="noindent">The following rules are known at this point.  The language with families
 are listed.  But this does not necessarily mean the information can be
 generalized for the whole family (as can be easily seen in the table
-below).<a rel="footnote" href="#fn-1"><sup>1</sup></a>
+below).<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
 
      <dl>
-<dt>Only one form:
-     <dd>Some languages only require one single form.  There is no distinction
+<dt>Only one form:<dd>Some languages only require one single form.  There is no distinction
 between the singular and plural form.  An appropriate header entry
 would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=1; plural=0;
-          </pre>
-
-     <p>Languages with this property include:
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Finno-Ugric family
-          <dd>Hungarian
-<br><dt>Asian family
-          <dd>Japanese, Korean
-<br><dt>Turkic/Altaic family
-          <dd>Turkish
+<dt>Finno-Ugric family<dd>Hungarian
+<br><dt>Asian family<dd>Japanese
+<br><dt>Turkic/Altaic family<dd>Turkish
 </dl>
 
-     <br><dt>Two forms, singular used for one only
-     <dd>This is the form used in most existing programs since it is what English
+     <br><dt>Two forms, singular used for one only<dd>This is the form used in most existing programs since it is what English
 is using.  A header entry would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=2; plural=n != 1;
-          </pre>
-
+     </pre>
      <p>(Note: this uses the feature of C expressions that boolean expressions
 have to value zero or one.)
 
-     <p>Languages with this property include:
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Germanic family
-          <dd>Danish, Dutch, English, German, Norwegian, Swedish
-<br><dt>Finno-Ugric family
-          <dd>Estonian, Finnish
-<br><dt>Latin/Greek family
-          <dd>Greek
-<br><dt>Semitic family
-          <dd>Hebrew
-<br><dt>Romance family
-          <dd>Italian, Portuguese, Spanish
-<br><dt>Artificial
-          <dd>Esperanto
+<dt>Germanic family<dd>Danish, Dutch, English, German, Norwegian, Swedish
+<br><dt>Finno-Ugric family<dd>Estonian, Finnish
+<br><dt>Latin/Greek family<dd>Greek
+<br><dt>Semitic family<dd>Hebrew
+<br><dt>Romance family<dd>Italian, Spanish
+<br><dt>Artificial<dd>Esperanto
 </dl>
 
-     <br><dt>Two forms, singular used for zero and one
-     <dd>Exceptional case in the language family.  The header entry would be:
+     <br><dt>Two forms, singular used for zero and one<dd>Exceptional case in the language family.  The header entry would be:
 
      <pre class="smallexample">          Plural-Forms: nplurals=2; plural=n&gt;1;
-          </pre>
-
-     <p>Languages with this property include:
-
-          <dl>
-<dt>Romanic family
-          <dd>French, Brazilian Portuguese
-</dl>
-
-     <br><dt>Three forms, special case for zero
-     <dd>The header entry would be:
-
-     <pre class="smallexample">          Plural-Forms: nplurals=3; plural=n%10==1 &amp;&amp; n%100!=11 ? 0 : n != 0 ? 1 : 2;
-          </pre>
-
-     <p>Languages with this property include:
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Baltic family
-          <dd>Latvian
+<dt>Romanic family<dd>French
 </dl>
 
-     <br><dt>Three forms, special cases for one and two
-     <dd>The header entry would be:
+     <br><dt>Three forms, special cases for one and two<dd>The header entry would be:
 
      <pre class="smallexample">          Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;
-          </pre>
-
-     <p>Languages with this property include:
-
-          <dl>
-<dt>Celtic
-          <dd>Gaeilge (Irish)
-</dl>
-
-     <br><dt>Three forms, special case for numbers ending in 1[2-9]
-     <dd>The header entry would look like this:
-
-     <pre class="smallexample">          Plural-Forms: nplurals=3; \
-              plural=n%10==1 &amp;&amp; n%100!=11 ? 0 : \
-                     n%10&gt;=2 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2;
-          </pre>
-
-     <p>Languages with this property include:
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Baltic family
-          <dd>Lithuanian
+<dt>Celtic<dd>Gaeilge
 </dl>
 
-     <br><dt>Three forms, special cases for numbers ending in 1 and 2, 3, 4, except those ending in 1[1-4]
-     <dd>The header entry would look like this:
+     <br><dt>Three forms, special cases for numbers ending in 1 and 2, 3, 4, except those ending in 1[1-4]<dd>The header entry would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=3; \
               plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10&gt;3 ? 2 : 1;
-          </pre>
-
-     <p>Languages with this property include:
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Slavic family
-          <dd>Croatian, Czech, Russian, Ukrainian
+<dt>Slavic family<dd>Czech, Russian
 </dl>
 
-     <br><dt>Three forms, special cases for 1 and 2, 3, 4
-     <dd>The header entry would look like this:
+     <br><dt>Three forms, special cases for 1 and 2, 3, 4<dd>The header entry would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=3; \
               plural=(n==1) ? 1 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 2 : 0;
-          </pre>
-
-     <p>Languages with this property include:
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Slavic family
-          <dd>Slovak
+<dt>Slavic family<dd>Slovak
 </dl>
 
-     <br><dt>Three forms, special case for one and some numbers ending in 2, 3, or 4
-     <dd>The header entry would look like this:
+     <br><dt>Three forms, special case for one and some numbers ending in 2, 3, or 4<dd>The header entry would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=3; \
               plural=n==1 ? 0 : \
                      n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2;
-          </pre>
+     </pre>
+     <p>(Continuation in the next line is possible.)
 
-     <p>Languages with this property include:
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Slavic family
-          <dd>Polish
+<dt>Slavic family<dd>Polish
 </dl>
 
-     <br><dt>Four forms, special case for one and all numbers ending in 02, 03, or 04
-     <dd>The header entry would look like this:
+     <br><dt>Four forms, special case for one and all numbers ending in 2, 3, or 4<dd>The header entry would look like this:
 
      <pre class="smallexample">          Plural-Forms: nplurals=4; \
-              plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;
-          </pre>
-
-     <p>Languages with this property include:
+              plural=n==1 ? 0 : n%10==2 ? 1 : n%10==3 || n%10==4 ? 2 : 3;
+     </pre>
+     <p class="noindent">Languages with this property include:
 
           <dl>
-<dt>Slavic family
-          <dd>Slovenian
+<dt>Slavic family<dd>Slovenian
 </dl>
      </dl>
 
    <div class="footnote">
 <hr>
-<h4>Footnotes</h4>
-<ol type="1">
-<li><a name="fn-1"></a>
-<p>Additions are welcome.  Send appropriate information to
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> Additions are welcome.  Send appropriate information to
 <a href="mailto:bug-glibc-manual@gnu.org">bug-glibc-manual@gnu.org</a>.</p>
 
-   </ol><hr></div>
+   <p><hr></div>
 
    </body></html>
 

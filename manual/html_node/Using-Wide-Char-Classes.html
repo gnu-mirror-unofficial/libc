@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Using Wide Char Classes - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Character-Handling.html#Character-Handling" title="Character Handling">
+<link rel="prev" href="Classification-of-Wide-Characters.html#Classification-of-Wide-Characters" title="Classification of Wide Characters">
+<link rel="next" href="Wide-Character-Case-Conversion.html#Wide-Character-Case-Conversion" title="Wide Character Case Conversion">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,24 +17,27 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Using%20Wide%20Char%20Classes">Using Wide Char Classes</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Wide-Character-Case-Conversion.html#Wide%20Character%20Case%20Conversion">Wide Character Case Conversion</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Classification-of-Wide-Characters.html#Classification%20of%20Wide%20Characters">Classification of Wide Characters</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Character-Handling.html#Character%20Handling">Character Handling</a>
-<hr><br>
+<a name="Using-Wide-Char-Classes"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Wide-Character-Case-Conversion.html#Wide-Character-Case-Conversion">Wide Character Case Conversion</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Classification-of-Wide-Characters.html#Classification-of-Wide-Characters">Classification of Wide Characters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Character-Handling.html#Character-Handling">Character Handling</a>
+<hr>
 </div>
 
-<h3 class="section">Notes on using the wide character classes</h3>
+<h3 class="section">4.4 Notes on using the wide character classes</h3>
 
 <p>The first note is probably not astonishing but still occasionally a
-cause of problems.  The <code>isw</code><var>XXX</var><code></code> functions can be implemented
+cause of problems.  The <code>isw</code><var>XXX</var> functions can be implemented
 using macros and in fact, the GNU C library does this.  They are still
-available as real functions but when the <code>wctype.h</code> header is
+available as real functions but when the <samp><span class="file">wctype.h</span></samp> header is
 included the macros will be used.  This is the same as the
 <code>char</code> type versions of these functions.
 
@@ -49,8 +57,7 @@ original code.  It is truncated a bit but the intention should be clear.
        ...
        return 0;
      }
-     </pre>
-
+</pre>
    <p>Now, with the <code>wctype</code> and <code>iswctype</code> you can avoid the
 <code>if</code> cascades, but rewriting the code as follows is wrong:
 
@@ -60,8 +67,7 @@ original code.  It is truncated a bit but the intention should be clear.
        wctype_t desc = wctype (class);
        return desc ? iswctype ((wint_t) c, desc) : 0;
      }
-     </pre>
-
+</pre>
    <p>The problem is that it is not guaranteed that the wide character
 representation of a single-byte character can be found using casting. 
 In fact, usually this fails miserably.  The correct solution to this
@@ -73,9 +79,8 @@ problem is to write the code as follows:
        wctype_t desc = wctype (class);
        return desc ? iswctype (btowc (c), desc) : 0;
      }
-     </pre>
-
-   <p>See <a href="Converting-a-Character.html#Converting%20a%20Character">Converting a Character</a>, for more information on <code>btowc</code>. 
+</pre>
+   <p>See <a href="Converting-a-Character.html#Converting-a-Character">Converting a Character</a>, for more information on <code>btowc</code>. 
 Note that this change probably does not improve the performance
 of the program a lot since the <code>wctype</code> function still has to make
 the string comparisons.  It gets really interesting if the

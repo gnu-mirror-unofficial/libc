@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Argp Example 2 - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Argp-Examples.html#Argp-Examples" title="Argp Examples">
+<link rel="prev" href="Argp-Example-1.html#Argp-Example-1" title="Argp Example 1">
+<link rel="next" href="Argp-Example-3.html#Argp-Example-3" title="Argp Example 3">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,26 +17,29 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Argp%20Example%202">Argp Example 2</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Example-3.html#Argp%20Example%203">Argp Example 3</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Example-1.html#Argp%20Example%201">Argp Example 1</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>
-<hr><br>
+<a name="Argp-Example-2"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Example-3.html#Argp-Example-3">Argp Example 3</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Example-1.html#Argp-Example-1">Argp Example 1</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Examples.html#Argp-Examples">Argp Examples</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">A Program Using Argp with Only Default Options</h5>
+<h5 class="subsubsection">25.3.11.2 A Program Using Argp with Only Default Options</h5>
 
 <p>This program doesn't use any options or arguments, it uses argp to be
 compliant with the GNU standard command line format.
 
-   <p>In addition to giving no arguments and implementing a <code>--help</code>
-option, this example has a <code>--version</code> option, which will put the
-given documentation string and bug address in the <code>--help</code> output,
+   <p>In addition to giving no arguments and implementing a `<samp><span class="samp">--help</span></samp>'
+option, this example has a `<samp><span class="samp">--version</span></samp>' option, which will put the
+given documentation string and bug address in the `<samp><span class="samp">--help</span></samp>' output,
 as per GNU standards.
 
    <p>The variable <code>argp</code> contains the argument parser
@@ -44,18 +52,16 @@ are considered global variables because they will almost always be
 constant for a given program, even if they use different argument
 parsers for various tasks.
 
-<pre class="smallexample">
-
-     /* Argp example #2 - a pretty minimal program using argp */
+<pre class="smallexample">     /* <span class="roman">Argp example #2 -- a pretty minimal program using argp</span> */
      
-     /* This program doesn't use any options or arguments, but uses
+     /* <span class="roman">This program doesn't use any options or arguments, but uses
         argp to be compliant with the GNU standard command line
         format.
      
         In addition to making sure no arguments are given, and
-        implementing a -help option, this example will have a
-        -version option, and will put the given documentation string
-        and bug address in the -help output, as per GNU standards.
+        implementing a --help option, this example will have a
+        --version option, and will put the given documentation string
+        and bug address in the --help output, as per GNU standards.
      
         The variable ARGP contains the argument parser specification;
         adding fields to this structure is the way most parameters are
@@ -65,7 +71,7 @@ parsers for various tasks.
         ARGP_PROGRAM_VERSION and ARGP_PROGRAM_BUG_ADDRESS (they are
         global variables because they will almost always be constant
         for a given program, even if it uses different argument
-        parsers for various tasks). */
+        parsers for various tasks).</span> */
      
      #include &lt;argp.h&gt;
      
@@ -74,15 +80,15 @@ parsers for various tasks.
      const char *argp_program_bug_address =
        "&lt;bug-gnu-utils@gnu.org&gt;";
      
-     /* Program documentation. */
+     /* <span class="roman">Program documentation.</span> */
      static char doc[] =
        "Argp example #2 -- a pretty minimal program using argp";
      
-     /* Our argument parser.  The <code>options</code>, <code>parser</code>, and
-        <code>args_doc</code> fields are zero because we have neither options or
-        arguments; <code>doc</code> and <code>argp_program_bug_address</code> will be
-        used in the output for <code>--help</code>, and the <code>--version</code>
-        option will print out <code>argp_program_version</code>. */
+     /* <span class="roman">Our argument parser.  The </span><code>options</code><span class="roman">, </span><code>parser</code><span class="roman">, and
+        </span><code>args_doc</code><span class="roman"> fields are zero because we have neither options or
+        arguments; </span><code>doc</code><span class="roman"> and </span><code>argp_program_bug_address</code><span class="roman"> will be
+        used in the output for `<samp>--help</samp>', and the `<samp>--version</samp>'
+        option will print out </span><code>argp_program_version</code><span class="roman">.</span> */
      static struct argp argp = { 0, 0, 0, doc };
      
      int main (int argc, char **argv)
@@ -90,7 +96,6 @@ parsers for various tasks.
        argp_parse (&amp;argp, argc, argv, 0, 0, 0);
        exit (0);
      }
-     </pre>
-
+</pre>
    </body></html>
 

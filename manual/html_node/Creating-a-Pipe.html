@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Creating a Pipe - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Pipes-and-FIFOs.html#Pipes-and-FIFOs" title="Pipes and FIFOs">
+<link rel="next" href="Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess" title="Pipe to a Subprocess">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,77 +16,71 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Creating%20a%20Pipe">Creating a Pipe</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
-<hr><br>
+<a name="Creating-a-Pipe"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess">Pipe to a Subprocess</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes-and-FIFOs">Pipes and FIFOs</a>
+<hr>
 </div>
 
-<h3 class="section">Creating a Pipe</h3>
+<h3 class="section">15.1 Creating a Pipe</h3>
 
-<p>The primitive for creating a pipe is the <code>pipe</code> function.  This
+<p><a name="index-creating-a-pipe-1603"></a><a name="index-opening-a-pipe-1604"></a><a name="index-interprocess-communication_002c-with-pipes-1605"></a>
+The primitive for creating a pipe is the <code>pipe</code> function.  This
 creates both the reading and writing ends of the pipe.  It is not very
 useful for a single process to use a pipe to talk to itself.  In typical
 use, a process creates a pipe just before it forks one or more child
-processes (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>).  The pipe is then used for
+processes (see <a href="Creating-a-Process.html#Creating-a-Process">Creating a Process</a>).  The pipe is then used for
 communication either between the parent or child processes, or between
 two sibling processes.
 
    <p>The <code>pipe</code> function is declared in the header file
-<code>unistd.h</code>.
+<samp><span class="file">unistd.h</span></samp>. 
+<a name="index-unistd_002eh-1606"></a>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>pipe</b><i> </i>(<i>int </i><var>filedes</var><i></i><tt>[2]</tt><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>pipe</code> function creates a pipe and puts the file descriptors
+<div class="defun">
+&mdash; Function: int <b>pipe</b> (<var>int filedes</var><tt>[2]</tt>)<var><a name="index-pipe-1607"></a></var><br>
+<blockquote><p>The <code>pipe</code> function creates a pipe and puts the file descriptors
 for the reading and writing ends of the pipe (respectively) into
-<code></code><var>filedes</var><code>[0]</code> and <code></code><var>filedes</var><code>[1]</code>.
+<var>filedes</var><code>[0]</code> and <var>filedes</var><code>[1]</code>.
 
-     <p>An easy way to remember that the input end comes first is that file
+        <p>An easy way to remember that the input end comes first is that file
 descriptor <code>0</code> is standard input, and file descriptor <code>1</code> is
 standard output.
 
-     <p>If successful, <code>pipe</code> returns a value of <code>0</code>.  On failure,
+        <p>If successful, <code>pipe</code> returns a value of <code>0</code>.  On failure,
 <code>-1</code> is returned.  The following <code>errno</code> error conditions are
 defined for this function:
 
           <dl>
-<dt><code>EMFILE</code>
-          <dd>The process has too many files open.
+<dt><code>EMFILE</code><dd>The process has too many files open.
 
-          <br><dt><code>ENFILE</code>
-          <dd>There are too many open files in the entire system.  See <a href="Error-Codes.html#Error%20Codes">Error Codes</a>,
+          <br><dt><code>ENFILE</code><dd>There are too many open files in the entire system.  See <a href="Error-Codes.html#Error-Codes">Error Codes</a>,
 for more information about <code>ENFILE</code>.  This error never occurs in
 the GNU system. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    <p>Here is an example of a simple program that creates a pipe.  This program
-uses the <code>fork</code> function (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>) to create
+uses the <code>fork</code> function (see <a href="Creating-a-Process.html#Creating-a-Process">Creating a Process</a>) to create
 a child process.  The parent process writes data to the pipe, which is
 read by the child process.
 
-<pre class="smallexample">
-
-     #include &lt;sys/types.h&gt;
+<pre class="smallexample">     #include &lt;sys/types.h&gt;
      #include &lt;unistd.h&gt;
      #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      
-     /* Read characters from the pipe and echo them to <code>stdout</code>. */
+     /* <span class="roman">Read characters from the pipe and echo them to </span><code>stdout</code><span class="roman">.</span> */
      
      void
      read_from_pipe (int file)
@@ -95,7 +93,7 @@ read by the child process.
        fclose (stream);
      }
      
-     /* Write some random text to the pipe. */
+     /* <span class="roman">Write some random text to the pipe.</span> */
      
      void
      write_to_pipe (int file)
@@ -113,39 +111,38 @@ read by the child process.
        pid_t pid;
        int mypipe[2];
      
-       /* Create the pipe. */
+       /* <span class="roman">Create the pipe.</span> */
        if (pipe (mypipe))
          {
            fprintf (stderr, "Pipe failed.\n");
            return EXIT_FAILURE;
          }
      
-       /* Create the child process. */
+       /* <span class="roman">Create the child process.</span> */
        pid = fork ();
        if (pid == (pid_t) 0)
          {
-           /* This is the child process.
-              Close other end first. */
+           /* <span class="roman">This is the child process.
+              Close other end first.</span> */
            close (mypipe[1]);
            read_from_pipe (mypipe[0]);
            return EXIT_SUCCESS;
          }
        else if (pid &lt; (pid_t) 0)
          {
-           /* The fork failed. */
+           /* <span class="roman">The fork failed.</span> */
            fprintf (stderr, "Fork failed.\n");
            return EXIT_FAILURE;
          }
        else
          {
-           /* This is the parent process.
-              Close other end first. */
+           /* <span class="roman">This is the parent process.
+              Close other end first.</span> */
            close (mypipe[0]);
            write_to_pipe (mypipe[1]);
            return EXIT_SUCCESS;
          }
      }
-     </pre>
-
+</pre>
    </body></html>
 

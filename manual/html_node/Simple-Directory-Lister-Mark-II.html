@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Simple Directory Lister Mark II - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Accessing-Directories.html#Accessing-Directories" title="Accessing Directories">
+<link rel="prev" href="Scanning-Directory-Content.html#Scanning-Directory-Content" title="Scanning Directory Content">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +16,28 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Simple%20Directory%20Lister%20Mark%20II">Simple Directory Lister Mark II</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Scanning-Directory-Content.html#Scanning%20Directory%20Content">Scanning Directory Content</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
-<hr><br>
+<a name="Simple-Directory-Lister-Mark-II"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Scanning-Directory-Content.html#Scanning-Directory-Content">Scanning Directory Content</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing-Directories">Accessing Directories</a>
+<hr>
 </div>
 
-<h3 class="subsection">Simple Program to List a Directory, Mark II</h4>
+<h4 class="subsection">14.2.7 Simple Program to List a Directory, Mark II</h4>
 
 <p>Here is a revised version of the directory lister found above
-(see <a href="Simple-Directory-Lister.html#Simple%20Directory%20Lister">Simple Directory Lister</a>).  Using the <code>scandir</code> function we
+(see <a href="Simple-Directory-Lister.html#Simple-Directory-Lister">Simple Directory Lister</a>).  Using the <code>scandir</code> function we
 can avoid the functions which work directly with the directory contents. 
 After the call the returned entries are available for direct use.
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;dirent.h&gt;
      
      static int
@@ -59,8 +64,7 @@ After the call the returned entries are available for direct use.
      
        return 0;
      }
-     </pre>
-
+</pre>
    <p>Note the simple selector function in this example.  Since we want to see
 all directory entries we always return <code>1</code>.
 

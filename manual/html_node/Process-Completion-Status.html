@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Process Completion Status - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Processes.html#Processes" title="Processes">
+<link rel="prev" href="Process-Completion.html#Process-Completion" title="Process Completion">
+<link rel="next" href="BSD-Wait-Functions.html#BSD-Wait-Functions" title="BSD Wait Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,131 +17,86 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Process%20Completion%20Status">Process Completion Status</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="BSD-Wait-Functions.html#BSD%20Wait%20Functions">BSD Wait Functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Completion.html#Process%20Completion">Process Completion</a>,
+<a name="Process-Completion-Status"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="BSD-Wait-Functions.html#BSD-Wait-Functions">BSD Wait Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Completion.html#Process-Completion">Process Completion</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Process Completion Status</h3>
+<h3 class="section">26.7 Process Completion Status</h3>
 
-<p>If the exit status value (see <a href="Program-Termination.html#Program%20Termination">Program Termination</a>) of the child
+<p>If the exit status value (see <a href="Program-Termination.html#Program-Termination">Program Termination</a>) of the child
 process is zero, then the status value reported by <code>waitpid</code> or
 <code>wait</code> is also zero.  You can test for other kinds of information
 encoded in the returned status value using the following macros. 
-These macros are defined in the header file <code>sys/wait.h</code>.
+These macros are defined in the header file <samp><span class="file">sys/wait.h</span></samp>. 
+<a name="index-sys_002fwait_002eh-3164"></a>
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WIFEXITED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if the child process terminated
+<div class="defun">
+&mdash; Macro: int <b>WIFEXITED</b> (<var>int status</var>)<var><a name="index-WIFEXITED-3165"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if the child process terminated
 normally with <code>exit</code> or <code>_exit</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WEXITSTATUS</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-If <code>WIFEXITED</code> is true of <var>status</var>, this macro returns the
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>WEXITSTATUS</b> (<var>int status</var>)<var><a name="index-WEXITSTATUS-3166"></a></var><br>
+<blockquote><p>If <code>WIFEXITED</code> is true of <var>status</var>, this macro returns the
 low-order 8 bits of the exit status value from the child process. 
-See <a href="Exit-Status.html#Exit%20Status">Exit Status</a>. 
-</td></tr>
-</table>
+See <a href="Exit-Status.html#Exit-Status">Exit Status</a>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WIFSIGNALED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if the child process terminated
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>WIFSIGNALED</b> (<var>int status</var>)<var><a name="index-WIFSIGNALED-3167"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if the child process terminated
 because it received a signal that was not handled. 
-See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>. 
-</td></tr>
-</table>
+See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WTERMSIG</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-If <code>WIFSIGNALED</code> is true of <var>status</var>, this macro returns the
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>WTERMSIG</b> (<var>int status</var>)<var><a name="index-WTERMSIG-3168"></a></var><br>
+<blockquote><p>If <code>WIFSIGNALED</code> is true of <var>status</var>, this macro returns the
 signal number of the signal that terminated the child process. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WCOREDUMP</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if the child process terminated
+<!-- sys/wait.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>WCOREDUMP</b> (<var>int status</var>)<var><a name="index-WCOREDUMP-3169"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if the child process terminated
 and produced a core dump. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WIFSTOPPED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if the child process is stopped. 
-</td></tr>
-</table>
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>WIFSTOPPED</b> (<var>int status</var>)<var><a name="index-WIFSTOPPED-3170"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if the child process is stopped. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>WSTOPSIG</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-If <code>WIFSTOPPED</code> is true of <var>status</var>, this macro returns the
+<!-- sys/wait.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>WSTOPSIG</b> (<var>int status</var>)<var><a name="index-WSTOPSIG-3171"></a></var><br>
+<blockquote><p>If <code>WIFSTOPPED</code> is true of <var>status</var>, this macro returns the
 signal number of the signal that caused the child process to stop. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Ports - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Internet-Namespace.html#Internet-Namespace" title="Internet Namespace">
+<link rel="prev" href="Protocols-Database.html#Protocols-Database" title="Protocols Database">
+<link rel="next" href="Services-Database.html#Services-Database" title="Services Database">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Ports">Ports</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Services-Database.html#Services%20Database">Services Database</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>
-<hr><br>
+<a name="Ports"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Services-Database.html#Services-Database">Services Database</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Protocols-Database.html#Protocols-Database">Protocols Database</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Internet-Namespace.html#Internet-Namespace">Internet Namespace</a>
+<hr>
 </div>
 
-<h3 class="subsection">Internet Ports</h4>
+<h4 class="subsection">16.6.3 Internet Ports</h4>
 
-<p>A socket address in the Internet namespace consists of a machine's
+<p><a name="index-port-number-1719"></a>
+A socket address in the Internet namespace consists of a machine's
 Internet address plus a <dfn>port number</dfn> which distinguishes the
 sockets on a given machine (for a given protocol).  Port numbers range
 from 0 to 65,535.
@@ -34,7 +43,7 @@ from 0 to 65,535.
    <p>Port numbers less than <code>IPPORT_RESERVED</code> are reserved for standard
 servers, such as <code>finger</code> and <code>telnet</code>.  There is a database
 that keeps track of these, and you can use the <code>getservbyname</code>
-function to map a service name onto a port number; see <a href="Services-Database.html#Services%20Database">Services Database</a>.
+function to map a service name onto a port number; see <a href="Services-Database.html#Services-Database">Services Database</a>.
 
    <p>If you write a server that is not one of the standard ones defined in
 the database, you must choose a port number for it.  Use a number
@@ -53,39 +62,25 @@ number).  You shouldn't duplicate a port number except in special
 circumstances where a higher-level protocol requires it.  Normally,
 the system won't let you do it; <code>bind</code> normally insists on
 distinct port numbers.  To reuse a port number, you must set the
-socket option <code>SO_REUSEADDR</code>.  See <a href="Socket-Level-Options.html#Socket-Level%20Options">Socket-Level Options</a>.
+socket option <code>SO_REUSEADDR</code>.  See <a href="Socket_002dLevel-Options.html#Socket_002dLevel-Options">Socket-Level Options</a>.
 
-   <p>These macros are defined in the header file <code>netinet/in.h</code>.
+   <p><a name="index-netinet_002fin_002eh-1720"></a>These macros are defined in the header file <samp><span class="file">netinet/in.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>IPPORT_RESERVED</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Port numbers less than <code>IPPORT_RESERVED</code> are reserved for
+<!-- netinet/in.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>IPPORT_RESERVED</b><var><a name="index-IPPORT_005fRESERVED-1721"></a></var><br>
+<blockquote><p>Port numbers less than <code>IPPORT_RESERVED</code> are reserved for
 superuser use. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>IPPORT_USERRESERVED</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Port numbers greater than or equal to <code>IPPORT_USERRESERVED</code> are
+<!-- netinet/in.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>IPPORT_USERRESERVED</b><var><a name="index-IPPORT_005fUSERRESERVED-1722"></a></var><br>
+<blockquote><p>Port numbers greater than or equal to <code>IPPORT_USERRESERVED</code> are
 reserved for explicit use; they will never be allocated automatically. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

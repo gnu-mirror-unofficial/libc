@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Streams and Threads - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="I_002fO-on-Streams.html#I_002fO-on-Streams" title="I/O on Streams">
+<link rel="prev" href="Closing-Streams.html#Closing-Streams" title="Closing Streams">
+<link rel="next" href="Streams-and-I18N.html#Streams-and-I18N" title="Streams and I18N">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Streams%20and%20Threads">Streams and Threads</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Streams-and-I18N.html#Streams%20and%20I18N">Streams and I18N</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Closing-Streams.html#Closing%20Streams">Closing Streams</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
-<hr><br>
+<a name="Streams-and-Threads"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Streams-and-I18N.html#Streams-and-I18N">Streams and I18N</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Closing-Streams.html#Closing-Streams">Closing Streams</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>
+<hr>
 </div>
 
-<h3 class="section">Streams and Threads</h3>
+<h3 class="section">12.5 Streams and Threads</h3>
 
-<p>Streams can be used in multi-threaded applications in the same way they
+<p><a name="index-threads-935"></a><a name="index-multi_002dthreaded-application-936"></a>Streams can be used in multi-threaded applications in the same way they
 are used in single-threaded applications.  But the programmer must be
 aware of a the possible complications.  It is important to know about
 these also if the program one writes never use threads since the design
@@ -50,63 +58,42 @@ themselves would ensure only atomicity of their own operation, but not
 atomicity over all the function calls.  For this it is necessary to
 perform the stream locking in the application code.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>flockfile</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>flockfile</code> function acquires the internal locking object
+<!-- stdio.h -->
+<!-- POSIX -->
+<div class="defun">
+&mdash; Function: void <b>flockfile</b> (<var>FILE *stream</var>)<var><a name="index-flockfile-937"></a></var><br>
+<blockquote><p>The <code>flockfile</code> function acquires the internal locking object
 associated with the stream <var>stream</var>.  This ensures that no other
 thread can explicitly through <code>flockfile</code>/<code>ftrylockfile</code> or
 implicit through a call of a stream function lock the stream.  The
 thread will block until the lock is acquired.  An explicit call to
 <code>funlockfile</code> has to be used to release the lock. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>ftrylockfile</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>ftrylockfile</code> function tries to acquire the internal locking
+<!-- stdio.h -->
+<!-- POSIX -->
+<div class="defun">
+&mdash; Function: int <b>ftrylockfile</b> (<var>FILE *stream</var>)<var><a name="index-ftrylockfile-938"></a></var><br>
+<blockquote><p>The <code>ftrylockfile</code> function tries to acquire the internal locking
 object associated with the stream <var>stream</var> just like
 <code>flockfile</code>.  But unlike <code>flockfile</code> this function does not
 block if the lock is not available.  <code>ftrylockfile</code> returns zero if
 the lock was successfully acquired.  Otherwise the stream is locked by
 another thread. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>funlockfile</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>funlockfile</code> function releases the internal locking object of
+<!-- stdio.h -->
+<!-- POSIX -->
+<div class="defun">
+&mdash; Function: void <b>funlockfile</b> (<var>FILE *stream</var>)<var><a name="index-funlockfile-939"></a></var><br>
+<blockquote><p>The <code>funlockfile</code> function releases the internal locking object of
 the stream <var>stream</var>. The stream must have been locked before by a
 call to <code>flockfile</code> or a successful call of <code>ftrylockfile</code>. 
 The implicit locking performed by the stream operations do not count. 
 The <code>funlockfile</code> function does not return an error status and the
 behavior of a call for a stream which is not locked by the current
 thread is undefined. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>The following example shows how the functions above can be used to
 generate an output line atomically even in multi-threaded applications
@@ -121,12 +108,11 @@ sometimes not possible):
         fprintf (fp, "%d\n", test);
         funlockfile (fp)
      }
-     </pre>
-
+</pre>
    <p>Without the explicit locking it would be possible for another thread to
 use the stream <var>fp</var> after the <code>fputs</code> call return and before
 <code>fprintf</code> was called with the result that the number does not
-follow the word <code>number</code>.
+follow the word `<samp><span class="samp">number</span></samp>'.
 
    <p>From this description it might already be clear that the locking objects
 in streams are no simple mutexes.  Since locking the same stream twice
@@ -141,11 +127,10 @@ For instance:
      {
        ftrylockfile (fp);
        fputs ("in foo\n", fp);
-       /* This is very wrong!!!  */
+       /* <span class="roman">This is very wrong!!!</span>  */
        funlockfile (fp);
      }
-     </pre>
-
+</pre>
    <p>It is important here that the <code>funlockfile</code> function is only called
 if the <code>ftrylockfile</code> function succeeded in locking the stream.  It
 is therefore always wrong to ignore the result of <code>ftrylockfile</code>. 
@@ -163,8 +148,7 @@ frees the stream prematurely.  The code should look like this:
            funlockfile (fp);
          }
      }
-     </pre>
-
+</pre>
    <p>Now that we covered why it is necessary to have these locking it is
 necessary to talk about situations when locking is unwanted and what can
 be done.  The locking operations (explicit or implicit) don't come for
@@ -172,7 +156,7 @@ free.  Even if a lock is not taken the cost is not zero.  The operations
 which have to be performed require memory operations that are safe in
 multi-processor environments.  With the many local caches involved in
 such systems this is quite costly.  So it is best to avoid the locking
-completely if it is not needed - because the code in question is never
+completely if it is not needed &ndash; because the code in question is never
 used in a context where two or more threads may use a stream at a time. 
 This can be determined most of the time for application code; for
 library code which can be used in many contexts one should default to be
@@ -205,8 +189,7 @@ locking then has to be performed in the program:
          putc_unlocked (*buf++, fp);
        funlockfile (fp);
      }
-     </pre>
-
+</pre>
    <p>If in this example the <code>putc</code> function would be used and the
 explicit locking would be missing the <code>putc</code> function would have to
 acquire the lock in every call, potentially many times depending on when
@@ -217,49 +200,39 @@ manipulation of the buffer of the stream.
    <p>A second way to avoid locking is by using a non-standard function which
 was introduced in Solaris and is available in the GNU C library as well.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>__fsetlocking</b><i> </i>(<i>FILE *</i><var>stream</var><i>, int </i><var>type</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-     <p>The <code>__fsetlocking</code> function can be used to select whether the
+<!-- stdio_ext.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: int <b>__fsetlocking</b> (<var>FILE *stream, int type</var>)<var><a name="index-g_t_005f_005ffsetlocking-940"></a></var><br>
+<blockquote>
+<p>The <code>__fsetlocking</code> function can be used to select whether the
 stream operations will implicitly acquire the locking object of the
 stream <var>stream</var>.  By default this is done but it can be disabled and
 reinstated using this function.  There are three values defined for the
 <var>type</var> parameter.
 
           <dl>
-<dt><code>FSETLOCKING_INTERNAL</code>
-          <dd>The stream <code>stream</code> will from now on use the default internal
+<dt><code>FSETLOCKING_INTERNAL</code><a name="index-FSETLOCKING_005fINTERNAL-941"></a><dd>The stream <code>stream</code> will from now on use the default internal
 locking.  Every stream operation with exception of the <code>_unlocked</code>
 variants will implicitly lock the stream.
 
-          <br><dt><code>FSETLOCKING_BYCALLER</code>
-          <dd>After the <code>__fsetlocking</code> function returns the user is responsible
+          <br><dt><code>FSETLOCKING_BYCALLER</code><a name="index-FSETLOCKING_005fBYCALLER-942"></a><dd>After the <code>__fsetlocking</code> function returns the user is responsible
 for locking the stream.  None of the stream operations will implicitly
 do this anymore until the state is set back to
 <code>FSETLOCKING_INTERNAL</code>.
 
-          <br><dt><code>FSETLOCKING_QUERY</code>
-          <dd><code>__fsetlocking</code> only queries the current locking state of the
+          <br><dt><code>FSETLOCKING_QUERY</code><a name="index-FSETLOCKING_005fQUERY-943"></a><dd><code>__fsetlocking</code> only queries the current locking state of the
 stream.  The return value will be <code>FSETLOCKING_INTERNAL</code> or
 <code>FSETLOCKING_BYCALLER</code> depending on the state. 
 </dl>
 
-     <p>The return value of <code>__fsetlocking</code> is either
+        <p>The return value of <code>__fsetlocking</code> is either
 <code>FSETLOCKING_INTERNAL</code> or <code>FSETLOCKING_BYCALLER</code> depending on
 the state of the stream before the call.
 
-     <p>This function and the values for the <var>type</var> parameter are declared
-in <code>stdio_ext.h</code>. 
-</td></tr>
-</table>
+        <p>This function and the values for the <var>type</var> parameter are declared
+in <samp><span class="file">stdio_ext.h</span></samp>. 
+</p></blockquote></div>
 
    <p>This function is especially useful when program code has to be used
 which is written without knowledge about the <code>_unlocked</code> functions

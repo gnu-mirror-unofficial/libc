@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>GUI program problems - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext" title="Message catalogs with gettext">
+<link rel="prev" href="Charset-conversion-in-gettext.html#Charset-conversion-in-gettext" title="Charset conversion in gettext">
+<link rel="next" href="Using-gettextized-software.html#Using-gettextized-software" title="Using gettextized software">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="GUI%20program%20problems">GUI program problems</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Using-gettextized-software.html#Using%20gettextized%20software">Using gettextized software</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Charset-conversion-in-gettext.html#Charset%20conversion%20in%20gettext">Charset conversion in gettext</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-with-gettext.html#Message%20catalogs%20with%20gettext">Message catalogs with gettext</a>
-<hr><br>
+<a name="GUI-program-problems"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Using-gettextized-software.html#Using-gettextized-software">Using gettextized software</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Charset-conversion-in-gettext.html#Charset-conversion-in-gettext">Charset conversion in gettext</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-with-gettext.html#Message-catalogs-with-gettext">Message catalogs with gettext</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">How to use <code>gettext</code> in GUI programs</h5>
+<h5 class="subsubsection">8.2.1.5 How to use <code>gettext</code> in GUI programs</h5>
 
 <p>One place where the <code>gettext</code> functions, if used normally, have big
 problems is within programs with graphical user interfaces (GUIs).  The
@@ -41,7 +49,7 @@ wrong and instead <code>catgets</code> should be used which indeed does not
 have this problem.  But there is a very simple and powerful method to
 handle these kind of problems with the <code>gettext</code> functions.
 
-<p>As as example consider the following fictional situation.  A GUI program
+<p class="noindent">As as example consider the following fictional situation.  A GUI program
 has a menu bar with the following entries:
 
 <pre class="smallexample">     +------------+------------+--------------------------------------+
@@ -51,8 +59,7 @@ has a menu bar with the following entries:
      | New      | | Open     |
      +----------+ | Connect  |
                   +----------+
-     </pre>
-
+</pre>
    <p>To have the strings <code>File</code>, <code>Printer</code>, <code>Open</code>,
 <code>New</code>, <code>Select</code>, and <code>Connect</code> translated there has to be
 at some point in the code a call to a function of the <code>gettext</code>
@@ -75,12 +82,12 @@ example above the strings could be chosen as
      Menu|Printer|Select
      Menu|Printer|Open
      Menu|Printer|Connect
-     </pre>
-
+</pre>
    <p>Now all the strings are different and if now instead of <code>gettext</code>
 the following little wrapper function is used, everything works just
 fine:
 
+   <p><a name="index-sgettext-809"></a>
 <pre class="smallexample">       char *
        sgettext (const char *msgid)
        {
@@ -89,8 +96,7 @@ fine:
            msgval = strrchr (msgid, '|') + 1;
          return msgval;
        }
-     </pre>
-
+</pre>
    <p>What this little function does is to recognize the case when no
 translation is available.  This can be done very efficiently by a
 pointer comparison since the return value is the input value.  If there
@@ -107,14 +113,14 @@ possible to produce a program which can be internationalized.
    <p>With advanced compilers (such as GNU C) one can write the
 <code>sgettext</code> functions as an inline function or as a macro like this:
 
+   <p><a name="index-sgettext-810"></a>
 <pre class="smallexample">     #define sgettext(msgid) \
        ({ const char *__msgid = (msgid);            \
           char *__msgstr = gettext (__msgid);       \
           if (__msgval == __msgid)                  \
             __msgval = strrchr (__msgid, '|') + 1;  \
           __msgval; })
-     </pre>
-
+</pre>
    <p>The other <code>gettext</code> functions (<code>dgettext</code>, <code>dcgettext</code>
 and the <code>ngettext</code> equivalents) can and should have corresponding
 functions as well which look almost identical, except for the parameters
@@ -137,8 +143,8 @@ character not often used in message strings.
 
      <p>But what if the character is used in message strings.  Or if the chose
 character is not available in the character set on the machine one
-compiles (e.g., <code>|</code> is not required to exist for ISO&nbsp;C; this is
-why the <code>iso646.h</code> file exists in ISO&nbsp;C programming environments). 
+compiles (e.g., <code>|</code> is not required to exist for ISO&nbsp;C<!-- /@w -->; this is
+why the <samp><span class="file">iso646.h</span></samp> file exists in ISO&nbsp;C<!-- /@w --> programming environments). 
 </ul>
 
    <p>There is only one more comment to make left.  The wrapper function above

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>FIFO Special Files - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Pipes-and-FIFOs.html#Pipes-and-FIFOs" title="Pipes and FIFOs">
+<link rel="prev" href="Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess" title="Pipe to a Subprocess">
+<link rel="next" href="Pipe-Atomicity.html#Pipe-Atomicity" title="Pipe Atomicity">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="FIFO%20Special%20Files">FIFO Special Files</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Pipe-Atomicity.html#Pipe%20Atomicity">Pipe Atomicity</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
-<hr><br>
+<a name="FIFO-Special-Files"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Pipe-Atomicity.html#Pipe-Atomicity">Pipe Atomicity</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Pipe-to-a-Subprocess.html#Pipe-to-a-Subprocess">Pipe to a Subprocess</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes-and-FIFOs">Pipes and FIFOs</a>
+<hr>
 </div>
 
-<h3 class="section">FIFO Special Files</h3>
+<h3 class="section">15.3 FIFO Special Files</h3>
 
-<p>A FIFO special file is similar to a pipe, except that it is created in a
+<p><a name="index-creating-a-FIFO-special-file-1613"></a><a name="index-interprocess-communication_002c-with-FIFO-1614"></a>
+A FIFO special file is similar to a pipe, except that it is created in a
 different way.  Instead of being an anonymous communications channel, a
 FIFO special file is entered into the file system by calling
 <code>mkfifo</code>.
@@ -39,40 +48,31 @@ reading normally blocks until some other process opens the same FIFO for
 writing, and vice versa.
 
    <p>The <code>mkfifo</code> function is declared in the header file
-<code>sys/stat.h</code>.
+<samp><span class="file">sys/stat.h</span></samp>. 
+<a name="index-sys_002fstat_002eh-1615"></a>
+<!-- sys/stat.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>mkfifo</b><i> </i>(<i>const char *</i><var>filename</var><i>, mode_t </i><var>mode</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>mkfifo</code> function makes a FIFO special file with name
+<div class="defun">
+&mdash; Function: int <b>mkfifo</b> (<var>const char *filename, mode_t mode</var>)<var><a name="index-mkfifo-1616"></a></var><br>
+<blockquote><p>The <code>mkfifo</code> function makes a FIFO special file with name
 <var>filename</var>.  The <var>mode</var> argument is used to set the file's
-permissions; see <a href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>.
+permissions; see <a href="Setting-Permissions.html#Setting-Permissions">Setting Permissions</a>.
 
-     <p>The normal, successful return value from <code>mkfifo</code> is <code>0</code>.  In
+        <p>The normal, successful return value from <code>mkfifo</code> is <code>0</code>.  In
 the case of an error, <code>-1</code> is returned.  In addition to the usual
-file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following
+file name errors (see <a href="File-Name-Errors.html#File-Name-Errors">File Name Errors</a>), the following
 <code>errno</code> error conditions are defined for this function:
 
           <dl>
-<dt><code>EEXIST</code>
-          <dd>The named file already exists.
+<dt><code>EEXIST</code><dd>The named file already exists.
 
-          <br><dt><code>ENOSPC</code>
-          <dd>The directory or file system cannot be extended.
+          <br><dt><code>ENOSPC</code><dd>The directory or file system cannot be extended.
 
-          <br><dt><code>EROFS</code>
-          <dd>The directory that would contain the file resides on a read-only file
+          <br><dt><code>EROFS</code><dd>The directory that would contain the file resides on a read-only file
 system. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    </body></html>
 

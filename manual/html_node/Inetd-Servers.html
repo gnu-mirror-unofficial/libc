@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Inetd Servers - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Inetd.html#Inetd" title="Inetd">
+<link rel="next" href="Configuring-Inetd.html#Configuring-Inetd" title="Configuring Inetd">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Inetd%20Servers">Inetd Servers</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Configuring-Inetd.html#Configuring%20Inetd">Configuring Inetd</a>,
+<a name="Inetd-Servers"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Configuring-Inetd.html#Configuring-Inetd">Configuring Inetd</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Inetd.html#Inetd">Inetd</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection"><code>inetd</code> Servers</h4>
+<h4 class="subsection">16.11.1 <code>inetd</code> Servers</h4>
 
 <p>Writing a server program to be run by <code>inetd</code> is very simple.  Each time
 someone requests a connection to the appropriate port, a new server

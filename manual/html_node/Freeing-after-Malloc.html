@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Freeing after Malloc - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Unconstrained-Allocation.html#Unconstrained-Allocation" title="Unconstrained Allocation">
+<link rel="prev" href="Malloc-Examples.html#Malloc-Examples" title="Malloc Examples">
+<link rel="next" href="Changing-Block-Size.html#Changing-Block-Size" title="Changing Block Size">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,53 +17,44 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Freeing%20after%20Malloc">Freeing after Malloc</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
-<hr><br>
+<a name="Freeing-after-Malloc"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Changing-Block-Size.html#Changing-Block-Size">Changing Block Size</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Malloc-Examples.html#Malloc-Examples">Malloc Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Freeing Memory Allocated with <code>malloc</code></h5>
+<h5 class="subsubsection">3.2.2.3 Freeing Memory Allocated with <code>malloc</code></h5>
 
-<p>When you no longer need a block that you got with <code>malloc</code>, use the
+<p><a name="index-freeing-memory-allocated-with-_0040code_007bmalloc_007d-252"></a><a name="index-heap_002c-freeing-memory-from-253"></a>
+When you no longer need a block that you got with <code>malloc</code>, use the
 function <code>free</code> to make the block available to be allocated again. 
-The prototype for this function is in <code>stdlib.h</code>.
+The prototype for this function is in <samp><span class="file">stdlib.h</span></samp>. 
+<a name="index-stdlib_002eh-254"></a>
+<!-- malloc.h stdlib.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>free</b><i> </i>(<i>void *</i><var>ptr</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>free</code> function deallocates the block of memory pointed at
+<div class="defun">
+&mdash; Function: void <b>free</b> (<var>void *ptr</var>)<var><a name="index-free-255"></a></var><br>
+<blockquote><p>The <code>free</code> function deallocates the block of memory pointed at
 by <var>ptr</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>cfree</b><i> </i>(<i>void *</i><var>ptr</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function does the same thing as <code>free</code>.  It's provided for
+<!-- stdlib.h -->
+<!-- Sun -->
+<div class="defun">
+&mdash; Function: void <b>cfree</b> (<var>void *ptr</var>)<var><a name="index-cfree-256"></a></var><br>
+<blockquote><p>This function does the same thing as <code>free</code>.  It's provided for
 backward compatibility with SunOS; you should use <code>free</code> instead. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>Freeing a block alters the contents of the block.  <strong>Do not expect to
 find any data (such as a pointer to the next block in a chain of blocks) in
@@ -83,8 +79,7 @@ a chain, and the strings that they point to:
            chain = next;
          }
      }
-     </pre>
-
+</pre>
    <p>Occasionally, <code>free</code> can actually return memory to the operating
 system and make the process smaller.  Usually, all it can do is allow a
 later call to <code>malloc</code> to reuse the space.  In the meantime, the

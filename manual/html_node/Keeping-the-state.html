@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Keeping the state - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion" title="Restartable multibyte conversion">
+<link rel="prev" href="Selecting-the-Conversion.html#Selecting-the-Conversion" title="Selecting the Conversion">
+<link rel="next" href="Converting-a-Character.html#Converting-a-Character" title="Converting a Character">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Keeping%20the%20state">Keeping the state</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Converting-a-Character.html#Converting%20a%20Character">Converting a Character</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Selecting-the-Conversion.html#Selecting%20the%20Conversion">Selecting the Conversion</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable%20multibyte%20conversion">Restartable multibyte conversion</a>
-<hr><br>
+<a name="Keeping-the-state"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Converting-a-Character.html#Converting-a-Character">Converting a Character</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Selecting-the-Conversion.html#Selecting-the-Conversion">Selecting the Conversion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Restartable-multibyte-conversion.html#Restartable-multibyte-conversion">Restartable multibyte conversion</a>
+<hr>
 </div>
 
-<h3 class="subsection">Representing the state of the conversion</h4>
+<h4 class="subsection">6.3.2 Representing the state of the conversion</h4>
 
-<p>In the introduction of this chapter it was said that certain character
+<p><a name="index-stateful-630"></a>In the introduction of this chapter it was said that certain character
 sets use a <dfn>stateful</dfn> encoding.  That is, the encoded values depend
 in some way on the previous bytes in the text.
 
@@ -34,24 +42,17 @@ in some way on the previous bytes in the text.
 step we must have a way to pass this information from one call of the
 functions to another.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>mbstate_t</b><i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-A variable of type <code>mbstate_t</code> can contain all the information
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Data type: <b>mbstate_t</b><var><a name="index-mbstate_005ft-631"></a></var><br>
+<blockquote><p><a name="index-shift-state-632"></a>A variable of type <code>mbstate_t</code> can contain all the information
 about the <dfn>shift state</dfn> needed from one call to a conversion
 function to another.
 
-     <p><code>mbstate_t</code> is defined in <code>wchar.h</code>.  It was introduced in
-Amendment&nbsp;1 to ISO&nbsp;C90. 
-</td></tr>
-</table>
+        <p><a name="index-wchar_002eh-633"></a><code>mbstate_t</code> is defined in <samp><span class="file">wchar.h</span></samp>.  It was introduced in
+Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w -->. 
+</p></blockquote></div>
 
    <p>To use objects of type <code>mbstate_t</code> the programmer has to define such
 objects (normally as local variables on the stack) and pass a pointer to
@@ -66,58 +67,51 @@ clearing the whole variable with code such as follows:
 <pre class="smallexample">     {
        mbstate_t state;
        memset (&amp;state, '\0', sizeof (state));
-       /* from now on <var>state</var> can be used.  */
+       /* <span class="roman">from now on </span><var>state</var><span class="roman"> can be used.</span>  */
        ...
      }
-     </pre>
-
+</pre>
    <p>When using the conversion functions to generate output it is often
 necessary to test whether the current state corresponds to the initial
 state.  This is necessary, for example, to decide whether to emit
 escape sequences to set the state to the initial state at certain
 sequence points.  Communication protocols often require this.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>mbsinit</b><i> </i>(<i>const mbstate_t *</i><var>ps</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>mbsinit</code> function determines whether the state object pointed
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>mbsinit</b> (<var>const mbstate_t *ps</var>)<var><a name="index-mbsinit-634"></a></var><br>
+<blockquote><p>The <code>mbsinit</code> function determines whether the state object pointed
 to by <var>ps</var> is in the initial state.  If <var>ps</var> is a null pointer or
 the object is in the initial state the return value is nonzero.  Otherwise
 it is zero.
 
-     <p><code>mbsinit</code> was introduced in Amendment&nbsp;1 to ISO&nbsp;C90 and is
-declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p><a name="index-wchar_002eh-635"></a><code>mbsinit</code> was introduced in Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w --> and is
+declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
    <p>Code using <code>mbsinit</code> often looks similar to this:
 
+<!-- Fix the example to explicitly say how to generate the escape sequence -->
+<!-- to restore the initial state. -->
 <pre class="smallexample">     {
        mbstate_t state;
        memset (&amp;state, '\0', sizeof (state));
-       /* Use <var>state</var>.  */
+       /* <span class="roman">Use </span><var>state</var><span class="roman">.</span>  */
        ...
        if (! mbsinit (&amp;state))
          {
-           /* Emit code to return to initial state.  */
+           /* <span class="roman">Emit code to return to initial state.</span>  */
            const wchar_t empty[] = L"";
            const wchar_t *srcp = empty;
            wcsrtombs (outbuf, &amp;srcp, outbuflen, &amp;state);
          }
        ...
      }
-     </pre>
-
+</pre>
    <p>The code to emit the escape sequence to get back to the initial state is
 interesting.  The <code>wcsrtombs</code> function can be used to determine the
-necessary output code (see <a href="Converting-Strings.html#Converting%20Strings">Converting Strings</a>).  Please note that on
+necessary output code (see <a href="Converting-Strings.html#Converting-Strings">Converting Strings</a>).  Please note that on
 GNU systems it is not necessary to perform this extra action for the
 conversion from multibyte text to wide character text since the wide
 character encoding is not stateful.  But there is nothing mentioned in

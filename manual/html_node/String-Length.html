@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>String Length - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="String-and-Array-Utilities.html#String-and-Array-Utilities" title="String and Array Utilities">
+<link rel="prev" href="String_002fArray-Conventions.html#String_002fArray-Conventions" title="String/Array Conventions">
+<link rel="next" href="Copying-and-Concatenation.html#Copying-and-Concatenation" title="Copying and Concatenation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,43 +17,40 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="String%20Length">String Length</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="String-Array-Conventions.html#String%2fArray%20Conventions">String/Array Conventions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
-<hr><br>
+<a name="String-Length"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Copying-and-Concatenation.html#Copying-and-Concatenation">Copying and Concatenation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="String_002fArray-Conventions.html#String_002fArray-Conventions">String/Array Conventions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String-and-Array-Utilities">String and Array Utilities</a>
+<hr>
 </div>
 
-<h3 class="section">String Length</h3>
+<h3 class="section">5.3 String Length</h3>
 
 <p>You can get the length of a string using the <code>strlen</code> function. 
-This function is declared in the header file <code>string.h</code>.
+This function is declared in the header file <samp><span class="file">string.h</span></samp>. 
+<a name="index-string_002eh-465"></a>
+<!-- string.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>strlen</b><i> </i>(<i>const char *</i><var>s</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>strlen</code> function returns the length of the null-terminated
+<div class="defun">
+&mdash; Function: size_t <b>strlen</b> (<var>const char *s</var>)<var><a name="index-strlen-466"></a></var><br>
+<blockquote><p>The <code>strlen</code> function returns the length of the null-terminated
 string <var>s</var> in bytes.  (In other words, it returns the offset of the
 terminating null character within the array.)
 
-     <p>For example,
+        <p>For example,
      <pre class="smallexample">          strlen ("hello, world")
               =&gt; 12
-          </pre>
-
-     <p>When applied to a character array, the <code>strlen</code> function returns
+     </pre>
+        <p>When applied to a character array, the <code>strlen</code> function returns
 the length of the string stored there, not its allocated size.  You can
 get the allocated size of the character array that holds a string using
 the <code>sizeof</code> operator:
@@ -58,9 +60,8 @@ the <code>sizeof</code> operator:
               =&gt; 32
           strlen (string)
               =&gt; 12
-          </pre>
-
-     <p>But beware, this will not work unless <var>string</var> is the character
+     </pre>
+        <p>But beware, this will not work unless <var>string</var> is the character
 array itself, not a pointer to it.  For example:
 
      <pre class="smallexample">          char string[32] = "hello, world";
@@ -68,20 +69,19 @@ array itself, not a pointer to it.  For example:
           sizeof (string)
               =&gt; 32
           sizeof (ptr)
-              =&gt; 4  /* (on a machine with 4 byte pointers) */
-          </pre>
-
-     <p>This is an easy mistake to make when you are working with functions that
+              =&gt; 4  /* <span class="roman">(on a machine with 4 byte pointers)</span> */
+     </pre>
+        <p>This is an easy mistake to make when you are working with functions that
 take string arguments; those arguments are always pointers, not arrays.
 
-     <p>It must also be noted that for multibyte encoded strings the return
+        <p>It must also be noted that for multibyte encoded strings the return
 value does not have to correspond to the number of characters in the
 string.  To get this value the string can be converted to wide
 characters and <code>wcslen</code> can be used or something like the following
 code can be used:
 
-     <pre class="smallexample">          /* The input is in <code>string</code>.
-             The length is expected in <code>n</code>.  */
+     <pre class="smallexample">          /* <span class="roman">The input is in </span><code>string</code><span class="roman">.</span>
+             <span class="roman">The length is expected in </span><code>n</code><span class="roman">.</span>  */
           {
             mbstate_t t;
             char *scopy = string;
@@ -90,49 +90,34 @@ code can be used:
             /* Determine number of characters.  */
             n = mbsrtowcs (NULL, &amp;scopy, strlen (scopy), &amp;t);
           }
-          </pre>
-
-     <p>This is cumbersome to do so if the number of characters (as opposed to
+     </pre>
+        <p>This is cumbersome to do so if the number of characters (as opposed to
 bytes) is needed often it is better to work with wide characters. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-   <p>The wide character equivalent is declared in <code>wchar.h</code>.
+   <p>The wide character equivalent is declared in <samp><span class="file">wchar.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>wcslen</b><i> </i>(<i>const wchar_t *</i><var>ws</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wcslen</code> function is the wide character equivalent to
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: size_t <b>wcslen</b> (<var>const wchar_t *ws</var>)<var><a name="index-wcslen-467"></a></var><br>
+<blockquote><p>The <code>wcslen</code> function is the wide character equivalent to
 <code>strlen</code>.  The return value is the number of wide characters in the
 wide character string pointed to by <var>ws</var> (this is also the offset of
 the terminating null wide character of <var>ws</var>).
 
-     <p>Since there are no multi wide character sequences making up one
+        <p>Since there are no multi wide character sequences making up one
 character the return value is not only the offset in the array, it is
 also the number of wide characters.
 
-     <p>This function was introduced in Amendment&nbsp;1 to ISO&nbsp;C90. 
-</td></tr>
-</table>
+        <p>This function was introduced in Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w -->. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>strnlen</b><i> </i>(<i>const char *</i><var>s</var><i>, size_t </i><var>maxlen</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>strnlen</code> function returns the length of the string <var>s</var> in
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: size_t <b>strnlen</b> (<var>const char *s, size_t maxlen</var>)<var><a name="index-strnlen-468"></a></var><br>
+<blockquote><p>The <code>strnlen</code> function returns the length of the string <var>s</var> in
 bytes if this length is smaller than <var>maxlen</var> bytes.  Otherwise it
 returns <var>maxlen</var>.  Therefore this function is equivalent to
 <code>(strlen (</code><var>s</var><code>) &lt; n ? strlen (</code><var>s</var><code>) : </code><var>maxlen</var><code>)</code> but it
@@ -144,28 +129,19 @@ null-terminated.
               =&gt; 12
           strnlen (string, 5)
               =&gt; 5
-          </pre>
+     </pre>
+        <p>This function is a GNU extension and is declared in <samp><span class="file">string.h</span></samp>. 
+</p></blockquote></div>
 
-     <p>This function is a GNU extension and is declared in <code>string.h</code>. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>wcsnlen</b><i> </i>(<i>const wchar_t *</i><var>ws</var><i>, size_t </i><var>maxlen</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>wcsnlen</code> is the wide character equivalent to <code>strnlen</code>.  The
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: size_t <b>wcsnlen</b> (<var>const wchar_t *ws, size_t maxlen</var>)<var><a name="index-wcsnlen-469"></a></var><br>
+<blockquote><p><code>wcsnlen</code> is the wide character equivalent to <code>strnlen</code>.  The
 <var>maxlen</var> parameter specifies the maximum number of wide characters.
 
-     <p>This function is a GNU extension and is declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p>This function is a GNU extension and is declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Who is Connected - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Connections.html#Connections" title="Connections">
+<link rel="prev" href="Accepting-Connections.html#Accepting-Connections" title="Accepting Connections">
+<link rel="next" href="Transferring-Data.html#Transferring-Data" title="Transferring Data">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,57 +17,49 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Who%20is%20Connected">Who is Connected</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Accepting-Connections.html#Accepting%20Connections">Accepting Connections</a>,
+<a name="Who-is-Connected"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Transferring-Data.html#Transferring-Data">Transferring Data</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Accepting-Connections.html#Accepting-Connections">Accepting Connections</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Connections.html#Connections">Connections</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Who is Connected to Me?</h4>
+<h4 class="subsection">16.9.4 Who is Connected to Me?</h4>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>getpeername</b><i> </i>(<i>int </i><var>socket</var><i>, struct sockaddr *</i><var>addr</var><i>, socklen_t *</i><var>length-ptr</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>getpeername</code> function returns the address of the socket that
+<!-- sys/socket.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>getpeername</b> (<var>int socket, struct sockaddr *addr, socklen_t *length-ptr</var>)<var><a name="index-getpeername-1790"></a></var><br>
+<blockquote><p>The <code>getpeername</code> function returns the address of the socket that
 <var>socket</var> is connected to; it stores the address in the memory space
 specified by <var>addr</var> and <var>length-ptr</var>.  It stores the length of
-the address in <code>*</code><var>length-ptr</var><code></code>.
+the address in <code>*</code><var>length-ptr</var>.
 
-     <p>See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>, for information about the format of the
+        <p>See <a href="Socket-Addresses.html#Socket-Addresses">Socket Addresses</a>, for information about the format of the
 address.  In some operating systems, <code>getpeername</code> works only for
 sockets in the Internet domain.
 
-     <p>The return value is <code>0</code> on success and <code>-1</code> on error.  The
+        <p>The return value is <code>0</code> on success and <code>-1</code> on error.  The
 following <code>errno</code> error conditions are defined for this function:
 
           <dl>
-<dt><code>EBADF</code>
-          <dd>The argument <var>socket</var> is not a valid file descriptor.
+<dt><code>EBADF</code><dd>The argument <var>socket</var> is not a valid file descriptor.
 
-          <br><dt><code>ENOTSOCK</code>
-          <dd>The descriptor <var>socket</var> is not a socket.
+          <br><dt><code>ENOTSOCK</code><dd>The descriptor <var>socket</var> is not a socket.
 
-          <br><dt><code>ENOTCONN</code>
-          <dd>The socket <var>socket</var> is not connected.
+          <br><dt><code>ENOTCONN</code><dd>The socket <var>socket</var> is not connected.
 
-          <br><dt><code>ENOBUFS</code>
-          <dd>There are not enough internal buffers available. 
+          <br><dt><code>ENOBUFS</code><dd>There are not enough internal buffers available. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    </body></html>
 

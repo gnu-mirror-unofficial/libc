@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Streams - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="I_002fO-on-Streams.html#I_002fO-on-Streams" title="I/O on Streams">
+<link rel="next" href="Standard-Streams.html#Standard-Streams" title="Standard Streams">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,53 +16,50 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Streams">Streams</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
-<hr><br>
+<a name="Streams"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Streams.html#Standard-Streams">Standard Streams</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>
+<hr>
 </div>
 
-<h3 class="section">Streams</h3>
+<h3 class="section">12.1 Streams</h3>
 
 <p>For historical reasons, the type of the C data structure that represents
-a stream is called <code>FILE</code> rather than "stream".  Since most of
+a stream is called <code>FILE</code> rather than &ldquo;stream&rdquo;.  Since most of
 the library functions deal with objects of type <code>FILE *</code>, sometimes
-the term <dfn>file pointer</dfn> is also used to mean "stream".  This leads
+the term <dfn>file pointer</dfn> is also used to mean &ldquo;stream&rdquo;.  This leads
 to unfortunate confusion over terminology in many books on C.  This
-manual, however, is careful to use the terms "file" and "stream"
-only in the technical sense.
+manual, however, is careful to use the terms &ldquo;file&rdquo; and &ldquo;stream&rdquo;
+only in the technical sense. 
+<a name="index-file-pointer-907"></a>
+<a name="index-stdio_002eh-908"></a>The <code>FILE</code> type is declared in the header file <samp><span class="file">stdio.h</span></samp>.
 
-   <p>The <code>FILE</code> type is declared in the header file <code>stdio.h</code>.
-
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>FILE</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the data type used to represent stream objects.  A <code>FILE</code>
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Data Type: <b>FILE</b><var><a name="index-FILE-909"></a></var><br>
+<blockquote><p>This is the data type used to represent stream objects.  A <code>FILE</code>
 object holds all of the internal state information about the connection
 to the associated file, including such things as the file position
 indicator and buffering information.  Each stream also has error and
 end-of-file status indicators that can be tested with the <code>ferror</code>
-and <code>feof</code> functions; see <a href="EOF-and-Errors.html#EOF%20and%20Errors">EOF and Errors</a>. 
-</td></tr>
-</table>
+and <code>feof</code> functions; see <a href="EOF-and-Errors.html#EOF-and-Errors">EOF and Errors</a>. 
+</p></blockquote></div>
 
    <p><code>FILE</code> objects are allocated and managed internally by the
 input/output library functions.  Don't try to create your own objects of
 type <code>FILE</code>; let the library do it.  Your programs should
 deal only with pointers to these objects (that is, <code>FILE *</code> values)
-rather than the objects themselves.
+rather than the objects themselves. 
+<!-- !!! should say that FILE's have "No user-serviceable parts inside." -->
 
    </body></html>
 

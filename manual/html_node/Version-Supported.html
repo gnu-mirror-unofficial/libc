@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Version Supported - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-Configuration.html#System-Configuration" title="System Configuration">
+<link rel="prev" href="System-Options.html#System-Options" title="System Options">
+<link rel="next" href="Sysconf.html#Sysconf" title="Sysconf">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,75 +17,64 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Version%20Supported">Version Supported</a>,
+<a name="Version-Supported"></a>
 Next:&nbsp;<a rel="next" accesskey="n" href="Sysconf.html#Sysconf">Sysconf</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="System-Options.html#System%20Options">System Options</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
-<hr><br>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="System-Options.html#System-Options">System Options</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System-Configuration">System Configuration</a>
+<hr>
 </div>
 
-<h3 class="section">Which Version of POSIX is Supported</h3>
+<h3 class="section">31.3 Which Version of POSIX is Supported</h3>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">long int <b>_POSIX_VERSION</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This constant represents the version of the POSIX.1 standard to which
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: long int <b>_POSIX_VERSION</b><var><a name="index-g_t_005fPOSIX_005fVERSION-3499"></a></var><br>
+<blockquote><p>This constant represents the version of the POSIX.1 standard to which
 the implementation conforms.  For an implementation conforming to the
 1995 POSIX.1 standard, the value is the integer <code>199506L</code>.
 
-     <p><code>_POSIX_VERSION</code> is always defined (in <code>unistd.h</code>) in any
+        <p><code>_POSIX_VERSION</code> is always defined (in <samp><span class="file">unistd.h</span></samp>) in any
 POSIX system.
 
-     <p><strong>Usage Note:</strong> Don't try to test whether the system supports POSIX
-by including <code>unistd.h</code> and then checking whether
+        <p><strong>Usage Note:</strong> Don't try to test whether the system supports POSIX
+by including <samp><span class="file">unistd.h</span></samp> and then checking whether
 <code>_POSIX_VERSION</code> is defined.  On a non-POSIX system, this will
-probably fail because there is no <code>unistd.h</code>.  We do not know of
+probably fail because there is no <samp><span class="file">unistd.h</span></samp>.  We do not know of
 <em>any</em> way you can reliably test at compilation time whether your
-target system supports POSIX or whether <code>unistd.h</code> exists.
+target system supports POSIX or whether <samp><span class="file">unistd.h</span></samp> exists.
 
-     <p>The GNU C compiler predefines the symbol <code>__POSIX__</code> if the target
+        <p>The GNU C compiler predefines the symbol <code>__POSIX__</code> if the target
 system is a POSIX system.  Provided you do not use any other compilers
 on POSIX systems, testing <code>defined (__POSIX__)</code> will reliably
 detect such systems. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">long int <b>_POSIX2_C_VERSION</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This constant represents the version of the POSIX.2 standard which the
+<!-- unistd.h -->
+<!-- POSIX.2 -->
+<div class="defun">
+&mdash; Macro: long int <b>_POSIX2_C_VERSION</b><var><a name="index-g_t_005fPOSIX2_005fC_005fVERSION-3500"></a></var><br>
+<blockquote><p>This constant represents the version of the POSIX.2 standard which the
 library and system kernel support.  We don't know what value this will
 be for the first version of the POSIX.2 standard, because the value is
 based on the year and month in which the standard is officially adopted.
 
-     <p>The value of this symbol says nothing about the utilities installed on
+        <p>The value of this symbol says nothing about the utilities installed on
 the system.
 
-     <p><strong>Usage Note:</strong> You can use this macro to tell whether a POSIX.1
+        <p><strong>Usage Note:</strong> You can use this macro to tell whether a POSIX.1
 system library supports POSIX.2 as well.  Any POSIX.1 system contains
-<code>unistd.h</code>, so include that file and then test <code>defined
+<samp><span class="file">unistd.h</span></samp>, so include that file and then test <code>defined
 (_POSIX2_C_VERSION)</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

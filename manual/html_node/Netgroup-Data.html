@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Netgroup Data - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Netgroup-Database.html#Netgroup-Database" title="Netgroup Database">
+<link rel="next" href="Lookup-Netgroup.html#Lookup-Netgroup" title="Lookup Netgroup">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +16,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Netgroup%20Data">Netgroup Data</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-Netgroup.html#Lookup%20Netgroup">Lookup Netgroup</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>
-<hr><br>
+<a name="Netgroup-Data"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-Netgroup.html#Lookup-Netgroup">Lookup Netgroup</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Netgroup-Database.html#Netgroup-Database">Netgroup Database</a>
+<hr>
 </div>
 
-<h3 class="subsection">Netgroup Data</h4>
+<h4 class="subsection">29.16.1 Netgroup Data</h4>
 
-<p>Sometimes it is useful to group users according to other criteria
-(see <a href="Group-Database.html#Group%20Database">Group Database</a>).  E.g., it is useful to associate a certain
+<p><a name="index-Netgroup-3403"></a>Sometimes it is useful to group users according to other criteria
+(see <a href="Group-Database.html#Group-Database">Group Database</a>).  E.g., it is useful to associate a certain
 group of users with a certain machine.  On the other hand grouping of
 host names is not supported so far.
 
@@ -40,13 +47,12 @@ list specifying a netgroup.  So one can construct arbitrary hierarchies
 without loops.
 
    <p>Sun's implementation allows netgroups only for the <code>nis</code> or
-<code>nisplus</code> service, see <a href="Services-in-the-NSS-configuration.html#Services%20in%20the%20NSS%20configuration">Services in the NSS configuration</a>.  The
+<code>nisplus</code> service, see <a href="Services-in-the-NSS-configuration.html#Services-in-the-NSS-configuration">Services in the NSS configuration</a>.  The
 implementation in the GNU C library has no such restriction.  An entry
 in either of the input services must have the following form:
 
 <pre class="smallexample">     <var>groupname</var> ( <var>groupname</var> | <code>(</code><var>hostname</var><code>,</code><var>username</var><code>,</code><code>domainname</code><code>)</code> )+
-     </pre>
-
+</pre>
    <p>Any of the fields in the triple can be empty which means anything
 matches.  While describing the functions we will see that the opposite
 case is useful as well.  I.e., there may be entries which will not

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>File Attributes - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="File-System-Interface.html#File-System-Interface" title="File System Interface">
+<link rel="prev" href="Creating-Directories.html#Creating-Directories" title="Creating Directories">
+<link rel="next" href="Making-Special-Files.html#Making-Special-Files" title="Making Special Files">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="File%20Attributes">File Attributes</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Making-Special-Files.html#Making%20Special%20Files">Making Special Files</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Creating-Directories.html#Creating%20Directories">Creating Directories</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>
-<hr><br>
+<a name="File-Attributes"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Making-Special-Files.html#Making-Special-Files">Making Special Files</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Creating-Directories.html#Creating-Directories">Creating Directories</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-System-Interface.html#File-System-Interface">File System Interface</a>
+<hr>
 </div>
 
-<h3 class="section">File Attributes</h3>
+<h3 class="section">14.9 File Attributes</h3>
 
-<p>When you issue an <code>ls -l</code> shell command on a file, it gives you
+<p><a name="index-ls-1480"></a>When you issue an `<samp><span class="samp">ls -l</span></samp>' shell command on a file, it gives you
 information about the size of the file, who owns it, when it was last
 modified, etc.  These are called the <dfn>file attributes</dfn>, and are
 associated with the file itself and not a particular one of its names.
@@ -35,22 +43,22 @@ associated with the file itself and not a particular one of its names.
 modify the attributes of a file.
 
 <ul class="menu">
-<li><a accesskey="1" href="Attribute-Meanings.html#Attribute%20Meanings">Attribute Meanings</a>:           The names of the file attributes,
+<li><a accesskey="1" href="Attribute-Meanings.html#Attribute-Meanings">Attribute Meanings</a>:           The names of the file attributes,
                                  and what their values mean. 
-<li><a accesskey="2" href="Reading-Attributes.html#Reading%20Attributes">Reading Attributes</a>:           How to read the attributes of a file. 
-<li><a accesskey="3" href="Testing-File-Type.html#Testing%20File%20Type">Testing File Type</a>:            Distinguishing ordinary files,
+<li><a accesskey="2" href="Reading-Attributes.html#Reading-Attributes">Reading Attributes</a>:           How to read the attributes of a file. 
+<li><a accesskey="3" href="Testing-File-Type.html#Testing-File-Type">Testing File Type</a>:            Distinguishing ordinary files,
                                  directories, links... 
-<li><a accesskey="4" href="File-Owner.html#File%20Owner">File Owner</a>:                   How ownership for new files is determined,
+<li><a accesskey="4" href="File-Owner.html#File-Owner">File Owner</a>:                   How ownership for new files is determined,
 			         and how to change it. 
-<li><a accesskey="5" href="Permission-Bits.html#Permission%20Bits">Permission Bits</a>:              How information about a file's access
+<li><a accesskey="5" href="Permission-Bits.html#Permission-Bits">Permission Bits</a>:              How information about a file's access
                                  mode is stored. 
-<li><a accesskey="6" href="Access-Permission.html#Access%20Permission">Access Permission</a>:            How the system decides who can access a file. 
-<li><a accesskey="7" href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>:          How permissions for new files are assigned,
+<li><a accesskey="6" href="Access-Permission.html#Access-Permission">Access Permission</a>:            How the system decides who can access a file. 
+<li><a accesskey="7" href="Setting-Permissions.html#Setting-Permissions">Setting Permissions</a>:          How permissions for new files are assigned,
 			         and how to change them. 
-<li><a accesskey="8" href="Testing-File-Access.html#Testing%20File%20Access">Testing File Access</a>:          How to find out if your process can
+<li><a accesskey="8" href="Testing-File-Access.html#Testing-File-Access">Testing File Access</a>:          How to find out if your process can
                                  access a file. 
-<li><a accesskey="9" href="File-Times.html#File%20Times">File Times</a>:                   About the time attributes of a file. 
-<li><a href="File-Size.html#File%20Size">File Size</a>: 			Manually changing the size of a file. 
+<li><a accesskey="9" href="File-Times.html#File-Times">File Times</a>:                   About the time attributes of a file. 
+<li><a href="File-Size.html#File-Size">File Size</a>: 			Manually changing the size of a file. 
 </ul>
 
    </body></html>

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Setuid Program Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Users-and-Groups.html#Users-and-Groups" title="Users and Groups">
+<link rel="prev" href="Enable_002fDisable-Setuid.html#Enable_002fDisable-Setuid" title="Enable/Disable Setuid">
+<link rel="next" href="Tips-for-Setuid.html#Tips-for-Setuid" title="Tips for Setuid">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,44 +17,45 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Setuid%20Program%20Example">Setuid Program Example</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Tips-for-Setuid.html#Tips%20for%20Setuid">Tips for Setuid</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
-<hr><br>
+<a name="Setuid-Program-Example"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Tips-for-Setuid.html#Tips-for-Setuid">Tips for Setuid</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Enable_002fDisable-Setuid.html#Enable_002fDisable-Setuid">Enable/Disable Setuid</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users-and-Groups">Users and Groups</a>
+<hr>
 </div>
 
-<h3 class="section">Setuid Program Example</h3>
+<h3 class="section">29.9 Setuid Program Example</h3>
 
 <p>Here's an example showing how to set up a program that changes its
 effective user ID.
 
    <p>This is part of a game program called <code>caber-toss</code> that manipulates
-a file <code>scores</code> that should be writable only by the game program
+a file <samp><span class="file">scores</span></samp> that should be writable only by the game program
 itself.  The program assumes that its executable file will be installed
-with the setuid bit set and owned by the same user as the <code>scores</code>
+with the setuid bit set and owned by the same user as the <samp><span class="file">scores</span></samp>
 file.  Typically, a system administrator will set up an account like
 <code>games</code> for this purpose.
 
    <p>The executable file is given mode <code>4755</code>, so that doing an
-<code>ls -l</code> on it produces output like:
+`<samp><span class="samp">ls -l</span></samp>' on it produces output like:
 
 <pre class="smallexample">     -rwsr-xr-x   1 games    184422 Jul 30 15:17 caber-toss
-     </pre>
+</pre>
+   <p class="noindent">The setuid bit shows up in the file modes as the `<samp><span class="samp">s</span></samp>'.
 
-<p>The setuid bit shows up in the file modes as the <code>s</code>.
-
-   <p>The scores file is given mode <code>644</code>, and doing an <code>ls -l</code> on
+   <p>The scores file is given mode <code>644</code>, and doing an `<samp><span class="samp">ls -l</span></samp>' on
 it shows:
 
 <pre class="smallexample">     -rw-r--r--  1 games           0 Jul 31 15:33 scores
-     </pre>
-
+</pre>
    <p>Here are the parts of the program that show how to set up the changed
 user ID.  This program is conditionalized so that it makes use of the
 file IDs feature if it is supported, and otherwise uses <code>setreuid</code>
@@ -61,12 +67,12 @@ to swap the effective and real user IDs.
      #include &lt;stdlib.h&gt;
      
      
-     /* Remember the effective and real UIDs. */
+     /* <span class="roman">Remember the effective and real UIDs.</span> */
      
      static uid_t euid, ruid;
      
      
-     /* Restore the effective UID to its original value. */
+     /* <span class="roman">Restore the effective UID to its original value.</span> */
      
      void
      do_setuid (void)
@@ -85,7 +91,7 @@ to swap the effective and real user IDs.
      }
      
      
-     /* Set the effective UID to the real UID. */
+     /* <span class="roman">Set the effective UID to the real UID.</span> */
      
      void
      undo_setuid (void)
@@ -103,21 +109,20 @@ to swap the effective and real user IDs.
          }
      }
      
-     /* Main program. */
+     /* <span class="roman">Main program.</span> */
      
      int
      main (void)
      {
-       /* Remember the real and effective user IDs.  */
+       /* <span class="roman">Remember the real and effective user IDs.</span>  */
        ruid = getuid ();
        euid = geteuid ();
        undo_setuid ();
      
-       /* Do the game and record the score.  */
+       /* <span class="roman">Do the game and record the score.</span>  */
        ...
      }
-     </pre>
-
+</pre>
    <p>Notice how the first thing the <code>main</code> function does is to set the
 effective user ID back to the real user ID.  This is so that any other
 file accesses that are performed while the user is playing the game use
@@ -125,7 +130,7 @@ the real user ID for determining permissions.  Only when the program
 needs to open the scores file does it switch back to the file user ID,
 like this:
 
-<pre class="smallexample">     /* Record the score. */
+<pre class="smallexample">     /* <span class="roman">Record the score.</span> */
      
      int
      record_score (int score)
@@ -133,12 +138,12 @@ like this:
        FILE *stream;
        char *myname;
      
-       /* Open the scores file. */
+       /* <span class="roman">Open the scores file.</span> */
        do_setuid ();
        stream = fopen (SCORES_FILE, "a");
        undo_setuid ();
      
-       /* Write the score to the file. */
+       /* <span class="roman">Write the score to the file.</span> */
        if (stream)
          {
            myname = cuserid (NULL);
@@ -152,7 +157,6 @@ like this:
        else
          return -1;
      }
-     </pre>
-
+</pre>
    </body></html>
 

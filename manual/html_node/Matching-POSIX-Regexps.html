@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Matching POSIX Regexps - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Regular-Expressions.html#Regular-Expressions" title="Regular Expressions">
+<link rel="prev" href="Flags-for-POSIX-Regexps.html#Flags-for-POSIX-Regexps" title="Flags for POSIX Regexps">
+<link rel="next" href="Regexp-Subexpressions.html#Regexp-Subexpressions" title="Regexp Subexpressions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,53 +17,49 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Regexp-Subexpressions.html#Regexp%20Subexpressions">Regexp Subexpressions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-POSIX-Regexps.html#Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
-<hr><br>
+<a name="Matching-POSIX-Regexps"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Regexp-Subexpressions.html#Regexp-Subexpressions">Regexp Subexpressions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-POSIX-Regexps.html#Flags-for-POSIX-Regexps">Flags for POSIX Regexps</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Regular-Expressions.html#Regular-Expressions">Regular Expressions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Matching a Compiled POSIX Regular Expression</h4>
+<h4 class="subsection">10.3.3 Matching a Compiled POSIX Regular Expression</h4>
 
-<p>Once you have compiled a regular expression, as described in <a href="POSIX-Regexp-Compilation.html#POSIX%20Regexp%20Compilation">POSIX Regexp Compilation</a>, you can match it against strings using
+<p>Once you have compiled a regular expression, as described in <a href="POSIX-Regexp-Compilation.html#POSIX-Regexp-Compilation">POSIX Regexp Compilation</a>, you can match it against strings using
 <code>regexec</code>.  A match anywhere inside the string counts as success,
-unless the regular expression contains anchor characters (<code>^</code> or
-<code>$</code>).
+unless the regular expression contains anchor characters (`<samp><span class="samp">^</span></samp>' or
+`<samp><span class="samp">$</span></samp>').
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>regexec</b><i> </i>(<i>regex_t *</i><var>compiled</var><i>, char *</i><var>string</var><i>, size_t </i><var>nmatch</var><i>, regmatch_t </i><var>matchptr</var><i> </i><tt>[]</tt><i>, int </i><var>eflags</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function tries to match the compiled regular expression
-<code>*</code><var>compiled</var><code></code> against <var>string</var>.
+<!-- regex.h -->
+<!-- POSIX.2 -->
+<div class="defun">
+&mdash; Function: int <b>regexec</b> (<var>regex_t *compiled, char *string, size_t nmatch, regmatch_t matchptr </var><tt>[]</tt><var>, int eflags</var>)<var><a name="index-regexec-871"></a></var><br>
+<blockquote><p>This function tries to match the compiled regular expression
+<code>*</code><var>compiled</var> against <var>string</var>.
 
-     <p><code>regexec</code> returns <code>0</code> if the regular expression matches;
+        <p><code>regexec</code> returns <code>0</code> if the regular expression matches;
 otherwise, it returns a nonzero value.  See the table below for
 what nonzero values mean.  You can use <code>regerror</code> to produce an
 error message string describing the reason for a nonzero value;
-see <a href="Regexp-Cleanup.html#Regexp%20Cleanup">Regexp Cleanup</a>.
+see <a href="Regexp-Cleanup.html#Regexp-Cleanup">Regexp Cleanup</a>.
 
-     <p>The argument <var>eflags</var> is a word of bit flags that enable various
+        <p>The argument <var>eflags</var> is a word of bit flags that enable various
 options.
 
-     <p>If you want to get information about what part of <var>string</var> actually
+        <p>If you want to get information about what part of <var>string</var> actually
 matched the regular expression or its subexpressions, use the arguments
 <var>matchptr</var> and <var>nmatch</var>.  Otherwise, pass <code>0</code> for
-<var>nmatch</var>, and <code>NULL</code> for <var>matchptr</var>.  See <a href="Regexp-Subexpressions.html#Regexp%20Subexpressions">Regexp Subexpressions</a>. 
-</td></tr>
-</table>
+<var>nmatch</var>, and <code>NULL</code> for <var>matchptr</var>.  See <a href="Regexp-Subexpressions.html#Regexp-Subexpressions">Regexp Subexpressions</a>. 
+</p></blockquote></div>
 
    <p>You must match the regular expression with the same set of current
 locales that were in effect when you compiled the regular expression.
@@ -67,24 +68,28 @@ locales that were in effect when you compiled the regular expression.
 <var>eflags</var> argument:
 
      <dl>
-<dt><code>REG_NOTBOL</code>
-     <dd>Do not regard the beginning of the specified string as the beginning of
+<!-- regex.h -->
+<!-- POSIX.2 -->
+<dt><code>REG_NOTBOL</code><dd>Do not regard the beginning of the specified string as the beginning of
 a line; more generally, don't make any assumptions about what text might
 precede it.
 
-     <br><dt><code>REG_NOTEOL</code>
-     <dd>Do not regard the end of the specified string as the end of a line; more
+     <!-- regex.h -->
+<!-- POSIX.2 -->
+<br><dt><code>REG_NOTEOL</code><dd>Do not regard the end of the specified string as the end of a line; more
 generally, don't make any assumptions about what text might follow it. 
 </dl>
 
    <p>Here are the possible nonzero values that <code>regexec</code> can return:
 
      <dl>
-<dt><code>REG_NOMATCH</code>
-     <dd>The pattern didn't match the string.  This isn't really an error.
+<!-- regex.h -->
+<!-- POSIX.2 -->
+<dt><code>REG_NOMATCH</code><dd>The pattern didn't match the string.  This isn't really an error.
 
-     <br><dt><code>REG_ESPACE</code>
-     <dd><code>regexec</code> ran out of memory. 
+     <!-- regex.h -->
+<!-- POSIX.2 -->
+<br><dt><code>REG_ESPACE</code><dd><code>regexec</code> ran out of memory. 
 </dl>
 
    </body></html>

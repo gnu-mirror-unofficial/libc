@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Filesystem Handling - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-Management.html#System-Management" title="System Management">
+<link rel="prev" href="Platform-Type.html#Platform-Type" title="Platform Type">
+<link rel="next" href="System-Parameters.html#System-Parameters" title="System Parameters">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Filesystem%20Handling">Filesystem Handling</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="System-Parameters.html#System%20Parameters">System Parameters</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Platform-Type.html#Platform%20Type">Platform Type</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="System-Management.html#System%20Management">System Management</a>
-<hr><br>
+<a name="Filesystem-Handling"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="System-Parameters.html#System-Parameters">System Parameters</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Platform-Type.html#Platform-Type">Platform Type</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Management.html#System-Management">System Management</a>
+<hr>
 </div>
 
-<h3 class="section">Controlling and Querying Mounts</h3>
+<h3 class="section">30.3 Controlling and Querying Mounts</h3>
 
 <p>All files are in filesystems, and before you can access any file, its
 filesystem must be mounted.  Because of Unix's concept of
@@ -43,15 +51,16 @@ a regular file in another filesystem as its medium.  So if that regular
 file contains appropriate data for a filesystem, you can by mounting the
 loop device essentially mount a regular file.
 
-   <p>Some filesystems aren't based on a device of any kind.  The "proc"
+   <p>Some filesystems aren't based on a device of any kind.  The &ldquo;proc&rdquo;
 filesystem, for example, contains files whose data is made up by the
 filesystem driver on the fly whenever you ask for it.  And when you
 write to it, the data you write causes changes in the system.  No data
 gets stored.
 
+<!-- It would be good to mention NFS mounts here. -->
 <ul class="menu">
-<li><a accesskey="1" href="Mount-Information.html#Mount%20Information">Mount Information</a>:            What is or could be mounted? 
-<li><a accesskey="2" href="Mount-Unmount-Remount.html#Mount-Unmount-Remount">Mount-Unmount-Remount</a>:        Controlling what is mounted and how
+<li><a accesskey="1" href="Mount-Information.html#Mount-Information">Mount Information</a>:            What is or could be mounted? 
+<li><a accesskey="2" href="Mount_002dUnmount_002dRemount.html#Mount_002dUnmount_002dRemount">Mount-Unmount-Remount</a>:        Controlling what is mounted and how
 </ul>
 
    </body></html>

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Error Recovery - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="I_002fO-on-Streams.html#I_002fO-on-Streams" title="I/O on Streams">
+<link rel="prev" href="EOF-and-Errors.html#EOF-and-Errors" title="EOF and Errors">
+<link rel="next" href="Binary-Streams.html#Binary-Streams" title="Binary Streams">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,57 +17,46 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Error%20Recovery">Error Recovery</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Binary-Streams.html#Binary%20Streams">Binary Streams</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="EOF-and-Errors.html#EOF%20and%20Errors">EOF and Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
-<hr><br>
+<a name="Error-Recovery"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Binary-Streams.html#Binary-Streams">Binary Streams</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="EOF-and-Errors.html#EOF-and-Errors">EOF and Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>
+<hr>
 </div>
 
-<h3 class="section">Recovering from errors</h3>
+<h3 class="section">12.16 Recovering from errors</h3>
 
 <p>You may explicitly clear the error and EOF flags with the <code>clearerr</code>
 function.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>clearerr</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function clears the end-of-file and error indicators for the
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: void <b>clearerr</b> (<var>FILE *stream</var>)<var><a name="index-clearerr-1094"></a></var><br>
+<blockquote><p>This function clears the end-of-file and error indicators for the
 stream <var>stream</var>.
 
-     <p>The file positioning functions (see <a href="File-Positioning.html#File%20Positioning">File Positioning</a>) also clear the
+        <p>The file positioning functions (see <a href="File-Positioning.html#File-Positioning">File Positioning</a>) also clear the
 end-of-file indicator for the stream. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>clearerr_unlocked</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>clearerr_unlocked</code> function is equivalent to the <code>clearerr</code>
+<!-- stdio.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void <b>clearerr_unlocked</b> (<var>FILE *stream</var>)<var><a name="index-clearerr_005funlocked-1095"></a></var><br>
+<blockquote><p>The <code>clearerr_unlocked</code> function is equivalent to the <code>clearerr</code>
 function except that it does not implicitly lock the stream.
 
-     <p>This function is a GNU extension. 
-</td></tr>
-</table>
+        <p>This function is a GNU extension. 
+</p></blockquote></div>
 
    <p>Note that it is <em>not</em> correct to just clear the error flag and retry
 a failed stream operation.  After a failed write, any number of
@@ -74,12 +68,12 @@ can thus cause lost or repeated data.
 a second try.  In both cases, you should seek to a known position before
 retrying.
 
-   <p>Most errors that can happen are not recoverable -- a second try will
+   <p>Most errors that can happen are not recoverable &mdash; a second try will
 always fail again in the same way.  So usually it is best to give up and
 report the error to the user, rather than install complicated recovery
 logic.
 
-   <p>One important exception is <code>EINTR</code> (see <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>). 
+   <p>One important exception is <code>EINTR</code> (see <a href="Interrupted-Primitives.html#Interrupted-Primitives">Interrupted Primitives</a>). 
 Many stream I/O implementations will treat it as an ordinary error, which
 can be quite inconvenient.  You can avoid this hassle by installing all
 signals with the <code>SA_RESTART</code> flag.

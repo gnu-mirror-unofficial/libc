@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Database Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Users-and-Groups.html#Users-and-Groups" title="Users and Groups">
+<link rel="prev" href="Group-Database.html#Group-Database" title="Group Database">
+<link rel="next" href="Netgroup-Database.html#Netgroup-Database" title="Netgroup Database">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +17,28 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Database%20Example">Database Example</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Group-Database.html#Group%20Database">Group Database</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
-<hr><br>
+<a name="Database-Example"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Netgroup-Database.html#Netgroup-Database">Netgroup Database</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Group-Database.html#Group-Database">Group Database</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users-and-Groups">Users and Groups</a>
+<hr>
 </div>
 
-<h3 class="section">User and Group Database Example</h3>
+<h3 class="section">29.15 User and Group Database Example</h3>
 
 <p>Here is an example program showing the use of the system database inquiry
 functions.  The program prints some information about the user running
 the program.
 
-<pre class="smallexample">
-
-     #include &lt;grp.h&gt;
+<pre class="smallexample">     #include &lt;grp.h&gt;
      #include &lt;pwd.h&gt;
      #include &lt;sys/types.h&gt;
      #include &lt;unistd.h&gt;
@@ -46,7 +52,7 @@ the program.
        struct group *my_group;
        char **members;
      
-       /* Get information about the user ID. */
+       /* <span class="roman">Get information about the user ID.</span> */
        me = getuid ();
        my_passwd = getpwuid (me);
        if (!my_passwd)
@@ -55,14 +61,14 @@ the program.
            exit (EXIT_FAILURE);
          }
      
-       /* Print the information. */
+       /* <span class="roman">Print the information.</span> */
        printf ("I am %s.\n", my_passwd-&gt;pw_gecos);
        printf ("My login name is %s.\n", my_passwd-&gt;pw_name);
        printf ("My uid is %d.\n", (int) (my_passwd-&gt;pw_uid));
        printf ("My home directory is %s.\n", my_passwd-&gt;pw_dir);
        printf ("My default shell is %s.\n", my_passwd-&gt;pw_shell);
      
-       /* Get information about the default group ID. */
+       /* <span class="roman">Get information about the default group ID.</span> */
        my_group = getgrgid (my_passwd-&gt;pw_gid);
        if (!my_group)
          {
@@ -71,7 +77,7 @@ the program.
            exit (EXIT_FAILURE);
          }
      
-       /* Print the information. */
+       /* <span class="roman">Print the information.</span> */
        printf ("My default group is %s (%d).\n",
                my_group-&gt;gr_name, (int) (my_passwd-&gt;pw_gid));
        printf ("The members of this group are:\n");
@@ -84,8 +90,7 @@ the program.
      
        return EXIT_SUCCESS;
      }
-     </pre>
-
+</pre>
    <p>Here is some output from this program:
 
 <pre class="smallexample">     I am Throckmorton Snurd.
@@ -97,7 +102,6 @@ the program.
      The members of this group are:
        friedman
        tami
-     </pre>
-
+</pre>
    </body></html>
 

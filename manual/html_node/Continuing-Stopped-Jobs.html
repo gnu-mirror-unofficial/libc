@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Continuing Stopped Jobs - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Implementing-a-Shell.html#Implementing-a-Shell" title="Implementing a Shell">
+<link rel="prev" href="Stopped-and-Terminated-Jobs.html#Stopped-and-Terminated-Jobs" title="Stopped and Terminated Jobs">
+<link rel="next" href="Missing-Pieces.html#Missing-Pieces" title="Missing Pieces">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Missing-Pieces.html#Missing%20Pieces">Missing Pieces</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
-<hr><br>
+<a name="Continuing-Stopped-Jobs"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Missing-Pieces.html#Missing-Pieces">Missing Pieces</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Stopped-and-Terminated-Jobs.html#Stopped-and-Terminated-Jobs">Stopped and Terminated Jobs</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing-a-Shell">Implementing a Shell</a>
+<hr>
 </div>
 
-<h3 class="subsection">Continuing Stopped Jobs</h4>
+<h4 class="subsection">27.6.6 Continuing Stopped Jobs</h4>
 
-<p>The shell can continue a stopped job by sending a <code>SIGCONT</code> signal
+<p><a name="index-stopped-jobs_002c-continuing-3204"></a>The shell can continue a stopped job by sending a <code>SIGCONT</code> signal
 to its process group.  If the job is being continued in the foreground,
 the shell should first invoke <code>tcsetpgrp</code> to give the job access to
 the terminal, and restore the saved terminal settings.  After continuing
@@ -34,9 +42,9 @@ a job in the foreground, the shell should wait for the job to stop or
 complete, as if the job had just been launched in the foreground.
 
    <p>The sample shell program handles both newly created and continued jobs
-with the same pair of functions, <code>put_job_in_foreground</code> and
-<code>put_job_in_background</code>.  The definitions of these functions
-were given in <a href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>.  When continuing a
+with the same pair of functions, <code>put_job_in_foreground</code><!-- /@w --> and
+<code>put_job_in_background</code><!-- /@w -->.  The definitions of these functions
+were given in <a href="Foreground-and-Background.html#Foreground-and-Background">Foreground and Background</a>.  When continuing a
 stopped job, a nonzero value is passed as the <var>cont</var> argument to
 ensure that the <code>SIGCONT</code> signal is sent and the terminal modes
 reset, as appropriate.
@@ -44,7 +52,7 @@ reset, as appropriate.
    <p>This leaves only a function for updating the shell's internal bookkeeping
 about the job being continued:
 
-<pre class="smallexample">     /* Mark a stopped job J as being running again.  */
+<pre class="smallexample">     /* <span class="roman">Mark a stopped job J as being running again.</span>  */
      
      void
      mark_job_as_running (job *j)
@@ -56,7 +64,7 @@ about the job being continued:
        j-&gt;notified = 0;
      }
      
-     /* Continue the job J.  */
+     /* <span class="roman">Continue the job J.</span>  */
      
      void
      continue_job (job *j, int foreground)
@@ -67,7 +75,6 @@ about the job being continued:
        else
          put_job_in_background (j, 1);
      }
-     </pre>
-
+</pre>
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Floating Point Classes - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Arithmetic.html#Arithmetic" title="Arithmetic">
+<link rel="prev" href="Floating-Point-Numbers.html#Floating-Point-Numbers" title="Floating Point Numbers">
+<link rel="next" href="Floating-Point-Errors.html#Floating-Point-Errors" title="Floating Point Errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,57 +17,49 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Floating%20Point%20Classes">Floating Point Classes</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Floating-Point-Errors.html#Floating%20Point%20Errors">Floating Point Errors</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Floating-Point-Numbers.html#Floating%20Point%20Numbers">Floating Point Numbers</a>,
+<a name="Floating-Point-Classes"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Floating-Point-Errors.html#Floating-Point-Errors">Floating Point Errors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Floating-Point-Numbers.html#Floating-Point-Numbers">Floating Point Numbers</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Floating-Point Number Classification Functions</h3>
+<h3 class="section">20.4 Floating-Point Number Classification Functions</h3>
 
-<p>ISO&nbsp;C99 defines macros that let you determine what sort of
+<p><a name="index-floating_002dpoint-classes-2325"></a><a name="index-classes_002c-floating_002dpoint-2326"></a><a name="index-math_002eh-2327"></a>
+ISO&nbsp;C99<!-- /@w --> defines macros that let you determine what sort of
 floating-point number a variable holds.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fpclassify</b><i> </i>(<i></i><em>float-type</em><i> </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is a generic macro which works on all floating-point types and
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>fpclassify</b> (<em>float-type</em><var> x</var>)<var><a name="index-fpclassify-2328"></a></var><br>
+<blockquote><p>This is a generic macro which works on all floating-point types and
 which returns a value of type <code>int</code>.  The possible values are:
 
           <dl>
-<dt><code>FP_NAN</code>
-          <dd>The floating-point number <var>x</var> is "Not a Number" (see <a href="Infinity-and-NaN.html#Infinity%20and%20NaN">Infinity and NaN</a>)
-<br><dt><code>FP_INFINITE</code>
-          <dd>The value of <var>x</var> is either plus or minus infinity (see <a href="Infinity-and-NaN.html#Infinity%20and%20NaN">Infinity and NaN</a>)
-<br><dt><code>FP_ZERO</code>
-          <dd>The value of <var>x</var> is zero.  In floating-point formats like IEEE&nbsp;754, where zero can be signed, this value is also returned if
+<dt><code>FP_NAN</code><a name="index-FP_005fNAN-2329"></a><dd>The floating-point number <var>x</var> is &ldquo;Not a Number&rdquo; (see <a href="Infinity-and-NaN.html#Infinity-and-NaN">Infinity and NaN</a>)
+<br><dt><code>FP_INFINITE</code><a name="index-FP_005fINFINITE-2330"></a><dd>The value of <var>x</var> is either plus or minus infinity (see <a href="Infinity-and-NaN.html#Infinity-and-NaN">Infinity and NaN</a>)
+<br><dt><code>FP_ZERO</code><a name="index-FP_005fZERO-2331"></a><dd>The value of <var>x</var> is zero.  In floating-point formats like IEEE&nbsp;754<!-- /@w -->, where zero can be signed, this value is also returned if
 <var>x</var> is negative zero. 
-<br><dt><code>FP_SUBNORMAL</code>
-          <dd>Numbers whose absolute value is too small to be represented in the
+<br><dt><code>FP_SUBNORMAL</code><a name="index-FP_005fSUBNORMAL-2332"></a><dd>Numbers whose absolute value is too small to be represented in the
 normal format are represented in an alternate, <dfn>denormalized</dfn> format
-(see <a href="Floating-Point-Concepts.html#Floating%20Point%20Concepts">Floating Point Concepts</a>).  This format is less precise but can
+(see <a href="Floating-Point-Concepts.html#Floating-Point-Concepts">Floating Point Concepts</a>).  This format is less precise but can
 represent values closer to zero.  <code>fpclassify</code> returns this value
 for values of <var>x</var> in this alternate format. 
-<br><dt><code>FP_NORMAL</code>
-          <dd>This value is returned for all other values of <var>x</var>.  It indicates
+<br><dt><code>FP_NORMAL</code><a name="index-FP_005fNORMAL-2333"></a><dd>This value is returned for all other values of <var>x</var>.  It indicates
 that there is nothing special about the number. 
 </dl>
 
-        </td></tr>
-</table>
+        </blockquote></div>
 
    <p><code>fpclassify</code> is most useful if more than one property of a number
 must be tested.  There are more specific macros which only test one
@@ -70,62 +67,40 @@ property at a time.  Generally these macros execute faster than
 <code>fpclassify</code>, since there is special hardware support for them. 
 You should therefore use the specific macros whenever possible.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>isfinite</b><i> </i>(<i></i><em>float-type</em><i> </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if <var>x</var> is finite: not plus or
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>isfinite</b> (<em>float-type</em><var> x</var>)<var><a name="index-isfinite-2334"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if <var>x</var> is finite: not plus or
 minus infinity, and not NaN.  It is equivalent to
 
      <pre class="smallexample">          (fpclassify (x) != FP_NAN &amp;&amp; fpclassify (x) != FP_INFINITE)
-          </pre>
-
-     <p><code>isfinite</code> is implemented as a macro which accepts any
+     </pre>
+        <p><code>isfinite</code> is implemented as a macro which accepts any
 floating-point type. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>isnormal</b><i> </i>(<i></i><em>float-type</em><i> </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if <var>x</var> is finite and normalized. 
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>isnormal</b> (<em>float-type</em><var> x</var>)<var><a name="index-isnormal-2335"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if <var>x</var> is finite and normalized. 
 It is equivalent to
 
      <pre class="smallexample">          (fpclassify (x) == FP_NORMAL)
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>isnan</b><i> </i>(<i></i><em>float-type</em><i> </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro returns a nonzero value if <var>x</var> is NaN.  It is equivalent
+<!-- math.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Macro: int <b>isnan</b> (<em>float-type</em><var> x</var>)<var><a name="index-isnan-2336"></a></var><br>
+<blockquote><p>This macro returns a nonzero value if <var>x</var> is NaN.  It is equivalent
 to
 
      <pre class="smallexample">          (fpclassify (x) == FP_NAN)
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
    <p>Another set of floating-point classification functions was provided by
 BSD.  The GNU C library also supports these functions; however, we
@@ -133,112 +108,55 @@ recommend that you use the ISO C99 macros in new code.  Those are standard
 and will be available more widely.  Also, since they are macros, you do
 not have to worry about the type of their argument.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>isinf</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>isinff</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>isinfl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function returns <code>-1</code> if <var>x</var> represents negative infinity,
+<!-- math.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>isinf</b> (<var>double x</var>)<var><a name="index-isinf-2337"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>isinff</b> (<var>float x</var>)<var><a name="index-isinff-2338"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>isinfl</b> (<var>long double x</var>)<var><a name="index-isinfl-2339"></a></var><br>
+<blockquote><p>This function returns <code>-1</code> if <var>x</var> represents negative infinity,
 <code>1</code> if <var>x</var> represents positive infinity, and <code>0</code> otherwise. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>isnan</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>isnanf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>isnanl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function returns a nonzero value if <var>x</var> is a "not a number"
+<!-- math.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>isnan</b> (<var>double x</var>)<var><a name="index-isnan-2340"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>isnanf</b> (<var>float x</var>)<var><a name="index-isnanf-2341"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>isnanl</b> (<var>long double x</var>)<var><a name="index-isnanl-2342"></a></var><br>
+<blockquote><p>This function returns a nonzero value if <var>x</var> is a &ldquo;not a number&rdquo;
 value, and zero otherwise.
 
-     <p><strong>Note:</strong> The <code>isnan</code> macro defined by ISO&nbsp;C99 overrides
+        <p><strong>Note:</strong> The <code>isnan</code> macro defined by ISO&nbsp;C99<!-- /@w --> overrides
 the BSD function.  This is normally not a problem, because the two
 routines behave identically.  However, if you really need to get the BSD
 function for some reason, you can write
 
      <pre class="smallexample">          (isnan) (x)
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>finite</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>finitef</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">int <b>finitel</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function returns a nonzero value if <var>x</var> is finite or a "not a
-number" value, and zero otherwise. 
-</td></tr>
-</table>
+<!-- math.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>finite</b> (<var>double x</var>)<var><a name="index-finite-2343"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>finitef</b> (<var>float x</var>)<var><a name="index-finitef-2344"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- BSD -->
+&mdash; Function: int <b>finitel</b> (<var>long double x</var>)<var><a name="index-finitel-2345"></a></var><br>
+<blockquote><p>This function returns a nonzero value if <var>x</var> is finite or a &ldquo;not a
+number&rdquo; value, and zero otherwise. 
+</p></blockquote></div>
 
    <p><strong>Portability Note:</strong> The functions listed in this section are BSD
 extensions.

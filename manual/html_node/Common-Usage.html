@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Common Usage - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Message-catalogs-a-la-X_002fOpen.html#Message-catalogs-a-la-X_002fOpen" title="Message catalogs a la X/Open">
+<link rel="prev" href="The-gencat-program.html#The-gencat-program" title="The gencat program">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,25 +16,28 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Common%20Usage">Common Usage</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="The-gencat-program.html#The%20gencat%20program">The gencat program</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-a-la-X-Open.html#Message%20catalogs%20a%20la%20X%2fOpen">Message catalogs a la X/Open</a>
-<hr><br>
+<a name="Common-Usage"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="The-gencat-program.html#The-gencat-program">The gencat program</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Message-catalogs-a-la-X_002fOpen.html#Message-catalogs-a-la-X_002fOpen">Message catalogs a la X/Open</a>
+<hr>
 </div>
 
-<h3 class="subsection">How to use the <code>catgets</code> interface</h4>
+<h4 class="subsection">8.1.4 How to use the <code>catgets</code> interface</h4>
 
 <p>The <code>catgets</code> functions can be used in two different ways.  By
 following slavishly the X/Open specs and not relying on the extension
 and by using the GNU extensions.  We will take a look at the former
 method first to understand the benefits of extensions.
 
-<h3 class="subsubsection">Not using symbolic names</h5>
+<h5 class="subsubsection">8.1.4.1 Not using symbolic names</h5>
 
 <p>Since the X/Open format of the message catalog files does not allow
 symbol names we have to work with numbers all the time.  When we start
@@ -38,9 +45,8 @@ writing a program we have to replace all appearances of translatable
 strings with something like
 
 <pre class="smallexample">     catgets (catdesc, set, msg, "string")
-     </pre>
-
-<p><var>catgets</var> is retrieved from a call to <code>catopen</code> which is
+</pre>
+   <p class="noindent"><var>catgets</var> is retrieved from a call to <code>catopen</code> which is
 normally done once at the program start.  The <code>"string"</code> is the
 string we want to translate.  The problems start with the set and
 message numbers.
@@ -63,7 +69,7 @@ worst cases the messages are so irritating that they cannot be
 recognized as wrong.  Think about the translations for <code>"true"</code> and
 <code>"false"</code> being exchanged.  This could result in a disaster.
 
-<h3 class="subsubsection">Using symbolic names</h5>
+<h5 class="subsubsection">8.1.4.2 Using symbolic names</h5>
 
 <p>The problems mentioned in the last section derive from the fact that:
 
@@ -84,20 +90,18 @@ program itself.
 before the program sources can be compiled.  In the last section it was
 described how to generate a header containing the mapping of the names. 
 E.g., for the example message file given in the last section we could
-call the <code>gencat</code> program as follow (assume <code>ex.msg</code> contains
+call the <code>gencat</code> program as follow (assume <samp><span class="file">ex.msg</span></samp> contains
 the sources).
 
 <pre class="smallexample">     gencat -H ex.h -o ex.cat ex.msg
-     </pre>
-
-<p>This generates a header file with the following content:
+</pre>
+   <p class="noindent">This generates a header file with the following content:
 
 <pre class="smallexample">     #define SetTwoSet 0x2   /* ex.msg:8 */
      
      #define SetOneSet 0x1   /* ex.msg:4 */
      #define SetOnetwo 0x2   /* ex.msg:6 */
-     </pre>
-
+</pre>
    <p>As can be seen the various symbols given in the source file are mangled
 to generate unique identifiers and these identifiers get numbers
 assigned.  Reading the source file and knowing about the rules will
@@ -122,14 +126,13 @@ code should look like this:
 
 <pre class="smallexample">     catgets (catdesc, SetOneSet, SetOnetwo,
               "   Message with ID \"two\", which gets the value 2 assigned")
-     </pre>
-
+</pre>
    <p>Writing the function this way will allow to change the message number
 and even the set number without requiring any change in the C source
 code.  (The text of the string is normally not the same; this is only
 for this example.)
 
-<h3 class="subsubsection">How does to this allow to develop</h5>
+<h5 class="subsubsection">8.1.4.3 How does to this allow to develop</h5>
 
 <p>To illustrate the usual way to work with the symbolic version numbers
 here is a little example.  Assume we want to write the very complex and
@@ -142,8 +145,7 @@ famous greeting program.  We start by writing the code as usual:
        printf ("Hello, world!\n");
        return 0;
      }
-     </pre>
-
+</pre>
    <p>Now we want to internationalize the message and therefore replace the
 message with whatever the user wants.
 
@@ -159,8 +161,7 @@ message with whatever the user wants.
        catclose (catdesc);
        return 0;
      }
-     </pre>
-
+</pre>
    <p>We see how the catalog object is opened and the returned descriptor used
 in the other function calls.  It is not really necessary to check for
 failure of any of the functions since even in these situations the
@@ -178,12 +179,11 @@ process it using the <code>gencat</code> program.
      
      $set Main
      Hello "Hallo, Welt!\n"
-     </pre>
-
+</pre>
    <p>Now we can start building the program (assume the message catalog source
-file is named <code>hello.msg</code> and the program source file <code>hello.c</code>):
+file is named <samp><span class="file">hello.msg</span></samp> and the program source file <samp><span class="file">hello.c</span></samp>):
 
-<pre class="smallexample">     <table class="cartouche" border=1><tr><td>
+<pre class="smallexample">     <p><table class="cartouche" summary="cartouche" border="1"><tr><td>
      % gencat -H msgnrs.h -o hello.cat hello.msg
      % cat msgnrs.h
      #define MainSet 0x1     /* hello.msg:4 */
@@ -196,11 +196,10 @@ file is named <code>hello.msg</code> and the program source file <code>hello.c</
      Hallo, Welt!
      %
      </td></tr></table>
-     </pre>
-
+</pre>
    <p>The call of the <code>gencat</code> program creates the missing header file
-<code>msgnrs.h</code> as well as the message catalog binary.  The former is
-used in the compilation of <code>hello.c</code> while the later is placed in a
+<samp><span class="file">msgnrs.h</span></samp> as well as the message catalog binary.  The former is
+used in the compilation of <samp><span class="file">hello.c</span></samp> while the later is placed in a
 directory in which the <code>catopen</code> function will try to locate it. 
 Please check the <code>LC_ALL</code> environment variable and the default path
 for <code>catopen</code> presented in the description above.

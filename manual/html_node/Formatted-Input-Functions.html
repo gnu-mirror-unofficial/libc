@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Formatted Input Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Formatted-Input.html#Formatted-Input" title="Formatted Input">
+<link rel="prev" href="Other-Input-Conversions.html#Other-Input-Conversions" title="Other Input Conversions">
+<link rel="next" href="Variable-Arguments-Input.html#Variable-Arguments-Input" title="Variable Arguments Input">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,139 +17,101 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Formatted%20Input%20Functions">Formatted Input Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Variable-Arguments-Input.html#Variable%20Arguments%20Input">Variable Arguments Input</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-Input-Conversions.html#Other%20Input%20Conversions">Other Input Conversions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
-<hr><br>
+<a name="Formatted-Input-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Variable-Arguments-Input.html#Variable-Arguments-Input">Variable Arguments Input</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-Input-Conversions.html#Other-Input-Conversions">Other Input Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted-Input">Formatted Input</a>
+<hr>
 </div>
 
-<h3 class="subsection">Formatted Input Functions</h4>
+<h4 class="subsection">12.14.8 Formatted Input Functions</h4>
 
 <p>Here are the descriptions of the functions for performing formatted
 input. 
-Prototypes for these functions are in the header file <code>stdio.h</code>.
+Prototypes for these functions are in the header file <samp><span class="file">stdio.h</span></samp>. 
+<a name="index-stdio_002eh-1074"></a>
+<!-- stdio.h -->
+<!-- ISO -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>scanf</b><i> </i>(<i>const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>scanf</code> function reads formatted input from the stream
+<div class="defun">
+&mdash; Function: int <b>scanf</b> (<var>const char *template, <small class="dots">...</small></var>)<var><a name="index-scanf-1075"></a></var><br>
+<blockquote><p>The <code>scanf</code> function reads formatted input from the stream
 <code>stdin</code> under the control of the template string <var>template</var>. 
 The optional arguments are pointers to the places which receive the
 resulting values.
 
-     <p>The return value is normally the number of successful assignments.  If
+        <p>The return value is normally the number of successful assignments.  If
 an end-of-file condition is detected before any matches are performed,
 including matches against whitespace and literal characters in the
 template, then <code>EOF</code> is returned. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>wscanf</b><i> </i>(<i>const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wscanf</code> function reads formatted input from the stream
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>wscanf</b> (<var>const wchar_t *template, <small class="dots">...</small></var>)<var><a name="index-wscanf-1076"></a></var><br>
+<blockquote><p>The <code>wscanf</code> function reads formatted input from the stream
 <code>stdin</code> under the control of the template string <var>template</var>. 
 The optional arguments are pointers to the places which receive the
 resulting values.
 
-     <p>The return value is normally the number of successful assignments.  If
+        <p>The return value is normally the number of successful assignments.  If
 an end-of-file condition is detected before any matches are performed,
 including matches against whitespace and literal characters in the
 template, then <code>WEOF</code> is returned. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is just like <code>scanf</code>, except that the input is read
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fscanf</b> (<var>FILE *stream, const char *template, <small class="dots">...</small></var>)<var><a name="index-fscanf-1077"></a></var><br>
+<blockquote><p>This function is just like <code>scanf</code>, except that the input is read
 from the stream <var>stream</var> instead of <code>stdin</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fwscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is just like <code>wscanf</code>, except that the input is read
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fwscanf</b> (<var>FILE *stream, const wchar_t *template, <small class="dots">...</small></var>)<var><a name="index-fwscanf-1078"></a></var><br>
+<blockquote><p>This function is just like <code>wscanf</code>, except that the input is read
 from the stream <var>stream</var> instead of <code>stdin</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>sscanf</b><i> </i>(<i>const char *</i><var>s</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is like <code>scanf</code>, except that the characters are taken from the
+<!-- stdio.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>sscanf</b> (<var>const char *s, const char *template, <small class="dots">...</small></var>)<var><a name="index-sscanf-1079"></a></var><br>
+<blockquote><p>This is like <code>scanf</code>, except that the characters are taken from the
 null-terminated string <var>s</var> instead of from a stream.  Reaching the
 end of the string is treated as an end-of-file condition.
 
-     <p>The behavior of this function is undefined if copying takes place
-between objects that overlap--for example, if <var>s</var> is also given
-as an argument to receive a string read under control of the <code>%s</code>,
-<code>%S</code>, or <code>%[</code> conversion. 
-</td></tr>
-</table>
+        <p>The behavior of this function is undefined if copying takes place
+between objects that overlap&mdash;for example, if <var>s</var> is also given
+as an argument to receive a string read under control of the `<samp><span class="samp">%s</span></samp>',
+`<samp><span class="samp">%S</span></samp>', or `<samp><span class="samp">%[</span></samp>' conversion. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>swscanf</b><i> </i>(<i>const wchar_t *</i><var>ws</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is like <code>wscanf</code>, except that the characters are taken from the
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>swscanf</b> (<var>const wchar_t *ws, const char *template, <small class="dots">...</small></var>)<var><a name="index-swscanf-1080"></a></var><br>
+<blockquote><p>This is like <code>wscanf</code>, except that the characters are taken from the
 null-terminated string <var>ws</var> instead of from a stream.  Reaching the
 end of the string is treated as an end-of-file condition.
 
-     <p>The behavior of this function is undefined if copying takes place
-between objects that overlap--for example, if <var>ws</var> is also given as
-an argument to receive a string read under control of the <code>%s</code>,
-<code>%S</code>, or <code>%[</code> conversion. 
-</td></tr>
-</table>
+        <p>The behavior of this function is undefined if copying takes place
+between objects that overlap&mdash;for example, if <var>ws</var> is also given as
+an argument to receive a string read under control of the `<samp><span class="samp">%s</span></samp>',
+`<samp><span class="samp">%S</span></samp>', or `<samp><span class="samp">%[</span></samp>' conversion. 
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Special Functions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Mathematics.html#Mathematics" title="Mathematics">
+<link rel="prev" href="Hyperbolic-Functions.html#Hyperbolic-Functions" title="Hyperbolic Functions">
+<link rel="next" href="Errors-in-Math-Functions.html#Errors-in-Math-Functions" title="Errors in Math Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,450 +17,223 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Special%20Functions">Special Functions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Errors-in-Math-Functions.html#Errors%20in%20Math%20Functions">Errors in Math Functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Hyperbolic-Functions.html#Hyperbolic%20Functions">Hyperbolic Functions</a>,
+<a name="Special-Functions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Errors-in-Math-Functions.html#Errors-in-Math-Functions">Errors in Math Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Hyperbolic-Functions.html#Hyperbolic-Functions">Hyperbolic Functions</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Special Functions</h3>
+<h3 class="section">19.6 Special Functions</h3>
 
-<p>These are some more exotic mathematical functions which are sometimes
+<p><a name="index-special-functions-2227"></a><a name="index-Bessel-functions-2228"></a><a name="index-gamma-function-2229"></a>
+These are some more exotic mathematical functions which are sometimes
 useful.  Currently they only have real-valued versions.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>erf</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>erff</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>erfl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>erf</code> returns the error function of <var>x</var>.  The error
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>erf</b> (<var>double x</var>)<var><a name="index-erf-2230"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>erff</b> (<var>float x</var>)<var><a name="index-erff-2231"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>erfl</b> (<var>long double x</var>)<var><a name="index-erfl-2232"></a></var><br>
+<blockquote><p><code>erf</code> returns the error function of <var>x</var>.  The error
 function is defined as
      <pre class="smallexample">          erf (x) = 2/sqrt(pi) * integral from 0 to x of exp(-t^2) dt
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>erfc</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>erfcf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>erfcl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>erfc</code> returns <code>1.0 - erf(</code><var>x</var><code>)</code>, but computed in a
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>erfc</b> (<var>double x</var>)<var><a name="index-erfc-2233"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>erfcf</b> (<var>float x</var>)<var><a name="index-erfcf-2234"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>erfcl</b> (<var>long double x</var>)<var><a name="index-erfcl-2235"></a></var><br>
+<blockquote><p><code>erfc</code> returns <code>1.0 - erf(</code><var>x</var><code>)</code>, but computed in a
 fashion that avoids round-off error when <var>x</var> is large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>lgamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>lgammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>lgammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>lgamma</code> returns the natural logarithm of the absolute value of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>lgamma</b> (<var>double x</var>)<var><a name="index-lgamma-2236"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>lgammaf</b> (<var>float x</var>)<var><a name="index-lgammaf-2237"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>lgammal</b> (<var>long double x</var>)<var><a name="index-lgammal-2238"></a></var><br>
+<blockquote><p><code>lgamma</code> returns the natural logarithm of the absolute value of
 the gamma function of <var>x</var>.  The gamma function is defined as
      <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
-          </pre>
-
-     <p>The sign of the gamma function is stored in the global variable
-<var>signgam</var>, which is declared in <code>math.h</code>.  It is <code>1</code> if
+     </pre>
+        <p><a name="index-signgam-2239"></a>The sign of the gamma function is stored in the global variable
+<var>signgam</var>, which is declared in <samp><span class="file">math.h</span></samp>.  It is <code>1</code> if
 the intermediate result was positive or zero, or <code>-1</code> if it was
 negative.
 
-     <p>To compute the real gamma function you can use the <code>tgamma</code>
+        <p>To compute the real gamma function you can use the <code>tgamma</code>
 function or you can compute the values as follows:
      <pre class="smallexample">          lgam = lgamma(x);
           gam  = signgam*exp(lgam);
-          </pre>
-
-     <p>The gamma function has singularities at the non-positive integers. 
+     </pre>
+        <p>The gamma function has singularities at the non-positive integers. 
 <code>lgamma</code> will raise the zero divide exception if evaluated at a
 singularity. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>lgamma_r</b><i> </i>(<i>double </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>lgammaf_r</b><i> </i>(<i>float </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>lgammal_r</b><i> </i>(<i>long double </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>lgamma_r</code> is just like <code>lgamma</code>, but it stores the sign of
+<!-- math.h -->
+<!-- XPG -->
+<div class="defun">
+&mdash; Function: double <b>lgamma_r</b> (<var>double x, int *signp</var>)<var><a name="index-lgamma_005fr-2240"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- XPG -->
+&mdash; Function: float <b>lgammaf_r</b> (<var>float x, int *signp</var>)<var><a name="index-lgammaf_005fr-2241"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- XPG -->
+&mdash; Function: long double <b>lgammal_r</b> (<var>long double x, int *signp</var>)<var><a name="index-lgammal_005fr-2242"></a></var><br>
+<blockquote><p><code>lgamma_r</code> is just like <code>lgamma</code>, but it stores the sign of
 the intermediate result in the variable pointed to by <var>signp</var>
 instead of in the <var>signgam</var> global.  This means it is reentrant. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>gamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>gammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>gammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-These functions exist for compatibility reasons.  They are equivalent to
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>gamma</b> (<var>double x</var>)<var><a name="index-gamma-2243"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>gammaf</b> (<var>float x</var>)<var><a name="index-gammaf-2244"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>gammal</b> (<var>long double x</var>)<var><a name="index-gammal-2245"></a></var><br>
+<blockquote><p>These functions exist for compatibility reasons.  They are equivalent to
 <code>lgamma</code> etc.  It is better to use <code>lgamma</code> since for one the
 name reflects better the actual computation, moreover <code>lgamma</code> is
-standardized in ISO&nbsp;C99 while <code>gamma</code> is not. 
-</td></tr>
-</table>
+standardized in ISO&nbsp;C99<!-- /@w --> while <code>gamma</code> is not. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>tgamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>tgammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>tgammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>tgamma</code> applies the gamma function to <var>x</var>.  The gamma
+<!-- math.h -->
+<!-- XPG, ISO -->
+<div class="defun">
+&mdash; Function: double <b>tgamma</b> (<var>double x</var>)<var><a name="index-tgamma-2246"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- XPG, ISO -->
+&mdash; Function: float <b>tgammaf</b> (<var>float x</var>)<var><a name="index-tgammaf-2247"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- XPG, ISO -->
+&mdash; Function: long double <b>tgammal</b> (<var>long double x</var>)<var><a name="index-tgammal-2248"></a></var><br>
+<blockquote><p><code>tgamma</code> applies the gamma function to <var>x</var>.  The gamma
 function is defined as
      <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
-          </pre>
+     </pre>
+        <p>This function was introduced in ISO&nbsp;C99<!-- /@w -->. 
+</p></blockquote></div>
 
-     <p>This function was introduced in ISO&nbsp;C99. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>j0</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>j0f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>j0l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>j0</code> returns the Bessel function of the first kind of order 0 of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>j0</b> (<var>double x</var>)<var><a name="index-j0-2249"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>j0f</b> (<var>float x</var>)<var><a name="index-j0f-2250"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>j0l</b> (<var>long double x</var>)<var><a name="index-j0l-2251"></a></var><br>
+<blockquote><p><code>j0</code> returns the Bessel function of the first kind of order 0 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>j1</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>j1f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>j1l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>j1</code> returns the Bessel function of the first kind of order 1 of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>j1</b> (<var>double x</var>)<var><a name="index-j1-2252"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>j1f</b> (<var>float x</var>)<var><a name="index-j1f-2253"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>j1l</b> (<var>long double x</var>)<var><a name="index-j1l-2254"></a></var><br>
+<blockquote><p><code>j1</code> returns the Bessel function of the first kind of order 1 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>jn</b><i> </i>(<i>int n, double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>jnf</b><i> </i>(<i>int n, float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>jnl</b><i> </i>(<i>int n, long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>jn</code> returns the Bessel function of the first kind of order
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>jn</b> (<var>int n, double x</var>)<var><a name="index-jn-2255"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>jnf</b> (<var>int n, float x</var>)<var><a name="index-jnf-2256"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>jnl</b> (<var>int n, long double x</var>)<var><a name="index-jnl-2257"></a></var><br>
+<blockquote><p><code>jn</code> returns the Bessel function of the first kind of order
 <var>n</var> of <var>x</var>.  It may signal underflow if <var>x</var> is too large. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>y0</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>y0f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>y0l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>y0</code> returns the Bessel function of the second kind of order 0 of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>y0</b> (<var>double x</var>)<var><a name="index-y0-2258"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>y0f</b> (<var>float x</var>)<var><a name="index-y0f-2259"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>y0l</b> (<var>long double x</var>)<var><a name="index-y0l-2260"></a></var><br>
+<blockquote><p><code>y0</code> returns the Bessel function of the second kind of order 0 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>y0</code> signals a domain error; if it is zero,
 <code>y0</code> signals overflow and returns -&amp;infin;. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>y1</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>y1f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>y1l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>y1</code> returns the Bessel function of the second kind of order 1 of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>y1</b> (<var>double x</var>)<var><a name="index-y1-2261"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>y1f</b> (<var>float x</var>)<var><a name="index-y1f-2262"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>y1l</b> (<var>long double x</var>)<var><a name="index-y1l-2263"></a></var><br>
+<blockquote><p><code>y1</code> returns the Bessel function of the second kind of order 1 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>y1</code> signals a domain error; if it is zero,
 <code>y1</code> signals overflow and returns -&amp;infin;. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">double <b>yn</b><i> </i>(<i>int n, double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">float <b>ynf</b><i> </i>(<i>int n, float </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-<tr>
-<td align="left">long double <b>ynl</b><i> </i>(<i>int n, long double </i><var>x</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>yn</code> returns the Bessel function of the second kind of order <var>n</var> of
+<!-- math.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: double <b>yn</b> (<var>int n, double x</var>)<var><a name="index-yn-2264"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: float <b>ynf</b> (<var>int n, float x</var>)<var><a name="index-ynf-2265"></a></var><br>
+<blockquote><!-- math.h -->
+<!-- SVID -->
+&mdash; Function: long double <b>ynl</b> (<var>int n, long double x</var>)<var><a name="index-ynl-2266"></a></var><br>
+<blockquote><p><code>yn</code> returns the Bessel function of the second kind of order <var>n</var> of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>yn</code> signals a domain error; if it is zero,
 <code>yn</code> signals overflow and returns -&amp;infin;. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

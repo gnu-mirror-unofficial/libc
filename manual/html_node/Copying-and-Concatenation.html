@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Copying and Concatenation - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="String-and-Array-Utilities.html#String-and-Array-Utilities" title="String and Array Utilities">
+<link rel="prev" href="String-Length.html#String-Length" title="String Length">
+<link rel="next" href="String_002fArray-Comparison.html#String_002fArray-Comparison" title="String/Array Comparison">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,27 +17,30 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Copying%20and%20Concatenation">Copying and Concatenation</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="String-Array-Comparison.html#String%2fArray%20Comparison">String/Array Comparison</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="String-Length.html#String%20Length">String Length</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
-<hr><br>
+<a name="Copying-and-Concatenation"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="String_002fArray-Comparison.html#String_002fArray-Comparison">String/Array Comparison</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="String-Length.html#String-Length">String Length</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String-and-Array-Utilities">String and Array Utilities</a>
+<hr>
 </div>
 
-<h3 class="section">Copying and Concatenation</h3>
+<h3 class="section">5.4 Copying and Concatenation</h3>
 
 <p>You can use the functions described in this section to copy the contents
 of strings and arrays, or to append the contents of one string to
-another.  The <code>str</code> and <code>mem</code> functions are declared in the
-header file <code>string.h</code> while the <code>wstr</code> and <code>wmem</code>
-functions are declared in the file <code>wchar.h</code>.
-
-   <p>A helpful way to remember the ordering of the arguments to the functions
+another.  The `<samp><span class="samp">str</span></samp>' and `<samp><span class="samp">mem</span></samp>' functions are declared in the
+header file <samp><span class="file">string.h</span></samp> while the `<samp><span class="samp">wstr</span></samp>' and `<samp><span class="samp">wmem</span></samp>'
+functions are declared in the file <samp><span class="file">wchar.h</span></samp>. 
+<a name="index-string_002eh-470"></a><a name="index-wchar_002eh-471"></a><a name="index-copying-strings-and-arrays-472"></a><a name="index-string-copy-functions-473"></a><a name="index-array-copy-functions-474"></a><a name="index-concatenating-strings-475"></a><a name="index-string-concatenation-functions-476"></a>
+A helpful way to remember the ordering of the arguments to the functions
 in this section is that it corresponds to an assignment expression, with
 the destination array specified to the left of the source array.  All
 of these functions return the address of the destination array.
@@ -48,52 +56,39 @@ your program.
 
    <p>All functions that have problems copying between overlapping arrays are
 explicitly identified in this manual.  In addition to functions in this
-section, there are a few others like <code>sprintf</code> (see <a href="Formatted-Output-Functions.html#Formatted%20Output%20Functions">Formatted Output Functions</a>) and <code>scanf</code> (see <a href="Formatted-Input-Functions.html#Formatted%20Input%20Functions">Formatted Input Functions</a>).
+section, there are a few others like <code>sprintf</code> (see <a href="Formatted-Output-Functions.html#Formatted-Output-Functions">Formatted Output Functions</a>) and <code>scanf</code> (see <a href="Formatted-Input-Functions.html#Formatted-Input-Functions">Formatted Input Functions</a>).
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void * <b>memcpy</b><i> </i>(<i>void *restrict </i><var>to</var><i>, const void *restrict </i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>memcpy</code> function copies <var>size</var> bytes from the object
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: void * <b>memcpy</b> (<var>void *restrict to, const void *restrict from, size_t size</var>)<var><a name="index-memcpy-477"></a></var><br>
+<blockquote><p>The <code>memcpy</code> function copies <var>size</var> bytes from the object
 beginning at <var>from</var> into the object beginning at <var>to</var>.  The
 behavior of this function is undefined if the two arrays <var>to</var> and
 <var>from</var> overlap; use <code>memmove</code> instead if overlapping is possible.
 
-     <p>The value returned by <code>memcpy</code> is the value of <var>to</var>.
+        <p>The value returned by <code>memcpy</code> is the value of <var>to</var>.
 
-     <p>Here is an example of how you might use <code>memcpy</code> to copy the
+        <p>Here is an example of how you might use <code>memcpy</code> to copy the
 contents of an array:
 
      <pre class="smallexample">          struct foo *oldarray, *newarray;
           int arraysize;
           ...
           memcpy (new, old, arraysize * sizeof (struct foo));
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wmemcpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restruct </i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wmemcpy</code> function copies <var>size</var> wide characters from the object
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wmemcpy</b> (<var>wchar_t *restrict wto, const wchar_t *restruct wfrom, size_t size</var>)<var><a name="index-wmemcpy-478"></a></var><br>
+<blockquote><p>The <code>wmemcpy</code> function copies <var>size</var> wide characters from the object
 beginning at <var>wfrom</var> into the object beginning at <var>wto</var>.  The
 behavior of this function is undefined if the two arrays <var>wto</var> and
 <var>wfrom</var> overlap; use <code>wmemmove</code> instead if overlapping is possible.
 
-     <p>The following is a possible implementation of <code>wmemcpy</code> but there
+        <p>The following is a possible implementation of <code>wmemcpy</code> but there
 are more optimizations possible.
 
      <pre class="smallexample">          wchar_t *
@@ -102,32 +97,24 @@ are more optimizations possible.
           {
             return (wchar_t *) memcpy (wto, wfrom, size * sizeof (wchar_t));
           }
-          </pre>
+     </pre>
+        <p>The value returned by <code>wmemcpy</code> is the value of <var>wto</var>.
 
-     <p>The value returned by <code>wmemcpy</code> is the value of <var>wto</var>.
+        <p>This function was introduced in Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w -->. 
+</p></blockquote></div>
 
-     <p>This function was introduced in Amendment&nbsp;1 to ISO&nbsp;C90. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">void * <b>mempcpy</b><i> </i>(<i>void *restrict </i><var>to</var><i>, const void *restrict </i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>mempcpy</code> function is nearly identical to the <code>memcpy</code>
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: void * <b>mempcpy</b> (<var>void *restrict to, const void *restrict from, size_t size</var>)<var><a name="index-mempcpy-479"></a></var><br>
+<blockquote><p>The <code>mempcpy</code> function is nearly identical to the <code>memcpy</code>
 function.  It copies <var>size</var> bytes from the object beginning at
 <code>from</code> into the object pointed to by <var>to</var>.  But instead of
 returning the value of <var>to</var> it returns a pointer to the byte
 following the last written byte in the object beginning at <var>to</var>. 
 I.e., the value is <code>((void *) ((char *) </code><var>to</var><code> + </code><var>size</var><code>))</code>.
 
-     <p>This function is useful in situations where a number of objects shall be
+        <p>This function is useful in situations where a number of objects shall be
 copied to consecutive memory positions.
 
      <pre class="smallexample">          void *
@@ -138,33 +125,25 @@ copied to consecutive memory positions.
               mempcpy (mempcpy (result, o1, s1), o2, s2);
             return result;
           }
-          </pre>
+     </pre>
+        <p>This function is a GNU extension. 
+</p></blockquote></div>
 
-     <p>This function is a GNU extension. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wmempcpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wmempcpy</code> function is nearly identical to the <code>wmemcpy</code>
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wmempcpy</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom, size_t size</var>)<var><a name="index-wmempcpy-480"></a></var><br>
+<blockquote><p>The <code>wmempcpy</code> function is nearly identical to the <code>wmemcpy</code>
 function.  It copies <var>size</var> wide characters from the object
 beginning at <code>wfrom</code> into the object pointed to by <var>wto</var>.  But
 instead of returning the value of <var>wto</var> it returns a pointer to the
 wide character following the last written wide character in the object
-beginning at <var>wto</var>.  I.e., the value is <code></code><var>wto</var><code> + </code><var>size</var><code></code>.
+beginning at <var>wto</var>.  I.e., the value is <var>wto</var><code> + </code><var>size</var>.
 
-     <p>This function is useful in situations where a number of objects shall be
+        <p>This function is useful in situations where a number of objects shall be
 copied to consecutive memory positions.
 
-     <p>The following is a possible implementation of <code>wmemcpy</code> but there
+        <p>The following is a possible implementation of <code>wmemcpy</code> but there
 are more optimizations possible.
 
      <pre class="smallexample">          wchar_t *
@@ -173,50 +152,35 @@ are more optimizations possible.
           {
             return (wchar_t *) mempcpy (wto, wfrom, size * sizeof (wchar_t));
           }
-          </pre>
+     </pre>
+        <p>This function is a GNU extension. 
+</p></blockquote></div>
 
-     <p>This function is a GNU extension. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">void * <b>memmove</b><i> </i>(<i>void *</i><var>to</var><i>, const void *</i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>memmove</code> copies the <var>size</var> bytes at <var>from</var> into the
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: void * <b>memmove</b> (<var>void *to, const void *from, size_t size</var>)<var><a name="index-memmove-481"></a></var><br>
+<blockquote><p><code>memmove</code> copies the <var>size</var> bytes at <var>from</var> into the
 <var>size</var> bytes at <var>to</var>, even if those two blocks of space
 overlap.  In the case of overlap, <code>memmove</code> is careful to copy the
 original values of the bytes in the block at <var>from</var>, including those
 bytes which also belong to the block at <var>to</var>.
 
-     <p>The value returned by <code>memmove</code> is the value of <var>to</var>. 
-</td></tr>
-</table>
+        <p>The value returned by <code>memmove</code> is the value of <var>to</var>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wmemmove</b><i> </i>(<i>wchar *</i><var>wto</var><i>, const wchar_t *</i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>wmemmove</code> copies the <var>size</var> wide characters at <var>wfrom</var>
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wmemmove</b> (<var>wchar *wto, const wchar_t *wfrom, size_t size</var>)<var><a name="index-wmemmove-482"></a></var><br>
+<blockquote><p><code>wmemmove</code> copies the <var>size</var> wide characters at <var>wfrom</var>
 into the <var>size</var> wide characters at <var>wto</var>, even if those two
 blocks of space overlap.  In the case of overlap, <code>memmove</code> is
 careful to copy the original values of the wide characters in the block
 at <var>wfrom</var>, including those wide characters which also belong to the
 block at <var>wto</var>.
 
-     <p>The following is a possible implementation of <code>wmemcpy</code> but there
+        <p>The following is a possible implementation of <code>wmemcpy</code> but there
 are more optimizations possible.
 
      <pre class="smallexample">          wchar_t *
@@ -225,249 +189,169 @@ are more optimizations possible.
           {
             return (wchar_t *) mempcpy (wto, wfrom, size * sizeof (wchar_t));
           }
-          </pre>
+     </pre>
+        <p>The value returned by <code>wmemmove</code> is the value of <var>wto</var>.
 
-     <p>The value returned by <code>wmemmove</code> is the value of <var>wto</var>.
+        <p>This function is a GNU extension. 
+</p></blockquote></div>
 
-     <p>This function is a GNU extension. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">void * <b>memccpy</b><i> </i>(<i>void *restrict </i><var>to</var><i>, const void *restrict </i><var>from</var><i>, int </i><var>c</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function copies no more than <var>size</var> bytes from <var>from</var> to
+<!-- string.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: void * <b>memccpy</b> (<var>void *restrict to, const void *restrict from, int c, size_t size</var>)<var><a name="index-memccpy-483"></a></var><br>
+<blockquote><p>This function copies no more than <var>size</var> bytes from <var>from</var> to
 <var>to</var>, stopping if a byte matching <var>c</var> is found.  The return
 value is a pointer into <var>to</var> one byte past where <var>c</var> was copied,
 or a null pointer if no byte matching <var>c</var> appeared in the first
 <var>size</var> bytes of <var>from</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void * <b>memset</b><i> </i>(<i>void *</i><var>block</var><i>, int </i><var>c</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function copies the value of <var>c</var> (converted to an
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: void * <b>memset</b> (<var>void *block, int c, size_t size</var>)<var><a name="index-memset-484"></a></var><br>
+<blockquote><p>This function copies the value of <var>c</var> (converted to an
 <code>unsigned char</code>) into each of the first <var>size</var> bytes of the
 object beginning at <var>block</var>.  It returns the value of <var>block</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wmemset</b><i> </i>(<i>wchar_t *</i><var>block</var><i>, wchar_t </i><var>wc</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function copies the value of <var>wc</var> into each of the first
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wmemset</b> (<var>wchar_t *block, wchar_t wc, size_t size</var>)<var><a name="index-wmemset-485"></a></var><br>
+<blockquote><p>This function copies the value of <var>wc</var> into each of the first
 <var>size</var> wide characters of the object beginning at <var>block</var>.  It
 returns the value of <var>block</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strcpy</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This copies characters from the string <var>from</var> (up to and including
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: char * <b>strcpy</b> (<var>char *restrict to, const char *restrict from</var>)<var><a name="index-strcpy-486"></a></var><br>
+<blockquote><p>This copies characters from the string <var>from</var> (up to and including
 the terminating null character) into the string <var>to</var>.  Like
 <code>memcpy</code>, this function has undefined results if the strings
 overlap.  The return value is the value of <var>to</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcscpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This copies wide characters from the string <var>wfrom</var> (up to and
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcscpy</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom</var>)<var><a name="index-wcscpy-487"></a></var><br>
+<blockquote><p>This copies wide characters from the string <var>wfrom</var> (up to and
 including the terminating null wide character) into the string
 <var>wto</var>.  Like <code>wmemcpy</code>, this function has undefined results if
 the strings overlap.  The return value is the value of <var>wto</var>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strncpy</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>strcpy</code> but always copies exactly
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: char * <b>strncpy</b> (<var>char *restrict to, const char *restrict from, size_t size</var>)<var><a name="index-strncpy-488"></a></var><br>
+<blockquote><p>This function is similar to <code>strcpy</code> but always copies exactly
 <var>size</var> characters into <var>to</var>.
 
-     <p>If the length of <var>from</var> is more than <var>size</var>, then <code>strncpy</code>
+        <p>If the length of <var>from</var> is more than <var>size</var>, then <code>strncpy</code>
 copies just the first <var>size</var> characters.  Note that in this case
 there is no null terminator written into <var>to</var>.
 
-     <p>If the length of <var>from</var> is less than <var>size</var>, then <code>strncpy</code>
+        <p>If the length of <var>from</var> is less than <var>size</var>, then <code>strncpy</code>
 copies all of <var>from</var>, followed by enough null characters to add up
 to <var>size</var> characters in all.  This behavior is rarely useful, but it
-is specified by the ISO&nbsp;C standard.
+is specified by the ISO&nbsp;C<!-- /@w --> standard.
 
-     <p>The behavior of <code>strncpy</code> is undefined if the strings overlap.
+        <p>The behavior of <code>strncpy</code> is undefined if the strings overlap.
 
-     <p>Using <code>strncpy</code> as opposed to <code>strcpy</code> is a way to avoid bugs
+        <p>Using <code>strncpy</code> as opposed to <code>strcpy</code> is a way to avoid bugs
 relating to writing past the end of the allocated space for <var>to</var>. 
 However, it can also make your program much slower in one common case:
 copying a string which is probably small into a potentially large buffer. 
 In this case, <var>size</var> may be large, and when it is, <code>strncpy</code> will
 waste a considerable amount of time copying null characters. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcsncpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>wcscpy</code> but always copies exactly
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcsncpy</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom, size_t size</var>)<var><a name="index-wcsncpy-489"></a></var><br>
+<blockquote><p>This function is similar to <code>wcscpy</code> but always copies exactly
 <var>size</var> wide characters into <var>wto</var>.
 
-     <p>If the length of <var>wfrom</var> is more than <var>size</var>, then
+        <p>If the length of <var>wfrom</var> is more than <var>size</var>, then
 <code>wcsncpy</code> copies just the first <var>size</var> wide characters.  Note
 that in this case there is no null terminator written into <var>wto</var>.
 
-     <p>If the length of <var>wfrom</var> is less than <var>size</var>, then
+        <p>If the length of <var>wfrom</var> is less than <var>size</var>, then
 <code>wcsncpy</code> copies all of <var>wfrom</var>, followed by enough null wide
 characters to add up to <var>size</var> wide characters in all.  This
-behavior is rarely useful, but it is specified by the ISO&nbsp;C
+behavior is rarely useful, but it is specified by the ISO&nbsp;C<!-- /@w -->
 standard.
 
-     <p>The behavior of <code>wcsncpy</code> is undefined if the strings overlap.
+        <p>The behavior of <code>wcsncpy</code> is undefined if the strings overlap.
 
-     <p>Using <code>wcsncpy</code> as opposed to <code>wcscpy</code> is a way to avoid bugs
+        <p>Using <code>wcsncpy</code> as opposed to <code>wcscpy</code> is a way to avoid bugs
 relating to writing past the end of the allocated space for <var>wto</var>. 
 However, it can also make your program much slower in one common case:
 copying a string which is probably small into a potentially large buffer. 
 In this case, <var>size</var> may be large, and when it is, <code>wcsncpy</code> will
 waste a considerable amount of time copying null wide characters. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strdup</b><i> </i>(<i>const char *</i><var>s</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function copies the null-terminated string <var>s</var> into a newly
+<!-- string.h -->
+<!-- SVID -->
+<div class="defun">
+&mdash; Function: char * <b>strdup</b> (<var>const char *s</var>)<var><a name="index-strdup-490"></a></var><br>
+<blockquote><p>This function copies the null-terminated string <var>s</var> into a newly
 allocated string.  The string is allocated using <code>malloc</code>; see
-<a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>.  If <code>malloc</code> cannot allocate space
+<a href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>.  If <code>malloc</code> cannot allocate space
 for the new string, <code>strdup</code> returns a null pointer.  Otherwise it
 returns a pointer to the new string. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcsdup</b><i> </i>(<i>const wchar_t *</i><var>ws</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function copies the null-terminated wide character string <var>ws</var>
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcsdup</b> (<var>const wchar_t *ws</var>)<var><a name="index-wcsdup-491"></a></var><br>
+<blockquote><p>This function copies the null-terminated wide character string <var>ws</var>
 into a newly allocated string.  The string is allocated using
-<code>malloc</code>; see <a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>.  If <code>malloc</code>
+<code>malloc</code>; see <a href="Unconstrained-Allocation.html#Unconstrained-Allocation">Unconstrained Allocation</a>.  If <code>malloc</code>
 cannot allocate space for the new string, <code>wcsdup</code> returns a null
 pointer.  Otherwise it returns a pointer to the new wide character
 string.
 
-     <p>This function is a GNU extension. 
-</td></tr>
-</table>
+        <p>This function is a GNU extension. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strndup</b><i> </i>(<i>const char *</i><var>s</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>strdup</code> but always copies at most
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>strndup</b> (<var>const char *s, size_t size</var>)<var><a name="index-strndup-492"></a></var><br>
+<blockquote><p>This function is similar to <code>strdup</code> but always copies at most
 <var>size</var> characters into the newly allocated string.
 
-     <p>If the length of <var>s</var> is more than <var>size</var>, then <code>strndup</code>
+        <p>If the length of <var>s</var> is more than <var>size</var>, then <code>strndup</code>
 copies just the first <var>size</var> characters and adds a closing null
 terminator.  Otherwise all characters are copied and the string is
 terminated.
 
-     <p>This function is different to <code>strncpy</code> in that it always
+        <p>This function is different to <code>strncpy</code> in that it always
 terminates the destination string.
 
-     <p><code>strndup</code> is a GNU extension. 
-</td></tr>
-</table>
+        <p><code>strndup</code> is a GNU extension. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>stpcpy</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is like <code>strcpy</code>, except that it returns a pointer to
+<!-- string.h -->
+<!-- Unknown origin -->
+<div class="defun">
+&mdash; Function: char * <b>stpcpy</b> (<var>char *restrict to, const char *restrict from</var>)<var><a name="index-stpcpy-493"></a></var><br>
+<blockquote><p>This function is like <code>strcpy</code>, except that it returns a pointer to
 the end of the string <var>to</var> (that is, the address of the terminating
 null character <code>to + strlen (from)</code>) rather than the beginning.
 
-     <p>For example, this program uses <code>stpcpy</code> to concatenate <code>foo</code>
-and <code>bar</code> to produce <code>foobar</code>, which it then prints.
+        <p>For example, this program uses <code>stpcpy</code> to concatenate `<samp><span class="samp">foo</span></samp>'
+and `<samp><span class="samp">bar</span></samp>' to produce `<samp><span class="samp">foobar</span></samp>', which it then prints.
 
-     <pre class="smallexample">
-
-          #include &lt;string.h&gt;
+     <pre class="smallexample">          #include &lt;string.h&gt;
           #include &lt;stdio.h&gt;
           
           int
@@ -480,130 +364,99 @@ and <code>bar</code> to produce <code>foobar</code>, which it then prints.
             puts (buffer);
             return 0;
           }
-          </pre>
-
-     <p>This function is not part of the ISO or POSIX standards, and is not
+     </pre>
+        <p>This function is not part of the ISO or POSIX standards, and is not
 customary on Unix systems, but we did not invent it either.  Perhaps it
 comes from MS-DOG.
 
-     <p>Its behavior is undefined if the strings overlap.  The function is
-declared in <code>string.h</code>. 
-</td></tr>
-</table>
+        <p>Its behavior is undefined if the strings overlap.  The function is
+declared in <samp><span class="file">string.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcpcpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is like <code>wcscpy</code>, except that it returns a pointer to
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcpcpy</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom</var>)<var><a name="index-wcpcpy-494"></a></var><br>
+<blockquote><p>This function is like <code>wcscpy</code>, except that it returns a pointer to
 the end of the string <var>wto</var> (that is, the address of the terminating
 null character <code>wto + strlen (wfrom)</code>) rather than the beginning.
 
-     <p>This function is not part of ISO or POSIX but was found useful while
+        <p>This function is not part of ISO or POSIX but was found useful while
 developing the GNU C Library itself.
 
-     <p>The behavior of <code>wcpcpy</code> is undefined if the strings overlap.
+        <p>The behavior of <code>wcpcpy</code> is undefined if the strings overlap.
 
-     <p><code>wcpcpy</code> is a GNU extension and is declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p><code>wcpcpy</code> is a GNU extension and is declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>stpncpy</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>stpcpy</code> but copies always exactly
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: char * <b>stpncpy</b> (<var>char *restrict to, const char *restrict from, size_t size</var>)<var><a name="index-stpncpy-495"></a></var><br>
+<blockquote><p>This function is similar to <code>stpcpy</code> but copies always exactly
 <var>size</var> characters into <var>to</var>.
 
-     <p>If the length of <var>from</var> is more then <var>size</var>, then <code>stpncpy</code>
+        <p>If the length of <var>from</var> is more then <var>size</var>, then <code>stpncpy</code>
 copies just the first <var>size</var> characters and returns a pointer to the
 character directly following the one which was copied last.  Note that in
 this case there is no null terminator written into <var>to</var>.
 
-     <p>If the length of <var>from</var> is less than <var>size</var>, then <code>stpncpy</code>
+        <p>If the length of <var>from</var> is less than <var>size</var>, then <code>stpncpy</code>
 copies all of <var>from</var>, followed by enough null characters to add up
 to <var>size</var> characters in all.  This behavior is rarely useful, but it
 is implemented to be useful in contexts where this behavior of the
 <code>strncpy</code> is used.  <code>stpncpy</code> returns a pointer to the
 <em>first</em> written null character.
 
-     <p>This function is not part of ISO or POSIX but was found useful while
+        <p>This function is not part of ISO or POSIX but was found useful while
 developing the GNU C Library itself.
 
-     <p>Its behavior is undefined if the strings overlap.  The function is
-declared in <code>string.h</code>. 
-</td></tr>
-</table>
+        <p>Its behavior is undefined if the strings overlap.  The function is
+declared in <samp><span class="file">string.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcpncpy</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>wcpcpy</code> but copies always exactly
+<!-- wchar.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcpncpy</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom, size_t size</var>)<var><a name="index-wcpncpy-496"></a></var><br>
+<blockquote><p>This function is similar to <code>wcpcpy</code> but copies always exactly
 <var>wsize</var> characters into <var>wto</var>.
 
-     <p>If the length of <var>wfrom</var> is more then <var>size</var>, then
+        <p>If the length of <var>wfrom</var> is more then <var>size</var>, then
 <code>wcpncpy</code> copies just the first <var>size</var> wide characters and
-returns a pointer to the wide character directly following the last
-non-null wide character which was copied last.  Note that in this case
-there is no null terminator written into <var>wto</var>.
+returns a pointer to the wide character directly following the one which
+was copied last.  Note that in this case there is no null terminator
+written into <var>wto</var>.
 
-     <p>If the length of <var>wfrom</var> is less than <var>size</var>, then <code>wcpncpy</code>
+        <p>If the length of <var>wfrom</var> is less than <var>size</var>, then <code>wcpncpy</code>
 copies all of <var>wfrom</var>, followed by enough null characters to add up
 to <var>size</var> characters in all.  This behavior is rarely useful, but it
 is implemented to be useful in contexts where this behavior of the
 <code>wcsncpy</code> is used.  <code>wcpncpy</code> returns a pointer to the
 <em>first</em> written null character.
 
-     <p>This function is not part of ISO or POSIX but was found useful while
+        <p>This function is not part of ISO or POSIX but was found useful while
 developing the GNU C Library itself.
 
-     <p>Its behavior is undefined if the strings overlap.
+        <p>Its behavior is undefined if the strings overlap.
 
-     <p><code>wcpncpy</code> is a GNU extension and is declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p><code>wcpncpy</code> is a GNU extension and is declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strdupa</b><i> </i>(<i>const char *</i><var>s</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This macro is similar to <code>strdup</code> but allocates the new string
-using <code>alloca</code> instead of <code>malloc</code> (see <a href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>).  This means of course the returned string has the same
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Macro: char * <b>strdupa</b> (<var>const char *s</var>)<var><a name="index-strdupa-497"></a></var><br>
+<blockquote><p>This macro is similar to <code>strdup</code> but allocates the new string
+using <code>alloca</code> instead of <code>malloc</code> (see <a href="Variable-Size-Automatic.html#Variable-Size-Automatic">Variable Size Automatic</a>).  This means of course the returned string has the same
 limitations as any block of memory allocated using <code>alloca</code>.
 
-     <p>For obvious reasons <code>strdupa</code> is implemented only as a macro;
+        <p>For obvious reasons <code>strdupa</code> is implemented only as a macro;
 you cannot get the address of this function.  Despite this limitation
 it is a useful function.  The following code shows a situation where
 using <code>malloc</code> would be a lot more expensive.
 
-     <pre class="smallexample">
-
-          #include &lt;paths.h&gt;
+     <pre class="smallexample">          #include &lt;paths.h&gt;
           #include &lt;string.h&gt;
           #include &lt;stdio.h&gt;
           
@@ -622,57 +475,42 @@ using <code>malloc</code> would be a lot more expensive.
               }
             return 0;
           }
-          </pre>
-
-     <p>Please note that calling <code>strtok</code> using <var>path</var> directly is
+     </pre>
+        <p>Please note that calling <code>strtok</code> using <var>path</var> directly is
 invalid.  It is also not allowed to call <code>strdupa</code> in the argument
 list of <code>strtok</code> since <code>strdupa</code> uses <code>alloca</code>
-(see <a href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>) can interfere with the parameter
+(see <a href="Variable-Size-Automatic.html#Variable-Size-Automatic">Variable Size Automatic</a>) can interfere with the parameter
 passing.
 
-     <p>This function is only available if GNU CC is used. 
-</td></tr>
-</table>
+        <p>This function is only available if GNU CC is used. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strndupa</b><i> </i>(<i>const char *</i><var>s</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is similar to <code>strndup</code> but like <code>strdupa</code> it
+<!-- string.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Macro: char * <b>strndupa</b> (<var>const char *s, size_t size</var>)<var><a name="index-strndupa-498"></a></var><br>
+<blockquote><p>This function is similar to <code>strndup</code> but like <code>strdupa</code> it
 allocates the new string using <code>alloca</code>
-see <a href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>.  The same advantages and limitations
+see <a href="Variable-Size-Automatic.html#Variable-Size-Automatic">Variable Size Automatic</a>.  The same advantages and limitations
 of <code>strdupa</code> are valid for <code>strndupa</code>, too.
 
-     <p>This function is implemented only as a macro, just like <code>strdupa</code>. 
+        <p>This function is implemented only as a macro, just like <code>strdupa</code>. 
 Just as <code>strdupa</code> this macro also must not be used inside the
 parameter list in a function call.
 
-     <p><code>strndupa</code> is only available if GNU CC is used. 
-</td></tr>
-</table>
+        <p><code>strndupa</code> is only available if GNU CC is used. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strcat</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>strcat</code> function is similar to <code>strcpy</code>, except that the
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: char * <b>strcat</b> (<var>char *restrict to, const char *restrict from</var>)<var><a name="index-strcat-499"></a></var><br>
+<blockquote><p>The <code>strcat</code> function is similar to <code>strcpy</code>, except that the
 characters from <var>from</var> are concatenated or appended to the end of
 <var>to</var>, instead of overwriting it.  That is, the first character from
 <var>from</var> overwrites the null character marking the end of <var>to</var>.
 
-     <p>An equivalent definition for <code>strcat</code> would be:
+        <p>An equivalent definition for <code>strcat</code> would be:
 
      <pre class="smallexample">          char *
           strcat (char *restrict to, const char *restrict from)
@@ -680,28 +518,20 @@ characters from <var>from</var> are concatenated or appended to the end of
             strcpy (to + strlen (to), from);
             return to;
           }
-          </pre>
+     </pre>
+        <p>This function has undefined results if the strings overlap. 
+</p></blockquote></div>
 
-     <p>This function has undefined results if the strings overlap. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcscat</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>wcscat</code> function is similar to <code>wcscpy</code>, except that the
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcscat</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom</var>)<var><a name="index-wcscat-500"></a></var><br>
+<blockquote><p>The <code>wcscat</code> function is similar to <code>wcscpy</code>, except that the
 characters from <var>wfrom</var> are concatenated or appended to the end of
 <var>wto</var>, instead of overwriting it.  That is, the first character from
 <var>wfrom</var> overwrites the null character marking the end of <var>wto</var>.
 
-     <p>An equivalent definition for <code>wcscat</code> would be:
+        <p>An equivalent definition for <code>wcscat</code> would be:
 
      <pre class="smallexample">          wchar_t *
           wcscat (wchar_t *wto, const wchar_t *wfrom)
@@ -709,11 +539,9 @@ characters from <var>wfrom</var> are concatenated or appended to the end of
             wcscpy (wto + wcslen (wto), wfrom);
             return wto;
           }
-          </pre>
-
-     <p>This function has undefined results if the strings overlap. 
-</td></tr>
-</table>
+     </pre>
+        <p>This function has undefined results if the strings overlap. 
+</p></blockquote></div>
 
    <p>Programmers using the <code>strcat</code> or <code>wcscat</code> function (or the
 following <code>strncat</code> or <code>wcsncar</code> functions for that matter)
@@ -726,8 +554,9 @@ to use <code>strcat</code>/<code>wcscat</code>.  A lot of time is wasted finding
 end of the destination string so that the actual copying can start. 
 This is a common example:
 
-<pre class="smallexample">     /* This function concatenates arbitrarily many strings.  The last
-        parameter must be <code>NULL</code>.  */
+   <p><a name="index-g_t_005f_005fva_005fcopy-501"></a><a name="index-va_005fcopy-502"></a>
+<pre class="smallexample">     /* <span class="roman">This function concatenates arbitrarily many strings.  The last</span>
+        <span class="roman">parameter must be </span><code>NULL</code><span class="roman">.</span>  */
      char *
      concat (const char *str, ...)
      {
@@ -737,11 +566,11 @@ This is a common example:
        char *result;
      
        va_start (ap, str);
-       /* Actually <code>va_copy</code>, but this is the name more gcc versions
-          understand.  */
+       /* <span class="roman">Actually </span><code>va_copy</code><span class="roman">, but this is the name more gcc versions</span>
+          <span class="roman">understand.</span>  */
        __va_copy (ap2, ap);
      
-       /* Determine how much space we need.  */
+       /* <span class="roman">Determine how much space we need.</span>  */
        for (s = str; s != NULL; s = va_arg (ap, const char *))
          total += strlen (s);
      
@@ -752,7 +581,7 @@ This is a common example:
          {
            result[0] = '\0';
      
-           /* Copy the strings.  */
+           /* <span class="roman">Copy the strings.</span>  */
            for (s = str; s != NULL; s = va_arg (ap2, const char *))
              strcat (result, s);
          }
@@ -761,8 +590,7 @@ This is a common example:
      
        return result;
      }
-     </pre>
-
+</pre>
    <p>This looks quite simple, especially the second loop where the strings
 are actually copied.  But these innocent lines hide a major performance
 penalty.  Just imagine that ten strings of 100 bytes each have to be
@@ -792,7 +620,7 @@ efficient:
              {
                size_t len = strlen (s);
      
-               /* Resize the allocated memory if necessary.  */
+               /* <span class="roman">Resize the allocated memory if necessary.</span>  */
                if (wp + len + 1 &gt; result + allocated)
                  {
                    allocated = (allocated + len) * 2;
@@ -809,10 +637,10 @@ efficient:
                wp = mempcpy (wp, s, len);
              }
      
-           /* Terminate the result string.  */
+           /* <span class="roman">Terminate the result string.</span>  */
            *wp++ = '\0';
      
-           /* Resize memory to the optimal size.  */
+           /* <span class="roman">Resize memory to the optimal size.</span>  */
            newp = realloc (result, wp - result);
            if (newp != NULL)
              result = newp;
@@ -822,8 +650,7 @@ efficient:
      
        return result;
      }
-     </pre>
-
+</pre>
    <p>With a bit more knowledge about the input strings one could fine-tune
 the memory allocation.  The difference we are pointing to here is that
 we don't use <code>strcat</code> anymore.  We always keep track of the length
@@ -839,23 +666,17 @@ should think twice and look through the program whether the code cannot
 be rewritten to take advantage of already calculated results.  Again: it
 is almost always unnecessary to use <code>strcat</code>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">char * <b>strncat</b><i> </i>(<i>char *restrict </i><var>to</var><i>, const char *restrict </i><var>from</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is like <code>strcat</code> except that not more than <var>size</var>
+<!-- string.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: char * <b>strncat</b> (<var>char *restrict to, const char *restrict from, size_t size</var>)<var><a name="index-strncat-503"></a></var><br>
+<blockquote><p>This function is like <code>strcat</code> except that not more than <var>size</var>
 characters from <var>from</var> are appended to the end of <var>to</var>.  A
 single null character is also always appended to <var>to</var>, so the total
-allocated size of <var>to</var> must be at least <code></code><var>size</var><code> + 1</code> bytes
+allocated size of <var>to</var> must be at least <var>size</var><code> + 1</code> bytes
 longer than its initial length.
 
-     <p>The <code>strncat</code> function could be implemented like this:
+        <p>The <code>strncat</code> function could be implemented like this:
 
      <pre class="smallexample">          char *
           strncat (char *to, const char *from, size_t size)
@@ -864,29 +685,21 @@ longer than its initial length.
             strncpy (to + strlen (to), from, size);
             return to;
           }
-          </pre>
+     </pre>
+        <p>The behavior of <code>strncat</code> is undefined if the strings overlap. 
+</p></blockquote></div>
 
-     <p>The behavior of <code>strncat</code> is undefined if the strings overlap. 
-</td></tr>
-</table>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">wchar_t * <b>wcsncat</b><i> </i>(<i>wchar_t *restrict </i><var>wto</var><i>, const wchar_t *restrict </i><var>wfrom</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function is like <code>wcscat</code> except that not more than <var>size</var>
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: wchar_t * <b>wcsncat</b> (<var>wchar_t *restrict wto, const wchar_t *restrict wfrom, size_t size</var>)<var><a name="index-wcsncat-504"></a></var><br>
+<blockquote><p>This function is like <code>wcscat</code> except that not more than <var>size</var>
 characters from <var>from</var> are appended to the end of <var>to</var>.  A
 single null character is also always appended to <var>to</var>, so the total
-allocated size of <var>to</var> must be at least <code></code><var>size</var><code> + 1</code> bytes
+allocated size of <var>to</var> must be at least <var>size</var><code> + 1</code> bytes
 longer than its initial length.
 
-     <p>The <code>wcsncat</code> function could be implemented like this:
+        <p>The <code>wcsncat</code> function could be implemented like this:
 
      <pre class="smallexample">          wchar_t *
           wcsncat (wchar_t *restrict wto, const wchar_t *restrict wfrom,
@@ -896,20 +709,16 @@ longer than its initial length.
             wcsncpy (wto + wcslen (wto), wfrom, size);
             return wto;
           }
-          </pre>
-
-     <p>The behavior of <code>wcsncat</code> is undefined if the strings overlap. 
-</td></tr>
-</table>
+     </pre>
+        <p>The behavior of <code>wcsncat</code> is undefined if the strings overlap. 
+</p></blockquote></div>
 
    <p>Here is an example showing the use of <code>strncpy</code> and <code>strncat</code>
 (the wide character version is equivalent).  Notice how, in the call to
 <code>strncat</code>, the <var>size</var> parameter is computed to avoid
 overflowing the character array <code>buffer</code>.
 
-<pre class="smallexample">
-
-     #include &lt;string.h&gt;
+<pre class="smallexample">     #include &lt;string.h&gt;
      #include &lt;stdio.h&gt;
      
      #define SIZE 10
@@ -923,45 +732,29 @@ overflowing the character array <code>buffer</code>.
        strncat (buffer, ", world", SIZE - strlen (buffer) - 1);
        puts (buffer);
      }
-     </pre>
-
-<p>The output produced by this program looks like:
+</pre>
+   <p class="noindent">The output produced by this program looks like:
 
 <pre class="smallexample">     hello
      hello, wo
-     </pre>
-
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>bcopy</b><i> </i>(<i>const void *</i><var>from</var><i>, void *</i><var>to</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is a partially obsolete alternative for <code>memmove</code>, derived from
+</pre>
+   <!-- string.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>bcopy</b> (<var>const void *from, void *to, size_t size</var>)<var><a name="index-bcopy-505"></a></var><br>
+<blockquote><p>This is a partially obsolete alternative for <code>memmove</code>, derived from
 BSD.  Note that it is not quite equivalent to <code>memmove</code>, because the
 arguments are not in the same order and there is no return value. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>bzero</b><i> </i>(<i>void *</i><var>block</var><i>, size_t </i><var>size</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is a partially obsolete alternative for <code>memset</code>, derived from
+<!-- string.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: void <b>bzero</b> (<var>void *block, size_t size</var>)<var><a name="index-bzero-506"></a></var><br>
+<blockquote><p>This is a partially obsolete alternative for <code>memset</code>, derived from
 BSD.  Note that it is not as general as <code>memset</code>, because the only
 value it can store is zero. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Process Identification - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Processes.html#Processes" title="Processes">
+<link rel="prev" href="Process-Creation-Concepts.html#Process-Creation-Concepts" title="Process Creation Concepts">
+<link rel="next" href="Creating-a-Process.html#Creating-a-Process" title="Creating a Process">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,70 +17,53 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Process%20Identification">Process Identification</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>,
+<a name="Process-Identification"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Creating-a-Process.html#Creating-a-Process">Creating a Process</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Creation-Concepts.html#Process-Creation-Concepts">Process Creation Concepts</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="section">Process Identification</h3>
+<h3 class="section">26.3 Process Identification</h3>
 
 <p>The <code>pid_t</code> data type represents process IDs.  You can get the
 process ID of a process by calling <code>getpid</code>.  The function
 <code>getppid</code> returns the process ID of the parent of the current
 process (this is also known as the <dfn>parent process ID</dfn>).  Your
-program should include the header files <code>unistd.h</code> and
-<code>sys/types.h</code> to use these functions.
+program should include the header files <samp><span class="file">unistd.h</span></samp> and
+<samp><span class="file">sys/types.h</span></samp> to use these functions. 
+<a name="index-sys_002ftypes_002eh-3140"></a><a name="index-unistd_002eh-3141"></a>
+<!-- sys/types.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>pid_t</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>pid_t</code> data type is a signed integer type which is capable
+<div class="defun">
+&mdash; Data Type: <b>pid_t</b><var><a name="index-pid_005ft-3142"></a></var><br>
+<blockquote><p>The <code>pid_t</code> data type is a signed integer type which is capable
 of representing a process ID.  In the GNU library, this is an <code>int</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">pid_t <b>getpid</b><i> </i>(<i>void</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>getpid</code> function returns the process ID of the current process. 
-</td></tr>
-</table>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Function: pid_t <b>getpid</b> (<var>void</var>)<var><a name="index-getpid-3143"></a></var><br>
+<blockquote><p>The <code>getpid</code> function returns the process ID of the current process. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">pid_t <b>getppid</b><i> </i>(<i>void</i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>getppid</code> function returns the process ID of the parent of the
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Function: pid_t <b>getppid</b> (<var>void</var>)<var><a name="index-getppid-3144"></a></var><br>
+<blockquote><p>The <code>getppid</code> function returns the process ID of the parent of the
 current process. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Traditional Scheduling Intro - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Traditional-Scheduling.html#Traditional-Scheduling" title="Traditional Scheduling">
+<link rel="next" href="Traditional-Scheduling-Functions.html#Traditional-Scheduling-Functions" title="Traditional Scheduling Functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,20 +16,23 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Traditional%20Scheduling%20Intro">Traditional Scheduling Intro</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Traditional-Scheduling-Functions.html#Traditional%20Scheduling%20Functions">Traditional Scheduling Functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a>
-<hr><br>
+<a name="Traditional-Scheduling-Intro"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Traditional-Scheduling-Functions.html#Traditional-Scheduling-Functions">Traditional Scheduling Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Traditional-Scheduling.html#Traditional-Scheduling">Traditional Scheduling</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Introduction To Traditional Scheduling</h5>
+<h5 class="subsubsection">22.3.4.1 Introduction To Traditional Scheduling</h5>
 
-<p>Long before there was absolute priority (See <a href="Absolute-Priority.html#Absolute%20Priority">Absolute Priority</a>),
+<p>Long before there was absolute priority (See <a href="Absolute-Priority.html#Absolute-Priority">Absolute Priority</a>),
 Unix systems were scheduling the CPU using this system.  When Posix came
 in like the Romans and imposed absolute priorities to accommodate the
 needs of realtime processing, it left the indigenous Absolute Priority
@@ -66,7 +73,7 @@ process' dynamic priority rises every time it is snubbed in the
 scheduling process.  In Linux, even the fat kid gets to play.
 
    <p>The fluctuation of a process' dynamic priority is regulated by another
-value: The "nice" value.  The nice value is an integer, usually in the
+value: The &ldquo;nice&rdquo; value.  The nice value is an integer, usually in the
 range -20 to 20, and represents an upper limit on a process' dynamic
 priority.  The higher the nice number, the lower that limit.
 
@@ -99,7 +106,7 @@ privileged process can lower its nice value.  A privileged process can
 also raise or lower another process' nice value.
 
    <p>GNU C Library functions for getting and setting nice values are described in
-See <a href="Traditional-Scheduling-Functions.html#Traditional%20Scheduling%20Functions">Traditional Scheduling Functions</a>.
+See <a href="Traditional-Scheduling-Functions.html#Traditional-Scheduling-Functions">Traditional Scheduling Functions</a>.
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Longjmp in Handler - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Defining-Handlers.html#Defining-Handlers" title="Defining Handlers">
+<link rel="prev" href="Termination-in-Handler.html#Termination-in-Handler" title="Termination in Handler">
+<link rel="next" href="Signals-in-Handler.html#Signals-in-Handler" title="Signals in Handler">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,22 +17,26 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Longjmp%20in%20Handler">Longjmp in Handler</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Signals-in-Handler.html#Signals%20in%20Handler">Signals in Handler</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Termination-in-Handler.html#Termination%20in%20Handler">Termination in Handler</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
-<hr><br>
+<a name="Longjmp-in-Handler"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Signals-in-Handler.html#Signals-in-Handler">Signals in Handler</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Termination-in-Handler.html#Termination-in-Handler">Termination in Handler</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Defining-Handlers.html#Defining-Handlers">Defining Handlers</a>
+<hr>
 </div>
 
-<h3 class="subsection">Nonlocal Control Transfer in Handlers</h4>
+<h4 class="subsection">24.4.3 Nonlocal Control Transfer in Handlers</h4>
 
-<p>You can do a nonlocal transfer of control out of a signal handler using
-the <code>setjmp</code> and <code>longjmp</code> facilities (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>).
+<p><a name="index-non_002dlocal-exit_002c-from-signal-handler-2910"></a>
+You can do a nonlocal transfer of control out of a signal handler using
+the <code>setjmp</code> and <code>longjmp</code> facilities (see <a href="Non_002dLocal-Exits.html#Non_002dLocal-Exits">Non-Local Exits</a>).
 
    <p>When the handler does a nonlocal control transfer, the part of the
 program that was running will not continue.  If this part of the program
@@ -38,7 +47,7 @@ terminate, the inconsistency is likely to be noticed later on.
    <p>There are two ways to avoid this problem.  One is to block the signal
 for the parts of the program that update important data structures. 
 Blocking the signal delays its delivery until it is unblocked, once the
-critical updating is finished.  See <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.
+critical updating is finished.  See <a href="Blocking-Signals.html#Blocking-Signals">Blocking Signals</a>.
 
    <p>The other way to re-initialize the crucial data structures in the signal
 handler, or make their values consistent.
@@ -56,8 +65,8 @@ global variable.
      void
      handle_sigint (int signum)
      {
-       /* We may have been waiting for input when the signal arrived,
-          but we are no longer waiting once we transfer control. */
+       /* <span class="roman">We may have been waiting for input when the signal arrived,</span>
+          <span class="roman">but we are no longer waiting once we transfer control.</span> */
        waiting_for_input = 0;
        longjmp (return_to_top_level, 1);
      }
@@ -75,7 +84,7 @@ global variable.
        }
      }
      
-     /* Imagine this is a subroutine used by various commands. */
+     /* <span class="roman">Imagine this is a subroutine used by various commands.</span> */
      char *
      read_data ()
      {
@@ -87,7 +96,6 @@ global variable.
          ...
        }
      }
-     </pre>
-
+</pre>
    </body></html>
 

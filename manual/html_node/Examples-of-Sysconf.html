@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Examples of Sysconf - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Sysconf.html#Sysconf" title="Sysconf">
+<link rel="prev" href="Constants-for-Sysconf.html#Constants-for-Sysconf" title="Constants for Sysconf">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Examples%20of%20Sysconf">Examples of Sysconf</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Constants-for-Sysconf.html#Constants%20for%20Sysconf">Constants for Sysconf</a>,
+<a name="Examples-of-Sysconf"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Constants-for-Sysconf.html#Constants-for-Sysconf">Constants for Sysconf</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Sysconf.html#Sysconf">Sysconf</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Examples of <code>sysconf</code></h4>
+<h4 class="subsection">31.4.3 Examples of <code>sysconf</code></h4>
 
 <p>We recommend that you first test for a macro definition for the
 parameter you are interested in, and call <code>sysconf</code> only if the
@@ -38,14 +45,13 @@ control is supported:
      #else
        int value = sysconf (_SC_JOB_CONTROL);
        if (value &lt; 0)
-         /* If the system is that badly wedged,
-            there's no use trying to go on.  */
+         /* <span class="roman">If the system is that badly wedged,</span>
+            <span class="roman">there's no use trying to go on.</span>  */
          fatal (strerror (errno));
        return value;
      #endif
      }
-     </pre>
-
+</pre>
    <p>Here is how to get the value of a numeric limit:
 
 <pre class="smallexample">     int
@@ -60,7 +66,6 @@ control is supported:
        return value;
      #endif
      }
-     </pre>
-
+</pre>
    </body></html>
 

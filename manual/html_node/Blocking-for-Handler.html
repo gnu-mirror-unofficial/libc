@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Blocking for Handler - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Blocking-Signals.html#Blocking-Signals" title="Blocking Signals">
+<link rel="prev" href="Testing-for-Delivery.html#Testing-for-Delivery" title="Testing for Delivery">
+<link rel="next" href="Checking-for-Pending-Signals.html#Checking-for-Pending-Signals" title="Checking for Pending Signals">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Blocking%20for%20Handler">Blocking for Handler</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Checking-for-Pending-Signals.html#Checking%20for%20Pending%20Signals">Checking for Pending Signals</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Testing-for-Delivery.html#Testing%20for%20Delivery">Testing for Delivery</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
-<hr><br>
+<a name="Blocking-for-Handler"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Checking-for-Pending-Signals.html#Checking-for-Pending-Signals">Checking for Pending Signals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Testing-for-Delivery.html#Testing-for-Delivery">Testing for Delivery</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking-Signals">Blocking Signals</a>
+<hr>
 </div>
 
-<h3 class="subsection">Blocking Signals for a Handler</h4>
+<h4 class="subsection">24.7.5 Blocking Signals for a Handler</h4>
 
-<p>When a signal handler is invoked, you usually want it to be able to
+<p><a name="index-blocking-signals_002c-in-a-handler-2951"></a>
+When a signal handler is invoked, you usually want it to be able to
 finish without being interrupted by another signal.  From the moment the
 handler starts until the moment it finishes, you must block signals that
 might confuse it or corrupt its data.
@@ -59,7 +68,7 @@ structure.
        sigset_t block_mask;
      
        sigemptyset (&amp;block_mask);
-       /* Block other terminal-generated signals while handler runs. */
+       /* <span class="roman">Block other terminal-generated signals while handler runs.</span> */
        sigaddset (&amp;block_mask, SIGINT);
        sigaddset (&amp;block_mask, SIGQUIT);
        setup_action.sa_handler = catch_stop;
@@ -67,8 +76,7 @@ structure.
        setup_action.sa_flags = 0;
        sigaction (SIGTSTP, &amp;setup_action, NULL);
      }
-     </pre>
-
+</pre>
    <p>This is more reliable than blocking the other signals explicitly in the
 code for the handler.  If you block signals explicitly in the handler,
 you can't avoid at least a short interval at the beginning of the

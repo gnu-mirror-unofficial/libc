@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Alarm Signals - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Standard-Signals.html#Standard-Signals" title="Standard Signals">
+<link rel="prev" href="Termination-Signals.html#Termination-Signals" title="Termination Signals">
+<link rel="next" href="Asynchronous-I_002fO-Signals.html#Asynchronous-I_002fO-Signals" title="Asynchronous I/O Signals">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,22 +17,25 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Alarm%20Signals">Alarm Signals</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Asynchronous-I-O-Signals.html#Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Termination-Signals.html#Termination%20Signals">Termination Signals</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
-<hr><br>
+<a name="Alarm-Signals"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Asynchronous-I_002fO-Signals.html#Asynchronous-I_002fO-Signals">Asynchronous I/O Signals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Termination-Signals.html#Termination-Signals">Termination Signals</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Standard-Signals.html#Standard-Signals">Standard Signals</a>
+<hr>
 </div>
 
-<h3 class="subsection">Alarm Signals</h4>
+<h4 class="subsection">24.2.3 Alarm Signals</h4>
 
 <p>These signals are used to indicate the expiration of timers. 
-See <a href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>, for information about functions that cause
+See <a href="Setting-an-Alarm.html#Setting-an-Alarm">Setting an Alarm</a>, for information about functions that cause
 these signals to be sent.
 
    <p>The default behavior for these signals is to cause program termination. 
@@ -35,53 +43,35 @@ This default is rarely useful, but no other default would be useful;
 most of the ways of using these signals would require handler functions
 in any case.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>SIGALRM</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This signal typically indicates expiration of a timer that measures real
+<!-- signal.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>SIGALRM</b><var><a name="index-SIGALRM-2840"></a></var><br>
+<blockquote><p>This signal typically indicates expiration of a timer that measures real
 or clock time.  It is used by the <code>alarm</code> function, for example. 
-</td></tr>
-</table>
+</p></blockquote></div>
+   <a name="index-alarm-signal-2841"></a>
+<!-- signal.h -->
+<!-- BSD -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>SIGVTALRM</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This signal typically indicates expiration of a timer that measures CPU
+<div class="defun">
+&mdash; Macro: int <b>SIGVTALRM</b><var><a name="index-SIGVTALRM-2842"></a></var><br>
+<blockquote><p>This signal typically indicates expiration of a timer that measures CPU
 time used by the current process.  The name is an abbreviation for
-"virtual time alarm". 
-</td></tr>
-</table>
+&ldquo;virtual time alarm&rdquo;. 
+</p></blockquote></div>
+   <a name="index-virtual-time-alarm-signal-2843"></a>
+<!-- signal.h -->
+<!-- BSD -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>SIGPROF</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This signal typically indicates expiration of a timer that measures
+<div class="defun">
+&mdash; Macro: int <b>SIGPROF</b><var><a name="index-SIGPROF-2844"></a></var><br>
+<blockquote><p>This signal typically indicates expiration of a timer that measures
 both CPU time used by the current process, and CPU time expended on
 behalf of the process by the system.  Such a timer is used to implement
 code profiling facilities, hence the name of this signal. 
-</td></tr>
-</table>
+</p></blockquote></div>
+   <a name="index-profiling-alarm-signal-2845"></a>
 
    </body></html>
 

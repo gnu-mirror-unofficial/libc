@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>String Parameters - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="System-Configuration.html#System-Configuration" title="System Configuration">
+<link rel="prev" href="Utility-Minimums.html#Utility-Minimums" title="Utility Minimums">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,104 +16,108 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="String%20Parameters">String Parameters</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Utility-Minimums.html#Utility%20Minimums">Utility Minimums</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
-<hr><br>
+<a name="String-Parameters"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Utility-Minimums.html#Utility-Minimums">Utility Minimums</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System-Configuration">System Configuration</a>
+<hr>
 </div>
 
-<h3 class="section">String-Valued Parameters</h3>
+<h3 class="section">31.12 String-Valued Parameters</h3>
 
 <p>POSIX.2 defines a way to get string-valued parameters from the operating
 system with the function <code>confstr</code>:
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">size_t <b>confstr</b><i> </i>(<i>int </i><var>parameter</var><i>, char *</i><var>buf</var><i>, size_t </i><var>len</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This function reads the value of a string-valued system parameter,
+<!-- unistd.h -->
+<!-- POSIX.2 -->
+<div class="defun">
+&mdash; Function: size_t <b>confstr</b> (<var>int parameter, char *buf, size_t len</var>)<var><a name="index-confstr-3652"></a></var><br>
+<blockquote><p>This function reads the value of a string-valued system parameter,
 storing the string into <var>len</var> bytes of memory space starting at
 <var>buf</var>.  The <var>parameter</var> argument should be one of the
-<code>_CS_</code> symbols listed below.
+`<samp><span class="samp">_CS_</span></samp>' symbols listed below.
 
-     <p>The normal return value from <code>confstr</code> is the length of the string
+        <p>The normal return value from <code>confstr</code> is the length of the string
 value that you asked for.  If you supply a null pointer for <var>buf</var>,
 then <code>confstr</code> does not try to store the string; it just returns
 its length.  A value of <code>0</code> indicates an error.
 
-     <p>If the string you asked for is too long for the buffer (that is, longer
-than <code></code><var>len</var><code> - 1</code>), then <code>confstr</code> stores just that much
+        <p>If the string you asked for is too long for the buffer (that is, longer
+than <var>len</var><code> - 1</code>), then <code>confstr</code> stores just that much
 (leaving room for the terminating null character).  You can tell that
 this has happened because <code>confstr</code> returns a value greater than or
 equal to <var>len</var>.
 
-     <p>The following <code>errno</code> error conditions are defined for this function:
+        <p>The following <code>errno</code> error conditions are defined for this function:
 
           <dl>
-<dt><code>EINVAL</code>
-          <dd>The value of the <var>parameter</var> is invalid. 
+<dt><code>EINVAL</code><dd>The value of the <var>parameter</var> is invalid. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    <p>Currently there is just one parameter you can read with <code>confstr</code>:
 
      <dl>
-<dt><code>_CS_PATH</code>
-     <dd>This parameter's value is the recommended default path for searching for
+<!-- unistd.h -->
+<!-- POSIX.2 -->
+<dt><code>_CS_PATH</code><dd>This parameter's value is the recommended default path for searching for
 executable files.  This is the path that a user has by default just
 after logging in.
 
-     <br><dt><code>_CS_LFS_CFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS_CFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the C compiler if a source is compiled using the
-<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS_LDFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS_LDFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the linker if a source is compiled using the
-<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS_LIBS</code>
-     <dd>The returned string specifies which additional libraries must be linked
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS_LIBS</code><dd>The returned string specifies which additional libraries must be linked
 to the application if a source is compiled using the
-<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS_LINTFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS_LINTFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the lint tool if a source is compiled using the
-<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS64_CFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS64_CFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the C compiler if a source is compiled using the
-<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS64_LDFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS64_LDFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the linker if a source is compiled using the
-<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS64_LIBS</code>
-     <dd>The returned string specifies which additional libraries must be linked
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS64_LIBS</code><dd>The returned string specifies which additional libraries must be linked
 to the application if a source is compiled using the
-<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>.
 
-     <br><dt><code>_CS_LFS64_LINTFLAGS</code>
-     <dd>The returned string specifies which additional flags must be given to
+     <!-- unistd.h -->
+<!-- Unix98 -->
+<br><dt><code>_CS_LFS64_LINTFLAGS</code><dd>The returned string specifies which additional flags must be given to
 the lint tool if a source is compiled using the
-<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>. 
+<code>_LARGEFILE64_SOURCE</code> feature select macro; see <a href="Feature-Test-Macros.html#Feature-Test-Macros">Feature Test Macros</a>. 
 </dl>
 
    <p>The way to use <code>confstr</code> without any arbitrary limit on string size
@@ -131,7 +139,7 @@ buffer, like this:
      
        return buffer;
      }
-     </pre>
-
-   </body></html>
+</pre>
+   <!-- This node must have no pointers. -->
+</body></html>
 

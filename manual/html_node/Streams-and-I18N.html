@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Streams and I18N - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="I_002fO-on-Streams.html#I_002fO-on-Streams" title="I/O on Streams">
+<link rel="prev" href="Streams-and-Threads.html#Streams-and-Threads" title="Streams and Threads">
+<link rel="next" href="Simple-Output.html#Simple-Output" title="Simple Output">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,21 +17,24 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Streams%20and%20I18N">Streams and I18N</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Simple-Output.html#Simple%20Output">Simple Output</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Streams-and-Threads.html#Streams%20and%20Threads">Streams and Threads</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
-<hr><br>
+<a name="Streams-and-I18N"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Simple-Output.html#Simple-Output">Simple Output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Streams-and-Threads.html#Streams-and-Threads">Streams and Threads</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I_002fO-on-Streams.html#I_002fO-on-Streams">I/O on Streams</a>
+<hr>
 </div>
 
-<h3 class="section">Streams in Internationalized Applications</h3>
+<h3 class="section">12.6 Streams in Internationalized Applications</h3>
 
-<p>ISO&nbsp;C90 introduced the new type <code>wchar_t</code> to allow handling
+<p>ISO&nbsp;C90<!-- /@w --> introduced the new type <code>wchar_t</code> to allow handling
 larger character sets.  What was missing was a possibility to output
 strings of <code>wchar_t</code> directly.  One had to convert them into
 multibyte strings using <code>mbstowcs</code> (there was no <code>mbsrtowcs</code>
@@ -50,7 +58,7 @@ possible to have a format string for <code>printf</code> and <code>scanf</code>
 consisting of wide characters.  The result is that format strings would
 have to be generated if they have to contain non-basic characters.
 
-   <p>In the Amendment&nbsp;1 to ISO&nbsp;C90 a whole new set of functions was
+   <p><a name="index-C_002b_002b-streams-944"></a><a name="index-streams_002c-C_002b_002b-945"></a>In the Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w --> a whole new set of functions was
 added to solve the problem.  Most of the stream functions got a
 counterpart which take a wide character or wide character string instead
 of a character or string respectively.  The new functions operate on the
@@ -58,7 +66,7 @@ same streams (like <code>stdout</code>).  This is different from the model of
 the C++ runtime library where separate streams for wide and normal I/O
 are used.
 
-   <p>Being able to use the same stream for wide and normal operations comes
+   <p><a name="index-orientation_002c-stream-946"></a><a name="index-stream-orientation-947"></a>Being able to use the same stream for wide and normal operations comes
 with a restriction: a stream can be used either for wide operations or
 for normal operations.  Once it is decided there is no way back.  Only a
 call to <code>freopen</code> or <code>freopen64</code> can reset the
@@ -80,35 +88,28 @@ a stream.  There are no diagnostics issued.  The application behavior
 will simply be strange or the application will simply crash.  The
 <code>fwide</code> function can help avoiding this.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>fwide</b><i> </i>(<i>FILE *</i><var>stream</var><i>, int </i><var>mode</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-
-     <p>The <code>fwide</code> function can be used to set and query the state of the
+<!-- wchar.h -->
+<!-- ISO -->
+<div class="defun">
+&mdash; Function: int <b>fwide</b> (<var>FILE *stream, int mode</var>)<var><a name="index-fwide-948"></a></var><br>
+<blockquote>
+<p>The <code>fwide</code> function can be used to set and query the state of the
 orientation of the stream <var>stream</var>.  If the <var>mode</var> parameter has
 a positive value the streams get wide oriented, for negative values
 narrow oriented.  It is not possible to overwrite previous orientations
 with <code>fwide</code>.  I.e., if the stream <var>stream</var> was already
 oriented before the call nothing is done.
 
-     <p>If <var>mode</var> is zero the current orientation state is queried and
+        <p>If <var>mode</var> is zero the current orientation state is queried and
 nothing is changed.
 
-     <p>The <code>fwide</code> function returns a negative value, zero, or a positive
+        <p>The <code>fwide</code> function returns a negative value, zero, or a positive
 value if the stream is narrow, not at all, or wide oriented
 respectively.
 
-     <p>This function was introduced in Amendment&nbsp;1 to ISO&nbsp;C90 and is
-declared in <code>wchar.h</code>. 
-</td></tr>
-</table>
+        <p>This function was introduced in Amendment&nbsp;1<!-- /@w --> to ISO&nbsp;C90<!-- /@w --> and is
+declared in <samp><span class="file">wchar.h</span></samp>. 
+</p></blockquote></div>
 
    <p>It is generally a good idea to orient a stream as early as possible. 
 This can prevent surprise especially for the standard streams
@@ -130,13 +131,12 @@ orientation).  The following little, silly function illustrates this.
      print_f (FILE *fp)
      {
        if (fwide (fp, 0) &gt; 0)
-         /* Positive return value means wide orientation.  */
+         /* <span class="roman">Positive return value means wide orientation.</span>  */
          fputwc (L'f', fp);
        else
          fputc ('f', fp);
      }
-     </pre>
-
+</pre>
    <p>Note that in this case the function <code>print_f</code> decides about the
 orientation of the stream if it was unoriented before (will not happen
 if the advise above is followed).
@@ -144,12 +144,12 @@ if the advise above is followed).
    <p>The encoding used for the <code>wchar_t</code> values is unspecified and the
 user must not make any assumptions about it.  For I/O of <code>wchar_t</code>
 values this means that it is impossible to write these values directly
-to the stream.  This is not what follows from the ISO&nbsp;C locale model
+to the stream.  This is not what follows from the ISO&nbsp;C<!-- /@w --> locale model
 either.  What happens instead is that the bytes read from or written to
 the underlying media are first converted into the internal encoding
 chosen by the implementation for <code>wchar_t</code>.  The external encoding
 is determined by the <code>LC_CTYPE</code> category of the current locale or
-by the <code>ccs</code> part of the mode specification given to <code>fopen</code>,
+by the `<samp><span class="samp">ccs</span></samp>' part of the mode specification given to <code>fopen</code>,
 <code>fopen64</code>, <code>freopen</code>, or <code>freopen64</code>.  How and when the
 conversion happens is unspecified and it happens invisible to the user.
 

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Getopt Long Option Example - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Getopt.html#Getopt" title="Getopt">
+<link rel="prev" href="Getopt-Long-Options.html#Getopt-Long-Options" title="Getopt Long Options">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,26 +16,27 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Getopt%20Long%20Option%20Example">Getopt Long Option Example</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Getopt-Long-Options.html#Getopt%20Long%20Options">Getopt Long Options</a>,
+<a name="Getopt-Long-Option-Example"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Getopt-Long-Options.html#Getopt-Long-Options">Getopt Long Options</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="subsection">Example of Parsing Long Options with <code>getopt_long</code></h4>
+<h4 class="subsection">25.2.4 Example of Parsing Long Options with <code>getopt_long</code></h4>
 
-<pre class="smallexample">
-
-     #include &lt;stdio.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
      #include &lt;stdlib.h&gt;
      #include &lt;getopt.h&gt;
      
-     /* Flag set by <code>--verbose</code>. */
+     /* <span class="roman">Flag set by `<samp>--verbose</samp>'.</span> */
      static int verbose_flag;
      
      int
@@ -45,11 +50,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
          {
            static struct option long_options[] =
              {
-               /* These options set a flag. */
+               /* <span class="roman">These options set a flag.</span> */
                {"verbose", no_argument,       &amp;verbose_flag, 1},
                {"brief",   no_argument,       &amp;verbose_flag, 0},
-               /* These options don't set a flag.
-                  We distinguish them by their indices. */
+               /* <span class="roman">These options don't set a flag.
+                  We distinguish them by their indices.</span> */
                {"add",     no_argument,       0, 'a'},
                {"append",  no_argument,       0, 'b'},
                {"delete",  required_argument, 0, 'd'},
@@ -57,20 +62,20 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
                {"file",    required_argument, 0, 'f'},
                {0, 0, 0, 0}
              };
-           /* <code>getopt_long</code> stores the option index here. */
+           /* <code>getopt_long</code><span class="roman"> stores the option index here.</span> */
            int option_index = 0;
      
            c = getopt_long (argc, argv, "abc:d:f:",
                             long_options, &amp;option_index);
      
-           /* Detect the end of the options. */
+           /* <span class="roman">Detect the end of the options.</span> */
            if (c == -1)
              break;
      
            switch (c)
              {
              case 0:
-               /* If this option set a flag, do nothing else now. */
+               /* <span class="roman">If this option set a flag, do nothing else now.</span> */
                if (long_options[option_index].flag != 0)
                  break;
                printf ("option %s", long_options[option_index].name);
@@ -100,7 +105,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
                break;
      
              case '?':
-               /* <code>getopt_long</code> already printed an error message. */
+               /* <code>getopt_long</code><span class="roman"> already printed an error message.</span> */
                break;
      
              default:
@@ -108,13 +113,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
              }
          }
      
-       /* Instead of reporting <code>--verbose</code>
-          and <code>--brief</code> as they are encountered,
-          we report the final status resulting from them. */
+       /* <span class="roman">Instead of reporting `<samp>--verbose</samp>'
+          and `<samp>--brief</samp>' as they are encountered,
+          we report the final status resulting from them.</span> */
        if (verbose_flag)
          puts ("verbose flag is set");
      
-       /* Print any remaining command line arguments (not options). */
+       /* <span class="roman">Print any remaining command line arguments (not options).</span> */
        if (optind &lt; argc)
          {
            printf ("non-option ARGV-elements: ");
@@ -125,7 +130,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
      
        exit (0);
      }
-     </pre>
-
+</pre>
    </body></html>
 

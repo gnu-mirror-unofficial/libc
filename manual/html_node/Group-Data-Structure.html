@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Group Data Structure - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Group-Database.html#Group-Database" title="Group Database">
+<link rel="next" href="Lookup-Group.html#Lookup-Group" title="Lookup Group">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,49 +16,43 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Group%20Data%20Structure">Group Data Structure</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-Group.html#Lookup%20Group">Lookup Group</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Group-Database.html#Group%20Database">Group Database</a>
-<hr><br>
+<a name="Group-Data-Structure"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Lookup-Group.html#Lookup-Group">Lookup Group</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Group-Database.html#Group-Database">Group Database</a>
+<hr>
 </div>
 
-<h3 class="subsection">The Data Structure for a Group</h4>
+<h4 class="subsection">29.14.1 The Data Structure for a Group</h4>
 
 <p>The functions and data structures for accessing the system group
-database are declared in the header file <code>grp.h</code>.
+database are declared in the header file <samp><span class="file">grp.h</span></samp>. 
+<a name="index-grp_002eh-3388"></a>
+<!-- grp.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct group</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>group</code> structure is used to hold information about an entry in
+<div class="defun">
+&mdash; Data Type: <b>struct group</b><var><a name="index-struct-group-3389"></a></var><br>
+<blockquote><p>The <code>group</code> structure is used to hold information about an entry in
 the system group database.  It has at least the following members:
 
           <dl>
-<dt><code>char *gr_name</code>
-          <dd>The name of the group.
+<dt><code>char *gr_name</code><dd>The name of the group.
 
-          <br><dt><code>gid_t gr_gid</code>
-          <dd>The group ID of the group.
+          <br><dt><code>gid_t gr_gid</code><dd>The group ID of the group.
 
-          <br><dt><code>char **gr_mem</code>
-          <dd>A vector of pointers to the names of users in the group.  Each user name
+          <br><dt><code>char **gr_mem</code><dd>A vector of pointers to the names of users in the group.  Each user name
 is a null-terminated string, and the vector itself is terminated by a
 null pointer. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Launching Jobs - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Implementing-a-Shell.html#Implementing-a-Shell" title="Implementing a Shell">
+<link rel="prev" href="Initializing-the-Shell.html#Initializing-the-Shell" title="Initializing the Shell">
+<link rel="next" href="Foreground-and-Background.html#Foreground-and-Background" title="Foreground and Background">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,26 +17,30 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Launching%20Jobs">Launching Jobs</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
-<hr><br>
+<a name="Launching-Jobs"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Foreground-and-Background.html#Foreground-and-Background">Foreground and Background</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Initializing-the-Shell.html#Initializing-the-Shell">Initializing the Shell</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing-a-Shell">Implementing a Shell</a>
+<hr>
 </div>
 
-<h3 class="subsection">Launching Jobs</h4>
+<h4 class="subsection">27.6.3 Launching Jobs</h4>
 
-<p>Once the shell has taken responsibility for performing job control on
+<p><a name="index-launching-jobs-3195"></a>
+Once the shell has taken responsibility for performing job control on
 its controlling terminal, it can launch jobs in response to commands
 typed by the user.
 
    <p>To create the processes in a process group, you use the same <code>fork</code>
-and <code>exec</code> functions described in <a href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>. 
+and <code>exec</code> functions described in <a href="Process-Creation-Concepts.html#Process-Creation-Concepts">Process Creation Concepts</a>. 
 Since there are multiple child processes involved, though, things are a
 little more complicated and you must be careful to do things in the
 right order.  Otherwise, nasty race conditions can result.
@@ -43,12 +52,12 @@ can make one process in group be the ancestor of all the other processes
 in that group.  The sample shell program presented in this chapter uses
 the first approach because it makes bookkeeping somewhat simpler.
 
-   <p>As each process is forked, it should put itself in the new process group
-by calling <code>setpgid</code>; see <a href="Process-Group-Functions.html#Process%20Group%20Functions">Process Group Functions</a>.  The first
+   <p><a name="index-process-group-leader-3196"></a><a name="index-process-group-ID-3197"></a>As each process is forked, it should put itself in the new process group
+by calling <code>setpgid</code>; see <a href="Process-Group-Functions.html#Process-Group-Functions">Process Group Functions</a>.  The first
 process in the new group becomes its <dfn>process group leader</dfn>, and its
 process ID becomes the <dfn>process group ID</dfn> for the group.
 
-   <p>The shell should also call <code>setpgid</code> to put each of its child
+   <p><a name="index-race-conditions_002c-relating-to-job-control-3198"></a>The shell should also call <code>setpgid</code> to put each of its child
 processes into the new process group.  This is because there is a
 potential timing problem: each child process must be put in the process
 group before it begins executing a new program, and the shell depends on
@@ -66,7 +75,7 @@ as by each of its child processes, to avoid race conditions.
 actions.
 
    <p>During initialization, the shell process set itself to ignore job
-control signals; see <a href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>.  As a result, any child
+control signals; see <a href="Initializing-the-Shell.html#Initializing-the-Shell">Initializing the Shell</a>.  As a result, any child
 processes it creates also ignore these signals by inheritance.  This is
 definitely undesirable, so each child process should explicitly set the
 actions for these signals back to <code>SIG_DFL</code> just after it is forked.
@@ -78,11 +87,11 @@ of stop signals.  Applications that disable the normal interpretation of
 the SUSP character should provide some other mechanism for the user to
 stop the job.  When the user invokes this mechanism, the program should
 send a <code>SIGTSTP</code> signal to the process group of the process, not
-just to the process itself.  See <a href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>.
+just to the process itself.  See <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
 
    <p>Finally, each child process should call <code>exec</code> in the normal way. 
 This is also the point at which redirection of the standard input and
-output channels should be handled.  See <a href="Duplicating-Descriptors.html#Duplicating%20Descriptors">Duplicating Descriptors</a>,
+output channels should be handled.  See <a href="Duplicating-Descriptors.html#Duplicating-Descriptors">Duplicating Descriptors</a>,
 for an explanation of how to do this.
 
    <p>Here is the function from the sample shell program that is responsible
@@ -98,17 +107,17 @@ immediately after it has been forked by the shell, and never returns.
      
        if (shell_is_interactive)
          {
-           /* Put the process into the process group and give the process group
-              the terminal, if appropriate.
-              This has to be done both by the shell and in the individual
-              child processes because of potential race conditions.  */
+           /* <span class="roman">Put the process into the process group and give the process group</span>
+              <span class="roman">the terminal, if appropriate.</span>
+              <span class="roman">This has to be done both by the shell and in the individual</span>
+              <span class="roman">child processes because of potential race conditions.</span>  */
            pid = getpid ();
            if (pgid == 0) pgid = pid;
            setpgid (pid, pgid);
            if (foreground)
              tcsetpgrp (shell_terminal, pgid);
      
-           /* Set the handling for job control signals back to the default.  */
+           /* <span class="roman">Set the handling for job control signals back to the default.</span>  */
            signal (SIGINT, SIG_DFL);
            signal (SIGQUIT, SIG_DFL);
            signal (SIGTSTP, SIG_DFL);
@@ -117,7 +126,7 @@ immediately after it has been forked by the shell, and never returns.
            signal (SIGCHLD, SIG_DFL);
          }
      
-       /* Set the standard input/output channels of the new process.  */
+       /* <span class="roman">Set the standard input/output channels of the new process.</span>  */
        if (infile != STDIN_FILENO)
          {
            dup2 (infile, STDIN_FILENO);
@@ -134,13 +143,12 @@ immediately after it has been forked by the shell, and never returns.
            close (errfile);
          }
      
-       /* Exec the new process.  Make sure we exit.  */
+       /* <span class="roman">Exec the new process.  Make sure we exit.</span>  */
        execvp (p-&gt;argv[0], p-&gt;argv);
        perror ("execvp");
        exit (1);
      }
-     </pre>
-
+</pre>
    <p>If the shell is not running interactively, this function does not do
 anything with process groups or signals.  Remember that a shell not
 performing job control must keep all of its subprocesses in the same
@@ -149,7 +157,7 @@ process group as the shell itself.
    <p>Next, here is the function that actually launches a complete job. 
 After creating the child processes, this function calls some other
 functions to put the newly created job into the foreground or background;
-these are discussed in <a href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>.
+these are discussed in <a href="Foreground-and-Background.html#Foreground-and-Background">Foreground and Background</a>.
 
 <pre class="smallexample">     void
      launch_job (job *j, int foreground)
@@ -161,7 +169,7 @@ these are discussed in <a href="Foreground-and-Background.html#Foreground%20and%
        infile = j-&gt;stdin;
        for (p = j-&gt;first_process; p; p = p-&gt;next)
          {
-           /* Set up pipes, if necessary.  */
+           /* <span class="roman">Set up pipes, if necessary.</span>  */
            if (p-&gt;next)
              {
                if (pipe (mypipe) &lt; 0)
@@ -174,21 +182,21 @@ these are discussed in <a href="Foreground-and-Background.html#Foreground%20and%
            else
              outfile = j-&gt;stdout;
      
-           /* Fork the child processes.  */
+           /* <span class="roman">Fork the child processes.</span>  */
            pid = fork ();
            if (pid == 0)
-             /* This is the child process.  */
+             /* <span class="roman">This is the child process.</span>  */
              launch_process (p, j-&gt;pgid, infile,
                              outfile, j-&gt;stderr, foreground);
            else if (pid &lt; 0)
              {
-               /* The fork failed.  */
+               /* <span class="roman">The fork failed.</span>  */
                perror ("fork");
                exit (1);
              }
            else
              {
-               /* This is the parent process.  */
+               /* <span class="roman">This is the parent process.</span>  */
                p-&gt;pid = pid;
                if (shell_is_interactive)
                  {
@@ -198,7 +206,7 @@ these are discussed in <a href="Foreground-and-Background.html#Foreground%20and%
                  }
              }
      
-           /* Clean up after pipes.  */
+           /* <span class="roman">Clean up after pipes.</span>  */
            if (infile != j-&gt;stdin)
              close (infile);
            if (outfile != j-&gt;stdout)
@@ -215,7 +223,6 @@ these are discussed in <a href="Foreground-and-Background.html#Foreground%20and%
        else
          put_job_in_background (j, 0);
      }
-     </pre>
-
+</pre>
    </body></html>
 

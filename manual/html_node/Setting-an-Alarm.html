@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Setting an Alarm - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Date-and-Time.html#Date-and-Time" title="Date and Time">
+<link rel="prev" href="Calendar-Time.html#Calendar-Time" title="Calendar Time">
+<link rel="next" href="Sleeping.html#Sleeping" title="Sleeping">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,40 +17,44 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Setting%20an%20Alarm">Setting an Alarm</a>,
+<a name="Setting-an-Alarm"></a>
 Next:&nbsp;<a rel="next" accesskey="n" href="Sleeping.html#Sleeping">Sleeping</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
-<hr><br>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Calendar-Time.html#Calendar-Time">Calendar Time</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Date-and-Time.html#Date-and-Time">Date and Time</a>
+<hr>
 </div>
 
-<h3 class="section">Setting an Alarm</h3>
+<h3 class="section">21.5 Setting an Alarm</h3>
 
 <p>The <code>alarm</code> and <code>setitimer</code> functions provide a mechanism for a
 process to interrupt itself in the future.  They do this by setting a
 timer; when the timer expires, the process receives a signal.
 
-   <p>Each process has three independent interval timers available:
+   <p><a name="index-setting-an-alarm-2665"></a><a name="index-interval-timer_002c-setting-2666"></a><a name="index-alarms_002c-setting-2667"></a><a name="index-timers_002c-setting-2668"></a>Each process has three independent interval timers available:
 
      <ul>
 <li>A real-time timer that counts elapsed time.  This timer sends a
-<code>SIGALRM</code> signal to the process when it expires.
-
-     <li>A virtual timer that counts processor time used by the process.  This timer
-sends a <code>SIGVTALRM</code> signal to the process when it expires.
-
-     <li>A profiling timer that counts both processor time used by the process,
+<code>SIGALRM</code> signal to the process when it expires. 
+<a name="index-real_002dtime-timer-2669"></a><a name="index-timer_002c-real_002dtime-2670"></a>
+<li>A virtual timer that counts processor time used by the process.  This timer
+sends a <code>SIGVTALRM</code> signal to the process when it expires. 
+<a name="index-virtual-timer-2671"></a><a name="index-timer_002c-virtual-2672"></a>
+<li>A profiling timer that counts both processor time used by the process,
 and processor time spent in system calls on behalf of the process.  This
-timer sends a <code>SIGPROF</code> signal to the process when it expires.
-
-     <p>This timer is useful for profiling in interpreters.  The interval timer
+timer sends a <code>SIGPROF</code> signal to the process when it expires. 
+<a name="index-profiling-timer-2673"></a><a name="index-timer_002c-profiling-2674"></a>
+This timer is useful for profiling in interpreters.  The interval timer
 mechanism does not have the fine granularity necessary for profiling
 native code. 
+<!-- @xref{profil} !!! -->
 </ul>
 
    <p>You can only have one timer of each kind set at any given time.  If you
@@ -57,130 +66,94 @@ new value.
 <code>setitimer</code> or <code>alarm</code>.  Otherwise, an unusual chain of events
 could cause the timer to expire before your program establishes the
 handler.  In this case it would be terminated, since termination is the
-default action for the alarm signals.  See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.
-
-   <p>To be able to use the alarm function to interrupt a system call which
-might block otherwise indefinitely it is important to <em>not</em> set the
-<code>SA_RESTART</code> flag when registering the signal handler using
-<code>sigaction</code>.  When not using <code>sigaction</code> things get even
-uglier: the <code>signal</code> function has to fixed semantics with respect
-to restarts.  The BSD semantics for this function is to set the flag. 
-Therefore, if <code>sigaction</code> for whatever reason cannot be used, it is
-necessary to use <code>sysv_signal</code> and not <code>signal</code>.
+default action for the alarm signals.  See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>.
 
    <p>The <code>setitimer</code> function is the primary means for setting an alarm. 
-This facility is declared in the header file <code>sys/time.h</code>.  The
-<code>alarm</code> function, declared in <code>unistd.h</code>, provides a somewhat
-simpler interface for setting the real-time timer.
+This facility is declared in the header file <samp><span class="file">sys/time.h</span></samp>.  The
+<code>alarm</code> function, declared in <samp><span class="file">unistd.h</span></samp>, provides a somewhat
+simpler interface for setting the real-time timer. 
+<a name="index-unistd_002eh-2675"></a><a name="index-sys_002ftime_002eh-2676"></a>
+<!-- sys/time.h -->
+<!-- BSD -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct itimerval</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This structure is used to specify when a timer should expire.  It contains
+<div class="defun">
+&mdash; Data Type: <b>struct itimerval</b><var><a name="index-struct-itimerval-2677"></a></var><br>
+<blockquote><p>This structure is used to specify when a timer should expire.  It contains
 the following members:
           <dl>
-<dt><code>struct timeval it_interval</code>
-          <dd>This is the period between successive timer interrupts.  If zero, the
+<dt><code>struct timeval it_interval</code><dd>This is the period between successive timer interrupts.  If zero, the
 alarm will only be sent once.
 
-          <br><dt><code>struct timeval it_value</code>
-          <dd>This is the period between now and the first timer interrupt.  If zero,
+          <br><dt><code>struct timeval it_value</code><dd>This is the period between now and the first timer interrupt.  If zero,
 the alarm is disabled. 
 </dl>
 
-     <p>The <code>struct timeval</code> data type is described in <a href="Elapsed-Time.html#Elapsed%20Time">Elapsed Time</a>. 
-</td></tr>
-</table>
+        <p>The <code>struct timeval</code> data type is described in <a href="Elapsed-Time.html#Elapsed-Time">Elapsed Time</a>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>setitimer</b><i> </i>(<i>int </i><var>which</var><i>, struct itimerval *</i><var>new</var><i>, struct itimerval *</i><var>old</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>setitimer</code> function sets the timer specified by <var>which</var>
+<!-- sys/time.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>setitimer</b> (<var>int which, struct itimerval *new, struct itimerval *old</var>)<var><a name="index-setitimer-2678"></a></var><br>
+<blockquote><p>The <code>setitimer</code> function sets the timer specified by <var>which</var>
 according to <var>new</var>.  The <var>which</var> argument can have a value of
 <code>ITIMER_REAL</code>, <code>ITIMER_VIRTUAL</code>, or <code>ITIMER_PROF</code>.
 
-     <p>If <var>old</var> is not a null pointer, <code>setitimer</code> returns information
+        <p>If <var>old</var> is not a null pointer, <code>setitimer</code> returns information
 about any previous unexpired timer of the same kind in the structure it
 points to.
 
-     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+        <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error conditions are defined for this function:
 
           <dl>
-<dt><code>EINVAL</code>
-          <dd>The timer period is too large. 
+<dt><code>EINVAL</code><dd>The timer period is too large. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>getitimer</b><i> </i>(<i>int </i><var>which</var><i>, struct itimerval *</i><var>old</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>getitimer</code> function stores information about the timer specified
+<!-- sys/time.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Function: int <b>getitimer</b> (<var>int which, struct itimerval *old</var>)<var><a name="index-getitimer-2679"></a></var><br>
+<blockquote><p>The <code>getitimer</code> function stores information about the timer specified
 by <var>which</var> in the structure pointed at by <var>old</var>.
 
-     <p>The return value and error conditions are the same as for <code>setitimer</code>. 
-</td></tr>
-</table>
+        <p>The return value and error conditions are the same as for <code>setitimer</code>. 
+</p></blockquote></div>
 
-     <dl>
-<dt><code>ITIMER_REAL</code>
-     <dd>This constant can be used as the <var>which</var> argument to the
+<!-- sys/time.h -->
+<!-- BSD -->
+<dl>
+<dt><code>ITIMER_REAL</code><a name="index-ITIMER_005fREAL-2680"></a><dd>This constant can be used as the <var>which</var> argument to the
 <code>setitimer</code> and <code>getitimer</code> functions to specify the real-time
 timer.
 
-     <br><dt><code>ITIMER_VIRTUAL</code>
-     <dd>This constant can be used as the <var>which</var> argument to the
+     <!-- sys/time.h -->
+<!-- BSD -->
+<br><dt><code>ITIMER_VIRTUAL</code><a name="index-ITIMER_005fVIRTUAL-2681"></a><dd>This constant can be used as the <var>which</var> argument to the
 <code>setitimer</code> and <code>getitimer</code> functions to specify the virtual
 timer.
 
-     <br><dt><code>ITIMER_PROF</code>
-     <dd>This constant can be used as the <var>which</var> argument to the
+     <!-- sys/time.h -->
+<!-- BSD -->
+<br><dt><code>ITIMER_PROF</code><a name="index-ITIMER_005fPROF-2682"></a><dd>This constant can be used as the <var>which</var> argument to the
 <code>setitimer</code> and <code>getitimer</code> functions to specify the profiling
 timer. 
 </dl>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">unsigned int <b>alarm</b><i> </i>(<i>unsigned int </i><var>seconds</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>alarm</code> function sets the real-time timer to expire in
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Function: unsigned int <b>alarm</b> (<var>unsigned int seconds</var>)<var><a name="index-alarm-2683"></a></var><br>
+<blockquote><p>The <code>alarm</code> function sets the real-time timer to expire in
 <var>seconds</var> seconds.  If you want to cancel any existing alarm, you
 can do this by calling <code>alarm</code> with a <var>seconds</var> argument of
 zero.
 
-     <p>The return value indicates how many seconds remain before the previous
+        <p>The return value indicates how many seconds remain before the previous
 alarm would have been sent.  If there is no previous alarm, <code>alarm</code>
 returns zero. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>The <code>alarm</code> function could be defined in terms of <code>setitimer</code>
 like this:
@@ -198,10 +171,9 @@ like this:
        else
          return old.it_value.tv_sec;
      }
-     </pre>
-
+</pre>
    <p>There is an example showing the use of the <code>alarm</code> function in
-<a href="Handler-Returns.html#Handler%20Returns">Handler Returns</a>.
+<a href="Handler-Returns.html#Handler-Returns">Handler Returns</a>.
 
    <p>If you simply want your process to wait for a given number of seconds,
 you should use the <code>sleep</code> function.  See <a href="Sleeping.html#Sleeping">Sleeping</a>.

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Reporting Bugs - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Installation.html#Installation" title="Installation">
+<link rel="prev" href="Linux.html#Linux" title="Linux">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,33 +16,37 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Reporting%20Bugs">Reporting Bugs</a>,
+<a name="Reporting-Bugs"></a>
 Previous:&nbsp;<a rel="previous" accesskey="p" href="Linux.html#Linux">Linux</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
-<hr><br>
+<hr>
 </div>
 
-<h3 class="appendixsec">Reporting Bugs</h3>
+<h3 class="appendixsec">C.6 Reporting Bugs</h3>
 
-<p>There are probably bugs in the GNU C library.  There are certainly
+<p><a name="index-reporting-bugs-3798"></a><a name="index-bugs_002c-reporting-3799"></a>
+There are probably bugs in the GNU C library.  There are certainly
 errors and omissions in this manual.  If you report them, they will get
 fixed.  If you don't, no one will ever know about them and they will
 remain unfixed for all eternity, if not longer.
 
    <p>It is a good idea to verify that the problem has not already been
-reported.  Bugs are documented in two places: The file <code>BUGS</code>
+reported.  Bugs are documented in two places: The file <samp><span class="file">BUGS</span></samp>
 describes a number of well known bugs and the bug tracking system has a
 WWW interface at
-&lt;<code>http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl</code>&gt;.  The WWW
-interface gives you access to open and closed reports.  A closed report
-normally includes a patch or a hint on solving the problem.
+<a href="http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl">http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl</a>.  The WWW
+interface gives you access to open and closed reports.  The closed
+reports normally include a patch or a hint on solving the problem.
 
-   <p>To report a bug, first you must find it.  With any luck, this will be the
+   <p>To report a bug, first you must find it.  Hopefully, this will be the
 hard part.  Once you've found a bug, make sure it's really a bug.  A
 good way to do this is to see if the GNU C library behaves the same way
 some other C library does.  If so, probably you are wrong and the
@@ -48,7 +56,7 @@ Unix C libraries permit things that we don't, such as closing a file
 twice.
 
    <p>If you think you have found some way in which the GNU C library does not
-conform to the ISO and POSIX standards (see <a href="Standards-and-Portability.html#Standards%20and%20Portability">Standards and Portability</a>), that is definitely a bug.  Report it!
+conform to the ISO and POSIX standards (see <a href="Standards-and-Portability.html#Standards-and-Portability">Standards and Portability</a>), that is definitely a bug.  Report it!
 
    <p>Once you're sure you've found a bug, try to narrow it down to the
 smallest test case that reproduces the problem.  In the case of a C

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Socket Data Options - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Transferring-Data.html#Transferring-Data" title="Transferring Data">
+<link rel="prev" href="Receiving-Data.html#Receiving-Data" title="Receiving Data">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,69 +16,51 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Socket%20Data%20Options">Socket Data Options</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>
-<hr><br>
+<a name="Socket-Data-Options"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Receiving-Data.html#Receiving-Data">Receiving Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Transferring-Data.html#Transferring-Data">Transferring Data</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Socket Data Options</h5>
+<h5 class="subsubsection">16.9.5.3 Socket Data Options</h5>
 
-<p>The <var>flags</var> argument to <code>send</code> and <code>recv</code> is a bit
+<p><a name="index-sys_002fsocket_002eh-1797"></a>The <var>flags</var> argument to <code>send</code> and <code>recv</code> is a bit
 mask.  You can bitwise-OR the values of the following macros together
 to obtain a value for this argument.  All are defined in the header
-file <code>sys/socket.h</code>.
+file <samp><span class="file">sys/socket.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>MSG_OOB</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Send or receive out-of-band data.  See <a href="Out-of-Band-Data.html#Out-of-Band%20Data">Out-of-Band Data</a>. 
-</td></tr>
-</table>
+<!-- sys/socket.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>MSG_OOB</b><var><a name="index-MSG_005fOOB-1798"></a></var><br>
+<blockquote><p>Send or receive out-of-band data.  See <a href="Out_002dof_002dBand-Data.html#Out_002dof_002dBand-Data">Out-of-Band Data</a>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>MSG_PEEK</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Look at the data but don't remove it from the input queue.  This is
+<!-- sys/socket.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>MSG_PEEK</b><var><a name="index-MSG_005fPEEK-1799"></a></var><br>
+<blockquote><p>Look at the data but don't remove it from the input queue.  This is
 only meaningful with input functions such as <code>recv</code>, not with
 <code>send</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>MSG_DONTROUTE</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Don't include routing information in the message.  This is only
+<!-- sys/socket.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>MSG_DONTROUTE</b><var><a name="index-MSG_005fDONTROUTE-1800"></a></var><br>
+<blockquote><p>Don't include routing information in the message.  This is only
 meaningful with output operations, and is usually only of interest for
 diagnostic or routing programs.  We don't try to explain it here. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Testing File Access - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="File-Attributes.html#File-Attributes" title="File Attributes">
+<link rel="prev" href="Setting-Permissions.html#Setting-Permissions" title="Setting Permissions">
+<link rel="next" href="File-Times.html#File-Times" title="File Times">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,26 +17,30 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Testing%20File%20Access">Testing File Access</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="File-Times.html#File%20Times">File Times</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="File-Attributes.html#File%20Attributes">File Attributes</a>
-<hr><br>
+<a name="Testing-File-Access"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Times.html#File-Times">File Times</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Setting-Permissions.html#Setting-Permissions">Setting Permissions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Attributes.html#File-Attributes">File Attributes</a>
+<hr>
 </div>
 
-<h3 class="subsection">Testing Permission to Access a File</h4>
+<h4 class="subsection">14.9.8 Testing Permission to Access a File</h4>
 
-<p>In some situations it is desirable to allow programs to access files or
+<p><a name="index-testing-access-permission-1561"></a><a name="index-access_002c-testing-for-1562"></a><a name="index-setuid-programs-and-file-access-1563"></a>
+In some situations it is desirable to allow programs to access files or
 devices even if this is not possible with the permissions granted to the
 user.  One possible solution is to set the setuid-bit of the program
 file.  If such a program is started the <em>effective</em> user ID of the
 process is changed to that of the owner of the program file.  So to
-allow write access to files like <code>/etc/passwd</code>, which normally can
+allow write access to files like <samp><span class="file">/etc/passwd</span></samp>, which normally can
 be written only by the super-user, the modifying program will have to be
 owned by <code>root</code> and the setuid-bit must be set.
 
@@ -59,109 +68,72 @@ appropriate for the system you are using.
 A non-setuid program will always use the effective ID rather than the
 real ID.
 
-   <p>The symbols in this section are declared in <code>unistd.h</code>.
+   <p><a name="index-unistd_002eh-1564"></a>The symbols in this section are declared in <samp><span class="file">unistd.h</span></samp>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>access</b><i> </i>(<i>const char *</i><var>filename</var><i>, int </i><var>how</var><i></i>)<i>
-     </i></td>
-<td align="right">Function</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The <code>access</code> function checks to see whether the file named by
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Function: int <b>access</b> (<var>const char *filename, int how</var>)<var><a name="index-access-1565"></a></var><br>
+<blockquote><p>The <code>access</code> function checks to see whether the file named by
 <var>filename</var> can be accessed in the way specified by the <var>how</var>
 argument.  The <var>how</var> argument either can be the bitwise OR of the
 flags <code>R_OK</code>, <code>W_OK</code>, <code>X_OK</code>, or the existence test
 <code>F_OK</code>.
 
-     <p>This function uses the <em>real</em> user and group IDs of the calling
+        <p>This function uses the <em>real</em> user and group IDs of the calling
 process, rather than the <em>effective</em> IDs, to check for access
 permission.  As a result, if you use the function from a <code>setuid</code>
-or <code>setgid</code> program (see <a href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>), it gives
+or <code>setgid</code> program (see <a href="How-Change-Persona.html#How-Change-Persona">How Change Persona</a>), it gives
 information relative to the user who actually ran the program.
 
-     <p>The return value is <code>0</code> if the access is permitted, and <code>-1</code>
+        <p>The return value is <code>0</code> if the access is permitted, and <code>-1</code>
 otherwise.  (In other words, treated as a predicate function,
 <code>access</code> returns true if the requested access is <em>denied</em>.)
 
-     <p>In addition to the usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following <code>errno</code> error conditions are defined for
+        <p>In addition to the usual file name errors (see <a href="File-Name-Errors.html#File-Name-Errors">File Name Errors</a>), the following <code>errno</code> error conditions are defined for
 this function:
 
           <dl>
-<dt><code>EACCES</code>
-          <dd>The access specified by <var>how</var> is denied.
+<dt><code>EACCES</code><dd>The access specified by <var>how</var> is denied.
 
-          <br><dt><code>ENOENT</code>
-          <dd>The file doesn't exist.
+          <br><dt><code>ENOENT</code><dd>The file doesn't exist.
 
-          <br><dt><code>EROFS</code>
-          <dd>Write permission was requested for a file on a read-only file system. 
+          <br><dt><code>EROFS</code><dd>Write permission was requested for a file on a read-only file system. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-   <p>These macros are defined in the header file <code>unistd.h</code> for use
+   <p>These macros are defined in the header file <samp><span class="file">unistd.h</span></samp> for use
 as the <var>how</var> argument to the <code>access</code> function.  The values
-are integer constants.
+are integer constants. 
+<a name="index-unistd_002eh-1566"></a>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>R_OK</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Flag meaning test for read permission. 
-</td></tr>
-</table>
+<div class="defun">
+&mdash; Macro: int <b>R_OK</b><var><a name="index-R_005fOK-1567"></a></var><br>
+<blockquote><p>Flag meaning test for read permission. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>W_OK</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Flag meaning test for write permission. 
-</td></tr>
-</table>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>W_OK</b><var><a name="index-W_005fOK-1568"></a></var><br>
+<blockquote><p>Flag meaning test for write permission. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>X_OK</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Flag meaning test for execute/search permission. 
-</td></tr>
-</table>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>X_OK</b><var><a name="index-X_005fOK-1569"></a></var><br>
+<blockquote><p>Flag meaning test for execute/search permission. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>F_OK</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-Flag meaning test for existence of the file. 
-</td></tr>
-</table>
+<!-- unistd.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>F_OK</b><var><a name="index-F_005fOK-1570"></a></var><br>
+<blockquote><p>Flag meaning test for existence of the file. 
+</p></blockquote></div>
 
    </body></html>
 

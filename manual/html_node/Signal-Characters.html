@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Signal Characters - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Special-Characters.html#Special-Characters" title="Special Characters">
+<link rel="prev" href="Editing-Characters.html#Editing-Characters" title="Editing Characters">
+<link rel="next" href="Start_002fStop-Characters.html#Start_002fStop-Characters" title="Start/Stop Characters">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,125 +17,100 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Signal%20Characters">Signal Characters</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Start-Stop-Characters.html#Start%2fStop%20Characters">Start/Stop Characters</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Editing-Characters.html#Editing%20Characters">Editing Characters</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Special-Characters.html#Special%20Characters">Special Characters</a>
-<hr><br>
+<a name="Signal-Characters"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Start_002fStop-Characters.html#Start_002fStop-Characters">Start/Stop Characters</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Editing-Characters.html#Editing-Characters">Editing Characters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Special-Characters.html#Special-Characters">Special Characters</a>
+<hr>
 </div>
 
-<h3 class="subsubsection">Characters that Cause Signals</h5>
+<h5 class="subsubsection">17.4.9.2 Characters that Cause Signals</h5>
 
 <p>These special characters may be active in either canonical or noncanonical
-input mode, but only when the <code>ISIG</code> flag is set (see <a href="Local-Modes.html#Local%20Modes">Local Modes</a>).
+input mode, but only when the <code>ISIG</code> flag is set (see <a href="Local-Modes.html#Local-Modes">Local Modes</a>).
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>VINTR</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the subscript for the INTR character in the special control
-character array.  <code></code><var>termios</var><code>.c_cc[VINTR]</code> holds the character
+<!-- termios.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>VINTR</b><var><a name="index-VINTR-1958"></a></var><br>
+<blockquote><p><a name="index-INTR-character-1959"></a><a name="index-interrupt-character-1960"></a>This is the subscript for the INTR character in the special control
+character array.  <var>termios</var><code>.c_cc[VINTR]</code> holds the character
 itself.
 
-     <p>The INTR (interrupt) character raises a <code>SIGINT</code> signal for all
+        <p>The INTR (interrupt) character raises a <code>SIGINT</code> signal for all
 processes in the foreground job associated with the terminal.  The INTR
-character itself is then discarded.  See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>, for more
+character itself is then discarded.  See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more
 information about signals.
 
-     <p>Typically, the INTR character is <kbd>C-c</kbd>. 
-</td></tr>
-</table>
+        <p>Typically, the INTR character is <kbd>C-c</kbd>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>VQUIT</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the subscript for the QUIT character in the special control
-character array.  <code></code><var>termios</var><code>.c_cc[VQUIT]</code> holds the character
+<!-- termios.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>VQUIT</b><var><a name="index-VQUIT-1961"></a></var><br>
+<blockquote><p><a name="index-QUIT-character-1962"></a>This is the subscript for the QUIT character in the special control
+character array.  <var>termios</var><code>.c_cc[VQUIT]</code> holds the character
 itself.
 
-     <p>The QUIT character raises a <code>SIGQUIT</code> signal for all processes in
+        <p>The QUIT character raises a <code>SIGQUIT</code> signal for all processes in
 the foreground job associated with the terminal.  The QUIT character
-itself is then discarded.  See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>, for more information
+itself is then discarded.  See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information
 about signals.
 
-     <p>Typically, the QUIT character is <kbd>C-\</kbd>. 
-</td></tr>
-</table>
+        <p>Typically, the QUIT character is <kbd>C-\</kbd>. 
+</p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>VSUSP</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the subscript for the SUSP character in the special control
-character array.  <code></code><var>termios</var><code>.c_cc[VSUSP]</code> holds the character
+<!-- termios.h -->
+<!-- POSIX.1 -->
+<div class="defun">
+&mdash; Macro: int <b>VSUSP</b><var><a name="index-VSUSP-1963"></a></var><br>
+<blockquote><p><a name="index-SUSP-character-1964"></a><a name="index-suspend-character-1965"></a>This is the subscript for the SUSP character in the special control
+character array.  <var>termios</var><code>.c_cc[VSUSP]</code> holds the character
 itself.
 
-     <p>The SUSP (suspend) character is recognized only if the implementation
-supports job control (see <a href="Job-Control.html#Job%20Control">Job Control</a>).  It causes a <code>SIGTSTP</code>
+        <p>The SUSP (suspend) character is recognized only if the implementation
+supports job control (see <a href="Job-Control.html#Job-Control">Job Control</a>).  It causes a <code>SIGTSTP</code>
 signal to be sent to all processes in the foreground job associated with
 the terminal.  The SUSP character itself is then discarded. 
-See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>, for more information about signals.
+See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information about signals.
 
-     <p>Typically, the SUSP character is <kbd>C-z</kbd>. 
-</td></tr>
-</table>
+        <p>Typically, the SUSP character is <kbd>C-z</kbd>. 
+</p></blockquote></div>
 
    <p>Few applications disable the normal interpretation of the SUSP
 character.  If your program does this, it should provide some other
 mechanism for the user to stop the job.  When the user invokes this
 mechanism, the program should send a <code>SIGTSTP</code> signal to the
 process group of the process, not just to the process itself. 
-See <a href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>.
+See <a href="Signaling-Another-Process.html#Signaling-Another-Process">Signaling Another Process</a>.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>VDSUSP</b><i>
-     </i></td>
-<td align="right">Macro</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the subscript for the DSUSP character in the special control
-character array.  <code></code><var>termios</var><code>.c_cc[VDSUSP]</code> holds the character
+<!-- termios.h -->
+<!-- BSD -->
+<div class="defun">
+&mdash; Macro: int <b>VDSUSP</b><var><a name="index-VDSUSP-1966"></a></var><br>
+<blockquote><p><a name="index-DSUSP-character-1967"></a><a name="index-delayed-suspend-character-1968"></a>This is the subscript for the DSUSP character in the special control
+character array.  <var>termios</var><code>.c_cc[VDSUSP]</code> holds the character
 itself.
 
-     <p>The DSUSP (suspend) character is recognized only if the implementation
-supports job control (see <a href="Job-Control.html#Job%20Control">Job Control</a>).  It sends a <code>SIGTSTP</code>
-signal, like the SUSP character, but not right away--only when the
+        <p>The DSUSP (suspend) character is recognized only if the implementation
+supports job control (see <a href="Job-Control.html#Job-Control">Job Control</a>).  It sends a <code>SIGTSTP</code>
+signal, like the SUSP character, but not right away&mdash;only when the
 program tries to read it as input.  Not all systems with job control
 support DSUSP; only BSD-compatible systems (including the GNU system).
 
-     <p>See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>, for more information about signals.
+        <p>See <a href="Signal-Handling.html#Signal-Handling">Signal Handling</a>, for more information about signals.
 
-     <p>Typically, the DSUSP character is <kbd>C-y</kbd>. 
-</td></tr>
-</table>
+        <p>Typically, the DSUSP character is <kbd>C-y</kbd>. 
+</p></blockquote></div>
 
    </body></html>
 

@@ -1,9 +1,14 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>Regexp Subexpressions - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Regular-Expressions.html#Regular-Expressions" title="Regular Expressions">
+<link rel="prev" href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps" title="Matching POSIX Regexps">
+<link rel="next" href="Subexpression-Complications.html#Subexpression-Complications" title="Subexpression Complications">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,19 +17,22 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="Regexp%20Subexpressions">Regexp Subexpressions</a>,
-Next:&nbsp;<a rel="next" accesskey="n" href="Subexpression-Complications.html#Subexpression%20Complications">Subexpression Complications</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Matching-POSIX-Regexps.html#Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
-<hr><br>
+<a name="Regexp-Subexpressions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Subexpression-Complications.html#Subexpression-Complications">Subexpression Complications</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Matching-POSIX-Regexps.html#Matching-POSIX-Regexps">Matching POSIX Regexps</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Regular-Expressions.html#Regular-Expressions">Regular Expressions</a>
+<hr>
 </div>
 
-<h3 class="subsection">Match Results with Subexpressions</h4>
+<h4 class="subsection">10.3.4 Match Results with Subexpressions</h4>
 
 <p>When <code>regexec</code> matches parenthetical subexpressions of
 <var>pattern</var>, it records which parts of <var>string</var> they match.  It
@@ -35,44 +43,28 @@ the entire regular expression.  Each other element of the array records
 the beginning and end of the part that matched a single parenthetical
 subexpression.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>regmatch_t</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the data type of the <var>matcharray</var> array that you pass to
+<!-- regex.h -->
+<!-- POSIX.2 -->
+<div class="defun">
+&mdash; Data Type: <b>regmatch_t</b><var><a name="index-regmatch_005ft-872"></a></var><br>
+<blockquote><p>This is the data type of the <var>matcharray</var> array that you pass to
 <code>regexec</code>.  It contains two structure fields, as follows:
 
           <dl>
-<dt><code>rm_so</code>
-          <dd>The offset in <var>string</var> of the beginning of a substring.  Add this
+<dt><code>rm_so</code><dd>The offset in <var>string</var> of the beginning of a substring.  Add this
 value to <var>string</var> to get the address of that part.
 
-          <br><dt><code>rm_eo</code>
-          <dd>The offset in <var>string</var> of the end of the substring. 
+          <br><dt><code>rm_eo</code><dd>The offset in <var>string</var> of the end of the substring. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>regoff_t</b><i>
-     </i></td>
-<td align="right">Data Type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-<code>regoff_t</code> is an alias for another signed integer type. 
+<!-- regex.h -->
+<!-- POSIX.2 -->
+<div class="defun">
+&mdash; Data Type: <b>regoff_t</b><var><a name="index-regoff_005ft-873"></a></var><br>
+<blockquote><p><code>regoff_t</code> is an alias for another signed integer type. 
 The fields of <code>regmatch_t</code> have type <code>regoff_t</code>. 
-</td></tr>
-</table>
+</p></blockquote></div>
 
    <p>The <code>regmatch_t</code> elements correspond to subexpressions
 positionally; the first element (index <code>1</code>) records where the first

@@ -1,9 +1,13 @@
 <html lang="en">
 <head>
-<title>The GNU C Library</title>
+<title>glibc iconv Implementation - The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="The GNU C Library">
-<meta name="generator" content="makeinfo 4.6">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Generic-Charset-Conversion.html#Generic-Charset-Conversion" title="Generic Charset Conversion">
+<link rel="prev" href="Other-iconv-Implementations.html#Other-iconv-Implementations" title="Other iconv Implementations">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <style type="text/css"><!--
   pre.display { font-family:inherit }
@@ -12,18 +16,21 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
 --></style>
 </head>
 <body>
 <div class="node">
 <p>
-Node:&nbsp;<a name="glibc%20iconv%20Implementation">glibc iconv Implementation</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-iconv-Implementations.html#Other%20iconv%20Implementations">Other iconv Implementations</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Generic-Charset-Conversion.html#Generic%20Charset%20Conversion">Generic Charset Conversion</a>
-<hr><br>
+<a name="glibc-iconv-Implementation"></a>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-iconv-Implementations.html#Other-iconv-Implementations">Other iconv Implementations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Generic-Charset-Conversion.html#Generic-Charset-Conversion">Generic Charset Conversion</a>
+<hr>
 </div>
 
-<h3 class="subsection">The <code>iconv</code> Implementation in the GNU C library</h4>
+<h4 class="subsection">6.5.4 The <code>iconv</code> Implementation in the GNU C library</h4>
 
 <p>After reading about the problems of <code>iconv</code> implementations in the
 last section it is certainly good to note that the implementation in
@@ -62,32 +69,32 @@ A to C directly).  If the <code>iconv_open</code>
 returns an error and sets <code>errno</code> to <code>EINVAL</code>, there is no
 known way, directly or indirectly, to perform the wanted conversion.
 
-   <p>Triangulation is achieved by providing for each character set a
-conversion from and to UCS-4 encoded ISO&nbsp;10646.  Using ISO&nbsp;10646
+   <p><a name="index-triangulation-669"></a>Triangulation is achieved by providing for each character set a
+conversion from and to UCS-4 encoded ISO&nbsp;10646<!-- /@w -->.  Using ISO&nbsp;10646<!-- /@w -->
 as an intermediate representation it is possible to <dfn>triangulate</dfn>
 (i.e., convert with an intermediate representation).
 
-   <p>There is no inherent requirement to provide a conversion to ISO&nbsp;10646 for a new character set, and it is also possible to provide other
-conversions where neither source nor destination character set is ISO&nbsp;10646.  The existing set of conversions is simply meant to cover all
+   <p>There is no inherent requirement to provide a conversion to ISO&nbsp;10646<!-- /@w --> for a new character set, and it is also possible to provide other
+conversions where neither source nor destination character set is ISO&nbsp;10646<!-- /@w -->.  The existing set of conversions is simply meant to cover all
 conversions that might be of interest.
 
-   <p>All currently available conversions use the triangulation method above,
+   <p><a name="index-ISO_002d2022_002dJP-670"></a><a name="index-EUC_002dJP-671"></a>All currently available conversions use the triangulation method above,
 making conversion run unnecessarily slow.  If, for example, somebody
 often needs the conversion from ISO-2022-JP to EUC-JP, a quicker solution
 would involve direct conversion between the two character sets, skipping
-the input to ISO&nbsp;10646 first.  The two character sets of interest
-are much more similar to each other than to ISO&nbsp;10646.
+the input to ISO&nbsp;10646<!-- /@w --> first.  The two character sets of interest
+are much more similar to each other than to ISO&nbsp;10646<!-- /@w -->.
 
    <p>In such a situation one easily can write a new conversion and provide it
 as a better alternative.  The GNU C library <code>iconv</code> implementation
 would automatically use the module implementing the conversion if it is
 specified to be more efficient.
 
-<h3 class="subsubsection">Format of <code>gconv-modules</code> files</h5>
+<h5 class="subsubsection">6.5.4.1 Format of <samp><span class="file">gconv-modules</span></samp> files</h5>
 
 <p>All information about the available conversions comes from a file named
-<code>gconv-modules</code>, which can be found in any of the directories along
-the <code>GCONV_PATH</code>.  The <code>gconv-modules</code> files are line-oriented
+<samp><span class="file">gconv-modules</span></samp>, which can be found in any of the directories along
+the <code>GCONV_PATH</code>.  The <samp><span class="file">gconv-modules</span></samp> files are line-oriented
 text files, where each of the lines has one of the following formats:
 
      <ul>
@@ -105,21 +112,21 @@ achieve the same result as when using the real character set name.
 names.  There is normally an official name but this need not correspond to
 the most popular name.  Beside this many character sets have special
 names that are somehow constructed.  For example, all character sets
-specified by the ISO have an alias of the form <code>ISO-IR-</code><var>nnn</var><code></code>
+specified by the ISO have an alias of the form <code>ISO-IR-</code><var>nnn</var>
 where <var>nnn</var> is the registration number.  This allows programs that
 know about the registration number to construct character set names and
 use them in <code>iconv_open</code> calls.  More on the available names and
 aliases follows below.
 
-     </p><li>Lines starting with <code>module</code> introduce an available conversion
+     <li>Lines starting with <code>module</code> introduce an available conversion
 module.  These lines must contain three or four more words.
 
      <p>The first word specifies the source character set, the second word the
 destination character set of conversion implemented in this module, and
 the third word is the name of the loadable module.  The filename is
 constructed by appending the usual shared object suffix (normally
-<code>.so</code>) and this file is then supposed to be found in the same
-directory the <code>gconv-modules</code> file is in.  The last word on the line,
+<samp><span class="file">.so</span></samp>) and this file is then supposed to be found in the same
+directory the <samp><span class="file">gconv-modules</span></samp> file is in.  The last word on the line,
 which is optional, is a numeric value representing the cost of the
 conversion.  If this word is missing, a cost of 1 is assumed.  The
 numeric value itself does not matter that much; what counts are the
@@ -130,55 +137,54 @@ Below is a more precise description of the use of the cost value.
    <p>Returning to the example above where one has written a module to directly
 convert from ISO-2022-JP to EUC-JP and back.  All that has to be done is
 to put the new module, let its name be ISO2022JP-EUCJP.so, in a directory
-and add a file <code>gconv-modules</code> with the following content in the
+and add a file <samp><span class="file">gconv-modules</span></samp> with the following content in the
 same directory:
 
 <pre class="smallexample">     module  ISO-2022-JP//   EUC-JP//        ISO2022JP-EUCJP    1
      module  EUC-JP//        ISO-2022-JP//   ISO2022JP-EUCJP    1
-     </pre>
-
+</pre>
    <p>To see why this is sufficient, it is necessary to understand how the
 conversion used by <code>iconv</code> (and described in the descriptor) is
 selected.  The approach to this problem is quite simple.
 
    <p>At the first call of the <code>iconv_open</code> function the program reads
-all available <code>gconv-modules</code> files and builds up two tables: one
+all available <samp><span class="file">gconv-modules</span></samp> files and builds up two tables: one
 containing all the known aliases and another that contains the
 information about the conversions and which shared object implements
 them.
 
-<h3 class="subsubsection">Finding the conversion path in <code>iconv</code></h5>
+<h5 class="subsubsection">6.5.4.2 Finding the conversion path in <code>iconv</code></h5>
 
 <p>The set of available conversions form a directed graph with weighted
 edges.  The weights on the edges are the costs specified in the
-<code>gconv-modules</code> files.  The <code>iconv_open</code> function uses an
+<samp><span class="file">gconv-modules</span></samp> files.  The <code>iconv_open</code> function uses an
 algorithm suitable for search for the best path in such a graph and so
 constructs a list of conversions that must be performed in succession
 to get the transformation from the source to the destination character
 set.
 
-   <p>Explaining why the above <code>gconv-modules</code> files allows the
+   <p>Explaining why the above <samp><span class="file">gconv-modules</span></samp> files allows the
 <code>iconv</code> implementation to resolve the specific ISO-2022-JP to
 EUC-JP conversion module instead of the conversion coming with the
 library itself is straightforward.  Since the latter conversion takes two
-steps (from ISO-2022-JP to ISO&nbsp;10646 and then from ISO&nbsp;10646 to
-EUC-JP), the cost is 1+1 = 2.  The above <code>gconv-modules</code>
+steps (from ISO-2022-JP to ISO&nbsp;10646<!-- /@w --> and then from ISO&nbsp;10646<!-- /@w --> to
+EUC-JP), the cost is 1+1 = 2.  The above <samp><span class="file">gconv-modules</span></samp>
 file, however, specifies that the new conversion modules can perform this
 conversion with only the cost of 1.
 
-   <p>A mysterious item about the <code>gconv-modules</code> file above (and also
+   <p>A mysterious item about the <samp><span class="file">gconv-modules</span></samp> file above (and also
 the file coming with the GNU C library) are the names of the character
 sets specified in the <code>module</code> lines.  Why do almost all the names
 end in <code>//</code>?  And this is not all: the names can actually be
 regular expressions.  At this point in time this mystery should not be
 revealed, unless you have the relevant spell-casting materials: ashes
-from an original DOS&nbsp;6.2 boot disk burnt in effigy, a crucifix
+from an original DOS&nbsp;6.2<!-- /@w --> boot disk burnt in effigy, a crucifix
 blessed by St. Emacs, assorted herbal roots from Central America, sand
 from Cebu, etc.  Sorry!  <strong>The part of the implementation where
 this is used is not yet finished.  For now please simply follow the
-existing examples.  It'll become clearer once it is. -drepper</strong>
+existing examples.  It'll become clearer once it is. &ndash;drepper</strong>
 
-   <p>A last remark about the <code>gconv-modules</code> is about the names not
+   <p>A last remark about the <samp><span class="file">gconv-modules</span></samp> is about the names not
 ending with <code>//</code>.  A character set named <code>INTERNAL</code> is often
 mentioned.  From the discussion above and the chosen name it should have
 become clear that this is the name for the representation used in the
@@ -195,7 +201,7 @@ trouble with endianess, the internal representation consistently is named
 <code>INTERNAL</code> even on big-endian systems where the representations are
 identical.
 
-<h3 class="subsubsection"><code>iconv</code> module data structures</h5>
+<h5 class="subsubsection">6.5.4.3 <code>iconv</code> module data structures</h5>
 
 <p>So far this section has described how modules are located and considered
 to be used.  What remains to be described is the interface of the modules
@@ -204,7 +210,7 @@ it is in use in January 1999.  The interface will change a bit in the
 future but, with luck, only in an upwardly compatible way.
 
    <p>The definitions necessary to write new modules are publicly available
-in the non-standard header <code>gconv.h</code>.  The following text,
+in the non-standard header <samp><span class="file">gconv.h</span></samp>.  The following text,
 therefore, describes the definitions from this header file.  First,
 however, it is necessary to get an overview.
 
@@ -219,19 +225,14 @@ elements necessary to understanding the implementation.
 
    <p>We need two different kinds of data structures.  The first describes the
 conversion and the second describes the state etc.  There are really two
-type definitions like this in <code>gconv.h</code>.
+type definitions like this in <samp><span class="file">gconv.h</span></samp>. 
+<a name="index-gconv_002eh-672"></a>
+<!-- gconv.h -->
+<!-- GNU -->
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct __gconv_step</b><i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This data structure describes one conversion a module can perform.  For
+<div class="defun">
+&mdash; Data type: <b>struct __gconv_step</b><var><a name="index-struct-_005f_005fgconv_005fstep-673"></a></var><br>
+<blockquote><p>This data structure describes one conversion a module can perform.  For
 each function in a loaded module with conversion functions there is
 exactly one object of this type.  This object is shared by all users of
 the conversion (i.e., this object does not contain any information
@@ -239,31 +240,19 @@ corresponding to an actual conversion; it only describes the conversion
 itself).
 
           <dl>
-<dt><code>struct __gconv_loaded_object *__shlib_handle</code>
-          <dd><dt><code>const char *__modname</code>
-          <dd><dt><code>int __counter</code>
-          <dd>All these elements of the structure are used internally in the C library
+<dt><code>struct __gconv_loaded_object *__shlib_handle</code><dt><code>const char *__modname</code><dt><code>int __counter</code><dd>All these elements of the structure are used internally in the C library
 to coordinate loading and unloading the shared.  One must not expect any
 of the other elements to be available or initialized.
 
-          <br><dt><code>const char *__from_name</code>
-          <dd><dt><code>const char *__to_name</code>
-          <dd><code>__from_name</code> and <code>__to_name</code> contain the names of the source and
+          <br><dt><code>const char *__from_name</code><dt><code>const char *__to_name</code><dd><code>__from_name</code> and <code>__to_name</code> contain the names of the source and
 destination character sets.  They can be used to identify the actual
 conversion to be carried out since one module might implement conversions
 for more than one character set and/or direction.
 
-          <br><dt><code>gconv_fct __fct</code>
-          <dd><dt><code>gconv_init_fct __init_fct</code>
-          <dd><dt><code>gconv_end_fct __end_fct</code>
-          <dd>These elements contain pointers to the functions in the loadable module. 
+          <br><dt><code>gconv_fct __fct</code><dt><code>gconv_init_fct __init_fct</code><dt><code>gconv_end_fct __end_fct</code><dd>These elements contain pointers to the functions in the loadable module. 
 The interface will be explained below.
 
-          <br><dt><code>int __min_needed_from</code>
-          <dd><dt><code>int __max_needed_from</code>
-          <dd><dt><code>int __min_needed_to</code>
-          <dd><dt><code>int __max_needed_to;</code>
-          <dd>These values have to be supplied in the init function of the module.  The
+          <br><dt><code>int __min_needed_from</code><dt><code>int __max_needed_from</code><dt><code>int __min_needed_to</code><dt><code>int __max_needed_to;</code><dd>These values have to be supplied in the init function of the module.  The
 <code>__min_needed_from</code> value specifies how many bytes a character of
 the source character set at least needs.  The <code>__max_needed_from</code>
 specifies the maximum value that also includes possible shift sequences.
@@ -275,13 +264,11 @@ this time for the destination character set.
           <p>It is crucial that these values be accurate since otherwise the
 conversion functions will have problems or not work at all.
 
-          <br><dt><code>int __stateful</code>
-          <dd>This element must also be initialized by the init function. 
+          <br><dt><code>int __stateful</code><dd>This element must also be initialized by the init function. 
 <code>int __stateful</code> is nonzero if the source character set is stateful. 
 Otherwise it is zero.
 
-          <br><dt><code>void *__data</code>
-          <dd>This element can be used freely by the conversion functions in the
+          <br><dt><code>void *__data</code><dd>This element can be used freely by the conversion functions in the
 module.  <code>void *__data</code> can be used to communicate extra information
 from one call to another.  <code>void *__data</code> need not be initialized if
 not needed at all.  If <code>void *__data</code> element is assigned a pointer
@@ -294,26 +281,17 @@ users of this specification conversion and therefore the <code>__data</code>
 element must not contain data specific to one specific use of the
 conversion function. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-<p>
-<table width="100%">
-<tr>
-<td align="left"><b>struct __gconv_step_data</b><i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This is the data structure that contains the information specific to
+<!-- gconv.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Data type: <b>struct __gconv_step_data</b><var><a name="index-struct-_005f_005fgconv_005fstep_005fdata-674"></a></var><br>
+<blockquote><p>This is the data structure that contains the information specific to
 each use of the conversion functions.
 
           <dl>
-<dt><code>char *__outbuf</code>
-          <dd><dt><code>char *__outbufend</code>
-          <dd>These elements specify the output buffer for the conversion step.  The
+<dt><code>char *__outbuf</code><dt><code>char *__outbufend</code><dd>These elements specify the output buffer for the conversion step.  The
 <code>__outbuf</code> element points to the beginning of the buffer, and
 <code>__outbufend</code> points to the byte following the last byte in the
 buffer.  The conversion function must not assume anything about the size
@@ -326,22 +304,19 @@ written into the buffer to signal how much output is available.  If this
 conversion step is not the last one, the element must not be modified. 
 The <code>__outbufend</code> element must not be modified.
 
-          <br><dt><code>int __is_last</code>
-          <dd>This element is nonzero if this conversion step is the last one.  This
+          <br><dt><code>int __is_last</code><dd>This element is nonzero if this conversion step is the last one.  This
 information is necessary for the recursion.  See the description of the
 conversion function internals below.  This element must never be
 modified.
 
-          <br><dt><code>int __invocation_counter</code>
-          <dd>The conversion function can use this element to see how many calls of
+          <br><dt><code>int __invocation_counter</code><dd>The conversion function can use this element to see how many calls of
 the conversion function already happened.  Some character sets require a
 certain prolog when generating output, and by comparing this value with
 zero, one can find out whether it is the first call and whether,
 therefore, the prolog should be emitted.  This element must never be
 modified.
 
-          <br><dt><code>int __internal_use</code>
-          <dd>This element is another one rarely used but needed in certain
+          <br><dt><code>int __internal_use</code><dd>This element is another one rarely used but needed in certain
 situations.  It is assigned a nonzero value in case the conversion
 functions are used to implement <code>mbsrtowcs</code> et.al. (i.e., the
 function is not used directly through the <code>iconv</code> interface).
@@ -366,27 +341,23 @@ information.
 
           <pre class="smallexample">               if (!data-&gt;__internal_use
                     &amp;&amp; data-&gt;__invocation_counter == 0)
-                 /* Emit prolog.  */
+                 /* <span class="roman">Emit prolog.</span>  */
                  ...
-               </pre>
-
+          </pre>
           <p>This element must never be modified.
 
-          <br><dt><code>mbstate_t *__statep</code>
-          <dd>The <code>__statep</code> element points to an object of type <code>mbstate_t</code>
-(see <a href="Keeping-the-state.html#Keeping%20the%20state">Keeping the state</a>).  The conversion of a stateful character
+          <br><dt><code>mbstate_t *__statep</code><dd>The <code>__statep</code> element points to an object of type <code>mbstate_t</code>
+(see <a href="Keeping-the-state.html#Keeping-the-state">Keeping the state</a>).  The conversion of a stateful character
 set must use the object pointed to by <code>__statep</code> to store
 information about the conversion state.  The <code>__statep</code> element
 itself must never be modified.
 
-          <br><dt><code>mbstate_t __state</code>
-          <dd>This element must <em>never</em> be used directly.  It is only part of
+          <br><dt><code>mbstate_t __state</code><dd>This element must <em>never</em> be used directly.  It is only part of
 this structure to have the needed space allocated. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
-<h3 class="subsubsection"><code>iconv</code> module interfaces</h5>
+<h5 class="subsubsection">6.5.4.4 <code>iconv</code> module interfaces</h5>
 
 <p>With the knowledge about the data structures we now can describe the
 conversion function itself.  To understand the interface a bit of
@@ -411,23 +382,20 @@ functions that the modules must provide.  There are three functions that
 must have the following names:
 
      <dl>
-<dt><code>gconv_init</code>
-     <dd>The <code>gconv_init</code> function initializes the conversion function
+<dt><code>gconv_init</code><dd>The <code>gconv_init</code> function initializes the conversion function
 specific data structure.  This very same object is shared by all
 conversions that use this conversion and, therefore, no state information
 about the conversion itself must be stored in here.  If a module
 implements more than one conversion, the <code>gconv_init</code> function will
 be called multiple times.
 
-     <br><dt><code>gconv_end</code>
-     <dd>The <code>gconv_end</code> function is responsible for freeing all resources
+     <br><dt><code>gconv_end</code><dd>The <code>gconv_end</code> function is responsible for freeing all resources
 allocated by the <code>gconv_init</code> function.  If there is nothing to do,
 this function can be missing.  Special care must be taken if the module
 implements more than one conversion and the <code>gconv_init</code> function
 does not allocate the same resources for all conversions.
 
-     <br><dt><code>gconv</code>
-     <dd>This is the actual conversion function.  It is called to convert one
+     <br><dt><code>gconv</code><dd>This is the actual conversion function.  It is called to convert one
 block of text.  It gets passed the conversion step information
 initialized by <code>gconv_init</code> and the conversion data, specific to
 this use of the conversion functions. 
@@ -436,40 +404,29 @@ this use of the conversion functions.
    <p>There are three data types defined for the three module interface
 functions and these define the interface.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>(*__gconv_init_fct)</b><i> </i>(<i>struct __gconv_step *</i>)<i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-This specifies the interface of the initialization function of the
+<!-- gconv.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Data type: int <b>(*__gconv_init_fct)</b> (<var>struct __gconv_step *</var>)<var><a name="index-g_t_0028_002a_005f_005fgconv_005finit_005ffct_0029-675"></a></var><br>
+<blockquote><p>This specifies the interface of the initialization function of the
 module.  It is called exactly once for each conversion the module
 implements.
 
-     <p>As explained in the description of the <code>struct __gconv_step</code> data
+        <p>As explained in the description of the <code>struct __gconv_step</code> data
 structure above the initialization function has to initialize parts of
 it.
 
           <dl>
-<dt><code>__min_needed_from</code>
-          <dd><dt><code>__max_needed_from</code>
-          <dd><dt><code>__min_needed_to</code>
-          <dd><dt><code>__max_needed_to</code>
-          <dd>These elements must be initialized to the exact numbers of the minimum
+<dt><code>__min_needed_from</code><dt><code>__max_needed_from</code><dt><code>__min_needed_to</code><dt><code>__max_needed_to</code><dd>These elements must be initialized to the exact numbers of the minimum
 and maximum number of bytes used by one character in the source and
 destination character sets, respectively.  If the characters all have the
 same size, the minimum and maximum values are the same.
 
-          <br><dt><code>__stateful</code>
-          <dd>This element must be initialized to an nonzero value if the source
+          <br><dt><code>__stateful</code><dd>This element must be initialized to an nonzero value if the source
 character set is stateful.  Otherwise it must be zero. 
 </dl>
 
-     <p>If the initialization function needs to communicate some information
+        <p>If the initialization function needs to communicate some information
 to the conversion function, this communication can happen using the
 <code>__data</code> element of the <code>__gconv_step</code> structure.  But since
 this data is shared by all the conversions, it must not be modified by
@@ -483,7 +440,7 @@ the conversion function.  The example below shows how this can be used.
           int
           gconv_init (struct __gconv_step *step)
           {
-            /* Determine which direction.  */
+            /* <span class="roman">Determine which direction.</span>  */
             struct iso2022jp_data *new_data;
             enum direction dir = illegal_dir;
             enum variant var = illegal_var;
@@ -538,7 +495,7 @@ the conversion function.  The example below shows how this can be used.
                         step-&gt;__max_needed_to = MAX_NEEDED_FROM + 2;
                       }
           
-                    /* Yes, this is a stateful encoding.  */
+                    /* <span class="roman">Yes, this is a stateful encoding.</span>  */
                     step-&gt;__stateful = 1;
           
                     result = __GCONV_OK;
@@ -547,21 +504,20 @@ the conversion function.  The example below shows how this can be used.
           
             return result;
           }
-          </pre>
-
-     <p>The function first checks which conversion is wanted.  The module from
+     </pre>
+        <p>The function first checks which conversion is wanted.  The module from
 which this function is taken implements four different conversions;
 which one is selected can be determined by comparing the names.  The
 comparison should always be done without paying attention to the case.
 
-     <p>Next, a data structure, which contains the necessary information about
+        <p>Next, a data structure, which contains the necessary information about
 which conversion is selected, is allocated.  The data structure
 <code>struct iso2022jp_data</code> is locally defined since, outside the
 module, this data is not used at all.  Please note that if all four
 conversions this modules supports are requested there are four data
 blocks.
 
-     <p>One interesting thing is the initialization of the <code>__min_</code> and
+        <p>One interesting thing is the initialization of the <code>__min_</code> and
 <code>__max_</code> elements of the step data object.  A single ISO-2022-JP
 character can consist of one to four bytes.  Therefore the
 <code>MIN_NEEDED_FROM</code> and <code>MAX_NEEDED_FROM</code> macros are defined
@@ -582,35 +538,25 @@ sequences to change the state in advance.  This means the escape
 sequences that have to be emitted together with the next character. 
 Therefore one needs more room than only for the character itself.
 
-     <p>The possible return values of the initialization function are:
+        <p>The possible return values of the initialization function are:
 
           <dl>
-<dt><code>__GCONV_OK</code>
-          <dd>The initialization succeeded
-<br><dt><code>__GCONV_NOCONV</code>
-          <dd>The requested conversion is not supported in the module.  This can
-happen if the <code>gconv-modules</code> file has errors. 
-<br><dt><code>__GCONV_NOMEM</code>
-          <dd>Memory required to store additional information could not be allocated. 
+<dt><code>__GCONV_OK</code><dd>The initialization succeeded
+<br><dt><code>__GCONV_NOCONV</code><dd>The requested conversion is not supported in the module.  This can
+happen if the <samp><span class="file">gconv-modules</span></samp> file has errors. 
+<br><dt><code>__GCONV_NOMEM</code><dd>Memory required to store additional information could not be allocated. 
 </dl>
-     </td></tr>
-</table>
+        </p></blockquote></div>
 
    <p>The function called before the module is unloaded is significantly
 easier.  It often has nothing at all to do; in which case it can be left
 out completely.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">void <b>(*__gconv_end_fct)</b><i> </i>(<i>struct gconv_step *</i>)<i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The task of this function is to free all resources allocated in the
+<!-- gconv.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Data type: void <b>(*__gconv_end_fct)</b> (<var>struct gconv_step *</var>)<var><a name="index-g_t_0028_002a_005f_005fgconv_005fend_005ffct_0029-676"></a></var><br>
+<blockquote><p>The task of this function is to free all resources allocated in the
 initialization function.  Therefore only the <code>__data</code> element of
 the object pointed to by the argument is of interest.  Continuing the
 example from the initialization function, the finalization function
@@ -621,38 +567,31 @@ looks like this:
           {
             free (data-&gt;__data);
           }
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
    <p>The most important function is the conversion function itself, which can
 get quite complicated for complex character sets.  But since this is not
 of interest here, we will only describe a possible skeleton for the
 conversion function.
 
-<p>
-<table width="100%">
-<tr>
-<td align="left">int <b>(*__gconv_fct)</b><i> </i>(<i>struct __gconv_step *, struct __gconv_step_data *, const char **, const char *, size_t *, int</i>)<i>
-     </i></td>
-<td align="right">Data type</td>
-</tr>
-</table>
-<table width="95%" align="center">
-<tr><td>
-The conversion function can be called for two basic reason: to convert
+<!-- gconv.h -->
+<!-- GNU -->
+<div class="defun">
+&mdash; Data type: int <b>(*__gconv_fct)</b> (<var>struct __gconv_step *, struct __gconv_step_data *, const char **, const char *, size_t *, int</var>)<var><a name="index-g_t_0028_002a_005f_005fgconv_005ffct_0029-677"></a></var><br>
+<blockquote><p>The conversion function can be called for two basic reason: to convert
 text or to reset the state.  From the description of the <code>iconv</code>
 function it can be seen why the flushing mode is necessary.  What mode
 is selected is determined by the sixth argument, an integer.  This
 argument being nonzero means that flushing is selected.
 
-     <p>Common to both modes is where the output buffer can be found.  The
+        <p>Common to both modes is where the output buffer can be found.  The
 information about this buffer is stored in the conversion step data.  A
 pointer to this information is passed as the second argument to this
 function.  The description of the <code>struct __gconv_step_data</code>
 structure has more information on the conversion step data.
 
-     <p>What has to be done for flushing depends on the source character set. 
+        <p><a name="index-stateful-678"></a>What has to be done for flushing depends on the source character set. 
 If the source character set is not stateful, nothing has to be done. 
 Otherwise the function has to emit a byte sequence to bring the state
 object into the initial state.  Once this all happened the other
@@ -661,14 +600,14 @@ chance.  Whether another step follows can be determined from the
 <code>__is_last</code> element of the step data structure to which the first
 parameter points.
 
-     <p>The more interesting mode is when actual text has to be converted.  The
+        <p>The more interesting mode is when actual text has to be converted.  The
 first step in this case is to convert as much text as possible from the
 input buffer and store the result in the output buffer.  The start of the
 input buffer is determined by the third argument, which is a pointer to a
 pointer variable referencing the beginning of the buffer.  The fourth
 argument is a pointer to the byte right after the last byte in the buffer.
 
-     <p>The conversion has to be performed according to the current state if the
+        <p>The conversion has to be performed according to the current state if the
 character set is stateful.  The state is stored in an object pointed to
 by the <code>__statep</code> element of the step data (second argument).  Once
 either the input buffer is empty or the output buffer is full the
@@ -677,7 +616,7 @@ third parameter must point to the byte following the last processed
 byte (i.e., if all of the input is consumed, this pointer and the fourth
 parameter have the same value).
 
-     <p>What now happens depends on whether this step is the last one.  If it is
+        <p>What now happens depends on whether this step is the last one.  If it is
 the last step, the only thing that has to be done is to update the
 <code>__outbuf</code> element of the step data structure to point after the
 last written byte.  This update gives the caller the information on how
@@ -686,7 +625,7 @@ pointed to by the fifth parameter, which is of type <code>size_t</code>, must
 be incremented by the number of characters (<em>not bytes</em>) that were
 converted in a non-reversible way.  Then, the function can return.
 
-     <p>In case the step is not the last one, the later conversion functions have
+        <p>In case the step is not the last one, the later conversion functions have
 to get a chance to do their work.  Therefore, the appropriate conversion
 function has to be called.  The information about the functions is
 stored in the conversion data structures, passed as the first parameter. 
@@ -701,17 +640,15 @@ element in both cases can be found by simple pointer arithmetic:
             struct __gconv_step *next_step = step + 1;
             struct __gconv_step_data *next_data = data + 1;
             ...
-          </pre>
-
-     <p>The <code>next_step</code> pointer references the next step information and
+     </pre>
+        <p>The <code>next_step</code> pointer references the next step information and
 <code>next_data</code> the next data record.  The call of the next function
 therefore will look similar to this:
 
      <pre class="smallexample">            next_step-&gt;__fct (next_step, next_data, &amp;outerr, outbuf,
                               written, 0)
-          </pre>
-
-     <p>But this is not yet all.  Once the function call returns the conversion
+     </pre>
+        <p>But this is not yet all.  Once the function call returns the conversion
 function might have some more to do.  If the return value of the function
 is <code>__GCONV_EMPTY_INPUT</code>, more room is available in the output
 buffer.  Unless the input buffer is empty the conversion, functions start
@@ -719,7 +656,7 @@ all over again and process the rest of the input buffer.  If the return
 value is not <code>__GCONV_EMPTY_INPUT</code>, something went wrong and we have
 to recover from this.
 
-     <p>A requirement for the conversion function is that the input buffer
+        <p>A requirement for the conversion function is that the input buffer
 pointer (the third argument) always point to the last character that
 was put in converted form into the output buffer.  This is trivially
 true after the conversion performed in the current step, but if the
@@ -727,7 +664,7 @@ conversion functions deeper downstream stop prematurely, not all
 characters from the output buffer are consumed and, therefore, the input
 buffer pointers must be backed off to the right position.
 
-     <p>Correcting the input buffers is easy to do if the input and output
+        <p>Correcting the input buffers is easy to do if the input and output
 character sets have a fixed width for all characters.  In this situation
 we can compute how many characters are left in the output buffer and,
 therefore, can correct the input buffer pointer appropriately with a
@@ -742,7 +679,7 @@ must be created, and the conversion can stop before converting the first
 unused character.  Once this is done the input buffer pointers must be
 updated again and the function can return.
 
-     <p>One final thing should be mentioned.  If it is necessary for the
+        <p>One final thing should be mentioned.  If it is necessary for the
 conversion to know whether it is the first invocation (in case a prolog
 has to be emitted), the conversion function should increment the
 <code>__invocation_counter</code> element of the step data structure just
@@ -750,21 +687,18 @@ before returning to the caller.  See the description of the <code>struct
 __gconv_step_data</code> structure above for more information on how this can
 be used.
 
-     <p>The return value must be one of the following values:
+        <p>The return value must be one of the following values:
 
           <dl>
-<dt><code>__GCONV_EMPTY_INPUT</code>
-          <dd>All input was consumed and there is room left in the output buffer. 
-<br><dt><code>__GCONV_FULL_OUTPUT</code>
-          <dd>No more room in the output buffer.  In case this is not the last step
+<dt><code>__GCONV_EMPTY_INPUT</code><dd>All input was consumed and there is room left in the output buffer. 
+<br><dt><code>__GCONV_FULL_OUTPUT</code><dd>No more room in the output buffer.  In case this is not the last step
 this value is propagated down from the call of the next conversion
 function in the chain. 
-<br><dt><code>__GCONV_INCOMPLETE_INPUT</code>
-          <dd>The input buffer is not entirely empty since it contains an incomplete
+<br><dt><code>__GCONV_INCOMPLETE_INPUT</code><dd>The input buffer is not entirely empty since it contains an incomplete
 character sequence. 
 </dl>
 
-     <p>The following example provides a framework for a conversion function. 
+        <p>The following example provides a framework for a conversion function. 
 In case a new conversion has to be written the holes in this
 implementation have to be filled and that is it.
 
@@ -778,25 +712,25 @@ implementation have to be filled and that is it.
             gconv_fct fct = next_step-&gt;__fct;
             int status;
           
-            /* If the function is called with no input this means we have
-               to reset to the initial state.  The possibly partly
-               converted input is dropped.  */
+            /* <span class="roman">If the function is called with no input this means we have</span>
+               <span class="roman">to reset to the initial state.  The possibly partly</span>
+               <span class="roman">converted input is dropped.</span>  */
             if (do_flush)
               {
                 status = __GCONV_OK;
           
-                /* Possible emit a byte sequence which put the state object
-                   into the initial state.  */
+                /* <span class="roman">Possible emit a byte sequence which put the state object</span>
+                   <span class="roman">into the initial state.</span>  */
           
-                /* Call the steps down the chain if there are any but only
-                   if we successfully emitted the escape sequence.  */
+                /* <span class="roman">Call the steps down the chain if there are any but only</span>
+                   <span class="roman">if we successfully emitted the escape sequence.</span>  */
                 if (status == __GCONV_OK &amp;&amp; ! data-&gt;__is_last)
                   status = fct (next_step, next_data, NULL, NULL,
                                 written, 1);
               }
             else
               {
-                /* We preserve the initial values of the pointer variables.  */
+                /* <span class="roman">We preserve the initial values of the pointer variables.</span>  */
                 const char *inptr = *inbuf;
                 char *outbuf = data-&gt;__outbuf;
                 char *outend = data-&gt;__outbufend;
@@ -804,31 +738,31 @@ implementation have to be filled and that is it.
           
                 do
                   {
-                    /* Remember the start value for this round.  */
+                    /* <span class="roman">Remember the start value for this round.</span>  */
                     inptr = *inbuf;
-                    /* The outbuf buffer is empty.  */
+                    /* <span class="roman">The outbuf buffer is empty.</span>  */
                     outptr = outbuf;
           
-                    /* For stateful encodings the state must be safe here.  */
+                    /* <span class="roman">For stateful encodings the state must be safe here.</span>  */
           
-                    /* Run the conversion loop.  <code>status</code> is set
-                       appropriately afterwards.  */
+                    /* <span class="roman">Run the conversion loop.  </span><code>status</code><span class="roman"> is set</span>
+                       <span class="roman">appropriately afterwards.</span>  */
           
-                    /* If this is the last step, leave the loop. There is
-                       nothing we can do.  */
+                    /* <span class="roman">If this is the last step, leave the loop. There is</span>
+                       <span class="roman">nothing we can do.</span>  */
                     if (data-&gt;__is_last)
                       {
-                        /* Store information about how many bytes are
-                           available.  */
+                        /* <span class="roman">Store information about how many bytes are</span>
+                           <span class="roman">available.</span>  */
                         data-&gt;__outbuf = outbuf;
           
-                       /* If any non-reversible conversions were performed,
-                          add the number to <code>*written</code>.  */
+                       /* <span class="roman">If any non-reversible conversions were performed,</span>
+                          <span class="roman">add the number to </span><code>*written</code><span class="roman">.</span>  */
           
                        break;
                      }
           
-                    /* Write out all output that was produced.  */
+                    /* <span class="roman">Write out all output that was produced.</span>  */
                     if (outbuf &gt; outptr)
                       {
                         const char *outerr = data-&gt;__outbuf;
@@ -841,47 +775,47 @@ implementation have to be filled and that is it.
                           {
                             if (outerr != outbuf)
                               {
-                                /* Reset the input buffer pointer.  We
-                                   document here the complex case.  */
+                                /* <span class="roman">Reset the input buffer pointer.  We</span>
+                                   <span class="roman">document here the complex case.</span>  */
                                 size_t nstatus;
           
-                                /* Reload the pointers.  */
+                                /* <span class="roman">Reload the pointers.</span>  */
                                 *inbuf = inptr;
                                 outbuf = outptr;
           
-                                /* Possibly reset the state.  */
+                                /* <span class="roman">Possibly reset the state.</span>  */
           
-                                /* Redo the conversion, but this time
-                                   the end of the output buffer is at
-                                   <code>outerr</code>.  */
+                                /* <span class="roman">Redo the conversion, but this time</span>
+                                   <span class="roman">the end of the output buffer is at</span>
+                                   <code>outerr</code><span class="roman">.</span>  */
                               }
           
-                            /* Change the status.  */
+                            /* <span class="roman">Change the status.</span>  */
                             status = result;
                           }
                         else
-                          /* All the output is consumed, we can make
-                              another run if everything was ok.  */
+                          /* <span class="roman">All the output is consumed, we can make</span>
+                             <span class="roman"> another run if everything was ok.</span>  */
                           if (status == __GCONV_FULL_OUTPUT)
                             status = __GCONV_OK;
                      }
                   }
                 while (status == __GCONV_OK);
           
-                /* We finished one use of this step.  */
+                /* <span class="roman">We finished one use of this step.</span>  */
                 ++data-&gt;__invocation_counter;
               }
           
             return status;
           }
-          </pre>
-     </td></tr>
-</table>
+     </pre>
+        </blockquote></div>
 
    <p>This information should be sufficient to write new modules.  Anybody
 doing so should also take a look at the available source code in the GNU
 C library sources.  It contains many examples of working and optimized
 modules.
 
-   </body></html>
+<!-- File charset.texi edited October 2001 by Dennis Grace, IBM Corporation -->
+</body></html>
 
