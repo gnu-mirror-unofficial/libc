@@ -1,605 +1,905 @@
-<!doctype html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
   <head>
-    <title>Undocumented functions in GNU libc</title>
+    <title>Undocumented glibc functions</title>
   </head>
 
   <body>
-    <h1>Undocumented functions in GNU libc</h1>
+    <center><h1>Undocumented <tt>glibc</tt> functions</h1></center>
 
-    The following functions which are available in GNU libc are currently
-    not documented in the GNU libc manual.  If you have some time to spend
-    consider writing some of the missing documentations.  Texinfo is easy
-    to use and if you don't like this, plain text is equally welcome (I'll
-    do the rest).<p>
+    <p>The following table includes names of the function in glibc
+    which are not yet documented in the manual.  This list is
+    automatically created and therefore might contain errors.  Please
+    check the latest manual (available from the CVS archive) before
+    starting to work.  It might also be good to let me know in
+    advanace on which functions you intend to work to avoid
+    duplication.</p>
 
-    The list might include some internal functions which need not be
-    documented.  I haven't compiled the list by hand, it is generated.
-    So, it is in any case best to talk to me before starting to write.
-    For one, I can make sure the function really needs to be documented
-    and second, I can make sure no two people are working on the same
-    function.<p>
+    <p>A few comments:</p>
 
-    <UL>
-      <LI>acct
-      <LI>addmntent
-      <LI>adjtimex
-      <LI>advance
-      <LI>asctime_r
-      <LI>authdes_create
-      <LI>authdes_getucred
-      <LI>authnone_create
-      <LI>authunix_create
-      <LI>authunix_create_default
-      <LI>basename
-      <LI>bdflush
-      <LI>bindresvport
-      <LI>bindtextdomain
-      <LI>brk
-      <LI>bsd_signal
-      <LI>btowc
-      <LI>callrpc
-      <LI>catclose
-      <LI>catgets
-      <LI>catopen
-      <LI>chflags
-      <LI>chroot
-      <LI>clearenv
-      <LI>clearerr_unlocked
-      <LI>clnt_broadcast
-      <LI>clnt_create
-      <LI>clnt_pcreateerror
-      <LI>clnt_perrno
-      <LI>clnt_perror
-      <LI>clnt_spcreateerror
-      <LI>clnt_sperrno
-      <LI>clnt_sperror
-      <LI>clntraw_create
-      <LI>clnttcp_create
-      <LI>clntudp_bufcreate
-      <LI>clntudp_create
-      <LI>clone
-      <LI>closelog
-      <LI>create_module
-      <LI>ctime_r
-      <LI>daemon
-      <LI>daylight
-      <LI>dcgettext
-      <LI>delete_module
-      <LI>des_setparity
-      <LI>dgettext
-      <LI>dirfd
-      <LI>dirname
-      <LI>dprintf
-      <LI>dup
-      <LI>dysize
-      <LI>ecvt
-      <LI>ecvt_r
-      <LI>endaliasent
-      <LI>endfsent
-      <LI>endmntent
-      <LI>endrpcent
-      <LI>endspent
-      <LI>endttyent
-      <LI>endusershell
-      <LI>endutent
-      <LI>environ
-      <LI>err
-      <LI>error
-      <LI>error_at_line
-      <LI>errx
-      <LI>ether_aton
-      <LI>ether_aton_r
-      <LI>ether_hostton
-      <LI>ether_line
-      <LI>ether_ntoa
-      <LI>ether_ntoa_r
-      <LI>ether_ntohost
-      <LI>euidaccess
-      <LI>fchdir
-      <LI>fchflags
-      <LI>fcvt
-      <LI>fcvt_r
-      <LI>fdatasync
-      <LI>feof_unlocked
-      <LI>ferror_unlocked
-      <LI>fexecve
-      <LI>fflush_unlocked
-      <LI>ffs
-      <LI>fgetspent
-      <LI>fgetspent_r
-      <LI>fileno_unlocked
-      <LI>flock
-      <LI>flockfile
-      <LI>fputc_unlocked
-      <LI>freeaddrinfo
-      <LI>fstatfs
-      <LI>fsync
-      <LI>ftime
-      <LI>ftok
-      <LI>ftruncate
-      <LI>ftrylockfile
-      <LI>fts_children
-      <LI>fts_close
-      <LI>fts_open
-      <LI>fts_read
-      <LI>fts_set
-      <LI>ftw
-      <LI>funlockfile
-      <LI>gai_strerror
-      <LI>gcvt
-      <LI>get_kernel_syms
-      <LI>getaddrinfo
-      <LI>getaliasbyname
-      <LI>getaliasbyname_r
-      <LI>getaliasent
-      <LI>getaliasent_r
-      <LI>getc_unlocked
-      <LI>getchar_unlocked
-      <LI>getdirentries
-      <LI>getdomainname
-      <LI>getdtablesize
-      <LI>getfsent
-      <LI>getfsfile
-      <LI>getfsspec
-      <LI>gethostbyaddr_r
-      <LI>gethostbyname2
-      <LI>gethostbyname2_r
-      <LI>gethostbyname_r
-      <LI>gethostent_r
-      <LI>getlogin_r
-      <LI>getmntent
-      <LI>getmntent_r
-      <LI>getnameinfo
-      <LI>getnetbyaddr_r
-      <LI>getnetbyname_r
-      <LI>getnetent_r
-      <LI>getnetname
-      <LI>getopt_long_only
-      <LI>getpagesize
-      <LI>getpass
-      <LI>getpgid
-      <LI>getprotobyname_r
-      <LI>getprotobynumber_r
-      <LI>getprotoent_r
-      <LI>getpublickey
-      <LI>getpw
-      <LI>getresuid
-      <LI>getrpcbyname
-      <LI>getrpcbyname_r
-      <LI>getrpcbynumber
-      <LI>getrpcbynumber_r
-      <LI>getrpcent
-      <LI>getrpcent_r
-      <LI>getrpcport
-      <LI>getsecretkey
-      <LI>getservbyname_r
-      <LI>getservbyport_r
-      <LI>getservent_r
-      <LI>getsid
-      <LI>getspent
-      <LI>getspent_r
-      <LI>getspnam
-      <LI>getspnam_r
-      <LI>gettext
-      <LI>getttyent
-      <LI>getttynam
-      <LI>getusershell
-      <LI>getutent
-      <LI>getutent_r
-      <LI>getutid
-      <LI>getutid_r
-      <LI>getutline
-      <LI>getutline_r
-      <LI>glob_pattern_p
-      <LI>globfree
-      <LI>gmtime_r
-      <LI>group_member
-      <LI>gtty
-      <LI>hasmntopt
-      <LI>hcreate
-      <LI>hcreate_r
-      <LI>hdestroy
-      <LI>hdestroy_r
-      <LI>herror
-      <LI>host2netname
-      <LI>hsearch
-      <LI>hsearch_r
-      <LI>hstrerror
-      <LI>if_freenameindex
-      <LI>if_indextoname
-      <LI>if_nameindex
-      <LI>if_nametoindex
-      <LI>inet6_isipv4mapped
-      <LI>inet_nsap_addr
-      <LI>inet_nsap_ntoa
-      <LI>inet_ntop
-      <LI>inet_pton
-      <LI>init_module
-      <LI>initstate_r
-      <LI>insque
-      <LI>ioctl
-      <LI>ioperm
-      <LI>iopl
-      <LI>iruserok
-      <LI>isfdtype
-      <LI>iswalnum
-      <LI>iswalpha
-      <LI>iswblank
-      <LI>iswcntrl
-      <LI>iswctype
-      <LI>iswdigit
-      <LI>iswgraph
-      <LI>iswlower
-      <LI>iswprint
-      <LI>iswpunct
-      <LI>iswspace
-      <LI>iswupper
-      <LI>iswxdigit
-      <LI>key_decryptsession
-      <LI>key_encryptsession
-      <LI>key_gendes
-      <LI>key_get_conv
-      <LI>key_setnet
-      <LI>key_setsecret
-      <LI>klogctl
-      <LI>lchown
-      <LI>lckpwdf
-      <LI>lfind
-      <LI>llabs
-      <LI>llseek
-      <LI>localtime_r
-      <LI>lockf
-      <LI>lsearch
-      <LI>madvise
-      <LI>malloc_get_state
-      <LI>malloc_set_state
-      <LI>malloc_stats
-      <LI>malloc_trim
-      <LI>malloc_usable_size
-      <LI>mbrlen
-      <LI>mbrtowc
-      <LI>mbsinit
-      <LI>mbsnrtowcs
-      <LI>mbsrtowcs
-      <LI>mcount
-      <LI>memfrob
-      <LI>mlock
-      <LI>mlockall
-      <LI>mmap
-      <LI>moncontrol
-      <LI>monstartup
-      <LI>mount
-      <LI>mprotect
-      <LI>mremap
-      <LI>msgctl
-      <LI>msgget
-      <LI>msgrcv
-      <LI>msgsnd
-      <LI>msync
-      <LI>mtrace
-      <LI>munlock
-      <LI>munlockall
-      <LI>munmap
-      <LI>muntrace
-      <LI>nanosleep
-      <LI>netname2host
-      <LI>netname2user
-      <LI>nfsservctl
-      <LI>nftw
-      <LI>nl_langinfo
-      <LI>openlog
-      <LI>personality
-      <LI>pmap_getmaps
-      <LI>pmap_getport
-      <LI>pmap_rmtcall
-      <LI>pmap_set
-      <LI>pmap_unset
-      <LI>poll
-      <LI>printchar
-      <LI>profil
-      <LI>profil_counter
-      <LI>pselect
-      <LI>pthread_attr_destroy
-      <LI>pthread_attr_getdetachstate
-      <LI>pthread_attr_getinheritsched
-      <LI>pthread_attr_getschedparam
-      <LI>pthread_attr_getschedpolicy
-      <LI>pthread_attr_getscope
-      <LI>pthread_attr_init
-      <LI>pthread_attr_setdetachstate
-      <LI>pthread_attr_setinheritsched
-      <LI>pthread_attr_setschedparam
-      <LI>pthread_attr_setschedpolicy
-      <LI>pthread_attr_setscope
-      <LI>pthread_cond_broadcast
-      <LI>pthread_cond_destroy
-      <LI>pthread_cond_init
-      <LI>pthread_cond_signal
-      <LI>pthread_cond_wait
-      <LI>pthread_condattr_destroy
-      <LI>pthread_condattr_init
-      <LI>pthread_equal
-      <LI>pthread_exit
-      <LI>pthread_getschedparam
-      <LI>pthread_mutex_destroy
-      <LI>pthread_mutex_init
-      <LI>pthread_mutex_lock
-      <LI>pthread_mutex_unlock
-      <LI>pthread_mutexattr_getkind_np
-      <LI>pthread_mutexattr_setkind_np
-      <LI>pthread_self
-      <LI>pthread_setcancelstate
-      <LI>pthread_setcanceltype
-      <LI>pthread_setschedparam
-      <LI>ptrace
-      <LI>putc_unlocked
-      <LI>putchar_unlocked
-      <LI>putspent
-      <LI>pututline
-      <LI>pvalloc
-      <LI>qecvt
-      <LI>qecvt_r
-      <LI>qfcvt
-      <LI>qfcvt_r
-      <LI>qgcvt
-      <LI>query_module
-      <LI>rand_r
-      <LI>random_r
-      <LI>rcmd
-      <LI>re_comp
-      <LI>re_compile_fastmap
-      <LI>re_compile_pattern
-      <LI>re_exec
-      <LI>re_match
-      <LI>re_search
-      <LI>readv
-      <LI>realpath
-      <LI>reboot
-      <LI>registerrpc
-      <LI>remque
-      <LI>res_init
-      <LI>revoke
-      <LI>rexec
-      <LI>rpmatch
-      <LI>rresvport
-      <LI>rtime
-      <LI>ruserok
-      <LI>ruserpass
-      <LI>sbrk
-      <LI>scalbn
-      <LI>scalbnf
-      <LI>scalbnl
-      <LI>sched_get_priority_max
-      <LI>sched_get_priority_min
-      <LI>sched_getparam
-      <LI>sched_getscheduler
-      <LI>sched_rr_get_interval
-      <LI>sched_setparam
-      <LI>sched_setscheduler
-      <LI>sched_yield
-      <LI>semctl
-      <LI>semget
-      <LI>semop
-      <LI>setaliasent
-      <LI>setdomainname
-      <LI>setegid
-      <LI>setenv
-      <LI>seteuid
-      <LI>setfsent
-      <LI>setfsgid
-      <LI>setfsuid
-      <LI>setlogin
-      <LI>setlogmask
-      <LI>setmntent
-      <LI>setresuid
-      <LI>setrpcent
-      <LI>setspent
-      <LI>setstate_r
-      <LI>setttyent
-      <LI>setusershell
-      <LI>setutent
-      <LI>sgetspent
-      <LI>sgetspent_r
-      <LI>shmat
-      <LI>shmctl
-      <LI>shmdt
-      <LI>shmget
-      <LI>sigandset
-      <LI>siggetmask
-      <LI>sigisemptyset
-      <LI>sigorset
-      <LI>sigreturn
-      <LI>sigwait
-      <LI>srand
-      <LI>srandom_r
-      <LI>sstk
-      <LI>statfs
-      <LI>step
-      <LI>stime
-      <LI>strfmon
-      <LI>strfry
-      <LI>strnlen
-      <LI>strptime
-      <LI>stty
-      <LI>svc_exit
-      <LI>svc_getreq
-      <LI>svc_getreqset
-      <LI>svc_register
-      <LI>svc_run
-      <LI>svc_sendreply
-      <LI>svc_unregister
-      <LI>svcerr_auth
-      <LI>svcerr_decode
-      <LI>svcerr_noproc
-      <LI>svcerr_noprog
-      <LI>svcerr_progvers
-      <LI>svcerr_systemerr
-      <LI>svcerr_weakauth
-      <LI>svcfd_create
-      <LI>svcraw_create
-      <LI>svctcp_create
-      <LI>svcudp_bufcreate
-      <LI>svcudp_create
-      <LI>svcudp_enablecache
-      <LI>swab
-      <LI>swapoff
-      <LI>swapon
-      <LI>sync
-      <LI>sys_errlist
-      <LI>sys_nerr
-      <LI>sys_sigabbrev
-      <LI>sys_siglist
-      <LI>syscall
-      <LI>sysctl
-      <LI>sysinfo
-      <LI>syslog
-      <LI>tdelete
-      <LI>tdestroy
-      <LI>textdomain
-      <LI>tfind
-      <LI>timegm
-      <LI>timelocal
-      <LI>timezone
-      <LI>towctrans
-      <LI>towlower
-      <LI>towupper
-      <LI>tr_break
-      <LI>truncate
-      <LI>tsearch
-      <LI>ttyname_r
-      <LI>ttyslot
-      <LI>twalk
-      <LI>tzname
-      <LI>ualarm
-      <LI>ulckpwdf
-      <LI>ulimit
-      <LI>umount
-      <LI>unsetenv
-      <LI>uselib
-      <LI>user2netname
-      <LI>usleep
-      <LI>ustat
-      <LI>utmpname
-      <LI>vdprintf
-      <LI>verr
-      <LI>verrx
-      <LI>vhangup
-      <LI>vlimit
-      <LI>vm86
-      <LI>vsyslog
-      <LI>vtimes
-      <LI>vwarn
-      <LI>vwarnx
-      <LI>wait
-      <LI>warn
-      <LI>warnx
-      <LI>wcpcpy
-      <LI>wcpncpy
-      <LI>wcrtomb
-      <LI>wcscasecmp
-      <LI>wcscat
-      <LI>wcschr
-      <LI>wcscmp
-      <LI>wcscoll
-      <LI>wcscpy
-      <LI>wcscspn
-      <LI>wcsdup
-      <LI>wcslen
-      <LI>wcsncasecmp
-      <LI>wcsncat
-      <LI>wcsncmp
-      <LI>wcsncpy
-      <LI>wcsnrtombs
-      <LI>wcspbrk
-      <LI>wcsrchr
-      <LI>wcsrtombs
-      <LI>wcsspn
-      <LI>wcsstr
-      <LI>wcstod
-      <LI>wcstof
-      <LI>wcstok
-      <LI>wcstol
-      <LI>wcstold
-      <LI>wcstoll
-      <LI>wcstoq
-      <LI>wcstoul
-      <LI>wcstoull
-      <LI>wcstouq
-      <LI>wcswcs
-      <LI>wcswidth
-      <LI>wcsxfrm
-      <LI>wctob
-      <LI>wctrans
-      <LI>wctype
-      <LI>wcwidth
-      <LI>wmemchr
-      <LI>wmemcmp
-      <LI>wmemcpy
-      <LI>wmemmove
-      <LI>wmemset
-      <LI>writev
-      <LI>xdecrypt
-      <LI>xdr_accepted_reply
-      <LI>xdr_array
-      <LI>xdr_authdes_cred
-      <LI>xdr_authdes_verf
-      <LI>xdr_authunix_parms
-      <LI>xdr_bool
-      <LI>xdr_bytes
-      <LI>xdr_callhdr
-      <LI>xdr_callmsg
-      <LI>xdr_char
-      <LI>xdr_cryptkeyarg
-      <LI>xdr_cryptkeyarg2
-      <LI>xdr_cryptkeyres
-      <LI>xdr_des_block
-      <LI>xdr_double
-      <LI>xdr_enum
-      <LI>xdr_float
-      <LI>xdr_free
-      <LI>xdr_getcredres
-      <LI>xdr_int
-      <LI>xdr_key_netstarg
-      <LI>xdr_key_netstres
-      <LI>xdr_keybuf
-      <LI>xdr_keystatus
-      <LI>xdr_long
-      <LI>xdr_netnamestr
-      <LI>xdr_netobj
-      <LI>xdr_opaque
-      <LI>xdr_opaque_auth
-      <LI>xdr_pmap
-      <LI>xdr_pmaplist
-      <LI>xdr_pointer
-      <LI>xdr_reference
-      <LI>xdr_rejected_reply
-      <LI>xdr_replymsg
-      <LI>xdr_rmtcall_args
-      <LI>xdr_rmtcallres
-      <LI>xdr_short
-      <LI>xdr_string
-      <LI>xdr_u_char
-      <LI>xdr_u_int
-      <LI>xdr_u_long
-      <LI>xdr_u_short
-      <LI>xdr_union
-      <LI>xdr_unixcred
-      <LI>xdr_vector
-      <LI>xdr_void
-      <LI>xdr_wrapstring
-      <LI>xdrmem_create
-      <LI>xdrrec_create
-      <LI>xdrrec_endofrecord
-      <LI>xdrrec_eof
-      <LI>xdrrec_skiprecord
-      <LI>xdrstdio_create
-      <LI>xencrypt
-      <LI>xprt_register
-      <LI>xprt_unregister
-    </UL>
+    <ul>
+      <li>Some functions in the list are much less important than
+      others.  Please prioritize.</li>
+
+      <li>Similarly for the LFS functions (those ending in 64).</li>
+    </ul>
+
+    <p>The function sombody already volunteered to document are marked
+    with a reference to the person.</p>
+
+    <center><table>
+<tr>
+
+<td><tt>acct</tt></td>
+<td><tt>advance</tt></td>
+<td><tt>authdes_create</tt></td>
+<td><tt>authdes_getucred</tt></td>
+</tr>
+<tr>
+
+<td><tt>authdes_pk_create</tt></td>
+<td><tt>authnone_create</tt></td>
+<td><tt>authunix_create</tt></td>
+<td><tt>authunix_create_default</tt></td>
+</tr>
+<tr>
+
+<td><tt>bdflush</tt></td>
+<td><tt>bindresvport</tt></td>
+<td><tt>bsd_signal</tt></td>
+<td><tt>callrpc</tt></td>
+</tr>
+<tr>
+
+<td><tt>capget</tt></td>
+<td><tt>capset</tt></td>
+<td><tt>chflags</tt></td>
+<td><tt>chroot</tt></td>
+</tr>
+<tr>
+
+<td><tt>clnt_broadcast</tt></td>
+<td><tt>clnt_create</tt></td>
+<td><tt>clnt_pcreateerror</tt></td>
+<td><tt>clnt_perrno</tt></td>
+</tr>
+<tr>
+
+<td><tt>clnt_perror</tt></td>
+<td><tt>clntraw_create</tt></td>
+<td><tt>clnt_spcreateerror</tt></td>
+<td><tt>clnt_sperrno</tt></td>
+</tr>
+<tr>
+
+<td><tt>clnt_sperror</tt></td>
+<td><tt>clnttcp_create</tt></td>
+<td><tt>clntudp_bufcreate</tt></td>
+<td><tt>clntudp_create</tt></td>
+</tr>
+<tr>
+
+<td><tt>clntunix_create</tt></td>
+<td><tt>clock_getcpuclockid</tt></td>
+<td><tt>clock_getres</tt></td>
+<td><tt>clock_gettime</tt></td>
+</tr>
+<tr>
+
+<td><tt>clock_nanosleep</tt></td>
+<td><tt>clock_settime</tt></td>
+<td><tt>clone</tt></td>
+<td><tt>create_module</tt></td>
+</tr>
+<tr>
+
+<td><tt>daemon</tt></td>
+<td><tt>delete_module</tt></td>
+<td><tt>dladdr</tt></td>
+<td><tt>dlclose</tt></td>
+</tr>
+<tr>
+
+<td><tt>dlerror</tt></td>
+<td><tt>dlopen</tt></td>
+<td><tt>dlsym</tt></td>
+<td><tt>dlvsym</tt></td>
+</tr>
+<tr>
+
+<td><tt>dprintf</tt></td>
+<td><tt>dysize</tt></td>
+<td><tt>endaliasent</tt></td>
+<td><tt>endrpcent</tt></td>
+</tr>
+<tr>
+
+<td><tt>endspent</tt></td>
+<td><tt>endttyent</tt></td>
+<td><tt>endusershell</tt></td>
+<td><tt>envz_remove</tt></td>
+</tr>
+<tr>
+
+<td><tt>err</tt></td>
+<td><tt>error</tt></td>
+<td><tt>error_at_line</tt></td>
+<td><tt>errx</tt></td>
+</tr>
+<tr>
+
+<td><tt>ether_aton</tt></td>
+<td><tt>ether_aton_r</tt></td>
+<td><tt>ether_hostton</tt></td>
+<td><tt>ether_line</tt></td>
+</tr>
+<tr>
+
+<td><tt>ether_ntoa</tt></td>
+<td><tt>ether_ntoa_r</tt></td>
+<td><tt>ether_ntohost</tt></td>
+<td><tt>euidaccess</tt></td>
+</tr>
+<tr>
+
+<td><tt>fattach</tt></td>
+<td><tt>fchflags</tt></td>
+<td><tt>fcrypt</tt></td>
+<td><tt>fdetach</tt></td>
+</tr>
+<tr>
+
+<td><tt>fexecve</tt></td>
+<td><tt>ffs</tt></td>
+<td><tt>ffsl</tt></td>
+<td><tt>ffsll</tt></td>
+</tr>
+<tr>
+
+<td><tt>fgetspent</tt></td>
+<td><tt>fgetspent_r</tt></td>
+<td><tt>flock</tt></td>
+<td><tt>freeaddrinfo</tt></td>
+</tr>
+<tr>
+
+<td><tt>fstatfs</tt></td>
+<td><tt>fstatfs64</tt></td>
+<td><tt>fstatvfs</tt></td>
+<td><tt>fstatvfs64</tt></td>
+</tr>
+<tr>
+
+<td><tt>ftime</tt></td>
+<td><tt>ftok</tt></td>
+<td><tt>fts_children</tt></td>
+<td><tt>fts_close</tt></td>
+</tr>
+<tr>
+
+<td><tt>fts_open</tt></td>
+<td><tt>fts_read</tt></td>
+<td><tt>fts_set</tt></td>
+<td><tt>gai_strerror</tt></td>
+</tr>
+<tr>
+
+<td><tt>getaddrinfo</tt></td>
+<td><tt>getaliasbyname</tt></td>
+<td><tt>getaliasbyname_r</tt></td>
+<td><tt>getaliasent</tt></td>
+</tr>
+<tr>
+
+<td><tt>getaliasent_r</tt></td>
+<td><tt>getdents64</tt></td>
+<td><tt>getdirentries</tt></td>
+<td><tt>getdirentries64</tt></td>
+</tr>
+<tr>
+
+<td><tt>getdomainname</tt></td>
+<td><tt>getdtablesize</tt></td>
+<td><tt>gethostent_r</tt></td>
+<td><tt>get_kernel_syms</tt></td>
+</tr>
+<tr>
+
+<td><tt>getlogin_r</tt></td>
+<td><tt>getmsg</tt></td>
+<td><tt>get_myaddress</tt></td>
+<td><tt>getnameinfo</tt></td>
+</tr>
+<tr>
+
+<td><tt>getnetbyaddr_r</tt></td>
+<td><tt>getnetbyname_r</tt></td>
+<td><tt>getnetent_r</tt></td>
+<td><tt>getnetname</tt></td>
+</tr>
+<tr>
+
+<td><tt>getpgid</tt></td>
+<td><tt>getpgrp</tt></td>
+<td><tt>getpmsg</tt></td>
+<td><tt>getprotobyname_r</tt></td>
+</tr>
+<tr>
+
+<td><tt>getprotobynumber_r</tt></td>
+<td><tt>getprotoent_r</tt></td>
+<td><tt>getpublickey</tt></td>
+<td><tt>getpw</tt></td>
+</tr>
+<tr>
+
+<td><tt>getresgid</tt></td>
+<td><tt>getresuid</tt></td>
+<td><tt>getrpcbyname</tt></td>
+<td><tt>getrpcbyname_r</tt></td>
+</tr>
+<tr>
+
+<td><tt>getrpcbynumber</tt></td>
+<td><tt>getrpcbynumber_r</tt></td>
+<td><tt>getrpcent</tt></td>
+<td><tt>getrpcent_r</tt></td>
+</tr>
+<tr>
+
+<td><tt>getrpcport</tt></td>
+<td><tt>getsecretkey</tt></td>
+<td><tt>getservbyname_r</tt></td>
+<td><tt>getservbyport_r</tt></td>
+</tr>
+<tr>
+
+<td><tt>getservent_r</tt></td>
+<td><tt>getspent</tt></td>
+<td><tt>getspent_r</tt></td>
+<td><tt>getspnam</tt></td>
+</tr>
+<tr>
+
+<td><tt>getspnam_r</tt></td>
+<td><tt>getttyent</tt></td>
+<td><tt>getttynam</tt></td>
+<td><tt>getusershell</tt></td>
+</tr>
+<tr>
+
+<td><tt>getwd</tt></td>
+<td><tt>glob_pattern_p</tt></td>
+<td><tt>gnu_get_libc_release</tt></td>
+<td><tt>gnu_get_libc_version</tt></td>
+</tr>
+<tr>
+
+<td><tt>group_member</tt></td>
+<td><tt>herror</tt></td>
+<td><tt>host2netname</tt></td>
+<td><tt>hstrerror</tt></td>
+</tr>
+<tr>
+
+<td><tt>inet_nsap_addr</tt></td>
+<td><tt>inet_nsap_ntoa</tt></td>
+<td><tt>init_module</tt></td>
+<td><tt>insque</tt></td>
+</tr>
+<tr>
+
+<td><tt>ioperm</tt></td>
+<td><tt>iopl</tt></td>
+<td><tt>iruserok</tt></td>
+<td><tt>iruserok_af</tt></td>
+</tr>
+<tr>
+
+<td><tt>isastream</tt></td>
+<td><tt>isfdtype</tt></td>
+<td><tt>key_decryptsession</tt></td>
+<td><tt>key_decryptsession_pk</tt></td>
+</tr>
+<tr>
+
+<td><tt>key_encryptsession</tt></td>
+<td><tt>key_encryptsession_pk</tt></td>
+<td><tt>key_gendes</tt></td>
+<td><tt>key_get_conv</tt></td>
+</tr>
+<tr>
+
+<td><tt>key_secretkey_is_set</tt></td>
+<td><tt>key_setnet</tt></td>
+<td><tt>key_setsecret</tt></td>
+<td><tt>klogctl</tt></td>
+</tr>
+<tr>
+
+<td><tt>lchown</tt></td>
+<td><tt>lckpwdf</tt></td>
+<td><tt>llseek</tt></td>
+<td><tt>lockf</tt></td>
+</tr>
+<tr>
+
+<td><tt>lockf64</tt></td>
+<td><tt>madvise</tt></td>
+<td><tt>malloc_get_state</tt></td>
+<td><tt>malloc_set_state</tt></td>
+</tr>
+<tr>
+
+<td><tt>malloc_stats</tt></td>
+<td><tt>malloc_trim</tt></td>
+<td><tt>malloc_usable_size</tt></td>
+<td><tt>matherr</tt></td>
+</tr>
+<tr>
+
+<td><tt>mcheck_check_all</tt></td>
+<td><tt>mcheck_pedantic</tt></td>
+<td><tt>mcount</tt></td>
+<td><tt>_mcount</tt></td>
+</tr>
+<tr>
+
+<td><tt>mincore</tt></td>
+<td><tt>mkstemp64</tt></td>
+<td><tt>modify_ldt</tt></td>
+<td><tt>moncontrol</tt></td>
+</tr>
+<tr>
+
+<td><tt>monstartup</tt></td>
+<td><tt>mprotect</tt></td>
+<td><tt>msgctl</tt></td>
+<td><tt>msgget</tt></td>
+</tr>
+<tr>
+
+<td><tt>msgrcv</tt></td>
+<td><tt>msgsnd</tt></td>
+<td><tt>netname2host</tt></td>
+<td><tt>netname2user</tt></td>
+</tr>
+<tr>
+
+<td><tt>nfsservctl</tt></td>
+<td><tt>obstack_free</tt></td>
+<td><tt>obstack_printf</tt></td>
+<td><tt>obstack_vprintf</tt></td>
+</tr>
+<tr>
+
+<td><tt>passwd2des</tt></td>
+<td><tt>personality</tt></td>
+<td><tt>pivot_root</tt></td>
+<td><tt>pmap_getmaps</tt></td>
+</tr>
+<tr>
+
+<td><tt>pmap_getport</tt></td>
+<td><tt>pmap_rmtcall</tt></td>
+<td><tt>pmap_set</tt></td>
+<td><tt>pmap_unset</tt></td>
+</tr>
+<tr>
+
+<td><tt>poll</tt></td>
+<td><tt>posix_fadvise</tt></td>
+<td><tt>posix_fadvise64</tt></td>
+<td><tt>posix_fallocate</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_fallocate64</tt></td>
+<td><tt>posix_madvise</tt></td>
+<td><tt>posix_openpt</tt></td>
+<td><tt>posix_spawn</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_spawnattr_destroy</tt></td>
+<td><tt>posix_spawnattr_getflags</tt></td>
+<td><tt>posix_spawnattr_getpgroup</tt></td>
+<td><tt>posix_spawnattr_getschedpara</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_spawnattr_getschedpoli</tt></td>
+<td><tt>posix_spawnattr_getsigdefaul</tt></td>
+<td><tt>posix_spawnattr_getsigmask</tt></td>
+<td><tt>posix_spawnattr_init</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_spawnattr_setflags</tt></td>
+<td><tt>posix_spawnattr_setpgroup</tt></td>
+<td><tt>posix_spawnattr_setschedpara</tt></td>
+<td><tt>posix_spawnattr_setschedpoli</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_spawnattr_setsigdefaul</tt></td>
+<td><tt>posix_spawnattr_setsigmask</tt></td>
+<td><tt>posix_spawn_file_actions_add</tt></td>
+<td><tt>posix_spawn_file_actions_add</tt></td>
+</tr>
+<tr>
+
+<td><tt>posix_spawn_file_actions_add</tt></td>
+<td><tt>posix_spawn_file_actions_des</tt></td>
+<td><tt>posix_spawn_file_actions_ini</tt></td>
+<td><tt>posix_spawnp</tt></td>
+</tr>
+<tr>
+
+<td><tt>prctl</tt></td>
+<td><tt>profil</tt></td>
+<td><tt>pselect</tt></td>
+<td><tt>pthread_attr_getdetachstate</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_attr_getguardsize</tt></td>
+<td><tt>pthread_attr_getinheritsched</tt></td>
+<td><tt>pthread_attr_getschedparam</tt></td>
+<td><tt>pthread_attr_getschedpolicy</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_attr_getscope</tt></td>
+<td><tt>pthread_attr_getstack</tt></td>
+<td><tt>pthread_attr_getstackaddr</tt></td>
+<td><tt>pthread_attr_getstacksize</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_attr_setdetachstate</tt></td>
+<td><tt>pthread_attr_setguardsize</tt></td>
+<td><tt>pthread_attr_setinheritsched</tt></td>
+<td><tt>pthread_attr_setschedparam</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_attr_setschedpolicy</tt></td>
+<td><tt>pthread_attr_setscope</tt></td>
+<td><tt>pthread_attr_setstack</tt></td>
+<td><tt>pthread_attr_setstackaddr</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_attr_setstacksize</tt></td>
+<td><tt>pthread_barrierattr_destroy</tt></td>
+<td><tt>pthread_barrierattr_init</tt></td>
+<td><tt>pthread_barrierattr_setpshar</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_barrier_destroy</tt></td>
+<td><tt>pthread_barrier_init</tt></td>
+<td><tt>pthread_barrier_wait</tt></td>
+<td><tt>pthread_condattr_getpshared</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_condattr_setpshared</tt></td>
+<td><tt>pthread_getattr_np</tt></td>
+<td><tt>pthread_getcpuclockid</tt></td>
+<td><tt>pthread_mutexattr_getkind_np</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_mutexattr_getpshared</tt></td>
+<td><tt>pthread_mutexattr_setkind_np</tt></td>
+<td><tt>pthread_mutexattr_setpshared</tt></td>
+<td><tt>pthread_rwlockattr_destroy</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_rwlockattr_getkind_n</tt></td>
+<td><tt>pthread_rwlockattr_getpshare</tt></td>
+<td><tt>pthread_rwlockattr_init</tt></td>
+<td><tt>pthread_rwlockattr_setkind_n</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_rwlockattr_setpshare</tt></td>
+<td><tt>pthread_rwlock_destroy</tt></td>
+<td><tt>pthread_rwlock_init</tt></td>
+<td><tt>pthread_rwlock_rdlock</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_rwlock_timedrdlock</tt></td>
+<td><tt>pthread_rwlock_timedwrlock</tt></td>
+<td><tt>pthread_rwlock_tryrdlock</tt></td>
+<td><tt>pthread_rwlock_trywrlock</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_rwlock_unlock</tt></td>
+<td><tt>pthread_rwlock_wrlock</tt></td>
+<td><tt>pthread_spin_destroy</tt></td>
+<td><tt>pthread_spin_init</tt></td>
+</tr>
+<tr>
+
+<td><tt>pthread_spin_lock</tt></td>
+<td><tt>pthread_spin_trylock</tt></td>
+<td><tt>pthread_spin_unlock</tt></td>
+<td><tt>pthread_yield</tt></td>
+</tr>
+<tr>
+
+<td><tt>ptrace</tt></td>
+<td><tt>putgrent</tt></td>
+<td><tt>putmsg</tt></td>
+<td><tt>putpmsg</tt></td>
+</tr>
+<tr>
+
+<td><tt>putspent</tt></td>
+<td><tt>pvalloc</tt></td>
+<td><tt>query_module</tt></td>
+<td><tt>quotactl</tt></td>
+</tr>
+<tr>
+
+<td><tt>rcmd</tt></td>
+<td><tt>rcmd_af</tt></td>
+<td><tt>reboot</tt></td>
+<td><tt>re_comp</tt></td>
+</tr>
+<tr>
+
+<td><tt>re_compile_fastmap</tt></td>
+<td><tt>re_compile_pattern</tt></td>
+<td><tt>re_exec</tt></td>
+<td><tt>registerrpc</tt></td>
+</tr>
+<tr>
+
+<td><tt>re_match</tt></td>
+<td><tt>re_match_2</tt></td>
+<td><tt>remque</tt></td>
+<td><tt>remquo</tt></td>
+</tr>
+<tr>
+
+<td><tt>remquof</tt></td>
+<td><tt>remquol</tt></td>
+<td><tt>re_search</tt></td>
+<td><tt>re_search_2</tt></td>
+</tr>
+<tr>
+
+<td><tt>re_set_registers</tt></td>
+<td><tt>re_set_syntax</tt></td>
+<td><tt>res_init</tt></td>
+<td><tt>revoke</tt></td>
+</tr>
+<tr>
+
+<td><tt>rexec</tt></td>
+<td><tt>rexec_af</tt></td>
+<td><tt>rpmatch</tt></td>
+<td><tt>rresvport</tt></td>
+</tr>
+<tr>
+
+<td><tt>rresvport_af</tt></td>
+<td><tt>rtime</tt></td>
+<td><tt>ruserok</tt></td>
+<td><tt>ruserok_af</tt></td>
+</tr>
+<tr>
+
+<td><tt>ruserpass</tt></td>
+<td><tt>sem_close</tt></td>
+<td><tt>semctl</tt></td>
+<td><tt>semget</tt></td>
+</tr>
+<tr>
+
+<td><tt>semop</tt></td>
+<td><tt>sem_open</tt></td>
+<td><tt>sem_timedwait</tt></td>
+<td><tt>sem_unlink</tt></td>
+</tr>
+<tr>
+
+<td><tt>sendfile</tt></td>
+<td><tt>setaliasent</tt></td>
+<td><tt>setfsgid</tt></td>
+<td><tt>setfsuid</tt></td>
+</tr>
+<tr>
+
+<td><tt>setjmp</tt></td>
+<td><tt>setlogin</tt></td>
+<td><tt>setresgid</tt></td>
+<td><tt>setresuid</tt></td>
+</tr>
+<tr>
+
+<td><tt>setrpcent</tt></td>
+<td><tt>setspent</tt></td>
+<td><tt>setttyent</tt></td>
+<td><tt>setusershell</tt></td>
+</tr>
+<tr>
+
+<td><tt>sgetspent</tt></td>
+<td><tt>sgetspent_r</tt></td>
+<td><tt>shmat</tt></td>
+<td><tt>shmctl</tt></td>
+</tr>
+<tr>
+
+<td><tt>shmdt</tt></td>
+<td><tt>shmget</tt></td>
+<td><tt>shm_open</tt></td>
+<td><tt>shm_unlink</tt></td>
+</tr>
+<tr>
+
+<td><tt>sigandset</tt></td>
+<td><tt>siggetmask</tt></td>
+<td><tt>sighold</tt></td>
+<td><tt>sigignore</tt></td>
+</tr>
+<tr>
+
+<td><tt>sigisemptyset</tt></td>
+<td><tt>sigorset</tt></td>
+<td><tt>sigqueue</tt></td>
+<td><tt>sigrelse</tt></td>
+</tr>
+<tr>
+
+<td><tt>sigreturn</tt></td>
+<td><tt>sigset</tt></td>
+<td><tt>sigtimedwait</tt></td>
+<td><tt>sigwaitinfo</tt></td>
+</tr>
+<tr>
+
+<td><tt>sprofil</tt></td>
+<td><tt>sstk</tt></td>
+<td><tt>statfs</tt></td>
+<td><tt>statfs64</tt></td>
+</tr>
+<tr>
+
+<td><tt>statvfs</tt></td>
+<td><tt>statvfs64</tt></td>
+<td><tt>step</tt></td>
+<td><tt>svcerr_auth</tt></td>
+</tr>
+<tr>
+
+<td><tt>svcerr_decode</tt></td>
+<td><tt>svcerr_noproc</tt></td>
+<td><tt>svcerr_noprog</tt></td>
+<td><tt>svcerr_progvers</tt></td>
+</tr>
+<tr>
+
+<td><tt>svcerr_systemerr</tt></td>
+<td><tt>svcerr_weakauth</tt></td>
+<td><tt>svc_exit</tt></td>
+<td><tt>svcfd_create</tt></td>
+</tr>
+<tr>
+
+<td><tt>svc_getreq</tt></td>
+<td><tt>svc_getreq_common</tt></td>
+<td><tt>svc_getreq_poll</tt></td>
+<td><tt>svc_getreqset</tt></td>
+</tr>
+<tr>
+
+<td><tt>svcraw_create</tt></td>
+<td><tt>svc_register</tt></td>
+<td><tt>svc_run</tt></td>
+<td><tt>svc_sendreply</tt></td>
+</tr>
+<tr>
+
+<td><tt>svctcp_create</tt></td>
+<td><tt>svcudp_bufcreate</tt></td>
+<td><tt>svcudp_create</tt></td>
+<td><tt>svcudp_enablecache</tt></td>
+</tr>
+<tr>
+
+<td><tt>svcunix_create</tt></td>
+<td><tt>svcunixfd_create</tt></td>
+<td><tt>svc_unregister</tt></td>
+<td><tt>swab</tt></td>
+</tr>
+<tr>
+
+<td><tt>swapoff</tt></td>
+<td><tt>swapon</tt></td>
+<td><tt>sysinfo</tt></td>
+<td><tt>timer_create</tt></td>
+</tr>
+<tr>
+
+<td><tt>timer_delete</tt></td>
+<td><tt>timer_getoverrun</tt></td>
+<td><tt>timer_gettime</tt></td>
+<td><tt>timer_settime</tt></td>
+</tr>
+<tr>
+
+<td><tt>tr_break</tt></td>
+<td><tt>ttyslot</tt></td>
+<td><tt>ualarm</tt></td>
+<td><tt>ulckpwdf</tt></td>
+</tr>
+<tr>
+
+<td><tt>updwtmpx</tt></td>
+<td><tt>uselib</tt></td>
+<td><tt>user2netname</tt></td>
+<td><tt>usleep</tt></td>
+</tr>
+<tr>
+
+<td><tt>ustat</tt></td>
+<td><tt>vdprintf</tt></td>
+<td><tt>verr</tt></td>
+<td><tt>verrx</tt></td>
+</tr>
+<tr>
+
+<td><tt>vhangup</tt></td>
+<td><tt>vm86</tt></td>
+<td><tt>vwarn</tt></td>
+<td><tt>vwarnx</tt></td>
+</tr>
+<tr>
+
+<td><tt>waitid</tt></td>
+<td><tt>warn</tt></td>
+<td><tt>warnx</tt></td>
+<td><tt>wcswidth</tt></td>
+</tr>
+<tr>
+
+<td><tt>wcwidth</tt></td>
+<td><tt>xdecrypt</tt></td>
+<td><tt>xdr_accepted_reply</tt></td>
+<td><tt>xdr_array</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_authdes_cred</tt></td>
+<td><tt>xdr_authdes_verf</tt></td>
+<td><tt>xdr_authunix_parms</tt></td>
+<td><tt>xdr_bool</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_bytes</tt></td>
+<td><tt>xdr_callhdr</tt></td>
+<td><tt>xdr_callmsg</tt></td>
+<td><tt>xdr_char</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_cryptkeyarg</tt></td>
+<td><tt>xdr_cryptkeyarg2</tt></td>
+<td><tt>xdr_cryptkeyres</tt></td>
+<td><tt>xdr_des_block</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_double</tt></td>
+<td><tt>xdr_enum</tt></td>
+<td><tt>xdr_float</tt></td>
+<td><tt>xdr_free</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_getcredres</tt></td>
+<td><tt>xdr_hyper</tt></td>
+<td><tt>xdr_int</tt></td>
+<td><tt>xdr_int16_t</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_int32_t</tt></td>
+<td><tt>xdr_int64_t</tt></td>
+<td><tt>xdr_int8_t</tt></td>
+<td><tt>xdr_keybuf</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_key_netstarg</tt></td>
+<td><tt>xdr_key_netstres</tt></td>
+<td><tt>xdr_keystatus</tt></td>
+<td><tt>xdr_long</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_longlong_t</tt></td>
+<td><tt>xdrmem_create</tt></td>
+<td><tt>xdr_netnamestr</tt></td>
+<td><tt>xdr_netobj</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_opaque</tt></td>
+<td><tt>xdr_opaque_auth</tt></td>
+<td><tt>xdr_pmap</tt></td>
+<td><tt>xdr_pmaplist</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_pointer</tt></td>
+<td><tt>xdrrec_create</tt></td>
+<td><tt>xdrrec_endofrecord</tt></td>
+<td><tt>xdrrec_eof</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdrrec_skiprecord</tt></td>
+<td><tt>xdr_reference</tt></td>
+<td><tt>xdr_rejected_reply</tt></td>
+<td><tt>xdr_replymsg</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_rmtcall_args</tt></td>
+<td><tt>xdr_rmtcallres</tt></td>
+<td><tt>xdr_short</tt></td>
+<td><tt>xdr_sizeof</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdrstdio_create</tt></td>
+<td><tt>xdr_string</tt></td>
+<td><tt>xdr_u_char</tt></td>
+<td><tt>xdr_u_hyper</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_u_int</tt></td>
+<td><tt>xdr_uint16_t</tt></td>
+<td><tt>xdr_uint32_t</tt></td>
+<td><tt>xdr_uint64_t</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_uint8_t</tt></td>
+<td><tt>xdr_u_long</tt></td>
+<td><tt>xdr_u_longlong_t</tt></td>
+<td><tt>xdr_union</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_unixcred</tt></td>
+<td><tt>xdr_u_short</tt></td>
+<td><tt>xdr_vector</tt></td>
+<td><tt>xdr_void</tt></td>
+</tr>
+<tr>
+
+<td><tt>xdr_wrapstring</tt></td>
+<td><tt>xencrypt</tt></td>
+<td><tt>xprt_register</tt></td>
+<td><tt>xprt_unregister</tt></td>
+</tr>
+    </table></center>
 
     <hr>
-    <address><a href="mailto:drepper@gnu.org">Ulrich Drepper</a></address>
+    <address><a href="mailto:drepper@redhat.com">Ulrich Drepper</a></address>
+Generated on Mon Apr  9 16:17:29 PDT 2001 with documented.sh version 1.0
   </body>
 </html>
