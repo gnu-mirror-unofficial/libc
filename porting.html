@@ -1,9 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <HTML>
 <HEAD>
 <TITLE>Porting the GNU C Library - GNU Project - Free Software Foundation
 (FSF)</TITLE>
-<LINK rev="made" href="mailto:webmasters@www.gnu.org">
+<LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
 </HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
 <H3>Porting the GNU C Library</H3>
@@ -13,17 +13,18 @@ platforms.  The main reason for this is that the C library cannot
 be written portably; it depends directly on the most intimate details
 of the kernel as well as the hardware.
 <P>
-The current version of GNU libc, version 2.2.3, now supports these
+The current version of GNU libc, version 2.2.4, now supports these
 systems:
 <UL>
   <LI><STRONG>GNU/Hurd</STRONG>.  We believe all platforms the Hurd runs on
        are also supported by GNU libc.
-  <LI><STRONG>GNU/Linux</STRONG>.  GNU libc 2.2 works with the Linux kernel,
+  <LI><STRONG>GNU/Linux</STRONG>.  GNU libc works with the Linux kernel,
        version 2.0.10 or later, on the following architectures:
        <UL>
 	 <LI>Intel ix86</LI>
 	 <LI>Motorola 680x0</LI>
 	 <LI>DEC Alpha</LI>
+	 <LI>PowerPC</LI>
 	 <LI>Sparc</LI>
 	 <LI>Sparc64</LI>
 	 <LI>ARM</LI>
@@ -37,17 +38,19 @@ systems:
        <P>
        Ports for HPPA and AMD x86-64 are being developed actively.
        Developers for other architectures should contact
-
-       <A HREF="mailto:bug-glibc@gnu.org">the GNU libc maintainers</A>.
+       the GNU libc maintainers
+       <A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>.
+  <LI><STRONG>Standalone</STRONG> operation (i.e., without an
+       operating system) is supported on the ARM architecture.
 </UL>
 
 <P>
 It should be possible without many problems to port the GNU libc to
-<EM>modern</EM> systems like Solaris (perhaps even SunOS-4), Irix, DEC
-Unix (OSF/1), and perhaps HP-UX.  Older systems such as Ultrix or
+<EM>modern</EM> systems like Solaris (perhaps even SunOS 4), IRIX, Tru64,
+and perhaps HP-UX.  Older systems such as Ultrix or
 SysVr3 systems cannot support GNU libc as a shared library, and some
-of the code---the part which assumes some parts of GNU libc are in
-separate libraries---needs to be changed as well.  But in principle it
+of the code (the part which assumes some parts of GNU libc are in
+separate libraries) needs to be changed as well.  But in principle it
 should be possible to build a completely static library from mostly
 the same sources.
 <P>
@@ -56,7 +59,7 @@ To port glibc to a new platform means basically to:
 <ul>
 <li>Read the documentation and understand the structure of the sysdeps
 directory.
-<li>configure glibc with --enable-hacker-mode
+<li>configure glibc with <samp>--enable-hacker-mode</samp>
 <li>running make and filling in the sysdeps directory.  You should not
 need to touch any files outside the sysdeps directory besides some
 configure stuff.
@@ -70,8 +73,8 @@ Currently a few volunteers are working on ports of GNU libc to other
 platforms.  Before you start working on a port you should look at the
 following list and find out whether somebody already works on the same or a
 related target system.  It is especially important to recognize that the GNU
-libc consist of two parts which have to be treated by the libc different for
-each platform:
+libc consists of two parts which have to be treated by the libc differently
+for each platform:
 <DL>
 <DT>Architecture dependent</DT>
 <DD>The are functions which are written in assembler or are specially
@@ -86,16 +89,16 @@ among different processor types.
 <P>
 That means a possible porter should contact the people who support files
 for the appropriate system as well as people who maintain some more general
-family of system.  See the table below for more information about this.
+family of systems.  See the table below for more information about this.
 <P>
 <H4>Responsibility for subtrees</H4>
 <P>
 The system-dependent part of the GNU libc is organized in subtrees
 which are used for different systems or different architectures.
-While the GNU libc maintainer is responsible for the whole system,
+While the GNU libc maintainers are responsible for the whole system,
 some of the subtrees are maintained by other people as well.  The
-following people list the subdirectories, describe briefly the
-contents and show who can be contacted.  Every directory listed
+following table lists the subdirectories, describes briefly the
+contents, and shows who can be contacted.  Every directory listed
 includes all directories below it as well.
 <P>
 All architecture-specific or system-specific directories not listed
@@ -265,6 +268,7 @@ Responsible: Martin Schwidefsky
 Other ports are being developed but are not yet usable.  If you are
 interested in porting GNU libc, please check this table to see whether
 somebody is already working on your system or a related system.
+<DL>
 <DT><CODE>sysdeps/x86_64/</CODE></DT>
 <DT><CODE>sysdeps/unix/sysv/linux/x86_64/</CODE></DT>
 <DD>
@@ -273,34 +277,40 @@ Andreas Jaeger
 <A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>
 is working on a port to Linux on AMD x86-64.
 </DD>
+</DL>
 <P>
 If you have interest in working on one of the systems listed above,
 please contact the appropriate people and also drop a note to the 
-
-<A HREF="mailto:bug-glibc@gnu.org">GNU libc maintainers</A> so that
-this table can be updated.
+GNU libc maintainers
+<A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>
+so that this table can be updated.
 <P>
 If you have interest in working on a system not listed above, please
-contact the <A href="mailto:bug-glibc@gnu.org">GNU libc
-maintainers</A> so that duplicate work can be avoided.
+contact the GNU libc maintainers
+<A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>
+so that duplicate work can be avoided.
 <P>
 <HR>
 <P>
 Return to the <A href="/software/libc/libc.html">GNU libc page</A>.
-<P>
+
 <HR>
 
+<P>
 Return to <A HREF="/home.html">GNU's home page</A>.
 <P>
+
 Please send FSF &amp; GNU inquiries &amp; questions to 
 
-<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>. There are
-also <A href="/home.html#ContactInfo">other ways to contact</A> the FSF.
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+There are also <A HREF="/home.html#ContactInfo">other ways to
+contact</A> the FSF.
 <P>
-Please send comments on these web pages to 
 
-<A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>,
-send other questions to
+Please send comments on these web pages to
+
+<A HREF="mailto:webmasters@gnu.org"><EM>webmasters@gnu.org</EM></A>.
+Send other questions to
 <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
 <P>
 Copyright (C) 1996, 1997, 1998, 2001 Free Software Foundation, Inc.,
@@ -310,9 +320,9 @@ Verbatim copying and distribution of this entire article is
 permitted in any medium, provided this notice is preserved.
 <P>
 Updated:
-<!-- hhmts start -->
-Last modified: Wed May 23 12:06:17 CEST 2001
-<!-- hhmts end -->
+<!-- timestamp start -->
+$Date: 2001/08/24 21:23:00 $ $Author: marksbrown $
+<!-- timestamp end -->
 <HR>
 </BODY>
 </HTML>
