@@ -72,6 +72,8 @@ please let me know.
 <p>
 <a href="#s-1.20"> 1.20. Which tools should I use for MIPS?</a>
 <p>
+<a href="#s-1.21"> 1.21. Which compiler should I use for powerpc64?</a>
+<p>
 
 <a href="#s-2"> 2. Installation and configuration issues</a>
 
@@ -176,6 +178,11 @@ please let me know.
 <a href="#s-2.34"> 2.34. When compiling C++ programs, I get a compilation error in streambuf.h.</a>
 <p>
 <a href="#s-2.35"> 2.35. When recompiling GCC, I get compilation errors in libio.</a>
+<p>
+<a href="#s-2.36"> 2.36. Why shall glibc never get installed on GNU/Linux systems in
+/usr/local?</a>
+<p>
+<a href="#s-2.37"> 2.37. When recompiling GCC, I get compilation errors in libstdc++.</a>
 <p>
 
 <a href="#s-3"> 3. Source and binary incompatibilities, and what to do about them</a>
@@ -300,6 +307,7 @@ in the future, are:
 	m68k-*-linux-gnu	Linux-2.x on Motorola 680x0
 	alpha*-*-linux-gnu	Linux-2.x on DEC Alpha
 	powerpc-*-linux-gnu     Linux and MkLinux on PowerPC systems
+	powerpc64-*-linux-gnu	Linux-2.4+ on 64-bit PowerPC systems
 	sparc-*-linux-gnu	Linux-2.x on SPARC
 	sparc64-*-linux-gnu	Linux-2.x on UltraSPARC
 	arm-*-none		ARM standalone systems
@@ -329,15 +337,14 @@ are used to increase portability and speed.
 <p>
 GNU CC is found, like all other GNU packages, on
 <p>
-<pre>	http://ftp.gnu.org/pub/gnu
+<pre>	ftp://ftp.gnu.org/pub/gnu
 </pre><p>
 and the many mirror sites.  ftp.gnu.org is always overloaded, so try to find
 a local mirror first.
 <p>
 You should always try to use the latest official release.  Older versions
 may not have all the features GNU libc requires.  The current releases of
-gcc (2.95 or newer) should work with the GNU C library (for powerpc see
-question <a href="#s-1.5">1.5</a>; for ARM see question <a href="#s-1.6">1.6</a>; for MIPS see question <a href="#s-1.20">1.20</a>).
+gcc (3.2 or newer) should work with the GNU C library (for MIPS see question <a href="#s-1.20">1.20</a>).
 <p>
 Please note that gcc 2.95 and 2.95.x cannot compile glibc on Alpha due to
 problems in the complex float support.
@@ -358,7 +365,7 @@ understand all the features of ELF, including weak and versioned symbols.
 The static library can be compiled with less featureful tools, but lacks key
 features such as NSS.
 <p>
-For Linux or Hurd, you want binutils 2.10.1 or higher.  These are the only
+For Linux or Hurd, you want binutils 2.13 or higher.  These are the only
 versions we've tested and found reliable.  Other versions may work but we
 don't recommend them, especially not when C++ is involved.
 <p>
@@ -368,18 +375,11 @@ them.
 
 <h4><a name="s-1.5">1.5.</a> Which compiler should I use for powerpc?</h4>
 
-{GK} You want to use at least gcc 2.95 (together with the right versions
-of all the other tools, of course).  See also question <a href="#s-2.8">2.8</a>.
+{} Removed.  Does not apply anymore.
 
 <h4><a name="s-1.6">1.6.</a> Which tools should I use for ARM?</h4>
 
-{PB} You should use egcs 1.1 or a later version.  For ELF systems some
-changes are needed to the compiler; a patch against egcs-1.1.x can be found
-at:
-<p>
-<a href=ftp://ftp.netwinder.org/users/p/philb/egcs-1.1.1pre2-diff-981126>ftp://ftp.netwinder.org/users/p/philb/egcs-1.1.1pre2-diff-981126</a>
-<p>
-Binutils 2.10.1 or later is also required.
+{} Removed.  Does not apply anymore.
 
 <h4><a name="s-1.7">1.7.</a> Do I need some more things to compile the GNU C Library?</h4>
 
@@ -388,7 +388,7 @@ Binutils 2.10.1 or later is also required.
 <ul>
 <li>  GNU gettext.  This package contains the tools needed to construct
   `message catalog' files containing translated versions of system
-  messages. See http://ftp.gnu.org/pub/gnu or better any mirror
+  messages. See ftp://ftp.gnu.org/pub/gnu or better any mirror
   site.  (We distribute compiled message catalogs, but they may not be
   updated in patches.)
 <p>
@@ -580,9 +580,7 @@ test in the sources.
 There are some failures which are not directly related to the GNU libc:
 <ul>
 <li>  Some compilers produce buggy code.  No compiler gets single precision
-  complex numbers correct on Alpha.  Otherwise, the egcs 1.1 release should be
-  ok; gcc 2.8.1 might cause some failures; gcc 2.7.2.x is so buggy that
-  explicit checks have been used so that you can't build with it.
+  complex numbers correct on Alpha.  Otherwise, gcc-3.2 should be ok.
 <li>  The kernel might have bugs.  For example on Linux/Alpha 2.0.34 the
   floating point handling has quite a number of bugs and therefore most of
   the test cases in the math subdirectory will fail.  Linux 2.2 has
@@ -642,8 +640,8 @@ newer.
 
 <h4><a name="s-1.20">1.20.</a> Which tools should I use for MIPS?</h4>
 
-{AJ} You should use the current development version of gcc 3.0 or newer from
-CVS.  gcc 2.95.x does not work correctly on mips-linux.
+{AJ} You should use the current development version of gcc 3.2 or newer from
+CVS.
 <p>
 You need also recent binutils, anything before and including 2.11 will not
 work correctly.  Either try the Linux binutils 2.11.90.0.5 from HJ Lu or the
@@ -654,6 +652,11 @@ because of problems of the FPU emulation in the Linux kernel (the MIPS FPU
 doesn't handle all cases and needs help from the kernel).
 <p>
 For details check also my page <a href=http://www.suse.de/~aj/glibc-mips.html>http://www.suse.de/~aj/glibc-mips.html</a>.
+
+<h4><a name="s-1.21">1.21.</a> Which compiler should I use for powerpc64?</h4>
+
+{SM} You want to use at least gcc 3.2 (together with the right versions
+of all the other tools, of course).
 <p><hr>
 <h3><a name="s-2"> 2.</a> Installation and configuration issues</h3>
 
@@ -908,7 +911,7 @@ you got with your distribution.
 	glibc 2.x?</h4>
 
 {AJ} There's only correct support for glibc 2.0.x in gcc 2.7.2.3 or later.
-But you should get at least gcc 2.95.2.1 (or later versions) instead.
+But you should get at least gcc 2.95.3 (or later versions) anyway
 
 <h4><a name="s-2.10">2.10.</a> The `gencat' utility cannot process the catalog sources which
 	were used on my Linux libc5 based system.  Why?</h4>
@@ -1303,13 +1306,37 @@ repository.
 {BH} You are using g++ 2.95.2? After upgrading to glibc 2.2, you need to
 apply a patch to the include files in /usr/include/g++, because the fpos_t
 type has changed in glibc 2.2.  The patch is at
-<a href=http://clisp.cons.org/~haible/gccinclude-glibc-2.2-compat.diff>http://clisp.cons.org/~haible/gccinclude-glibc-2.2-compat.diff</a>
+<p>
+<pre>  <a href=http://www.haible.de/bruno/gccinclude-glibc-2.2-compat.diff>http://www.haible.de/bruno/gccinclude-glibc-2.2-compat.diff</a>
+</pre>
 
 <h4><a name="s-2.35">2.35.</a> When recompiling GCC, I get compilation errors in libio.</h4>
 
 {BH} You are trying to recompile gcc 2.95.2?  Use gcc 2.95.3 instead.
 This version is needed because the fpos_t type and a few libio internals
 have changed in glibc 2.2, and gcc 2.95.3 contains a corresponding patch.
+
+<h4><a name="s-2.36">2.36.</a> Why shall glibc never get installed on GNU/Linux systems in
+/usr/local?</h4>
+
+{AJ} The GNU C compiler treats /usr/local/include and /usr/local/lib in a
+special way, these directories will be searched before the system
+directories.  Since on GNU/Linux the system directories /usr/include and
+/usr/lib contain a --- possibly different --- version of glibc and mixing
+certain files from different glibc installations is not supported and will
+break, you risk breaking your complete system.  If you want to test a glibc
+installation, use another directory as argument to --prefix.  If you like to
+install this glibc version as default version, overriding the existing one,
+use --prefix=/usr and everything will go in the right places.
+
+<h4><a name="s-2.37">2.37.</a> When recompiling GCC, I get compilation errors in libstdc++.</h4>
+
+{BH} You are trying to recompile gcc 3.2?  You need to patch gcc 3.2,
+because some last minute changes were made in glibc 2.3 which were not
+known when gcc 3.2 was released.  The patch is at
+<p>
+<pre>  <a href=http://www.haible.de/bruno/gcc-3.2-glibc-2.3-compat.diff>http://www.haible.de/bruno/gcc-3.2-glibc-2.3-compat.diff</a>
+</pre>
 <p><hr>
 <h3><a name="s-3"> 3.</a> Source and binary incompatibilities, and what to do about them</h3>
 
@@ -1947,6 +1974,7 @@ Answers were given by:<br>
 {CG} Cristian Gafton, &lt;<a href="mailto:gafton@redhat.com">gafton@redhat.com</a>&gt;<br>
 {AO} Alexandre Oliva, &lt;<a href="mailto:aoliva@redhat.com">aoliva@redhat.com</a>&gt;<br>
 {BH} Bruno Haible, &lt;<a href="mailto:haible@clisp.cons.org">haible@clisp.cons.org</a>&gt;<br>
+{SM} Steven Munroe, &lt;<a href="mailto:sjmunroe@us.ibm.com">sjmunroe@us.ibm.com</a>&gt;<br>
 <br>
 <br>
 <hr>
@@ -1954,6 +1982,6 @@ Please note that the original version doesn't use HTML and this page is generate
 automatically with a simple script to just add a few HTML tags.
 I know that the HTML is not perfect. <p>
     <address><a href="mailto:aj@suse.de">Andreas Jaeger</a></address>
-Last modified: Sun Jan  6 18:46:59 2002
+Last modified: Sat Apr 12 07:46:06 2003
   </body>
 </html>
