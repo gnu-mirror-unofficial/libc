@@ -13,7 +13,7 @@ platforms.  The main reason for this is that the C library cannot
 be written portably; it depends directly on the most intimate details
 of the kernel as well as the hardware.
 <P>
-The current version of GNU libc, version 2.2.1, now supports these
+The current version of GNU libc, version 2.2.3, now supports these
 systems:
 <UL>
   <LI><STRONG>GNU/Hurd</STRONG>.  We believe all platforms the Hurd runs on
@@ -51,6 +51,19 @@ separate libraries---needs to be changed as well.  But in principle it
 should be possible to build a completely static library from mostly
 the same sources.
 <P>
+
+To port glibc to a new platform means basically to:
+<ul>
+<li>Read the documentation and understand the structure of the sysdeps
+directory.
+<li>configure glibc with --enable-hacker-mode
+<li>running make and filling in the sysdeps directory.  You should not
+need to touch any files outside the sysdeps directory besides some
+configure stuff.
+</ul>
+To get the port integrated into the official glibc release, you have
+to file copyright papers to the FSF (for details ask the maintainers).
+
 <H4>Volunteers doing ports</H4>
 <P>
 Currently a few volunteers are working on ports of GNU libc to other
@@ -109,6 +122,23 @@ Responsible: Richard Henderson
 
 <A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
 </DD>
+<DT><CODE>sysdeps/arm/</CODE></DT>
+<DD>
+Arm specific functions.
+<P>
+Responsible: Philipp Blundell 
+
+<A HREF="mailto:philb@gnu.org">&lt;philb@gnu.org&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/ia64/</CODE></DT>
+<DD>
+Intel ia64 specific functions.
+<P>
+Responsible: Jes Sorensen
+
+<A HREF="mailto:jes@sunsite.dk">&lt;jes@sunsite.dk&gt;</A>.
+</DD>
+
 <DT><CODE>sysdeps/i386/</CODE></DT>
 <DD>Intel ix86 specific functions.
 <P>
@@ -132,6 +162,32 @@ Responsible: Andreas Jaeger
 
 <A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.
 </DD>
+
+<DT><CODE>sysdeps/s390/</CODE></DT>
+<DD>
+IBM S390 specific functions.
+<P>
+Responsible: Martin Schwidefsky 
+
+<A HREF="mailto:schwidefsky@de.ibm.com">&lt;schwidefsky@de.ibm.com&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/sh/</CODE></DT>
+<DD>
+Super Hitachi specific functions.
+<P>
+Responsible: Kazumoto Kojima/Yutaka Niibe
+
+<A HREF="mailto:kkojima@rr.iij4u.or.jp">&lt;kkojima@rr.iij4u.or.jp&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/arm/</CODE></DT>
+<DD>
+Kernel-dependent functions for the Arm port of Linux.
+<P>
+Responsible: Philipp Blundell 
+
+<A HREF="mailto:philb@gnu.org">&lt;philb@gnu.org&gt;</A>.
+</DD>
+
 <DT><CODE>sysdeps/unix/sysv/linux/alpha/</CODE></DT>
 <DD>
 Kernel-dependent functions for the DEC Alpha port of Linux
@@ -140,6 +196,13 @@ Responsible:  Richard Henderson
 
 <A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
 </DD>
+<DT><CODE>sysdeps/unix/sysv/linux/ia64/</CODE></DT>
+<DD>
+Kernel-dependent functions for the Intel ia64 port of Linux.
+<P>
+Responsible: Jes Sorensen
+
+<A HREF="mailto:jes@sunsite.dk">&lt;jes@sunsite.dk&gt;</A>.
 <DT><CODE>sysdeps/unix/sysv/linux/i386/</CODE></DT>
 <DD>Intel ix86 port of Linux.
 <P>
@@ -171,6 +234,14 @@ Responsible: Geoffrey Keating
 
 <A HREF="mailto:geoffk@geoffk.org">&lt;geoffk@geoffk.org&gt;</A>.
 </DD>
+<DT><CODE>sysdeps/unix/sysv/linux/sh/</CODE></DT>
+<DD>
+Kernel-dependent functions for the Super Hitachi port of Linux.
+<P>
+Responsible: Kazumoto Kojima/Yutaka Niibe
+
+<A HREF="mailto:kkojima@rr.iij4u.or.jp">&lt;kkojima@rr.iij4u.or.jp&gt;</A>.
+</DD>
 <DT><CODE>sysdeps/unix/sysv/linux/sparc/</CODE></DT>
 <DD>
 Kernel-dependent functions for the SPARC port of Linux.
@@ -179,6 +250,15 @@ Responsible: Jakub Jelinek
 
 <A HREF="mailto:jakub@redhat.com">&lt;jakub@redhat.com&gt;</A>.
 </DD>
+<DT><CODE>sysdeps/unix/sysv/linux/s390/</CODE></DT>
+<DD>
+Kernel-dependent functions for the IBM S390 port of Linux.
+<P>
+Responsible: Martin Schwidefsky 
+
+<A HREF="mailto:schwidefsky@de.ibm.com">&lt;schwidefsky@de.ibm.com&gt;</A>.
+</DD>
+
 </DL>
 <H4>Ongoing work</H4>
 <P>
@@ -231,7 +311,7 @@ permitted in any medium, provided this notice is preserved.
 <P>
 Updated:
 <!-- hhmts start -->
-Last modified: Wed Apr 18 10:15:30 CEST 2001
+Last modified: Wed May 23 12:06:17 CEST 2001
 <!-- hhmts end -->
 <HR>
 </BODY>
