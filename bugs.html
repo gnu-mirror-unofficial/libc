@@ -1,103 +1,248 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
 <HTML>
+  
   <HEAD>
+    <link rel="stylesheet" type="text/css" href="gnu.css" />
     <TITLE>
-      Reporting Bugs - GNU C Library - GNU Project - Free Software Foundation (FSF)
+      Bugs - GNU C Library - GNU Project - Free Software Foundation (FSF)
     </TITLE>
     <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
-    <META NAME="keywords" CONTENT="libc, bugs">
+    <META NAME="keywords" CONTENT="libc">
   </HEAD>
 
 
-  <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+  <BODY>
+
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td rowspan="2" width="150">
+    <A HREF="/graphics/agnuhead.html"><IMG SRC="./img/gnu-head-sm.png" ALT="[image of the Head of a GNU]" border="0"></A>
+	</td>
+	<td colspan="4">
+		<h1>Bugs</h1>
+	</td>
+	</tr>
+	<tr>
+		<td width="100" height="25" class="toc_inactive"><a href="libc.html">Main page</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="bugs.html">Bugs</a></td>
+		<td width="100" height="25" class="toc_inactive"><a HREF="/software/libc/manual/">Manual</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="resources.html">Resources</a></td>
+		<td>&nbsp;</td>
+	</tr>
+	</table>
+	<br>
+	
+<div class="toc">
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#report" name="TOCreport">Reporting Bugs</a></li>
+  <ul>
+    <li><a href="#general_info" name="TOCgeneral_info">General Information</a></li>
+    <ul>
+      <li><a href="#what_to_report" name="TOCwhat_to_report">What bugs should be reported?</a></li>
+      <li><a href="#filing_a_bug" name="TOCfiling_a_bug">So you still want to file a bug?</a></li>
+      <li><a href="#where_to_file" name="TOCwhere_to_file">Where to file a bug</a></li>
+    </ul>
+    <li><a href="#instructions" name="TOCinstructions">Bug reporting instructions</a></li>
+    <ul>
+      <li><a href="#check_against_cvs" name="TOCcheck_against_cvs">Check you bug against CVS glibc</a><br>
+      </li>
+      <li><a href="#search_for_existing" name="TOCsearch_for_existing">Search for existing bugs</a></li>
+      <li><a href="#file_a_new_bug" name="TOCfile_a_new_bug">File a new bug</a></li>
+    </ul>
+    <li><a href="#support_forums" name="TOCsupport_forums">Support Forums</a></li>
+  </ul>
+ </ul>
+</div>
 
 
-    <H3>Reporting Bugs in the GNU C Library</H3>
-
-    <A HREF="/graphics/agnuhead.html">
-      <IMG SRC="/graphics/gnu-head-sm.jpg"
-	   ALT=" [image of the Head of a GNU] "
-	   WIDTH="129" HEIGHT="122">
-    </A>
-
-    <HR>
-
-<P>
-<B>Note:</B>
-Past GNU C Library releases have included a script called
-<tt>glibcbug</tt>, which used to be the preferred way to report bugs.
-<BR>Using the <tt>glibcbug</tt> script is <i>no longer supported</i>.<BR>
-Please read on for current information on reporting <tt>glibc</tt> bugs.
-</P>
-
-    <HR>
-
-<P>
-Most users do not compile the GNU C Library from the sources released by
-the GNU developers.  Most people are using <tt>glibc</tt> binaries supplied
-with a complete operating system distribution from a project such as
-<A HREF="http://www.debian.org/">Debian</A> or
-<A HREF="http://fedora.redhat.com/">Fedora</A> (among many others).
-Distributions such as these include their own modifications to
-<tt>glibc</tt> in the binaries and sources you get with the operating system.
-
-If the <tt>glibc</tt> you are using comes from a complete operating system
-distribution, you should report bugs to that distribution project first.
+<h1><a name="report" href="#TOCreport">Reporting Bugs</a>
+</h1>
+<p>The main purpose of a bug report is to enable us to fix the bug. The
+most important prerequisite for this is that the report must be
+complete and
+self-contained, which we explain in detail below.</p>
+<p>Before you report a bug, please check the <a href="#FRB">list of
+well-known bugs</a> and, <strong>if possible
+in any way, try a current CVS development snapshot</strong>.<br>
+</p>
+<h2 class="section"><a name="general_info" href="#TOCgeneral_info">General Information about filing bugs</a><br>
+</h2>
+<h3 class="subsection"><a name="what_to_report" href="#TOCwhat_to_report">What bugs should be reported?</a><br>
+</h3>
+<p><span style="font-weight: bold; color: rgb(255, 0, 0);"></span><span
+ style="font-weight: bold; color: rgb(255, 0, 0);">Most users do not
+compile the GNU C Library from the sources released by
+the GNU developers</span>. Most people are using <tt>glibc</tt>
+binaries supplied with a complete operating system distribution (for a comprehensive list of 
+distributions see <a href="http://lwn.net/Distributions/">Linux Weekly News Distributions page</a>).
+Distributions include their own modifications to
+<tt>glibc</tt> in the binaries and sources you get with the operating
+system.
+If the <tt>glibc</tt> you are using comes from a complete operating
+system
+distribution, <span style="font-weight: bold;">you should report bugs
+to that distribution project first</span>.
 Your distribution's own documentation and web pages should refer you to
-their bug-reporting system.  Your distribution's maintainers will determine
-whether the problem is specific to their modifications or other details of
-that particular system.  If the problem does exist in the standard GNU C
-Library code, they will report it to the GNU maintainers or direct you how
-to do so.
-</P>
+their bug-reporting system. Your distribution's maintainers will
+determine
+whether the problem is specific to their modifications or other details
+of
+that particular system. If the problem does exist in the standard GNU C
+Library code, they will report it to the GNU maintainers or direct you
+how
+to do so.</p>
+<h3 class="subsection"><a name="filing_a_bug" href="#TOCfiling_a_bug">So you still want to file a bug?<br>
+</a></h3>
+<p>If you have determined that your bug should be directed directly to
+the GNU developers and not your distribution maintainers, your next
+step should be to check the latest CVS
+sources.&nbsp; Information on the <tt>glibc</tt> CVS repository can be
+found at the <a href="http://sources.redhat.com/glibc/"><tt>glibc</tt>
+status page</a>.<br>
+</p>
+<p>As a rule, bug reports should generally be filed against the current
+CVS versions at the time you file the bug.&nbsp; <tt>glibc</tt>
+development can move quickly at times and you will often find your
+specific bug has already been fixed.</p>
 
+<h3 class="subsection"><a name="where_to_file" href="#TOCwhere_to_file">Where to file a bug</a></h3>
+<p><tt>glibc</tt> runs a <a href="http://sources.redhat.com/bugzilla/">bugzilla
+database</a> where all bugs should be recorded.&nbsp; </p>
+<h2 class="section"><a name="instructions" href="#TOCinstructions">Bug reporting instructions</a><br>
+</h2>
+<h4><a name="check_against_cvs" href="#TOCcheck_against_cvs">Step 1. Check your bug against CVS <tt>glibc</tt></a></h4>
+ <p>You might save yourself significant effort by
+simply checking the problem still exists with current development
+snapshots (see the <a href="./resources.html">resources</a> page for more information).  Building <tt>glibc</tt> is a tricky business, and
+<tt>glibc</tt> maintainers will generally not offer generous support
+for people having problems building the library.<br>
+</p>
+<h4><a name="search_for_existing" href="#TOCsearch_for_existing">Step 2. Search for existing bugs</a></h4>
+<p>
+Your bug may already have been reported.&nbsp; Firstly, use a general
+web search engine such as <a href="http://www.google.com">Google</a>
+to
+investigate your problem.&nbsp; Search engines should index many
+different mailing lists where others may have explored the same
+problem.<br>
+<br>
+Secondly, try your search via the search functionality provided at the
+<a href="http://sources.redhat.com/ml/libc-alpha/"><tt>libc-alpha</tt></a>
+and <a href="http://sources.redhat.com/ml/libc-hacker/"><tt>libc-hacker</tt></a>
+information pages (see <a href="./resources.html">resources</a> for more
+relevant mailing lists).&nbsp; These are the main lists the GNU
+developers discuss <tt>glibc</tt> issues. <br>
+</p>
+<p>Finally, use the <a
+ href="http://sources.redhat.com/bugzilla/query.cgi">query
+existing bug
+reports</a> and the <a
+ href="http://sources.redhat.com/bugzilla/duplicates.cgi">most
+frequently reported bugs</a> forms to attempt to identify your
+bug in Bugzilla.&nbsp; If you find your bug some relevant actions (in
+increasing order of usefulness) might be</p>
+<ul>
+  <li>Add yourself to the CC list for the bug to keep informed about
+developments.<br>
+  </li>
+  <li>Confirmation of the bug in a different environment or
+architecture.<br>
+  </li>
+  <li>More information on how to trigger the bug.<br>
+  </li>
+  <li>A self contained test case to replicate the bug, if one does not
+exist.</li>
+  <li>A patch to correct the bug.</li>
+</ul>
+<h4><a name="file_a_new_bug" href="#TOCfile_a_new_bug">Step 3. File a new bug</a><br>
+</h4>
+<p>If your bug does not appear to exist, you may file a new bug with
+the <a
+ href="http://sources.redhat.com/bugzilla/enter_bug.cgi?product=glibc">new
+bug</a> form.&nbsp; Bugzilla contains a <a
+ href="http://sources.redhat.com/bugzilla/bugwritinghelp.html">general bug writing guide</a>
+explaining the interface.&nbsp; Please take into
+account the following guidelines:
+</p>
+<h5>Duplicate Bugs</h5>
+<p>Even if you think a bug is new, expert <tt>glibc</tt> bug hunters may
+recognise it as a symptom of an existing problem and mark it as
+duplicate.
+</p>
+<h5>Support Categories </h5>
+<p>Support is broadly divided up into <a
+ href="http://sources.redhat.com/bugzilla/describecomponents.cgi?product=glibc">components</a>
+relating to divisions in the libc source code.&nbsp; Please read the
+component descriptions and file your bug appropriately.
+</p>
+<h5>What to put in a new report</h5>
+<ul>
+  <li>The <tt>glibc</tt> version you are using; either from a official
+release or the date and time you checked out CVS.
+  </li>
+  <li>The host/build/target triplets</li>
+  <ul>
+    <li>If you are cross compiling, you should already know these.</li>
+    <li>If you otherwise don't know use the output of <code>scripts/config.guess</code>
+    </li>
+  </ul>
+  <li>The options given to the <code>./configure </code>command </li>
+  <li>The kernel you are running (obtain the output of <code>uname -a)</code>
+  </li>
+  <li>The version of gcc and toolchain you are using to build <tt>glibc</tt>(obtain the output of <code>gcc -v </code>and <code>ld -v</code><code>)</code></li>
+  <li>A description of the problem and <span style="font-weight: bold;">some
+way to replicate the problem</span>.&nbsp; The only way to guarantee anyone will look at your bug report is to provide a self
+contained test case that illustrates the problem; it is far too time consuming for developers to track down problems in other peoples code.  If the developers can not
+replicate the problem, there is little hope of getting it fixed.</li>
+  <li>Any analysis of the problem you have performed.</li>
+  <li>If your bug relates to incorrect behaviour of standardised 
+  interfaces, a link to the appropriate section of the standard. </li>
+</ul>
+<h5>What not to put in a new report</h5>
+<ul>
+  <li>Any binary files.
+  </li>
+  <li>An attached archive (tar, zip, shar, whatever) containing any of
+the above.</li>
+  <li>E-mail messages that complement previous, incomplete bug reports.
+Post a new, self-contained, full bug report instead, if possible as a
+follow-up to the original bug report</li>
+  <li>Duplicate bug reports, or reports of bugs already fixed in the
+development tree, especially those that have already been reported as
+fixed last week.
+  </li>
+  <li>Bugs in gcc, the linker/assembler or your application. These
+are all separate projects, with separate mailing lists and different bug
+reporting procedures</li>
+  <li>Bugs in releases or snapshots of <tt>glibc</tt> not issued by the GNU
+Project. Report them to whoever provided you with the release (usually
+your distribution). </li>
+  <li>Questions about the correctness or the expected behaviour of
+standardised system calls.&nbsp; These might be more appropriately
+asked in other forums.</li>
+</ul>
+<h2 class="section"><a name="support_forums" href="#TOCsupport_forums">Support Forums</a></h2>
+<p>
+There are a number of mailing lists relevant to <tt>glibc</tt> development.  Please check the <a href="./resources.html">resources</a> page for a complete list.
+</p>
+
+<div class="copyright">
     <P>
-GNU C Library bugs are now tracked using the system at
-<A HREF="http://sources.redhat.com/bugzilla/">
-http://sources.redhat.com/bugzilla/</A>.
-Follow that link for details on using the system.
-</P>
-
-<P>
-It's always best to query the database for similar-sounding bugs before
-filing a new bug report.  If you find a report that clearly matches the
-problem you have experienced, then don't enter a new report.  If you have
-additional information to supply, you can add your comments to the existing
-bug report.  If you want to be notified when new information is available,
-add yourself to the bug's CC list.
-If your problem seems different from one
-you found, but you're not sure, it doesn't hurt to file a new report--but
-be sure to mention the number of the bug report you think might be related.
-If your report turns out to be a duplicate of an existing one, we can mark
-it that way in the system.
-    </P>
-    <P>
-If your problem is not already addressed by an existing bug report, you can
-<A HREF="http://sources.redhat.com/bugzilla/enter_bug.cgi?product=glibc">
-enter a new bug report here</A>.
-</P>
-
-
-    <HR>
-
-    Return to <A HREF="/software/libc/libc.html">GNU C Library</A>
-    or <A HREF="/home.html">GNU's home page</A>.
-
-    <P>
-      Please send FSF &amp; GNU inquiries &amp; questions to
+      Please send FSF &amp; GNU inquiries &amp; questions to 
       <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
       are also <A HREF="/home.html#ContactInfo">other ways to
       contact</A> the FSF.
 
     <P>
-      Please send comments on these web pages to
+      Please send comments on these web pages to 
       <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
-      Send other questions to
+      Send other questions to 
       <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
 
     <P>
-      Copyright (C) 2004 Free Software Foundation, Inc.,
+      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.,
       59 Temple Place - Suite 330, Boston, MA  02111,  USA
 
     <P>
@@ -107,8 +252,7 @@ enter a new bug report here</A>.
     <P>
       Updated:
 <!-- timestamp start -->
-$Date: 2004/01/19 23:27:26 $ $Author: roland $
-<!-- timestamp end -->
-    <HR>
+$Date: 2004/03/15 23:27:41 $ $Author: ianw $
+</div>
   </BODY>
 </HTML>

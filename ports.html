@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<HTML>
+<HEAD>
+ <HEAD>
+    <link rel="stylesheet" type="text/css" href="gnu.css" />
+    <TITLE>
+      Ports - GNU C Library  - GNU Project - Free Software Foundation (FSF)
+    </TITLE>
+    <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
+    <META NAME="keywords" CONTENT="libc">
+  </HEAD>
+
+
+  <BODY>
+</HEAD>
+
+<BODY>
+
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td rowspan="2" width="150">
+    <A HREF="/graphics/agnuhead.html"><IMG SRC="./img/gnu-head-sm.png" ALT="[image of the Head of a GNU]" border="0"></A>
+	</td>
+	<td colspan="4">
+		<h1>Ports</h1>
+	</td>
+	</tr>
+	<tr>
+		<td width="100" height="25" class="toc_inactive"><a href="libc.html">Main page</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="bugs.html">Bugs</a></td>
+		<td width="100" height="25" class="toc_inactive"><a HREF="/software/libc/manual/">Manual</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="resources.html">Resources</a></td>
+		<td>&nbsp;</td>
+	</tr>
+	</table>
+	<br>
+
+<div class="toc">
+    <H2>Table of Contents</H2 class="section">
+    <UL>
+     	<LI><A HREF="#Supported Systems" NAME="TOCSupported Systems">Supported Systems</a>
+      <LI><A HREF="#SubtreeMaintainers" NAME="TOCSubtreeMaintainers">Subtree Maintainers</a>
+      <LI><A HREF="#OngoingWork" NAME="TOCOngoingWork">Ongoing Work</a>
+    </UL>
+</div>    
+
+<H2 class="section"><A HREF="#TOCSupported Systems" NAME="Supported Systems">Supported Systems</A></H2>
+
+    <p>
+      Version 2 currently supports only GNU systems (both Hurd-based and Linux-based).  The list of supported architectures is
+    </p>
+<UL>
+	<LI><STRONG>GNU/Hurd</STRONG>.  We believe all platforms the Hurd runs on
+   	    are also supported by GNU libc.
+	<LI><STRONG>GNU/Linux</STRONG>.  GNU libc works with the Linux kernel,
+   	    version 2.0.10 or later, on the following architectures:
+	<UL>
+		 <LI>Intel ix86</LI>
+		 <LI>Motorola 680x0</LI>
+		 <LI>DEC Alpha</LI>
+		 <LI>PowerPC (32 and 64 bit)</LI>
+		 <LI>Sparc</LI>
+		 <LI>Sparc64</LI>
+		 <LI>ARM</LI>
+		 <LI>MIPS (Kernels > 2.2.15)</LI>
+		 <LI>Intel IA64 (Kernels > 2.4.0)</LI>
+		 <LI>IBM S/390 (32 and 64 bit)</LI>
+   	 <LI>SH</LI>
+		 <LI>CRIS</LI>
+		 <LI>AMD x86-64</LI>
+		 <LI>ARM</LI>
+	</UL>
+</UL>	    
+
+<h2 class="section"><a href="#TOCSubtreeMaintainers">Subtree Maintainers</a></h2>
+<p>The system-dependent parts of <tt>glibc</tt> are organised in subtrees
+which are used for different systems or different architectures.
+While the <tt>glibc</tt> maintainers are responsible for the whole system,
+some of the subtrees are maintained by other people as well.  The
+following table lists the subdirectories, describes briefly the
+contents, and shows who can be contacted.  Every directory listed
+includes all directories below it as well.
+</p>
+
+<p>
+All architecture-specific or system-specific directories not listed
+here are currently not actively maintained.
+</p>
+
+<DL>
+
+<DT class="maintainers"><CODE>hurd/</CODE></DT>
+<DT class="maintainers"><CODE>mach/</CODE></DT>
+<DT class="maintainers"><CODE>sysdeps/mach/</CODE></DT>
+<DD class="maintainers">
+<STRONG>GNU Hurd</STRONG> is built on top of <STRONG>Mach</STRONG>,
+and the Hurd developers are responsible for these directories.
+<P>
+Responsible: Roland McGrath 
+
+<A HREF="mailto:roland@gnu.org">&lt;roland@gnu.org&gt;</A> and
+Mark Kettenis
+
+<A HREF="mailto:kettenis@gnu.org">&lt;kettenis@gnu.org&gt;</A>.
+<DT class="maintainers"><CODE>sysdeps/alpha/</CODE></DT>
+<DD class="maintainers">
+DEC Alpha specific functions.
+<P>
+Responsible: Richard Henderson 
+
+<A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/arm/</CODE></DT>
+<DD class="maintainers">
+Arm specific functions.
+<P>
+Responsible: Philipp Blundell 
+
+<A HREF="mailto:philb@gnu.org">&lt;philb@gnu.org&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/ia64/</CODE></DT>
+<DD class="maintainers">
+Intel ia64 specific functions.
+<P>
+Responsible: Jes Sorensen
+
+<A HREF="mailto:jes@sunsite.dk">&lt;jes@sunsite.dk&gt;</A>.
+</DD>
+
+<DT class="maintainers"><CODE>sysdeps/i386/</CODE></DT>
+<DD class="maintainers">Intel ix86 specific functions.
+<P>
+Responsible: Ulrich Drepper 
+
+<A HREF="mailto:drepper@cygnus.com">&lt;drepper@cygnus.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/m68k/</CODE></DT>
+<DD class="maintainers">
+Motorola 680x0 specific functions.
+<P>
+Responsible: Andreas Schwab 
+
+<A HREF="mailto:schwab@suse.de">&lt;schwab@suse.de&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/mips/</CODE></DT>
+<DD class="maintainers">
+MIPS R[23458]000 specific functions.
+<P>
+Responsible: Andreas Jaeger
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.
+</DD>
+
+<DT class="maintainers"><CODE>sysdeps/s390/</CODE></DT>
+<DD class="maintainers">
+IBM S390 specific functions.
+<P>
+Responsible: Martin Schwidefsky 
+
+<A HREF="mailto:schwidefsky@de.ibm.com">&lt;schwidefsky@de.ibm.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/sh/</CODE></DT>
+<DD class="maintainers">
+Super Hitachi specific functions.
+<P>
+Responsible: Kazumoto Kojima/Yutaka Niibe
+
+<DT class="maintainers"><CODE>sysdeps/x86_64/</CODE></DT>
+<DD class="maintfile:///home/ianw/programs/glibc-www/porting.htmlainers"> AMD x86-64 specific functions.
+<p>Responsible: Andreas Jaeger <a href="mailto:aj@suse.de">&lt;aj@suse.de&gt;</a>.</p>
+</dd>
+
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/arm/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the Arm port of Linux.
+<P>
+Responsible: Philipp Blundell 
+
+<A HREF="mailto:philb@gnu.org">&lt;philb@gnu.org&gt;</A>.
+</DD>
+
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/alpha/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the DEC Alpha port of Linux
+<P>
+Responsible:  Richard Henderson 
+
+<A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/ia64/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the Intel ia64 port of Linux.
+<P>
+Responsible: Jes Sorensen
+
+<A HREF="mailto:jes@sunsite.dk">&lt;jes@sunsite.dk&gt;</A>.
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/i386/</CODE></DT>
+<DD class="maintainers">Intel ix86 port of Linux.
+<P>
+Responsible: Ulrich Drepper 
+
+<A HREF="mailto:drepper@cygnus.com">&lt;drepper@cygnus.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/m68k/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the Motorola 680x0 port of Linux.
+<P>
+Responsible: Andreas Schwab 
+
+<A HREF="mailto:schwab@suse.de">&lt;schwab@suse.de&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/mips/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the MIPS R[23458]000 port of Linux.
+<P>
+Responsible: Andreas Jaeger
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/ppc/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the Power PC port of Linux.
+<P>
+Responsible: Steven Munroe
+<A HREF="mailto:sjmunroe@vnet.ibm.com">&lt;sjmunroe@vnet.ibm.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/sh/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the Super Hitachi port of Linux.
+<P>
+Responsible: Kazumoto Kojima/Yutaka Niibe
+
+<A HREF="mailto:kkojima@rr.iij4u.or.jp">&lt;kkojima@rr.iij4u.or.jp&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/sparc/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the SPARC port of Linux.
+<P>
+Responsible: Jakub Jelinek
+
+<A HREF="mailto:jakub@redhat.com">&lt;jakub@redhat.com&gt;</A>.
+</DD>
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/s390/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the IBM S390 port of Linux.
+<P>
+Responsible: Martin Schwidefsky 
+
+<A HREF="mailto:schwidefsky@de.ibm.com">&lt;schwidefsky@de.ibm.com&gt;</A>.
+</DD>
+
+<DT class="maintainers"><CODE>sysdeps/unix/sysv/linux/x86_64/</CODE></DT>
+<DD class="maintainers">
+Kernel-dependent functions for the AMD x86-64 port of Linux.
+<p>Responsible: Andreas Jaeger 
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.</p>
+</DD>
+
+</DL>
+
+<h2 class="section"><a href="#TOCOnoingWork">Ongoing work</a></h2>
+<p>
+Other ports are being developed but are not yet usable.  If you are
+interested in porting GNU libc, please to see whether
+somebody is already working on your system or a related system.
+</p>
+
+<p>
+<tt>No new ports under development</tt>
+</p>
+
+<p>
+If you have interest in working on one of the systems listed above,
+please contact the appropriate people and also drop a note to the 
+GNU libc maintainers
+<A HREF="mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</A>
+so that this table can be updated.
+<P>
+If you have interest in working on a system <b>not</b> listed above, please
+contact the GNU libc maintainers
+<A HREF="mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</A>
+so that duplicate work can be avoided.
+<P>
+
+<div class="copyright">
+    <p>
+      Please send FSF &amp; GNU inquiries &amp; questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
+      are also <A HREF="/home.html#ContactInfo">other ways to
+      contact</A> the FSF.
+    </p>
+
+    <p>
+      Please send comments on these web pages to 
+      <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
+      Send other questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+    </p>
+
+    <p>
+      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.,
+      59 Temple Place - Suite 330, Boston, MA  02111,  USA
+    </p>
+
+    <p>
+      Verbatim copying and distribution of this entire article is
+      permitted in any medium, provided this notice is preserved.
+    </p>
+
+Updated:
+<!-- timestamp start -->
+$Date: 2004/03/15 23:27:41 $ $Author: ianw $
+<!-- timestamp end -->
+</div>
+</BODY>
+</HTML>

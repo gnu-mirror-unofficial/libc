@@ -1,0 +1,194 @@
+body { 
+	background-color: white; 
+	color: black;
+	font-family: serif;
+	font-size: 11pt;
+}
+
+a:link { 
+ 	color: #1f00ff; 
+	background-color: transparent;
+	text-decoration: underline;
+ 	}
+
+a:visited { 
+ 	color: #9900dd; 
+	background-color: transparent;
+	text-decoration: underline;
+ 	}
+
+a:hover { 
+ 	color: #9900dd; 
+	background-color: transparent;
+	text-decoration: none;
+ 	}
+
+.center {
+	text-align: center;
+	font-size: 11pt;
+}
+
+.italic { 
+ 	font-style: italic; 
+	font-size: 11pt;
+ 	}
+
+.bold {
+        font-weight: bold;
+	font-size: 11pt;
+        }
+
+.quote {
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 11pt;
+}
+
+.hrsmall {
+	width: 80px;
+	height: 1px;
+	margin-left: 20px;
+}
+
+.td_title {
+	border-color: #3366cc;
+	border-style: solid;
+	border-width: thin;
+	color: #3366cc;
+	background-color : #f2f2f9; 
+	font-weight: bold; 
+	font-size: 11pt;
+}
+
+.td_con {
+	padding-top: 3px; 
+	padding-left: 8px; 
+	padding-bottom: 3px; 
+	color : #303030; 
+	background-color : #fefefe; 
+	font-size: 10pt;
+}
+
+.translations {
+	background-color: transparent; 
+	color: black;
+	font-family: serif;
+	font-size: 10pt;
+}
+
+.fsflink {
+	font-size: 10pt; 
+	font-family: monospace; 
+	color : #000000; 
+	border-left: #3366cc thin solid; 
+	border-bottom: #3366cc thin solid; 
+	padding-left: 5px; 
+	padding-bottom: 5px;
+}
+
+.trans {
+	font-size: 10pt; 
+	color : #000000; 
+	border-left: #3366cc thin solid; 
+	padding-left: 20px; 
+}
+
+img {
+	border: none 0;
+}
+
+td.side {
+	color: #3366cc;
+\*	background: #f2f2f9; 
+	border-color: #3366cc;
+	border-style: solid;
+	border-width: thin; *\
+	border-color: white;
+	border-style: none;
+	vertical-align: top;
+	width: 150px;
+	font-size: 11pt;
+}
+
+div.copyright {
+	font-size: 8pt; 
+	border: 2px solid #3366cc; 
+	padding: 4px;
+	background: #f2f2f9;
+	border-style: solid;
+	border-width: thin;
+}
+
+
+/* by wkotwica; please don't remove, Polish pages rely on these */
+div.translations {
+	font-size: 10pt;
+}
+.footnoteref {
+	font-size: 8pt; vertical-align: text-top;
+}
+
+/* glibc */
+
+div.toc {
+	font-size: 11pt;
+	border: 2px solid #ffff99;
+	padding: 4px;
+	background: #ffffee;
+	border-style: solid;
+	border-width: thin;
+}
+	
+
+H2 {
+	font-size: 12pt;
+}	
+H2.section {
+	padding: 4px;
+	background: #eeeeff;
+}
+H2.section a:link, H2.section a:hover, H2.section a:visited {
+	text-decoration: none;
+}
+
+H3 {
+	font-size: 11pt;
+}
+H3 a:link, H3 a:hover, H3 a:visited {
+	text-decoration: none;
+}
+H3.subsection {
+	padding: 2px;
+	background: #ffeeee;
+}
+
+H4 {
+	font-size: 10pt;
+}
+H4 a:link, H4 a:hover, H4 a:visited {
+	text-decoration: none;
+}
+
+DT.maintainers {
+	background: #e0e0e0;
+}
+DD.maintainers {
+	background: #ffffee;
+}
+
+PRE.code
+{
+	width: 80%;
+	background: rgb(204, 204, 204);
+	border: 1px solid black;
+	padding: 4px;
+	font-face: monospace;
+}
+
+TD.toc_inactive 
+{
+ 	background: #f0f0f0;
+ 	border-right: #bfbfbf 2px solid;
+ 	padding: 2px;
+ 	text-align: center;
+}

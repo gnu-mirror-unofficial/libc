@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<HTML>
+  
+  <HEAD>
+    <link rel="stylesheet" type="text/css" href="gnu.css" />
+    <TITLE>
+      Resources - GNU C Library - GNU Project - Free Software Foundation (FSF)
+    </TITLE>
+    <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
+    <META NAME="keywords" CONTENT="libc">
+  </HEAD>
+
+
+  <BODY>
+
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td rowspan="2" width="150">
+    <A HREF="/graphics/agnuhead.html"><IMG SRC="./img/gnu-head-sm.png" ALT="[image of the Head of a GNU]" border="0"></A>
+	</td>
+	<td colspan="4">
+		<h1>Resources</h1>
+	</td>
+	</tr>
+	<tr>
+		<td width="100" height="25" class="toc_inactive"><a href="libc.html">Main page</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="bugs.html">Bugs</a></td>
+		<td width="100" height="25" class="toc_inactive"><a HREF="/software/libc/manual/">Manual</a></td>
+		<td width="100" height="25" class="toc_inactive"><a href="resources.html">Resources</a></td>
+		<td>&nbsp;</td>
+	</tr>
+	</table>
+	<br>
+
+<div class="toc">
+    <H2>Table of Contents</H2 class="section">
+  <ul>
+  <li><a href="#projectweb" name="TOCprojectweb">Project Website</a>
+  <li><a href="#building" name="TOCbuilding">Building</a></li>
+  <li><a href="#external_resources" name="TOCexternal_resources">External Resources</a></li>
+  </ul>
+</div>
+    
+<h2 class="section"><a href="#TOCprojectweb" name="projectweb">Project Website</a></h2>
+
+<p> Mailing list subscription information,
+    archives of all lists and the CVS archive can be found at the project website <A
+    HREF="http://sources.redhat.com/glibc">&lt;http://sources.redhat.com/glibc&gt;</A>.
+</p>
+
+<h3 class="subsection">Mailing Lists</h3>
+<p>
+There are a number of mailing lists relevant to glibc
+development.&nbsp; If you are interested in ongoing development you
+should subscribe to libc-alpha, other lists are more specific.
+</p>
+<ul>
+  <li><a href="http://sources.redhat.com/ml/libc-announce/"><tt>libc-announce</tt></a>
+: general announcements about glibc releases.<br>
+  </li>
+  <li><a href="http://sources.redhat.com/ml/libc-alpha/"><tt>libc-alpha</tt></a>
+: public discussion about glibc development.&nbsp; Questions or queries
+(not bugs) are appropriately discussed here.<br>
+  </li>
+  <li><a href="http://sources.redhat.com/ml/libc-hacker/"><tt>libc-hacker</tt></a>
+: private (but archived) list for glibc
+development.<br>
+  </li>
+  <li><a href="http://sources.redhat.com/ml/glibc-cvs/"><tt>glibc-cvs</tt></a>
+: glibc CVS commits.</li>
+  <li><a href="http://www.redhat.com/archives/phil-list/"><tt>phil-list</tt></a>
+: discussion about the NPTL library.<br>
+  </li>
+</ul>  
+    
+</p>
+  
+<h3 class="subsection"><a name="check_cvs"></a>Getting CVS sources</h2>
+<p>
+CVS sources are available from the project website (as per the <a
+ href="http://sources.redhat.com/glibc">instructions</a>).</p>
+<pre class="code">
+$ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc login
+{enter "anoncvs" as the password}
+$ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co libc
+</pre>
+</p>
+
+<h2 class="section"><a name="building" href="#TOCbuilding">Building</a></h2>
+<p>
+Building <tt>glibc</tt> is quite tricky and has a number of pitfalls, not the least of which include 
+<ul>
+ <li><b>Never</b> install over a live system.  The connection between
+    the individual parts of the <tt>glibc</tt> shared libraries is
+    special.  The <tt>libc.so</tt> shared library uses private
+    interfaces in <tt>ld.so</tt> and vice versa.  On a live system
+    with dynamically linked applications if a new <tt>libc.so</tt>
+    replaces an old one with a different internal ABI your system will
+    be broken.  <tt>libpthread.so</tt>, <tt>libm.so</tt>, and
+    <tt>librt.so</tt> have similar problems.  At a minimum, install
+    into a separate chroot environment.
+  </li>
+  <li> There is a high possibility you will end up creating a different
+  public ABI.  If you were to begin distributing binaries they would
+  at a minimum not work, and at best create a lot of confusion.</li>
+</ul>
+	      
+</p>If you find yourself needing to build a customised version of
+<tt>glibc</tt>, you are best to use the framework offered by your
+distribution (i.e. the <tt>rpm</tt> or <tt>deb</tt> package build
+facilities).</p>
+
+<h2 class="section"><a name="external_resources" href="#TOCexternal_resources">External Resources</a></h2>
+<p>
+Below are some tools that may help you to work with <tt>glibc</tt>
+</p>
+<h3 class="subsection">Documentation</h3>
+<ul>
+  <li><a href="http://www.kegel.com/crosstool/">Building and Testing
+gcc/glibc cross toolchains</a></li>
+  <li><a href="http://javierlinares.com/debian/docs/chroot/chroot.pdf">Setting
+up a chroot Debian system</a></li>
+  <li>The <a
+ href="http://www.unix-systems.org/single_unix_specification/">Single
+Unix Specification</a> (for an overview of the standard and it's
+history see <a href="http://www.unix.org/version3/overview.html">this</a>
+or <a href="http://www.gelato.unsw.edu.au/IA64wiki/WhatIsPOSIX">this</a>).
+  </li>
+</ul>
+<h3 class="subsection">Tools</h3>
+<ul>
+  <li><a href="http://www.liacs.nl/%7Ewichert/strace/">strace</a> :
+Strace is a debugging tool which prints out
+a trace of all the system calls made by a program.</li>
+  <li><a href="http://packages.debian.org/unstable/utils/ltrace.html">ltrace</a>
+: Ltrace intercepts and records
+the dynamic library calls which are called by
+the executed process and the signals received by that process.</li>
+  <li><a href="http://www.gnu.org/software/ddd/">ddd</a> : An interface
+to gdb</li>
+  <li>The standard ELF tools nm, objdump and readelf (see man pages).</li>
+  <li><a href="http://valgrind.kde.org">Valgrind</a> (x86 Linux) : With the tools
+  that come with Valgrind, you can automatically detect many memory
+  management and threading bugs, avoiding hours of frustrating
+  bug-hunting, making your programs more stable. You can also perform
+  detailed profiling, to speed up and reduce memory use of your
+  programs.
+</ul>
+<h3 class="subsection">Projects</h3>
+<ul>
+<li>A few modules of the C library can be used on their own, as part of standalone applications 
+intended to be portable to hosts based on non-GNU C libraries.  The 
+<a href='http://www.gnu.org/software/gnulib/'>GNU Portability Library (gnulib)</a> 
+has packaged some of these modules and provides instructions how to modify makefiles,
+<samp>configure.ac</samp> files, etc.
+</ul>       
+
+
+<div class="copyright">
+    <P>
+      Please send FSF &amp; GNU inquiries &amp; questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
+      are also <A HREF="/home.html#ContactInfo">other ways to
+      contact</A> the FSF.
+
+    <P>
+      Please send comments on these web pages to 
+      <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
+      Send other questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+
+    <P>
+      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.,
+      59 Temple Place - Suite 330, Boston, MA  02111,  USA
+
+    <P>
+      Verbatim copying and distribution of this entire article is
+      permitted in any medium, provided this notice is preserved.
+
+    <P>
+      Updated:
+<!-- timestamp start -->
+$Date: 2004/03/15 23:27:41 $ $Author: ianw $
+<!-- timestamp end -->
+</div>
+  </BODY>
+</HTML>
