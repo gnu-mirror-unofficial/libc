@@ -142,13 +142,28 @@ the dynamic library calls which are called by
 the executed process and the signals received by that process.</li>
   <li><a href="http://www.gnu.org/software/ddd/">ddd</a> : An interface
 to gdb</li>
-  <li>The standard ELF tools nm, objdump and readelf (see man pages).</li>
+  <li>The standard ELF tools nm, objdump and readelf (see man pages
+  and the <a href="http://sources.redhat.com/binutils/">GNU
+  binutils</a> documentation).</li>
   <li><a href="http://valgrind.kde.org">Valgrind</a> (x86 Linux) : With the tools
   that come with Valgrind, you can automatically detect many memory
   management and threading bugs, avoiding hours of frustrating
   bug-hunting, making your programs more stable. You can also perform
   detailed profiling, to speed up and reduce memory use of your
   programs.
+  <li>Profiling utilities
+  <ul>
+   <li><tt>gprof</tt> is the standard profiler distributed with GNU binutils.	
+
+   <li><tt><a href="http://www.hpl.hp.com/research/linux/qprof/">qprof</a></tt>
+  is an alternative profiler for Linux on IA64 and i386 platforms.
+  
+   <li><tt><a
+  href="http://oprofile.sourceforge.net/news/">oprofile</a></tt> is a
+  Linux based system wide profiling tool.
+
+  </ul>
+
 </ul>
 <h3 class="subsection">Projects</h3>
 <ul>
@@ -157,6 +172,12 @@ intended to be portable to hosts based on non-GNU C libraries.  The
 <a href='http://www.gnu.org/software/gnulib/'>GNU Portability Library (gnulib)</a> 
 has packaged some of these modules and provides instructions how to modify makefiles,
 <samp>configure.ac</samp> files, etc.
+</li>
+
+<li><a href="http://www.bullopensource.org/nptl/index.html">NTPL
+testing and tracing</a> : A project aimed at providing test/stress
+programs and a tracing mechanism for the NPTL thread suite.</li>
+
 </ul>       
 
 
@@ -184,7 +205,7 @@ has packaged some of these modules and provides instructions how to modify makef
     <P>
       Updated:
 <!-- timestamp start -->
-$Date: 2004/03/25 23:34:04 $ $Author: ianw $
+$Date: 2004/04/06 23:36:02 $ $Author: ianw $
 <!-- timestamp end -->
 </div>
   </BODY>
