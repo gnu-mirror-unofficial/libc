@@ -1,11 +1,47 @@
-GNU C Library NEWS -- history of user-visible changes.  2001-2-9
-
-Copyright (C) 1992-1999, 2000, 2001 Free Software Foundation, Inc.
+GNU C Library NEWS -- history of user-visible changes.  2001-4-20
+Copyright (C) 1992-2000, 2001 Free Software Foundation, Inc.
 See the end for copying conditions.
 
 Please send GNU C library bug reports using the `glibcbug' script to
 <bugs@gnu.org>.  Questions and suggestions should be send to
 <bug-glibc@gnu.org>.
+
+Version 2.2.3
+
+* Intel's IA-64 math library is largely integrated.  It provides fast and
+  accurate implementatations for most basic and standard math functions
+  in float, double, and long double format.
+
+* Stephen Moshier implemented j0, j1, jn, y0, y1, yn, lgamma, erf, erfc,
+  and asin for the 96-bit long double format and asin, log, tan for the
+  128-bit long double format.
+
+* The beginning of a last-bit accurate math library by IBM Haifa were added.
+  The basic double functions exist today.  Contributed by Abraham Ziv
+  <ziv@il.ibm.com>, Moshe Olshansky <olshansk@il.ibm.com>, Ealan Henis
+  <ealan@il.ibm.com>, and Anna Reitman <reitman@il.ibm.com>.
+
+* An asynchronous name lookup library was added.  The interface is designed
+  after POSIX AIO.  The proposal was circulated beforehand to get comments.
+  No negative ones came in.  Implemented by Ulrich Drepper.
+
+* Port to S390/64bit contributed by Martin Schwidefsky
+  <schwidefsky@de.ibm.com>.
+
+* David Mosberger <davidm@hpl.hp.com> implemented the setcontext family
+  of functions for Linux/IA-64.
+
+* The RPC code is now thread safe.  Threads can now use the same service
+  of different services at the same time.  Patch by Eric Norum
+  <eric.norum@usask.ca> with some help by Ulrich Drepper.
+
+* Martin Schwidefsky <schwidefsky@de.ibm.com> implemented the setcontext
+  family of functions for Linux/S390.
+
+* Ulrich Drepper <drepper@redhat.com> implemented the setcontext family
+  of functions for Linux/x86.
+
+* Port to Linux/CRIS contributed by Axis Communications.
 
 Version 2.2.2
 
