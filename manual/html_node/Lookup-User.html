@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Lookup%20User">Lookup User</a>,
-Next:<a rel=next accesskey=n href="Scanning-All-Users.html#Scanning%20All%20Users">Scanning All Users</a>,
-Previous:<a rel=previous accesskey=p href="User-Data-Structure.html#User%20Data%20Structure">User Data Structure</a>,
-Up:<a rel=up accesskey=u href="User-Database.html#User%20Database">User Database</a>
+Node:&nbsp;<a name="Lookup%20User">Lookup User</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Scanning-All-Users.html#Scanning%20All%20Users">Scanning All Users</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="User-Data-Structure.html#User%20Data%20Structure">User Data Structure</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Database.html#User%20Database">User Database</a>
 <hr><br>
+</div>
 
-<h4>Looking Up One User</h4>
+<h3 class="subsection">Looking Up One User</h4>
 
 <p>You can search the system user database for information about a
 specific user using <code>getpwuid</code> or <code>getpwnam</code>.  These
@@ -23,8 +33,8 @@ functions are declared in <code>pwd.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct passwd * <b>getpwuid</b><i> (uid_t <var>uid</var>)
-</i></td>
+<td align="left">struct passwd * <b>getpwuid</b><i> </i>(<i>uid_t </i><var>uid</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -34,7 +44,7 @@ This function returns a pointer to a statically-allocated structure
 containing information about the user whose user ID is <var>uid</var>.  This
 structure may be overwritten on subsequent calls to <code>getpwuid</code>.
 
-<p>A null pointer value indicates there is no user in the data base with
+     <p>A null pointer value indicates there is no user in the data base with
 user ID <var>uid</var>. 
 </td></tr>
 </table>
@@ -42,8 +52,8 @@ user ID <var>uid</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpwuid_r</b><i> (uid_t <var>uid</var>, struct passwd *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct passwd **<var>result</var>)
-</i></td>
+<td align="left">int <b>getpwuid_r</b><i> </i>(<i>uid_t </i><var>uid</var><i>, struct passwd *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, size_t </i><var>buflen</var><i>, struct passwd **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -57,7 +67,7 @@ the information instead of using a static buffer.  The first
 are used to contain additional information, normally strings which are
 pointed to by the elements of the result structure.
 
-<p>If a user with ID <var>uid</var> is found, the pointer returned in
+     <p>If a user with ID <var>uid</var> is found, the pointer returned in
 <var>result</var> points to the record which contains the wanted data (i.e.,
 <var>result</var> contains the value <var>result_buf</var>).  If no user is found
 or if an error occurred, the pointer returned in <var>result</var> is a null
@@ -71,8 +81,8 @@ error code <code>ERANGE</code> is returned and <var>errno</var> is set to
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct passwd * <b>getpwnam</b><i> (const char *<var>name</var>)
-</i></td>
+<td align="left">struct passwd * <b>getpwnam</b><i> </i>(<i>const char *</i><var>name</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -83,15 +93,15 @@ containing information about the user whose user name is <var>name</var>.
 This structure may be overwritten on subsequent calls to
 <code>getpwnam</code>.
 
-<p>A null pointer return indicates there is no user named <var>name</var>. 
+     <p>A null pointer return indicates there is no user named <var>name</var>. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpwnam_r</b><i> (const char *<var>name</var>, struct passwd *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct passwd **<var>result</var>)
-</i></td>
+<td align="left">int <b>getpwnam_r</b><i> </i>(<i>const char *</i><var>name</var><i>, struct passwd *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, size_t </i><var>buflen</var><i>, struct passwd **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -103,9 +113,9 @@ information about the user whose user name is <var>name</var>.  However, like
 <var>result_buf</var> and <var>buffer</var> with the information instead of using
 a static buffer.
 
-<p>The return values are the same as for <code>getpwuid_r</code>. 
+     <p>The return values are the same as for <code>getpwuid_r</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

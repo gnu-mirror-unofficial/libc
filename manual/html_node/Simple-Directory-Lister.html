@@ -2,54 +2,63 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Simple%20Directory%20Lister">Simple Directory Lister</a>,
-Next:<a rel=next accesskey=n href="Random-Access-Directory.html#Random%20Access%20Directory">Random Access Directory</a>,
-Previous:<a rel=previous accesskey=p href="Reading-Closing-Directory.html#Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
-Up:<a rel=up accesskey=u href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
+Node:&nbsp;<a name="Simple%20Directory%20Lister">Simple Directory Lister</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Random-Access-Directory.html#Random%20Access%20Directory">Random Access Directory</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Reading-Closing-Directory.html#Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
 <hr><br>
+</div>
 
-<h4>Simple Program to List a Directory</h4>
+<h3 class="subsection">Simple Program to List a Directory</h4>
 
 <p>Here's a simple program that prints the names of the files in
 the current working directory:
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;stddef.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;dirent.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;sys/types.h&gt;
+     #include &lt;dirent.h&gt;
+     
+     int
+     main (void)
+     {
+       DIR *dp;
+       struct dirent *ep;
+     
+       dp = opendir ("./");
+       if (dp != NULL)
+         {
+           while (ep = readdir (dp))
+             puts (ep-&gt;d_name);
+           (void) closedir (dp);
+         }
+       else
+         perror ("Couldn't open the directory");
+     
+       return 0;
+     }
+     </pre>
 
-int
-main (void)
-{
-  DIR *dp;
-  struct dirent *ep;
-
-  dp = opendir ("./");
-  if (dp != NULL)
-    {
-      while (ep = readdir (dp))
-        puts (ep-&gt;d_name);
-      (void) closedir (dp);
-    }
-  else
-    perror ("Couldn't open the directory");
-
-  return 0;
-}
-</pre>
-
-<p>The order in which files appear in a directory tends to be fairly
+   <p>The order in which files appear in a directory tends to be fairly
 random.  A more useful program would sort the entries (perhaps by
 alphabetizing them) before printing them; see
 <a href="Scanning-Directory-Content.html#Scanning%20Directory%20Content">Scanning Directory Content</a>, and <a href="Array-Sort-Function.html#Array%20Sort%20Function">Array Sort Function</a>.
 
-</body></html>
+   </body></html>
 

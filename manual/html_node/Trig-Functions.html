@@ -2,31 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Trig%20Functions">Trig Functions</a>,
-Next:<a rel=next accesskey=n href="Inverse-Trig-Functions.html#Inverse%20Trig%20Functions">Inverse Trig Functions</a>,
-Previous:<a rel=previous accesskey=p href="Mathematical-Constants.html#Mathematical%20Constants">Mathematical Constants</a>,
-Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+Node:&nbsp;<a name="Trig%20Functions">Trig Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Inverse-Trig-Functions.html#Inverse%20Trig%20Functions">Inverse Trig Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mathematical-Constants.html#Mathematical%20Constants">Mathematical Constants</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
 <hr><br>
+</div>
 
-<h3>Trigonometric Functions</h3>
+<h3 class="section">Trigonometric Functions</h3>
 
 <p>These are the familiar <code>sin</code>, <code>cos</code>, and <code>tan</code> functions. 
 The arguments to all of these functions are in units of radians; recall
 that pi radians equals 180 degrees.
 
-<p>The math library normally defines <code>M_PI</code> to a <code>double</code>
+   <p>The math library normally defines <code>M_PI</code> to a <code>double</code>
 approximation of pi.  If strict ISO and/or POSIX compliance
 are requested this constant is not defined, but you can easily define it
 yourself:
 
-<br><pre>#define M_PI 3.14159265358979323846264338327
-</pre>
+<pre class="smallexample">     #define M_PI 3.14159265358979323846264338327
+     </pre>
 
 <p>You can also compute the value of pi with the expression <code>acos
 (-1.0)</code>.
@@ -34,8 +44,8 @@ yourself:
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>sin</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>sin</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -43,8 +53,8 @@ yourself:
 <tr><td>
 
 <tr>
-<td align="left">float <b>sinf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>sinf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -52,8 +62,8 @@ yourself:
 <tr><td>
 
 <tr>
-<td align="left">long double <b>sinl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>sinl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -67,8 +77,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>cos</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>cos</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -76,8 +86,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>cosf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>cosf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -85,8 +95,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>cosl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>cosl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -100,8 +110,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>tan</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>tan</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -109,8 +119,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>tanf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>tanf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -118,8 +128,8 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>tanl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>tanl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -128,13 +138,13 @@ radians.  The return value is in the range <code>-1</code> to <code>1</code>.
 These functions return the tangent of <var>x</var>, where <var>x</var> is given in
 radians.
 
-<p>Mathematically, the tangent function has singularities at odd multiples
+     <p>Mathematically, the tangent function has singularities at odd multiples
 of pi/2.  If the argument <var>x</var> is too close to one of these
 singularities, <code>tan</code> will signal overflow. 
 </td></tr>
 </table>
 
-<p>In many applications where <code>sin</code> and <code>cos</code> are used, the sine
+   <p>In many applications where <code>sin</code> and <code>cos</code> are used, the sine
 and cosine of the same angle are needed at the same time.  It is more
 efficient to compute them simultaneously, so the library provides a
 function to do that.
@@ -142,8 +152,8 @@ function to do that.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>sincos</b><i> (double <var>x</var>, double *<var>sinx</var>, double *<var>cosx</var>)
-</i></td>
+<td align="left">void <b>sincos</b><i> </i>(<i>double </i><var>x</var><i>, double *</i><var>sinx</var><i>, double *</i><var>cosx</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -151,8 +161,8 @@ function to do that.
 <tr><td>
 
 <tr>
-<td align="left">void <b>sincosf</b><i> (float <var>x</var>, float *<var>sinx</var>, float *<var>cosx</var>)
-</i></td>
+<td align="left">void <b>sincosf</b><i> </i>(<i>float </i><var>x</var><i>, float *</i><var>sinx</var><i>, float *</i><var>cosx</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -160,24 +170,24 @@ function to do that.
 <tr><td>
 
 <tr>
-<td align="left">void <b>sincosl</b><i> (long double <var>x</var>, long double *<var>sinx</var>, long double *<var>cosx</var>)
-</i></td>
+<td align="left">void <b>sincosl</b><i> </i>(<i>long double </i><var>x</var><i>, long double *</i><var>sinx</var><i>, long double *</i><var>cosx</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-These functions return the sine of <var>x</var> in <code>*<var>sinx</var></code> and the
-cosine of <var>x</var> in <code>*<var>cos</var></code>, where <var>x</var> is given in
-radians.  Both values, <code>*<var>sinx</var></code> and <code>*<var>cosx</var></code>, are in
+These functions return the sine of <var>x</var> in <code>*</code><var>sinx</var><code></code> and the
+cosine of <var>x</var> in <code>*</code><var>cos</var><code></code>, where <var>x</var> is given in
+radians.  Both values, <code>*</code><var>sinx</var><code></code> and <code>*</code><var>cosx</var><code></code>, are in
 the range of <code>-1</code> to <code>1</code>.
 
-<p>This function is a GNU extension.  Portable programs should be prepared
+     <p>This function is a GNU extension.  Portable programs should be prepared
 to cope with its absence. 
 </td></tr>
 </table>
 
-<p>ISO&nbsp;C99 defines variants of the trig functions which work on
+   <p>ISO&nbsp;C99 defines variants of the trig functions which work on
 complex numbers.  The GNU C library provides these functions, but they
 are only useful if your compiler supports the new complex types defined
 by the standard. 
@@ -187,8 +197,8 @@ the implementation.)
 <p>
 <table width="100%">
 <tr>
-<td align="left">complex double <b>csin</b><i> (complex double <var>z</var>)
-</i></td>
+<td align="left">complex double <b>csin</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -196,8 +206,8 @@ the implementation.)
 <tr><td>
 
 <tr>
-<td align="left">complex float <b>csinf</b><i> (complex float <var>z</var>)
-</i></td>
+<td align="left">complex float <b>csinf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -205,8 +215,8 @@ the implementation.)
 <tr><td>
 
 <tr>
-<td align="left">complex long double <b>csinl</b><i> (complex long double <var>z</var>)
-</i></td>
+<td align="left">complex long double <b>csinl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -215,15 +225,15 @@ the implementation.)
 These functions return the complex sine of <var>z</var>. 
 The mathematical definition of the complex sine is
 
-<p>sin (z) = 1/(2*i) * (exp (z*i) - exp (-z*i)). 
+     <p>sin (z) = 1/(2*i) * (exp (z*i) - exp (-z*i)). 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">complex double <b>ccos</b><i> (complex double <var>z</var>)
-</i></td>
+<td align="left">complex double <b>ccos</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -231,8 +241,8 @@ The mathematical definition of the complex sine is
 <tr><td>
 
 <tr>
-<td align="left">complex float <b>ccosf</b><i> (complex float <var>z</var>)
-</i></td>
+<td align="left">complex float <b>ccosf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -240,8 +250,8 @@ The mathematical definition of the complex sine is
 <tr><td>
 
 <tr>
-<td align="left">complex long double <b>ccosl</b><i> (complex long double <var>z</var>)
-</i></td>
+<td align="left">complex long double <b>ccosl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -250,15 +260,15 @@ The mathematical definition of the complex sine is
 These functions return the complex cosine of <var>z</var>. 
 The mathematical definition of the complex cosine is
 
-<p>cos (z) = 1/2 * (exp (z*i) + exp (-z*i))
+     <p>cos (z) = 1/2 * (exp (z*i) + exp (-z*i))
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">complex double <b>ctan</b><i> (complex double <var>z</var>)
-</i></td>
+<td align="left">complex double <b>ctan</b><i> </i>(<i>complex double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -266,8 +276,8 @@ The mathematical definition of the complex cosine is
 <tr><td>
 
 <tr>
-<td align="left">complex float <b>ctanf</b><i> (complex float <var>z</var>)
-</i></td>
+<td align="left">complex float <b>ctanf</b><i> </i>(<i>complex float </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -275,8 +285,8 @@ The mathematical definition of the complex cosine is
 <tr><td>
 
 <tr>
-<td align="left">complex long double <b>ctanl</b><i> (complex long double <var>z</var>)
-</i></td>
+<td align="left">complex long double <b>ctanl</b><i> </i>(<i>complex long double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -285,13 +295,13 @@ The mathematical definition of the complex cosine is
 These functions return the complex tangent of <var>z</var>. 
 The mathematical definition of the complex tangent is
 
-<p>tan (z) = -i * (exp (z*i) - exp (-z*i)) / (exp (z*i) + exp (-z*i))
+     <p>tan (z) = -i * (exp (z*i) - exp (-z*i)) / (exp (z*i) + exp (-z*i))
 
-<p>The complex tangent has poles at pi/2 + 2n, where n is an
+     <p>The complex tangent has poles at pi/2 + 2n, where n is an
 integer.  <code>ctan</code> may signal overflow if <var>z</var> is too close to a
 pole. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

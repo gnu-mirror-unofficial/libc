@@ -2,34 +2,44 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="System%20V%20Number%20Conversion">System V Number Conversion</a>,
-Previous:<a rel=previous accesskey=p href="Parsing-of-Numbers.html#Parsing%20of%20Numbers">Parsing of Numbers</a>,
-Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+Node:&nbsp;<a name="System%20V%20Number%20Conversion">System V Number Conversion</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Parsing-of-Numbers.html#Parsing%20of%20Numbers">Parsing of Numbers</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
 <hr><br>
+</div>
 
-<h3>Old-fashioned System V number-to-string functions</h3>
+<h3 class="section">Old-fashioned System V number-to-string functions</h3>
 
 <p>The old System&nbsp;V C library provided three functions to convert
 numbers to strings, with unusual and hard-to-use semantics.  The GNU C
 library also provides these functions and some natural extensions.
 
-<p>These functions are only available in glibc and on systems descended
+   <p>These functions are only available in glibc and on systems descended
 from AT&amp;T Unix.  Therefore, unless these functions do precisely what you
 need, it is better to use <code>sprintf</code>, which is standard.
 
-<p>All these functions are defined in <code>stdlib.h</code>.
+   <p>All these functions are defined in <code>stdlib.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>ecvt</b><i> (double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>)
-</i></td>
+<td align="left">char * <b>ecvt</b><i> </i>(<i>double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -39,21 +49,21 @@ The function <code>ecvt</code> converts the floating-point number <var>value</va
 to a string with at most <var>ndigit</var> decimal digits.  The
 returned string contains no decimal point or sign. The first digit of
 the string is non-zero (unless <var>value</var> is actually zero) and the
-last digit is rounded to nearest.  <code>*<var>decpt</var></code> is set to the
+last digit is rounded to nearest.  <code>*</code><var>decpt</var><code></code> is set to the
 index in the string of the first digit after the decimal point. 
-<code>*<var>neg</var></code> is set to a nonzero value if <var>value</var> is negative,
+<code>*</code><var>neg</var><code></code> is set to a nonzero value if <var>value</var> is negative,
 zero otherwise.
 
-<p>If <var>ndigit</var> decimal digits would exceed the precision of a
+     <p>If <var>ndigit</var> decimal digits would exceed the precision of a
 <code>double</code> it is reduced to a system-specific value.
 
-<p>The returned string is statically allocated and overwritten by each call
+     <p>The returned string is statically allocated and overwritten by each call
 to <code>ecvt</code>.
 
-<p>If <var>value</var> is zero, it is implementation defined whether
-<code>*<var>decpt</var></code> is <code>0</code> or <code>1</code>.
+     <p>If <var>value</var> is zero, it is implementation defined whether
+<code>*</code><var>decpt</var><code></code> is <code>0</code> or <code>1</code>.
 
-<p>For example: <code>ecvt (12.3, 5, &amp;d, &amp;n)</code> returns <code>"12300"</code>
+     <p>For example: <code>ecvt (12.3, 5, &amp;d, &amp;n)</code> returns <code>"12300"</code>
 and sets <var>d</var> to <code>2</code> and <var>n</var> to <code>0</code>. 
 </td></tr>
 </table>
@@ -61,8 +71,8 @@ and sets <var>d</var> to <code>2</code> and <var>n</var> to <code>0</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>fcvt</b><i> (double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>)
-</i></td>
+<td align="left">char * <b>fcvt</b><i> </i>(<i>double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -76,10 +86,10 @@ left of the decimal point.  For example, if <var>ndigit</var> is <code>-1</code>
 negative and larger than the number of digits to the left of the decimal
 point in <var>value</var>, <var>value</var> will be rounded to one significant digit.
 
-<p>If <var>ndigit</var> decimal digits would exceed the precision of a
+     <p>If <var>ndigit</var> decimal digits would exceed the precision of a
 <code>double</code> it is reduced to a system-specific value.
 
-<p>The returned string is statically allocated and overwritten by each call
+     <p>The returned string is statically allocated and overwritten by each call
 to <code>fcvt</code>. 
 </td></tr>
 </table>
@@ -87,8 +97,8 @@ to <code>fcvt</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>gcvt</b><i> (double <var>value</var>, int <var>ndigit</var>, char *<var>buf</var>)
-</i></td>
+<td align="left">char * <b>gcvt</b><i> </i>(<i>double </i><var>value</var><i>, int </i><var>ndigit</var><i>, char *</i><var>buf</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -98,19 +108,19 @@ to <code>fcvt</code>.
 ndigit, value</code>.  It is provided only for compatibility's sake.  It
 returns <var>buf</var>.
 
-<p>If <var>ndigit</var> decimal digits would exceed the precision of a
+     <p>If <var>ndigit</var> decimal digits would exceed the precision of a
 <code>double</code> it is reduced to a system-specific value. 
 </td></tr>
 </table>
 
-<p>As extensions, the GNU C library provides versions of these three
+   <p>As extensions, the GNU C library provides versions of these three
 functions that take <code>long double</code> arguments.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>qecvt</b><i> (long double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>)
-</i></td>
+<td align="left">char * <b>qecvt</b><i> </i>(<i>long double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -125,8 +135,8 @@ restricted by the precision of a <code>long double</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>qfcvt</b><i> (long double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>)
-</i></td>
+<td align="left">char * <b>qfcvt</b><i> </i>(<i>long double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -141,8 +151,8 @@ restricted by the precision of a <code>long double</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>qgcvt</b><i> (long double <var>value</var>, int <var>ndigit</var>, char *<var>buf</var>)
-</i></td>
+<td align="left">char * <b>qgcvt</b><i> </i>(<i>long double </i><var>value</var><i>, int </i><var>ndigit</var><i>, char *</i><var>buf</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -154,21 +164,21 @@ restricted by the precision of a <code>long double</code>.
 </td></tr>
 </table>
 
-<p>The <code>ecvt</code> and <code>fcvt</code> functions, and their <code>long double</code>
+   <p>The <code>ecvt</code> and <code>fcvt</code> functions, and their <code>long double</code>
 equivalents, all return a string located in a static buffer which is
 overwritten by the next call to the function.  The GNU C library
 provides another set of extended functions which write the converted
 string into a user-supplied buffer.  These have the conventional
 <code>_r</code> suffix.
 
-<p><code>gcvt_r</code> is not necessary, because <code>gcvt</code> already uses a
+   <p><code>gcvt_r</code> is not necessary, because <code>gcvt</code> already uses a
 user-supplied buffer.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>ecvt_r</b><i> (double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>, char *<var>buf</var>, size_t <var>len</var>)
-</i></td>
+<td align="left">char * <b>ecvt_r</b><i> </i>(<i>double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i>, char *</i><var>buf</var><i>, size_t </i><var>len</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -178,15 +188,15 @@ The <code>ecvt_r</code> function is the same as <code>ecvt</code>, except
 that it places its result into the user-specified buffer pointed to by
 <var>buf</var>, with length <var>len</var>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>fcvt_r</b><i> (double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>, char *<var>buf</var>, size_t <var>len</var>)
-</i></td>
+<td align="left">char * <b>fcvt_r</b><i> </i>(<i>double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i>, char *</i><var>buf</var><i>, size_t </i><var>len</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -196,15 +206,15 @@ The <code>fcvt_r</code> function is the same as <code>fcvt</code>, except
 that it places its result into the user-specified buffer pointed to by
 <var>buf</var>, with length <var>len</var>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>qecvt_r</b><i> (long double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>, char *<var>buf</var>, size_t <var>len</var>)
-</i></td>
+<td align="left">char * <b>qecvt_r</b><i> </i>(<i>long double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i>, char *</i><var>buf</var><i>, size_t </i><var>len</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -214,15 +224,15 @@ The <code>qecvt_r</code> function is the same as <code>qecvt</code>, except
 that it places its result into the user-specified buffer pointed to by
 <var>buf</var>, with length <var>len</var>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>qfcvt_r</b><i> (long double <var>value</var>, int <var>ndigit</var>, int *<var>decpt</var>, int *<var>neg</var>, char *<var>buf</var>, size_t <var>len</var>)
-</i></td>
+<td align="left">char * <b>qfcvt_r</b><i> </i>(<i>long double </i><var>value</var><i>, int </i><var>ndigit</var><i>, int *</i><var>decpt</var><i>, int *</i><var>neg</var><i>, char *</i><var>buf</var><i>, size_t </i><var>len</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -232,9 +242,9 @@ The <code>qfcvt_r</code> function is the same as <code>qfcvt</code>, except
 that it places its result into the user-specified buffer pointed to by
 <var>buf</var>, with length <var>len</var>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

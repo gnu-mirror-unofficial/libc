@@ -2,39 +2,49 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Services%20in%20the%20NSS%20configuration">Services in the NSS configuration</a>,
-Next:<a rel=next accesskey=n href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>,
-Previous:<a rel=previous accesskey=p href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>,
-Up:<a rel=up accesskey=u href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>
+Node:&nbsp;<a name="Services%20in%20the%20NSS%20configuration">Services in the NSS configuration</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>
 <hr><br>
+</div>
 
-<h4>Services in the NSS configuration File</h4>
+<h3 class="subsection">Services in the NSS configuration File</h4>
 
 <p>The above example file mentions four different services: <code>files</code>,
 <code>db</code>, <code>nis</code>, and <code>nisplus</code>.  This does not mean these
 services are available on all sites and it does also not mean these are
 all the services which will ever be available.
 
-<p>In fact, these names are simply strings which the NSS code uses to find
+   <p>In fact, these names are simply strings which the NSS code uses to find
 the implicitly addressed functions.  The internal interface will be
 described later.  Visible to the user are the modules which implement an
 individual service.
 
-<p>Assume the service <var>name</var> shall be used for a lookup.  The code for
-this service is implemented in a module called <code>libnss_<var>name</var></code>. 
+   <p>Assume the service <var>name</var> shall be used for a lookup.  The code for
+this service is implemented in a module called <code>libnss_</code><var>name</var><code></code>. 
 On a system supporting shared libraries this is in fact a shared library
-with the name (for example) <code>libnss_<var>name</var>.so.2</code>.  The number
+with the name (for example) <code>libnss_</code><var>name</var><code>.so.2</code>.  The number
 at the end is the currently used version of the interface which will not
 change frequently.  Normally the user should not have to be cognizant of
 these files since they should be placed in a directory where they are
 found automatically.  Only the names of all available services are
 important.
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Socket%20Addresses">Socket Addresses</a>,
-Next:<a rel=next accesskey=n href="Interface-Naming.html#Interface%20Naming">Interface Naming</a>,
-Previous:<a rel=previous accesskey=p href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>,
-Up:<a rel=up accesskey=u href="Sockets.html#Sockets">Sockets</a>
+Node:&nbsp;<a name="Socket%20Addresses">Socket Addresses</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Interface-Naming.html#Interface%20Naming">Interface Naming</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Sockets.html#Sockets">Sockets</a>
 <hr><br>
+</div>
 
-<h3>Socket Addresses</h3>
+<h3 class="section">Socket Addresses</h3>
 
 <p>The name of a socket is normally called an <dfn>address</dfn>.  The
 functions and symbols for dealing with socket addresses were named
@@ -22,27 +32,27 @@ inconsistently, sometimes using the term "name" and sometimes using
 "address".  You can regard these terms as synonymous where sockets
 are concerned.
 
-<p>A socket newly created with the <code>socket</code> function has no
+   <p>A socket newly created with the <code>socket</code> function has no
 address.  Other processes can find it for communication only if you
 give it an address.  We call this <dfn>binding</dfn> the address to the
 socket, and the way to do it is with the <code>bind</code> function.
 
-<p>You need be concerned with the address of a socket if other processes
+   <p>You need be concerned with the address of a socket if other processes
 are to find it and start communicating with it.  You can specify an
 address for other sockets, but this is usually pointless; the first time
 you send data from a socket, or use it to initiate a connection, the
 system assigns an address automatically if you have not specified one.
 
-<p>Occasionally a client needs to specify an address because the server
+   <p>Occasionally a client needs to specify an address because the server
 discriminates based on address; for example, the rsh and rlogin
 protocols look at the client's socket address and only bypass password
 checking if it is less than <code>IPPORT_RESERVED</code> (see <a href="Ports.html#Ports">Ports</a>).
 
-<p>The details of socket addresses vary depending on what namespace you are
+   <p>The details of socket addresses vary depending on what namespace you are
 using.  See <a href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>, or <a href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>, for specific
 information.
 
-<p>Regardless of the namespace, you use the same functions <code>bind</code> and
+   <p>Regardless of the namespace, you use the same functions <code>bind</code> and
 <code>getsockname</code> to set and examine a socket's address.  These
 functions use a phony data type, <code>struct sockaddr *</code>, to accept the
 address.  In practice, the address lives in a structure of some other
@@ -50,11 +60,11 @@ data type appropriate to the address format you are using, but you cast
 its address to <code>struct sockaddr *</code> when you pass it to
 <code>bind</code>.
 
-<ul>
-<li><a accesskey=1 href="Address-Formats.html#Address%20Formats">Address Formats</a>: 		About <code>struct sockaddr</code>. 
-<li><a accesskey=2 href="Setting-Address.html#Setting%20Address">Setting Address</a>: 		Binding an address to a socket. 
-<li><a accesskey=3 href="Reading-Address.html#Reading%20Address">Reading Address</a>: 		Reading the address of a socket. 
+<ul class="menu">
+<li><a accesskey="1" href="Address-Formats.html#Address%20Formats">Address Formats</a>: 		About <code>struct sockaddr</code>. 
+<li><a accesskey="2" href="Setting-Address.html#Setting%20Address">Setting Address</a>: 		Binding an address to a socket. 
+<li><a accesskey="3" href="Reading-Address.html#Reading%20Address">Reading Address</a>: 		Reading the address of a socket. 
 </ul>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Setting%20the%20Locale">Setting the Locale</a>,
-Next:<a rel=next accesskey=n href="Standard-Locales.html#Standard%20Locales">Standard Locales</a>,
-Previous:<a rel=previous accesskey=p href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>,
-Up:<a rel=up accesskey=u href="Locales.html#Locales">Locales</a>
+Node:&nbsp;<a name="Setting%20the%20Locale">Setting the Locale</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Locales.html#Standard%20Locales">Standard Locales</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locales.html#Locales">Locales</a>
 <hr><br>
+</div>
 
-<h3>How Programs Set the Locale</h3>
+<h3 class="section">How Programs Set the Locale</h3>
 
 <p>A C program inherits its locale environment variables when it starts up. 
 This happens automatically.  However, these variables do not
@@ -23,22 +33,22 @@ ISO&nbsp;C says that all programs start by default in the standard <code>C</code
 locale.  To use the locales specified by the environment, you must call
 <code>setlocale</code>.  Call it as follows:
 
-<br><pre>setlocale (LC_ALL, "");
-</pre>
+<pre class="smallexample">     setlocale (LC_ALL, "");
+     </pre>
 
 <p>to select a locale based on the user choice of the appropriate
 environment variables.
 
-<p>You can also use <code>setlocale</code> to specify a particular locale, for
+   <p>You can also use <code>setlocale</code> to specify a particular locale, for
 general use or for a specific category.
 
-<p>The symbols in this section are defined in the header file <code>locale.h</code>.
+   <p>The symbols in this section are defined in the header file <code>locale.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>setlocale</b><i> (int <var>category</var>, const char *<var>locale</var>)
-</i></td>
+<td align="left">char * <b>setlocale</b><i> </i>(<i>int </i><var>category</var><i>, const char *</i><var>locale</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -48,92 +58,92 @@ The function <code>setlocale</code> sets the current locale for category
 <var>category</var> to <var>locale</var>.  A list of all the locales the system
 provides can be created by running
 
-<br><pre>  locale -a
-</pre>
+     <pre class="smallexample">            locale -a
+          </pre>
 
-<p>If <var>category</var> is <code>LC_ALL</code>, this specifies the locale for all
+     <p>If <var>category</var> is <code>LC_ALL</code>, this specifies the locale for all
 purposes.  The other possible values of <var>category</var> specify an
 single purpose (see <a href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>).
 
-<p>You can also use this function to find out the current locale by passing
+     <p>You can also use this function to find out the current locale by passing
 a null pointer as the <var>locale</var> argument.  In this case,
 <code>setlocale</code> returns a string that is the name of the locale
 currently selected for category <var>category</var>.
 
-<p>The string returned by <code>setlocale</code> can be overwritten by subsequent
+     <p>The string returned by <code>setlocale</code> can be overwritten by subsequent
 calls, so you should make a copy of the string (see <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>) if you want to save it past any further calls to
 <code>setlocale</code>.  (The standard library is guaranteed never to call
 <code>setlocale</code> itself.)
 
-<p>You should not modify the string returned by <code>setlocale</code>.  It might
+     <p>You should not modify the string returned by <code>setlocale</code>.  It might
 be the same string that was passed as an argument in a previous call to
 <code>setlocale</code>.  One requirement is that the <var>category</var> must be
 the same in the call the string was returned and the one when the string
 is passed in as <var>locale</var> parameter.
 
-<p>When you read the current locale for category <code>LC_ALL</code>, the value
+     <p>When you read the current locale for category <code>LC_ALL</code>, the value
 encodes the entire combination of selected locales for all categories. 
 In this case, the value is not just a single locale name.  In fact, we
 don't make any promises about what it looks like.  But if you specify
 the same "locale name" with <code>LC_ALL</code> in a subsequent call to
 <code>setlocale</code>, it restores the same combination of locale selections.
 
-<p>To be sure you can use the returned string encoding the currently selected
+     <p>To be sure you can use the returned string encoding the currently selected
 locale at a later time, you must make a copy of the string.  It is not
 guaranteed that the returned pointer remains valid over time.
 
-<p>When the <var>locale</var> argument is not a null pointer, the string returned
+     <p>When the <var>locale</var> argument is not a null pointer, the string returned
 by <code>setlocale</code> reflects the newly-modified locale.
 
-<p>If you specify an empty string for <var>locale</var>, this means to read the
+     <p>If you specify an empty string for <var>locale</var>, this means to read the
 appropriate environment variable and use its value to select the locale
 for <var>category</var>.
 
-<p>If a nonempty string is given for <var>locale</var>, then the locale of that
+     <p>If a nonempty string is given for <var>locale</var>, then the locale of that
 name is used if possible.
 
-<p>If you specify an invalid locale name, <code>setlocale</code> returns a null
+     <p>If you specify an invalid locale name, <code>setlocale</code> returns a null
 pointer and leaves the current locale unchanged. 
 </td></tr>
 </table>
 
-<p>Here is an example showing how you might use <code>setlocale</code> to
+   <p>Here is an example showing how you might use <code>setlocale</code> to
 temporarily switch to a new locale.
 
-<br><pre>#include &lt;stddef.h&gt;
-#include &lt;locale.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
+<pre class="smallexample">     #include &lt;stddef.h&gt;
+     #include &lt;locale.h&gt;
+     #include &lt;stdlib.h&gt;
+     #include &lt;string.h&gt;
+     
+     void
+     with_other_locale (char *new_locale,
+                        void (*subroutine) (int),
+                        int argument)
+     {
+       char *old_locale, *saved_locale;
+     
+       /* Get the name of the current locale.  */
+       old_locale = setlocale (LC_ALL, NULL);
+     
+       /* Copy the name so it won't be clobbered by <code>setlocale</code>. */
+       saved_locale = strdup (old_locale);
+       if (saved_locale == NULL)
+         fatal ("Out of memory");
+     
+       /* Now change the locale and do some stuff with it. */
+       setlocale (LC_ALL, new_locale);
+       (*subroutine) (argument);
+     
+       /* Restore the original locale. */
+       setlocale (LC_ALL, saved_locale);
+       free (saved_locale);
+     }
+     </pre>
 
-void
-with_other_locale (char *new_locale,
-                   void (*subroutine) (int),
-                   int argument)
-{
-  char *old_locale, *saved_locale;
-
-  /* Get the name of the current locale.  */
-  old_locale = setlocale (LC_ALL, NULL);
-
-  /* Copy the name so it won't be clobbered by <code>setlocale</code>. */
-  saved_locale = strdup (old_locale);
-  if (saved_locale == NULL)
-    fatal ("Out of memory");
-
-  /* Now change the locale and do some stuff with it. */
-  setlocale (LC_ALL, new_locale);
-  (*subroutine) (argument);
-
-  /* Restore the original locale. */
-  setlocale (LC_ALL, saved_locale);
-  free (saved_locale);
-}
-</pre>
-
-<p><strong>Portability Note:</strong> Some ISO&nbsp;C systems may define additional
+   <p><strong>Portability Note:</strong> Some ISO&nbsp;C systems may define additional
 locale categories, and future versions of the library will do so.  For
 portability, assume that any symbol beginning with <code>LC_</code> might be
 defined in <code>locale.h</code>.
 
-</body></html>
+   </body></html>
 

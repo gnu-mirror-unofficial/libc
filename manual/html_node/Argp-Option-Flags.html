@@ -2,42 +2,52 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Option%20Flags">Argp Option Flags</a>,
-Up:<a rel=up accesskey=u href="Argp-Option-Vectors.html#Argp%20Option%20Vectors">Argp Option Vectors</a>
+Node:&nbsp;<a name="Argp%20Option%20Flags">Argp Option Flags</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Option-Vectors.html#Argp%20Option%20Vectors">Argp Option Vectors</a>
 <hr><br>
+</div>
 
-<h5>Flags for Argp Options</h5>
+<h3 class="subsubsection">Flags for Argp Options</h5>
 
 <p>The following flags may be or'd together in the <code>flags</code> field of a
 <code>struct argp_option</code>.  These flags control various aspects of how
 that option is parsed or displayed in help messages:
 
-<dl>
+     <dl>
 <dt><code>OPTION_ARG_OPTIONAL</code>
-<dd>The argument associated with this option is optional.
+     <dd>The argument associated with this option is optional.
 
-<br><dt><code>OPTION_HIDDEN</code>
-<dd>This option isn't displayed in any help messages.
+     <br><dt><code>OPTION_HIDDEN</code>
+     <dd>This option isn't displayed in any help messages.
 
-<br><dt><code>OPTION_ALIAS</code>
-<dd>This option is an alias for the closest previous non-alias option.  This
+     <br><dt><code>OPTION_ALIAS</code>
+     <dd>This option is an alias for the closest previous non-alias option.  This
 means that it will be displayed in the same help entry, and will inherit
 fields other than <code>name</code> and <code>key</code> from the option being
 aliased.
 
-<br><dt><code>OPTION_DOC</code>
-<dd>This option isn't actually an option and should be ignored by the actual
+     <br><dt><code>OPTION_DOC</code>
+     <dd>This option isn't actually an option and should be ignored by the actual
 option parser.  It is an arbitrary section of documentation that should
 be displayed in much the same manner as the options.  This is known as a
 <dfn>documentation option</dfn>.
 
-<p>If this flag is set, then the option <code>name</code> field is displayed
+     <p>If this flag is set, then the option <code>name</code> field is displayed
 unmodified (e.g., no <code>--</code> prefix is added) at the left-margin where
 a <em>short</em> option would normally be displayed, and this
 documentation string is left in it's usual place.  For purposes of
@@ -46,17 +56,17 @@ first non-whitespace character is <code>-</code>.  This entry is displayed
 after all options, after <code>OPTION_DOC</code> entries with a leading
 <code>-</code>, in the same group.
 
-<br><dt><code>OPTION_NO_USAGE</code>
-<dd>This option shouldn't be included in `long' usage messages, but should
+     <br><dt><code>OPTION_NO_USAGE</code>
+     <dd>This option shouldn't be included in `long' usage messages, but should
 still be included in other help messages.  This is intended for options
 that are completely documented in an argp's <code>args_doc</code>
 field.  See <a href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>.  Including this option in the generic usage
 list would be redundant, and should be avoided.
 
-<p>For instance, if <code>args_doc</code> is <code>"FOO BAR\n-x BLAH"</code>, and the
+     <p>For instance, if <code>args_doc</code> is <code>"FOO BAR\n-x BLAH"</code>, and the
 <code>-x</code> option's purpose is to distinguish these two cases, <code>-x</code>
 should probably be marked <code>OPTION_NO_USAGE</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

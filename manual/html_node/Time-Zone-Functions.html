@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Time%20Zone%20Functions">Time Zone Functions</a>,
-Next:<a rel=next accesskey=n href="Time-Functions-Example.html#Time%20Functions%20Example">Time Functions Example</a>,
-Previous:<a rel=previous accesskey=p href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>,
-Up:<a rel=up accesskey=u href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
+Node:&nbsp;<a name="Time%20Zone%20Functions">Time Zone Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Time-Functions-Example.html#Time%20Functions%20Example">Time Functions Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
 <hr><br>
+</div>
 
-<h4>Functions and Variables for Time Zones</h4>
+<h3 class="subsection">Functions and Variables for Time Zones</h4>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>tzname</b><i> [2]
-</i></td>
+<td align="left">char * <b>tzname</b><i> </i>[<i>2</i>]<i>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -35,30 +45,30 @@ example, <code>"EDT"</code>).  These correspond to the <var>std</var> and <var>d
 strings (respectively) from the <code>TZ</code> environment variable.  If
 Daylight Saving Time is never used, <code>tzname[1]</code> is the empty string.
 
-<p>The <code>tzname</code> array is initialized from the <code>TZ</code> environment
+     <p>The <code>tzname</code> array is initialized from the <code>TZ</code> environment
 variable whenever <code>tzset</code>, <code>ctime</code>, <code>strftime</code>,
 <code>mktime</code>, or <code>localtime</code> is called.  If multiple abbreviations
 have been used (e.g. <code>"EWT"</code> and <code>"EDT"</code> for U.S. Eastern War
 Time and Eastern Daylight Time), the array contains the most recent
 abbreviation.
 
-<p>The <code>tzname</code> array is required for POSIX.1 compatibility, but in
+     <p>The <code>tzname</code> array is required for POSIX.1 compatibility, but in
 GNU programs it is better to use the <code>tm_zone</code> member of the
 broken-down time structure, since <code>tm_zone</code> reports the correct
 abbreviation even when it is not the latest one.
 
-<p>Though the strings are declared as <code>char *</code> the user must refrain
+     <p>Though the strings are declared as <code>char *</code> the user must refrain
 from modifying these strings.  Modifying the strings will almost certainly
 lead to trouble.
 
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>tzset</b><i> (void)
-</i></td>
+<td align="left">void <b>tzset</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,7 +82,7 @@ depend on the time zone.
 </td></tr>
 </table>
 
-<p>The following variables are defined for compatibility with System V
+   <p>The following variables are defined for compatibility with System V
 Unix.  Like <code>tzname</code>, these variables are set by calling
 <code>tzset</code> or the other time conversion functions.
 
@@ -80,7 +90,7 @@ Unix.  Like <code>tzname</code>, these variables are set by calling
 <table width="100%">
 <tr>
 <td align="left">long int <b>timezone</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -100,7 +110,7 @@ it is not the latest one.
 <table width="100%">
 <tr>
 <td align="left">int <b>daylight</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -113,5 +123,5 @@ effect.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

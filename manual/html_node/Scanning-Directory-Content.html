@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Scanning%20Directory%20Content">Scanning Directory Content</a>,
-Next:<a rel=next accesskey=n href="Simple-Directory-Lister-Mark-II.html#Simple%20Directory%20Lister%20Mark%20II">Simple Directory Lister Mark II</a>,
-Previous:<a rel=previous accesskey=p href="Random-Access-Directory.html#Random%20Access%20Directory">Random Access Directory</a>,
-Up:<a rel=up accesskey=u href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
+Node:&nbsp;<a name="Scanning%20Directory%20Content">Scanning Directory Content</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Simple-Directory-Lister-Mark-II.html#Simple%20Directory%20Lister%20Mark%20II">Simple Directory Lister Mark II</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Random-Access-Directory.html#Random%20Access%20Directory">Random Access Directory</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
 <hr><br>
+</div>
 
-<h4>Scanning the Content of a Directory</h4>
+<h3 class="subsection">Scanning the Content of a Directory</h4>
 
 <p>A higher-level interface to the directory handling functions is the
 <code>scandir</code> function.  With its help one can select a subset of the
@@ -24,15 +34,15 @@ the result.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>scandir</b><i> (const char *<var>dir</var>, struct dirent ***<var>namelist</var>, int (*<var>selector</var>) (const struct dirent *), int (*<var>cmp</var>) (const void *, const void *))
-</i></td>
+<td align="left">int <b>scandir</b><i> </i>(<i>const char *</i><var>dir</var><i>, struct dirent ***</i><var>namelist</var><i>, int </i>(<i>*</i><var>selector</var><i></i>)<i> </i>(<i>const struct dirent *</i>)<i>, int </i>(<i>*</i><var>cmp</var><i></i>)<i> </i>(<i>const void *, const void *</i>)<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p>The <code>scandir</code> function scans the contents of the directory selected
+     <p>The <code>scandir</code> function scans the contents of the directory selected
 by <var>dir</var>.  The result in *<var>namelist</var> is an array of pointers to
 structure of type <code>struct dirent</code> which describe all selected
 directory entries and which is allocated using <code>malloc</code>.  Instead
@@ -41,20 +51,20 @@ function <var>selector</var> can be used to decide which entries are in the
 result.  Only the entries for which <var>selector</var> returns a non-zero
 value are selected.
 
-<p>Finally the entries in *<var>namelist</var> are sorted using the
+     <p>Finally the entries in *<var>namelist</var> are sorted using the
 user-supplied function <var>cmp</var>.  The arguments passed to the <var>cmp</var>
 function are of type <code>struct dirent **</code>, therefore one cannot
 directly use the <code>strcmp</code> or <code>strcoll</code> functions; instead see
 the functions <code>alphasort</code> and <code>versionsort</code> below.
 
-<p>The return value of the function is the number of entries placed in
+     <p>The return value of the function is the number of entries placed in
 *<var>namelist</var>.  If it is <code>-1</code> an error occurred (either the
 directory could not be opened for reading or the malloc call failed) and
 the global variable <code>errno</code> contains more information on the error. 
 </td></tr>
 </table>
 
-<p>As described above the fourth argument to the <code>scandir</code> function
+   <p>As described above the fourth argument to the <code>scandir</code> function
 must be a pointer to a sorting function.  For the convenience of the
 programmer the GNU C library contains implementations of functions which
 are very helpful for this purpose.
@@ -62,8 +72,8 @@ are very helpful for this purpose.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>alphasort</b><i> (const void *<var>a</var>, const void *<var>b</var>)
-</i></td>
+<td align="left">int <b>alphasort</b><i> </i>(<i>const void *</i><var>a</var><i>, const void *</i><var>b</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -74,7 +84,7 @@ The <code>alphasort</code> function behaves like the <code>strcoll</code> functi
 are not string pointers but instead they are of type
 <code>struct dirent **</code>.
 
-<p>The return value of <code>alphasort</code> is less than, equal to, or greater
+     <p>The return value of <code>alphasort</code> is less than, equal to, or greater
 than zero depending on the order of the two entries <var>a</var> and <var>b</var>. 
 </td></tr>
 </table>
@@ -82,8 +92,8 @@ than zero depending on the order of the two entries <var>a</var> and <var>b</var
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>versionsort</b><i> (const void *<var>a</var>, const void *<var>b</var>)
-</i></td>
+<td align="left">int <b>versionsort</b><i> </i>(<i>const void *</i><var>a</var><i>, const void *</i><var>b</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -94,15 +104,15 @@ uses the <code>strverscmp</code> function internally.
 </td></tr>
 </table>
 
-<p>If the filesystem supports large files we cannot use the <code>scandir</code>
+   <p>If the filesystem supports large files we cannot use the <code>scandir</code>
 anymore since the <code>dirent</code> structure might not able to contain all
 the information.  The LFS provides the new type <code>struct&nbsp;dirent64</code>.  To use this we need a new function.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>scandir64</b><i> (const char *<var>dir</var>, struct dirent64 ***<var>namelist</var>, int (*<var>selector</var>) (const struct dirent64 *), int (*<var>cmp</var>) (const void *, const void *))
-</i></td>
+<td align="left">int <b>scandir64</b><i> </i>(<i>const char *</i><var>dir</var><i>, struct dirent64 ***</i><var>namelist</var><i>, int </i>(<i>*</i><var>selector</var><i></i>)<i> </i>(<i>const struct dirent64 *</i>)<i>, int </i>(<i>*</i><var>cmp</var><i></i>)<i> </i>(<i>const void *, const void *</i>)<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -115,20 +125,20 @@ of type <code>struct&nbsp;dirent64</code>.  The function pointed to by
 <var>selector</var> now must point to a function which takes a
 <code>struct&nbsp;dirent64&nbsp;*</code> parameter.
 
-<p>Similarly the <var>cmp</var> function should expect its two arguments to be
+     <p>Similarly the <var>cmp</var> function should expect its two arguments to be
 of type <code>struct dirent64 **</code>. 
 </td></tr>
 </table>
 
-<p>As <var>cmp</var> is now a function of a different type, the functions
+   <p>As <var>cmp</var> is now a function of a different type, the functions
 <code>alphasort</code> and <code>versionsort</code> cannot be supplied for that
 argument.  Instead we provide the two replacement functions below.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>alphasort64</b><i> (const void *<var>a</var>, const void *<var>b</var>)
-</i></td>
+<td align="left">int <b>alphasort64</b><i> </i>(<i>const void *</i><var>a</var><i>, const void *</i><var>b</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -139,7 +149,7 @@ The <code>alphasort64</code> function behaves like the <code>strcoll</code> func
 are not string pointers but instead they are of type
 <code>struct dirent64 **</code>.
 
-<p>Return value of <code>alphasort64</code> is less than, equal to, or greater
+     <p>Return value of <code>alphasort64</code> is less than, equal to, or greater
 than zero depending on the order of the two entries <var>a</var> and <var>b</var>. 
 </td></tr>
 </table>
@@ -147,8 +157,8 @@ than zero depending on the order of the two entries <var>a</var> and <var>b</var
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>versionsort64</b><i> (const void *<var>a</var>, const void *<var>b</var>)
-</i></td>
+<td align="left">int <b>versionsort64</b><i> </i>(<i>const void *</i><var>a</var><i>, const void *</i><var>b</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -159,9 +169,9 @@ uses the <code>strverscmp</code> function internally.
 </td></tr>
 </table>
 
-<p>It is important not to mix the use of <code>scandir</code> and the 64-bit
+   <p>It is important not to mix the use of <code>scandir</code> and the 64-bit
 comparison functions or vice versa.  There are systems on which this
 works but on others it will fail miserably.
 
-</body></html>
+   </body></html>
 

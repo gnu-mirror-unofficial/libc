@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Null%20Pointer%20Constant">Null Pointer Constant</a>,
-Next:<a rel=next accesskey=n href="Important-Data-Types.html#Important%20Data%20Types">Important Data Types</a>,
-Previous:<a rel=previous accesskey=p href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>,
-Up:<a rel=up accesskey=u href="Language-Features.html#Language%20Features">Language Features</a>
+Node:&nbsp;<a name="Null%20Pointer%20Constant">Null Pointer Constant</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Important-Data-Types.html#Important%20Data%20Types">Important Data Types</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Language-Features.html#Language%20Features">Language Features</a>
 <hr><br>
+</div>
 
-<h3>Null Pointer Constant</h3>
+<h3 class="section">Null Pointer Constant</h3>
 
 <p>The null pointer constant is guaranteed not to point to any real object. 
 You can assign it to any pointer variable since it has type <code>void
@@ -25,7 +35,7 @@ You can assign it to any pointer variable since it has type <code>void
 <table width="100%">
 <tr>
 <td align="left">void * <b>NULL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -35,11 +45,11 @@ This is a null pointer constant.
 </td></tr>
 </table>
 
-<p>You can also use <code>0</code> or <code>(void *)0</code> as a null pointer
+   <p>You can also use <code>0</code> or <code>(void *)0</code> as a null pointer
 constant, but using <code>NULL</code> is cleaner because it makes the purpose
 of the constant more evident.
 
-<p>If you use the null pointer constant as a function argument, then for
+   <p>If you use the null pointer constant as a function argument, then for
 complete portability you should make sure that the function has a
 prototype declaration.  Otherwise, if the target machine has two
 different pointer representations, the compiler won't know which
@@ -47,5 +57,5 @@ representation to use for that argument.  You can avoid the problem by
 explicitly casting the constant to the proper pointer type, but we
 recommend instead adding a prototype for the function you are calling.
 
-</body></html>
+   </body></html>
 

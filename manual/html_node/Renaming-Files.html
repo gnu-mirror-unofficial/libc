@@ -2,27 +2,37 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Renaming%20Files">Renaming Files</a>,
-Next:<a rel=next accesskey=n href="Creating-Directories.html#Creating%20Directories">Creating Directories</a>,
-Previous:<a rel=previous accesskey=p href="Deleting-Files.html#Deleting%20Files">Deleting Files</a>,
-Up:<a rel=up accesskey=u href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>
+Node:&nbsp;<a name="Renaming%20Files">Renaming Files</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Creating-Directories.html#Creating%20Directories">Creating Directories</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Deleting-Files.html#Deleting%20Files">Deleting Files</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>
 <hr><br>
+</div>
 
-<h3>Renaming Files</h3>
+<h3 class="section">Renaming Files</h3>
 
 <p>The <code>rename</code> function is used to change a file's name.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>rename</b><i> (const char *<var>oldname</var>, const char *<var>newname</var>)
-</i></td>
+<td align="left">int <b>rename</b><i> </i>(<i>const char *</i><var>oldname</var><i>, const char *</i><var>newname</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -34,27 +44,27 @@ The <code>rename</code> function renames the file <var>oldname</var> to
 the file had any other names aside from <var>oldname</var>, it continues to
 have those names.)
 
-<p>The directory containing the name <var>newname</var> must be on the same file
+     <p>The directory containing the name <var>newname</var> must be on the same file
 system as the directory containing the name <var>oldname</var>.
 
-<p>One special case for <code>rename</code> is when <var>oldname</var> and
+     <p>One special case for <code>rename</code> is when <var>oldname</var> and
 <var>newname</var> are two names for the same file.  The consistent way to
 handle this case is to delete <var>oldname</var>.  However, in this case
 POSIX requires that <code>rename</code> do nothing and report success--which
 is inconsistent.  We don't know what your operating system will do.
 
-<p>If <var>oldname</var> is not a directory, then any existing file named
+     <p>If <var>oldname</var> is not a directory, then any existing file named
 <var>newname</var> is removed during the renaming operation.  However, if
 <var>newname</var> is the name of a directory, <code>rename</code> fails in this
 case.
 
-<p>If <var>oldname</var> is a directory, then either <var>newname</var> must not
+     <p>If <var>oldname</var> is a directory, then either <var>newname</var> must not
 exist or it must name a directory that is empty.  In the latter case,
 the existing directory named <var>newname</var> is deleted first.  The name
 <var>newname</var> must not specify a subdirectory of the directory
 <code>oldname</code> which is being renamed.
 
-<p>One useful feature of <code>rename</code> is that the meaning of <var>newname</var>
+     <p>One useful feature of <code>rename</code> is that the meaning of <var>newname</var>
 changes "atomically" from any previously existing file by that name to
 its new meaning (i.e. the file that was called <var>oldname</var>).  There is
 no instant at which <var>newname</var> is non-existent "in between" the old
@@ -62,54 +72,54 @@ meaning and the new meaning.  If there is a system crash during the
 operation, it is possible for both names to still exist; but
 <var>newname</var> will always be intact if it exists at all.
 
-<p>If <code>rename</code> fails, it returns <code>-1</code>.  In addition to the usual
+     <p>If <code>rename</code> fails, it returns <code>-1</code>.  In addition to the usual
 file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following
 <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EACCES</code>
-<dd>One of the directories containing <var>newname</var> or <var>oldname</var>
+          <dd>One of the directories containing <var>newname</var> or <var>oldname</var>
 refuses write permission; or <var>newname</var> and <var>oldname</var> are
 directories and write permission is refused for one of them.
 
-<br><dt><code>EBUSY</code>
-<dd>A directory named by <var>oldname</var> or <var>newname</var> is being used by
+          <br><dt><code>EBUSY</code>
+          <dd>A directory named by <var>oldname</var> or <var>newname</var> is being used by
 the system in a way that prevents the renaming from working.  This includes
 directories that are mount points for filesystems, and directories
 that are the current working directories of processes.
 
-<br><dt><code>ENOTEMPTY</code>
-<dt><code>EEXIST</code>
-<dd>The directory <var>newname</var> isn't empty.  The GNU system always returns
+          <br><dt><code>ENOTEMPTY</code>
+          <dd><dt><code>EEXIST</code>
+          <dd>The directory <var>newname</var> isn't empty.  The GNU system always returns
 <code>ENOTEMPTY</code> for this, but some other systems return <code>EEXIST</code>.
 
-<br><dt><code>EINVAL</code>
-<dd><var>oldname</var> is a directory that contains <var>newname</var>.
+          <br><dt><code>EINVAL</code>
+          <dd><var>oldname</var> is a directory that contains <var>newname</var>.
 
-<br><dt><code>EISDIR</code>
-<dd><var>newname</var> is a directory but the <var>oldname</var> isn't.
+          <br><dt><code>EISDIR</code>
+          <dd><var>newname</var> is a directory but the <var>oldname</var> isn't.
 
-<br><dt><code>EMLINK</code>
-<dd>The parent directory of <var>newname</var> would have too many links
+          <br><dt><code>EMLINK</code>
+          <dd>The parent directory of <var>newname</var> would have too many links
 (entries).
 
-<br><dt><code>ENOENT</code>
-<dd>The file <var>oldname</var> doesn't exist.
+          <br><dt><code>ENOENT</code>
+          <dd>The file <var>oldname</var> doesn't exist.
 
-<br><dt><code>ENOSPC</code>
-<dd>The directory that would contain <var>newname</var> has no room for another
+          <br><dt><code>ENOSPC</code>
+          <dd>The directory that would contain <var>newname</var> has no room for another
 entry, and there is no space left in the file system to expand it.
 
-<br><dt><code>EROFS</code>
-<dd>The operation would involve writing to a directory on a read-only file
+          <br><dt><code>EROFS</code>
+          <dd>The operation would involve writing to a directory on a read-only file
 system.
 
-<br><dt><code>EXDEV</code>
-<dd>The two file names <var>newname</var> and <var>oldname</var> are on different
+          <br><dt><code>EXDEV</code>
+          <dd>The two file names <var>newname</var> and <var>oldname</var> are on different
 file systems. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

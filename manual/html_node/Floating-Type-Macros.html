@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Floating%20Type%20Macros">Floating Type Macros</a>,
-Next:<a rel=next accesskey=n href="Structure-Measurement.html#Structure%20Measurement">Structure Measurement</a>,
-Previous:<a rel=previous accesskey=p href="Range-of-Type.html#Range%20of%20Type">Range of Type</a>,
-Up:<a rel=up accesskey=u href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>
+Node:&nbsp;<a name="Floating%20Type%20Macros">Floating Type Macros</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Structure-Measurement.html#Structure%20Measurement">Structure Measurement</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Range-of-Type.html#Range%20of%20Type">Range of Type</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>
 <hr><br>
+</div>
 
-<h4>Floating Type Macros</h4>
+<h3 class="subsection">Floating Type Macros</h4>
 
 <p>The specific representation of floating point numbers varies from
 machine to machine.  Because floating point numbers are represented
@@ -22,7 +32,7 @@ internally as approximate quantities, algorithms for manipulating
 floating point data often need to take account of the precise details of
 the machine's floating point representation.
 
-<p>Some of the functions in the C library itself need this information; for
+   <p>Some of the functions in the C library itself need this information; for
 example, the algorithms for printing and reading floating point numbers
 (see <a href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>) and for calculating trigonometric and
 irrational functions (see <a href="Mathematics.html#Mathematics">Mathematics</a>) use it to avoid round-off
@@ -30,15 +40,15 @@ error and loss of accuracy.  User programs that implement numerical
 analysis techniques also often need this information in order to
 minimize or compute error bounds.
 
-<p>The header file <code>float.h</code> describes the format used by your
+   <p>The header file <code>float.h</code> describes the format used by your
 machine.
 
-<ul>
-<li><a accesskey=1 href="Floating-Point-Concepts.html#Floating%20Point%20Concepts">Floating Point Concepts</a>:      Definitions of terminology. 
-<li><a accesskey=2 href="Floating-Point-Parameters.html#Floating%20Point%20Parameters">Floating Point Parameters</a>:    Details of specific macros. 
-<li><a accesskey=3 href="IEEE-Floating-Point.html#IEEE%20Floating%20Point">IEEE Floating Point</a>:          The measurements for one common
+<ul class="menu">
+<li><a accesskey="1" href="Floating-Point-Concepts.html#Floating%20Point%20Concepts">Floating Point Concepts</a>:      Definitions of terminology. 
+<li><a accesskey="2" href="Floating-Point-Parameters.html#Floating%20Point%20Parameters">Floating Point Parameters</a>:    Details of specific macros. 
+<li><a accesskey="3" href="IEEE-Floating-Point.html#IEEE%20Floating%20Point">IEEE Floating Point</a>:          The measurements for one common
                                  representation. 
 </ul>
 
-</body></html>
+   </body></html>
 

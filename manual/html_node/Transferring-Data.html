@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Transferring%20Data">Transferring Data</a>,
-Next:<a rel=next accesskey=n href="Byte-Stream-Example.html#Byte%20Stream%20Example">Byte Stream Example</a>,
-Previous:<a rel=previous accesskey=p href="Who-is-Connected.html#Who%20is%20Connected">Who is Connected</a>,
-Up:<a rel=up accesskey=u href="Connections.html#Connections">Connections</a>
+Node:&nbsp;<a name="Transferring%20Data">Transferring Data</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Byte-Stream-Example.html#Byte%20Stream%20Example">Byte Stream Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Who-is-Connected.html#Who%20is%20Connected">Who is Connected</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Connections.html#Connections">Connections</a>
 <hr><br>
+</div>
 
-<h4>Transferring Data</h4>
+<h3 class="subsection">Transferring Data</h4>
 
 <p>Once a socket has been connected to a peer, you can use the ordinary
 <code>read</code> and <code>write</code> operations (see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>) to
 transfer data.  A socket is a two-way communications channel, so read
 and write operations can be performed at either end.
 
-<p>There are also some I/O modes that are specific to socket operations. 
+   <p>There are also some I/O modes that are specific to socket operations. 
 In order to specify these modes, you must use the <code>recv</code> and
 <code>send</code> functions instead of the more generic <code>read</code> and
 <code>write</code> functions.  The <code>recv</code> and <code>send</code> functions take
@@ -31,11 +41,11 @@ control special I/O modes.  For example, you can specify the
 <code>MSG_PEEK</code> flag to peek at input, or the <code>MSG_DONTROUTE</code> flag
 to control inclusion of routing information on output.
 
-<ul>
-<li><a accesskey=1 href="Sending-Data.html#Sending%20Data">Sending Data</a>: 		Sending data with <code>send</code>. 
-<li><a accesskey=2 href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>: 		Reading data with <code>recv</code>. 
-<li><a accesskey=3 href="Socket-Data-Options.html#Socket%20Data%20Options">Socket Data Options</a>: 		Using <code>send</code> and <code>recv</code>. 
+<ul class="menu">
+<li><a accesskey="1" href="Sending-Data.html#Sending%20Data">Sending Data</a>: 		Sending data with <code>send</code>. 
+<li><a accesskey="2" href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>: 		Reading data with <code>recv</code>. 
+<li><a accesskey="3" href="Socket-Data-Options.html#Socket%20Data%20Options">Socket Data Options</a>: 		Using <code>send</code> and <code>recv</code>. 
 </ul>
 
-</body></html>
+   </body></html>
 

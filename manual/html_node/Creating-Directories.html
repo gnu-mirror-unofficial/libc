@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Creating%20Directories">Creating Directories</a>,
-Next:<a rel=next accesskey=n href="File-Attributes.html#File%20Attributes">File Attributes</a>,
-Previous:<a rel=previous accesskey=p href="Renaming-Files.html#Renaming%20Files">Renaming Files</a>,
-Up:<a rel=up accesskey=u href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>
+Node:&nbsp;<a name="Creating%20Directories">Creating Directories</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Attributes.html#File%20Attributes">File Attributes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Renaming-Files.html#Renaming%20Files">Renaming Files</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>
 <hr><br>
+</div>
 
-<h3>Creating Directories</h3>
+<h3 class="section">Creating Directories</h3>
 
 <p>Directories are created with the <code>mkdir</code> function.  (There is also
 a shell command <code>mkdir</code> which does the same thing.)
@@ -22,8 +32,8 @@ a shell command <code>mkdir</code> which does the same thing.)
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>mkdir</b><i> (const char *<var>filename</var>, mode_t <var>mode</var>)
-</i></td>
+<td align="left">int <b>mkdir</b><i> </i>(<i>const char *</i><var>filename</var><i>, mode_t </i><var>mode</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -32,43 +42,43 @@ a shell command <code>mkdir</code> which does the same thing.)
 The <code>mkdir</code> function creates a new, empty directory with name
 <var>filename</var>.
 
-<p>The argument <var>mode</var> specifies the file permissions for the new
+     <p>The argument <var>mode</var> specifies the file permissions for the new
 directory file.  See <a href="Permission-Bits.html#Permission%20Bits">Permission Bits</a>, for more information about
 this.
 
-<p>A return value of <code>0</code> indicates successful completion, and
+     <p>A return value of <code>0</code> indicates successful completion, and
 <code>-1</code> indicates failure.  In addition to the usual file name syntax
 errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following <code>errno</code> error
 conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EACCES</code>
-<dd>Write permission is denied for the parent directory in which the new
+          <dd>Write permission is denied for the parent directory in which the new
 directory is to be added.
 
-<br><dt><code>EEXIST</code>
-<dd>A file named <var>filename</var> already exists.
+          <br><dt><code>EEXIST</code>
+          <dd>A file named <var>filename</var> already exists.
 
-<br><dt><code>EMLINK</code>
-<dd>The parent directory has too many links (entries).
+          <br><dt><code>EMLINK</code>
+          <dd>The parent directory has too many links (entries).
 
-<p>Well-designed file systems never report this error, because they permit
+          <p>Well-designed file systems never report this error, because they permit
 more links than your disk could possibly hold.  However, you must still
 take account of the possibility of this error, as it could result from
 network access to a file system on another machine.
 
-<br><dt><code>ENOSPC</code>
-<dd>The file system doesn't have enough room to create the new directory.
+          <br><dt><code>ENOSPC</code>
+          <dd>The file system doesn't have enough room to create the new directory.
 
-<br><dt><code>EROFS</code>
-<dd>The parent directory of the directory being created is on a read-only
+          <br><dt><code>EROFS</code>
+          <dd>The parent directory of the directory being created is on a read-only
 file system and cannot be modified. 
 </dl>
 
-<p>To use this function, your program should include the header file
+     <p>To use this function, your program should include the header file
 <code>sys/stat.h</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

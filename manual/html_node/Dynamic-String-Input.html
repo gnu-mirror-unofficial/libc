@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Dynamic%20String%20Input">Dynamic String Input</a>,
-Next:<a rel=next accesskey=n href="Other-Input-Conversions.html#Other%20Input%20Conversions">Other Input Conversions</a>,
-Previous:<a rel=previous accesskey=p href="String-Input-Conversions.html#String%20Input%20Conversions">String Input Conversions</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="Dynamic%20String%20Input">Dynamic String Input</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Other-Input-Conversions.html#Other%20Input%20Conversions">Other Input Conversions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="String-Input-Conversions.html#String%20Input%20Conversions">String Input Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>Dynamically Allocating String Conversions</h4>
+<h3 class="subsection">Dynamically Allocating String Conversions</h4>
 
 <p>A GNU extension to formatted input lets you safely read a string with no
 maximum size.  Using this feature, you don't supply a buffer; instead,
@@ -22,28 +32,28 @@ maximum size.  Using this feature, you don't supply a buffer; instead,
 you its address.  To use this feature, write <code>a</code> as a flag
 character, as in <code>%as</code> or <code>%a[0-9a-z]</code>.
 
-<p>The pointer argument you supply for where to store the input should have
+   <p>The pointer argument you supply for where to store the input should have
 type <code>char **</code>.  The <code>scanf</code> function allocates a buffer and
 stores its address in the word that the argument points to.  You should
 free the buffer with <code>free</code> when you no longer need it.
 
-<p>Here is an example of using the <code>a</code> flag with the <code>%[<small>...</small>]</code>
+   <p>Here is an example of using the <code>a</code> flag with the <code>%[...]</code>
 conversion specification to read a "variable assignment" of the form
-<code><var>variable</var> = <var>value</var></code>.
+<code></code><var>variable</var><code> = </code><var>value</var><code></code>.
 
-<br><pre>{
-  char *variable, *value;
+<pre class="smallexample">     {
+       char *variable, *value;
+     
+       if (2 &gt; scanf ("%a[a-zA-Z0-9] = %a[^\n]\n",
+                      &amp;variable, &amp;value))
+         {
+           invalid_input_error ();
+           return 0;
+         }
+     
+       ...
+     }
+     </pre>
 
-  if (2 &gt; scanf ("%a[a-zA-Z0-9] = %a[^\n]\n",
-                 &amp;variable, &amp;value))
-    {
-      invalid_input_error ();
-      return 0;
-    }
-
-  <small>...</small>
-}
-</pre>
-
-</body></html>
+   </body></html>
 

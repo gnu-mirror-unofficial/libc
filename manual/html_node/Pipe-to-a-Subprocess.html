@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>,
-Next:<a rel=next accesskey=n href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>,
-Previous:<a rel=previous accesskey=p href="Creating-a-Pipe.html#Creating%20a%20Pipe">Creating a Pipe</a>,
-Up:<a rel=up accesskey=u href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
+Node:&nbsp;<a name="Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Creating-a-Pipe.html#Creating%20a%20Pipe">Creating a Pipe</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
 <hr><br>
+</div>
 
-<h3>Pipe to a Subprocess</h3>
+<h3 class="section">Pipe to a Subprocess</h3>
 
 <p>A common use of pipes is to send data to or receive data from a program
 being run as a subprocess.  One way of doing this is by using a combination of
@@ -23,15 +33,15 @@ being run as a subprocess.  One way of doing this is by using a combination of
 or output channel), and <code>exec</code> (to execute the new program).  Or,
 you can use <code>popen</code> and <code>pclose</code>.
 
-<p>The advantage of using <code>popen</code> and <code>pclose</code> is that the
+   <p>The advantage of using <code>popen</code> and <code>pclose</code> is that the
 interface is much simpler and easier to use.  But it doesn't offer as
 much flexibility as using the low-level functions directly.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">FILE * <b>popen</b><i> (const char *<var>command</var>, const char *<var>mode</var>)
-</i></td>
+<td align="left">FILE * <b>popen</b><i> </i>(<i>const char *</i><var>command</var><i>, const char *</i><var>mode</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -43,16 +53,16 @@ function; see <a href="Running-a-Command.html#Running%20a%20Command">Running a C
 command to complete, it creates a pipe to the subprocess and returns a
 stream that corresponds to that pipe.
 
-<p>If you specify a <var>mode</var> argument of <code>"r"</code>, you can read from the
+     <p>If you specify a <var>mode</var> argument of <code>"r"</code>, you can read from the
 stream to retrieve data from the standard output channel of the subprocess. 
 The subprocess inherits its standard input channel from the parent process.
 
-<p>Similarly, if you specify a <var>mode</var> argument of <code>"w"</code>, you can
+     <p>Similarly, if you specify a <var>mode</var> argument of <code>"w"</code>, you can
 write to the stream to send data to the standard input channel of the
 subprocess.  The subprocess inherits its standard output channel from
 the parent process.
 
-<p>In the event of an error <code>popen</code> returns a null pointer.  This
+     <p>In the event of an error <code>popen</code> returns a null pointer.  This
 might happen if the pipe or stream cannot be created, if the subprocess
 cannot be forked, or if the program cannot be executed. 
 </td></tr>
@@ -61,8 +71,8 @@ cannot be forked, or if the program cannot be executed.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>pclose</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>pclose</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -74,49 +84,49 @@ as for the <code>system</code> function.
 </td></tr>
 </table>
 
-<p>Here is an example showing how to use <code>popen</code> and <code>pclose</code> to
+   <p>Here is an example showing how to use <code>popen</code> and <code>pclose</code> to
 filter output through another program, in this case the paging program
 <code>more</code>.
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;stdlib.h&gt;
+     
+     void
+     write_data (FILE * stream)
+     {
+       int i;
+       for (i = 0; i &lt; 100; i++)
+         fprintf (stream, "%d\n", i);
+       if (ferror (stream))
+         {
+           fprintf (stderr, "Output to stream failed.\n");
+           exit (EXIT_FAILURE);
+         }
+     }
+     
+     int
+     main (void)
+     {
+       FILE *output;
+     
+       output = popen ("more", "w");
+       if (!output)
+         {
+           fprintf (stderr,
+                    "incorrect parameters or too many files.\n");
+           return EXIT_FAILURE;
+         }
+       write_data (output);
+       if (pclose (output) != 0)
+         {
+           fprintf (stderr,
+                    "Could not run more or other error.\n");
+         }
+       return EXIT_SUCCESS;
+     }
+     </pre>
 
-void
-write_data (FILE * stream)
-{
-  int i;
-  for (i = 0; i &lt; 100; i++)
-    fprintf (stream, "%d\n", i);
-  if (ferror (stream))
-    {
-      fprintf (stderr, "Output to stream failed.\n");
-      exit (EXIT_FAILURE);
-    }
-}
-
-int
-main (void)
-{
-  FILE *output;
-
-  output = popen ("more", "w");
-  if (!output)
-    {
-      fprintf (stderr,
-               "incorrect parameters or too many files.\n");
-      return EXIT_FAILURE;
-    }
-  write_data (output);
-  if (pclose (output) != 0)
-    {
-      fprintf (stderr,
-               "Could not run more or other error.\n");
-    }
-  return EXIT_SUCCESS;
-}
-</pre>
-
-</body></html>
+   </body></html>
 

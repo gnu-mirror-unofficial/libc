@@ -2,53 +2,63 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Missing%20Pieces">Missing Pieces</a>,
-Previous:<a rel=previous accesskey=p href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>,
-Up:<a rel=up accesskey=u href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
+Node:&nbsp;<a name="Missing%20Pieces">Missing Pieces</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
 <hr><br>
+</div>
 
-<h4>The Missing Pieces</h4>
+<h3 class="subsection">The Missing Pieces</h4>
 
 <p>The code extracts for the sample shell included in this chapter are only
 a part of the entire shell program.  In particular, nothing at all has
 been said about how <code>job</code> and <code>program</code> data structures are
 allocated and initialized.
 
-<p>Most real shells provide a complex user interface that has support for
+   <p>Most real shells provide a complex user interface that has support for
 a command language; variables; abbreviations, substitutions, and pattern
 matching on file names; and the like.  All of this is far too complicated
 to explain here!  Instead, we have concentrated on showing how to
 implement the core process creation and job control functions that can
 be called from such a shell.
 
-<p>Here is a table summarizing the major entry points we have presented:
+   <p>Here is a table summarizing the major entry points we have presented:
 
-<dl>
+     <dl>
 <dt><code>void init_shell (void)</code>
-<dd>Initialize the shell's internal state.  See <a href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>.
+     <dd>Initialize the shell's internal state.  See <a href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>.
 
-<br><dt><code>void launch_job (job *<var>j</var>, int <var>foreground</var>)</code>
-<dd>Launch the job <var>j</var> as either a foreground or background job. 
+     <br><dt><code>void launch_job (job *</code><var>j</var><code>, int </code><var>foreground</var><code>)</code>
+     <dd>Launch the job <var>j</var> as either a foreground or background job. 
 See <a href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>.
 
-<br><dt><code>void do_job_notification (void)</code>
-<dd>Check for and report any jobs that have terminated or stopped.  Can be
+     <br><dt><code>void do_job_notification (void)</code>
+     <dd>Check for and report any jobs that have terminated or stopped.  Can be
 called synchronously or within a handler for <code>SIGCHLD</code> signals. 
 See <a href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>.
 
-<br><dt><code>void continue_job (job *<var>j</var>, int <var>foreground</var>)</code>
-<dd>Continue the job <var>j</var>.  See <a href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>. 
+     <br><dt><code>void continue_job (job *</code><var>j</var><code>, int </code><var>foreground</var><code>)</code>
+     <dd>Continue the job <var>j</var>.  See <a href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>. 
 </dl>
 
-<p>Of course, a real shell would also want to provide other functions for
+   <p>Of course, a real shell would also want to provide other functions for
 managing jobs.  For example, it would be useful to have commands to list
 all active jobs or to send a signal (such as <code>SIGKILL</code>) to a job.
 
-</body></html>
+   </body></html>
 

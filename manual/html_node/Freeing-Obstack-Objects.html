@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Freeing%20Obstack%20Objects">Freeing Obstack Objects</a>,
-Next:<a rel=next accesskey=n href="Obstack-Functions.html#Obstack%20Functions">Obstack Functions</a>,
-Previous:<a rel=previous accesskey=p href="Allocation-in-an-Obstack.html#Allocation%20in%20an%20Obstack">Allocation in an Obstack</a>,
-Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+Node:&nbsp;<a name="Freeing%20Obstack%20Objects">Freeing Obstack Objects</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Obstack-Functions.html#Obstack%20Functions">Obstack Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Allocation-in-an-Obstack.html#Allocation%20in%20an%20Obstack">Allocation in an Obstack</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Obstacks.html#Obstacks">Obstacks</a>
 <hr><br>
+</div>
 
-<h5>Freeing Objects in an Obstack</h5>
+<h3 class="subsubsection">Freeing Objects in an Obstack</h5>
 
 <p>To free an object allocated in an obstack, use the function
 <code>obstack_free</code>.  Since the obstack is a stack of objects, freeing
@@ -24,8 +34,8 @@ in the same obstack.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_free</b><i> (struct obstack *<var>obstack-ptr</var>, void *<var>object</var>)
-</i></td>
+<td align="left">void <b>obstack_free</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, void *</i><var>object</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,18 +48,18 @@ everything allocated in <var>obstack</var> since <var>object</var>.
 </td></tr>
 </table>
 
-<p>Note that if <var>object</var> is a null pointer, the result is an
+   <p>Note that if <var>object</var> is a null pointer, the result is an
 uninitialized obstack.  To free all memory in an obstack but leave it
 valid for further allocation, call <code>obstack_free</code> with the address
 of the first object allocated on the obstack:
 
-<br><pre>obstack_free (obstack_ptr, first_object_allocated_ptr);
-</pre>
+<pre class="smallexample">     obstack_free (obstack_ptr, first_object_allocated_ptr);
+     </pre>
 
-<p>Recall that the objects in an obstack are grouped into chunks.  When all
+   <p>Recall that the objects in an obstack are grouped into chunks.  When all
 the objects in a chunk become free, the obstack library automatically
 frees the chunk (see <a href="Preparing-for-Obstacks.html#Preparing%20for%20Obstacks">Preparing for Obstacks</a>).  Then other
 obstacks, or non-obstack allocation, can reuse the space of the chunk.
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Blocking%20Signals">Blocking Signals</a>,
-Next:<a rel=next accesskey=n href="Waiting-for-a-Signal.html#Waiting%20for%20a%20Signal">Waiting for a Signal</a>,
-Previous:<a rel=previous accesskey=p href="Generating-Signals.html#Generating%20Signals">Generating Signals</a>,
-Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+Node:&nbsp;<a name="Blocking%20Signals">Blocking Signals</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Waiting-for-a-Signal.html#Waiting%20for%20a%20Signal">Waiting for a Signal</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Generating-Signals.html#Generating%20Signals">Generating Signals</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
 <hr><br>
+</div>
 
-<h3>Blocking Signals</h3>
+<h3 class="section">Blocking Signals</h3>
 
 <p>Blocking a signal means telling the operating system to hold it and
 deliver it later.  Generally, a program does not block signals
@@ -22,32 +32,32 @@ indefinitely--it might as well ignore them by setting their actions to
 <code>SIG_IGN</code>.  But it is useful to block signals briefly, to prevent
 them from interrupting sensitive operations.  For instance:
 
-<ul>
+     <ul>
 <li>You can use the <code>sigprocmask</code> function to block signals while you
 modify global variables that are also modified by the handlers for these
 signals.
 
-<li>You can set <code>sa_mask</code> in your <code>sigaction</code> call to block
+     <li>You can set <code>sa_mask</code> in your <code>sigaction</code> call to block
 certain signals while a particular signal handler runs.  This way, the
 signal handler can run without being interrupted itself by signals. 
 </ul>
 
-<ul>
-<li><a accesskey=1 href="Why-Block.html#Why%20Block">Why Block</a>:                            The purpose of blocking signals. 
-<li><a accesskey=2 href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>:                          How to specify which signals to
+<ul class="menu">
+<li><a accesskey="1" href="Why-Block.html#Why%20Block">Why Block</a>:                            The purpose of blocking signals. 
+<li><a accesskey="2" href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>:                          How to specify which signals to
                                          block. 
-<li><a accesskey=3 href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>:                  Blocking delivery of signals to your
+<li><a accesskey="3" href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>:                  Blocking delivery of signals to your
 				         process during normal execution. 
-<li><a accesskey=4 href="Testing-for-Delivery.html#Testing%20for%20Delivery">Testing for Delivery</a>:                 Blocking to Test for Delivery of
+<li><a accesskey="4" href="Testing-for-Delivery.html#Testing%20for%20Delivery">Testing for Delivery</a>:                 Blocking to Test for Delivery of
                                          a Signal. 
-<li><a accesskey=5 href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>:                 Blocking additional signals while a
+<li><a accesskey="5" href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>:                 Blocking additional signals while a
 				         handler is being run. 
-<li><a accesskey=6 href="Checking-for-Pending-Signals.html#Checking%20for%20Pending%20Signals">Checking for Pending Signals</a>:         Checking for Pending Signals
-<li><a accesskey=7 href="Remembering-a-Signal.html#Remembering%20a%20Signal">Remembering a Signal</a>:                 How you can get almost the same
+<li><a accesskey="6" href="Checking-for-Pending-Signals.html#Checking%20for%20Pending%20Signals">Checking for Pending Signals</a>:         Checking for Pending Signals
+<li><a accesskey="7" href="Remembering-a-Signal.html#Remembering%20a%20Signal">Remembering a Signal</a>:                 How you can get almost the same
                                          effect as blocking a signal, by
                                          handling it and setting a flag
                                          to be tested later. 
 </ul>
 
-</body></html>
+   </body></html>
 

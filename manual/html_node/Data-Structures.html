@@ -2,95 +2,105 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Data%20Structures">Data Structures</a>,
-Next:<a rel=next accesskey=n href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>,
-Up:<a rel=up accesskey=u href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
+Node:&nbsp;<a name="Data%20Structures">Data Structures</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
 <hr><br>
+</div>
 
-<h4>Data Structures for the Shell</h4>
+<h3 class="subsection">Data Structures for the Shell</h4>
 
 <p>All of the program examples included in this chapter are part of
 a simple shell program.  This section presents data structures
 and utility functions which are used throughout the example.
 
-<p>The sample shell deals mainly with two data structures.  The
+   <p>The sample shell deals mainly with two data structures.  The
 <code>job</code> type contains information about a job, which is a
 set of subprocesses linked together with pipes.  The <code>process</code> type
 holds information about a single subprocess.  Here are the relevant
 data structure declarations:
 
-<br><pre>/* A process is a single process.  */
-typedef struct process
-{
-  struct process *next;       /* next process in pipeline */
-  char **argv;                /* for exec */
-  pid_t pid;                  /* process ID */
-  char completed;             /* true if process has completed */
-  char stopped;               /* true if process has stopped */
-  int status;                 /* reported status value */
-} process;
+<pre class="smallexample">     /* A process is a single process.  */
+     typedef struct process
+     {
+       struct process *next;       /* next process in pipeline */
+       char **argv;                /* for exec */
+       pid_t pid;                  /* process ID */
+       char completed;             /* true if process has completed */
+       char stopped;               /* true if process has stopped */
+       int status;                 /* reported status value */
+     } process;
+     
+     /* A job is a pipeline of processes.  */
+     typedef struct job
+     {
+       struct job *next;           /* next active job */
+       char *command;              /* command line, used for messages */
+       process *first_process;     /* list of processes in this job */
+       pid_t pgid;                 /* process group ID */
+       char notified;              /* true if user told about stopped job */
+       struct termios tmodes;      /* saved terminal modes */
+       int stdin, stdout, stderr;  /* standard i/o channels */
+     } job;
+     
+     /* The active jobs are linked into a list.  This is its head.   */
+     job *first_job = NULL;
+     </pre>
 
-/* A job is a pipeline of processes.  */
-typedef struct job
-{
-  struct job *next;           /* next active job */
-  char *command;              /* command line, used for messages */
-  process *first_process;     /* list of processes in this job */
-  pid_t pgid;                 /* process group ID */
-  char notified;              /* true if user told about stopped job */
-  struct termios tmodes;      /* saved terminal modes */
-  int stdin, stdout, stderr;  /* standard i/o channels */
-} job;
-
-/* The active jobs are linked into a list.  This is its head.   */
-job *first_job = NULL;
-</pre>
-
-<p>Here are some utility functions that are used for operating on <code>job</code>
+   <p>Here are some utility functions that are used for operating on <code>job</code>
 objects.
 
-<br><pre>/* Find the active job with the indicated <var>pgid</var>.  */
-job *
-find_job (pid_t pgid)
-{
-  job *j;
+<pre class="smallexample">     /* Find the active job with the indicated <var>pgid</var>.  */
+     job *
+     find_job (pid_t pgid)
+     {
+       job *j;
+     
+       for (j = first_job; j; j = j-&gt;next)
+         if (j-&gt;pgid == pgid)
+           return j;
+       return NULL;
+     }
+     
+     /* Return true if all processes in the job have stopped or completed.  */
+     int
+     job_is_stopped (job *j)
+     {
+       process *p;
+     
+       for (p = j-&gt;first_process; p; p = p-&gt;next)
+         if (!p-&gt;completed &amp;&amp; !p-&gt;stopped)
+           return 0;
+       return 1;
+     }
+     
+     /* Return true if all processes in the job have completed.  */
+     int
+     job_is_completed (job *j)
+     {
+       process *p;
+     
+       for (p = j-&gt;first_process; p; p = p-&gt;next)
+         if (!p-&gt;completed)
+           return 0;
+       return 1;
+     }
+     </pre>
 
-  for (j = first_job; j; j = j-&gt;next)
-    if (j-&gt;pgid == pgid)
-      return j;
-  return NULL;
-}
-
-/* Return true if all processes in the job have stopped or completed.  */
-int
-job_is_stopped (job *j)
-{
-  process *p;
-
-  for (p = j-&gt;first_process; p; p = p-&gt;next)
-    if (!p-&gt;completed &amp;&amp; !p-&gt;stopped)
-      return 0;
-  return 1;
-}
-
-/* Return true if all processes in the job have completed.  */
-int
-job_is_completed (job *j)
-{
-  process *p;
-
-  for (p = j-&gt;first_process; p; p = p-&gt;next)
-    if (!p-&gt;completed)
-      return 0;
-  return 1;
-}
-</pre>
-
-</body></html>
+   </body></html>
 

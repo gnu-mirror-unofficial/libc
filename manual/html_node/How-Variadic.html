@@ -2,47 +2,57 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="How%20Variadic">How Variadic</a>,
-Next:<a rel=next accesskey=n href="Variadic-Example.html#Variadic%20Example">Variadic Example</a>,
-Previous:<a rel=previous accesskey=p href="Why-Variadic.html#Why%20Variadic">Why Variadic</a>,
-Up:<a rel=up accesskey=u href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>
+Node:&nbsp;<a name="How%20Variadic">How Variadic</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Variadic-Example.html#Variadic%20Example">Variadic Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Why-Variadic.html#Why%20Variadic">Why Variadic</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>
 <hr><br>
+</div>
 
-<h4>How Variadic Functions are Defined and Used</h4>
+<h3 class="subsection">How Variadic Functions are Defined and Used</h4>
 
 <p>Defining and using a variadic function involves three steps:
 
-<ul>
+     <ul>
 <li><em>Define</em> the function as variadic, using an ellipsis
-(<code><small>...</small></code>) in the argument list, and using special macros to
+(<code>...</code>) in the argument list, and using special macros to
 access the variable arguments.  See <a href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>.
 
-<li><em>Declare</em> the function as variadic, using a prototype with an
-ellipsis (<code><small>...</small></code>), in all the files which call it. 
+     <li><em>Declare</em> the function as variadic, using a prototype with an
+ellipsis (<code>...</code>), in all the files which call it. 
 See <a href="Variadic-Prototypes.html#Variadic%20Prototypes">Variadic Prototypes</a>.
 
-<li><em>Call</em> the function by writing the fixed arguments followed by the
+     <li><em>Call</em> the function by writing the fixed arguments followed by the
 additional variable arguments.  See <a href="Calling-Variadics.html#Calling%20Variadics">Calling Variadics</a>. 
 </ul>
 
-<ul>
-<li><a accesskey=1 href="Variadic-Prototypes.html#Variadic%20Prototypes">Variadic Prototypes</a>:   How to make a prototype for a function
+<ul class="menu">
+<li><a accesskey="1" href="Variadic-Prototypes.html#Variadic%20Prototypes">Variadic Prototypes</a>:   How to make a prototype for a function
 			  with variable arguments. 
-<li><a accesskey=2 href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>:   Steps you must follow to access the
+<li><a accesskey="2" href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>:   Steps you must follow to access the
 			  optional argument values. 
-<li><a accesskey=3 href="How-Many-Arguments.html#How%20Many%20Arguments">How Many Arguments</a>:    How to decide whether there are more arguments. 
-<li><a accesskey=4 href="Calling-Variadics.html#Calling%20Variadics">Calling Variadics</a>:     Things you need to know about calling
+<li><a accesskey="3" href="How-Many-Arguments.html#How%20Many%20Arguments">How Many Arguments</a>:    How to decide whether there are more arguments. 
+<li><a accesskey="4" href="Calling-Variadics.html#Calling%20Variadics">Calling Variadics</a>:     Things you need to know about calling
 			  variable arguments functions. 
-<li><a accesskey=5 href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>:       Detailed specification of the macros
+<li><a accesskey="5" href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>:       Detailed specification of the macros
         		  for accessing variable arguments. 
-<li><a accesskey=6 href="Old-Varargs.html#Old%20Varargs">Old Varargs</a>: 		 The pre-ISO way of defining variadic functions. 
+<li><a accesskey="6" href="Old-Varargs.html#Old%20Varargs">Old Varargs</a>: 		 The pre-ISO way of defining variadic functions. 
 </ul>
 
-</body></html>
+   </body></html>
 

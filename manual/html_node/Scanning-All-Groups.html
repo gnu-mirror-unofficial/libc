@@ -2,31 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Scanning%20All%20Groups">Scanning All Groups</a>,
-Previous:<a rel=previous accesskey=p href="Lookup-Group.html#Lookup%20Group">Lookup Group</a>,
-Up:<a rel=up accesskey=u href="Group-Database.html#Group%20Database">Group Database</a>
+Node:&nbsp;<a name="Scanning%20All%20Groups">Scanning All Groups</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Lookup-Group.html#Lookup%20Group">Lookup Group</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Group-Database.html#Group%20Database">Group Database</a>
 <hr><br>
+</div>
 
-<h4>Scanning the List of All Groups</h4>
+<h3 class="subsection">Scanning the List of All Groups</h4>
 
 <p>This section explains how a program can read the list of all groups in
 the system, one group at a time.  The functions described here are
 declared in <code>grp.h</code>.
 
-<p>You can use the <code>fgetgrent</code> function to read group entries from a
+   <p>You can use the <code>fgetgrent</code> function to read group entries from a
 particular file.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct group * <b>fgetgrent</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">struct group * <b>fgetgrent</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,7 +48,7 @@ allocated and is overwritten on subsequent calls to <code>fgetgrent</code>.  You
 must copy the contents of the structure if you wish to save the
 information.
 
-<p>The stream must correspond to a file in the same format as the standard
+     <p>The stream must correspond to a file in the same format as the standard
 group database file. 
 </td></tr>
 </table>
@@ -46,8 +56,8 @@ group database file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fgetgrent_r</b><i> (FILE *<var>stream</var>, struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)
-</i></td>
+<td align="left">int <b>fgetgrent_r</b><i> </i>(<i>FILE *</i><var>stream</var><i>, struct group *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, size_t </i><var>buflen</var><i>, struct group **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,24 +70,24 @@ of the additional buffer pointed to by <var>buffer</var> are used to contain
 additional information, normally strings which are pointed to by the
 elements of the result structure.
 
-<p>This stream must correspond to a file in the same format as the standard
+     <p>This stream must correspond to a file in the same format as the standard
 group database file.
 
-<p>If the function returns zero <var>result</var> points to the structure with
+     <p>If the function returns zero <var>result</var> points to the structure with
 the wanted data (normally this is in <var>result_buf</var>).  If errors
 occurred the return value is non-zero and <var>result</var> contains a null
 pointer. 
 </td></tr>
 </table>
 
-<p>The way to scan all the entries in the group database is with
+   <p>The way to scan all the entries in the group database is with
 <code>setgrent</code>, <code>getgrent</code>, and <code>endgrent</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>setgrent</b><i> (void)
-</i></td>
+<td align="left">void <b>setgrent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -91,8 +101,8 @@ You use this stream by calling <code>getgrent</code> or <code>getgrent_r</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct group * <b>getgrent</b><i> (void)
-</i></td>
+<td align="left">struct group * <b>getgrent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -109,8 +119,8 @@ wish to save the information.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getgrent_r</b><i> (struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)
-</i></td>
+<td align="left">int <b>getgrent_r</b><i> </i>(<i>struct group *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, size_t </i><var>buflen</var><i>, struct group **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -121,7 +131,7 @@ entry from the stream initialized by <code>setgrent</code>.  Like
 <code>fgetgrent_r</code>, it places the result in user-supplied buffers
 pointed to <var>result_buf</var> and <var>buffer</var>.
 
-<p>If the function returns zero <var>result</var> contains a pointer to the data
+     <p>If the function returns zero <var>result</var> contains a pointer to the data
 (normally equal to <var>result_buf</var>).  If errors occurred the return
 value is non-zero and <var>result</var> contains a null pointer. 
 </td></tr>
@@ -130,8 +140,8 @@ value is non-zero and <var>result</var> contains a null pointer.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endgrent</b><i> (void)
-</i></td>
+<td align="left">void <b>endgrent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -142,5 +152,5 @@ This function closes the internal stream used by <code>getgrent</code> or
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Freeing%20after%20Malloc">Freeing after Malloc</a>,
-Next:<a rel=next accesskey=n href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
-Previous:<a rel=previous accesskey=p href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
-Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+Node:&nbsp;<a name="Freeing%20after%20Malloc">Freeing after Malloc</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
 <hr><br>
+</div>
 
-<h5>Freeing Memory Allocated with <code>malloc</code></h5>
+<h3 class="subsubsection">Freeing Memory Allocated with <code>malloc</code></h5>
 
 <p>When you no longer need a block that you got with <code>malloc</code>, use the
 function <code>free</code> to make the block available to be allocated again. 
@@ -23,8 +33,8 @@ The prototype for this function is in <code>stdlib.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>free</b><i> (void *<var>ptr</var>)
-</i></td>
+<td align="left">void <b>free</b><i> </i>(<i>void *</i><var>ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,8 +48,8 @@ by <var>ptr</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>cfree</b><i> (void *<var>ptr</var>)
-</i></td>
+<td align="left">void <b>cfree</b><i> </i>(<i>void *</i><var>ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,40 +60,40 @@ backward compatibility with SunOS; you should use <code>free</code> instead.
 </td></tr>
 </table>
 
-<p>Freeing a block alters the contents of the block.  <strong>Do not expect to
+   <p>Freeing a block alters the contents of the block.  <strong>Do not expect to
 find any data (such as a pointer to the next block in a chain of blocks) in
 the block after freeing it.</strong>  Copy whatever you need out of the block before
 freeing it!  Here is an example of the proper way to free all the blocks in
 a chain, and the strings that they point to:
 
-<br><pre>struct chain
-  {
-    struct chain *next;
-    char *name;
-  }
+<pre class="smallexample">     struct chain
+       {
+         struct chain *next;
+         char *name;
+       }
+     
+     void
+     free_chain (struct chain *chain)
+     {
+       while (chain != 0)
+         {
+           struct chain *next = chain-&gt;next;
+           free (chain-&gt;name);
+           free (chain);
+           chain = next;
+         }
+     }
+     </pre>
 
-void
-free_chain (struct chain *chain)
-{
-  while (chain != 0)
-    {
-      struct chain *next = chain-&gt;next;
-      free (chain-&gt;name);
-      free (chain);
-      chain = next;
-    }
-}
-</pre>
-
-<p>Occasionally, <code>free</code> can actually return memory to the operating
+   <p>Occasionally, <code>free</code> can actually return memory to the operating
 system and make the process smaller.  Usually, all it can do is allow a
 later call to <code>malloc</code> to reuse the space.  In the meantime, the
 space remains in your program as part of a free-list used internally by
 <code>malloc</code>.
 
-<p>There is no point in freeing blocks at the end of a program, because all
+   <p>There is no point in freeing blocks at the end of a program, because all
 of the program's space is given back to the system when the process
 terminates.
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Variable%20Arguments%20Input">Variable Arguments Input</a>,
-Previous:<a rel=previous accesskey=p href="Formatted-Input-Functions.html#Formatted%20Input%20Functions">Formatted Input Functions</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="Variable%20Arguments%20Input">Variable Arguments Input</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatted-Input-Functions.html#Formatted%20Input%20Functions">Formatted Input Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>Variable Arguments Input Functions</h4>
+<h3 class="subsection">Variable Arguments Input Functions</h4>
 
 <p>The functions <code>vscanf</code> and friends are provided so that you can
 define your own variadic <code>scanf</code>-like functions that make use of
@@ -22,14 +32,14 @@ These functions are analogous to the <code>vprintf</code> series of output
 functions.  See <a href="Variable-Arguments-Output.html#Variable%20Arguments%20Output">Variable Arguments Output</a>, for important
 information on how to use them.
 
-<p><strong>Portability Note:</strong> The functions listed in this section were
+   <p><strong>Portability Note:</strong> The functions listed in this section were
 introduced in ISO&nbsp;C99 and were before available as GNU extensions.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vscanf</b><i> (const char *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vscanf</b><i> </i>(<i>const char *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -44,8 +54,8 @@ pointer <var>ap</var> of type <code>va_list</code> (see <a href="Variadic-Functi
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vwscanf</b><i> (const wchar_t *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vwscanf</b><i> </i>(<i>const wchar_t *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,8 +70,8 @@ pointer <var>ap</var> of type <code>va_list</code> (see <a href="Variadic-Functi
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vfscanf</b><i> (FILE *<var>stream</var>, const char *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vfscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const char *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -75,8 +85,8 @@ specified directly as for <code>vscanf</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vfwscanf</b><i> (FILE *<var>stream</var>, const wchar_t *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vfwscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const wchar_t *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -90,8 +100,8 @@ specified directly as for <code>vwscanf</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vsscanf</b><i> (const char *<var>s</var>, const char *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vsscanf</b><i> </i>(<i>const char *</i><var>s</var><i>, const char *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -105,8 +115,8 @@ specified directly as for <code>vscanf</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>vswscanf</b><i> (const wchar_t *<var>s</var>, const wchar_t *<var>template</var>, va_list <var>ap</var>)
-</i></td>
+<td align="left">int <b>vswscanf</b><i> </i>(<i>const wchar_t *</i><var>s</var><i>, const wchar_t *</i><var>template</var><i>, va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -117,11 +127,11 @@ specified directly as for <code>vwscanf</code>.
 </td></tr>
 </table>
 
-<p>In GNU C, there is a special construct you can use to let the compiler
+   <p>In GNU C, there is a special construct you can use to let the compiler
 know that a function uses a <code>scanf</code>-style format string.  Then it
 can check the number and types of arguments in each call to the
 function, and warn you when they do not match the format string. 
 For details, See <a href="../gcc.info/Function-Attributes.html#Function%20Attributes">Declaring Attributes of Functions</a>.
 
-</body></html>
+   </body></html>
 

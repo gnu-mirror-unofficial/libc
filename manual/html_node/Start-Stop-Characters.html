@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Start%2fStop%20Characters">Start/Stop Characters</a>,
-Next:<a rel=next accesskey=n href="Other-Special.html#Other%20Special">Other Special</a>,
-Previous:<a rel=previous accesskey=p href="Signal-Characters.html#Signal%20Characters">Signal Characters</a>,
-Up:<a rel=up accesskey=u href="Special-Characters.html#Special%20Characters">Special Characters</a>
+Node:&nbsp;<a name="Start%2fStop%20Characters">Start/Stop Characters</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Other-Special.html#Other%20Special">Other Special</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Signal-Characters.html#Signal%20Characters">Signal Characters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Special-Characters.html#Special%20Characters">Special Characters</a>
 <hr><br>
+</div>
 
-<h5>Special Characters for Flow Control</h5>
+<h3 class="subsubsection">Special Characters for Flow Control</h5>
 
 <p>These special characters may be active in either canonical or noncanonical
 input mode, but their use is controlled by the flags <code>IXON</code> and
@@ -24,17 +34,17 @@ input mode, but their use is controlled by the flags <code>IXON</code> and
 <table width="100%">
 <tr>
 <td align="left">int <b>VSTART</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This is the subscript for the START character in the special control
-character array.  <code><var>termios</var>.c_cc[VSTART]</code> holds the
+character array.  <code></code><var>termios</var><code>.c_cc[VSTART]</code> holds the
 character itself.
 
-<p>The START character is used to support the <code>IXON</code> and <code>IXOFF</code>
+     <p>The START character is used to support the <code>IXON</code> and <code>IXOFF</code>
 input modes.  If <code>IXON</code> is set, receiving a START character resumes
 suspended output; the START character itself is discarded.  If
 <code>IXANY</code> is set, receiving any character at all resumes suspended
@@ -42,7 +52,7 @@ output; the resuming character is not discarded unless it is the START
 character.  <code>IXOFF</code> is set, the system may also transmit START
 characters to the terminal.
 
-<p>The usual value for the START character is <kbd>C-q</kbd>.  You may not be
+     <p>The usual value for the START character is <kbd>C-q</kbd>.  You may not be
 able to change this value--the hardware may insist on using <kbd>C-q</kbd>
 regardless of what you specify. 
 </td></tr>
@@ -52,27 +62,27 @@ regardless of what you specify.
 <table width="100%">
 <tr>
 <td align="left">int <b>VSTOP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This is the subscript for the STOP character in the special control
-character array.  <code><var>termios</var>.c_cc[VSTOP]</code> holds the character
+character array.  <code></code><var>termios</var><code>.c_cc[VSTOP]</code> holds the character
 itself.
 
-<p>The STOP character is used to support the <code>IXON</code> and <code>IXOFF</code>
+     <p>The STOP character is used to support the <code>IXON</code> and <code>IXOFF</code>
 input modes.  If <code>IXON</code> is set, receiving a STOP character causes
 output to be suspended; the STOP character itself is discarded.  If
 <code>IXOFF</code> is set, the system may also transmit STOP characters to the
 terminal, to prevent the input queue from overflowing.
 
-<p>The usual value for the STOP character is <kbd>C-s</kbd>.  You may not be
+     <p>The usual value for the STOP character is <kbd>C-s</kbd>.  You may not be
 able to change this value--the hardware may insist on using <kbd>C-s</kbd>
 regardless of what you specify. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Special%20Functions">Special Functions</a>,
-Next:<a rel=next accesskey=n href="Errors-in-Math-Functions.html#Errors%20in%20Math%20Functions">Errors in Math Functions</a>,
-Previous:<a rel=previous accesskey=p href="Hyperbolic-Functions.html#Hyperbolic%20Functions">Hyperbolic Functions</a>,
-Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+Node:&nbsp;<a name="Special%20Functions">Special Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Errors-in-Math-Functions.html#Errors%20in%20Math%20Functions">Errors in Math Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Hyperbolic-Functions.html#Hyperbolic%20Functions">Hyperbolic Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Mathematics.html#Mathematics">Mathematics</a>
 <hr><br>
+</div>
 
-<h3>Special Functions</h3>
+<h3 class="section">Special Functions</h3>
 
 <p>These are some more exotic mathematical functions which are sometimes
 useful.  Currently they only have real-valued versions.
@@ -22,8 +32,8 @@ useful.  Currently they only have real-valued versions.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>erf</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>erf</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -31,8 +41,8 @@ useful.  Currently they only have real-valued versions.
 <tr><td>
 
 <tr>
-<td align="left">float <b>erff</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>erff</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -40,8 +50,8 @@ useful.  Currently they only have real-valued versions.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>erfl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>erfl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -49,16 +59,16 @@ useful.  Currently they only have real-valued versions.
 <tr><td>
 <code>erf</code> returns the error function of <var>x</var>.  The error
 function is defined as
-<br><pre>erf (x) = 2/sqrt(pi) * integral from 0 to x of exp(-t^2) dt
-</pre>
-</td></tr>
+     <pre class="smallexample">          erf (x) = 2/sqrt(pi) * integral from 0 to x of exp(-t^2) dt
+          </pre>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>erfc</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>erfc</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -66,8 +76,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">float <b>erfcf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>erfcf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -75,14 +85,14 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">long double <b>erfcl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>erfcl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-<code>erfc</code> returns <code>1.0 - erf(<var>x</var>)</code>, but computed in a
+<code>erfc</code> returns <code>1.0 - erf(</code><var>x</var><code>)</code>, but computed in a
 fashion that avoids round-off error when <var>x</var> is large. 
 </td></tr>
 </table>
@@ -90,8 +100,8 @@ fashion that avoids round-off error when <var>x</var> is large.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>lgamma</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>lgamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -99,8 +109,8 @@ fashion that avoids round-off error when <var>x</var> is large.
 <tr><td>
 
 <tr>
-<td align="left">float <b>lgammaf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>lgammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -108,8 +118,8 @@ fashion that avoids round-off error when <var>x</var> is large.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>lgammal</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>lgammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -117,21 +127,21 @@ fashion that avoids round-off error when <var>x</var> is large.
 <tr><td>
 <code>lgamma</code> returns the natural logarithm of the absolute value of
 the gamma function of <var>x</var>.  The gamma function is defined as
-<br><pre>gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
-</pre>
+     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+          </pre>
 
-<p>The sign of the gamma function is stored in the global variable
+     <p>The sign of the gamma function is stored in the global variable
 <var>signgam</var>, which is declared in <code>math.h</code>.  It is <code>1</code> if
 the intermediate result was positive or zero, or <code>-1</code> if it was
 negative.
 
-<p>To compute the real gamma function you can use the <code>tgamma</code>
+     <p>To compute the real gamma function you can use the <code>tgamma</code>
 function or you can compute the values as follows:
-<br><pre>lgam = lgamma(x);
-gam  = signgam*exp(lgam);
-</pre>
+     <pre class="smallexample">          lgam = lgamma(x);
+          gam  = signgam*exp(lgam);
+          </pre>
 
-<p>The gamma function has singularities at the non-positive integers. 
+     <p>The gamma function has singularities at the non-positive integers. 
 <code>lgamma</code> will raise the zero divide exception if evaluated at a
 singularity. 
 </td></tr>
@@ -140,8 +150,8 @@ singularity.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>lgamma_r</b><i> (double <var>x</var>, int *<var>signp</var>)
-</i></td>
+<td align="left">double <b>lgamma_r</b><i> </i>(<i>double </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -149,8 +159,8 @@ singularity.
 <tr><td>
 
 <tr>
-<td align="left">float <b>lgammaf_r</b><i> (float <var>x</var>, int *<var>signp</var>)
-</i></td>
+<td align="left">float <b>lgammaf_r</b><i> </i>(<i>float </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -158,8 +168,8 @@ singularity.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>lgammal_r</b><i> (long double <var>x</var>, int *<var>signp</var>)
-</i></td>
+<td align="left">long double <b>lgammal_r</b><i> </i>(<i>long double </i><var>x</var><i>, int *</i><var>signp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -174,8 +184,8 @@ instead of in the <var>signgam</var> global.  This means it is reentrant.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>gamma</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>gamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -183,8 +193,8 @@ instead of in the <var>signgam</var> global.  This means it is reentrant.
 <tr><td>
 
 <tr>
-<td align="left">float <b>gammaf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>gammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -192,8 +202,8 @@ instead of in the <var>signgam</var> global.  This means it is reentrant.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>gammal</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>gammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -209,8 +219,8 @@ standardized in ISO&nbsp;C99 while <code>gamma</code> is not.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>tgamma</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>tgamma</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -218,8 +228,8 @@ standardized in ISO&nbsp;C99 while <code>gamma</code> is not.
 <tr><td>
 
 <tr>
-<td align="left">float <b>tgammaf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>tgammaf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -227,8 +237,8 @@ standardized in ISO&nbsp;C99 while <code>gamma</code> is not.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>tgammal</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>tgammal</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -236,18 +246,18 @@ standardized in ISO&nbsp;C99 while <code>gamma</code> is not.
 <tr><td>
 <code>tgamma</code> applies the gamma function to <var>x</var>.  The gamma
 function is defined as
-<br><pre>gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
-</pre>
+     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+          </pre>
 
-<p>This function was introduced in ISO&nbsp;C99. 
+     <p>This function was introduced in ISO&nbsp;C99. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>j0</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>j0</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -255,8 +265,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">float <b>j0f</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>j0f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -264,8 +274,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">long double <b>j0l</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>j0l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -279,8 +289,8 @@ function is defined as
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>j1</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>j1</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -288,8 +298,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">float <b>j1f</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>j1f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -297,8 +307,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">long double <b>j1l</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>j1l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -312,8 +322,8 @@ function is defined as
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>jn</b><i> (int n, double <var>x</var>)
-</i></td>
+<td align="left">double <b>jn</b><i> </i>(<i>int n, double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -321,8 +331,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">float <b>jnf</b><i> (int n, float <var>x</var>)
-</i></td>
+<td align="left">float <b>jnf</b><i> </i>(<i>int n, float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -330,8 +340,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">long double <b>jnl</b><i> (int n, long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>jnl</b><i> </i>(<i>int n, long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -345,8 +355,8 @@ function is defined as
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>y0</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>y0</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -354,8 +364,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">float <b>y0f</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>y0f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -363,8 +373,8 @@ function is defined as
 <tr><td>
 
 <tr>
-<td align="left">long double <b>y0l</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>y0l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -380,8 +390,8 @@ is negative, <code>y0</code> signals a domain error; if it is zero,
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>y1</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>y1</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -389,8 +399,8 @@ is negative, <code>y0</code> signals a domain error; if it is zero,
 <tr><td>
 
 <tr>
-<td align="left">float <b>y1f</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>y1f</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -398,8 +408,8 @@ is negative, <code>y0</code> signals a domain error; if it is zero,
 <tr><td>
 
 <tr>
-<td align="left">long double <b>y1l</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>y1l</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -415,8 +425,8 @@ is negative, <code>y1</code> signals a domain error; if it is zero,
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>yn</b><i> (int n, double <var>x</var>)
-</i></td>
+<td align="left">double <b>yn</b><i> </i>(<i>int n, double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -424,8 +434,8 @@ is negative, <code>y1</code> signals a domain error; if it is zero,
 <tr><td>
 
 <tr>
-<td align="left">float <b>ynf</b><i> (int n, float <var>x</var>)
-</i></td>
+<td align="left">float <b>ynf</b><i> </i>(<i>int n, float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -433,8 +443,8 @@ is negative, <code>y1</code> signals a domain error; if it is zero,
 <tr><td>
 
 <tr>
-<td align="left">long double <b>ynl</b><i> (int n, long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>ynl</b><i> </i>(<i>int n, long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -447,5 +457,5 @@ is negative, <code>yn</code> signals a domain error; if it is zero,
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Job%20Control">Job Control</a>,
-Next:<a rel=next accesskey=n href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>,
-Previous:<a rel=previous accesskey=p href="Processes.html#Processes">Processes</a>,
-Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+Node:&nbsp;<a name="Job%20Control">Job Control</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Processes.html#Processes">Processes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
 <hr><br>
+</div>
 
-<h2>Job Control</h2>
+<h2 class="chapter">Job Control</h2>
 
 <p><dfn>Job control</dfn> refers to the protocol for allowing a user to move
 between multiple <dfn>process groups</dfn> (or <dfn>jobs</dfn>) within a single
@@ -24,19 +34,19 @@ need not do anything special about job control.  So you can probably
 ignore the material in this chapter unless you are writing a shell or
 login program.
 
-<p>You need to be familiar with concepts relating to process creation
+   <p>You need to be familiar with concepts relating to process creation
 (see <a href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>) and signal handling (see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>) in order to understand this material presented in this
 chapter.
 
-<ul>
-<li><a accesskey=1 href="Concepts-of-Job-Control.html#Concepts%20of%20Job%20Control">Concepts of Job Control</a>:      Jobs can be controlled by a shell. 
-<li><a accesskey=2 href="Job-Control-is-Optional.html#Job%20Control%20is%20Optional">Job Control is Optional</a>:      Not all POSIX systems support job control. 
-<li><a accesskey=3 href="Controlling-Terminal.html#Controlling%20Terminal">Controlling Terminal</a>:         How a process gets its controlling terminal. 
-<li><a accesskey=4 href="Access-to-the-Terminal.html#Access%20to%20the%20Terminal">Access to the Terminal</a>:       How processes share the controlling terminal. 
-<li><a accesskey=5 href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>:      Jobs left after the user logs out. 
-<li><a accesskey=6 href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>:         What a shell must do to implement job control. 
-<li><a accesskey=7 href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>:    Functions to control process groups. 
+<ul class="menu">
+<li><a accesskey="1" href="Concepts-of-Job-Control.html#Concepts%20of%20Job%20Control">Concepts of Job Control</a>:      Jobs can be controlled by a shell. 
+<li><a accesskey="2" href="Job-Control-is-Optional.html#Job%20Control%20is%20Optional">Job Control is Optional</a>:      Not all POSIX systems support job control. 
+<li><a accesskey="3" href="Controlling-Terminal.html#Controlling%20Terminal">Controlling Terminal</a>:         How a process gets its controlling terminal. 
+<li><a accesskey="4" href="Access-to-the-Terminal.html#Access%20to%20the%20Terminal">Access to the Terminal</a>:       How processes share the controlling terminal. 
+<li><a accesskey="5" href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>:      Jobs left after the user logs out. 
+<li><a accesskey="6" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>:         What a shell must do to implement job control. 
+<li><a accesskey="7" href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>:    Functions to control process groups. 
 </ul>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Allocating%20Cleared%20Space">Allocating Cleared Space</a>,
-Next:<a rel=next accesskey=n href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
-Previous:<a rel=previous accesskey=p href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
-Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+Node:&nbsp;<a name="Allocating%20Cleared%20Space">Allocating Cleared Space</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
 <hr><br>
+</div>
 
-<h5>Allocating Cleared Space</h5>
+<h3 class="subsubsection">Allocating Cleared Space</h5>
 
 <p>The function <code>calloc</code> allocates memory and clears it to zero.  It
 is declared in <code>stdlib.h</code>.
@@ -22,8 +32,8 @@ is declared in <code>stdlib.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>calloc</b><i> (size_t <var>count</var>, size_t <var>eltsize</var>)
-</i></td>
+<td align="left">void * <b>calloc</b><i> </i>(<i>size_t </i><var>count</var><i>, size_t </i><var>eltsize</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,23 +45,23 @@ cleared to zero before <code>calloc</code> returns.
 </td></tr>
 </table>
 
-<p>You could define <code>calloc</code> as follows:
+   <p>You could define <code>calloc</code> as follows:
 
-<br><pre>void *
-calloc (size_t count, size_t eltsize)
-{
-  size_t size = count * eltsize;
-  void *value = malloc (size);
-  if (value != 0)
-    memset (value, 0, size);
-  return value;
-}
-</pre>
+<pre class="smallexample">     void *
+     calloc (size_t count, size_t eltsize)
+     {
+       size_t size = count * eltsize;
+       void *value = malloc (size);
+       if (value != 0)
+         memset (value, 0, size);
+       return value;
+     }
+     </pre>
 
-<p>But in general, it is not guaranteed that <code>calloc</code> calls
+   <p>But in general, it is not guaranteed that <code>calloc</code> calls
 <code>malloc</code> internally.  Therefore, if an application provides its own
 <code>malloc</code>/<code>realloc</code>/<code>free</code> outside the C library, it
 should always define <code>calloc</code>, too.
 
-</body></html>
+   </body></html>
 

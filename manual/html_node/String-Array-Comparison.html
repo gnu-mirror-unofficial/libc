@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="String%2fArray%20Comparison">String/Array Comparison</a>,
-Next:<a rel=next accesskey=n href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>,
-Previous:<a rel=previous accesskey=p href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>,
-Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+Node:&nbsp;<a name="String%2fArray%20Comparison">String/Array Comparison</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
 <hr><br>
+</div>
 
-<h3>String/Array Comparison</h3>
+<h3 class="section">String/Array Comparison</h3>
 
 <p>You can use the functions in this section to perform comparisons on the
 contents of strings and arrays.  As well as checking for equality, these
 functions can also be used as the ordering functions for sorting
 operations.  See <a href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>, for an example of this.
 
-<p>Unlike most comparison operations in C, the string comparison functions
+   <p>Unlike most comparison operations in C, the string comparison functions
 return a nonzero value if the strings are <em>not</em> equivalent rather
 than if they are.  The sign of the value indicates the relative ordering
 of the first characters in the strings that are not equivalent:  a
@@ -29,16 +39,16 @@ negative value indicates that the first string is "less" than the
 second, while a positive value indicates that the first string is
 "greater".
 
-<p>The most common use of these functions is to check only for equality. 
+   <p>The most common use of these functions is to check only for equality. 
 This is canonically done with an expression like <code>!&nbsp;strcmp&nbsp;(s1,&nbsp;s2)</code>.
 
-<p>All of these functions are declared in the header file <code>string.h</code>.
+   <p>All of these functions are declared in the header file <code>string.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>memcmp</b><i> (const void *<var>a1</var>, const void *<var>a2</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>memcmp</b><i> </i>(<i>const void *</i><var>a1</var><i>, const void *</i><var>a2</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,7 +60,7 @@ at <var>a2</var>.  The value returned has the same sign as the difference
 between the first differing pair of bytes (interpreted as <code>unsigned
 char</code> objects, then promoted to <code>int</code>).
 
-<p>If the contents of the two blocks are equal, <code>memcmp</code> returns
+     <p>If the contents of the two blocks are equal, <code>memcmp</code> returns
 <code>0</code>. 
 </td></tr>
 </table>
@@ -58,8 +68,8 @@ char</code> objects, then promoted to <code>int</code>).
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wmemcmp</b><i> (const wchar_t *<var>a1</var>, const wchar_t *<var>a2</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>wmemcmp</b><i> </i>(<i>const wchar_t *</i><var>a1</var><i>, const wchar_t *</i><var>a2</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -71,23 +81,23 @@ at <var>a2</var>.  The value returned is smaller than or larger than zero
 depending on whether the first differing wide character is <var>a1</var> is
 smaller or larger than the corresponding character in <var>a2</var>.
 
-<p>If the contents of the two blocks are equal, <code>wmemcmp</code> returns
+     <p>If the contents of the two blocks are equal, <code>wmemcmp</code> returns
 <code>0</code>. 
 </td></tr>
 </table>
 
-<p>On arbitrary arrays, the <code>memcmp</code> function is mostly useful for
+   <p>On arbitrary arrays, the <code>memcmp</code> function is mostly useful for
 testing equality.  It usually isn't meaningful to do byte-wise ordering
 comparisons on arrays of things other than bytes.  For example, a
 byte-wise comparison on the bytes that make up floating-point numbers
 isn't likely to tell you anything about the relationship between the
 values of the floating-point numbers.
 
-<p><code>wmemcmp</code> is really only useful to compare arrays of type
+   <p><code>wmemcmp</code> is really only useful to compare arrays of type
 <code>wchar_t</code> since the function looks at <code>sizeof (wchar_t)</code> bytes
 at a time and this number of bytes is system dependent.
 
-<p>You should also be careful about using <code>memcmp</code> to compare objects
+   <p>You should also be careful about using <code>memcmp</code> to compare objects
 that can contain "holes", such as the padding inserted into structure
 objects to enforce alignment requirements, extra space at the end of
 unions, and extra characters at the ends of strings whose length is less
@@ -96,19 +106,19 @@ indeterminate and may cause strange behavior when performing byte-wise
 comparisons.  For more predictable results, perform an explicit
 component-wise comparison.
 
-<p>For example, given a structure type definition like:
+   <p>For example, given a structure type definition like:
 
-<br><pre>struct foo
-  {
-    unsigned char tag;
-    union
-      {
-        double f;
-        long i;
-        char *p;
-      } value;
-  };
-</pre>
+<pre class="smallexample">     struct foo
+       {
+         unsigned char tag;
+         union
+           {
+             double f;
+             long i;
+             char *p;
+           } value;
+       };
+     </pre>
 
 <p>you are better off writing a specialized comparison function to compare
 <code>struct foo</code> objects instead of comparing them with <code>memcmp</code>.
@@ -116,8 +126,8 @@ component-wise comparison.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>strcmp</b><i> (const char *<var>s1</var>, const char *<var>s2</var>)
-</i></td>
+<td align="left">int <b>strcmp</b><i> </i>(<i>const char *</i><var>s1</var><i>, const char *</i><var>s2</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -128,13 +138,13 @@ The <code>strcmp</code> function compares the string <var>s1</var> against
 between the first differing pair of characters (interpreted as
 <code>unsigned char</code> objects, then promoted to <code>int</code>).
 
-<p>If the two strings are equal, <code>strcmp</code> returns <code>0</code>.
+     <p>If the two strings are equal, <code>strcmp</code> returns <code>0</code>.
 
-<p>A consequence of the ordering used by <code>strcmp</code> is that if <var>s1</var>
+     <p>A consequence of the ordering used by <code>strcmp</code> is that if <var>s1</var>
 is an initial substring of <var>s2</var>, then <var>s1</var> is considered to be
 "less than" <var>s2</var>.
 
-<p><code>strcmp</code> does not take sorting conventions of the language the
+     <p><code>strcmp</code> does not take sorting conventions of the language the
 strings are written in into account.  To get that one has to use
 <code>strcoll</code>. 
 </td></tr>
@@ -143,26 +153,26 @@ strings are written in into account.  To get that one has to use
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wcscmp</b><i> (const wchar_t *<var>ws1</var>, const wchar_t *<var>ws2</var>)
-</i></td>
+<td align="left">int <b>wcscmp</b><i> </i>(<i>const wchar_t *</i><var>ws1</var><i>, const wchar_t *</i><var>ws2</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p>The <code>wcscmp</code> function compares the wide character string <var>ws1</var>
+     <p>The <code>wcscmp</code> function compares the wide character string <var>ws1</var>
 against <var>ws2</var>.  The value returned is smaller than or larger than zero
 depending on whether the first differing wide character is <var>ws1</var> is
 smaller or larger than the corresponding character in <var>ws2</var>.
 
-<p>If the two strings are equal, <code>wcscmp</code> returns <code>0</code>.
+     <p>If the two strings are equal, <code>wcscmp</code> returns <code>0</code>.
 
-<p>A consequence of the ordering used by <code>wcscmp</code> is that if <var>ws1</var>
+     <p>A consequence of the ordering used by <code>wcscmp</code> is that if <var>ws1</var>
 is an initial substring of <var>ws2</var>, then <var>ws1</var> is considered to be
 "less than" <var>ws2</var>.
 
-<p><code>wcscmp</code> does not take sorting conventions of the language the
+     <p><code>wcscmp</code> does not take sorting conventions of the language the
 strings are written in into account.  To get that one has to use
 <code>wcscoll</code>. 
 </td></tr>
@@ -171,8 +181,8 @@ strings are written in into account.  To get that one has to use
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>strcasecmp</b><i> (const char *<var>s1</var>, const char *<var>s2</var>)
-</i></td>
+<td align="left">int <b>strcasecmp</b><i> </i>(<i>const char *</i><var>s1</var><i>, const char *</i><var>s2</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -184,15 +194,15 @@ determined by the currently selected locale.  In the standard <code>"C"</code>
 locale the characters &Auml; and &auml; do not match but in a locale which
 regards these characters as parts of the alphabet they do match.
 
-<p><code>strcasecmp</code> is derived from BSD. 
+     <p><code>strcasecmp</code> is derived from BSD. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wcscasecmp</b><i> (const wchar_t *<var>ws1</var>, const wchar_T *<var>ws2</var>)
-</i></td>
+<td align="left">int <b>wcscasecmp</b><i> </i>(<i>const wchar_t *</i><var>ws1</var><i>, const wchar_T *</i><var>ws2</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -204,15 +214,15 @@ determined by the currently selected locale.  In the standard <code>"C"</code>
 locale the characters &Auml; and &auml; do not match but in a locale which
 regards these characters as parts of the alphabet they do match.
 
-<p><code>wcscasecmp</code> is a GNU extension. 
+     <p><code>wcscasecmp</code> is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>strncmp</b><i> (const char *<var>s1</var>, const char *<var>s2</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>strncmp</b><i> </i>(<i>const char *</i><var>s1</var><i>, const char *</i><var>s2</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -228,8 +238,8 @@ return value is zero.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wcsncmp</b><i> (const wchar_t *<var>ws1</var>, const wchar_t *<var>ws2</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>wcsncmp</b><i> </i>(<i>const wchar_t *</i><var>ws1</var><i>, const wchar_t *</i><var>ws2</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -245,8 +255,8 @@ return value is zero.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>strncasecmp</b><i> (const char *<var>s1</var>, const char *<var>s2</var>, size_t <var>n</var>)
-</i></td>
+<td align="left">int <b>strncasecmp</b><i> </i>(<i>const char *</i><var>s1</var><i>, const char *</i><var>s2</var><i>, size_t </i><var>n</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -256,15 +266,15 @@ This function is like <code>strncmp</code>, except that differences in case
 are ignored.  Like <code>strcasecmp</code>, it is locale dependent how
 uppercase and lowercase characters are related.
 
-<p><code>strncasecmp</code> is a GNU extension. 
+     <p><code>strncasecmp</code> is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wcsncasecmp</b><i> (const wchar_t *<var>ws1</var>, const wchar_t *<var>s2</var>, size_t <var>n</var>)
-</i></td>
+<td align="left">int <b>wcsncasecmp</b><i> </i>(<i>const wchar_t *</i><var>ws1</var><i>, const wchar_t *</i><var>s2</var><i>, size_t </i><var>n</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -274,36 +284,36 @@ This function is like <code>wcsncmp</code>, except that differences in case
 are ignored.  Like <code>wcscasecmp</code>, it is locale dependent how
 uppercase and lowercase characters are related.
 
-<p><code>wcsncasecmp</code> is a GNU extension. 
+     <p><code>wcsncasecmp</code> is a GNU extension. 
 </td></tr>
 </table>
 
-<p>Here are some examples showing the use of <code>strcmp</code> and
+   <p>Here are some examples showing the use of <code>strcmp</code> and
 <code>strncmp</code> (equivalent examples can be constructed for the wide
 character functions).  These examples assume the use of the ASCII
 character set.  (If some other character set--say, EBCDIC--is used
 instead, then the glyphs are associated with different numeric codes,
 and the return values and ordering may differ.)
 
-<br><pre>strcmp ("hello", "hello")
-    =&gt; 0    /* These two strings are the same. */
-strcmp ("hello", "Hello")
-    =&gt; 32   /* Comparisons are case-sensitive. */
-strcmp ("hello", "world")
-    =&gt; -15  /* The character <code>'h'</code> comes before <code>'w'</code>. */
-strcmp ("hello", "hello, world")
-    =&gt; -44  /* Comparing a null character against a comma. */
-strncmp ("hello", "hello, world", 5)
-    =&gt; 0    /* The initial 5 characters are the same. */
-strncmp ("hello, world", "hello, stupid world!!!", 5)
-    =&gt; 0    /* The initial 5 characters are the same. */
-</pre>
+<pre class="smallexample">     strcmp ("hello", "hello")
+         =&gt; 0    /* These two strings are the same. */
+     strcmp ("hello", "Hello")
+         =&gt; 32   /* Comparisons are case-sensitive. */
+     strcmp ("hello", "world")
+         =&gt; -15  /* The character <code>'h'</code> comes before <code>'w'</code>. */
+     strcmp ("hello", "hello, world")
+         =&gt; -44  /* Comparing a null character against a comma. */
+     strncmp ("hello", "hello, world", 5)
+         =&gt; 0    /* The initial 5 characters are the same. */
+     strncmp ("hello, world", "hello, stupid world!!!", 5)
+         =&gt; 0    /* The initial 5 characters are the same. */
+     </pre>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>strverscmp</b><i> (const char *<var>s1</var>, const char *<var>s2</var>)
-</i></td>
+<td align="left">int <b>strverscmp</b><i> </i>(<i>const char *</i><var>s1</var><i>, const char *</i><var>s2</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -315,7 +325,7 @@ value follows the same conventions as found in the <code>strverscmp</code>
 function.  In fact, if <var>s1</var> and <var>s2</var> contain no digits,
 <code>strverscmp</code> behaves like <code>strcmp</code>.
 
-<p>Basically, we compare strings normally (character by character), until
+     <p>Basically, we compare strings normally (character by character), until
 we find a digit in each string - then we enter a special comparison
 mode, where each sequence of digits is taken as a whole.  If we reach the
 end of these two parts without noticing a difference, we return to the
@@ -323,41 +333,41 @@ standard comparison mode.  There are two types of numeric parts:
 "integral" and "fractional" (those  begin with a '0'). The types
 of the numeric parts affect the way we sort them:
 
-<ul>
+          <ul>
 <li>integral/integral: we compare values as you would expect.
 
-<li>fractional/integral: the fractional part is less than the integral one. 
+          <li>fractional/integral: the fractional part is less than the integral one. 
 Again, no surprise.
 
-<li>fractional/fractional: the things become a bit more complex. 
+          <li>fractional/fractional: the things become a bit more complex. 
 If the common prefix contains only leading zeroes, the longest part is less
 than the other one; else the comparison behaves normally. 
 </ul>
 
-<br><pre>strverscmp ("no digit", "no digit")
-    =&gt; 0    /* same behavior as strcmp. */
-strverscmp ("item#99", "item#100")
-    =&gt; &lt;0   /* same prefix, but 99 &lt; 100. */
-strverscmp ("alpha1", "alpha001")
-    =&gt; &gt;0   /* fractional part inferior to integral one. */
-strverscmp ("part1_f012", "part1_f01")
-    =&gt; &gt;0   /* two fractional parts. */
-strverscmp ("foo.009", "foo.0")
-    =&gt; &lt;0   /* idem, but with leading zeroes only. */
-</pre>
+     <pre class="smallexample">          strverscmp ("no digit", "no digit")
+              =&gt; 0    /* same behavior as strcmp. */
+          strverscmp ("item#99", "item#100")
+              =&gt; &lt;0   /* same prefix, but 99 &lt; 100. */
+          strverscmp ("alpha1", "alpha001")
+              =&gt; &gt;0   /* fractional part inferior to integral one. */
+          strverscmp ("part1_f012", "part1_f01")
+              =&gt; &gt;0   /* two fractional parts. */
+          strverscmp ("foo.009", "foo.0")
+              =&gt; &lt;0   /* idem, but with leading zeroes only. */
+          </pre>
 
-<p>This function is especially useful when dealing with filename sorting,
+     <p>This function is especially useful when dealing with filename sorting,
 because filenames frequently hold indices/version numbers.
 
-<p><code>strverscmp</code> is a GNU extension. 
+     <p><code>strverscmp</code> is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>bcmp</b><i> (const void *<var>a1</var>, const void *<var>a2</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>bcmp</b><i> </i>(<i>const void *</i><var>a1</var><i>, const void *</i><var>a2</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -367,5 +377,5 @@ This is an obsolete alias for <code>memcmp</code>, derived from BSD.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

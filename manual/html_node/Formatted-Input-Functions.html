@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Formatted%20Input%20Functions">Formatted Input Functions</a>,
-Next:<a rel=next accesskey=n href="Variable-Arguments-Input.html#Variable%20Arguments%20Input">Variable Arguments Input</a>,
-Previous:<a rel=previous accesskey=p href="Other-Input-Conversions.html#Other%20Input%20Conversions">Other Input Conversions</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="Formatted%20Input%20Functions">Formatted Input Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Variable-Arguments-Input.html#Variable%20Arguments%20Input">Variable Arguments Input</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Other-Input-Conversions.html#Other%20Input%20Conversions">Other Input Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>Formatted Input Functions</h4>
+<h3 class="subsection">Formatted Input Functions</h4>
 
 <p>Here are the descriptions of the functions for performing formatted
 input. 
@@ -23,8 +33,8 @@ Prototypes for these functions are in the header file <code>stdio.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>scanf</b><i> (const char *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>scanf</b><i> </i>(<i>const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,7 +45,7 @@ The <code>scanf</code> function reads formatted input from the stream
 The optional arguments are pointers to the places which receive the
 resulting values.
 
-<p>The return value is normally the number of successful assignments.  If
+     <p>The return value is normally the number of successful assignments.  If
 an end-of-file condition is detected before any matches are performed,
 including matches against whitespace and literal characters in the
 template, then <code>EOF</code> is returned. 
@@ -45,8 +55,8 @@ template, then <code>EOF</code> is returned.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wscanf</b><i> (const wchar_t *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>wscanf</b><i> </i>(<i>const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -57,7 +67,7 @@ The <code>wscanf</code> function reads formatted input from the stream
 The optional arguments are pointers to the places which receive the
 resulting values.
 
-<p>The return value is normally the number of successful assignments.  If
+     <p>The return value is normally the number of successful assignments.  If
 an end-of-file condition is detected before any matches are performed,
 including matches against whitespace and literal characters in the
 template, then <code>WEOF</code> is returned. 
@@ -67,8 +77,8 @@ template, then <code>WEOF</code> is returned.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fscanf</b><i> (FILE *<var>stream</var>, const char *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>fscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -82,8 +92,8 @@ from the stream <var>stream</var> instead of <code>stdin</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fwscanf</b><i> (FILE *<var>stream</var>, const wchar_t *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>fwscanf</b><i> </i>(<i>FILE *</i><var>stream</var><i>, const wchar_t *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -97,8 +107,8 @@ from the stream <var>stream</var> instead of <code>stdin</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sscanf</b><i> (const char *<var>s</var>, const char *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>sscanf</b><i> </i>(<i>const char *</i><var>s</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -108,7 +118,7 @@ This is like <code>scanf</code>, except that the characters are taken from the
 null-terminated string <var>s</var> instead of from a stream.  Reaching the
 end of the string is treated as an end-of-file condition.
 
-<p>The behavior of this function is undefined if copying takes place
+     <p>The behavior of this function is undefined if copying takes place
 between objects that overlap--for example, if <var>s</var> is also given
 as an argument to receive a string read under control of the <code>%s</code>,
 <code>%S</code>, or <code>%[</code> conversion. 
@@ -118,8 +128,8 @@ as an argument to receive a string read under control of the <code>%s</code>,
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>swscanf</b><i> (const wchar_t *<var>ws</var>, const char *<var>template</var>, <small>...</small>)
-</i></td>
+<td align="left">int <b>swscanf</b><i> </i>(<i>const wchar_t *</i><var>ws</var><i>, const char *</i><var>template</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -129,12 +139,12 @@ This is like <code>wscanf</code>, except that the characters are taken from the
 null-terminated string <var>ws</var> instead of from a stream.  Reaching the
 end of the string is treated as an end-of-file condition.
 
-<p>The behavior of this function is undefined if copying takes place
+     <p>The behavior of this function is undefined if copying takes place
 between objects that overlap--for example, if <var>ws</var> is also given as
 an argument to receive a string read under control of the <code>%s</code>,
 <code>%S</code>, or <code>%[</code> conversion. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

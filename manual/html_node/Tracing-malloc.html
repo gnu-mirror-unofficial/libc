@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Tracing%20malloc">Tracing malloc</a>,
-Next:<a rel=next accesskey=n href="Using-the-Memory-Debugger.html#Using%20the%20Memory%20Debugger">Using the Memory Debugger</a>,
-Up:<a rel=up accesskey=u href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>
+Node:&nbsp;<a name="Tracing%20malloc">Tracing malloc</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Using-the-Memory-Debugger.html#Using%20the%20Memory%20Debugger">Using the Memory Debugger</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>
 <hr><br>
+</div>
 
-<h5>How to install the tracing functionality</h5>
+<h3 class="subsubsection">How to install the tracing functionality</h5>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>mtrace</b><i> (void)
-</i></td>
+<td align="left">void <b>mtrace</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -34,14 +44,14 @@ nothing is done.  The behavior of <code>malloc</code> etc. is not changed.
 For obvious reasons this also happens if the application is installed
 with the SUID or SGID bit set.
 
-<p>If the named file is successfully opened, <code>mtrace</code> installs special
+     <p>If the named file is successfully opened, <code>mtrace</code> installs special
 handlers for the functions <code>malloc</code>, <code>realloc</code>, and
 <code>free</code> (see <a href="Hooks-for-Malloc.html#Hooks%20for%20Malloc">Hooks for Malloc</a>).  From then on, all uses of these
 functions are traced and protocolled into the file.  There is now of
 course a speed penalty for all calls to the traced functions so tracing
 should not be enabled during normal use.
 
-<p>This function is a GNU extension and generally not available on other
+     <p>This function is a GNU extension and generally not available on other
 systems.  The prototype can be found in <code>mcheck.h</code>. 
 </td></tr>
 </table>
@@ -49,8 +59,8 @@ systems.  The prototype can be found in <code>mcheck.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>muntrace</b><i> (void)
-</i></td>
+<td align="left">void <b>muntrace</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,14 +70,14 @@ The <code>muntrace</code> function can be called after <code>mtrace</code> was u
 to enable tracing the <code>malloc</code> calls.  If no (successful) call of
 <code>mtrace</code> was made <code>muntrace</code> does nothing.
 
-<p>Otherwise it deinstalls the handlers for <code>malloc</code>, <code>realloc</code>,
+     <p>Otherwise it deinstalls the handlers for <code>malloc</code>, <code>realloc</code>,
 and <code>free</code> and then closes the protocol file.  No calls are
 protocolled anymore and the program runs again at full speed.
 
-<p>This function is a GNU extension and generally not available on other
+     <p>This function is a GNU extension and generally not available on other
 systems.  The prototype can be found in <code>mcheck.h</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

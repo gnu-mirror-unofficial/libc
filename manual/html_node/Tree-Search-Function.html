@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Tree%20Search%20Function">Tree Search Function</a>,
-Previous:<a rel=previous accesskey=p href="Hash-Search-Function.html#Hash%20Search%20Function">Hash Search Function</a>,
-Up:<a rel=up accesskey=u href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
+Node:&nbsp;<a name="Tree%20Search%20Function">Tree Search Function</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Hash-Search-Function.html#Hash%20Search%20Function">Hash Search Function</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
 <hr><br>
+</div>
 
-<h3>The <code>tsearch</code> function.</h3>
+<h3 class="section">The <code>tsearch</code> function.</h3>
 
 <p>Another common form to organize data for efficient search is to use
 trees.  The <code>tsearch</code> function family provides a nice interface to
@@ -23,39 +33,40 @@ The GNU C library implementation even guarantees that this bound is
 never exceeded even for input data which cause problems for simple
 binary tree implementations.
 
-<p>The functions described in the chapter are all described in the System&nbsp;V and X/Open specifications and are therefore quite portable.
+   <p>The functions described in the chapter are all described in the System&nbsp;V and X/Open specifications and are therefore quite portable.
 
-<p>In contrast to the <code>hsearch</code> functions the <code>tsearch</code> functions
+   <p>In contrast to the <code>hsearch</code> functions the <code>tsearch</code> functions
 can be used with arbitrary data and not only zero-terminated strings.
 
-<p>The <code>tsearch</code> functions have the advantage that no function to
+   <p>The <code>tsearch</code> functions have the advantage that no function to
 initialize data structures is necessary.  A simple pointer of type
 <code>void *</code> initialized to <code>NULL</code> is a valid tree and can be
-extended or searched.
+extended or searched.  The prototypes for these functions can be found
+in the header file <code>search.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>tsearch</b><i> (const void *<var>key</var>, void **<var>rootp</var>, comparison_fn_t <var>compar</var>)
-</i></td>
+<td align="left">void * <b>tsearch</b><i> </i>(<i>const void *</i><var>key</var><i>, void **</i><var>rootp</var><i>, comparison_fn_t </i><var>compar</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 The <code>tsearch</code> function searches in the tree pointed to by
-<code>*<var>rootp</var></code> for an element matching <var>key</var>.  The function
+<code>*</code><var>rootp</var><code></code> for an element matching <var>key</var>.  The function
 pointed to by <var>compar</var> is used to determine whether two elements
 match.  See <a href="Comparison-Functions.html#Comparison%20Functions">Comparison Functions</a>, for a specification of the functions
 which can be used for the <var>compar</var> parameter.
 
-<p>If the tree does not contain a matching entry the <var>key</var> value will
+     <p>If the tree does not contain a matching entry the <var>key</var> value will
 be added to the tree.  <code>tsearch</code> does not make a copy of the object
 pointed to by <var>key</var> (how could it since the size is unknown). 
 Instead it adds a reference to this object which means the object must
 be available as long as the tree data structure is used.
 
-<p>The tree is represented by a pointer to a pointer since it is sometimes
+     <p>The tree is represented by a pointer to a pointer since it is sometimes
 necessary to change the root node of the tree.  So it must not be
 assumed that the variable pointed to by <var>rootp</var> has the same value
 after the call.  This also shows that it is not safe to call the
@@ -63,7 +74,7 @@ after the call.  This also shows that it is not safe to call the
 tree.  It is no problem to run it more than once at a time on different
 trees.
 
-<p>The return value is a pointer to the matching element in the tree.  If a
+     <p>The return value is a pointer to the matching element in the tree.  If a
 new element was created the pointer points to the new data (which is in
 fact <var>key</var>).  If an entry had to be created and the program ran out
 of space <code>NULL</code> is returned. 
@@ -73,8 +84,8 @@ of space <code>NULL</code> is returned.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>tfind</b><i> (const void *<var>key</var>, void *const *<var>rootp</var>, comparison_fn_t <var>compar</var>)
-</i></td>
+<td align="left">void * <b>tfind</b><i> </i>(<i>const void *</i><var>key</var><i>, void *const *</i><var>rootp</var><i>, comparison_fn_t </i><var>compar</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -88,15 +99,15 @@ constant pointer).  Instead the function returns <code>NULL</code>.
 </td></tr>
 </table>
 
-<p>Another advantage of the <code>tsearch</code> function in contrast to the
+   <p>Another advantage of the <code>tsearch</code> function in contrast to the
 <code>hsearch</code> functions is that there is an easy way to remove
 elements.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>tdelete</b><i> (const void *<var>key</var>, void **<var>rootp</var>, comparison_fn_t <var>compar</var>)
-</i></td>
+<td align="left">void * <b>tdelete</b><i> </i>(<i>const void *</i><var>key</var><i>, void **</i><var>rootp</var><i>, comparison_fn_t </i><var>compar</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -116,8 +127,8 @@ is deleted <code>tdelete</code> returns some unspecified value not equal to
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>tdestroy</b><i> (void *<var>vroot</var>, __free_fn_t <var>freefct</var>)
-</i></td>
+<td align="left">void <b>tdestroy</b><i> </i>(<i>void *</i><var>vroot</var><i>, __free_fn_t </i><var>freefct</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -127,24 +138,24 @@ If the complete search tree has to be removed one can use
 <code>tdestroy</code>.  It frees all resources allocated by the <code>tsearch</code>
 function to generate the tree pointed to by <var>vroot</var>.
 
-<p>For the data in each tree node the function <var>freefct</var> is called. 
+     <p>For the data in each tree node the function <var>freefct</var> is called. 
 The pointer to the data is passed as the argument to the function.  If
 no such work is necessary <var>freefct</var> must point to a function doing
 nothing.  It is called in any case.
 
-<p>This function is a GNU extension and not covered by the System&nbsp;V or
+     <p>This function is a GNU extension and not covered by the System&nbsp;V or
 X/Open specifications. 
 </td></tr>
 </table>
 
-<p>In addition to the function to create and destroy the tree data
+   <p>In addition to the function to create and destroy the tree data
 structure, there is another function which allows you to apply a
 function to all elements of the tree.  The function must have this type:
 
-<br><pre>void __action_fn_t (const void *nodep, VISIT value, int level);
-</pre>
+<pre class="smallexample">     void __action_fn_t (const void *nodep, VISIT value, int level);
+     </pre>
 
-<p>The <var>nodep</var> is the data value of the current node (once given as the
+   <p>The <var>nodep</var> is the data value of the current node (once given as the
 <var>key</var> argument to <code>tsearch</code>).  <var>level</var> is a numeric value
 which corresponds to the depth of the current node in the tree.  The
 root node has the depth 0 and its children have a depth of
@@ -154,7 +165,7 @@ root node has the depth 0 and its children have a depth of
 <table width="100%">
 <tr>
 <td align="left"><b>VISIT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -168,27 +179,27 @@ the first child is processed, after the first child is processed and
 after both children are processed.  This makes it possible to handle all
 three methods of tree traversal (or even a combination of them).
 
-<dl>
+          <dl>
 <dt><code>preorder</code>
-<dd>The current node is an internal node and the function is called before
+          <dd>The current node is an internal node and the function is called before
 the first child was processed. 
 <br><dt><code>postorder</code>
-<dd>The current node is an internal node and the function is called after
+          <dd>The current node is an internal node and the function is called after
 the first child was processed. 
 <br><dt><code>endorder</code>
-<dd>The current node is an internal node and the function is called after
+          <dd>The current node is an internal node and the function is called after
 the second child was processed. 
 <br><dt><code>leaf</code>
-<dd>The current node is a leaf. 
+          <dd>The current node is a leaf. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>twalk</b><i> (const void *<var>root</var>, __action_fn_t <var>action</var>)
-</i></td>
+<td align="left">void <b>twalk</b><i> </i>(<i>const void *</i><var>root</var><i>, __action_fn_t </i><var>action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -204,7 +215,7 @@ function is computed while descending the tree with increasing the value
 by one for the descend to a child, starting with the value 0 for
 the root node.
 
-<p>Since the functions used for the <var>action</var> parameter to <code>twalk</code>
+     <p>Since the functions used for the <var>action</var> parameter to <code>twalk</code>
 must not modify the tree data, it is safe to run <code>twalk</code> in more
 than one thread at the same time, working on the same tree.  It is also
 safe to call <code>tfind</code> in parallel.  Functions which modify the tree
@@ -212,5 +223,5 @@ must not be used, otherwise the behavior is undefined.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

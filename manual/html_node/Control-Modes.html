@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Control%20Modes">Control Modes</a>,
-Next:<a rel=next accesskey=n href="Local-Modes.html#Local%20Modes">Local Modes</a>,
-Previous:<a rel=previous accesskey=p href="Output-Modes.html#Output%20Modes">Output Modes</a>,
-Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+Node:&nbsp;<a name="Control%20Modes">Control Modes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Local-Modes.html#Local%20Modes">Local Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-Modes.html#Output%20Modes">Output Modes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
 <hr><br>
+</div>
 
-<h4>Control Modes</h4>
+<h3 class="subsection">Control Modes</h4>
 
 <p>This section describes the terminal flags and fields that control
 parameters usually associated with asynchronous serial data
@@ -23,7 +33,7 @@ terminal ports (such as a network connection pseudo-terminal).  All of
 these are contained in the <code>c_cflag</code> member of the <code>struct
 termios</code> structure.
 
-<p>The <code>c_cflag</code> member itself is an integer, and you change the flags
+   <p>The <code>c_cflag</code> member itself is an integer, and you change the flags
 and fields using the operators <code>&amp;</code>, <code>|</code>, and <code>^</code>.  Don't
 try to specify the entire value for <code>c_cflag</code>--instead, change
 only specific flags and leave the rest untouched (see <a href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>).
@@ -32,7 +42,7 @@ only specific flags and leave the rest untouched (see <a href="Setting-Modes.htm
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CLOCAL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -42,11 +52,11 @@ If this bit is set, it indicates that the terminal is connected
 "locally" and that the modem status lines (such as carrier detect)
 should be ignored.
 
-<p>On many systems if this bit is not set and you call <code>open</code> without
+     <p>On many systems if this bit is not set and you call <code>open</code> without
 the <code>O_NONBLOCK</code> flag set, <code>open</code> blocks until a modem
 connection is established.
 
-<p>If this bit is not set and a modem disconnect is detected, a
+     <p>If this bit is not set and a modem disconnect is detected, a
 <code>SIGHUP</code> signal is sent to the controlling process group for the
 terminal (if it has one).  Normally, this causes the process to exit;
 see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.  Reading from the terminal after a disconnect
@@ -60,7 +70,7 @@ clear the condition.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>HUPCL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -75,7 +85,7 @@ that have the terminal device open have either closed the file or exited.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CREAD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -90,7 +100,7 @@ input is discarded when it arrives.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CSTOPB</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -105,7 +115,7 @@ is used.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>PARENB</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -114,7 +124,7 @@ is used.
 If this bit is set, generation and detection of a parity bit are enabled. 
 See <a href="Input-Modes.html#Input%20Modes">Input Modes</a>, for information on how input parity errors are handled.
 
-<p>If this bit is not set, no parity bit is added to output characters, and
+     <p>If this bit is not set, no parity bit is added to output characters, and
 input characters are not checked for correct parity. 
 </td></tr>
 </table>
@@ -123,7 +133,7 @@ input characters are not checked for correct parity.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>PARODD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -134,7 +144,7 @@ odd parity is used, otherwise even parity is used.
 </td></tr>
 </table>
 
-<p>The control mode flags also includes a field for the number of bits per
+   <p>The control mode flags also includes a field for the number of bits per
 character.  You can use the <code>CSIZE</code> macro as a mask to extract the
 value, like this: <code>settings.c_cflag &amp; CSIZE</code>.
 
@@ -142,7 +152,7 @@ value, like this: <code>settings.c_cflag &amp; CSIZE</code>.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CSIZE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -156,7 +166,7 @@ This is a mask for the number of bits per character.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CS5</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -170,7 +180,7 @@ This specifies five bits per byte.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CS6</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -184,7 +194,7 @@ This specifies six bits per byte.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CS7</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -198,7 +208,7 @@ This specifies seven bits per byte.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CS8</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -208,14 +218,14 @@ This specifies eight bits per byte.
 </td></tr>
 </table>
 
-<p>The following four bits are BSD extensions; this exist only on BSD
+   <p>The following four bits are BSD extensions; this exist only on BSD
 systems and the GNU system.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CCTS_OFLOW</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -230,7 +240,7 @@ If this bit is set, enable flow control of output based on the CTS wire
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CRTS_IFLOW</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -245,7 +255,7 @@ If this bit is set, enable flow control of input based on the RTS wire
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>MDMBUF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -259,7 +269,7 @@ If this bit is set, enable carrier-based flow control of output.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>CIGNORE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -268,16 +278,16 @@ If this bit is set, enable carrier-based flow control of output.
 If this bit is set, it says to ignore the control modes and line speed
 values entirely.  This is only meaningful in a call to <code>tcsetattr</code>.
 
-<p>The <code>c_cflag</code> member and the line speed values returned by
+     <p>The <code>c_cflag</code> member and the line speed values returned by
 <code>cfgetispeed</code> and <code>cfgetospeed</code> will be unaffected by the
 call.  <code>CIGNORE</code> is useful if you want to set all the software
 modes in the other members, but leave the hardware details in
 <code>c_cflag</code> unchanged.  (This is how the <code>TCSASOFT</code> flag to
 <code>tcsettattr</code> works.)
 
-<p>This bit is never set in the structure filled in by <code>tcgetattr</code>. 
+     <p>This bit is never set in the structure filled in by <code>tcgetattr</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

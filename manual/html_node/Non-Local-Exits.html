@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Non-Local%20Exits">Non-Local Exits</a>,
-Next:<a rel=next accesskey=n href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>,
-Previous:<a rel=previous accesskey=p href="Resource-Usage-And-Limitation.html#Resource%20Usage%20And%20Limitation">Resource Usage And Limitation</a>,
-Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+Node:&nbsp;<a name="Non-Local%20Exits">Non-Local Exits</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Resource-Usage-And-Limitation.html#Resource%20Usage%20And%20Limitation">Resource Usage And Limitation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
 <hr><br>
+</div>
 
-<h2>Non-Local Exits</h2>
+<h2 class="chapter">Non-Local Exits</h2>
 
 <p>Sometimes when your program detects an unusual situation inside a deeply
 nested set of function calls, you would like to be able to immediately
@@ -22,12 +32,12 @@ return to an outer level of control.  This section describes how you can
 do such <dfn>non-local exits</dfn> using the <code>setjmp</code> and <code>longjmp</code>
 functions.
 
-<ul>
-<li><a accesskey=1 href="Non-Local-Intro.html#Non-Local%20Intro">Intro</a>:         When and how to use these facilities. 
-<li><a accesskey=2 href="Non-Local-Details.html#Non-Local%20Details">Details</a>:     Functions for non-local exits. 
-<li><a accesskey=3 href="Non-Local-Exits-and-Signals.html#Non-Local%20Exits%20and%20Signals">Non-Local Exits and Signals</a>:   Portability issues. 
-<li><a accesskey=4 href="System-V-contexts.html#System%20V%20contexts">System V contexts</a>:             Complete context control a la System V. 
+<ul class="menu">
+<li><a accesskey="1" href="Non-Local-Intro.html#Non-Local%20Intro">Intro</a>:         When and how to use these facilities. 
+<li><a accesskey="2" href="Non-Local-Details.html#Non-Local%20Details">Details</a>:     Functions for non-local exits. 
+<li><a accesskey="3" href="Non-Local-Exits-and-Signals.html#Non-Local%20Exits%20and%20Signals">Non-Local Exits and Signals</a>:   Portability issues. 
+<li><a accesskey="4" href="System-V-contexts.html#System%20V%20contexts">System V contexts</a>:             Complete context control a la System V. 
 </ul>
 
-</body></html>
+   </body></html>
 

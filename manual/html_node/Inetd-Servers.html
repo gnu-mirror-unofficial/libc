@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Inetd%20Servers">Inetd Servers</a>,
-Next:<a rel=next accesskey=n href="Configuring-Inetd.html#Configuring%20Inetd">Configuring Inetd</a>,
-Up:<a rel=up accesskey=u href="Inetd.html#Inetd">Inetd</a>
+Node:&nbsp;<a name="Inetd%20Servers">Inetd Servers</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Configuring-Inetd.html#Configuring%20Inetd">Configuring Inetd</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Inetd.html#Inetd">Inetd</a>
 <hr><br>
+</div>
 
-<h4><code>inetd</code> Servers</h4>
+<h3 class="subsection"><code>inetd</code> Servers</h4>
 
 <p>Writing a server program to be run by <code>inetd</code> is very simple.  Each time
 someone requests a connection to the appropriate port, a new server
@@ -25,7 +35,7 @@ right away.  Often the program needs only the ordinary I/O facilities;
 in fact, a general-purpose filter program that knows nothing about
 sockets can work as a byte stream server run by <code>inetd</code>.
 
-<p>You can also use <code>inetd</code> for servers that use connectionless
+   <p>You can also use <code>inetd</code> for servers that use connectionless
 communication styles.  For these servers, <code>inetd</code> does not try to accept
 a connection since no connection is possible.  It just starts the
 server program, which can read the incoming datagram packet from
@@ -34,5 +44,5 @@ exit, or you can choose to write it to keep reading more requests
 until no more arrive, and then exit.  You must specify which of these
 two techniques the server uses when you configure <code>inetd</code>.
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Closing%20Streams">Closing Streams</a>,
-Next:<a rel=next accesskey=n href="Streams-and-Threads.html#Streams%20and%20Threads">Streams and Threads</a>,
-Previous:<a rel=previous accesskey=p href="Opening-Streams.html#Opening%20Streams">Opening Streams</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="Closing%20Streams">Closing Streams</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Streams-and-Threads.html#Streams%20and%20Threads">Streams and Threads</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Opening-Streams.html#Opening%20Streams">Opening Streams</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>Closing Streams</h3>
+<h3 class="section">Closing Streams</h3>
 
 <p>When a stream is closed with <code>fclose</code>, the connection between the
 stream and the file is canceled.  After you have closed a stream, you
@@ -23,8 +33,8 @@ cannot perform any additional operations on it.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fclose</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>fclose</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,25 +46,25 @@ and any buffered input is discarded.  The <code>fclose</code> function returns
 a value of <code>0</code> if the file was closed successfully, and <code>EOF</code>
 if an error was detected.
 
-<p>It is important to check for errors when you call <code>fclose</code> to close
+     <p>It is important to check for errors when you call <code>fclose</code> to close
 an output stream, because real, everyday errors can be detected at this
 time.  For example, when <code>fclose</code> writes the remaining buffered
 output, it might get an error because the disk is full.  Even if you
 know the buffer is empty, errors can still occur when closing a file if
 you are using NFS.
 
-<p>The function <code>fclose</code> is declared in <code>stdio.h</code>. 
+     <p>The function <code>fclose</code> is declared in <code>stdio.h</code>. 
 </td></tr>
 </table>
 
-<p>To close all streams currently available the GNU C Library provides
+   <p>To close all streams currently available the GNU C Library provides
 another function.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fcloseall</b><i> (void)
-</i></td>
+<td align="left">int <b>fcloseall</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -66,17 +76,17 @@ is written and any buffered input is discarded.  The <code>fcloseall</code>
 function returns a value of <code>0</code> if all the files were closed
 successfully, and <code>EOF</code> if an error was detected.
 
-<p>This function should be used only in special situations, e.g., when an
+     <p>This function should be used only in special situations, e.g., when an
 error occurred and the program must be aborted.  Normally each single
 stream should be closed separately so that problems with individual
 streams can be identified.  It is also problematic since the standard
 streams (see <a href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>) will also be closed.
 
-<p>The function <code>fcloseall</code> is declared in <code>stdio.h</code>. 
+     <p>The function <code>fcloseall</code> is declared in <code>stdio.h</code>. 
 </td></tr>
 </table>
 
-<p>If the <code>main</code> function to your program returns, or if you call the
+   <p>If the <code>main</code> function to your program returns, or if you call the
 <code>exit</code> function (see <a href="Normal-Termination.html#Normal%20Termination">Normal Termination</a>), all open streams are
 automatically closed properly.  If your program terminates in any other
 manner, such as by calling the <code>abort</code> function (see <a href="Aborting-a-Program.html#Aborting%20a%20Program">Aborting a Program</a>) or from a fatal signal (see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>), open streams
@@ -84,5 +94,5 @@ might not be closed properly.  Buffered output might not be flushed and
 files may be incomplete.  For more information on buffering of streams,
 see <a href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>.
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Signal%20Stack">Signal Stack</a>,
-Next:<a rel=next accesskey=n href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>,
-Previous:<a rel=previous accesskey=p href="Waiting-for-a-Signal.html#Waiting%20for%20a%20Signal">Waiting for a Signal</a>,
-Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+Node:&nbsp;<a name="Signal%20Stack">Signal Stack</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Waiting-for-a-Signal.html#Waiting%20for%20a%20Signal">Waiting for a Signal</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
 <hr><br>
+</div>
 
-<h3>Using a Separate Signal Stack</h3>
+<h3 class="section">Using a Separate Signal Stack</h3>
 
 <p>A signal stack is a special area of memory to be used as the execution
 stack during signal handlers.  It should be fairly large, to avoid any
@@ -24,13 +34,13 @@ defined to a canonical size for signal stacks.  You can use
 <code>sigaltstack</code> or <code>sigstack</code> to tell the system to use that
 space for the signal stack.
 
-<p>You don't need to write signal handlers differently in order to use a
+   <p>You don't need to write signal handlers differently in order to use a
 signal stack.  Switching from one stack to the other happens
 automatically.  (Some non-GNU debuggers on some machines may get
 confused if you examine a stack trace while a handler that uses the
 signal stack is running.)
 
-<p>There are two interfaces for telling the system to use a separate signal
+   <p>There are two interfaces for telling the system to use a separate signal
 stack.  <code>sigstack</code> is the older interface, which comes from 4.2
 BSD.  <code>sigaltstack</code> is the newer interface, and comes from 4.4
 BSD.  The <code>sigaltstack</code> interface has the advantage that it does
@@ -41,7 +51,7 @@ depends on the specific machine and operating system.
 <table width="100%">
 <tr>
 <td align="left"><b>stack_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -49,55 +59,55 @@ depends on the specific machine and operating system.
 <tr><td>
 This structure describes a signal stack.  It contains the following members:
 
-<dl>
+          <dl>
 <dt><code>void *ss_sp</code>
-<dd>This points to the base of the signal stack.
+          <dd>This points to the base of the signal stack.
 
-<br><dt><code>size_t ss_size</code>
-<dd>This is the size (in bytes) of the signal stack which <code>ss_sp</code> points to. 
+          <br><dt><code>size_t ss_size</code>
+          <dd>This is the size (in bytes) of the signal stack which <code>ss_sp</code> points to. 
 You should set this to however much space you allocated for the stack.
 
-<p>There are two macros defined in <code>signal.h</code> that you should use in
+          <p>There are two macros defined in <code>signal.h</code> that you should use in
 calculating this size:
 
-<dl>
+               <dl>
 <dt><code>SIGSTKSZ</code>
-<dd>This is the canonical size for a signal stack.  It is judged to be
+               <dd>This is the canonical size for a signal stack.  It is judged to be
 sufficient for normal uses.
 
-<br><dt><code>MINSIGSTKSZ</code>
-<dd>This is the amount of signal stack space the operating system needs just
+               <br><dt><code>MINSIGSTKSZ</code>
+               <dd>This is the amount of signal stack space the operating system needs just
 to implement signal delivery.  The size of a signal stack <strong>must</strong>
 be greater than this.
 
-<p>For most cases, just using <code>SIGSTKSZ</code> for <code>ss_size</code> is
+               <p>For most cases, just using <code>SIGSTKSZ</code> for <code>ss_size</code> is
 sufficient.  But if you know how much stack space your program's signal
 handlers will need, you may want to use a different size.  In this case,
 you should allocate <code>MINSIGSTKSZ</code> additional bytes for the signal
 stack and increase <code>ss_size</code> accordingly. 
 </dl>
 
-<br><dt><code>int ss_flags</code>
-<dd>This field contains the bitwise <small>OR</small> of these flags:
+          <br><dt><code>int ss_flags</code>
+          <dd>This field contains the bitwise <small>OR</small> of these flags:
 
-<dl>
+               <dl>
 <dt><code>SS_DISABLE</code>
-<dd>This tells the system that it should not use the signal stack.
+               <dd>This tells the system that it should not use the signal stack.
 
-<br><dt><code>SS_ONSTACK</code>
-<dd>This is set by the system, and indicates that the signal stack is
+               <br><dt><code>SS_ONSTACK</code>
+               <dd>This is set by the system, and indicates that the signal stack is
 currently in use.  If this bit is not set, then signals will be
 delivered on the normal user stack. 
 </dl>
-</dl>
-</td></tr>
+          </dl>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigaltstack</b><i> (const stack_t *restrict <var>stack</var>, stack_t *restrict <var>oldstack</var>)
-</i></td>
+<td align="left">int <b>sigaltstack</b><i> </i>(<i>const stack_t *restrict </i><var>stack</var><i>, stack_t *restrict </i><var>oldstack</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -109,33 +119,33 @@ its action indicates that the signal stack is used, the system arranges
 a switch to the currently installed signal stack while the handler for
 that signal is executed.
 
-<p>If <var>oldstack</var> is not a null pointer, information about the currently
+     <p>If <var>oldstack</var> is not a null pointer, information about the currently
 installed signal stack is returned in the location it points to.  If
 <var>stack</var> is not a null pointer, then this is installed as the new
 stack for use by signal handlers.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  If
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  If
 <code>sigaltstack</code> fails, it sets <code>errno</code> to one of these values:
 
-<dl>
+          <dl>
 <dt><code>EINVAL</code>
-<dd>You tried to disable a stack that was in fact currently in use.
+          <dd>You tried to disable a stack that was in fact currently in use.
 
-<br><dt><code>ENOMEM</code>
-<dd>The size of the alternate stack was too small. 
+          <br><dt><code>ENOMEM</code>
+          <dd>The size of the alternate stack was too small. 
 It must be greater than <code>MINSIGSTKSZ</code>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>Here is the older <code>sigstack</code> interface.  You should use
+   <p>Here is the older <code>sigstack</code> interface.  You should use
 <code>sigaltstack</code> instead on systems that have it.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct sigstack</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -143,23 +153,23 @@ It must be greater than <code>MINSIGSTKSZ</code>.
 <tr><td>
 This structure describes a signal stack.  It contains the following members:
 
-<dl>
+          <dl>
 <dt><code>void *ss_sp</code>
-<dd>This is the stack pointer.  If the stack grows downwards on your
+          <dd>This is the stack pointer.  If the stack grows downwards on your
 machine, this should point to the top of the area you allocated.  If the
 stack grows upwards, it should point to the bottom.
 
-<br><dt><code>int ss_onstack</code>
-<dd>This field is true if the process is currently using this stack. 
+          <br><dt><code>int ss_onstack</code>
+          <dd>This field is true if the process is currently using this stack. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigstack</b><i> (const struct sigstack *<var>stack</var>, struct sigstack *<var>oldstack</var>)
-</i></td>
+<td align="left">int <b>sigstack</b><i> </i>(<i>const struct sigstack *</i><var>stack</var><i>, struct sigstack *</i><var>oldstack</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -171,14 +181,14 @@ action indicates that the signal stack is used, the system arranges a
 switch to the currently installed signal stack while the handler for
 that signal is executed.
 
-<p>If <var>oldstack</var> is not a null pointer, information about the currently
+     <p>If <var>oldstack</var> is not a null pointer, information about the currently
 installed signal stack is returned in the location it points to.  If
 <var>stack</var> is not a null pointer, then this is installed as the new
 stack for use by signal handlers.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure. 
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

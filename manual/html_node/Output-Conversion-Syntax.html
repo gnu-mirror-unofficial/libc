@@ -2,129 +2,144 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Output%20Conversion%20Syntax">Output Conversion Syntax</a>,
-Next:<a rel=next accesskey=n href="Table-of-Output-Conversions.html#Table%20of%20Output%20Conversions">Table of Output Conversions</a>,
-Previous:<a rel=previous accesskey=p href="Formatted-Output-Basics.html#Formatted%20Output%20Basics">Formatted Output Basics</a>,
-Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+Node:&nbsp;<a name="Output%20Conversion%20Syntax">Output Conversion Syntax</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Table-of-Output-Conversions.html#Table%20of%20Output%20Conversions">Table of Output Conversions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatted-Output-Basics.html#Formatted%20Output%20Basics">Formatted Output Basics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
 <hr><br>
+</div>
 
-<h4>Output Conversion Syntax</h4>
+<h3 class="subsection">Output Conversion Syntax</h4>
 
 <p>This section provides details about the precise syntax of conversion
 specifications that can appear in a <code>printf</code> template
 string.
 
-<p>Characters in the template string that are not part of a conversion
+   <p>Characters in the template string that are not part of a conversion
 specification are printed as-is to the output stream.  Multibyte
 character sequences (see <a href="Character-Set-Handling.html#Character%20Set%20Handling">Character Set Handling</a>) are permitted in a
 template string.
 
-<p>The conversion specifications in a <code>printf</code> template string have
+   <p>The conversion specifications in a <code>printf</code> template string have
 the general form:
 
-<br><pre>% [ <var>param-no</var> $] <var>flags</var> <var>width</var> [ . <var>precision</var> ] <var>type</var> <var>conversion</var>
-</pre>
+<pre class="smallexample">     % [ <var>param-no</var> $] <var>flags</var> <var>width</var> [ . <var>precision</var> ] <var>type</var> <var>conversion</var>
+     </pre>
 
-<p>For example, in the conversion specifier <code>%-10.8ld</code>, the <code>-</code>
+<p>or
+
+<pre class="smallexample">     % [ <var>param-no</var> $] <var>flags</var> <var>width</var> . * [ <var>param-no</var> $] <var>type</var> <var>conversion</var>
+     </pre>
+
+   <p>For example, in the conversion specifier <code>%-10.8ld</code>, the <code>-</code>
 is a flag, <code>10</code> specifies the field width, the precision is
 <code>8</code>, the letter <code>l</code> is a type modifier, and <code>d</code> specifies
 the conversion style.  (This particular type specifier says to
 print a <code>long int</code> argument in decimal notation, with a minimum of
 8 digits left-justified in a field at least 10 characters wide.)
 
-<p>In more detail, output conversion specifications consist of an
+   <p>In more detail, output conversion specifications consist of an
 initial <code>%</code> character followed in sequence by:
 
-<ul>
+     <ul>
 <li>An optional specification of the parameter used for this format. 
 Normally the parameters to the <code>printf</code> function are assigned to the
 formats in the order of appearance in the format string.  But in some
 situations (such as message translation) this is not desirable and this
 extension allows an explicit parameter to be specified.
 
-<p>The <var>param-no</var> part of the format must be an integer in the range of
+     <p>The <var>param-no</var> parts of the format must be integers in the range of
 1 to the maximum number of arguments present to the function call.  Some
 implementations limit this number to a certainly upper bound.  The exact
 limit can be retrieved by the following constant.
 
-<p>
+     <p>
 <table width="100%">
 <tr>
 <td align="left"><b>NL_ARGMAX</b><i>
-</i></td>
+          </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-The value of <code>ARGMAX</code> is the maximum value allowed for the
+The value of <code>NL_ARGMAX</code> is the maximum value allowed for the
 specification of an positional parameter in a <code>printf</code> call.  The
 actual value in effect at runtime can be retrieved by using
 <code>sysconf</code> using the <code>_SC_NL_ARGMAX</code> parameter see <a href="Sysconf-Definition.html#Sysconf%20Definition">Sysconf Definition</a>.
 
-<p>Some system have a quite low limit such as 9 for System&nbsp;V
+          <p>Some system have a quite low limit such as 9 for System&nbsp;V
 systems.  The GNU C library has no real limit. 
 </td></tr>
 </table>
 
-<p>If any of the formats has a specification for the parameter position all
+     <p>If any of the formats has a specification for the parameter position all
 of them in the format string shall have one.  Otherwise the behavior is
 undefined.
 
-</p><li>Zero or more <dfn>flag characters</dfn> that modify the normal behavior of
+     </p><li>Zero or more <dfn>flag characters</dfn> that modify the normal behavior of
 the conversion specification.
 
-<li>An optional decimal integer specifying the <dfn>minimum field width</dfn>. 
+     <li>An optional decimal integer specifying the <dfn>minimum field width</dfn>. 
 If the normal conversion produces fewer characters than this, the field
 is padded with spaces to the specified width.  This is a <em>minimum</em>
 value; if the normal conversion produces more characters than this, the
 field is <em>not</em> truncated.  Normally, the output is right-justified
 within the field.
 
-<p>You can also specify a field width of <code>*</code>.  This means that the
+     <p>You can also specify a field width of <code>*</code>.  This means that the
 next argument in the argument list (before the actual value to be
 printed) is used as the field width.  The value must be an <code>int</code>. 
 If the value is negative, this means to set the <code>-</code> flag (see
 below) and to use the absolute value as the field width.
 
-</p><li>An optional <dfn>precision</dfn> to specify the number of digits to be
+     </p><li>An optional <dfn>precision</dfn> to specify the number of digits to be
 written for the numeric conversions.  If the precision is specified, it
 consists of a period (<code>.</code>) followed optionally by a decimal integer
 (which defaults to zero if omitted).
 
-<p>You can also specify a precision of <code>*</code>.  This means that the next
+     <p>You can also specify a precision of <code>*</code>.  This means that the next
 argument in the argument list (before the actual value to be printed) is
 used as the precision.  The value must be an <code>int</code>, and is ignored
 if it is negative.  If you specify <code>*</code> for both the field width and
 precision, the field width argument precedes the precision argument. 
 Other C library versions may not recognize this syntax.
 
-</p><li>An optional <dfn>type modifier character</dfn>, which is used to specify the
+     </p><li>An optional <dfn>type modifier character</dfn>, which is used to specify the
 data type of the corresponding argument if it differs from the default
 type.  (For example, the integer conversions assume a type of <code>int</code>,
 but you can specify <code>h</code>, <code>l</code>, or <code>L</code> for other integer
 types.)
 
-<li>A character that specifies the conversion to be applied. 
+     <li>A character that specifies the conversion to be applied. 
 </ul>
 
-<p>The exact options that are permitted and how they are interpreted vary
+   <p>The exact options that are permitted and how they are interpreted vary
 between the different conversion specifiers.  See the descriptions of the
 individual conversions for information about the particular options that
 they use.
 
-<p>With the <code>-Wformat</code> option, the GNU C compiler checks calls to
+   <p>With the <code>-Wformat</code> option, the GNU C compiler checks calls to
 <code>printf</code> and related functions.  It examines the format string and
 verifies that the correct number and types of arguments are supplied. 
 There is also a GNU C syntax to tell the compiler that a function you
 write uses a <code>printf</code>-style format string. 
 See <a href="../gcc.info/Function-Attributes.html#Function%20Attributes">Declaring Attributes of Functions</a>, for more information.
 
-</body></html>
+   </body></html>
 

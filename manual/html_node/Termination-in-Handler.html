@@ -2,55 +2,65 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Termination%20in%20Handler">Termination in Handler</a>,
-Next:<a rel=next accesskey=n href="Longjmp-in-Handler.html#Longjmp%20in%20Handler">Longjmp in Handler</a>,
-Previous:<a rel=previous accesskey=p href="Handler-Returns.html#Handler%20Returns">Handler Returns</a>,
-Up:<a rel=up accesskey=u href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
+Node:&nbsp;<a name="Termination%20in%20Handler">Termination in Handler</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Longjmp-in-Handler.html#Longjmp%20in%20Handler">Longjmp in Handler</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Handler-Returns.html#Handler%20Returns">Handler Returns</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
 <hr><br>
+</div>
 
-<h4>Handlers That Terminate the Process</h4>
+<h3 class="subsection">Handlers That Terminate the Process</h4>
 
 <p>Handler functions that terminate the program are typically used to cause
 orderly cleanup or recovery from program error signals and interactive
 interrupts.
 
-<p>The cleanest way for a handler to terminate the process is to raise the
+   <p>The cleanest way for a handler to terminate the process is to raise the
 same signal that ran the handler in the first place.  Here is how to do
 this:
 
-<br><pre>volatile sig_atomic_t fatal_error_in_progress = 0;
+<pre class="smallexample">     volatile sig_atomic_t fatal_error_in_progress = 0;
+     
+     void
+     fatal_error_signal (int sig)
+     {
+       /* Since this handler is established for more than one kind of signal, 
+          it might still get invoked recursively by delivery of some other kind
+          of signal.  Use a static variable to keep track of that. */
+       if (fatal_error_in_progress)
+         raise (sig);
+       fatal_error_in_progress = 1;
+     
+       /* Now do the clean up actions:
+          - reset terminal modes
+          - kill child processes
+          - remove lock files */
+       ...
+     
+       /* Now reraise the signal.  We reactivate the signal's
+          default handling, which is to terminate the process.
+          We could just call <code>exit</code> or <code>abort</code>,
+          but reraising the signal sets the return status
+          from the process correctly. */
+       signal (sig, SIG_DFL);
+       raise (sig);
+     }
+     </pre>
 
-void
-fatal_error_signal (int sig)
-{
-  /* Since this handler is established for more than one kind of signal, 
-     it might still get invoked recursively by delivery of some other kind
-     of signal.  Use a static variable to keep track of that. */
-  if (fatal_error_in_progress)
-    raise (sig);
-  fatal_error_in_progress = 1;
-
-  /* Now do the clean up actions:
-     - reset terminal modes
-     - kill child processes
-     - remove lock files */
-  <small>...</small>
-
-  /* Now reraise the signal.  We reactivate the signal's
-     default handling, which is to terminate the process.
-     We could just call <code>exit</code> or <code>abort</code>,
-     but reraising the signal sets the return status
-     from the process correctly. */
-  signal (sig, SIG_DFL);
-  raise (sig);
-}
-</pre>
-
-</body></html>
+   </body></html>
 

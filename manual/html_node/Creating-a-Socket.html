@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Creating%20a%20Socket">Creating a Socket</a>,
-Next:<a rel=next accesskey=n href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>,
-Up:<a rel=up accesskey=u href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
+Node:&nbsp;<a name="Creating%20a%20Socket">Creating a Socket</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
 <hr><br>
+</div>
 
-<h4>Creating a Socket</h4>
+<h3 class="subsection">Creating a Socket</h4>
 
 <p>The primitive for creating a socket is the <code>socket</code> function,
 declared in <code>sys/socket.h</code>.
@@ -21,8 +31,8 @@ declared in <code>sys/socket.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>socket</b><i> (int <var>namespace</var>, int <var>style</var>, int <var>protocol</var>)
-</i></td>
+<td align="left">int <b>socket</b><i> </i>(<i>int </i><var>namespace</var><i>, int </i><var>style</var><i>, int </i><var>protocol</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,37 +46,37 @@ the namespace; it must be <code>PF_LOCAL</code> (see <a href="Local-Namespace.ht
 designates the specific protocol (see <a href="Socket-Concepts.html#Socket%20Concepts">Socket Concepts</a>); zero is
 usually right for <var>protocol</var>.
 
-<p>The return value from <code>socket</code> is the file descriptor for the new
+     <p>The return value from <code>socket</code> is the file descriptor for the new
 socket, or <code>-1</code> in case of error.  The following <code>errno</code> error
 conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EPROTONOSUPPORT</code>
-<dd>The <var>protocol</var> or <var>style</var> is not supported by the
+          <dd>The <var>protocol</var> or <var>style</var> is not supported by the
 <var>namespace</var> specified.
 
-<br><dt><code>EMFILE</code>
-<dd>The process already has too many file descriptors open.
+          <br><dt><code>EMFILE</code>
+          <dd>The process already has too many file descriptors open.
 
-<br><dt><code>ENFILE</code>
-<dd>The system already has too many file descriptors open.
+          <br><dt><code>ENFILE</code>
+          <dd>The system already has too many file descriptors open.
 
-<br><dt><code>EACCES</code>
-<dd>The process does not have the privilege to create a socket of the specified
+          <br><dt><code>EACCES</code>
+          <dd>The process does not have the privilege to create a socket of the specified
 <var>style</var> or <var>protocol</var>.
 
-<br><dt><code>ENOBUFS</code>
-<dd>The system ran out of internal buffer space. 
+          <br><dt><code>ENOBUFS</code>
+          <dd>The system ran out of internal buffer space. 
 </dl>
 
-<p>The file descriptor returned by the <code>socket</code> function supports both
+     <p>The file descriptor returned by the <code>socket</code> function supports both
 read and write operations.  However, like pipes, sockets do not support file
 positioning operations. 
 </td></tr>
 </table>
 
-<p>For examples of how to call the <code>socket</code> function,
+   <p>For examples of how to call the <code>socket</code> function,
 see <a href="Local-Socket-Example.html#Local%20Socket%20Example">Local Socket Example</a>, or <a href="Inet-Example.html#Inet%20Example">Inet Example</a>.
 
-</body></html>
+   </body></html>
 

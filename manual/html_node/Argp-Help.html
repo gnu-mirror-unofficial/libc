@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Help">Argp Help</a>,
-Next:<a rel=next accesskey=n href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>,
-Previous:<a rel=previous accesskey=p href="Argp-Flags.html#Argp%20Flags">Argp Flags</a>,
-Up:<a rel=up accesskey=u href="Argp.html#Argp">Argp</a>
+Node:&nbsp;<a name="Argp%20Help">Argp Help</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Flags.html#Argp%20Flags">Argp Flags</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp.html#Argp">Argp</a>
 <hr><br>
+</div>
 
-<h4>The <code>argp_help</code> Function</h4>
+<h3 class="subsection">The <code>argp_help</code> Function</h4>
 
 <p>Normally programs using argp need not be written with particular
 printing argument-usage-type help messages in mind as the standard
@@ -27,8 +37,8 @@ program options, argp offers the <code>argp_help</code> interface.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>argp_help</b><i> (const struct argp *<var>argp</var>, FILE *<var>stream</var>, unsigned <var>flags</var>, char *<var>name</var>)
-</i></td>
+<td align="left">void <b>argp_help</b><i> </i>(<i>const struct argp *</i><var>argp</var><i>, FILE *</i><var>stream</var><i>, unsigned </i><var>flags</var><i>, char *</i><var>name</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,16 +48,16 @@ This outputs a help message for the argp parser <var>argp</var> to
 <var>stream</var>.  The type of messages printed will be determined by
 <var>flags</var>.
 
-<p>Any options such as <code>--help</code> that are implemented automatically by
+     <p>Any options such as <code>--help</code> that are implemented automatically by
 argp itself will <em>not</em> be present in the help output; for this
 reason it is best to use <code>argp_state_help</code> if calling from within
 an argp parser function.  See <a href="Argp-Helper-Functions.html#Argp%20Helper%20Functions">Argp Helper Functions</a>. 
 </td></tr>
 </table>
 
-<ul>
-<li><a accesskey=1 href="Argp-Help-Flags.html#Argp%20Help%20Flags">Flags</a>:        Specifying what sort of help message to print. 
+<ul class="menu">
+<li><a accesskey="1" href="Argp-Help-Flags.html#Argp%20Help%20Flags">Flags</a>:        Specifying what sort of help message to print. 
 </ul>
 
-</body></html>
+   </body></html>
 

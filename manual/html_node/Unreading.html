@@ -2,34 +2,44 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Unreading">Unreading</a>,
-Next:<a rel=next accesskey=n href="Block-Input-Output.html#Block%20Input%2fOutput">Block Input/Output</a>,
-Previous:<a rel=previous accesskey=p href="Line-Input.html#Line%20Input">Line Input</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="Unreading">Unreading</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Block-Input-Output.html#Block%20Input%2fOutput">Block Input/Output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Line-Input.html#Line%20Input">Line Input</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>Unreading</h3>
+<h3 class="section">Unreading</h3>
 
 <p>In parser programs it is often useful to examine the next character in
 the input stream without removing it from the stream.  This is called
 "peeking ahead" at the input because your program gets a glimpse of
 the input it will read next.
 
-<p>Using stream I/O, you can peek ahead at input by first reading it and
+   <p>Using stream I/O, you can peek ahead at input by first reading it and
 then <dfn>unreading</dfn> it (also called  <dfn>pushing it back</dfn> on the stream). 
 Unreading a character makes it available to be input again from the stream,
 by  the next call to <code>fgetc</code> or other input function on that stream.
 
-<ul>
-<li><a accesskey=1 href="Unreading-Idea.html#Unreading%20Idea">Unreading Idea</a>:               An explanation of unreading with pictures. 
-<li><a accesskey=2 href="How-Unread.html#How%20Unread">How Unread</a>:                   How to call <code>ungetc</code> to do unreading. 
+<ul class="menu">
+<li><a accesskey="1" href="Unreading-Idea.html#Unreading%20Idea">Unreading Idea</a>:               An explanation of unreading with pictures. 
+<li><a accesskey="2" href="How-Unread.html#How%20Unread">How Unread</a>:                   How to call <code>ungetc</code> to do unreading. 
 </ul>
 
-</body></html>
+   </body></html>
 

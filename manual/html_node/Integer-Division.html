@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Integer%20Division">Integer Division</a>,
-Next:<a rel=next accesskey=n href="Floating-Point-Numbers.html#Floating%20Point%20Numbers">Floating Point Numbers</a>,
-Previous:<a rel=previous accesskey=p href="Integers.html#Integers">Integers</a>,
-Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+Node:&nbsp;<a name="Integer%20Division">Integer Division</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Floating-Point-Numbers.html#Floating%20Point%20Numbers">Floating Point Numbers</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Integers.html#Integers">Integers</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
 <hr><br>
+</div>
 
-<h3>Integer Division</h3>
+<h3 class="section">Integer Division</h3>
 
 <p>This section describes functions for performing integer division.  These
 functions are redundant when GNU CC is used, because in GNU C the
@@ -24,18 +34,18 @@ implementations, <code>/</code> may round differently with negative arguments.
 the quotient: towards zero.  The remainder has the same sign as the
 numerator.
 
-<p>These functions are specified to return a result <var>r</var> such that the value
-<code><var>r</var>.quot*<var>denominator</var> + <var>r</var>.rem</code> equals
+   <p>These functions are specified to return a result <var>r</var> such that the value
+<code></code><var>r</var><code>.quot*</code><var>denominator</var><code> + </code><var>r</var><code>.rem</code> equals
 <var>numerator</var>.
 
-<p>To use these facilities, you should include the header file
+   <p>To use these facilities, you should include the header file
 <code>stdlib.h</code> in your program.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>div_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -44,21 +54,21 @@ numerator.
 This is a structure type used to hold the result returned by the <code>div</code>
 function.  It has the following members:
 
-<dl>
+          <dl>
 <dt><code>int quot</code>
-<dd>The quotient from the division.
+          <dd>The quotient from the division.
 
-<br><dt><code>int rem</code>
-<dd>The remainder from the division. 
+          <br><dt><code>int rem</code>
+          <dd>The remainder from the division. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">div_t <b>div</b><i> (int <var>numerator</var>, int <var>denominator</var>)
-</i></td>
+<td align="left">div_t <b>div</b><i> </i>(<i>int </i><var>numerator</var><i>, int </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -68,16 +78,16 @@ This function <code>div</code> computes the quotient and remainder from
 the division of <var>numerator</var> by <var>denominator</var>, returning the
 result in a structure of type <code>div_t</code>.
 
-<p>If the result cannot be represented (as in a division by zero), the
+     <p>If the result cannot be represented (as in a division by zero), the
 behavior is undefined.
 
-<p>Here is an example, albeit not a very useful one.
+     <p>Here is an example, albeit not a very useful one.
 
-<br><pre>div_t result;
-result = div (20, -6);
-</pre>
+     <pre class="smallexample">          div_t result;
+          result = div (20, -6);
+          </pre>
 
-<p>Now <code>result.quot</code> is <code>-3</code> and <code>result.rem</code> is <code>2</code>. 
+     <p>Now <code>result.quot</code> is <code>-3</code> and <code>result.rem</code> is <code>2</code>. 
 </td></tr>
 </table>
 
@@ -85,7 +95,7 @@ result = div (20, -6);
 <table width="100%">
 <tr>
 <td align="left"><b>ldiv_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -94,15 +104,15 @@ result = div (20, -6);
 This is a structure type used to hold the result returned by the <code>ldiv</code>
 function.  It has the following members:
 
-<dl>
+          <dl>
 <dt><code>long int quot</code>
-<dd>The quotient from the division.
+          <dd>The quotient from the division.
 
-<br><dt><code>long int rem</code>
-<dd>The remainder from the division. 
+          <br><dt><code>long int rem</code>
+          <dd>The remainder from the division. 
 </dl>
 
-<p>(This is identical to <code>div_t</code> except that the components are of
+     <p>(This is identical to <code>div_t</code> except that the components are of
 type <code>long int</code> rather than <code>int</code>.) 
 </td></tr>
 </table>
@@ -110,8 +120,8 @@ type <code>long int</code> rather than <code>int</code>.)
 <p>
 <table width="100%">
 <tr>
-<td align="left">ldiv_t <b>ldiv</b><i> (long int <var>numerator</var>, long int <var>denominator</var>)
-</i></td>
+<td align="left">ldiv_t <b>ldiv</b><i> </i>(<i>long int </i><var>numerator</var><i>, long int </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -127,7 +137,7 @@ structure of type <code>ldiv_t</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>lldiv_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -136,15 +146,15 @@ structure of type <code>ldiv_t</code>.
 This is a structure type used to hold the result returned by the <code>lldiv</code>
 function.  It has the following members:
 
-<dl>
+          <dl>
 <dt><code>long long int quot</code>
-<dd>The quotient from the division.
+          <dd>The quotient from the division.
 
-<br><dt><code>long long int rem</code>
-<dd>The remainder from the division. 
+          <br><dt><code>long long int rem</code>
+          <dd>The remainder from the division. 
 </dl>
 
-<p>(This is identical to <code>div_t</code> except that the components are of
+     <p>(This is identical to <code>div_t</code> except that the components are of
 type <code>long long int</code> rather than <code>int</code>.) 
 </td></tr>
 </table>
@@ -152,8 +162,8 @@ type <code>long long int</code> rather than <code>int</code>.)
 <p>
 <table width="100%">
 <tr>
-<td align="left">lldiv_t <b>lldiv</b><i> (long long int <var>numerator</var>, long long int <var>denominator</var>)
-</i></td>
+<td align="left">lldiv_t <b>lldiv</b><i> </i>(<i>long long int </i><var>numerator</var><i>, long long int </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -163,7 +173,7 @@ The <code>lldiv</code> function is like the <code>div</code> function, but the
 arguments are of type <code>long long int</code> and the result is returned as
 a structure of type <code>lldiv_t</code>.
 
-<p>The <code>lldiv</code> function was added in ISO&nbsp;C99. 
+     <p>The <code>lldiv</code> function was added in ISO&nbsp;C99. 
 </td></tr>
 </table>
 
@@ -171,7 +181,7 @@ a structure of type <code>lldiv_t</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>imaxdiv_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -180,27 +190,27 @@ a structure of type <code>lldiv_t</code>.
 This is a structure type used to hold the result returned by the <code>imaxdiv</code>
 function.  It has the following members:
 
-<dl>
+          <dl>
 <dt><code>intmax_t quot</code>
-<dd>The quotient from the division.
+          <dd>The quotient from the division.
 
-<br><dt><code>intmax_t rem</code>
-<dd>The remainder from the division. 
+          <br><dt><code>intmax_t rem</code>
+          <dd>The remainder from the division. 
 </dl>
 
-<p>(This is identical to <code>div_t</code> except that the components are of
+     <p>(This is identical to <code>div_t</code> except that the components are of
 type <code>intmax_t</code> rather than <code>int</code>.)
 
-<p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
+     <p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
 
-</td></tr>
+        </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">imaxdiv_t <b>imaxdiv</b><i> (intmax_t <var>numerator</var>, intmax_t <var>denominator</var>)
-</i></td>
+<td align="left">imaxdiv_t <b>imaxdiv</b><i> </i>(<i>intmax_t </i><var>numerator</var><i>, intmax_t </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -210,11 +220,11 @@ The <code>imaxdiv</code> function is like the <code>div</code> function, but the
 arguments are of type <code>intmax_t</code> and the result is returned as
 a structure of type <code>imaxdiv_t</code>.
 
-<p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
+     <p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
 
-<p>The <code>imaxdiv</code> function was added in ISO&nbsp;C99. 
+     <p>The <code>imaxdiv</code> function was added in ISO&nbsp;C99. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Misc%20FP%20Arithmetic">Misc FP Arithmetic</a>,
-Previous:<a rel=previous accesskey=p href="FP-Comparison-Functions.html#FP%20Comparison%20Functions">FP Comparison Functions</a>,
-Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+Node:&nbsp;<a name="Misc%20FP%20Arithmetic">Misc FP Arithmetic</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="FP-Comparison-Functions.html#FP%20Comparison%20Functions">FP Comparison Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
 <hr><br>
+</div>
 
-<h4>Miscellaneous FP arithmetic functions</h4>
+<h3 class="subsection">Miscellaneous FP arithmetic functions</h4>
 
 <p>The functions in this section perform miscellaneous but common
 operations that are awkward to express with C operators.  On some
@@ -23,8 +33,8 @@ perform these operations faster than the equivalent C code.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>fmin</b><i> (double <var>x</var>, double <var>y</var>)
-</i></td>
+<td align="left">double <b>fmin</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -32,8 +42,8 @@ perform these operations faster than the equivalent C code.
 <tr><td>
 
 <tr>
-<td align="left">float <b>fminf</b><i> (float <var>x</var>, float <var>y</var>)
-</i></td>
+<td align="left">float <b>fminf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -41,8 +51,8 @@ perform these operations faster than the equivalent C code.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>fminl</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>fminl</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,11 +60,11 @@ perform these operations faster than the equivalent C code.
 <tr><td>
 The <code>fmin</code> function returns the lesser of the two values <var>x</var>
 and <var>y</var>.  It is similar to the expression
-<br><pre>((x) &lt; (y) ? (x) : (y))
-</pre>
-except that <var>x</var> and <var>y</var> are only evaluated once.
+     <pre class="smallexample">          ((x) &lt; (y) ? (x) : (y))
+          </pre>
+     except that <var>x</var> and <var>y</var> are only evaluated once.
 
-<p>If an argument is NaN, the other argument is returned.  If both arguments
+     <p>If an argument is NaN, the other argument is returned.  If both arguments
 are NaN, NaN is returned. 
 </td></tr>
 </table>
@@ -62,8 +72,8 @@ are NaN, NaN is returned.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>fmax</b><i> (double <var>x</var>, double <var>y</var>)
-</i></td>
+<td align="left">double <b>fmax</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -71,8 +81,8 @@ are NaN, NaN is returned.
 <tr><td>
 
 <tr>
-<td align="left">float <b>fmaxf</b><i> (float <var>x</var>, float <var>y</var>)
-</i></td>
+<td align="left">float <b>fmaxf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -80,8 +90,8 @@ are NaN, NaN is returned.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>fmaxl</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>fmaxl</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -90,7 +100,7 @@ are NaN, NaN is returned.
 The <code>fmax</code> function returns the greater of the two values <var>x</var>
 and <var>y</var>.
 
-<p>If an argument is NaN, the other argument is returned.  If both arguments
+     <p>If an argument is NaN, the other argument is returned.  If both arguments
 are NaN, NaN is returned. 
 </td></tr>
 </table>
@@ -98,8 +108,8 @@ are NaN, NaN is returned.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>fdim</b><i> (double <var>x</var>, double <var>y</var>)
-</i></td>
+<td align="left">double <b>fdim</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -107,8 +117,8 @@ are NaN, NaN is returned.
 <tr><td>
 
 <tr>
-<td align="left">float <b>fdimf</b><i> (float <var>x</var>, float <var>y</var>)
-</i></td>
+<td align="left">float <b>fdimf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -116,8 +126,8 @@ are NaN, NaN is returned.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>fdiml</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>fdiml</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -127,15 +137,15 @@ The <code>fdim</code> function returns the positive difference between
 <var>x</var> and <var>y</var>.  The positive difference is <var>x</var> -
 <var>y</var> if <var>x</var> is greater than <var>y</var>, and 0 otherwise.
 
-<p>If <var>x</var>, <var>y</var>, or both are NaN, NaN is returned. 
+     <p>If <var>x</var>, <var>y</var>, or both are NaN, NaN is returned. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>fma</b><i> (double <var>x</var>, double <var>y</var>, double <var>z</var>)
-</i></td>
+<td align="left">double <b>fma</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i>, double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -143,8 +153,8 @@ The <code>fdim</code> function returns the positive difference between
 <tr><td>
 
 <tr>
-<td align="left">float <b>fmaf</b><i> (float <var>x</var>, float <var>y</var>, float <var>z</var>)
-</i></td>
+<td align="left">float <b>fmaf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i>, float </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -152,8 +162,8 @@ The <code>fdim</code> function returns the positive difference between
 <tr><td>
 
 <tr>
-<td align="left">long double <b>fmal</b><i> (long double <var>x</var>, long double <var>y</var>, long double <var>z</var>)
-</i></td>
+<td align="left">long double <b>fmal</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i>, long double </i><var>z</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -164,13 +174,13 @@ the operation (<var>x</var> &amp;middot; <var>y</var>) + <var>z</var>, but the
 intermediate result is not rounded to the destination type.  This can
 sometimes improve the precision of a calculation.
 
-<p>This function was introduced because some processors have a special
+     <p>This function was introduced because some processors have a special
 instruction to perform multiply-add.  The C compiler cannot use it
 directly, because the expression <code>x*y + z</code> is defined to round the
 intermediate result.  <code>fma</code> lets you choose when you want to round
 only once.
 
-<p>On processors which do not implement multiply-add in hardware,
+     <p>On processors which do not implement multiply-add in hardware,
 <code>fma</code> can be very slow since it must avoid intermediate rounding. 
 <code>math.h</code> defines the symbols <code>FP_FAST_FMA</code>,
 <code>FP_FAST_FMAF</code>, and <code>FP_FAST_FMAL</code> when the corresponding
@@ -180,5 +190,5 @@ hardware.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

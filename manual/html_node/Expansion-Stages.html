@@ -2,54 +2,64 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Expansion%20Stages">Expansion Stages</a>,
-Next:<a rel=next accesskey=n href="Calling-Wordexp.html#Calling%20Wordexp">Calling Wordexp</a>,
-Up:<a rel=up accesskey=u href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
+Node:&nbsp;<a name="Expansion%20Stages">Expansion Stages</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Calling-Wordexp.html#Calling%20Wordexp">Calling Wordexp</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
 <hr><br>
+</div>
 
-<h4>The Stages of Word Expansion</h4>
+<h3 class="subsection">The Stages of Word Expansion</h4>
 
 <p>When word expansion is applied to a sequence of words, it performs the
 following transformations in the order shown here:
 
-<ol type=1 start=1>
-</p><li><dfn>Tilde expansion</dfn>: Replacement of <code>~foo</code> with the name of
+     <ol type=1 start=1>
+<li><dfn>Tilde expansion</dfn>: Replacement of <code>~foo</code> with the name of
 the home directory of <code>foo</code>.
 
-<li>Next, three different transformations are applied in the same step,
+     <li>Next, three different transformations are applied in the same step,
 from left to right:
 
-<ul>
+          <ul>
 <li><dfn>Variable substitution</dfn>: Environment variables are substituted for
 references such as <code>$foo</code>.
 
-<li><dfn>Command substitution</dfn>: Constructs such as <code>`cat&nbsp;foo`</code> and
+          <li><dfn>Command substitution</dfn>: Constructs such as <code>`cat&nbsp;foo`</code> and
 the equivalent <code>$(cat&nbsp;foo)</code> are replaced with the output from
 the inner command.
 
-<li><dfn>Arithmetic expansion</dfn>: Constructs such as <code>$(($x-1))</code> are
+          <li><dfn>Arithmetic expansion</dfn>: Constructs such as <code>$(($x-1))</code> are
 replaced with the result of the arithmetic computation. 
 </ul>
 
-<li><dfn>Field splitting</dfn>: subdivision of the text into <dfn>words</dfn>.
+     <li><dfn>Field splitting</dfn>: subdivision of the text into <dfn>words</dfn>.
 
-<li><dfn>Wildcard expansion</dfn>: The replacement of a construct such as <code>*.c</code>
+     <li><dfn>Wildcard expansion</dfn>: The replacement of a construct such as <code>*.c</code>
 with a list of <code>.c</code> file names.  Wildcard expansion applies to an
 entire word at a time, and replaces that word with 0 or more file names
 that are themselves words.
 
-<li><dfn>Quote removal</dfn>: The deletion of string-quotes, now that they have
+     <li><dfn>Quote removal</dfn>: The deletion of string-quotes, now that they have
 done their job by inhibiting the above transformations when appropriate.
-</ol>
+        </ol>
 
-<p>For the details of these transformations, and how to write the constructs
+   <p>For the details of these transformations, and how to write the constructs
 that use them, see <cite>The&nbsp;BASH&nbsp;Manual</cite> (to appear).
 
-</body></html>
+   </body></html>
 

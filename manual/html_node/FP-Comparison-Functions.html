@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="FP%20Comparison%20Functions">FP Comparison Functions</a>,
-Next:<a rel=next accesskey=n href="Misc-FP-Arithmetic.html#Misc%20FP%20Arithmetic">Misc FP Arithmetic</a>,
-Previous:<a rel=previous accesskey=p href="FP-Bit-Twiddling.html#FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
-Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+Node:&nbsp;<a name="FP%20Comparison%20Functions">FP Comparison Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Misc-FP-Arithmetic.html#Misc%20FP%20Arithmetic">Misc FP Arithmetic</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="FP-Bit-Twiddling.html#FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
 <hr><br>
+</div>
 
-<h4>Floating-Point Comparison Functions</h4>
+<h3 class="subsection">Floating-Point Comparison Functions</h4>
 
 <p>The standard C comparison operators provoke exceptions when one or other
 of the operands is NaN.  For example,
 
-<br><pre>int v = a &lt; 1.0;
-</pre>
+<pre class="smallexample">     int v = a &lt; 1.0;
+     </pre>
 
 <p>will raise an exception if <var>a</var> is NaN.  (This does <em>not</em>
 happen with <code>==</code> and <code>!=</code>; those merely return false and true,
@@ -34,15 +44,15 @@ arguments only once.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isgreater</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>isgreater</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This macro determines whether the argument <var>x</var> is greater than
-<var>y</var>.  It is equivalent to <code>(<var>x</var>) &gt; (<var>y</var>)</code>, but no
+<var>y</var>.  It is equivalent to <code>(</code><var>x</var><code>) &gt; (</code><var>y</var><code>)</code>, but no
 exception is raised if <var>x</var> or <var>y</var> are NaN. 
 </td></tr>
 </table>
@@ -50,15 +60,15 @@ exception is raised if <var>x</var> or <var>y</var> are NaN.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isgreaterequal</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>isgreaterequal</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This macro determines whether the argument <var>x</var> is greater than or
-equal to <var>y</var>.  It is equivalent to <code>(<var>x</var>) &gt;= (<var>y</var>)</code>, but no
+equal to <var>y</var>.  It is equivalent to <code>(</code><var>x</var><code>) &gt;= (</code><var>y</var><code>)</code>, but no
 exception is raised if <var>x</var> or <var>y</var> are NaN. 
 </td></tr>
 </table>
@@ -66,15 +76,15 @@ exception is raised if <var>x</var> or <var>y</var> are NaN.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isless</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>isless</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This macro determines whether the argument <var>x</var> is less than <var>y</var>. 
-It is equivalent to <code>(<var>x</var>) &lt; (<var>y</var>)</code>, but no exception is
+It is equivalent to <code>(</code><var>x</var><code>) &lt; (</code><var>y</var><code>)</code>, but no exception is
 raised if <var>x</var> or <var>y</var> are NaN. 
 </td></tr>
 </table>
@@ -82,15 +92,15 @@ raised if <var>x</var> or <var>y</var> are NaN.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>islessequal</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>islessequal</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This macro determines whether the argument <var>x</var> is less than or equal
-to <var>y</var>.  It is equivalent to <code>(<var>x</var>) &lt;= (<var>y</var>)</code>, but no
+to <var>y</var>.  It is equivalent to <code>(</code><var>x</var><code>) &lt;= (</code><var>y</var><code>)</code>, but no
 exception is raised if <var>x</var> or <var>y</var> are NaN. 
 </td></tr>
 </table>
@@ -98,19 +108,19 @@ exception is raised if <var>x</var> or <var>y</var> are NaN.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>islessgreater</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>islessgreater</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This macro determines whether the argument <var>x</var> is less or greater
-than <var>y</var>.  It is equivalent to <code>(<var>x</var>) &lt; (<var>y</var>) ||
-(<var>x</var>) &gt; (<var>y</var>)</code> (although it only evaluates <var>x</var> and <var>y</var>
+than <var>y</var>.  It is equivalent to <code>(</code><var>x</var><code>) &lt; (</code><var>y</var><code>) ||
+(</code><var>x</var><code>) &gt; (</code><var>y</var><code>)</code> (although it only evaluates <var>x</var> and <var>y</var>
 once), but no exception is raised if <var>x</var> or <var>y</var> are NaN.
 
-<p>This macro is not equivalent to <code><var>x</var> != <var>y</var></code>, because that
+     <p>This macro is not equivalent to <code></code><var>x</var><code> != </code><var>y</var><code></code>, because that
 expression is true if <var>x</var> or <var>y</var> are NaN. 
 </td></tr>
 </table>
@@ -118,8 +128,8 @@ expression is true if <var>x</var> or <var>y</var> are NaN.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isunordered</b><i> (<em>real-floating</em> <var>x</var>, <em>real-floating</em> <var>y</var>)
-</i></td>
+<td align="left">int <b>isunordered</b><i> </i>(<i></i><em>real-floating</em><i> </i><var>x</var><i>, </i><em>real-floating</em><i> </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -130,13 +140,13 @@ words, it is true if <var>x</var> or <var>y</var> are NaN, and false otherwise.
 </td></tr>
 </table>
 
-<p>Not all machines provide hardware support for these operations.  On
+   <p>Not all machines provide hardware support for these operations.  On
 machines that don't, the macros can be very slow.  Therefore, you should
 not use these functions when NaN is not a concern.
 
-<p><strong>Note:</strong> There are no macros <code>isequal</code> or <code>isunequal</code>. 
+   <p><strong>Note:</strong> There are no macros <code>isequal</code> or <code>isunequal</code>. 
 They are unnecessary, because the <code>==</code> and <code>!=</code> operators do
 <em>not</em> throw an exception if one or both of the operands are NaN.
 
-</body></html>
+   </body></html>
 

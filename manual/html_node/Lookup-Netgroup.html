@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Lookup%20Netgroup">Lookup Netgroup</a>,
-Next:<a rel=next accesskey=n href="Netgroup-Membership.html#Netgroup%20Membership">Netgroup Membership</a>,
-Previous:<a rel=previous accesskey=p href="Netgroup-Data.html#Netgroup%20Data">Netgroup Data</a>,
-Up:<a rel=up accesskey=u href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>
+Node:&nbsp;<a name="Lookup%20Netgroup">Lookup Netgroup</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Netgroup-Membership.html#Netgroup%20Membership">Netgroup Membership</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Netgroup-Data.html#Netgroup%20Data">Netgroup Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>
 <hr><br>
+</div>
 
-<h4>Looking up one Netgroup</h4>
+<h3 class="subsection">Looking up one Netgroup</h4>
 
 <p>The lookup functions for netgroups are a bit different to all other
 system database handling functions.  Since a single netgroup can contain
@@ -25,8 +35,8 @@ These functions are declared in <code>netdb.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setnetgrent</b><i> (const char *<var>netgroup</var>)
-</i></td>
+<td align="left">int <b>setnetgrent</b><i> </i>(<i>const char *</i><var>netgroup</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,13 +46,13 @@ A call to this function initializes the internal state of the library to
 allow following calls of the <code>getnetgrent</code> to iterate over all entries
 in the netgroup with name <var>netgroup</var>.
 
-<p>When the call is successful (i.e., when a netgroup with this name exists)
+     <p>When the call is successful (i.e., when a netgroup with this name exists)
 the return value is <code>1</code>.  When the return value is <code>0</code> no
 netgroup of this name is known or some other error occurred. 
 </td></tr>
 </table>
 
-<p>It is important to remember that there is only one single state for
+   <p>It is important to remember that there is only one single state for
 iterating the netgroups.  Even if the programmer uses the
 <code>getnetgrent_r</code> function the result is not really reentrant since
 always only one single netgroup at a time can be processed.  If the
@@ -51,15 +61,15 @@ must protect this by using external locking.  This problem was
 introduced in the original netgroups implementation in SunOS and since
 we must stay compatible it is not possible to change this.
 
-<p>Some other functions also use the netgroups state.  Currently these are
+   <p>Some other functions also use the netgroups state.  Currently these are
 the <code>innetgr</code> function and parts of the implementation of the
 <code>compat</code> service part of the NSS implementation.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getnetgrent</b><i> (char **<var>hostp</var>, char **<var>userp</var>, char **<var>domainp</var>)
-</i></td>
+<td align="left">int <b>getnetgrent</b><i> </i>(<i>char **</i><var>hostp</var><i>, char **</i><var>userp</var><i>, char **</i><var>domainp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -73,7 +83,7 @@ in the next entry is empty the pointer has the value <code>NULL</code>.
 The returned string pointers are only valid if none of the netgroup
 related functions are called.
 
-<p>The return value is <code>1</code> if the next entry was successfully read.  A
+     <p>The return value is <code>1</code> if the next entry was successfully read.  A
 value of <code>0</code> means no further entries exist or internal errors occurred. 
 </td></tr>
 </table>
@@ -81,8 +91,8 @@ value of <code>0</code> means no further entries exist or internal errors occurr
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getnetgrent_r</b><i> (char **<var>hostp</var>, char **<var>userp</var>, char **<var>domainp</var>, char *<var>buffer</var>, int <var>buflen</var>)
-</i></td>
+<td align="left">int <b>getnetgrent_r</b><i> </i>(<i>char **</i><var>hostp</var><i>, char **</i><var>userp</var><i>, char **</i><var>domainp</var><i>, char *</i><var>buffer</var><i>, int </i><var>buflen</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -94,12 +104,12 @@ the strings the three string pointers <var>hostp</var>, <var>userp</var>, and
 starting at <var>buffer</var>.  This means the returned values are valid
 even after other netgroup related functions are called.
 
-<p>The return value is <code>1</code> if the next entry was successfully read and
+     <p>The return value is <code>1</code> if the next entry was successfully read and
 the buffer contains enough room to place the strings in it.  <code>0</code> is
 returned in case no more entries are found, the buffer is too small, or
 internal errors occurred.
 
-<p>This function is a GNU extension.  The original implementation in the
+     <p>This function is a GNU extension.  The original implementation in the
 SunOS libc does not provide this function. 
 </td></tr>
 </table>
@@ -107,8 +117,8 @@ SunOS libc does not provide this function.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endnetgrent</b><i> (void)
-</i></td>
+<td align="left">void <b>endnetgrent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -120,5 +130,5 @@ to <code>getnetgrent</code> are invalid afterwards.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

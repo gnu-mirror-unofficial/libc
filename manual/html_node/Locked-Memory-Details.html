@@ -2,60 +2,70 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Locked%20Memory%20Details">Locked Memory Details</a>,
-Next:<a rel=next accesskey=n href="Page-Lock-Functions.html#Page%20Lock%20Functions">Page Lock Functions</a>,
-Previous:<a rel=previous accesskey=p href="Why-Lock-Pages.html#Why%20Lock%20Pages">Why Lock Pages</a>,
-Up:<a rel=up accesskey=u href="Locking-Pages.html#Locking%20Pages">Locking Pages</a>
+Node:&nbsp;<a name="Locked%20Memory%20Details">Locked Memory Details</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Page-Lock-Functions.html#Page%20Lock%20Functions">Page Lock Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Why-Lock-Pages.html#Why%20Lock%20Pages">Why Lock Pages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locking-Pages.html#Locking%20Pages">Locking Pages</a>
 <hr><br>
+</div>
 
-<h4>Locked Memory Details</h4>
+<h3 class="subsection">Locked Memory Details</h4>
 
 <p>A memory lock is associated with a virtual page, not a real frame.  The
 paging rule is: If a frame backs at least one locked page, don't page it
 out.
 
-<p>Memory locks do not stack.  I.e. you can't lock a particular page twice
+   <p>Memory locks do not stack.  I.e. you can't lock a particular page twice
 so that it has to be unlocked twice before it is truly unlocked.  It is
 either locked or it isn't.
 
-<p>A memory lock persists until the process that owns the memory explicitly
+   <p>A memory lock persists until the process that owns the memory explicitly
 unlocks it.  (But process termination and exec cause the virtual memory
 to cease to exist, which you might say means it isn't locked any more).
 
-<p>Memory locks are not inherited by child processes.  (But note that on a
+   <p>Memory locks are not inherited by child processes.  (But note that on a
 modern Unix system, immediately after a fork, the parent's and the
 child's virtual address space are backed by the same real page frames,
 so the child enjoys the parent's locks).  See <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>.
 
-<p>Because of its ability to impact other processes, only the superuser can
+   <p>Because of its ability to impact other processes, only the superuser can
 lock a page.  Any process can unlock its own page.
 
-<p>The system sets limits on the amount of memory a process can have locked
+   <p>The system sets limits on the amount of memory a process can have locked
 and the amount of real memory it can have dedicated to it.  See <a href="Limits-on-Resources.html#Limits%20on%20Resources">Limits on Resources</a>.
 
-<p>In Linux, locked pages aren't as locked as you might think. 
+   <p>In Linux, locked pages aren't as locked as you might think. 
 Two virtual pages that are not shared memory can nonetheless be backed
 by the same real frame.  The kernel does this in the name of efficiency
 when it knows both virtual pages contain identical data, and does it
 even if one or both of the virtual pages are locked.
 
-<p>But when a process modifies one of those pages, the kernel must get it a
+   <p>But when a process modifies one of those pages, the kernel must get it a
 separate frame and fill it with the page's data.  This is known as a
 <dfn>copy-on-write page fault</dfn>.  It takes a small amount of time and in
 a pathological case, getting that frame may require I/O.
 
-<p>To make sure this doesn't happen to your program, don't just lock the
+   <p>To make sure this doesn't happen to your program, don't just lock the
 pages.  Write to them as well, unless you know you won't write to them
 ever.  And to make sure you have pre-allocated frames for your stack,
 enter a scope that declares a C automatic variable larger than the
 maximum stack size you will need, set it to something, then return from
 its scope.
 
-</body></html>
+   </body></html>
 

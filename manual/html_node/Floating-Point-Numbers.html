@@ -2,22 +2,32 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Floating%20Point%20Numbers">Floating Point Numbers</a>,
-Next:<a rel=next accesskey=n href="Floating-Point-Classes.html#Floating%20Point%20Classes">Floating Point Classes</a>,
-Previous:<a rel=previous accesskey=p href="Integer-Division.html#Integer%20Division">Integer Division</a>,
-Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+Node:&nbsp;<a name="Floating%20Point%20Numbers">Floating Point Numbers</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Floating-Point-Classes.html#Floating%20Point%20Classes">Floating Point Classes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Integer-Division.html#Integer%20Division">Integer Division</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
 <hr><br>
+</div>
 
-<h3>Floating Point Numbers</h3>
+<h3 class="section">Floating Point Numbers</h3>
 
 <p>Most computer hardware has support for two different kinds of numbers:
-integers (<small>...</small>-3, -2, -1, 0, 1, 2, 3<small>...</small>) and
+integers (<small class="dots">...</small>-3, -2, -1, 0, 1, 2, 3<small class="dots">...</small>) and
 floating-point numbers.  Floating-point numbers have three parts: the
 <dfn>mantissa</dfn>, the <dfn>exponent</dfn>, and the <dfn>sign bit</dfn>.  The real
 number represented by a floating-point value is given by
@@ -27,14 +37,14 @@ the mantissa.  See <a href="Floating-Point-Concepts.html#Floating%20Point%20Conc
 possible to have a different <dfn>base</dfn> for the exponent, but all modern
 hardware uses 2.)
 
-<p>Floating-point numbers can represent a finite subset of the real
+   <p>Floating-point numbers can represent a finite subset of the real
 numbers.  While this subset is large enough for most purposes, it is
 important to remember that the only reals that can be represented
 exactly are rational numbers that have a terminating binary expansion
 shorter than the width of the mantissa.  Even simple fractions such as
 1/5 can only be approximated by floating point.
 
-<p>Mathematical operations and functions frequently need to produce values
+   <p>Mathematical operations and functions frequently need to produce values
 that are not representable.  Often these values can be approximated
 closely enough for practical purposes, but sometimes they can't. 
 Historically there was no way to tell when the results of a calculation
@@ -45,5 +55,5 @@ framework consists of a set of <dfn>exceptions</dfn> that indicate why a
 result could not be represented, and the special values <dfn>infinity</dfn>
 and <dfn>not a number</dfn> (NaN).
 
-</body></html>
+   </body></html>
 

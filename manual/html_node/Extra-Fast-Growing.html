@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Extra%20Fast%20Growing">Extra Fast Growing</a>,
-Next:<a rel=next accesskey=n href="Status-of-an-Obstack.html#Status%20of%20an%20Obstack">Status of an Obstack</a>,
-Previous:<a rel=previous accesskey=p href="Growing-Objects.html#Growing%20Objects">Growing Objects</a>,
-Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+Node:&nbsp;<a name="Extra%20Fast%20Growing">Extra Fast Growing</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Status-of-an-Obstack.html#Status%20of%20an%20Obstack">Status of an Obstack</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Growing-Objects.html#Growing%20Objects">Growing Objects</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Obstacks.html#Obstacks">Obstacks</a>
 <hr><br>
+</div>
 
-<h5>Extra Fast Growing Objects</h5>
+<h3 class="subsubsection">Extra Fast Growing Objects</h5>
 
 <p>The usual functions for growing objects incur overhead for checking
 whether there is room for the new growth in the current chunk.  If you
 are frequently constructing objects in small steps of growth, this
 overhead can be significant.
 
-<p>You can reduce the overhead by using special "fast growth"
+   <p>You can reduce the overhead by using special "fast growth"
 functions that grow the object without checking.  In order to have a
 robust program, you must do the checking yourself.  If you do this checking
 in the simplest way each time you are about to add data to the object, you
@@ -29,14 +39,14 @@ have not saved anything, because that is what the ordinary growth
 functions do.  But if you can arrange to check less often, or check
 more efficiently, then you make the program faster.
 
-<p>The function <code>obstack_room</code> returns the amount of room available
+   <p>The function <code>obstack_room</code> returns the amount of room available
 in the current chunk.  It is declared as follows:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>obstack_room</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">int <b>obstack_room</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -48,14 +58,14 @@ growing object (or to an object about to be started) in obstack
 </td></tr>
 </table>
 
-<p>While you know there is room, you can use these fast growth functions
+   <p>While you know there is room, you can use these fast growth functions
 for adding data to a growing object:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_1grow_fast</b><i> (struct obstack *<var>obstack-ptr</var>, char <var>c</var>)
-</i></td>
+<td align="left">void <b>obstack_1grow_fast</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, char </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -69,8 +79,8 @@ character <var>c</var> to the growing object in obstack <var>obstack-ptr</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_ptr_grow_fast</b><i> (struct obstack *<var>obstack-ptr</var>, void *<var>data</var>)
-</i></td>
+<td align="left">void <b>obstack_ptr_grow_fast</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, void *</i><var>data</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -85,8 +95,8 @@ obstack <var>obstack-ptr</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_int_grow_fast</b><i> (struct obstack *<var>obstack-ptr</var>, int <var>data</var>)
-</i></td>
+<td align="left">void <b>obstack_int_grow_fast</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, int </i><var>data</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -101,8 +111,8 @@ containing the value of <var>data</var> to the growing object in obstack
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_blank_fast</b><i> (struct obstack *<var>obstack-ptr</var>, int <var>size</var>)
-</i></td>
+<td align="left">void <b>obstack_blank_fast</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, int </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -113,44 +123,44 @@ growing object in obstack <var>obstack-ptr</var> without initializing them.
 </td></tr>
 </table>
 
-<p>When you check for space using <code>obstack_room</code> and there is not
+   <p>When you check for space using <code>obstack_room</code> and there is not
 enough room for what you want to add, the fast growth functions
 are not safe.  In this case, simply use the corresponding ordinary
 growth function instead.  Very soon this will copy the object to a
 new chunk; then there will be lots of room available again.
 
-<p>So, each time you use an ordinary growth function, check afterward for
+   <p>So, each time you use an ordinary growth function, check afterward for
 sufficient space using <code>obstack_room</code>.  Once the object is copied
 to a new chunk, there will be plenty of space again, so the program will
 start using the fast growth functions again.
 
-<p>Here is an example:
+   <p>Here is an example:
 
-<br><pre>void
-add_string (struct obstack *obstack, const char *ptr, int len)
-{
-  while (len &gt; 0)
-    {
-      int room = obstack_room (obstack);
-      if (room == 0)
-        {
-          /* Not enough room. Add one character slowly,
-             which may copy to a new chunk and make room.  */
-          obstack_1grow (obstack, *ptr++);
-          len--;
-        }
-      else
-        {
-          if (room &gt; len)
-            room = len;
-          /* Add fast as much as we have room for. */
-          len -= room;
-          while (room-- &gt; 0)
-            obstack_1grow_fast (obstack, *ptr++);
-        }
-    }
-}
-</pre>
+<pre class="smallexample">     void
+     add_string (struct obstack *obstack, const char *ptr, int len)
+     {
+       while (len &gt; 0)
+         {
+           int room = obstack_room (obstack);
+           if (room == 0)
+             {
+               /* Not enough room. Add one character slowly,
+                  which may copy to a new chunk and make room.  */
+               obstack_1grow (obstack, *ptr++);
+               len--;
+             }
+           else
+             {
+               if (room &gt; len)
+                 room = len;
+               /* Add fast as much as we have room for. */
+               len -= room;
+               while (room-- &gt; 0)
+                 obstack_1grow_fast (obstack, *ptr++);
+             }
+         }
+     }
+     </pre>
 
-</body></html>
+   </body></html>
 

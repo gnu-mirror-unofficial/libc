@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Encode%20Binary%20Data">Encode Binary Data</a>,
-Next:<a rel=next accesskey=n href="Argz-and-Envz-Vectors.html#Argz%20and%20Envz%20Vectors">Argz and Envz Vectors</a>,
-Previous:<a rel=previous accesskey=p href="Trivial-Encryption.html#Trivial%20Encryption">Trivial Encryption</a>,
-Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+Node:&nbsp;<a name="Encode%20Binary%20Data">Encode Binary Data</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Argz-and-Envz-Vectors.html#Argz%20and%20Envz%20Vectors">Argz and Envz Vectors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Trivial-Encryption.html#Trivial%20Encryption">Trivial Encryption</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
 <hr><br>
+</div>
 
-<h3>Encode Binary Data</h3>
+<h3 class="section">Encode Binary Data</h3>
 
 <p>To store or transfer binary data in environments which only support text
 one has to encode the binary data by mapping the input bytes to
@@ -25,8 +35,8 @@ this task.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>l64a</b><i> (long int <var>n</var>)
-</i></td>
+<td align="left">char * <b>l64a</b><i> </i>(<i>long int </i><var>n</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -47,69 +57,69 @@ implementation, <code>l64a</code> treats its argument as unsigned, so it will
 return a sensible encoding for any nonzero <var>n</var>; however, portable
 programs should not rely on this.
 
-<p>To encode a large buffer <code>l64a</code> must be called in a loop, once for
+     <p>To encode a large buffer <code>l64a</code> must be called in a loop, once for
 each 32-bit word of the buffer.  For example, one could do something
 like this:
 
-<br><pre>char *
-encode (const void *buf, size_t len)
-{
-  /* We know in advance how long the buffer has to be. */
-  unsigned char *in = (unsigned char *) buf;
-  char *out = malloc (6 + ((len + 3) / 4) * 6 + 1);
-  char *cp = out;
+     <pre class="smallexample">          char *
+          encode (const void *buf, size_t len)
+          {
+            /* We know in advance how long the buffer has to be. */
+            unsigned char *in = (unsigned char *) buf;
+            char *out = malloc (6 + ((len + 3) / 4) * 6 + 1);
+            char *cp = out;
+          
+            /* Encode the length. */
+            /* Using `htonl' is necessary so that the data can be
+               decoded even on machines with different byte order. */
+          
+            cp = mempcpy (cp, l64a (htonl (len)), 6);
+          
+            while (len &gt; 3)
+              {
+                unsigned long int n = *in++;
+                n = (n &lt;&lt; 8) | *in++;
+                n = (n &lt;&lt; 8) | *in++;
+                n = (n &lt;&lt; 8) | *in++;
+                len -= 4;
+                if (n)
+                  cp = mempcpy (cp, l64a (htonl (n)), 6);
+                else
+                      /* `l64a' returns the empty string for n==0, so we 
+                         must generate its encoding ("......") by hand. */
+                  cp = stpcpy (cp, "......");
+              }
+            if (len &gt; 0)
+              {
+                unsigned long int n = *in++;
+                if (--len &gt; 0)
+                  {
+                    n = (n &lt;&lt; 8) | *in++;
+                    if (--len &gt; 0)
+                      n = (n &lt;&lt; 8) | *in;
+                  }
+                memcpy (cp, l64a (htonl (n)), 6);
+                cp += 6;
+              }
+            *cp = '\0';
+            return out;
+          }
+          </pre>
 
-  /* Encode the length. */
-  /* Using `htonl' is necessary so that the data can be
-     decoded even on machines with different byte order. */
-
-  cp = mempcpy (cp, l64a (htonl (len)), 6);
-
-  while (len &gt; 3)
-    {
-      unsigned long int n = *in++;
-      n = (n &lt;&lt; 8) | *in++;
-      n = (n &lt;&lt; 8) | *in++;
-      n = (n &lt;&lt; 8) | *in++;
-      len -= 4;
-      if (n)
-        cp = mempcpy (cp, l64a (htonl (n)), 6);
-      else
-            /* `l64a' returns the empty string for n==0, so we 
-               must generate its encoding ("......") by hand. */
-        cp = stpcpy (cp, "......");
-    }
-  if (len &gt; 0)
-    {
-      unsigned long int n = *in++;
-      if (--len &gt; 0)
-        {
-          n = (n &lt;&lt; 8) | *in++;
-          if (--len &gt; 0)
-            n = (n &lt;&lt; 8) | *in;
-        }
-      memcpy (cp, l64a (htonl (n)), 6);
-      cp += 6;
-    }
-  *cp = '\0';
-  return out;
-}
-</pre>
-
-<p>It is strange that the library does not provide the complete
+     <p>It is strange that the library does not provide the complete
 functionality needed but so be it.
 
-</td></tr>
+        </td></tr>
 </table>
 
-<p>To decode data produced with <code>l64a</code> the following function should be
+   <p>To decode data produced with <code>l64a</code> the following function should be
 used.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>a64l</b><i> (const char *<var>string</var>)
-</i></td>
+<td align="left">long int <b>a64l</b><i> </i>(<i>const char *</i><var>string</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -122,15 +132,15 @@ below.  It stops decoding when it finds a character not in the table,
 rather like <code>atoi</code>; if you have a buffer which has been broken into
 lines, you must be careful to skip over the end-of-line characters.
 
-<p>The decoded number is returned as a <code>long int</code> value. 
+     <p>The decoded number is returned as a <code>long int</code> value. 
 </td></tr>
 </table>
 
-<p>The <code>l64a</code> and <code>a64l</code> functions use a base 64 encoding, in
+   <p>The <code>l64a</code> and <code>a64l</code> functions use a base 64 encoding, in
 which each character of an encoded string represents six bits of an
 input word.  These symbols are used for the base 64 digits:
 
-<p><table><tr align="left"><td valign="top"></td><td valign="top">0 </td><td valign="top">1 </td><td valign="top">2 </td><td valign="top">3 </td><td valign="top">4 </td><td valign="top">5 </td><td valign="top">6 </td><td valign="top">7
+   <p><table><tr align="left"><td valign="top"></td><td valign="top">0 </td><td valign="top">1 </td><td valign="top">2 </td><td valign="top">3 </td><td valign="top">4 </td><td valign="top">5 </td><td valign="top">6 </td><td valign="top">7
 <br></td></tr><tr align="left"><td valign="top">0      </td><td valign="top"><code>.</code> </td><td valign="top"><code>/</code> </td><td valign="top"><code>0</code> </td><td valign="top"><code>1</code>
                    </td><td valign="top"><code>2</code> </td><td valign="top"><code>3</code> </td><td valign="top"><code>4</code> </td><td valign="top"><code>5</code>
 <br></td></tr><tr align="left"><td valign="top">8      </td><td valign="top"><code>6</code> </td><td valign="top"><code>7</code> </td><td valign="top"><code>8</code> </td><td valign="top"><code>9</code>
@@ -147,11 +157,11 @@ input word.  These symbols are used for the base 64 digits:
                    </td><td valign="top"><code>o</code> </td><td valign="top"><code>p</code> </td><td valign="top"><code>q</code> </td><td valign="top"><code>r</code>
 <br></td></tr><tr align="left"><td valign="top">56     </td><td valign="top"><code>s</code> </td><td valign="top"><code>t</code> </td><td valign="top"><code>u</code> </td><td valign="top"><code>v</code>
                    </td><td valign="top"><code>w</code> </td><td valign="top"><code>x</code> </td><td valign="top"><code>y</code> </td><td valign="top"><code>z</code>
-<br></td></tr></table>
+   <br></td></tr></table>
 
-<p>This encoding scheme is not standard.  There are some other encoding
+   <p>This encoding scheme is not standard.  There are some other encoding
 methods which are much more widely used (UU encoding, MIME encoding). 
 Generally, it is better to use one of these encodings.
 
-</body></html>
+   </body></html>
 

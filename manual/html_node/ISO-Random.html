@@ -2,30 +2,40 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="ISO%20Random">ISO Random</a>,
-Next:<a rel=next accesskey=n href="BSD-Random.html#BSD%20Random">BSD Random</a>,
-Up:<a rel=up accesskey=u href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>
+Node:&nbsp;<a name="ISO%20Random">ISO Random</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="BSD-Random.html#BSD%20Random">BSD Random</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>
 <hr><br>
+</div>
 
-<h4>ISO C Random Number Functions</h4>
+<h3 class="subsection">ISO C Random Number Functions</h4>
 
 <p>This section describes the random number functions that are part of
 the ISO&nbsp;C standard.
 
-<p>To use these facilities, you should include the header file
+   <p>To use these facilities, you should include the header file
 <code>stdlib.h</code> in your program.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>RAND_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -41,8 +51,8 @@ value the <code>rand</code> function can return.  In the GNU library, it is
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>rand</b><i> (void)
-</i></td>
+<td align="left">int <b>rand</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -56,8 +66,8 @@ series.  The value ranges from <code>0</code> to <code>RAND_MAX</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>srand</b><i> (unsigned int <var>seed</var>)
-</i></td>
+<td align="left">void <b>srand</b><i> </i>(<i>unsigned int </i><var>seed</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -68,20 +78,20 @@ pseudo-random numbers.  If you call <code>rand</code> before a seed has been
 established with <code>srand</code>, it uses the value <code>1</code> as a default
 seed.
 
-<p>To produce a different pseudo-random series each time your program is
+     <p>To produce a different pseudo-random series each time your program is
 run, do <code>srand (time (0))</code>. 
 </td></tr>
 </table>
 
-<p>POSIX.1 extended the C standard functions to support reproducible random
+   <p>POSIX.1 extended the C standard functions to support reproducible random
 numbers in multi-threaded programs.  However, the extension is badly
 designed and unsuitable for serious work.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>rand_r</b><i> (unsigned int *<var>seed</var>)
-</i></td>
+<td align="left">int <b>rand_r</b><i> </i>(<i>unsigned int *</i><var>seed</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -93,12 +103,12 @@ just as <code>rand</code> does.  However, all its state is stored in the
 bits as the type <code>unsigned int</code> has.  This is far too few to
 provide a good RNG.
 
-<p>If your program requires a reentrant RNG, we recommend you use the
+     <p>If your program requires a reentrant RNG, we recommend you use the
 reentrant GNU extensions to the SVID random number generator.  The
 POSIX.1 interface should only be used when the GNU extensions are not
 available. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Adding%20Severity%20Classes">Adding Severity Classes</a>,
-Next:<a rel=next accesskey=n href="Example.html#Example">Example</a>,
-Previous:<a rel=previous accesskey=p href="Printing-Formatted-Messages.html#Printing%20Formatted%20Messages">Printing Formatted Messages</a>,
-Up:<a rel=up accesskey=u href="Formatted-Messages.html#Formatted%20Messages">Formatted Messages</a>
+Node:&nbsp;<a name="Adding%20Severity%20Classes">Adding Severity Classes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Example.html#Example">Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Printing-Formatted-Messages.html#Printing%20Formatted%20Messages">Printing Formatted Messages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Messages.html#Formatted%20Messages">Formatted Messages</a>
 <hr><br>
+</div>
 
-<h4>Adding Severity Classes</h4>
+<h3 class="subsection">Adding Severity Classes</h4>
 
 <p>There is another possibility to introduce severity classes besides using
 the environment variable <code>SEV_LEVEL</code>.  This simplifies the task of
@@ -25,8 +35,8 @@ but this is toilsome.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>addseverity</b><i> (int <var>severity</var>, const char *<var>string</var>)
-</i></td>
+<td align="left">int <b>addseverity</b><i> </i>(<i>int </i><var>severity</var><i>, const char *</i><var>string</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -39,22 +49,22 @@ for the parameter with the same name of <code>fmtmsg</code>, and <var>string</va
 is the string printed in the actual messages instead of the numeric
 value.
 
-<p>If <var>string</var> is <code>NULL</code> the severity class with the numeric value
+     <p>If <var>string</var> is <code>NULL</code> the severity class with the numeric value
 according to <var>severity</var> is removed.
 
-<p>It is not possible to overwrite or remove one of the default severity
+     <p>It is not possible to overwrite or remove one of the default severity
 classes.  All calls to <code>addseverity</code> with <var>severity</var> set to one
 of the values for the default classes will fail.
 
-<p>The return value is <code>MM_OK</code> if the task was successfully performed. 
+     <p>The return value is <code>MM_OK</code> if the task was successfully performed. 
 If the return value is <code>MM_NOTOK</code> something went wrong.  This could
 mean that no more memory is available or a class is not available when
 it has to be removed.
 
-<p>This function is not specified in the X/Open Portability Guide although
+     <p>This function is not specified in the X/Open Portability Guide although
 the <code>fmtsmg</code> function is.  It is available on System V systems. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

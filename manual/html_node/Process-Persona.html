@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Persona">Process Persona</a>,
-Next:<a rel=next accesskey=n href="Why-Change-Persona.html#Why%20Change%20Persona">Why Change Persona</a>,
-Previous:<a rel=previous accesskey=p href="User-and-Group-IDs.html#User%20and%20Group%20IDs">User and Group IDs</a>,
-Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+Node:&nbsp;<a name="Process%20Persona">Process Persona</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Why-Change-Persona.html#Why%20Change%20Persona">Why Change Persona</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="User-and-Group-IDs.html#User%20and%20Group%20IDs">User and Group IDs</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
 <hr><br>
+</div>
 
-<h3>The Persona of a Process</h3>
+<h3 class="section">The Persona of a Process</h3>
 
 <p>At any time, each process has an <dfn>effective user ID</dfn>, a <dfn>effective
 group ID</dfn>, and a set of <dfn>supplementary group IDs</dfn>.  These IDs
@@ -22,31 +32,31 @@ determine the privileges of the process.  They are collectively
 called the <dfn>persona</dfn> of the process, because they determine "who it
 is" for purposes of access control.
 
-<p>Your login shell starts out with a persona which consists of your user
+   <p>Your login shell starts out with a persona which consists of your user
 ID, your default group ID, and your supplementary group IDs (if you are
 in more than one group).  In normal circumstances, all your other processes
 inherit these values.
 
-<p>A process also has a <dfn>real user ID</dfn> which identifies the user who
+   <p>A process also has a <dfn>real user ID</dfn> which identifies the user who
 created the process, and a <dfn>real group ID</dfn> which identifies that
 user's default group.  These values do not play a role in access
 control, so we do not consider them part of the persona.  But they are
 also important.
 
-<p>Both the real and effective user ID can be changed during the lifetime
+   <p>Both the real and effective user ID can be changed during the lifetime
 of a process.  See <a href="Why-Change-Persona.html#Why%20Change%20Persona">Why Change Persona</a>.
 
-<p>For details on how a process's effective user ID and group IDs affect
+   <p>For details on how a process's effective user ID and group IDs affect
 its permission to access files, see <a href="Access-Permission.html#Access%20Permission">Access Permission</a>.
 
-<p>The effective user ID of a process also controls permissions for sending
+   <p>The effective user ID of a process also controls permissions for sending
 signals using the <code>kill</code> function.  See <a href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>.
 
-<p>Finally, there are many operations which can only be performed by a
+   <p>Finally, there are many operations which can only be performed by a
 process whose effective user ID is zero.  A process with this user ID is
 a <dfn>privileged process</dfn>.  Commonly the user name <code>root</code> is
 associated with user ID 0, but there may be other user names with this
 ID.
 
-</body></html>
+   </body></html>
 

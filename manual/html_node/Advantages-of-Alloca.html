@@ -2,36 +2,46 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Advantages%20of%20Alloca">Advantages of Alloca</a>,
-Next:<a rel=next accesskey=n href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>,
-Previous:<a rel=previous accesskey=p href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>,
-Up:<a rel=up accesskey=u href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>
+Node:&nbsp;<a name="Advantages%20of%20Alloca">Advantages of Alloca</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>
 <hr><br>
+</div>
 
-<h5>Advantages of <code>alloca</code></h5>
+<h3 class="subsubsection">Advantages of <code>alloca</code></h5>
 
 <p>Here are the reasons why <code>alloca</code> may be preferable to <code>malloc</code>:
 
-<ul>
+     <ul>
 <li>Using <code>alloca</code> wastes very little space and is very fast.  (It is
 open-coded by the GNU C compiler.)
 
-<li>Since <code>alloca</code> does not have separate pools for different sizes of
+     <li>Since <code>alloca</code> does not have separate pools for different sizes of
 block, space used for any size block can be reused for any other size. 
 <code>alloca</code> does not cause memory fragmentation.
 
-<li>Nonlocal exits done with <code>longjmp</code> (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>)
+     <li>Nonlocal exits done with <code>longjmp</code> (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>)
 automatically free the space allocated with <code>alloca</code> when they exit
 through the function that called <code>alloca</code>.  This is the most
 important reason to use <code>alloca</code>.
 
-<p>To illustrate this, suppose you have a function
+     <p>To illustrate this, suppose you have a function
 <code>open_or_report_error</code> which returns a descriptor, like
 <code>open</code>, if it succeeds, but does not return to its caller if it
 fails.  If the file cannot be opened, it prints an error message and
@@ -39,23 +49,23 @@ jumps out to the command level of your program using <code>longjmp</code>.
 Let's change <code>open2</code> (see <a href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>) to use this
 subroutine:
 
-<br><pre>int
-open2 (char *str1, char *str2, int flags, int mode)
-{
-  char *name = (char *) alloca (strlen (str1) + strlen (str2) + 1);
-  stpcpy (stpcpy (name, str1), str2);
-  return open_or_report_error (name, flags, mode);
-}
-</pre>
+     <pre class="smallexample">          int
+          open2 (char *str1, char *str2, int flags, int mode)
+          {
+            char *name = (char *) alloca (strlen (str1) + strlen (str2) + 1);
+            stpcpy (stpcpy (name, str1), str2);
+            return open_or_report_error (name, flags, mode);
+          }
+          </pre>
 
-<p>Because of the way <code>alloca</code> works, the memory it allocates is
+     <p>Because of the way <code>alloca</code> works, the memory it allocates is
 freed even when an error occurs, with no special effort required.
 
-<p>By contrast, the previous definition of <code>open2</code> (which uses
+     <p>By contrast, the previous definition of <code>open2</code> (which uses
 <code>malloc</code> and <code>free</code>) would develop a memory leak if it were
 changed in this way.  Even if you are willing to make more changes to
 fix it, there is no easy way to do so. 
 </ul>
 
-</body></html>
+   </body></html>
 

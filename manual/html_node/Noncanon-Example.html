@@ -2,96 +2,106 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Noncanon%20Example">Noncanon Example</a>,
-Next:<a rel=next accesskey=n href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>,
-Previous:<a rel=previous accesskey=p href="Line-Control.html#Line%20Control">Line Control</a>,
-Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+Node:&nbsp;<a name="Noncanon%20Example">Noncanon Example</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Line-Control.html#Line%20Control">Line Control</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
 <hr><br>
+</div>
 
-<h3>Noncanonical Mode Example</h3>
+<h3 class="section">Noncanonical Mode Example</h3>
 
 <p>Here is an example program that shows how you can set up a terminal
 device to read single characters in noncanonical input mode, without
 echo.
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;unistd.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;termios.h&gt;
+     #include &lt;unistd.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;stdlib.h&gt;
+     #include &lt;termios.h&gt;
+     
+     /* Use this variable to remember original terminal attributes. */
+     
+     struct termios saved_attributes;
+     
+     void
+     reset_input_mode (void)
+     {
+       tcsetattr (STDIN_FILENO, TCSANOW, &amp;saved_attributes);
+     }
+     
+     void
+     set_input_mode (void)
+     {
+       struct termios tattr;
+       char *name;
+     
+       /* Make sure stdin is a terminal. */
+       if (!isatty (STDIN_FILENO))
+         {
+           fprintf (stderr, "Not a terminal.\n");
+           exit (EXIT_FAILURE);
+         }
+     
+       /* Save the terminal attributes so we can restore them later. */
+       tcgetattr (STDIN_FILENO, &amp;saved_attributes);
+       atexit (reset_input_mode);
+     
+       /* Set the funny terminal modes. */
+       tcgetattr (STDIN_FILENO, &amp;tattr);
+       tattr.c_lflag &amp;= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
+       tattr.c_cc[VMIN] = 1;
+       tattr.c_cc[VTIME] = 0;
+       tcsetattr (STDIN_FILENO, TCSAFLUSH, &amp;tattr);
+     }
+     
+     int
+     main (void)
+     {
+       char c;
+     
+       set_input_mode ();
+     
+       while (1)
+         {
+           read (STDIN_FILENO, &amp;c, 1);
+           if (c == '\004')          /* <kbd>C-d</kbd> */
+             break;
+           else
+             putchar (c);
+         }
+     
+       return EXIT_SUCCESS;
+     }
+     </pre>
 
-/* Use this variable to remember original terminal attributes. */
-
-struct termios saved_attributes;
-
-void
-reset_input_mode (void)
-{
-  tcsetattr (STDIN_FILENO, TCSANOW, &amp;saved_attributes);
-}
-
-void
-set_input_mode (void)
-{
-  struct termios tattr;
-  char *name;
-
-  /* Make sure stdin is a terminal. */
-  if (!isatty (STDIN_FILENO))
-    {
-      fprintf (stderr, "Not a terminal.\n");
-      exit (EXIT_FAILURE);
-    }
-
-  /* Save the terminal attributes so we can restore them later. */
-  tcgetattr (STDIN_FILENO, &amp;saved_attributes);
-  atexit (reset_input_mode);
-
-  /* Set the funny terminal modes. */
-  tcgetattr (STDIN_FILENO, &amp;tattr);
-  tattr.c_lflag &amp;= ~(ICANON|ECHO); /* Clear ICANON and ECHO. */
-  tattr.c_cc[VMIN] = 1;
-  tattr.c_cc[VTIME] = 0;
-  tcsetattr (STDIN_FILENO, TCSAFLUSH, &amp;tattr);
-}
-
-int
-main (void)
-{
-  char c;
-
-  set_input_mode ();
-
-  while (1)
-    {
-      read (STDIN_FILENO, &amp;c, 1);
-      if (c == '\004')          /* <kbd>C-d</kbd> */
-        break;
-      else
-        putchar (c);
-    }
-
-  return EXIT_SUCCESS;
-}
-</pre>
-
-<p>This program is careful to restore the original terminal modes before
+   <p>This program is careful to restore the original terminal modes before
 exiting or terminating with a signal.  It uses the <code>atexit</code>
 function (see <a href="Cleanups-on-Exit.html#Cleanups%20on%20Exit">Cleanups on Exit</a>) to make sure this is done
 by <code>exit</code>.
 
-<p>The shell is supposed to take care of resetting the terminal modes when
+   <p>The shell is supposed to take care of resetting the terminal modes when
 a process is stopped or continued; see <a href="Job-Control.html#Job%20Control">Job Control</a>.  But some
 existing shells do not actually do this, so you may wish to establish
 handlers for job control signals that reset terminal modes.  The above
 example does so.
 
-</body></html>
+   </body></html>
 

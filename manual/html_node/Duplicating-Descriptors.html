@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Duplicating%20Descriptors">Duplicating Descriptors</a>,
-Next:<a rel=next accesskey=n href="Descriptor-Flags.html#Descriptor%20Flags">Descriptor Flags</a>,
-Previous:<a rel=previous accesskey=p href="Control-Operations.html#Control%20Operations">Control Operations</a>,
-Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+Node:&nbsp;<a name="Duplicating%20Descriptors">Duplicating Descriptors</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Descriptor-Flags.html#Descriptor%20Flags">Descriptor Flags</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Control-Operations.html#Control%20Operations">Control Operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
 <hr><br>
+</div>
 
-<h3>Duplicating Descriptors</h3>
+<h3 class="section">Duplicating Descriptors</h3>
 
 <p>You can <dfn>duplicate</dfn> a file descriptor, or allocate another file
 descriptor that refers to the same open file as the original.  Duplicate
@@ -22,23 +32,23 @@ descriptors share one file position and one set of file status flags
 (see <a href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>), but each has its own set of file descriptor
 flags (see <a href="Descriptor-Flags.html#Descriptor%20Flags">Descriptor Flags</a>).
 
-<p>The major use of duplicating a file descriptor is to implement
+   <p>The major use of duplicating a file descriptor is to implement
 <dfn>redirection</dfn> of input or output:  that is, to change the
 file or pipe that a particular file descriptor corresponds to.
 
-<p>You can perform this operation using the <code>fcntl</code> function with the
+   <p>You can perform this operation using the <code>fcntl</code> function with the
 <code>F_DUPFD</code> command, but there are also convenient functions
 <code>dup</code> and <code>dup2</code> for duplicating descriptors.
 
-<p>The <code>fcntl</code> function and flags are declared in <code>fcntl.h</code>,
+   <p>The <code>fcntl</code> function and flags are declared in <code>fcntl.h</code>,
 while prototypes for <code>dup</code> and <code>dup2</code> are in the header file
 <code>unistd.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>dup</b><i> (int <var>old</var>)
-</i></td>
+<td align="left">int <b>dup</b><i> </i>(<i>int </i><var>old</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -46,15 +56,15 @@ while prototypes for <code>dup</code> and <code>dup2</code> are in the header fi
 <tr><td>
 This function copies descriptor <var>old</var> to the first available
 descriptor number (the first number not currently open).  It is
-equivalent to <code>fcntl (<var>old</var>, F_DUPFD, 0)</code>. 
+equivalent to <code>fcntl (</code><var>old</var><code>, F_DUPFD, 0)</code>. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>dup2</b><i> (int <var>old</var>, int <var>new</var>)
-</i></td>
+<td align="left">int <b>dup2</b><i> </i>(<i>int </i><var>old</var><i>, int </i><var>new</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -63,19 +73,19 @@ equivalent to <code>fcntl (<var>old</var>, F_DUPFD, 0)</code>.
 This function copies the descriptor <var>old</var> to descriptor number
 <var>new</var>.
 
-<p>If <var>old</var> is an invalid descriptor, then <code>dup2</code> does nothing; it
+     <p>If <var>old</var> is an invalid descriptor, then <code>dup2</code> does nothing; it
 does not close <var>new</var>.  Otherwise, the new duplicate of <var>old</var>
 replaces any previous meaning of descriptor <var>new</var>, as if <var>new</var>
 were closed first.
 
-<p>If <var>old</var> and <var>new</var> are different numbers, and <var>old</var> is a
+     <p>If <var>old</var> and <var>new</var> are different numbers, and <var>old</var> is a
 valid descriptor number, then <code>dup2</code> is equivalent to:
 
-<br><pre>close (<var>new</var>);
-fcntl (<var>old</var>, F_DUPFD, <var>new</var>)
-</pre>
+     <pre class="smallexample">          close (<var>new</var>);
+          fcntl (<var>old</var>, F_DUPFD, <var>new</var>)
+          </pre>
 
-<p>However, <code>dup2</code> does this atomically; there is no instant in the
+     <p>However, <code>dup2</code> does this atomically; there is no instant in the
 middle of calling <code>dup2</code> at which <var>new</var> is closed and not yet a
 duplicate of <var>old</var>. 
 </td></tr>
@@ -85,7 +95,7 @@ duplicate of <var>old</var>.
 <table width="100%">
 <tr>
 <td align="left">int <b>F_DUPFD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -94,35 +104,35 @@ duplicate of <var>old</var>.
 This macro is used as the <var>command</var> argument to <code>fcntl</code>, to
 copy the file descriptor given as the first argument.
 
-<p>The form of the call in this case is:
+     <p>The form of the call in this case is:
 
-<br><pre>fcntl (<var>old</var>, F_DUPFD, <var>next-filedes</var>)
-</pre>
+     <pre class="smallexample">          fcntl (<var>old</var>, F_DUPFD, <var>next-filedes</var>)
+          </pre>
 
-<p>The <var>next-filedes</var> argument is of type <code>int</code> and specifies that
+     <p>The <var>next-filedes</var> argument is of type <code>int</code> and specifies that
 the file descriptor returned should be the next available one greater
 than or equal to this value.
 
-<p>The return value from <code>fcntl</code> with this command is normally the value
+     <p>The return value from <code>fcntl</code> with this command is normally the value
 of the new file descriptor.  A return value of -1 indicates an
 error.  The following <code>errno</code> error conditions are defined for
 this command:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>old</var> argument is invalid.
+          <dd>The <var>old</var> argument is invalid.
 
-<br><dt><code>EINVAL</code>
-<dd>The <var>next-filedes</var> argument is invalid.
+          <br><dt><code>EINVAL</code>
+          <dd>The <var>next-filedes</var> argument is invalid.
 
-<br><dt><code>EMFILE</code>
-<dd>There are no more file descriptors available--your program is already
+          <br><dt><code>EMFILE</code>
+          <dd>There are no more file descriptors available--your program is already
 using the maximum.  In BSD and GNU, the maximum is controlled by a
 resource limit that can be changed; see <a href="Limits-on-Resources.html#Limits%20on%20Resources">Limits on Resources</a>, for
 more information about the <code>RLIMIT_NOFILE</code> limit. 
 </dl>
 
-<p><code>ENFILE</code> is not a possible error code for <code>dup2</code> because
+     <p><code>ENFILE</code> is not a possible error code for <code>dup2</code> because
 <code>dup2</code> does not create a new opening of a file; duplicate
 descriptors do not count toward the limit which <code>ENFILE</code>
 indicates.  <code>EMFILE</code> is possible because it refers to the limit on
@@ -130,7 +140,7 @@ distinct descriptor numbers in use in one process.
 </td></tr>
 </table>
 
-<p>Here is an example showing how to use <code>dup2</code> to do redirection. 
+   <p>Here is an example showing how to use <code>dup2</code> to do redirection. 
 Typically, redirection of the standard streams (like <code>stdin</code>) is
 done by a shell or shell-like program before calling one of the
 <code>exec</code> functions (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>) to execute a new
@@ -139,25 +149,25 @@ creates and initializes the standard streams to point to the
 corresponding file descriptors, before its <code>main</code> function is
 invoked.
 
-<p>So, to redirect standard input to a file, the shell could do something
+   <p>So, to redirect standard input to a file, the shell could do something
 like:
 
-<br><pre>pid = fork ();
-if (pid == 0)
-  {
-    char *filename;
-    char *program;
-    int file;
-    <small>...</small>
-    file = TEMP_FAILURE_RETRY (open (filename, O_RDONLY));
-    dup2 (file, STDIN_FILENO);
-    TEMP_FAILURE_RETRY (close (file));
-    execv (program, NULL);
-  }
-</pre>
+<pre class="smallexample">     pid = fork ();
+     if (pid == 0)
+       {
+         char *filename;
+         char *program;
+         int file;
+         ...
+         file = TEMP_FAILURE_RETRY (open (filename, O_RDONLY));
+         dup2 (file, STDIN_FILENO);
+         TEMP_FAILURE_RETRY (close (file));
+         execv (program, NULL);
+       }
+     </pre>
 
-<p>There is also a more detailed example showing how to implement redirection
+   <p>There is also a more detailed example showing how to implement redirection
 in the context of a pipeline of processes in <a href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>.
 
-</body></html>
+   </body></html>
 

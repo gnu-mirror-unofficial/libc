@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Predefined%20Printf%20Handlers">Predefined Printf Handlers</a>,
-Previous:<a rel=previous accesskey=p href="Printf-Extension-Example.html#Printf%20Extension%20Example">Printf Extension Example</a>,
-Up:<a rel=up accesskey=u href="Customizing-Printf.html#Customizing%20Printf">Customizing Printf</a>
+Node:&nbsp;<a name="Predefined%20Printf%20Handlers">Predefined Printf Handlers</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Printf-Extension-Example.html#Printf%20Extension%20Example">Printf Extension Example</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Customizing-Printf.html#Customizing%20Printf">Customizing Printf</a>
 <hr><br>
+</div>
 
-<h4>Predefined <code>printf</code> Handlers</h4>
+<h3 class="subsection">Predefined <code>printf</code> Handlers</h4>
 
 <p>The GNU libc also contains a concrete and useful application of the
 <code>printf</code> handler extension.  There are two functions available
@@ -22,8 +32,8 @@ which implement a special way to print floating-point numbers.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>printf_size</b><i> (FILE *<var>fp</var>, const struct printf_info *<var>info</var>, const void *const *<var>args</var>)
-</i></td>
+<td align="left">int <b>printf_size</b><i> </i>(<i>FILE *</i><var>fp</var><i>, const struct printf_info *</i><var>info</var><i>, const void *const *</i><var>args</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -37,22 +47,22 @@ format character specified while registered this handler.  If the
 character is of lower case, 1024 is used.  For upper case characters,
 1000 is used.
 
-<p>The postfix tag corresponds to bytes, kilobytes, megabytes, gigabytes,
+     <p>The postfix tag corresponds to bytes, kilobytes, megabytes, gigabytes,
 etc.  The full table is:
 
-<p>The default precision is 3, i.e., 1024 is printed with a lower-case
+     <p>The default precision is 3, i.e., 1024 is printed with a lower-case
 format character as if it were <code>%.3fk</code> and will yield <code>1.000k</code>. 
 </td></tr>
 </table>
 
-<p>Due to the requirements of <code>register_printf_function</code> we must also
+   <p>Due to the requirements of <code>register_printf_function</code> we must also
 provide the function which returns information about the arguments.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>printf_size_info</b><i> (const struct printf_info *<var>info</var>, size_t <var>n</var>, int *<var>argtypes</var>)
-</i></td>
+<td align="left">int <b>printf_size_info</b><i> </i>(<i>const struct printf_info *</i><var>info</var><i>, size_t </i><var>n</var><i>, int *</i><var>argtypes</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -64,26 +74,26 @@ it.  The format always takes one argument.
 </td></tr>
 </table>
 
-<p>To use these functions both functions must be registered with a call like
+   <p>To use these functions both functions must be registered with a call like
 
-<br><pre>register_printf_function ('B', printf_size, printf_size_info);
-</pre>
+<pre class="smallexample">     register_printf_function ('B', printf_size, printf_size_info);
+     </pre>
 
-<p>Here we register the functions to print numbers as powers of 1000 since
+   <p>Here we register the functions to print numbers as powers of 1000 since
 the format character <code>'B'</code> is an upper-case character.  If we
 would additionally use <code>'b'</code> in a line like
 
-<br><pre>register_printf_function ('b', printf_size, printf_size_info);
-</pre>
+<pre class="smallexample">     register_printf_function ('b', printf_size, printf_size_info);
+     </pre>
 
 <p>we could also print using a power of 1024.  Please note that all that is
 different in these two lines is the format specifier.  The
 <code>printf_size</code> function knows about the difference between lower and upper
 case format specifiers.
 
-<p>The use of <code>'B'</code> and <code>'b'</code> is no coincidence.  Rather it is
+   <p>The use of <code>'B'</code> and <code>'b'</code> is no coincidence.  Rather it is
 the preferred way to use this functionality since it is available on
 some other systems which also use format specifiers.
 
-</body></html>
+   </body></html>
 

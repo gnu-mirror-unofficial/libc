@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Identifying%20the%20Terminal">Identifying the Terminal</a>,
-Next:<a rel=next accesskey=n href="Process-Group-Functions.html#Process%20Group%20Functions">Process Group Functions</a>,
-Up:<a rel=up accesskey=u href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
+Node:&nbsp;<a name="Identifying%20the%20Terminal">Identifying the Terminal</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Process-Group-Functions.html#Process%20Group%20Functions">Process Group Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
 <hr><br>
+</div>
 
-<h4>Identifying the Controlling Terminal</h4>
+<h3 class="subsection">Identifying the Controlling Terminal</h4>
 
 <p>You can use the <code>ctermid</code> function to get a file name that you can
 use to open the controlling terminal.  In the GNU library, it returns
@@ -22,14 +32,14 @@ the same string all the time: <code>"/dev/tty"</code>.  That is a special
 current process (if it has one).  To find the name of the specific
 terminal device, use <code>ttyname</code>; see <a href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>.
 
-<p>The function <code>ctermid</code> is declared in the header file
+   <p>The function <code>ctermid</code> is declared in the header file
 <code>stdio.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>ctermid</b><i> (char *<var>string</var>)
-</i></td>
+<td align="left">char * <b>ctermid</b><i> </i>(<i>char *</i><var>string</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -42,7 +52,7 @@ not a null pointer, it should be an array that can hold at least
 Otherwise, a pointer to a string in a static area is returned, which
 might get overwritten on subsequent calls to this function.
 
-<p>An empty string is returned if the file name cannot be determined for
+     <p>An empty string is returned if the file name cannot be determined for
 any reason.  Even if a file name is returned, access to the file it
 represents is not guaranteed. 
 </td></tr>
@@ -52,7 +62,7 @@ represents is not guaranteed.
 <table width="100%">
 <tr>
 <td align="left">int <b>L_ctermid</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -64,8 +74,8 @@ returned by <code>ctermid</code>.
 </td></tr>
 </table>
 
-<p>See also the <code>isatty</code> and <code>ttyname</code> functions, in
+   <p>See also the <code>isatty</code> and <code>ttyname</code> functions, in
 <a href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>.
 
-</body></html>
+   </body></html>
 

@@ -2,37 +2,47 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Syslog%20Example">Syslog Example</a>,
-Previous:<a rel=previous accesskey=p href="setlogmask.html#setlogmask">setlogmask</a>,
-Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+Node:&nbsp;<a name="Syslog%20Example">Syslog Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="setlogmask.html#setlogmask">setlogmask</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
 <hr><br>
+</div>
 
-<h4>Syslog Example</h4>
+<h3 class="subsection">Syslog Example</h4>
 
 <p>Here is an example of <code>openlog</code>, <code>syslog</code>, and <code>closelog</code>:
 
-<p>This example sets the logmask so that debug and informational messages
+   <p>This example sets the logmask so that debug and informational messages
 get discarded without ever reaching Syslog.  So the second <code>syslog</code>
 in the example does nothing.
 
-<br><pre>#include &lt;syslog.h&gt;
+<pre class="smallexample">     #include &lt;syslog.h&gt;
+     
+     setlogmask (LOG_UPTO (LOG_NOTICE));
+     
+     openlog ("exampleprog", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
+     
+     syslog (LOG_NOTICE, "Program started by User %d", getuid ());
+     syslog (LOG_INFO, "A tree falls in a forest");
+     
+     closelog ();
+     
+     </pre>
 
-setlogmask (LOG_UPTO (LOG_NOTICE));
-
-openlog ("exampleprog", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
-
-syslog (LOG_NOTICE, "Program started by User %d", getuid ());
-syslog (LOG_INFO, "A tree falls in a forest");
-
-closelog ();
-
-</pre>
-
-</body></html>
+   </body></html>
 

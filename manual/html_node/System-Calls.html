@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="System%20Calls">System Calls</a>,
-Next:<a rel=next accesskey=n href="Program-Termination.html#Program%20Termination">Program Termination</a>,
-Previous:<a rel=previous accesskey=p href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>,
-Up:<a rel=up accesskey=u href="Program-Basics.html#Program%20Basics">Program Basics</a>
+Node:&nbsp;<a name="System%20Calls">System Calls</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Program-Termination.html#Program%20Termination">Program Termination</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Program-Basics.html#Program%20Basics">Program Basics</a>
 <hr><br>
+</div>
 
-<h3>System Calls</h3>
+<h3 class="section">System Calls</h3>
 
 <p>A system call is a request for service that a program makes of the
 kernel.  The service is generally something that only the kernel has
@@ -26,21 +36,21 @@ there is a system call that changes the permissions of a file, but
 you don't need to know about it because you can just use the GNU C
 library's <code>chmod</code> function.
 
-<p>System calls are sometimes called kernel calls.
+   <p>System calls are sometimes called kernel calls.
 
-<p>However, there are times when you want to make a system call explicitly,
+   <p>However, there are times when you want to make a system call explicitly,
 and for that, the GNU C library provides the <code>syscall</code> function. 
 <code>syscall</code> is harder to use and less portable than functions like
 <code>chmod</code>, but easier and more portable than coding the system call
 in assembler instructions.
 
-<p><code>syscall</code> is most useful when you are working with a system call
+   <p><code>syscall</code> is most useful when you are working with a system call
 which is special to your system or is newer than the GNU C library you
 are using.  <code>syscall</code> is implemented in an entirely generic way;
 the function does not know anything about what a particular system
 call does or even if it is valid.
 
-<p>The description of <code>syscall</code> in this section assumes a certain
+   <p>The description of <code>syscall</code> in this section assumes a certain
 protocol for system calls on the various platforms on which the GNU C
 library runs.  That protocol is not defined by any strong authority, but
 we won't describe it here either because anyone who is coding
@@ -48,77 +58,77 @@ we won't describe it here either because anyone who is coding
 library source code as a specification of the interface between them
 anyway.
 
-<p><code>syscall</code> is declared in <code>unistd.h</code>.
+   <p><code>syscall</code> is declared in <code>unistd.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>syscall</b><i> (long int <var>sysno</var>, ...)
-</i></td>
+<td align="left">long int <b>syscall</b><i> </i>(<i>long int </i><var>sysno</var><i>, ...</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>syscall</code> performs a generic system call.
+     <p><code>syscall</code> performs a generic system call.
 
-<p><var>sysno</var> is the system call number.  Each kind of system call is
+     <p><var>sysno</var> is the system call number.  Each kind of system call is
 identified by a number.  Macros for all the possible system call numbers
 are defined in <code>sys/syscall.h</code>
 
-<p>The remaining arguments are the arguments for the system call, in
+     <p>The remaining arguments are the arguments for the system call, in
 order, and their meanings depend on the kind of system call.  Each kind
 of system call has a definite number of arguments, from zero to five. 
 If you code more arguments than the system call takes, the extra ones to
 the right are ignored.
 
-<p>The return value is the return value from the system call, unless the
+     <p>The return value is the return value from the system call, unless the
 system call failed.  In that case, <code>syscall</code> returns <code>-1</code> and
 sets <code>errno</code> to an error code that the system call returned.  Note
 that system calls do not return <code>-1</code> when they succeed.
 
-<p>If you specify an invalid <var>sysno</var>, <code>syscall</code> returns <code>-1</code>
+     <p>If you specify an invalid <var>sysno</var>, <code>syscall</code> returns <code>-1</code>
 with <code>errno</code> = <code>ENOSYS</code>.
 
-<p>Example:
+     <p>Example:
 
-<br><pre>
-#include &lt;unistd.h&gt;
-#include &lt;sys/syscall.h&gt;
-#include &lt;errno.h&gt;
+     <pre class="smallexample">          
+          #include &lt;unistd.h&gt;
+          #include &lt;sys/syscall.h&gt;
+          #include &lt;errno.h&gt;
+          
+          ...
+          
+          int rc;
+          
+          rc = syscall(SYS_chmod, "/etc/passwd", 0444);
+          
+          if (rc == -1)
+             fprintf(stderr, "chmod failed, errno = %d\n", errno);
+          
+          </pre>
 
-...
-
-int rc;
-
-rc = syscall(SYS_chmod, "/etc/passwd", 0444);
-
-if (rc == -1)
-   fprintf(stderr, "chmod failed, errno = %d\n", errno);
-
-</pre>
-
-<p>This, if all the compatibility stars are aligned, is equivalent to the
+     <p>This, if all the compatibility stars are aligned, is equivalent to the
 following preferable code:
 
-<br><pre>
-#include &lt;sys/types.h&gt;
-#include &lt;sys/stat.h&gt;
-#include &lt;errno.h&gt;
+     <pre class="smallexample">          
+          #include &lt;sys/types.h&gt;
+          #include &lt;sys/stat.h&gt;
+          #include &lt;errno.h&gt;
+          
+          ...
+          
+          int rc;
+          
+          rc = chmod("/etc/passwd", 0444);
+          if (rc == -1)
+             fprintf(stderr, "chmod failed, errno = %d\n", errno);
+          
+          </pre>
 
-...
-
-int rc;
-
-rc = chmod("/etc/passwd", 0444);
-if (rc == -1)
-   fprintf(stderr, "chmod failed, errno = %d\n", errno);
-
-</pre>
-
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

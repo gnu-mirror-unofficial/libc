@@ -2,40 +2,50 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Unconstrained%20Allocation">Unconstrained Allocation</a>,
-Next:<a rel=next accesskey=n href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>,
-Previous:<a rel=previous accesskey=p href="Memory-Allocation-and-C.html#Memory%20Allocation%20and%20C">Memory Allocation and C</a>,
-Up:<a rel=up accesskey=u href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>
+Node:&nbsp;<a name="Unconstrained%20Allocation">Unconstrained Allocation</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Memory-Allocation-and-C.html#Memory%20Allocation%20and%20C">Memory Allocation and C</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>
 <hr><br>
+</div>
 
-<h4>Unconstrained Allocation</h4>
+<h3 class="subsection">Unconstrained Allocation</h4>
 
 <p>The most general dynamic allocation facility is <code>malloc</code>.  It
 allows you to allocate blocks of memory of any size at any time, make
 them bigger or smaller at any time, and free the blocks individually at
 any time (or never).
 
-<ul>
-<li><a accesskey=1 href="Basic-Allocation.html#Basic%20Allocation">Basic Allocation</a>:             Simple use of <code>malloc</code>. 
-<li><a accesskey=2 href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>:              Examples of <code>malloc</code>.  <code>xmalloc</code>. 
-<li><a accesskey=3 href="Freeing-after-Malloc.html#Freeing%20after%20Malloc">Freeing after Malloc</a>:         Use <code>free</code> to free a block you
+<ul class="menu">
+<li><a accesskey="1" href="Basic-Allocation.html#Basic%20Allocation">Basic Allocation</a>:             Simple use of <code>malloc</code>. 
+<li><a accesskey="2" href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>:              Examples of <code>malloc</code>.  <code>xmalloc</code>. 
+<li><a accesskey="3" href="Freeing-after-Malloc.html#Freeing%20after%20Malloc">Freeing after Malloc</a>:         Use <code>free</code> to free a block you
 				 got with <code>malloc</code>. 
-<li><a accesskey=4 href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>:          Use <code>realloc</code> to make a block
+<li><a accesskey="4" href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>:          Use <code>realloc</code> to make a block
 				 bigger or smaller. 
-<li><a accesskey=5 href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>:     Use <code>calloc</code> to allocate a
+<li><a accesskey="5" href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>:     Use <code>calloc</code> to allocate a
 				 block and clear it. 
-<li><a accesskey=6 href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>:        Efficiency considerations in use of
+<li><a accesskey="6" href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>:        Efficiency considerations in use of
 				 these functions. 
-<li><a accesskey=7 href="Aligned-Memory-Blocks.html#Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>:        Allocating specially aligned memory. 
-<li><a accesskey=8 href="Malloc-Tunable-Parameters.html#Malloc%20Tunable%20Parameters">Malloc Tunable Parameters</a>:    Use <code>mallopt</code> to adjust allocation
+<li><a accesskey="7" href="Aligned-Memory-Blocks.html#Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>:        Allocating specially aligned memory. 
+<li><a accesskey="8" href="Malloc-Tunable-Parameters.html#Malloc%20Tunable%20Parameters">Malloc Tunable Parameters</a>:    Use <code>mallopt</code> to adjust allocation
                                  parameters. 
-<li><a accesskey=9 href="Heap-Consistency-Checking.html#Heap%20Consistency%20Checking">Heap Consistency Checking</a>:    Automatic checking for errors. 
+<li><a accesskey="9" href="Heap-Consistency-Checking.html#Heap%20Consistency%20Checking">Heap Consistency Checking</a>:    Automatic checking for errors. 
 <li><a href="Hooks-for-Malloc.html#Hooks%20for%20Malloc">Hooks for Malloc</a>:             You can use these hooks for debugging
 				 programs that use <code>malloc</code>. 
 <li><a href="Statistics-of-Malloc.html#Statistics%20of%20Malloc">Statistics of Malloc</a>:         Getting information about how much
@@ -43,5 +53,5 @@ any time (or never).
 <li><a href="Summary-of-Malloc.html#Summary%20of%20Malloc">Summary of Malloc</a>:            Summary of <code>malloc</code> and related functions. 
 </ul>
 
-</body></html>
+   </body></html>
 

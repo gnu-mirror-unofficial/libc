@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
-Next:<a rel=next accesskey=n href="Simple-Directory-Lister.html#Simple%20Directory%20Lister">Simple Directory Lister</a>,
-Previous:<a rel=previous accesskey=p href="Opening-a-Directory.html#Opening%20a%20Directory">Opening a Directory</a>,
-Up:<a rel=up accesskey=u href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
+Node:&nbsp;<a name="Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Simple-Directory-Lister.html#Simple%20Directory%20Lister">Simple Directory Lister</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Opening-a-Directory.html#Opening%20a%20Directory">Opening a Directory</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
 <hr><br>
+</div>
 
-<h4>Reading and Closing a Directory Stream</h4>
+<h3 class="subsection">Reading and Closing a Directory Stream</h4>
 
 <p>This section describes how to read directory entries from a directory
 stream, and how to close the stream when you are done with it.  All the
@@ -23,8 +33,8 @@ symbols are declared in the header file <code>dirent.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct dirent * <b>readdir</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">struct dirent * <b>readdir</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,20 +45,20 @@ returns a pointer to a structure containing information about the file.
 This structure is statically allocated and can be rewritten by a
 subsequent call.
 
-<p><strong>Portability Note:</strong> On some systems <code>readdir</code> may not
+     <p><strong>Portability Note:</strong> On some systems <code>readdir</code> may not
 return entries for <code>.</code> and <code>..</code>, even though these are always
 valid file names in any directory.  See <a href="File-Name-Resolution.html#File%20Name%20Resolution">File Name Resolution</a>.
 
-<p>If there are no more entries in the directory or an error is detected,
+     <p>If there are no more entries in the directory or an error is detected,
 <code>readdir</code> returns a null pointer.  The following <code>errno</code> error
 conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>dirstream</var> argument is not valid. 
+          <dd>The <var>dirstream</var> argument is not valid. 
 </dl>
 
-<p><code>readdir</code> is not thread safe.  Multiple threads using
+     <p><code>readdir</code> is not thread safe.  Multiple threads using
 <code>readdir</code> on the same <var>dirstream</var> may overwrite the return
 value.  Use <code>readdir_r</code> when this is critical. 
 </td></tr>
@@ -57,8 +67,8 @@ value.  Use <code>readdir_r</code> when this is critical.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>readdir_r</b><i> (DIR *<var>dirstream</var>, struct dirent *<var>entry</var>, struct dirent **<var>result</var>)
-</i></td>
+<td align="left">int <b>readdir_r</b><i> </i>(<i>DIR *</i><var>dirstream</var><i>, struct dirent *</i><var>entry</var><i>, struct dirent **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -70,17 +80,13 @@ prevent conflicts between simultaneously running threads the result is
 not stored in statically allocated memory.  Instead the argument
 <var>entry</var> points to a place to store the result.
 
-<p>The return value is <code>0</code> in case the next entry was read
-successfully.  In this case a pointer to the result is returned in
-*<var>result</var>.  It is not required that *<var>result</var> is the same as
-<var>entry</var>.  If something goes wrong while executing <code>readdir_r</code>
-the function returns a value indicating the error (as described for
-<code>readdir</code>).
+     <p>Normally <code>readdir_r</code> returns zero and sets <code>*</code><var>result</var><code></code>
+to <var>entry</var>.  If there are no more entries in the directory or an
+error is detected, <code>readdir_r</code> sets <code>*</code><var>result</var><code></code> to a
+null pointer and returns a nonzero error code, also stored in
+<code>errno</code>, as described for <code>readdir</code>.
 
-<p>If there are no more directory entries, <code>readdir_r</code>'s return value is
-<code>0</code>, and *<var>result</var> is set to <code>NULL</code>.
-
-<p><strong>Portability Note:</strong> On some systems <code>readdir_r</code> may not
+     <p><strong>Portability Note:</strong> On some systems <code>readdir_r</code> may not
 return a NUL terminated string for the file name, even when there is no
 <code>d_reclen</code> field in <code>struct dirent</code> and the file
 name is the maximum allowed size.  Modern systems all have the
@@ -89,7 +95,7 @@ critical.  In any case there is no such problem with the <code>readdir</code>
 function, so that even on systems without the <code>d_reclen</code> member one
 could use multiple threads by using external locking.
 
-<p>It is also important to look at the definition of the <code>struct
+     <p>It is also important to look at the definition of the <code>struct
 dirent</code> type.  Simply passing a pointer to an object of this type for
 the second parameter of <code>readdir_r</code> might not be enough.  Some
 systems don't define the <code>d_name</code> element sufficiently long.  In
@@ -97,26 +103,26 @@ this case the user has to provide additional space.  There must be room
 for at least <code>NAME_MAX + 1</code> characters in the <code>d_name</code> array. 
 Code to call <code>readdir_r</code> could look like this:
 
-<br><pre>  union
-  {
-    struct dirent d;
-    char b[offsetof (struct dirent, d_name) + NAME_MAX + 1];
-  } u;
-
-  if (readdir_r (dir, &amp;u.d, &amp;res) == 0)
-    ...
-</pre>
-</td></tr>
+     <pre class="smallexample">            union
+            {
+              struct dirent d;
+              char b[offsetof (struct dirent, d_name) + NAME_MAX + 1];
+            } u;
+          
+            if (readdir_r (dir, &amp;u.d, &amp;res) == 0)
+              ...
+          </pre>
+     </td></tr>
 </table>
 
-<p>To support large filesystems on 32-bit machines there are LFS variants
+   <p>To support large filesystems on 32-bit machines there are LFS variants
 of the last two functions.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct dirent64 * <b>readdir64</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">struct dirent64 * <b>readdir64</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -127,15 +133,15 @@ except that it returns a pointer to a record of type <code>struct
 dirent64</code>.  Some of the members of this data type (notably <code>d_ino</code>)
 might have a different size to allow large filesystems.
 
-<p>In all other aspects this function is equivalent to <code>readdir</code>. 
+     <p>In all other aspects this function is equivalent to <code>readdir</code>. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>readdir64_r</b><i> (DIR *<var>dirstream</var>, struct dirent64 *<var>entry</var>, struct dirent64 **<var>result</var>)
-</i></td>
+<td align="left">int <b>readdir64_r</b><i> </i>(<i>DIR *</i><var>dirstream</var><i>, struct dirent64 *</i><var>entry</var><i>, struct dirent64 **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -152,8 +158,8 @@ position.  The same precautions mentioned in the documentation of
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>closedir</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">int <b>closedir</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -162,15 +168,15 @@ position.  The same precautions mentioned in the documentation of
 This function closes the directory stream <var>dirstream</var>.  It returns
 <code>0</code> on success and <code>-1</code> on failure.
 
-<p>The following <code>errno</code> error conditions are defined for this
+     <p>The following <code>errno</code> error conditions are defined for this
 function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>dirstream</var> argument is not valid. 
+          <dd>The <var>dirstream</var> argument is not valid. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

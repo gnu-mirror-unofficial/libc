@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Non-reentrant%20Character%20Conversion">Non-reentrant Character Conversion</a>,
-Next:<a rel=next accesskey=n href="Non-reentrant-String-Conversion.html#Non-reentrant%20String%20Conversion">Non-reentrant String Conversion</a>,
-Up:<a rel=up accesskey=u href="Non-reentrant-Conversion.html#Non-reentrant%20Conversion">Non-reentrant Conversion</a>
+Node:&nbsp;<a name="Non-reentrant%20Character%20Conversion">Non-reentrant Character Conversion</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Non-reentrant-String-Conversion.html#Non-reentrant%20String%20Conversion">Non-reentrant String Conversion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non-reentrant-Conversion.html#Non-reentrant%20Conversion">Non-reentrant Conversion</a>
 <hr><br>
+</div>
 
-<h4>Non-reentrant Conversion of Single Characters</h4>
+<h3 class="subsection">Non-reentrant Conversion of Single Characters</h4>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>mbtowc</b><i> (wchar_t *restrict <var>result</var>, const char *restrict <var>string</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>mbtowc</b><i> </i>(<i>wchar_t *restrict </i><var>result</var><i>, const char *restrict </i><var>string</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -28,27 +38,27 @@ Up:<a rel=up accesskey=u href="Non-reentrant-Conversion.html#Non-reentrant%20Con
 The <code>mbtowc</code> ("multibyte to wide character") function when called
 with non-null <var>string</var> converts the first multibyte character
 beginning at <var>string</var> to its corresponding wide character code.  It
-stores the result in <code>*<var>result</var></code>.
+stores the result in <code>*</code><var>result</var><code></code>.
 
-<p><code>mbtowc</code> never examines more than <var>size</var> bytes.  (The idea is
+     <p><code>mbtowc</code> never examines more than <var>size</var> bytes.  (The idea is
 to supply for <var>size</var> the number of bytes of data you have in hand.)
 
-<p><code>mbtowc</code> with non-null <var>string</var> distinguishes three
+     <p><code>mbtowc</code> with non-null <var>string</var> distinguishes three
 possibilities: the first <var>size</var> bytes at <var>string</var> start with
 valid multibyte characters, they start with an invalid byte sequence or
 just part of a character, or <var>string</var> points to an empty string (a
 null character).
 
-<p>For a valid multibyte character, <code>mbtowc</code> converts it to a wide
-character and stores that in <code>*<var>result</var></code>, and returns the
+     <p>For a valid multibyte character, <code>mbtowc</code> converts it to a wide
+character and stores that in <code>*</code><var>result</var><code></code>, and returns the
 number of bytes in that character (always at least 1 and never
 more than <var>size</var>).
 
-<p>For an invalid byte sequence, <code>mbtowc</code> returns -1.  For an
+     <p>For an invalid byte sequence, <code>mbtowc</code> returns -1.  For an
 empty string, it returns 0, also storing <code>'\0'</code> in
-<code>*<var>result</var></code>.
+<code>*</code><var>result</var><code></code>.
 
-<p>If the multibyte character code uses shift characters, then
+     <p>If the multibyte character code uses shift characters, then
 <code>mbtowc</code> maintains and updates a shift state as it scans.  If you
 call <code>mbtowc</code> with a null pointer for <var>string</var>, that
 initializes the shift state to its standard initial value.  It also
@@ -60,8 +70,8 @@ shift state.  See <a href="Shift-State.html#Shift%20State">Shift State</a>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wctomb</b><i> (char *<var>string</var>, wchar_t <var>wchar</var>)
-</i></td>
+<td align="left">int <b>wctomb</b><i> </i>(<i>char *</i><var>string</var><i>, wchar_t </i><var>wchar</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,43 +82,43 @@ the wide character code <var>wchar</var> to its corresponding multibyte
 character sequence, and stores the result in bytes starting at
 <var>string</var>.  At most <code>MB_CUR_MAX</code> characters are stored.
 
-<p><code>wctomb</code> with non-null <var>string</var> distinguishes three
+     <p><code>wctomb</code> with non-null <var>string</var> distinguishes three
 possibilities for <var>wchar</var>: a valid wide character code (one that can
 be translated to a multibyte character), an invalid code, and
 <code>L'\0'</code>.
 
-<p>Given a valid code, <code>wctomb</code> converts it to a multibyte character,
+     <p>Given a valid code, <code>wctomb</code> converts it to a multibyte character,
 storing the bytes starting at <var>string</var>.  Then it returns the number
 of bytes in that character (always at least 1 and never more
 than <code>MB_CUR_MAX</code>).
 
-<p>If <var>wchar</var> is an invalid wide character code, <code>wctomb</code> returns
+     <p>If <var>wchar</var> is an invalid wide character code, <code>wctomb</code> returns
 -1.  If <var>wchar</var> is <code>L'\0'</code>, it returns <code>0</code>, also
-storing <code>'\0'</code> in <code>*<var>string</var></code>.
+storing <code>'\0'</code> in <code>*</code><var>string</var><code></code>.
 
-<p>If the multibyte character code uses shift characters, then
+     <p>If the multibyte character code uses shift characters, then
 <code>wctomb</code> maintains and updates a shift state as it scans.  If you
 call <code>wctomb</code> with a null pointer for <var>string</var>, that
 initializes the shift state to its standard initial value.  It also
 returns nonzero if the multibyte character code in use actually has a
 shift state.  See <a href="Shift-State.html#Shift%20State">Shift State</a>.
 
-<p>Calling this function with a <var>wchar</var> argument of zero when
+     <p>Calling this function with a <var>wchar</var> argument of zero when
 <var>string</var> is not null has the side-effect of reinitializing the
 stored shift state <em>as well as</em> storing the multibyte character
 <code>'\0'</code> and returning 0. 
 </td></tr>
 </table>
 
-<p>Similar to <code>mbrlen</code> there is also a non-reentrant function that
+   <p>Similar to <code>mbrlen</code> there is also a non-reentrant function that
 computes the length of a multibyte character.  It can be defined in
 terms of <code>mbtowc</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>mblen</b><i> (const char *<var>string</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>mblen</b><i> </i>(<i>const char *</i><var>string</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -119,26 +129,26 @@ the number of bytes that make up the multibyte character beginning at
 <var>string</var>, never examining more than <var>size</var> bytes.  (The idea is
 to supply for <var>size</var> the number of bytes of data you have in hand.)
 
-<p>The return value of <code>mblen</code> distinguishes three possibilities: the
+     <p>The return value of <code>mblen</code> distinguishes three possibilities: the
 first <var>size</var> bytes at <var>string</var> start with valid multibyte
 characters, they start with an invalid byte sequence or just part of a
 character, or <var>string</var> points to an empty string (a null character).
 
-<p>For a valid multibyte character, <code>mblen</code> returns the number of
+     <p>For a valid multibyte character, <code>mblen</code> returns the number of
 bytes in that character (always at least <code>1</code> and never more than
 <var>size</var>).  For an invalid byte sequence, <code>mblen</code> returns
 -1.  For an empty string, it returns 0.
 
-<p>If the multibyte character code uses shift characters, then <code>mblen</code>
+     <p>If the multibyte character code uses shift characters, then <code>mblen</code>
 maintains and updates a shift state as it scans.  If you call
 <code>mblen</code> with a null pointer for <var>string</var>, that initializes the
 shift state to its standard initial value.  It also returns a nonzero
 value if the multibyte character code in use actually has a shift state. 
 See <a href="Shift-State.html#Shift%20State">Shift State</a>.
 
-<p>The function <code>mblen</code> is declared in <code>stdlib.h</code>. 
+     <p>The function <code>mblen</code> is declared in <code>stdlib.h</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

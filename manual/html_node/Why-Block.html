@@ -2,36 +2,46 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Why%20Block">Why Block</a>,
-Next:<a rel=next accesskey=n href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>,
-Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+Node:&nbsp;<a name="Why%20Block">Why Block</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
 <hr><br>
+</div>
 
-<h4>Why Blocking Signals is Useful</h4>
+<h3 class="subsection">Why Blocking Signals is Useful</h4>
 
 <p>Temporary blocking of signals with <code>sigprocmask</code> gives you a way to
 prevent interrupts during critical parts of your code.  If signals
 arrive in that part of the program, they are delivered later, after you
 unblock them.
 
-<p>One example where this is useful is for sharing data between a signal
+   <p>One example where this is useful is for sharing data between a signal
 handler and the rest of the program.  If the type of the data is not
 <code>sig_atomic_t</code> (see <a href="Atomic-Data-Access.html#Atomic%20Data%20Access">Atomic Data Access</a>), then the signal
 handler could run when the rest of the program has only half finished
 reading or writing the data.  This would lead to confusing consequences.
 
-<p>To make the program reliable, you can prevent the signal handler from
+   <p>To make the program reliable, you can prevent the signal handler from
 running while the rest of the program is examining or modifying that
 data--by blocking the appropriate signal around the parts of the
 program that touch the data.
 
-<p>Blocking signals is also necessary when you want to perform a certain
+   <p>Blocking signals is also necessary when you want to perform a certain
 action only if a signal has not arrived.  Suppose that the handler for
 the signal sets a flag of type <code>sig_atomic_t</code>; you would like to
 test the flag and perform the action if the flag is not set.  This is
@@ -39,8 +49,8 @@ unreliable.  Suppose the signal is delivered immediately after you test
 the flag, but before the consequent action: then the program will
 perform the action even though the signal has arrived.
 
-<p>The only way to test reliably for whether a signal has yet arrived is to
+   <p>The only way to test reliably for whether a signal has yet arrived is to
 test while the signal is blocked.
 
-</body></html>
+   </body></html>
 

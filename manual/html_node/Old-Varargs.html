@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Old%20Varargs">Old Varargs</a>,
-Previous:<a rel=previous accesskey=p href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>,
-Up:<a rel=up accesskey=u href="How-Variadic.html#How%20Variadic">How Variadic</a>
+Node:&nbsp;<a name="Old%20Varargs">Old Varargs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="How-Variadic.html#How%20Variadic">How Variadic</a>
 <hr><br>
+</div>
 
-<h5>Old-Style Variadic Functions</h5>
+<h3 class="subsubsection">Old-Style Variadic Functions</h5>
 
 <p>Before ISO&nbsp;C, programmers used a slightly different facility for
 writing variadic functions.  The GNU C compiler still supports it;
@@ -21,32 +31,32 @@ currently, it is more portable than the ISO&nbsp;C facility, since support
 for ISO&nbsp;C is still not universal.  The header file which defines the
 old-fashioned variadic facility is called <code>varargs.h</code>.
 
-<p>Using <code>varargs.h</code> is almost the same as using <code>stdarg.h</code>. 
+   <p>Using <code>varargs.h</code> is almost the same as using <code>stdarg.h</code>. 
 There is no difference in how you call a variadic function;
 see <a href="Calling-Variadics.html#Calling%20Variadics">Calling Variadics</a>.  The only difference is in how you define
 them.  First of all, you must use old-style non-prototype syntax, like
 this:
 
-<br><pre>tree
-build (va_alist)
-     va_dcl
-{
-</pre>
+<pre class="smallexample">     tree
+     build (va_alist)
+          va_dcl
+     {
+     </pre>
 
-<p>Secondly, you must give <code>va_start</code> only one argument, like this:
+   <p>Secondly, you must give <code>va_start</code> only one argument, like this:
 
-<br><pre>  va_list p;
-  va_start (p);
-</pre>
+<pre class="smallexample">       va_list p;
+       va_start (p);
+     </pre>
 
-<p>These are the special macros used for defining old-style variadic
+   <p>These are the special macros used for defining old-style variadic
 functions:
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>va_alist</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -61,7 +71,7 @@ function.
 <table width="100%">
 <tr>
 <td align="left"><b>va_dcl</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -75,8 +85,8 @@ function.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>va_start</b><i> (va_list <var>ap</var>)
-</i></td>
+<td align="left">void <b>va_start</b><i> </i>(<i>va_list </i><var>ap</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -88,12 +98,12 @@ function.
 </td></tr>
 </table>
 
-<p>The other argument macros, <code>va_arg</code> and <code>va_end</code>, are the same
+   <p>The other argument macros, <code>va_arg</code> and <code>va_end</code>, are the same
 in <code>varargs.h</code> as in <code>stdarg.h</code>; see <a href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>, for
 details.
 
-<p>It does not work to include both <code>varargs.h</code> and <code>stdarg.h</code> in
+   <p>It does not work to include both <code>varargs.h</code> and <code>stdarg.h</code> in
 the same compilation; they define <code>va_start</code> in conflicting ways.
 
-</body></html>
+   </body></html>
 

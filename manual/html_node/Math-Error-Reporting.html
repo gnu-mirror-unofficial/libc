@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Math%20Error%20Reporting">Math Error Reporting</a>,
-Previous:<a rel=previous accesskey=p href="Status-bit-operations.html#Status%20bit%20operations">Status bit operations</a>,
-Up:<a rel=up accesskey=u href="Floating-Point-Errors.html#Floating%20Point%20Errors">Floating Point Errors</a>
+Node:&nbsp;<a name="Math%20Error%20Reporting">Math Error Reporting</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Status-bit-operations.html#Status%20bit%20operations">Status bit operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Floating-Point-Errors.html#Floating%20Point%20Errors">Floating Point Errors</a>
 <hr><br>
+</div>
 
-<h4>Error Reporting by Mathematical Functions</h4>
+<h3 class="subsection">Error Reporting by Mathematical Functions</h4>
 
 <p>Many of the math functions are defined only over a subset of the real or
 complex numbers.  Even if they are mathematically defined, their result
@@ -24,7 +34,7 @@ one of these errors occurs.  In this manual we will refer to the
 complete response as <dfn>signalling</dfn> a domain error, overflow, or
 underflow.
 
-<p>When a math function suffers a domain error, it raises the invalid
+   <p>When a math function suffers a domain error, it raises the invalid
 exception and returns NaN.  It also sets <var>errno</var> to <code>EDOM</code>;
 this is for compatibility with old systems that do not support IEEE&nbsp;754 exception handling.  Likewise, when overflow occurs, math
 functions raise the overflow exception and return &amp;infin; or
@@ -33,14 +43,14 @@ functions raise the overflow exception and return &amp;infin; or
 raised, and zero (appropriately signed) is returned.  <var>errno</var> may be
 set to <code>ERANGE</code>, but this is not guaranteed.
 
-<p>Some of the math functions are defined mathematically to result in a
+   <p>Some of the math functions are defined mathematically to result in a
 complex value over parts of their domains.  The most familiar example of
 this is taking the square root of a negative number.  The complex math
 functions, such as <code>csqrt</code>, will return the appropriate complex value
 in this case.  The real-valued functions, such as <code>sqrt</code>, will
 signal a domain error.
 
-<p>Some older hardware does not support infinities.  On that hardware,
+   <p>Some older hardware does not support infinities.  On that hardware,
 overflows instead return a particular very large number (usually the
 largest representable number).  <code>math.h</code> defines macros you can use
 to test for overflow on both old and new hardware.
@@ -49,7 +59,7 @@ to test for overflow on both old and new hardware.
 <table width="100%">
 <tr>
 <td align="left">double <b>HUGE_VAL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -58,7 +68,7 @@ to test for overflow on both old and new hardware.
 
 <tr>
 <td align="left">float <b>HUGE_VALF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -67,7 +77,7 @@ to test for overflow on both old and new hardware.
 
 <tr>
 <td align="left">long double <b>HUGE_VALL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -78,11 +88,11 @@ that use IEEE&nbsp;754 floating point format, <code>HUGE_VAL</code> is infinity.
 On other machines, it's typically the largest positive number that can
 be represented.
 
-<p>Mathematical functions return the appropriately typed version of
+     <p>Mathematical functions return the appropriately typed version of
 <code>HUGE_VAL</code> or <code>-HUGE_VAL</code> when the result is too large
 to be represented. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

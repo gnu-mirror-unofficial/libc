@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Binary%20Streams">Binary Streams</a>,
-Next:<a rel=next accesskey=n href="File-Positioning.html#File%20Positioning">File Positioning</a>,
-Previous:<a rel=previous accesskey=p href="Error-Recovery.html#Error%20Recovery">Error Recovery</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="Binary%20Streams">Binary Streams</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Positioning.html#File%20Positioning">File Positioning</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Error-Recovery.html#Error%20Recovery">Error Recovery</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>Text and Binary Streams</h3>
+<h3 class="section">Text and Binary Streams</h3>
 
 <p>The GNU system and other POSIX-compatible operating systems organize all
 files as uniform sequences of characters.  However, some other systems
@@ -23,46 +33,46 @@ binary data, and the input and output facilities of ISO&nbsp;C provide for
 this distinction.  This section tells you how to write programs portable
 to such systems.
 
-<p>When you open a stream, you can specify either a <dfn>text stream</dfn> or a
+   <p>When you open a stream, you can specify either a <dfn>text stream</dfn> or a
 <dfn>binary stream</dfn>.  You indicate that you want a binary stream by
 specifying the <code>b</code> modifier in the <var>opentype</var> argument to
 <code>fopen</code>; see <a href="Opening-Streams.html#Opening%20Streams">Opening Streams</a>.  Without this
 option, <code>fopen</code> opens the file as a text stream.
 
-<p>Text and binary streams differ in several ways:
+   <p>Text and binary streams differ in several ways:
 
-<ul>
+     <ul>
 <li>The data read from a text stream is divided into <dfn>lines</dfn> which are
 terminated by newline (<code>'\n'</code>) characters, while a binary stream is
 simply a long series of characters.  A text stream might on some systems
 fail to handle lines more than 254 characters long (including the
 terminating newline character).
 
-<li>On some systems, text files can contain only printing characters,
+     <li>On some systems, text files can contain only printing characters,
 horizontal tab characters, and newlines, and so text streams may not
 support other characters.  However, binary streams can handle any
 character value.
 
-<li>Space characters that are written immediately preceding a newline
+     <li>Space characters that are written immediately preceding a newline
 character in a text stream may disappear when the file is read in again.
 
-<li>More generally, there need not be a one-to-one mapping between
+     <li>More generally, there need not be a one-to-one mapping between
 characters that are read from or written to a text stream, and the
 characters in the actual file. 
 </ul>
 
-<p>Since a binary stream is always more capable and more predictable than a
+   <p>Since a binary stream is always more capable and more predictable than a
 text stream, you might wonder what purpose text streams serve.  Why not
 simply always use binary streams?  The answer is that on these operating
 systems, text and binary streams use different file formats, and the
 only way to read or write "an ordinary file of text" that can work
 with other text-oriented programs is through a text stream.
 
-<p>In the GNU library, and on all POSIX systems, there is no difference
+   <p>In the GNU library, and on all POSIX systems, there is no difference
 between text streams and binary streams.  When you open a stream, you
 get the same kind of stream regardless of whether you ask for binary. 
 This stream can handle any file content, and has none of the
 restrictions that text streams sometimes have.
 
-</body></html>
+   </body></html>
 

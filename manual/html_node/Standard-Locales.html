@@ -2,49 +2,59 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Standard%20Locales">Standard Locales</a>,
-Next:<a rel=next accesskey=n href="Locale-Information.html#Locale%20Information">Locale Information</a>,
-Previous:<a rel=previous accesskey=p href="Setting-the-Locale.html#Setting%20the%20Locale">Setting the Locale</a>,
-Up:<a rel=up accesskey=u href="Locales.html#Locales">Locales</a>
+Node:&nbsp;<a name="Standard%20Locales">Standard Locales</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Locale-Information.html#Locale%20Information">Locale Information</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Setting-the-Locale.html#Setting%20the%20Locale">Setting the Locale</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locales.html#Locales">Locales</a>
 <hr><br>
+</div>
 
-<h3>Standard Locales</h3>
+<h3 class="section">Standard Locales</h3>
 
 <p>The only locale names you can count on finding on all operating systems
 are these three standard ones:
 
-<dl>
+     <dl>
 <dt><code>"C"</code>
-<dd>This is the standard C locale.  The attributes and behavior it provides
+     <dd>This is the standard C locale.  The attributes and behavior it provides
 are specified in the ISO&nbsp;C standard.  When your program starts up, it
 initially uses this locale by default.
 
-<br><dt><code>"POSIX"</code>
-<dd>This is the standard POSIX locale.  Currently, it is an alias for the
+     <br><dt><code>"POSIX"</code>
+     <dd>This is the standard POSIX locale.  Currently, it is an alias for the
 standard C locale.
 
-<br><dt><code>""</code>
-<dd>The empty name says to select a locale based on environment variables. 
+     <br><dt><code>""</code>
+     <dd>The empty name says to select a locale based on environment variables. 
 See <a href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>. 
 </dl>
 
-<p>Defining and installing named locales is normally a responsibility of
+   <p>Defining and installing named locales is normally a responsibility of
 the system administrator at your site (or the person who installed the
 GNU C library).  It is also possible for the user to create private
 locales.  All this will be discussed later when describing the tool to
 do so.
 
-<p>If your program needs to use something other than the <code>C</code> locale,
+   <p>If your program needs to use something other than the <code>C</code> locale,
 it will be more portable if you use whatever locale the user specifies
 with the environment, rather than trying to specify some non-standard
 locale explicitly by name.  Remember, different machines might have
 different sets of locales installed.
 
-</body></html>
+   </body></html>
 

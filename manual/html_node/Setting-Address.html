@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Setting%20Address">Setting Address</a>,
-Next:<a rel=next accesskey=n href="Reading-Address.html#Reading%20Address">Reading Address</a>,
-Previous:<a rel=previous accesskey=p href="Address-Formats.html#Address%20Formats">Address Formats</a>,
-Up:<a rel=up accesskey=u href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>
+Node:&nbsp;<a name="Setting%20Address">Setting Address</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Reading-Address.html#Reading%20Address">Reading Address</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Address-Formats.html#Address%20Formats">Address Formats</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>
 <hr><br>
+</div>
 
-<h4>Setting the Address of a Socket</h4>
+<h3 class="subsection">Setting the Address of a Socket</h4>
 
 <p>Use the <code>bind</code> function to assign an address to a socket.  The
 prototype for <code>bind</code> is in the header file <code>sys/socket.h</code>. 
@@ -23,8 +33,8 @@ For examples of use, see <a href="Local-Socket-Example.html#Local%20Socket%20Exa
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>bind</b><i> (int <var>socket</var>, struct sockaddr *<var>addr</var>, socklen_t <var>length</var>)
-</i></td>
+<td align="left">int <b>bind</b><i> </i>(<i>int </i><var>socket</var><i>, struct sockaddr *</i><var>addr</var><i>, socklen_t </i><var>length</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -37,36 +47,36 @@ The first part of the address is always the format designator, which
 specifies a namespace, and says that the address is in the format of
 that namespace.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>socket</var> argument is not a valid file descriptor.
+          <dd>The <var>socket</var> argument is not a valid file descriptor.
 
-<br><dt><code>ENOTSOCK</code>
-<dd>The descriptor <var>socket</var> is not a socket.
+          <br><dt><code>ENOTSOCK</code>
+          <dd>The descriptor <var>socket</var> is not a socket.
 
-<br><dt><code>EADDRNOTAVAIL</code>
-<dd>The specified address is not available on this machine.
+          <br><dt><code>EADDRNOTAVAIL</code>
+          <dd>The specified address is not available on this machine.
 
-<br><dt><code>EADDRINUSE</code>
-<dd>Some other socket is already using the specified address.
+          <br><dt><code>EADDRINUSE</code>
+          <dd>Some other socket is already using the specified address.
 
-<br><dt><code>EINVAL</code>
-<dd>The socket <var>socket</var> already has an address.
+          <br><dt><code>EINVAL</code>
+          <dd>The socket <var>socket</var> already has an address.
 
-<br><dt><code>EACCES</code>
-<dd>You do not have permission to access the requested address.  (In the
+          <br><dt><code>EACCES</code>
+          <dd>You do not have permission to access the requested address.  (In the
 Internet domain, only the super-user is allowed to specify a port number
 in the range 0 through <code>IPPORT_RESERVED</code> minus one; see
 <a href="Ports.html#Ports">Ports</a>.) 
 </dl>
 
-<p>Additional conditions may be possible depending on the particular namespace
+     <p>Additional conditions may be possible depending on the particular namespace
 of the socket. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,37 +2,47 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Variadic%20Prototypes">Variadic Prototypes</a>,
-Next:<a rel=next accesskey=n href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>,
-Up:<a rel=up accesskey=u href="How-Variadic.html#How%20Variadic">How Variadic</a>
+Node:&nbsp;<a name="Variadic%20Prototypes">Variadic Prototypes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="How-Variadic.html#How%20Variadic">How Variadic</a>
 <hr><br>
+</div>
 
-<h5>Syntax for Variable Arguments</h5>
+<h3 class="subsubsection">Syntax for Variable Arguments</h5>
 
 <p>A function that accepts a variable number of arguments must be declared
 with a prototype that says so.   You write the fixed arguments as usual,
-and then tack on <code><small>...</small></code> to indicate the possibility of
+and then tack on <code>...</code> to indicate the possibility of
 additional arguments.  The syntax of ISO&nbsp;C requires at least one fixed
-argument before the <code><small>...</small></code>.  For example,
+argument before the <code>...</code>.  For example,
 
-<br><pre>int
-func (const char *a, int b, <small>...</small>)
-{
-  <small>...</small>
-}
-</pre>
+<pre class="smallexample">     int
+     func (const char *a, int b, ...)
+     {
+       ...
+     }
+     </pre>
 
 <p>defines a function <code>func</code> which returns an <code>int</code> and takes two
 required arguments, a <code>const char *</code> and an <code>int</code>.  These are
 followed by any number of anonymous arguments.
 
-<p><strong>Portability note:</strong> For some C compilers, the last required
+   <p><strong>Portability note:</strong> For some C compilers, the last required
 argument must not be declared <code>register</code> in the function
 definition.  Furthermore, this argument's type must be
 <dfn>self-promoting</dfn>: that is, the default promotions must not change
@@ -40,5 +50,5 @@ its type.  This rules out array and function types, as well as
 <code>float</code>, <code>char</code> (whether signed or not) and <code>short&nbsp;int</code>
 (whether signed or not).  This is actually an ISO&nbsp;C requirement.
 
-</body></html>
+   </body></html>
 

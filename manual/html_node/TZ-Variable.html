@@ -2,32 +2,42 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="TZ%20Variable">TZ Variable</a>,
-Next:<a rel=next accesskey=n href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functions</a>,
-Previous:<a rel=previous accesskey=p href="Parsing-Date-and-Time.html#Parsing%20Date%20and%20Time">Parsing Date and Time</a>,
-Up:<a rel=up accesskey=u href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
+Node:&nbsp;<a name="TZ%20Variable">TZ Variable</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Parsing-Date-and-Time.html#Parsing%20Date%20and%20Time">Parsing Date and Time</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
 <hr><br>
+</div>
 
-<h4>Specifying the Time Zone with <code>TZ</code></h4>
+<h3 class="subsection">Specifying the Time Zone with <code>TZ</code></h4>
 
 <p>In POSIX systems, a user can specify the time zone by means of the
 <code>TZ</code> environment variable.  For information about how to set
 environment variables, see <a href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>.  The functions
 for accessing the time zone are declared in <code>time.h</code>.
 
-<p>You should not normally need to set <code>TZ</code>.  If the system is
+   <p>You should not normally need to set <code>TZ</code>.  If the system is
 configured properly, the default time zone will be correct.  You might
 set <code>TZ</code> if you are using a computer over a network from a
 different time zone, and would like times reported to you in the time
 zone local to you, rather than what is local to the computer.
 
-<p>In POSIX.1 systems the value of the <code>TZ</code> variable can be in one of
+   <p>In POSIX.1 systems the value of the <code>TZ</code> variable can be in one of
 three formats.  With the GNU C library, the most common format is the
 last one, which can specify a selection from a large database of time
 zone information for many regions of the world.  The first two formats
@@ -37,57 +47,57 @@ specifies the details of the first two formats, so it is good to be
 familiar with them in case you come across a POSIX.1 system that doesn't
 support a time zone information database.
 
-<p>The first format is used when there is no Daylight Saving Time (or
+   <p>The first format is used when there is no Daylight Saving Time (or
 summer time) in the local time zone:
 
-<br><pre><var>std</var> <var>offset</var>
-</pre>
+<pre class="smallexample">     <var>std</var> <var>offset</var>
+     </pre>
 
-<p>The <var>std</var> string specifies the name of the time zone.  It must be
+   <p>The <var>std</var> string specifies the name of the time zone.  It must be
 three or more characters long and must not contain a leading colon,
 embedded digits, commas, nor plus and minus signs.  There is no space
 character separating the time zone name from the <var>offset</var>, so these
 restrictions are necessary to parse the specification correctly.
 
-<p>The <var>offset</var> specifies the time value you must add to the local time
+   <p>The <var>offset</var> specifies the time value you must add to the local time
 to get a Coordinated Universal Time value.  It has syntax like
 [<code>+</code>|<code>-</code>]<var>hh</var>[<code>:</code><var>mm</var>[<code>:</code><var>ss</var>]].  This
 is positive if the local time zone is west of the Prime Meridian and
 negative if it is east.  The hour must be between <code>0</code> and
 <code>23</code>, and the minute and seconds between <code>0</code> and <code>59</code>.
 
-<p>For example, here is how we would specify Eastern Standard Time, but
+   <p>For example, here is how we would specify Eastern Standard Time, but
 without any Daylight Saving Time alternative:
 
-<br><pre>EST+5
-</pre>
+<pre class="smallexample">     EST+5
+     </pre>
 
-<p>The second format is used when there is Daylight Saving Time:
+   <p>The second format is used when there is Daylight Saving Time:
 
-<br><pre><var>std</var> <var>offset</var> <var>dst</var> [<var>offset</var>]<code>,</code><var>start</var>[<code>/</code><var>time</var>]<code>,</code><var>end</var>[<code>/</code><var>time</var>]
-</pre>
+<pre class="smallexample">     <var>std</var> <var>offset</var> <var>dst</var> [<var>offset</var>]<code>,</code><var>start</var>[<code>/</code><var>time</var>]<code>,</code><var>end</var>[<code>/</code><var>time</var>]
+     </pre>
 
-<p>The initial <var>std</var> and <var>offset</var> specify the standard time zone, as
+   <p>The initial <var>std</var> and <var>offset</var> specify the standard time zone, as
 described above.  The <var>dst</var> string and <var>offset</var> specify the name
 and offset for the corresponding Daylight Saving Time zone; if the
 <var>offset</var> is omitted, it defaults to one hour ahead of standard time.
 
-<p>The remainder of the specification describes when Daylight Saving Time is
+   <p>The remainder of the specification describes when Daylight Saving Time is
 in effect.  The <var>start</var> field is when Daylight Saving Time goes into
 effect and the <var>end</var> field is when the change is made back to standard
 time.  The following formats are recognized for these fields:
 
-<dl>
-<dt><code>J<var>n</var></code>
-<dd>This specifies the Julian day, with <var>n</var> between <code>1</code> and <code>365</code>. 
+     <dl>
+<dt><code>J</code><var>n</var><code></code>
+     <dd>This specifies the Julian day, with <var>n</var> between <code>1</code> and <code>365</code>. 
 February 29 is never counted, even in leap years.
 
-<br><dt><code><var>n</var></code>
-<dd>This specifies the Julian day, with <var>n</var> between <code>0</code> and <code>365</code>. 
+     <br><dt><code></code><var>n</var><code></code>
+     <dd>This specifies the Julian day, with <var>n</var> between <code>0</code> and <code>365</code>. 
 February 29 is counted in leap years.
 
-<br><dt><code>M<var>m</var>.<var>w</var>.<var>d</var></code>
-<dd>This specifies day <var>d</var> of week <var>w</var> of month <var>m</var>.  The day
+     <br><dt><code>M</code><var>m</var><code>.</code><var>w</var><code>.</code><var>d</var><code></code>
+     <dd>This specifies day <var>d</var> of week <var>w</var> of month <var>m</var>.  The day
 <var>d</var> must be between <code>0</code> (Sunday) and <code>6</code>.  The week
 <var>w</var> must be between <code>1</code> and <code>5</code>; week <code>1</code> is the
 first week in which day <var>d</var> occurs, and week <code>5</code> specifies the
@@ -95,21 +105,21 @@ first week in which day <var>d</var> occurs, and week <code>5</code> specifies t
 between <code>1</code> and <code>12</code>. 
 </dl>
 
-<p>The <var>time</var> fields specify when, in the local time currently in
+   <p>The <var>time</var> fields specify when, in the local time currently in
 effect, the change to the other time occurs.  If omitted, the default is
 <code>02:00:00</code>.
 
-<p>For example, here is how you would specify the Eastern time zone in the
+   <p>For example, here is how you would specify the Eastern time zone in the
 United States, including the appropriate Daylight Saving Time and its dates
 of applicability.  The normal offset from UTC is 5 hours; since this is
 west of the prime meridian, the sign is positive.  Summer time begins on
 the first Sunday in April at 2:00am, and ends on the last Sunday in October
 at 2:00am.
 
-<br><pre>EST+5EDT,M4.1.0/2,M10.5.0/2
-</pre>
+<pre class="smallexample">     EST+5EDT,M4.1.0/2,M10.5.0/2
+     </pre>
 
-<p>The schedule of Daylight Saving Time in any particular jurisdiction has
+   <p>The schedule of Daylight Saving Time in any particular jurisdiction has
 changed over the years.  To be strictly correct, the conversion of dates
 and times in the past should be based on the schedule that was in effect
 then.  However, this format has no facilities to let you specify how the
@@ -119,16 +129,16 @@ used to convert any date, no matter when.  For precise time zone
 specifications, it is best to use the time zone information database
 (see below).
 
-<p>The third format looks like this:
+   <p>The third format looks like this:
 
-<br><pre>:<var>characters</var>
-</pre>
+<pre class="smallexample">     :<var>characters</var>
+     </pre>
 
-<p>Each operating system interprets this format differently; in the GNU C
+   <p>Each operating system interprets this format differently; in the GNU C
 library, <var>characters</var> is the name of a file which describes the time
 zone.
 
-<p>If the <code>TZ</code> environment variable does not have a value, the
+   <p>If the <code>TZ</code> environment variable does not have a value, the
 operation chooses a time zone by default.  In the GNU C library, the
 default time zone is like the specification <code>TZ=:/etc/localtime</code>
 (or <code>TZ=:/usr/local/etc/localtime</code>, depending on how GNU C library
@@ -136,9 +146,9 @@ was configured; see <a href="Installation.html#Installation">Installation</a>). 
 rule for choosing the default time zone, so there is little we can say
 about them.
 
-<p>If <var>characters</var> begins with a slash, it is an absolute file name;
+   <p>If <var>characters</var> begins with a slash, it is an absolute file name;
 otherwise the library looks for the file
-<code>/share/lib/zoneinfo/<var>characters</var></code>.  The <code>zoneinfo</code>
+<code>/share/lib/zoneinfo/</code><var>characters</var><code></code>.  The <code>zoneinfo</code>
 directory contains data files describing local time zones in many
 different parts of the world.  The names represent major cities, with
 subdirectories for geographical areas; for example,
@@ -149,5 +159,5 @@ zone.  The GNU C library comes with a large database of time zone
 information for most regions of the world, which is maintained by a
 community of volunteers and put in the public domain.
 
-</body></html>
+   </body></html>
 

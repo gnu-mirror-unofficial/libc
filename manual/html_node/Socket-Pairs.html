@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Socket%20Pairs">Socket Pairs</a>,
-Previous:<a rel=previous accesskey=p href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>,
-Up:<a rel=up accesskey=u href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
+Node:&nbsp;<a name="Socket%20Pairs">Socket Pairs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
 <hr><br>
+</div>
 
-<h4>Socket Pairs</h4>
+<h3 class="subsection">Socket Pairs</h4>
 
 <p>A <dfn>socket pair</dfn> consists of a pair of connected (but unnamed)
 sockets.  It is very similar to a pipe and is used in much the same
@@ -25,49 +35,49 @@ pipe has one input-only end and one output-only end (see <a href="Pipes-and-FIFO
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>socketpair</b><i> (int <var>namespace</var>, int <var>style</var>, int <var>protocol</var>, int <var>filedes</var><tt>[2]</tt>)
-</i></td>
+<td align="left">int <b>socketpair</b><i> </i>(<i>int </i><var>namespace</var><i>, int </i><var>style</var><i>, int </i><var>protocol</var><i>, int </i><var>filedes</var><i></i><tt>[2]</tt><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 This function creates a socket pair, returning the file descriptors in
-<code><var>filedes</var>[0]</code> and <code><var>filedes</var>[1]</code>.  The socket pair
+<code></code><var>filedes</var><code>[0]</code> and <code></code><var>filedes</var><code>[1]</code>.  The socket pair
 is a full-duplex communications channel, so that both reading and writing
 may be performed at either end.
 
-<p>The <var>namespace</var>, <var>style</var> and <var>protocol</var> arguments are
+     <p>The <var>namespace</var>, <var>style</var> and <var>protocol</var> arguments are
 interpreted as for the <code>socket</code> function.  <var>style</var> should be
 one of the communication styles listed in <a href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>. 
 The <var>namespace</var> argument specifies the namespace, which must be
 <code>AF_LOCAL</code> (see <a href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>); <var>protocol</var> specifies the
 communications protocol, but zero is the only meaningful value.
 
-<p>If <var>style</var> specifies a connectionless communication style, then
+     <p>If <var>style</var> specifies a connectionless communication style, then
 the two sockets you get are not <em>connected</em>, strictly speaking,
 but each of them knows the other as the default destination address,
 so they can send packets to each other.
 
-<p>The <code>socketpair</code> function returns <code>0</code> on success and <code>-1</code>
+     <p>The <code>socketpair</code> function returns <code>0</code> on success and <code>-1</code>
 on failure.  The following <code>errno</code> error conditions are defined
 for this function:
 
-<dl>
+          <dl>
 <dt><code>EMFILE</code>
-<dd>The process has too many file descriptors open.
+          <dd>The process has too many file descriptors open.
 
-<br><dt><code>EAFNOSUPPORT</code>
-<dd>The specified namespace is not supported.
+          <br><dt><code>EAFNOSUPPORT</code>
+          <dd>The specified namespace is not supported.
 
-<br><dt><code>EPROTONOSUPPORT</code>
-<dd>The specified protocol is not supported.
+          <br><dt><code>EPROTONOSUPPORT</code>
+          <dd>The specified protocol is not supported.
 
-<br><dt><code>EOPNOTSUPP</code>
-<dd>The specified protocol does not support the creation of socket pairs. 
+          <br><dt><code>EOPNOTSUPP</code>
+          <dd>The specified protocol does not support the creation of socket pairs. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

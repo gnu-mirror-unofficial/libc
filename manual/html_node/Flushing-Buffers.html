@@ -2,46 +2,56 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Flushing%20Buffers">Flushing Buffers</a>,
-Next:<a rel=next accesskey=n href="Controlling-Buffering.html#Controlling%20Buffering">Controlling Buffering</a>,
-Previous:<a rel=previous accesskey=p href="Buffering-Concepts.html#Buffering%20Concepts">Buffering Concepts</a>,
-Up:<a rel=up accesskey=u href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>
+Node:&nbsp;<a name="Flushing%20Buffers">Flushing Buffers</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Controlling-Buffering.html#Controlling%20Buffering">Controlling Buffering</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Buffering-Concepts.html#Buffering%20Concepts">Buffering Concepts</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>
 <hr><br>
+</div>
 
-<h4>Flushing Buffers</h4>
+<h3 class="subsection">Flushing Buffers</h4>
 
 <p><dfn>Flushing</dfn> output on a buffered stream means transmitting all
 accumulated characters to the file.  There are many circumstances when
 buffered output on a stream is flushed automatically:
 
-<ul>
+     <ul>
 <li>When you try to do output and the output buffer is full.
 
-<li>When the stream is closed.  See <a href="Closing-Streams.html#Closing%20Streams">Closing Streams</a>.
+     <li>When the stream is closed.  See <a href="Closing-Streams.html#Closing%20Streams">Closing Streams</a>.
 
-<li>When the program terminates by calling <code>exit</code>. 
+     <li>When the program terminates by calling <code>exit</code>. 
 See <a href="Normal-Termination.html#Normal%20Termination">Normal Termination</a>.
 
-<li>When a newline is written, if the stream is line buffered.
+     <li>When a newline is written, if the stream is line buffered.
 
-<li>Whenever an input operation on <em>any</em> stream actually reads data
+     <li>Whenever an input operation on <em>any</em> stream actually reads data
 from its file. 
 </ul>
 
-<p>If you want to flush the buffered output at another time, call
+   <p>If you want to flush the buffered output at another time, call
 <code>fflush</code>, which is declared in the header file <code>stdio.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fflush</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>fflush</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -52,7 +62,7 @@ to the file.  If <var>stream</var> is a null pointer, then
 <code>fflush</code> causes buffered output on <em>all</em> open output streams
 to be flushed.
 
-<p>This function returns <code>EOF</code> if a write error occurs, or zero
+     <p>This function returns <code>EOF</code> if a write error occurs, or zero
 otherwise. 
 </td></tr>
 </table>
@@ -60,8 +70,8 @@ otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fflush_unlocked</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>fflush_unlocked</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,7 +82,7 @@ function except that it does not implicitly lock the stream.
 </td></tr>
 </table>
 
-<p>The <code>fflush</code> function can be used to flush all streams currently
+   <p>The <code>fflush</code> function can be used to flush all streams currently
 opened.  While this is useful in some situations it does often more than
 necessary since it might be done in situations when terminal input is
 required and the program wants to be sure that all output is visible on
@@ -84,8 +94,8 @@ exported.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>_flushlbf</b><i> (void)
-</i></td>
+<td align="left">void <b>_flushlbf</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -94,17 +104,17 @@ exported.
 The <code>_flushlbf</code> function flushes all line buffered streams
 currently opened.
 
-<p>This function is declared in the <code>stdio_ext.h</code> header. 
+     <p>This function is declared in the <code>stdio_ext.h</code> header. 
 </td></tr>
 </table>
 
-<p><strong>Compatibility Note:</strong> Some brain-damaged operating systems have
+   <p><strong>Compatibility Note:</strong> Some brain-damaged operating systems have
 been known to be so thoroughly fixated on line-oriented input and output
 that flushing a line buffered stream causes a newline to be written! 
 Fortunately, this "feature" seems to be becoming less common.  You do
 not need to worry about this in the GNU system.
 
-<p>In some situations it might be useful to not flush the output pending
+   <p>In some situations it might be useful to not flush the output pending
 for a stream but instead simply forget it.  If transmission is costly
 and the output is not needed anymore this is valid reasoning.  In this
 situation a non-standard function introduced in Solaris and available in
@@ -113,8 +123,8 @@ the GNU C library can be used.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>__fpurge</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">void <b>__fpurge</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -126,9 +136,9 @@ input in the buffer is lost.  If the stream is in output mode the
 buffered output is not written to the device (or whatever other
 underlying storage) and the buffer the cleared.
 
-<p>This function is declared in <code>stdio_ext.h</code>. 
+     <p>This function is declared in <code>stdio_ext.h</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Non-Local%20Exits%20and%20Signals">Non-Local Exits and Signals</a>,
-Next:<a rel=next accesskey=n href="System-V-contexts.html#System%20V%20contexts">System V contexts</a>,
-Previous:<a rel=previous accesskey=p href="Non-Local-Details.html#Non-Local%20Details">Non-Local Details</a>,
-Up:<a rel=up accesskey=u href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>
+Node:&nbsp;<a name="Non-Local%20Exits%20and%20Signals">Non-Local Exits and Signals</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="System-V-contexts.html#System%20V%20contexts">System V contexts</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Non-Local-Details.html#Non-Local%20Details">Non-Local Details</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>
 <hr><br>
+</div>
 
-<h3>Non-Local Exits and Signals</h3>
+<h3 class="section">Non-Local Exits and Signals</h3>
 
 <p>In BSD Unix systems, <code>setjmp</code> and <code>longjmp</code> also save and
 restore the set of blocked signals; see <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.  However,
@@ -23,19 +33,19 @@ change the set of blocked signals, and provides an additional pair of
 functions (<code>sigsetjmp</code> and <code>siglongjmp</code>) to get the BSD
 behavior.
 
-<p>The behavior of <code>setjmp</code> and <code>longjmp</code> in the GNU library is
+   <p>The behavior of <code>setjmp</code> and <code>longjmp</code> in the GNU library is
 controlled by feature test macros; see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>.  The
 default in the GNU system is the POSIX.1 behavior rather than the BSD
 behavior.
 
-<p>The facilities in this section are declared in the header file
+   <p>The facilities in this section are declared in the header file
 <code>setjmp.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>sigjmp_buf</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -49,8 +59,8 @@ information about the set of blocked signals.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigsetjmp</b><i> (sigjmp_buf <var>state</var>, int <var>savesigs</var>)
-</i></td>
+<td align="left">int <b>sigsetjmp</b><i> </i>(<i>sigjmp_buf </i><var>state</var><i>, int </i><var>savesigs</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -65,8 +75,8 @@ of blocked signals is saved in <var>state</var> and will be restored if a
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>siglongjmp</b><i> (sigjmp_buf <var>state</var>, int <var>value</var>)
-</i></td>
+<td align="left">void <b>siglongjmp</b><i> </i>(<i>sigjmp_buf </i><var>state</var><i>, int </i><var>value</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -79,5 +89,5 @@ blocked signals.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

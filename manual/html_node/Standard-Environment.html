@@ -2,152 +2,162 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Standard%20Environment">Standard Environment</a>,
-Previous:<a rel=previous accesskey=p href="Environment-Access.html#Environment%20Access">Environment Access</a>,
-Up:<a rel=up accesskey=u href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>
+Node:&nbsp;<a name="Standard%20Environment">Standard Environment</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Environment-Access.html#Environment%20Access">Environment Access</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>
 <hr><br>
+</div>
 
-<h4>Standard Environment Variables</h4>
+<h3 class="subsection">Standard Environment Variables</h4>
 
 <p>These environment variables have standard meanings.  This doesn't mean
 that they are always present in the environment; but if these variables
 <em>are</em> present, they have these meanings.  You shouldn't try to use
 these environment variable names for some other purpose.
 
-<dl>
+     <dl>
 <dt><code>HOME</code>
-<dd>
+     <dd>
 
-<p>This is a string representing the user's <dfn>home directory</dfn>, or
+     <p>This is a string representing the user's <dfn>home directory</dfn>, or
 initial default working directory.
 
-<p>The user can set <code>HOME</code> to any value. 
+     <p>The user can set <code>HOME</code> to any value. 
 If you need to make sure to obtain the proper home directory
 for a particular user, you should not use <code>HOME</code>; instead,
 look up the user's name in the user database (see <a href="User-Database.html#User%20Database">User Database</a>).
 
-<p>For most purposes, it is better to use <code>HOME</code>, precisely because
+     <p>For most purposes, it is better to use <code>HOME</code>, precisely because
 this lets the user specify the value.
 
-<br><dt><code>LOGNAME</code>
-<dd>
+     <br><dt><code>LOGNAME</code>
+     <dd>
 
-<p>This is the name that the user used to log in.  Since the value in the
+     <p>This is the name that the user used to log in.  Since the value in the
 environment can be tweaked arbitrarily, this is not a reliable way to
 identify the user who is running a program; a function like
 <code>getlogin</code> (see <a href="Who-Logged-In.html#Who%20Logged%20In">Who Logged In</a>) is better for that purpose.
 
-<p>For most purposes, it is better to use <code>LOGNAME</code>, precisely because
+     <p>For most purposes, it is better to use <code>LOGNAME</code>, precisely because
 this lets the user specify the value.
 
-<br><dt><code>PATH</code>
-<dd>
+     <br><dt><code>PATH</code>
+     <dd>
 
-<p>A <dfn>path</dfn> is a sequence of directory names which is used for
+     <p>A <dfn>path</dfn> is a sequence of directory names which is used for
 searching for a file.  The variable <code>PATH</code> holds a path used
 for searching for programs to be run.
 
-<p>The <code>execlp</code> and <code>execvp</code> functions (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>)
+     <p>The <code>execlp</code> and <code>execvp</code> functions (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>)
 use this environment variable, as do many shells and other utilities
 which are implemented in terms of those functions.
 
-<p>The syntax of a path is a sequence of directory names separated by
+     <p>The syntax of a path is a sequence of directory names separated by
 colons.  An empty string instead of a directory name stands for the
 current directory (see <a href="Working-Directory.html#Working%20Directory">Working Directory</a>).
 
-<p>A typical value for this environment variable might be a string like:
+     <p>A typical value for this environment variable might be a string like:
 
-<br><pre>:/bin:/etc:/usr/bin:/usr/new/X11:/usr/new:/usr/local/bin
-</pre>
+     <pre class="smallexample">          :/bin:/etc:/usr/bin:/usr/new/X11:/usr/new:/usr/local/bin
+          </pre>
 
-<p>This means that if the user tries to execute a program named <code>foo</code>,
+     <p>This means that if the user tries to execute a program named <code>foo</code>,
 the system will look for files named <code>foo</code>, <code>/bin/foo</code>,
 <code>/etc/foo</code>, and so on.  The first of these files that exists is
 the one that is executed.
 
-<br><dt><code>TERM</code>
-<dd>
+     <br><dt><code>TERM</code>
+     <dd>
 
-<p>This specifies the kind of terminal that is receiving program output. 
+     <p>This specifies the kind of terminal that is receiving program output. 
 Some programs can make use of this information to take advantage of
 special escape sequences or terminal modes supported by particular kinds
 of terminals.  Many programs which use the termcap library
 (see <a href="../termcap/Finding-a-Terminal-Description.html#Finding%20a%20Terminal%20Description">Find</a>) use the <code>TERM</code> environment variable, for example.
 
-<br><dt><code>TZ</code>
-<dd>
+     <br><dt><code>TZ</code>
+     <dd>
 
-<p>This specifies the time zone.  See <a href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>, for information about
+     <p>This specifies the time zone.  See <a href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>, for information about
 the format of this string and how it is used.
 
-<br><dt><code>LANG</code>
-<dd>
+     <br><dt><code>LANG</code>
+     <dd>
 
-<p>This specifies the default locale to use for attribute categories where
+     <p>This specifies the default locale to use for attribute categories where
 neither <code>LC_ALL</code> nor the specific environment variable for that
 category is set.  See <a href="Locales.html#Locales">Locales</a>, for more information about
 locales.
 
-<br><dt><code>LC_ALL</code>
-<dd>
+     <br><dt><code>LC_ALL</code>
+     <dd>
 
-<p>If this environment variable is set it overrides the selection for all
+     <p>If this environment variable is set it overrides the selection for all
 the locales done using the other <code>LC_*</code> environment variables.  The
 value of the other <code>LC_*</code> environment variables is simply ignored
 in this case.
 
-<br><dt><code>LC_COLLATE</code>
-<dd>
+     <br><dt><code>LC_COLLATE</code>
+     <dd>
 
-<p>This specifies what locale to use for string sorting.
+     <p>This specifies what locale to use for string sorting.
 
-<br><dt><code>LC_CTYPE</code>
-<dd>
+     <br><dt><code>LC_CTYPE</code>
+     <dd>
 
-<p>This specifies what locale to use for character sets and character
+     <p>This specifies what locale to use for character sets and character
 classification.
 
-<br><dt><code>LC_MESSAGES</code>
-<dd>
+     <br><dt><code>LC_MESSAGES</code>
+     <dd>
 
-<p>This specifies what locale to use for printing messages and to parse
+     <p>This specifies what locale to use for printing messages and to parse
 responses.
 
-<br><dt><code>LC_MONETARY</code>
-<dd>
+     <br><dt><code>LC_MONETARY</code>
+     <dd>
 
-<p>This specifies what locale to use for formatting monetary values.
+     <p>This specifies what locale to use for formatting monetary values.
 
-<br><dt><code>LC_NUMERIC</code>
-<dd>
+     <br><dt><code>LC_NUMERIC</code>
+     <dd>
 
-<p>This specifies what locale to use for formatting numbers.
+     <p>This specifies what locale to use for formatting numbers.
 
-<br><dt><code>LC_TIME</code>
-<dd>
+     <br><dt><code>LC_TIME</code>
+     <dd>
 
-<p>This specifies what locale to use for formatting date/time values.
+     <p>This specifies what locale to use for formatting date/time values.
 
-<br><dt><code>NLSPATH</code>
-<dd>
+     <br><dt><code>NLSPATH</code>
+     <dd>
 
-<p>This specifies the directories in which the <code>catopen</code> function
+     <p>This specifies the directories in which the <code>catopen</code> function
 looks for message translation catalogs.
 
-<br><dt><code>_POSIX_OPTION_ORDER</code>
-<dd>
+     <br><dt><code>_POSIX_OPTION_ORDER</code>
+     <dd>
 
-<p>If this environment variable is defined, it suppresses the usual
+     <p>If this environment variable is defined, it suppresses the usual
 reordering of command line arguments by <code>getopt</code> and
 <code>argp_parse</code>.  See <a href="Argument-Syntax.html#Argument%20Syntax">Argument Syntax</a>.
 
-</dl>
+   </dl>
 
-</body></html>
+   </body></html>
 

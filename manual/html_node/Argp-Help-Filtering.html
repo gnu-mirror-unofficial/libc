@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Help%20Filtering">Argp Help Filtering</a>,
-Previous:<a rel=previous accesskey=p href="Argp-Children.html#Argp%20Children">Argp Children</a>,
-Up:<a rel=up accesskey=u href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>
+Node:&nbsp;<a name="Argp%20Help%20Filtering">Argp Help Filtering</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Children.html#Argp%20Children">Argp Children</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>
 <hr><br>
+</div>
 
-<h4>Customizing Argp Help Output</h4>
+<h3 class="subsection">Customizing Argp Help Output</h4>
 
 <p>The <code>help_filter</code> field in a <code>struct argp</code> is a pointer to a
 function that filters the text of help messages before displaying
 them.  They have a function signature like:
 
-<br><pre>char *<var>help-filter</var> (int <var>key</var>, const char *<var>text</var>, void *<var>input</var>)
-</pre>
+<pre class="smallexample">     char *<var>help-filter</var> (int <var>key</var>, const char *<var>text</var>, void *<var>input</var>)
+     </pre>
 
 <p>Where <var>key</var> is either a key from an option, in which case <var>text</var>
 is that option's help text.  See <a href="Argp-Option-Vectors.html#Argp%20Option%20Vectors">Argp Option Vectors</a>.  Alternately, one
@@ -28,7 +38,7 @@ of the special keys with names beginning with <code>ARGP_KEY_HELP_</code>
 might be used, describing which other help text <var>text</var> will contain. 
 See <a href="Argp-Help-Filter-Keys.html#Argp%20Help%20Filter%20Keys">Argp Help Filter Keys</a>.
 
-<p>The function should return either <var>text</var> if it remains as-is, or a
+   <p>The function should return either <var>text</var> if it remains as-is, or a
 replacement string allocated using <code>malloc</code>.  This will be either be
 freed by argp or zero, which prints nothing.  The value of <var>text</var> is
 supplied <em>after</em> any translation has been done, so if any of the
@@ -36,9 +46,9 @@ replacement text needs translation, it will be done by the filter
 function.  <var>input</var> is either the input supplied to <code>argp_parse</code>
 or it is zero, if <code>argp_help</code> was called directly by the user.
 
-<ul>
-<li><a accesskey=1 href="Argp-Help-Filter-Keys.html#Argp%20Help%20Filter%20Keys">Keys</a>:   Special <var>key</var> values for help filter functions. 
+<ul class="menu">
+<li><a accesskey="1" href="Argp-Help-Filter-Keys.html#Argp%20Help%20Filter%20Keys">Keys</a>:   Special <var>key</var> values for help filter functions. 
 </ul>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Pipe%20Atomicity">Pipe Atomicity</a>,
-Previous:<a rel=previous accesskey=p href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>,
-Up:<a rel=up accesskey=u href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
+Node:&nbsp;<a name="Pipe%20Atomicity">Pipe Atomicity</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
 <hr><br>
+</div>
 
-<h3>Atomicity of Pipe I/O</h3>
+<h3 class="section">Atomicity of Pipe I/O</h3>
 
 <p>Reading or writing pipe data is <dfn>atomic</dfn> if the size of data written
 is not greater than <code>PIPE_BUF</code>.  This means that the data transfer
@@ -22,13 +32,13 @@ can observe a state in which it is partially complete.  Atomic I/O may
 not begin right away (it may need to wait for buffer space or for data),
 but once it does begin it finishes immediately.
 
-<p>Reading or writing a larger amount of data may not be atomic; for
+   <p>Reading or writing a larger amount of data may not be atomic; for
 example, output data from other processes sharing the descriptor may be
 interspersed.  Also, once <code>PIPE_BUF</code> characters have been written,
 further writes will block until some characters are read.
 
-<p>See <a href="Limits-for-Files.html#Limits%20for%20Files">Limits for Files</a>, for information about the <code>PIPE_BUF</code>
+   <p>See <a href="Limits-for-Files.html#Limits%20for%20Files">Limits for Files</a>, for information about the <code>PIPE_BUF</code>
 parameter.
 
-</body></html>
+   </body></html>
 

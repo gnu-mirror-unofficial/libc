@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Limits%20for%20Files">Limits for Files</a>,
-Next:<a rel=next accesskey=n href="Options-for-Files.html#Options%20for%20Files">Options for Files</a>,
-Previous:<a rel=previous accesskey=p href="Minimums.html#Minimums">Minimums</a>,
-Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+Node:&nbsp;<a name="Limits%20for%20Files">Limits for Files</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Options-for-Files.html#Options%20for%20Files">Options for Files</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Minimums.html#Minimums">Minimums</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
 <hr><br>
+</div>
 
-<h3>Limits on File System Capacity</h3>
+<h3 class="section">Limits on File System Capacity</h3>
 
 <p>The POSIX.1 standard specifies a number of parameters that describe the
 limitations of the file system.  It's possible for the system to have a
@@ -24,13 +34,13 @@ parameters, even different files) to have different maximum limits.  For
 example, this is very likely if you use NFS to mount some of the file
 systems from other machines.
 
-<p>Each of the following macros is defined in <code>limits.h</code> only if the
+   <p>Each of the following macros is defined in <code>limits.h</code> only if the
 system has a fixed, uniform limit for the parameter in question.  If the
 system allows different file systems or files to have different limits,
 then the macro is undefined; use <code>pathconf</code> or <code>fpathconf</code> to
 find out the limit that applies to a particular file.  See <a href="Pathconf.html#Pathconf">Pathconf</a>.
 
-<p>Each parameter also has another macro, with a name starting with
+   <p>Each parameter also has another macro, with a name starting with
 <code>_POSIX</code>, which gives the lowest value that the limit is allowed to
 have on <em>any</em> POSIX system.  See <a href="File-Minimums.html#File%20Minimums">File Minimums</a>.
 
@@ -38,7 +48,7 @@ have on <em>any</em> POSIX system.  See <a href="File-Minimums.html#File%20Minim
 <table width="100%">
 <tr>
 <td align="left">int <b>LINK_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -53,7 +63,7 @@ file.  See <a href="Hard-Links.html#Hard%20Links">Hard Links</a>.
 <table width="100%">
 <tr>
 <td align="left">int <b>MAX_CANON</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -68,7 +78,7 @@ input when input editing is enabled.  See <a href="Canonical-or-Not.html#Canonic
 <table width="100%">
 <tr>
 <td align="left">int <b>MAX_INPUT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -83,7 +93,7 @@ typed ahead as input.  See <a href="I-O-Queues.html#I%2fO%20Queues">I/O Queues</
 <table width="100%">
 <tr>
 <td align="left">int <b>NAME_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -97,7 +107,7 @@ The uniform system limit (if any) for the length of a file name component.
 <table width="100%">
 <tr>
 <td align="left">int <b>PATH_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -112,7 +122,7 @@ is, the argument given to system calls such as <code>open</code>).
 <table width="100%">
 <tr>
 <td align="left">int <b>PIPE_BUF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -125,13 +135,13 @@ interleaved in chunks of this size.  See <a href="Pipes-and-FIFOs.html#Pipes%20a
 </td></tr>
 </table>
 
-<p>These are alternative macro names for some of the same information.
+   <p>These are alternative macro names for some of the same information.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>MAXNAMLEN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -146,7 +156,7 @@ This is the BSD name for <code>NAME_MAX</code>.  It is defined in
 <table width="100%">
 <tr>
 <td align="left">int <b>FILENAME_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -156,15 +166,15 @@ The value of this macro is an integer constant expression that
 represents the maximum length of a file name string.  It is defined in
 <code>stdio.h</code>.
 
-<p>Unlike <code>PATH_MAX</code>, this macro is defined even if there is no actual
+     <p>Unlike <code>PATH_MAX</code>, this macro is defined even if there is no actual
 limit imposed.  In such a case, its value is typically a very large
 number.  <strong>This is always the case on the GNU system.</strong>
 
-<p><strong>Usage Note:</strong> Don't use <code>FILENAME_MAX</code> as the size of an
+     <p><strong>Usage Note:</strong> Don't use <code>FILENAME_MAX</code> as the size of an
 array in which to store a file name!  You can't possibly make an array
 that big!  Use dynamic allocation (see <a href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>) instead. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

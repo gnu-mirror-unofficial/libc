@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Open-time%20Flags">Open-time Flags</a>,
-Next:<a rel=next accesskey=n href="Operating-Modes.html#Operating%20Modes">Operating Modes</a>,
-Previous:<a rel=previous accesskey=p href="Access-Modes.html#Access%20Modes">Access Modes</a>,
-Up:<a rel=up accesskey=u href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>
+Node:&nbsp;<a name="Open-time%20Flags">Open-time Flags</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Operating-Modes.html#Operating%20Modes">Operating Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Access-Modes.html#Access%20Modes">Access Modes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>
 <hr><br>
+</div>
 
-<h4>Open-time Flags</h4>
+<h3 class="subsection">Open-time Flags</h4>
 
 <p>The open-time flags specify options affecting how <code>open</code> will behave. 
 These options are not preserved once the file is open.  The exception to
@@ -22,23 +32,23 @@ this is <code>O_NONBLOCK</code>, which is also an I/O operating mode and so it
 <em>is</em> saved.  See <a href="Opening-and-Closing-Files.html#Opening%20and%20Closing%20Files">Opening and Closing Files</a>, for how to call
 <code>open</code>.
 
-<p>There are two sorts of options specified by open-time flags.
+   <p>There are two sorts of options specified by open-time flags.
 
-<ul>
+     <ul>
 <li><dfn>File name translation flags</dfn> affect how <code>open</code> looks up the
 file name to locate the file, and whether the file can be created.
 
-<li><dfn>Open-time action flags</dfn> specify extra operations that <code>open</code> will
+     <li><dfn>Open-time action flags</dfn> specify extra operations that <code>open</code> will
 perform on the file once it is open. 
 </ul>
 
-<p>Here are the file name translation flags.
+   <p>Here are the file name translation flags.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>O_CREAT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -52,7 +62,7 @@ If set, the file will be created if it doesn't already exist.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_EXCL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -68,7 +78,7 @@ clobber an existing file.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_NONBLOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -81,7 +91,7 @@ ignored.  Often opening a port to a modem blocks until the modem reports
 carrier detection; if <code>O_NONBLOCK</code> is specified, <code>open</code> will
 return immediately without a carrier.
 
-<p>Note that the <code>O_NONBLOCK</code> flag is overloaded as both an I/O operating
+     <p>Note that the <code>O_NONBLOCK</code> flag is overloaded as both an I/O operating
 mode and a file name translation flag.  This means that specifying
 <code>O_NONBLOCK</code> in <code>open</code> also sets nonblocking I/O mode;
 see <a href="Operating-Modes.html#Operating%20Modes">Operating Modes</a>.  To open the file without blocking but do normal
@@ -94,7 +104,7 @@ then call <code>fcntl</code> to turn the bit off.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_NOCTTY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -104,7 +114,7 @@ If the named file is a terminal device, don't make it the controlling
 terminal for the process.  See <a href="Job-Control.html#Job%20Control">Job Control</a>, for information about
 what it means to be the controlling terminal.
 
-<p>In the GNU system and 4.4 BSD, opening a file never makes it the
+     <p>In the GNU system and 4.4 BSD, opening a file never makes it the
 controlling terminal and <code>O_NOCTTY</code> is zero.  However, other
 systems may use a nonzero value for <code>O_NOCTTY</code> and set the
 controlling terminal when you open a file that is a terminal device; so
@@ -112,13 +122,13 @@ to be portable, use <code>O_NOCTTY</code> when it is important to avoid this.
 </td></tr>
 </table>
 
-<p>The following three file name translation flags exist only in the GNU system.
+   <p>The following three file name translation flags exist only in the GNU system.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>O_IGNORE_CTTY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -135,7 +145,7 @@ See <a href="Job-Control.html#Job%20Control">Job Control</a>.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_NOLINK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -151,7 +161,7 @@ return the information returned by <code>lstat</code> on the link's name.)
 <table width="100%">
 <tr>
 <td align="left">int <b>O_NOTRANS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -162,7 +172,7 @@ Open the bare file the translator itself sees.
 </td></tr>
 </table>
 
-<p>The open-time action flags tell <code>open</code> to do additional operations
+   <p>The open-time action flags tell <code>open</code> to do additional operations
 which are not really related to opening the file.  The reason to do them
 as part of <code>open</code> instead of in separate calls is that <code>open</code>
 can do them <i>atomically</i>.
@@ -171,7 +181,7 @@ can do them <i>atomically</i>.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_TRUNC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -183,7 +193,7 @@ requires that you open the file for writing to use <code>O_TRUNC</code>.  In
 BSD and GNU you must have permission to write the file to truncate it,
 but you need not open for write access.
 
-<p>This is the only open-time action flag specified by POSIX.1.  There is
+     <p>This is the only open-time action flag specified by POSIX.1.  There is
 no good reason for truncation to be done by <code>open</code>, instead of by
 calling <code>ftruncate</code> afterwards.  The <code>O_TRUNC</code> flag existed in
 Unix before <code>ftruncate</code> was invented, and is retained for backward
@@ -191,14 +201,14 @@ compatibility.
 </td></tr>
 </table>
 
-<p>The remaining operating modes are BSD extensions.  They exist only
+   <p>The remaining operating modes are BSD extensions.  They exist only
 on some systems.  On other systems, these macros are not defined.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>O_SHLOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -207,7 +217,7 @@ on some systems.  On other systems, these macros are not defined.
 Acquire a shared lock on the file, as with <code>flock</code>. 
 See <a href="File-Locks.html#File%20Locks">File Locks</a>.
 
-<p>If <code>O_CREAT</code> is specified, the locking is done atomically when
+     <p>If <code>O_CREAT</code> is specified, the locking is done atomically when
 creating the file.  You are guaranteed that no other process will get
 the lock on the new file first. 
 </td></tr>
@@ -217,7 +227,7 @@ the lock on the new file first.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_EXLOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -228,5 +238,5 @@ See <a href="File-Locks.html#File%20Locks">File Locks</a>.  This is atomic like 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

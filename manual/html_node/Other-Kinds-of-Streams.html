@@ -2,43 +2,53 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Other%20Kinds%20of%20Streams">Other Kinds of Streams</a>,
-Next:<a rel=next accesskey=n href="Formatted-Messages.html#Formatted%20Messages">Formatted Messages</a>,
-Previous:<a rel=previous accesskey=p href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="Other%20Kinds%20of%20Streams">Other Kinds of Streams</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Formatted-Messages.html#Formatted%20Messages">Formatted Messages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>Other Kinds of Streams</h3>
+<h3 class="section">Other Kinds of Streams</h3>
 
 <p>The GNU library provides ways for you to define additional kinds of
 streams that do not necessarily correspond to an open file.
 
-<p>One such type of stream takes input from or writes output to a string. 
+   <p>One such type of stream takes input from or writes output to a string. 
 These kinds of streams are used internally to implement the
 <code>sprintf</code> and <code>sscanf</code> functions.  You can also create such a
 stream explicitly, using the functions described in <a href="String-Streams.html#String%20Streams">String Streams</a>.
 
-<p>More generally, you can define streams that do input/output to arbitrary
+   <p>More generally, you can define streams that do input/output to arbitrary
 objects using functions supplied by your program.  This protocol is
 discussed in <a href="Custom-Streams.html#Custom%20Streams">Custom Streams</a>.
 
-<p><strong>Portability Note:</strong> The facilities described in this section are
+   <p><strong>Portability Note:</strong> The facilities described in this section are
 specific to GNU.  Other systems or C implementations might or might not
 provide equivalent functionality.
 
-<ul>
-<li><a accesskey=1 href="String-Streams.html#String%20Streams">String Streams</a>:               Streams that get data from or put data in
+<ul class="menu">
+<li><a accesskey="1" href="String-Streams.html#String%20Streams">String Streams</a>:               Streams that get data from or put data in
                                  a string or memory buffer. 
-<li><a accesskey=2 href="Obstack-Streams.html#Obstack%20Streams">Obstack Streams</a>: 		Streams that store data in an obstack. 
-<li><a accesskey=3 href="Custom-Streams.html#Custom%20Streams">Custom Streams</a>:               Defining your own streams with an arbitrary
+<li><a accesskey="2" href="Obstack-Streams.html#Obstack%20Streams">Obstack Streams</a>: 		Streams that store data in an obstack. 
+<li><a accesskey="3" href="Custom-Streams.html#Custom%20Streams">Custom Streams</a>:               Defining your own streams with an arbitrary
                                  input data source and/or output data sink. 
 </ul>
 
-</body></html>
+   </body></html>
 

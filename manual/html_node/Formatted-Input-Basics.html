@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Formatted%20Input%20Basics">Formatted Input Basics</a>,
-Next:<a rel=next accesskey=n href="Input-Conversion-Syntax.html#Input%20Conversion%20Syntax">Input Conversion Syntax</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="Formatted%20Input%20Basics">Formatted Input Basics</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Input-Conversion-Syntax.html#Input%20Conversion%20Syntax">Input Conversion Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>Formatted Input Basics</h4>
+<h3 class="subsection">Formatted Input Basics</h4>
 
 <p>Calls to <code>scanf</code> are superficially similar to calls to
 <code>printf</code> in that arbitrary arguments are read under the control of
@@ -29,7 +39,7 @@ Ordinarily, non-whitespace characters in the template are expected to
 match characters in the input stream exactly, but a matching failure is
 distinct from an input error on the stream.
 
-<p>Another area of difference between <code>scanf</code> and <code>printf</code> is
+   <p>Another area of difference between <code>scanf</code> and <code>printf</code> is
 that you must remember to supply pointers rather than immediate values
 as the optional arguments to <code>scanf</code>; the values that are read are
 stored in the objects that the pointers point to.  Even experienced
@@ -37,35 +47,35 @@ programmers tend to forget this occasionally, so if your program is
 getting strange errors that seem to be related to <code>scanf</code>, you
 might want to double-check this.
 
-<p>When a <dfn>matching failure</dfn> occurs, <code>scanf</code> returns immediately,
+   <p>When a <dfn>matching failure</dfn> occurs, <code>scanf</code> returns immediately,
 leaving the first non-matching character as the next character to be
 read from the stream.  The normal return value from <code>scanf</code> is the
 number of values that were assigned, so you can use this to determine if
 a matching error happened before all the expected values were read.
 
-<p>The <code>scanf</code> function is typically used for things like reading in
+   <p>The <code>scanf</code> function is typically used for things like reading in
 the contents of tables.  For example, here is a function that uses
 <code>scanf</code> to initialize an array of <code>double</code>:
 
-<br><pre>void
-readarray (double *array, int n)
-{
-  int i;
-  for (i=0; i&lt;n; i++)
-    if (scanf (" %lf", &amp;(array[i])) != 1)
-      invalid_input_error ();
-}
-</pre>
+<pre class="smallexample">     void
+     readarray (double *array, int n)
+     {
+       int i;
+       for (i=0; i&lt;n; i++)
+         if (scanf (" %lf", &amp;(array[i])) != 1)
+           invalid_input_error ();
+     }
+     </pre>
 
-<p>The formatted input functions are not used as frequently as the
+   <p>The formatted input functions are not used as frequently as the
 formatted output functions.  Partly, this is because it takes some care
 to use them properly.  Another reason is that it is difficult to recover
 from a matching error.
 
-<p>If you are trying to read input that doesn't match a single, fixed
+   <p>If you are trying to read input that doesn't match a single, fixed
 pattern, you may be better off using a tool such as Flex to generate a
 lexical scanner, or Bison to generate a parser, rather than using
 <code>scanf</code>.  For more information about these tools, see <a href="../flex.info/index.html#Top">Top</a>, and <a href="../bison.info/index.html#Top">Top</a>.
 
-</body></html>
+   </body></html>
 

@@ -2,46 +2,56 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="General%20Numeric">General Numeric</a>,
-Next:<a rel=next accesskey=n href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>,
-Up:<a rel=up accesskey=u href="The-Lame-Way-to-Locale-Data.html#The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>
+Node:&nbsp;<a name="General%20Numeric">General Numeric</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="The-Lame-Way-to-Locale-Data.html#The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>
 <hr><br>
+</div>
 
-<h5>Generic Numeric Formatting Parameters</h5>
+<h3 class="subsubsection">Generic Numeric Formatting Parameters</h5>
 
 <p>These are the standard members of <code>struct lconv</code>; there may be
 others.
 
-<dl>
+     <dl>
 <dt><code>char *decimal_point</code>
-<dt><code>char *mon_decimal_point</code>
-<dd>These are the decimal-point separators used in formatting non-monetary
+     <dd><dt><code>char *mon_decimal_point</code>
+     <dd>These are the decimal-point separators used in formatting non-monetary
 and monetary quantities, respectively.  In the <code>C</code> locale, the
 value of <code>decimal_point</code> is <code>"."</code>, and the value of
 <code>mon_decimal_point</code> is <code>""</code>.
 
-<br><dt><code>char *thousands_sep</code>
-<dt><code>char *mon_thousands_sep</code>
-<dd>These are the separators used to delimit groups of digits to the left of
+     <br><dt><code>char *thousands_sep</code>
+     <dd><dt><code>char *mon_thousands_sep</code>
+     <dd>These are the separators used to delimit groups of digits to the left of
 the decimal point in formatting non-monetary and monetary quantities,
 respectively.  In the <code>C</code> locale, both members have a value of
 <code>""</code> (the empty string).
 
-<br><dt><code>char *grouping</code>
-<dt><code>char *mon_grouping</code>
-<dd>These are strings that specify how to group the digits to the left of
+     <br><dt><code>char *grouping</code>
+     <dd><dt><code>char *mon_grouping</code>
+     <dd>These are strings that specify how to group the digits to the left of
 the decimal point.  <code>grouping</code> applies to non-monetary quantities
 and <code>mon_grouping</code> applies to monetary quantities.  Use either
 <code>thousands_sep</code> or <code>mon_thousands_sep</code> to separate the digit
 groups.
 
-<p>Each member of these strings is to be interpreted as an integer value of
+     <p>Each member of these strings is to be interpreted as an integer value of
 type <code>char</code>.  Successive numbers (from left to right) give the
 sizes of successive groups (from right to left, starting at the decimal
 point.)  The last member is either <code>0</code>, in which case the previous
@@ -50,28 +60,28 @@ member is used over and over again for all the remaining groups, or
 another way, any remaining digits form one large group without
 separators.
 
-<p>For example, if <code>grouping</code> is <code>"\04\03\02"</code>, the correct
+     <p>For example, if <code>grouping</code> is <code>"\04\03\02"</code>, the correct
 grouping for the number <code>123456787654321</code> is <code>12</code>, <code>34</code>,
 <code>56</code>, <code>78</code>, <code>765</code>, <code>4321</code>.  This uses a group of 4
 digits at the end, preceded by a group of 3 digits, preceded by groups
 of 2 digits (as many as needed).  With a separator of <code>,</code>, the
 number would be printed as <code>12,34,56,78,765,4321</code>.
 
-<p>A value of <code>"\03"</code> indicates repeated groups of three digits, as
+     <p>A value of <code>"\03"</code> indicates repeated groups of three digits, as
 normally used in the U.S.
 
-<p>In the standard <code>C</code> locale, both <code>grouping</code> and
+     <p>In the standard <code>C</code> locale, both <code>grouping</code> and
 <code>mon_grouping</code> have a value of <code>""</code>.  This value specifies no
 grouping at all.
 
-<br><dt><code>char int_frac_digits</code>
-<dt><code>char frac_digits</code>
-<dd>These are small integers indicating how many fractional digits (to the
+     <br><dt><code>char int_frac_digits</code>
+     <dd><dt><code>char frac_digits</code>
+     <dd>These are small integers indicating how many fractional digits (to the
 right of the decimal point) should be displayed in a monetary value in
 international and local formats, respectively.  (Most often, both
 members have the same value.)
 
-<p>In the standard <code>C</code> locale, both of these members have the value
+     <p>In the standard <code>C</code> locale, both of these members have the value
 <code>CHAR_MAX</code>, meaning "unspecified".  The ISO standard doesn't say
 what to do when you find this value; we recommend printing no
 fractional digits.  (This locale also specifies the empty string for
@@ -79,5 +89,5 @@ fractional digits.  (This locale also specifies the empty string for
 confusing!) 
 </dl>
 
-</body></html>
+   </body></html>
 

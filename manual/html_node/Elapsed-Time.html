@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Elapsed%20Time">Elapsed Time</a>,
-Next:<a rel=next accesskey=n href="Processor-And-CPU-Time.html#Processor%20And%20CPU%20Time">Processor And CPU Time</a>,
-Previous:<a rel=previous accesskey=p href="Time-Basics.html#Time%20Basics">Time Basics</a>,
-Up:<a rel=up accesskey=u href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
+Node:&nbsp;<a name="Elapsed%20Time">Elapsed Time</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Processor-And-CPU-Time.html#Processor%20And%20CPU%20Time">Processor And CPU Time</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Time-Basics.html#Time%20Basics">Time Basics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
 <hr><br>
+</div>
 
-<h3>Elapsed Time</h3>
+<h3 class="section">Elapsed Time</h3>
 
 <p>One way to represent an elapsed time is with a simple arithmetic data
 type, as with the following function to compute the elapsed time between
@@ -23,8 +33,8 @@ two calendar times.  This function is declared in <code>time.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>difftime</b><i> (time_t <var>time1</var>, time_t <var>time0</var>)
-</i></td>
+<td align="left">double <b>difftime</b><i> </i>(<i>time_t </i><var>time1</var><i>, time_t </i><var>time0</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,13 +45,13 @@ time between calendar time <var>time1</var> and calendar time <var>time0</var>, 
 a value of type <code>double</code>.  The difference ignores leap seconds
 unless leap second support is enabled.
 
-<p>In the GNU system, you can simply subtract <code>time_t</code> values.  But on
+     <p>In the GNU system, you can simply subtract <code>time_t</code> values.  But on
 other systems, the <code>time_t</code> data type might use some other encoding
 where subtraction doesn't work directly. 
 </td></tr>
 </table>
 
-<p>The GNU C library provides two data types specifically for representing
+   <p>The GNU C library provides two data types specifically for representing
 an elapsed time.  They are used by various GNU C library functions, and
 you can use them for your own purposes too.  They're exactly the same
 except that one has a resolution in microseconds, and the other, newer
@@ -51,7 +61,7 @@ one, is in nanoseconds.
 <table width="100%">
 <tr>
 <td align="left"><b>struct timeval</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -60,24 +70,24 @@ one, is in nanoseconds.
 The <code>struct timeval</code> structure represents an elapsed time.  It is
 declared in <code>sys/time.h</code> and has the following members:
 
-<dl>
+          <dl>
 <dt><code>long int tv_sec</code>
-<dd>This represents the number of whole seconds of elapsed time.
+          <dd>This represents the number of whole seconds of elapsed time.
 
-<br><dt><code>long int tv_usec</code>
-<dd>This is the rest of the elapsed time (a fraction of a second),
+          <br><dt><code>long int tv_usec</code>
+          <dd>This is the rest of the elapsed time (a fraction of a second),
 represented as the number of microseconds.  It is always less than one
 million.
 
-</dl>
-</td></tr>
+     </dl>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct timespec</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -86,59 +96,59 @@ million.
 The <code>struct timespec</code> structure represents an elapsed time.  It is
 declared in <code>time.h</code> and has the following members:
 
-<dl>
+          <dl>
 <dt><code>long int tv_sec</code>
-<dd>This represents the number of whole seconds of elapsed time.
+          <dd>This represents the number of whole seconds of elapsed time.
 
-<br><dt><code>long int tv_nsec</code>
-<dd>This is the rest of the elapsed time (a fraction of a second),
+          <br><dt><code>long int tv_nsec</code>
+          <dd>This is the rest of the elapsed time (a fraction of a second),
 represented as the number of nanoseconds.  It is always less than one
 billion.
 
-</dl>
-</td></tr>
+     </dl>
+     </td></tr>
 </table>
 
-<p>It is often necessary to subtract two values of type <code>struct&nbsp;timeval</code> or <code>struct&nbsp;timespec</code>.  Here is the best way to do
+   <p>It is often necessary to subtract two values of type <code>struct&nbsp;timeval</code> or <code>struct&nbsp;timespec</code>.  Here is the best way to do
 this.  It works even on some peculiar operating systems where the
 <code>tv_sec</code> member has an unsigned type.
 
-<br><pre>/* Subtract the `struct timeval' values X and Y,
-   storing the result in RESULT.
-   Return 1 if the difference is negative, otherwise 0.  */
+<pre class="smallexample">     /* Subtract the `struct timeval' values X and Y,
+        storing the result in RESULT.
+        Return 1 if the difference is negative, otherwise 0.  */
+     
+     int
+     timeval_subtract (result, x, y)
+          struct timeval *result, *x, *y;
+     {
+       /* Perform the carry for the later subtraction by updating <var>y</var>. */
+       if (x-&gt;tv_usec &lt; y-&gt;tv_usec) {
+         int nsec = (y-&gt;tv_usec - x-&gt;tv_usec) / 1000000 + 1;
+         y-&gt;tv_usec -= 1000000 * nsec;
+         y-&gt;tv_sec += nsec;
+       }
+       if (x-&gt;tv_usec - y-&gt;tv_usec &gt; 1000000) {
+         int nsec = (x-&gt;tv_usec - y-&gt;tv_usec) / 1000000;
+         y-&gt;tv_usec += 1000000 * nsec;
+         y-&gt;tv_sec -= nsec;
+       }
+     
+       /* Compute the time remaining to wait.
+          <code>tv_usec</code> is certainly positive. */
+       result-&gt;tv_sec = x-&gt;tv_sec - y-&gt;tv_sec;
+       result-&gt;tv_usec = x-&gt;tv_usec - y-&gt;tv_usec;
+     
+       /* Return 1 if result is negative. */
+       return x-&gt;tv_sec &lt; y-&gt;tv_sec;
+     }
+     </pre>
 
-int
-timeval_subtract (result, x, y)
-     struct timeval *result, *x, *y;
-{
-  /* Perform the carry for the later subtraction by updating <var>y</var>. */
-  if (x-&gt;tv_usec &lt; y-&gt;tv_usec) {
-    int nsec = (y-&gt;tv_usec - x-&gt;tv_usec) / 1000000 + 1;
-    y-&gt;tv_usec -= 1000000 * nsec;
-    y-&gt;tv_sec += nsec;
-  }
-  if (x-&gt;tv_usec - y-&gt;tv_usec &gt; 1000000) {
-    int nsec = (x-&gt;tv_usec - y-&gt;tv_usec) / 1000000;
-    y-&gt;tv_usec += 1000000 * nsec;
-    y-&gt;tv_sec -= nsec;
-  }
-
-  /* Compute the time remaining to wait.
-     <code>tv_usec</code> is certainly positive. */
-  result-&gt;tv_sec = x-&gt;tv_sec - y-&gt;tv_sec;
-  result-&gt;tv_usec = x-&gt;tv_usec - y-&gt;tv_usec;
-
-  /* Return 1 if result is negative. */
-  return x-&gt;tv_sec &lt; y-&gt;tv_sec;
-}
-</pre>
-
-<p>Common functions that use <code>struct timeval</code> are <code>gettimeofday</code>
+   <p>Common functions that use <code>struct timeval</code> are <code>gettimeofday</code>
 and <code>settimeofday</code>.
 
-<p>There are no GNU C library functions specifically oriented toward
+   <p>There are no GNU C library functions specifically oriented toward
 dealing with elapsed times, but the calendar time, processor time, and
 alarm and sleeping functions have a lot to do with them.
 
-</body></html>
+   </body></html>
 

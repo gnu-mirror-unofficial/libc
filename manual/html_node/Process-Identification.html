@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Identification">Process Identification</a>,
-Next:<a rel=next accesskey=n href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>,
-Previous:<a rel=previous accesskey=p href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>,
-Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+Node:&nbsp;<a name="Process%20Identification">Process Identification</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
 <hr><br>
+</div>
 
-<h3>Process Identification</h3>
+<h3 class="section">Process Identification</h3>
 
 <p>The <code>pid_t</code> data type represents process IDs.  You can get the
 process ID of a process by calling <code>getpid</code>.  The function
@@ -27,7 +37,7 @@ program should include the header files <code>unistd.h</code> and
 <table width="100%">
 <tr>
 <td align="left"><b>pid_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -41,8 +51,8 @@ of representing a process ID.  In the GNU library, this is an <code>int</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>getpid</b><i> (void)
-</i></td>
+<td align="left">pid_t <b>getpid</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -55,8 +65,8 @@ The <code>getpid</code> function returns the process ID of the current process.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>getppid</b><i> (void)
-</i></td>
+<td align="left">pid_t <b>getppid</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -67,5 +77,5 @@ current process.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

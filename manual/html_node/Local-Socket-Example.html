@@ -2,69 +2,81 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Local%20Socket%20Example">Local Socket Example</a>,
-Previous:<a rel=previous accesskey=p href="Local-Namespace-Details.html#Local%20Namespace%20Details">Local Namespace Details</a>,
-Up:<a rel=up accesskey=u href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>
+Node:&nbsp;<a name="Local%20Socket%20Example">Local Socket Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Local-Namespace-Details.html#Local%20Namespace%20Details">Local Namespace Details</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>
 <hr><br>
+</div>
 
-<h4>Example of Local-Namespace Sockets</h4>
+<h3 class="subsection">Example of Local-Namespace Sockets</h4>
 
 <p>Here is an example showing how to create and name a socket in the local
 namespace.
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;stddef.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;errno.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;sys/socket.h&gt;
-#include &lt;sys/un.h&gt;
+     #include &lt;stddef.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;errno.h&gt;
+     #include &lt;stdlib.h&gt;
+     #include &lt;string.h&gt;
+     #include &lt;sys/socket.h&gt;
+     #include &lt;sys/un.h&gt;
+     
+     int
+     make_named_socket (const char *filename)
+     {
+       struct sockaddr_un name;
+       int sock;
+       size_t size;
+     
+       /* Create the socket. */
+       sock = socket (PF_LOCAL, SOCK_DGRAM, 0);
+       if (sock &lt; 0)
+         {
+           perror ("socket");
+           exit (EXIT_FAILURE);
+         }
+     
+       /* Bind a name to the socket. */
+       name.sun_family = AF_LOCAL;
+       strncpy (name.sun_path, filename, sizeof (name.sun_path));
+       name.sun_path[sizeof (name.sun_path) - 1] = '\0';
+     
+       /* The size of the address is
+          the offset of the start of the filename,
+          plus its length,
+          plus one for the terminating null byte.
+          Alternatively you can just do:
+          size = SUN_LEN (&amp;name);
+      */
+       size = (offsetof (struct sockaddr_un, sun_path)
+               + strlen (name.sun_path) + 1);
+     
+       if (bind (sock, (struct sockaddr *) &amp;name, size) &lt; 0)
+         {
+           perror ("bind");
+           exit (EXIT_FAILURE);
+         }
+     
+       return sock;
+     }
+     </pre>
 
-int
-make_named_socket (const char *filename)
-{
-  struct sockaddr_un name;
-  int sock;
-  size_t size;
-
-  /* Create the socket. */
-  sock = socket (PF_LOCAL, SOCK_DGRAM, 0);
-  if (sock &lt; 0)
-    {
-      perror ("socket");
-      exit (EXIT_FAILURE);
-    }
-
-  /* Bind a name to the socket. */
-  name.sun_family = AF_LOCAL;
-  strncpy (name.sun_path, filename, sizeof (name.sun_path));
-
-  /* The size of the address is
-     the offset of the start of the filename,
-     plus its length,
-     plus one for the terminating null byte.
-     Alternatively you can just do:
-     size = SUN_LEN (&amp;name);
- */
-  size = (offsetof (struct sockaddr_un, sun_path)
-          + strlen (name.sun_path) + 1);
-
-  if (bind (sock, (struct sockaddr *) &amp;name, size) &lt; 0)
-    {
-      perror ("bind");
-      exit (EXIT_FAILURE);
-    }
-
-  return sock;
-}
-</pre>
-
-</body></html>
+   </body></html>
 

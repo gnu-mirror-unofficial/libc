@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Streams">Streams</a>,
-Next:<a rel=next accesskey=n href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="Streams">Streams</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>Streams</h3>
+<h3 class="section">Streams</h3>
 
 <p>For historical reasons, the type of the C data structure that represents
 a stream is called <code>FILE</code> rather than "stream".  Since most of
@@ -23,13 +33,13 @@ to unfortunate confusion over terminology in many books on C.  This
 manual, however, is careful to use the terms "file" and "stream"
 only in the technical sense.
 
-<p>The <code>FILE</code> type is declared in the header file <code>stdio.h</code>.
+   <p>The <code>FILE</code> type is declared in the header file <code>stdio.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>FILE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -44,11 +54,11 @@ and <code>feof</code> functions; see <a href="EOF-and-Errors.html#EOF%20and%20Er
 </td></tr>
 </table>
 
-<p><code>FILE</code> objects are allocated and managed internally by the
+   <p><code>FILE</code> objects are allocated and managed internally by the
 input/output library functions.  Don't try to create your own objects of
 type <code>FILE</code>; let the library do it.  Your programs should
 deal only with pointers to these objects (that is, <code>FILE *</code> values)
 rather than the objects themselves.
 
-</body></html>
+   </body></html>
 

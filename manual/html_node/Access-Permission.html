@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Access%20Permission">Access Permission</a>,
-Next:<a rel=next accesskey=n href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>,
-Previous:<a rel=previous accesskey=p href="Permission-Bits.html#Permission%20Bits">Permission Bits</a>,
-Up:<a rel=up accesskey=u href="File-Attributes.html#File%20Attributes">File Attributes</a>
+Node:&nbsp;<a name="Access%20Permission">Access Permission</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Permission-Bits.html#Permission%20Bits">Permission Bits</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Attributes.html#File%20Attributes">File Attributes</a>
 <hr><br>
+</div>
 
-<h4>How Your Access to a File is Decided</h4>
+<h3 class="subsection">How Your Access to a File is Decided</h4>
 
 <p>Recall that the operating system normally decides access permission for
 a file based on the effective user and group IDs of the process and its
 supplementary group IDs, together with the file's owner, group and
 permission bits.  These concepts are discussed in detail in <a href="Process-Persona.html#Process%20Persona">Process Persona</a>.
 
-<p>If the effective user ID of the process matches the owner user ID of the
+   <p>If the effective user ID of the process matches the owner user ID of the
 file, then permissions for read, write, and execute/search are
 controlled by the corresponding "user" (or "owner") bits.  Likewise,
 if any of the effective group ID or supplementary group IDs of the
@@ -29,9 +39,9 @@ process matches the group owner ID of the file, then permissions are
 controlled by the "group" bits.  Otherwise, permissions are controlled
 by the "other" bits.
 
-<p>Privileged users, like <code>root</code>, can access any file regardless of
+   <p>Privileged users, like <code>root</code>, can access any file regardless of
 its permission bits.  As a special case, for a file to be executable
 even by a privileged user, at least one of its execute bits must be set.
 
-</body></html>
+   </body></html>
 

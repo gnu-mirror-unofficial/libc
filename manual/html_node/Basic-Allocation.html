@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Basic%20Allocation">Basic Allocation</a>,
-Next:<a rel=next accesskey=n href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
-Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+Node:&nbsp;<a name="Basic%20Allocation">Basic Allocation</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
 <hr><br>
+</div>
 
-<h5>Basic Memory Allocation</h5>
+<h3 class="subsubsection">Basic Memory Allocation</h5>
 
 <p>To allocate a block of memory, call <code>malloc</code>.  The prototype for
 this function is in <code>stdlib.h</code>.
@@ -21,8 +31,8 @@ this function is in <code>stdlib.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>malloc</b><i> (size_t <var>size</var>)
-</i></td>
+<td align="left">void * <b>malloc</b><i> </i>(<i>size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -33,37 +43,37 @@ bytes long, or a null pointer if the block could not be allocated.
 </td></tr>
 </table>
 
-<p>The contents of the block are undefined; you must initialize it yourself
+   <p>The contents of the block are undefined; you must initialize it yourself
 (or use <code>calloc</code> instead; see <a href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>). 
 Normally you would cast the value as a pointer to the kind of object
 that you want to store in the block.  Here we show an example of doing
 so, and of initializing the space with zeros using the library function
 <code>memset</code> (see <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>):
 
-<br><pre>struct foo *ptr;
-<small>...</small>
-ptr = (struct foo *) malloc (sizeof (struct foo));
-if (ptr == 0) abort ();
-memset (ptr, 0, sizeof (struct foo));
-</pre>
+<pre class="smallexample">     struct foo *ptr;
+     ...
+     ptr = (struct foo *) malloc (sizeof (struct foo));
+     if (ptr == 0) abort ();
+     memset (ptr, 0, sizeof (struct foo));
+     </pre>
 
-<p>You can store the result of <code>malloc</code> into any pointer variable
+   <p>You can store the result of <code>malloc</code> into any pointer variable
 without a cast, because ISO&nbsp;C automatically converts the type
 <code>void *</code> to another type of pointer when necessary.  But the cast
 is necessary in contexts other than assignment operators or if you might
 want your code to run in traditional C.
 
-<p>Remember that when allocating space for a string, the argument to
+   <p>Remember that when allocating space for a string, the argument to
 <code>malloc</code> must be one plus the length of the string.  This is
 because a string is terminated with a null character that doesn't count
 in the "length" of the string but does need space.  For example:
 
-<br><pre>char *ptr;
-<small>...</small>
-ptr = (char *) malloc (length + 1);
-</pre>
+<pre class="smallexample">     char *ptr;
+     ...
+     ptr = (char *) malloc (length + 1);
+     </pre>
 
 <p>See <a href="Representation-of-Strings.html#Representation%20of%20Strings">Representation of Strings</a>, for more information about this.
 
-</body></html>
+   </body></html>
 

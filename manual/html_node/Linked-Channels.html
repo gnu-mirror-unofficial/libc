@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Linked%20Channels">Linked Channels</a>,
-Next:<a rel=next accesskey=n href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
-Up:<a rel=up accesskey=u href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
+Node:&nbsp;<a name="Linked%20Channels">Linked Channels</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
 <hr><br>
+</div>
 
-<h4>Linked Channels</h4>
+<h3 class="subsection">Linked Channels</h4>
 
 <p>Channels that come from a single opening share the same file position;
 we call them <dfn>linked</dfn> channels.  Linked channels result when you
@@ -25,16 +35,17 @@ terminals and pipes, <em>all</em> channels are effectively linked.  On
 random-access files, all append-type output streams are effectively
 linked to each other.
 
-<p>If you have been using a stream for I/O, and you want to do I/O using
+   <p>If you have been using a stream for I/O (or have just opened the stream),
+and you want to do I/O using
 another channel (either a stream or a descriptor) that is linked to it,
 you must first <dfn>clean up</dfn> the stream that you have been using. 
 See <a href="Cleaning-Streams.html#Cleaning%20Streams">Cleaning Streams</a>.
 
-<p>Terminating a process, or executing a new program in the process,
+   <p>Terminating a process, or executing a new program in the process,
 destroys all the streams in the process.  If descriptors linked to these
 streams persist in other processes, their file positions become
 undefined as a result.  To prevent this, you must clean up the streams
 before destroying them.
 
-</body></html>
+   </body></html>
 

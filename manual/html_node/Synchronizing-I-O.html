@@ -2,34 +2,44 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Synchronizing%20I%2fO">Synchronizing I/O</a>,
-Next:<a rel=next accesskey=n href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>,
-Previous:<a rel=previous accesskey=p href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>,
-Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+Node:&nbsp;<a name="Synchronizing%20I%2fO">Synchronizing I/O</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
 <hr><br>
+</div>
 
-<h3>Synchronizing I/O operations</h3>
+<h3 class="section">Synchronizing I/O operations</h3>
 
 <p>In most modern operating systems, the normal I/O operations are not
 executed synchronously.  I.e., even if a <code>write</code> system call
 returns, this does not mean the data is actually written to the media,
 e.g., the disk.
 
-<p>In situations where synchronization points are necessary, you can use
+   <p>In situations where synchronization points are necessary, you can use
 special functions which ensure that all operations finish before
 they return.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sync</b><i> (void)
-</i></td>
+<td align="left">int <b>sync</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -40,20 +50,20 @@ has not been written to the device.  All dirty buffers in the kernel will
 be written and so an overall consistent system can be achieved (if no
 other process in parallel writes data).
 
-<p>A prototype for <code>sync</code> can be found in <code>unistd.h</code>.
+     <p>A prototype for <code>sync</code> can be found in <code>unistd.h</code>.
 
-<p>The return value is zero to indicate no error. 
+     <p>The return value is zero to indicate no error. 
 </td></tr>
 </table>
 
-<p>Programs more often want to ensure that data written to a given file is
+   <p>Programs more often want to ensure that data written to a given file is
 committed, rather than all data in the system.  For this, <code>sync</code> is overkill.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fsync</b><i> (int <var>fildes</var>)
-</i></td>
+<td align="left">int <b>fsync</b><i> </i>(<i>int </i><var>fildes</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -64,29 +74,29 @@ the open file <var>fildes</var> is written to the device associated with the
 descriptor.  The function call does not return unless all actions have
 finished.
 
-<p>A prototype for <code>fsync</code> can be found in <code>unistd.h</code>.
+     <p>A prototype for <code>fsync</code> can be found in <code>unistd.h</code>.
 
-<p>This function is a cancellation point in multi-threaded programs.  This
+     <p>This function is a cancellation point in multi-threaded programs.  This
 is a problem if the thread allocates some resources (like memory, file
 descriptors, semaphores or whatever) at the time <code>fsync</code> is
 called.  If the thread gets canceled these resources stay allocated
 until the program ends.  To avoid this, calls to <code>fsync</code> should be
 protected using cancellation handlers.
 
-<p>The return value of the function is zero if no error occurred.  Otherwise
+     <p>The return value of the function is zero if no error occurred.  Otherwise
 it is -1 and the global variable <var>errno</var> is set to the
 following values:
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The descriptor <var>fildes</var> is not valid.
+          <dd>The descriptor <var>fildes</var> is not valid.
 
-<br><dt><code>EINVAL</code>
-<dd>No synchronization is possible since the system does not implement this. 
+          <br><dt><code>EINVAL</code>
+          <dd>No synchronization is possible since the system does not implement this. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>Sometimes it is not even necessary to write all data associated with a
+   <p>Sometimes it is not even necessary to write all data associated with a
 file descriptor.  E.g., in database files which do not change in size it
 is enough to write all the file content data to the device. 
 Meta-information, like the modification time etc., are not that important
@@ -96,8 +106,8 @@ recovering of the file in case of a problem.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fdatasync</b><i> (int <var>fildes</var>)
-</i></td>
+<td align="left">int <b>fdatasync</b><i> </i>(<i>int </i><var>fildes</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -107,25 +117,25 @@ When a call to the <code>fdatasync</code> function returns, it is ensured
 that all of the file data is written to the device.  For all pending I/O
 operations, the parts guaranteeing data integrity finished.
 
-<p>Not all systems implement the <code>fdatasync</code> operation.  On systems
+     <p>Not all systems implement the <code>fdatasync</code> operation.  On systems
 missing this functionality <code>fdatasync</code> is emulated by a call to
 <code>fsync</code> since the performed actions are a superset of those
 required by <code>fdatasync</code>.
 
-<p>The prototype for <code>fdatasync</code> is in <code>unistd.h</code>.
+     <p>The prototype for <code>fdatasync</code> is in <code>unistd.h</code>.
 
-<p>The return value of the function is zero if no error occurred.  Otherwise
+     <p>The return value of the function is zero if no error occurred.  Otherwise
 it is -1 and the global variable <var>errno</var> is set to the
 following values:
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The descriptor <var>fildes</var> is not valid.
+          <dd>The descriptor <var>fildes</var> is not valid.
 
-<br><dt><code>EINVAL</code>
-<dd>No synchronization is possible since the system does not implement this. 
+          <br><dt><code>EINVAL</code>
+          <dd>No synchronization is possible since the system does not implement this. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

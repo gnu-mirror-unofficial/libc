@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Mode%20Data%20Types">Mode Data Types</a>,
-Next:<a rel=next accesskey=n href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>,
-Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+Node:&nbsp;<a name="Mode%20Data%20Types">Mode Data Types</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
 <hr><br>
+</div>
 
-<h4>Terminal Mode Data Types</h4>
+<h3 class="subsection">Terminal Mode Data Types</h4>
 
 <p>The entire collection of attributes of a terminal is stored in a
 structure of type <code>struct termios</code>.  This structure is used
@@ -24,7 +34,7 @@ and set the attributes.
 <table width="100%">
 <tr>
 <td align="left"><b>struct termios</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -33,39 +43,39 @@ and set the attributes.
 Structure that records all the I/O attributes of a terminal.  The
 structure includes at least the following members:
 
-<dl>
+          <dl>
 <dt><code>tcflag_t c_iflag</code>
-<dd>A bit mask specifying flags for input modes; see <a href="Input-Modes.html#Input%20Modes">Input Modes</a>.
+          <dd>A bit mask specifying flags for input modes; see <a href="Input-Modes.html#Input%20Modes">Input Modes</a>.
 
-<br><dt><code>tcflag_t c_oflag</code>
-<dd>A bit mask specifying flags for output modes; see <a href="Output-Modes.html#Output%20Modes">Output Modes</a>.
+          <br><dt><code>tcflag_t c_oflag</code>
+          <dd>A bit mask specifying flags for output modes; see <a href="Output-Modes.html#Output%20Modes">Output Modes</a>.
 
-<br><dt><code>tcflag_t c_cflag</code>
-<dd>A bit mask specifying flags for control modes; see <a href="Control-Modes.html#Control%20Modes">Control Modes</a>.
+          <br><dt><code>tcflag_t c_cflag</code>
+          <dd>A bit mask specifying flags for control modes; see <a href="Control-Modes.html#Control%20Modes">Control Modes</a>.
 
-<br><dt><code>tcflag_t c_lflag</code>
-<dd>A bit mask specifying flags for local modes; see <a href="Local-Modes.html#Local%20Modes">Local Modes</a>.
+          <br><dt><code>tcflag_t c_lflag</code>
+          <dd>A bit mask specifying flags for local modes; see <a href="Local-Modes.html#Local%20Modes">Local Modes</a>.
 
-<br><dt><code>cc_t c_cc[NCCS]</code>
-<dd>An array specifying which characters are associated with various
+          <br><dt><code>cc_t c_cc[NCCS]</code>
+          <dd>An array specifying which characters are associated with various
 control functions; see <a href="Special-Characters.html#Special%20Characters">Special Characters</a>. 
 </dl>
 
-<p>The <code>struct termios</code> structure also contains members which
+     <p>The <code>struct termios</code> structure also contains members which
 encode input and output transmission speeds, but the representation is
 not specified.  See <a href="Line-Speed.html#Line%20Speed">Line Speed</a>, for how to examine and store the
 speed values. 
 </td></tr>
 </table>
 
-<p>The following sections describe the details of the members of the
+   <p>The following sections describe the details of the members of the
 <code>struct termios</code> structure.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>tcflag_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -80,7 +90,7 @@ bit masks for terminal flags.
 <table width="100%">
 <tr>
 <td align="left"><b>cc_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -95,7 +105,7 @@ with various terminal control functions.
 <table width="100%">
 <tr>
 <td align="left">int <b>NCCS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -106,5 +116,5 @@ array.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

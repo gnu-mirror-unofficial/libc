@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="General%20Time%20String%20Parsing">General Time String Parsing</a>,
-Previous:<a rel=previous accesskey=p href="Low-Level-Time-String-Parsing.html#Low-Level%20Time%20String%20Parsing">Low-Level Time String Parsing</a>,
-Up:<a rel=up accesskey=u href="Parsing-Date-and-Time.html#Parsing%20Date%20and%20Time">Parsing Date and Time</a>
+Node:&nbsp;<a name="General%20Time%20String%20Parsing">General Time String Parsing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Low-Level-Time-String-Parsing.html#Low-Level%20Time%20String%20Parsing">Low-Level Time String Parsing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Parsing-Date-and-Time.html#Parsing%20Date%20and%20Time">Parsing Date and Time</a>
 <hr><br>
+</div>
 
-<h5>A More User-friendly Way to Parse Times and Dates</h5>
+<h3 class="subsubsection">A More User-friendly Way to Parse Times and Dates</h5>
 
 <p>The Unix standard defines another function for parsing date strings. 
 The interface is weird, but if the function happens to suit your
@@ -26,7 +36,7 @@ environment variable).
 <table width="100%">
 <tr>
 <td align="left"><b>getdate_err</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -35,35 +45,35 @@ environment variable).
 This variable of type <code>int</code> contains the error code of the last
 unsuccessful call to <code>getdate</code>.  Defined values are:
 
-<dl>
+          <dl>
 <dt>1
-<dd>The environment variable <code>DATEMSK</code> is not defined or null. 
+          <dd>The environment variable <code>DATEMSK</code> is not defined or null. 
 <br><dt>2
-<dd>The template file denoted by the <code>DATEMSK</code> environment variable
+          <dd>The template file denoted by the <code>DATEMSK</code> environment variable
 cannot be opened. 
 <br><dt>3
-<dd>Information about the template file cannot retrieved. 
+          <dd>Information about the template file cannot retrieved. 
 <br><dt>4
-<dd>The template file is not a regular file. 
+          <dd>The template file is not a regular file. 
 <br><dt>5
-<dd>An I/O error occurred while reading the template file. 
+          <dd>An I/O error occurred while reading the template file. 
 <br><dt>6
-<dd>Not enough memory available to execute the function. 
+          <dd>Not enough memory available to execute the function. 
 <br><dt>7
-<dd>The template file contains no matching template. 
+          <dd>The template file contains no matching template. 
 <br><dt>8
-<dd>The input date is invalid, but would match a template otherwise.  This
+          <dd>The input date is invalid, but would match a template otherwise.  This
 includes dates like February 31st, and dates which cannot be represented
 in a <code>time_t</code> variable. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct tm * <b>getdate</b><i> (const char *<var>string</var>)
-</i></td>
+<td align="left">struct tm * <b>getdate</b><i> </i>(<i>const char *</i><var>string</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -73,71 +83,71 @@ The interface to <code>getdate</code> is the simplest possible for a function
 to parse a string and return the value.  <var>string</var> is the input
 string and the result is returned in a statically-allocated variable.
 
-<p>The details about how the string is processed are hidden from the user. 
+     <p>The details about how the string is processed are hidden from the user. 
 In fact, they can be outside the control of the program.  Which formats
 are recognized is controlled by the file named by the environment
 variable <code>DATEMSK</code>.  This file should contain
 lines of valid format strings which could be passed to <code>strptime</code>.
 
-<p>The <code>getdate</code> function reads these format strings one after the
+     <p>The <code>getdate</code> function reads these format strings one after the
 other and tries to match the input string.  The first line which
 completely matches the input string is used.
 
-<p>Elements not initialized through the format string retain the values
+     <p>Elements not initialized through the format string retain the values
 present at the time of the <code>getdate</code> function call.
 
-<p>The formats recognized by <code>getdate</code> are the same as for
+     <p>The formats recognized by <code>getdate</code> are the same as for
 <code>strptime</code>.  See above for an explanation.  There are only a few
 extensions to the <code>strptime</code> behavior:
 
-<ul>
+          <ul>
 <li>If the <code>%Z</code> format is given the broken-down time is based on the
 current time of the timezone matched, not of the current timezone of the
 runtime environment.
 
-<p><em>Note</em>: This is not implemented (currently).  The problem is that
+          <p><em>Note</em>: This is not implemented (currently).  The problem is that
 timezone names are not unique.  If a fixed timezone is assumed for a
 given string (say <code>EST</code> meaning US East Coast time), then uses for
 countries other than the USA will fail.  So far we have found no good
 solution to this.
 
-<li>If only the weekday is specified the selected day depends on the current
+          <li>If only the weekday is specified the selected day depends on the current
 date.  If the current weekday is greater or equal to the <code>tm_wday</code>
 value the current week's day is chosen, otherwise the day next week is chosen.
 
-<li>A similar heuristic is used when only the month is given and not the
+          <li>A similar heuristic is used when only the month is given and not the
 year.  If the month is greater than or equal to the current month, then
 the current year is used.  Otherwise it wraps to next year.  The first
 day of the month is assumed if one is not explicitly specified.
 
-<li>The current hour, minute, and second are used if the appropriate value is
+          <li>The current hour, minute, and second are used if the appropriate value is
 not set through the format.
 
-<li>If no date is given tomorrow's date is used if the time is
+          <li>If no date is given tomorrow's date is used if the time is
 smaller than the current time.  Otherwise today's date is taken. 
 </ul>
 
-<p>It should be noted that the format in the template file need not only
+     <p>It should be noted that the format in the template file need not only
 contain format elements.  The following is a list of possible format
 strings (taken from the Unix standard):
 
-<br><pre>%m
-%A %B %d, %Y %H:%M:%S
-%A
-%B
-%m/%d/%y %I %p
-%d,%m,%Y %H:%M
-at %A the %dst of %B in %Y
-run job at %I %p,%B %dnd
-%A den %d. %B %Y %H.%M Uhr
-</pre>
+     <pre class="smallexample">          %m
+          %A %B %d, %Y %H:%M:%S
+          %A
+          %B
+          %m/%d/%y %I %p
+          %d,%m,%Y %H:%M
+          at %A the %dst of %B in %Y
+          run job at %I %p,%B %dnd
+          %A den %d. %B %Y %H.%M Uhr
+          </pre>
 
-<p>As you can see, the template list can contain very specific strings like
+     <p>As you can see, the template list can contain very specific strings like
 <code>run job at %I %p,%B %dnd</code>.  Using the above list of templates and
 assuming the current time is Mon Sep 22 12:19:47 EDT 1986 we can obtain the
 following results for the given input.
 
-<p><table><tr align="left"><td valign="top">Input </td><td valign="top">Match </td><td valign="top">Result
+     <p><table><tr align="left"><td valign="top">Input </td><td valign="top">Match </td><td valign="top">Result
 <br></td></tr><tr align="left"><td valign="top">Mon </td><td valign="top">%a </td><td valign="top">Mon Sep 22 12:19:47 EDT 1986
 <br></td></tr><tr align="left"><td valign="top">Sun </td><td valign="top">%a </td><td valign="top">Sun Sep 28 12:19:47 EDT 1986
 <br></td></tr><tr align="left"><td valign="top">Fri </td><td valign="top">%a </td><td valign="top">Fri Sep 26 12:19:47 EDT 1986
@@ -152,18 +162,18 @@ following results for the given input.
 <br></td></tr><tr align="left"><td valign="top">Feb 10:30 </td><td valign="top">%b %H:%S </td><td valign="top">Sun Feb 1 10:00:30 EST 1987
 <br></td></tr><tr align="left"><td valign="top">10:30 </td><td valign="top">%H:%M </td><td valign="top">Tue Sep 23 10:30:00 EDT 1986
 <br></td></tr><tr align="left"><td valign="top">13:30 </td><td valign="top">%H:%M </td><td valign="top">Mon Sep 22 13:30:00 EDT 1986
-<br></td></tr></table>
+     <br></td></tr></table>
 
-<p>The return value of the function is a pointer to a static variable of
+     <p>The return value of the function is a pointer to a static variable of
 type <code>struct&nbsp;tm</code>, or a null pointer if an error occurred.  The
 result is only valid until the next <code>getdate</code> call, making this
 function unusable in multi-threaded applications.
 
-<p>The <code>errno</code> variable is <em>not</em> changed.  Error conditions are
+     <p>The <code>errno</code> variable is <em>not</em> changed.  Error conditions are
 stored in the global variable <code>getdate_err</code>.  See the
 description above for a list of the possible error values.
 
-<p><em>Warning:</em> The <code>getdate</code> function should <em>never</em> be
+     <p><em>Warning:</em> The <code>getdate</code> function should <em>never</em> be
 used in SUID-programs.  The reason is obvious: using the
 <code>DATEMSK</code> environment variable you can get the function to open
 any arbitrary file and chances are high that with some bogus input
@@ -174,8 +184,8 @@ any arbitrary file and chances are high that with some bogus input
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getdate_r</b><i> (const char *<var>string</var>, struct tm *<var>tp</var>)
-</i></td>
+<td align="left">int <b>getdate_r</b><i> </i>(<i>const char *</i><var>string</var><i>, struct tm *</i><var>tp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -187,17 +197,17 @@ to signal an error, but instead returns an error code.  The same error
 codes as described in the <code>getdate_err</code> documentation above are
 used, with 0 meaning success.
 
-<p>Moreover, <code>getdate_r</code> stores the broken-down time in the variable
+     <p>Moreover, <code>getdate_r</code> stores the broken-down time in the variable
 of type <code>struct tm</code> pointed to by the second argument, rather than
 in a static variable.
 
-<p>This function is not defined in the Unix standard.  Nevertheless it is
+     <p>This function is not defined in the Unix standard.  Nevertheless it is
 available on some other Unix systems as well.
 
-<p>The warning against using <code>getdate</code> in SUID-programs applies to
+     <p>The warning against using <code>getdate</code> in SUID-programs applies to
 <code>getdate_r</code> as well. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

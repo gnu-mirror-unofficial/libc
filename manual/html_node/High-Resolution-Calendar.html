@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="High-Resolution%20Calendar">High-Resolution Calendar</a>,
-Next:<a rel=next accesskey=n href="Broken-down-Time.html#Broken-down%20Time">Broken-down Time</a>,
-Previous:<a rel=previous accesskey=p href="Simple-Calendar-Time.html#Simple%20Calendar%20Time">Simple Calendar Time</a>,
-Up:<a rel=up accesskey=u href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
+Node:&nbsp;<a name="High-Resolution%20Calendar">High-Resolution Calendar</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Broken-down-Time.html#Broken-down%20Time">Broken-down Time</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Simple-Calendar-Time.html#Simple%20Calendar%20Time">Simple Calendar Time</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
 <hr><br>
+</div>
 
-<h4>High-Resolution Calendar</h4>
+<h3 class="subsection">High-Resolution Calendar</h4>
 
 <p>The <code>time_t</code> data type used to represent simple times has a
 resolution of only one second.  Some applications need more precision.
 
-<p>So, the GNU C library also contains functions which are capable of
+   <p>So, the GNU C library also contains functions which are capable of
 representing calendar times to a higher resolution than one second.  The
 functions and the associated data types described in this section are
 declared in <code>sys/time.h</code>.
@@ -28,7 +38,7 @@ declared in <code>sys/time.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>struct timezone</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -37,15 +47,15 @@ declared in <code>sys/time.h</code>.
 The <code>struct timezone</code> structure is used to hold minimal information
 about the local time zone.  It has the following members:
 
-<dl>
+          <dl>
 <dt><code>int tz_minuteswest</code>
-<dd>This is the number of minutes west of UTC.
+          <dd>This is the number of minutes west of UTC.
 
-<br><dt><code>int tz_dsttime</code>
-<dd>If nonzero, Daylight Saving Time applies during some part of the year. 
+          <br><dt><code>int tz_dsttime</code>
+          <dd>If nonzero, Daylight Saving Time applies during some part of the year. 
 </dl>
 
-<p>The <code>struct timezone</code> type is obsolete and should never be used. 
+     <p>The <code>struct timezone</code> type is obsolete and should never be used. 
 Instead, use the facilities described in <a href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functions</a>. 
 </td></tr>
 </table>
@@ -53,8 +63,8 @@ Instead, use the facilities described in <a href="Time-Zone-Functions.html#Time%
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>gettimeofday</b><i> (struct timeval *<var>tp</var>, struct timezone *<var>tzp</var>)
-</i></td>
+<td align="left">int <b>gettimeofday</b><i> </i>(<i>struct timeval *</i><var>tp</var><i>, struct timezone *</i><var>tzp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -63,29 +73,29 @@ Instead, use the facilities described in <a href="Time-Zone-Functions.html#Time%
 The <code>gettimeofday</code> function returns the current calendar time as
 the elapsed time since the epoch in the <code>struct timeval</code> structure
 indicated by <var>tp</var>.  (see <a href="Elapsed-Time.html#Elapsed%20Time">Elapsed Time</a> for a description of
-<code>struct timespec</code>).  Information about the time zone is returned in
+<code>struct timeval</code>).  Information about the time zone is returned in
 the structure pointed at <var>tzp</var>.  If the <var>tzp</var> argument is a null
 pointer, time zone information is ignored.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error condition is defined for this function:
 
-<dl>
+          <dl>
 <dt><code>ENOSYS</code>
-<dd>The operating system does not support getting time zone information, and
+          <dd>The operating system does not support getting time zone information, and
 <var>tzp</var> is not a null pointer.  The GNU operating system does not
 support using <code>struct&nbsp;timezone</code> to represent time zone
 information; that is an obsolete feature of 4.3 BSD. 
 Instead, use the facilities described in <a href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functions</a>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>settimeofday</b><i> (const struct timeval *<var>tp</var>, const struct timezone *<var>tzp</var>)
-</i></td>
+<td align="left">int <b>settimeofday</b><i> </i>(<i>const struct timeval *</i><var>tp</var><i>, const struct timezone *</i><var>tzp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -97,43 +107,43 @@ the calendar time is represented as the elapsed time since the epoch.
 As for <code>gettimeofday</code>, time zone information is ignored if
 <var>tzp</var> is a null pointer.
 
-<p>You must be a privileged user in order to use <code>settimeofday</code>.
+     <p>You must be a privileged user in order to use <code>settimeofday</code>.
 
-<p>Some kernels automatically set the system clock from some source such as
+     <p>Some kernels automatically set the system clock from some source such as
 a hardware clock when they start up.  Others, including Linux, place the
 system clock in an "invalid" state (in which attempts to read the clock
 fail).  A call of <code>stime</code> removes the system clock from an invalid
 state, and system startup scripts typically run a program that calls
 <code>stime</code>.
 
-<p><code>settimeofday</code> causes a sudden jump forwards or backwards, which
+     <p><code>settimeofday</code> causes a sudden jump forwards or backwards, which
 can cause a variety of problems in a system.  Use <code>adjtime</code> (below)
 to make a smooth transition from one time to another by temporarily
 speeding up or slowing down the clock.
 
-<p>With a Linux kernel, <code>adjtimex</code> does the same thing and can also
+     <p>With a Linux kernel, <code>adjtimex</code> does the same thing and can also
 make permanent changes to the speed of the system clock so it doesn't
 need to be corrected as often.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EPERM</code>
-<dd>This process cannot set the clock because it is not privileged.
+          <dd>This process cannot set the clock because it is not privileged.
 
-<br><dt><code>ENOSYS</code>
-<dd>The operating system does not support setting time zone information, and
+          <br><dt><code>ENOSYS</code>
+          <dd>The operating system does not support setting time zone information, and
 <var>tzp</var> is not a null pointer. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>adjtime</b><i> (const struct timeval *<var>delta</var>, struct timeval *<var>olddelta</var>)
-</i></td>
+<td align="left">int <b>adjtime</b><i> </i>(<i>const struct timeval *</i><var>delta</var><i>, struct timeval *</i><var>olddelta</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -144,54 +154,54 @@ a gradual adjustment.  This ensures that the calendar time reported by
 the system clock is always monotonically increasing, which might not
 happen if you simply set the clock.
 
-<p>The <var>delta</var> argument specifies a relative adjustment to be made to
+     <p>The <var>delta</var> argument specifies a relative adjustment to be made to
 the clock time.  If negative, the system clock is slowed down for a
 while until it has lost this much elapsed time.  If positive, the system
 clock is speeded up for a while.
 
-<p>If the <var>olddelta</var> argument is not a null pointer, the <code>adjtime</code>
+     <p>If the <var>olddelta</var> argument is not a null pointer, the <code>adjtime</code>
 function returns information about any previous time adjustment that
 has not yet completed.
 
-<p>This function is typically used to synchronize the clocks of computers
+     <p>This function is typically used to synchronize the clocks of computers
 in a local network.  You must be a privileged user to use it.
 
-<p>With a Linux kernel, you can use the <code>adjtimex</code> function to
+     <p>With a Linux kernel, you can use the <code>adjtimex</code> function to
 permanently change the clock speed.
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error condition is defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EPERM</code>
-<dd>You do not have privilege to set the time. 
+          <dd>You do not have privilege to set the time. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p><strong>Portability Note:</strong>  The <code>gettimeofday</code>, <code>settimeofday</code>,
+   <p><strong>Portability Note:</strong>  The <code>gettimeofday</code>, <code>settimeofday</code>,
 and <code>adjtime</code> functions are derived from BSD.
 
-<p>Symbols for the following function are declared in <code>sys/timex.h</code>.
+   <p>Symbols for the following function are declared in <code>sys/timex.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>adjtimex</b><i> (struct timex *<var>timex</var>)
-</i></td>
+<td align="left">int <b>adjtimex</b><i> </i>(<i>struct timex *</i><var>timex</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>adjtimex</code> is functionally identical to <code>ntp_adjtime</code>. 
+     <p><code>adjtimex</code> is functionally identical to <code>ntp_adjtime</code>. 
 See <a href="High-Accuracy-Clock.html#High%20Accuracy%20Clock">High Accuracy Clock</a>.
 
-<p>This function is present only with a Linux kernel.
+     <p>This function is present only with a Linux kernel.
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

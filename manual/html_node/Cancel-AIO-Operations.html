@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Cancel%20AIO%20Operations">Cancel AIO Operations</a>,
-Next:<a rel=next accesskey=n href="Configuration-of-AIO.html#Configuration%20of%20AIO">Configuration of AIO</a>,
-Previous:<a rel=previous accesskey=p href="Synchronizing-AIO-Operations.html#Synchronizing%20AIO%20Operations">Synchronizing AIO Operations</a>,
-Up:<a rel=up accesskey=u href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>
+Node:&nbsp;<a name="Cancel%20AIO%20Operations">Cancel AIO Operations</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Configuration-of-AIO.html#Configuration%20of%20AIO">Configuration of AIO</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Synchronizing-AIO-Operations.html#Synchronizing%20AIO%20Operations">Synchronizing AIO Operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>
 <hr><br>
+</div>
 
-<h4>Cancellation of AIO Operations</h4>
+<h3 class="subsection">Cancellation of AIO Operations</h4>
 
 <p>When one or more requests are asynchronously processed, it might be
 useful in some situations to cancel a selected operation, e.g., if it
@@ -30,8 +40,8 @@ or not.  Therefore using this function is merely a hint.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_cancel</b><i> (int <var>fildes</var>, struct aiocb *<var>aiocbp</var>)
-</i></td>
+<td align="left">int <b>aio_cancel</b><i> </i>(<i>int </i><var>fildes</var><i>, struct aiocb *</i><var>aiocbp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -44,19 +54,19 @@ the file descriptor <var>fildes</var> (i.e., whose <code>aio_fildes</code> membe
 is <var>fildes</var>).  If <var>aiocbp</var> is not <code>NULL</code>, <code>aio_cancel</code>
 attempts to cancel the specific request pointed to by <var>aiocbp</var>.
 
-<p>For requests which were successfully canceled, the normal notification
+     <p>For requests which were successfully canceled, the normal notification
 about the termination of the request should take place.  I.e., depending
 on the <code>struct sigevent</code> object which controls this, nothing
 happens, a signal is sent or a thread is started.  If the request cannot
 be canceled, it terminates the usual way after performing the operation.
 
-<p>After a request is successfully canceled, a call to <code>aio_error</code> with
+     <p>After a request is successfully canceled, a call to <code>aio_error</code> with
 a reference to this request as the parameter will return
 <code>ECANCELED</code> and a call to <code>aio_return</code> will return -1. 
 If the request wasn't canceled and is still running the error status is
 still <code>EINPROGRESS</code>.
 
-<p>The return value of the function is <code>AIO_CANCELED</code> if there were
+     <p>The return value of the function is <code>AIO_CANCELED</code> if there were
 requests which haven't terminated and which were successfully canceled. 
 If there is one or more requests left which couldn't be canceled, the
 return value is <code>AIO_NOTCANCELED</code>.  In this case <code>aio_error</code>
@@ -65,18 +75,18 @@ must be used to find out which of the, perhaps multiple, requests (in
 requests already terminated at the time <code>aio_cancel</code> is called the
 return value is <code>AIO_ALLDONE</code>.
 
-<p>If an error occurred during the execution of <code>aio_cancel</code> the
+     <p>If an error occurred during the execution of <code>aio_cancel</code> the
 function returns -1 and sets <code>errno</code> to one of the following
 values.
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The file descriptor <var>fildes</var> is not valid. 
+          <dd>The file descriptor <var>fildes</var> is not valid. 
 <br><dt><code>ENOSYS</code>
-<dd><code>aio_cancel</code> is not implemented. 
+          <dd><code>aio_cancel</code> is not implemented. 
 </dl>
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code>, this
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code>, this
 function is in fact <code>aio_cancel64</code> since the LFS interface
 transparently replaces the normal implementation. 
 </td></tr>
@@ -85,8 +95,8 @@ transparently replaces the normal implementation.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_cancel64</b><i> (int <var>fildes</var>, struct aiocb64 *<var>aiocbp</var>)
-</i></td>
+<td align="left">int <b>aio_cancel64</b><i> </i>(<i>int </i><var>fildes</var><i>, struct aiocb64 *</i><var>aiocbp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -96,12 +106,12 @@ This function is similar to <code>aio_cancel</code> with the only difference
 that the argument is a reference to a variable of type <code>struct
 aiocb64</code>.
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code>, this
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code>, this
 function is available under the name <code>aio_cancel</code> and so
 transparently replaces the interface for small files on 32 bit
 machines. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

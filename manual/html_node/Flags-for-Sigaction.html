@@ -2,44 +2,54 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Flags%20for%20Sigaction">Flags for Sigaction</a>,
-Next:<a rel=next accesskey=n href="Initial-Signal-Actions.html#Initial%20Signal%20Actions">Initial Signal Actions</a>,
-Previous:<a rel=previous accesskey=p href="Sigaction-Function-Example.html#Sigaction%20Function%20Example">Sigaction Function Example</a>,
-Up:<a rel=up accesskey=u href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
+Node:&nbsp;<a name="Flags%20for%20Sigaction">Flags for Sigaction</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Initial-Signal-Actions.html#Initial%20Signal%20Actions">Initial Signal Actions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Sigaction-Function-Example.html#Sigaction%20Function%20Example">Sigaction Function Example</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
 <hr><br>
+</div>
 
-<h4>Flags for <code>sigaction</code></h4>
+<h3 class="subsection">Flags for <code>sigaction</code></h4>
 
 <p>The <code>sa_flags</code> member of the <code>sigaction</code> structure is a
 catch-all for special features.  Most of the time, <code>SA_RESTART</code> is
 a good value to use for this field.
 
-<p>The value of <code>sa_flags</code> is interpreted as a bit mask.  Thus, you
+   <p>The value of <code>sa_flags</code> is interpreted as a bit mask.  Thus, you
 should choose the flags you want to set, <small>OR</small> those flags together,
 and store the result in the <code>sa_flags</code> member of your
 <code>sigaction</code> structure.
 
-<p>Each signal number has its own set of flags.  Each call to
+   <p>Each signal number has its own set of flags.  Each call to
 <code>sigaction</code> affects one particular signal number, and the flags
 that you specify apply only to that particular signal.
 
-<p>In the GNU C library, establishing a handler with <code>signal</code> sets all
+   <p>In the GNU C library, establishing a handler with <code>signal</code> sets all
 the flags to zero except for <code>SA_RESTART</code>, whose value depends on
 the settings you have made with <code>siginterrupt</code>.  See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>, to see what this is about.
 
-<p>These macros are defined in the header file <code>signal.h</code>.
+   <p>These macros are defined in the header file <code>signal.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>SA_NOCLDSTOP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -50,7 +60,7 @@ flag is set, the system delivers the signal for a terminated child
 process but not for one that is stopped.  By default, <code>SIGCHLD</code> is
 delivered for both terminated children and stopped children.
 
-<p>Setting this flag for a signal other than <code>SIGCHLD</code> has no effect. 
+     <p>Setting this flag for a signal other than <code>SIGCHLD</code> has no effect. 
 </td></tr>
 </table>
 
@@ -58,7 +68,7 @@ delivered for both terminated children and stopped children.
 <table width="100%">
 <tr>
 <td align="left">int <b>SA_ONSTACK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -75,7 +85,7 @@ the system terminates the program with <code>SIGILL</code>.
 <table width="100%">
 <tr>
 <td align="left">int <b>SA_RESTART</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -87,7 +97,7 @@ and the signal handler returns normally.  There are two alternatives:
 the library function can resume, or it can return failure with error
 code <code>EINTR</code>.
 
-<p>The choice is controlled by the <code>SA_RESTART</code> flag for the
+     <p>The choice is controlled by the <code>SA_RESTART</code> flag for the
 particular kind of signal that was delivered.  If the flag is set,
 returning from a handler resumes the library function.  If the flag is
 clear, returning from a handler makes the function fail. 
@@ -95,5 +105,5 @@ See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted P
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Initial%20Signal%20Actions">Initial Signal Actions</a>,
-Previous:<a rel=previous accesskey=p href="Flags-for-Sigaction.html#Flags%20for%20Sigaction">Flags for Sigaction</a>,
-Up:<a rel=up accesskey=u href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
+Node:&nbsp;<a name="Initial%20Signal%20Actions">Initial Signal Actions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-Sigaction.html#Flags%20for%20Sigaction">Flags for Sigaction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
 <hr><br>
+</div>
 
-<h4>Initial Signal Actions</h4>
+<h3 class="subsection">Initial Signal Actions</h4>
 
 <p>When a new process is created (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>), it inherits
 handling of signals from its parent process.  However, when you load a
@@ -24,27 +34,27 @@ that program, and aren't even present in the address space of the new
 program image.)  Of course, the new program can establish its own
 handlers.
 
-<p>When a program is run by a shell, the shell normally sets the initial
+   <p>When a program is run by a shell, the shell normally sets the initial
 actions for the child process to <code>SIG_DFL</code> or <code>SIG_IGN</code>, as
 appropriate.  It's a good idea to check to make sure that the shell has
 not set up an initial action of <code>SIG_IGN</code> before you establish your
 own signal handlers.
 
-<p>Here is an example of how to establish a handler for <code>SIGHUP</code>, but
+   <p>Here is an example of how to establish a handler for <code>SIGHUP</code>, but
 not if <code>SIGHUP</code> is currently ignored:
 
-<br><pre><small>...</small>
-struct sigaction temp;
+<pre class="smallexample">     ...
+     struct sigaction temp;
+     
+     sigaction (SIGHUP, NULL, &amp;temp);
+     
+     if (temp.sa_handler != SIG_IGN)
+       {
+         temp.sa_handler = handle_sighup;
+         sigemptyset (&amp;temp.sa_mask);
+         sigaction (SIGHUP, &amp;temp, NULL);
+       }
+     </pre>
 
-sigaction (SIGHUP, NULL, &amp;temp);
-
-if (temp.sa_handler != SIG_IGN)
-  {
-    temp.sa_handler = handle_sighup;
-    sigemptyset (&amp;temp.sa_mask);
-    sigaction (SIGHUP, &amp;temp, NULL);
-  }
-</pre>
-
-</body></html>
+   </body></html>
 

@@ -2,39 +2,49 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="NSS%20Module%20Names">NSS Module Names</a>,
-Next:<a rel=next accesskey=n href="NSS-Modules-Interface.html#NSS%20Modules%20Interface">NSS Modules Interface</a>,
-Previous:<a rel=previous accesskey=p href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>,
-Up:<a rel=up accesskey=u href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>
+Node:&nbsp;<a name="NSS%20Module%20Names">NSS Module Names</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="NSS-Modules-Interface.html#NSS%20Modules%20Interface">NSS Modules Interface</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>
 <hr><br>
+</div>
 
-<h4>The Naming Scheme of the NSS Modules</h4>
+<h3 class="subsection">The Naming Scheme of the NSS Modules</h4>
 
 <p>The name of each function consist of various parts:
 
-<blockquote>
+   <blockquote>
        _nss_<var>service</var>_<var>function</var>
 </blockquote>
 
-<p><var>service</var> of course corresponds to the name of the module this
-function is found in.<a rel=footnote href="#fn-1"><sup>1</sup></a>  The <var>function</var> part is derived
+   <p><var>service</var> of course corresponds to the name of the module this
+function is found in.<a rel="footnote" href="#fn-1"><sup>1</sup></a>  The <var>function</var> part is derived
 from the interface function in the C library itself.  If the user calls
 the function <code>gethostbyname</code> and the service used is <code>files</code>
 the function
 
-<br><pre>       _nss_files_gethostbyname_r
-</pre>
+<pre class="smallexample">            _nss_files_gethostbyname_r
+     </pre>
 
 <p>in the module
 
-<br><pre>       libnss_files.so.2
-</pre>
+<pre class="smallexample">            libnss_files.so.2
+     </pre>
 
 <p>is used.  You see, what is explained above in not the whole truth.  In
 fact the NSS modules only contain reentrant versions of the lookup
@@ -46,36 +56,38 @@ interface is (nearly) the same.  For the non-reentrant version The
 library keeps internal buffers which are used to replace the user
 supplied buffer.
 
-<p>I.e., the reentrant functions <em>can</em> have counterparts.  No service
+   <p>I.e., the reentrant functions <em>can</em> have counterparts.  No service
 module is forced to have functions for all databases and all kinds to
 access them.  If a function is not available it is simply treated as if
 the function would return <code>unavail</code>
 (see <a href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>).
 
-<p>The file name <code>libnss_files.so.2</code> would be on a Solaris&nbsp;2
+   <p>The file name <code>libnss_files.so.2</code> would be on a Solaris&nbsp;2
 system <code>nss_files.so.2</code>.  This is the difference mentioned above. 
 Sun's NSS modules are usable as modules which get indirectly loaded
 only.
 
-<p>The NSS modules in the GNU C Library are prepared to be used as normal
+   <p>The NSS modules in the GNU C Library are prepared to be used as normal
 libraries themselves.  This is <em>not</em> true at the moment, though. 
 However,  the organization of the name space in the modules does not make it
 impossible like it is for Solaris.  Now you can see why the modules are
-still libraries.<a rel=footnote href="#fn-2"><sup>2</sup></a>
+still libraries.<a rel="footnote" href="#fn-2"><sup>2</sup></a>
 
-<hr><h4>Footnotes</h4>
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4>
 <ol type="1">
 <li><a name="fn-1"></a>
 <p>Now you might ask why this information is
 duplicated.  The answer is that we want to make it possible to link
 directly with these shared objects.</p>
 
-<li><a name="fn-2"></a>
+   <li><a name="fn-2"></a>
 <p>There is a second explanation: we were too
 lazy to change the Makefiles to allow the generation of shared objects
 not starting with <code>lib</code> but don't tell this to anybody.</p>
 
-</ol><hr>
+   </ol><hr></div>
 
-</body></html>
+   </body></html>
 

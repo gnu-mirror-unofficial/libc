@@ -2,77 +2,87 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Sign%20of%20Money%20Amount">Sign of Money Amount</a>,
-Previous:<a rel=previous accesskey=p href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>,
-Up:<a rel=up accesskey=u href="The-Lame-Way-to-Locale-Data.html#The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>
+Node:&nbsp;<a name="Sign%20of%20Money%20Amount">Sign of Money Amount</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="The-Lame-Way-to-Locale-Data.html#The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>
 <hr><br>
+</div>
 
-<h5>Printing the Sign of a Monetary Amount</h5>
+<h3 class="subsubsection">Printing the Sign of a Monetary Amount</h5>
 
 <p>These members of the <code>struct lconv</code> structure specify how to print
 the sign (if any) of a monetary value.
 
-<dl>
+     <dl>
 <dt><code>char *positive_sign</code>
-<dt><code>char *negative_sign</code>
-<dd>These are strings used to indicate positive (or zero) and negative
+     <dd><dt><code>char *negative_sign</code>
+     <dd>These are strings used to indicate positive (or zero) and negative
 monetary quantities, respectively.
 
-<p>In the standard <code>C</code> locale, both of these members have a value of
+     <p>In the standard <code>C</code> locale, both of these members have a value of
 <code>""</code> (the empty string), meaning "unspecified".
 
-<p>The ISO standard doesn't say what to do when you find this value; we
+     <p>The ISO standard doesn't say what to do when you find this value; we
 recommend printing <code>positive_sign</code> as you find it, even if it is
 empty.  For a negative value, print <code>negative_sign</code> as you find it
 unless both it and <code>positive_sign</code> are empty, in which case print
 <code>-</code> instead.  (Failing to indicate the sign at all seems rather
 unreasonable.)
 
-<br><dt><code>char p_sign_posn</code>
-<dt><code>char n_sign_posn</code>
-<dt><code>char int_p_sign_posn</code>
-<dt><code>char int_n_sign_posn</code>
-<dd>These members are small integers that indicate how to
+     <br><dt><code>char p_sign_posn</code>
+     <dd><dt><code>char n_sign_posn</code>
+     <dd><dt><code>char int_p_sign_posn</code>
+     <dd><dt><code>char int_n_sign_posn</code>
+     <dd>These members are small integers that indicate how to
 position the sign for nonnegative and negative monetary quantities,
 respectively.  (The string used by the sign is what was specified with
 <code>positive_sign</code> or <code>negative_sign</code>.)  The possible values are
 as follows:
 
-<dl>
+          <dl>
 <dt><code>0</code>
-<dd>The currency symbol and quantity should be surrounded by parentheses.
+          <dd>The currency symbol and quantity should be surrounded by parentheses.
 
-<br><dt><code>1</code>
-<dd>Print the sign string before the quantity and currency symbol.
+          <br><dt><code>1</code>
+          <dd>Print the sign string before the quantity and currency symbol.
 
-<br><dt><code>2</code>
-<dd>Print the sign string after the quantity and currency symbol.
+          <br><dt><code>2</code>
+          <dd>Print the sign string after the quantity and currency symbol.
 
-<br><dt><code>3</code>
-<dd>Print the sign string right before the currency symbol.
+          <br><dt><code>3</code>
+          <dd>Print the sign string right before the currency symbol.
 
-<br><dt><code>4</code>
-<dd>Print the sign string right after the currency symbol.
+          <br><dt><code>4</code>
+          <dd>Print the sign string right after the currency symbol.
 
-<br><dt><code>CHAR_MAX</code>
-<dd>"Unspecified".  Both members have this value in the standard
+          <br><dt><code>CHAR_MAX</code>
+          <dd>"Unspecified".  Both members have this value in the standard
 <code>C</code> locale. 
 </dl>
 
-<p>The ISO standard doesn't say what you should do when the value is
+     <p>The ISO standard doesn't say what you should do when the value is
 <code>CHAR_MAX</code>.  We recommend you print the sign after the currency
 symbol.
 
-<p>The members with the <code>int_</code> prefix apply to the
+     <p>The members with the <code>int_</code> prefix apply to the
 <code>int_curr_symbol</code> while the other two apply to
 <code>currency_symbol</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

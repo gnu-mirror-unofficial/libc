@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Conversion%20Specifier%20Options">Conversion Specifier Options</a>,
-Next:<a rel=next accesskey=n href="Defining-the-Output-Handler.html#Defining%20the%20Output%20Handler">Defining the Output Handler</a>,
-Previous:<a rel=previous accesskey=p href="Registering-New-Conversions.html#Registering%20New%20Conversions">Registering New Conversions</a>,
-Up:<a rel=up accesskey=u href="Customizing-Printf.html#Customizing%20Printf">Customizing Printf</a>
+Node:&nbsp;<a name="Conversion%20Specifier%20Options">Conversion Specifier Options</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Defining-the-Output-Handler.html#Defining%20the%20Output%20Handler">Defining the Output Handler</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Registering-New-Conversions.html#Registering%20New%20Conversions">Registering New Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Customizing-Printf.html#Customizing%20Printf">Customizing Printf</a>
 <hr><br>
+</div>
 
-<h4>Conversion Specifier Options</h4>
+<h3 class="subsection">Conversion Specifier Options</h4>
 
 <p>If you define a meaning for <code>%A</code>, what if the template contains
 <code>%+23A</code> or <code>%-#A</code>?  To implement a sensible meaning for these,
 the handler when called needs to be able to get the options specified in
 the template.
 
-<p>Both the <var>handler-function</var> and <var>arginfo-function</var> accept an
+   <p>Both the <var>handler-function</var> and <var>arginfo-function</var> accept an
 argument that points to a <code>struct printf_info</code>, which contains
 information about the options appearing in an instance of the conversion
 specifier.  This data type is declared in the header file
@@ -31,7 +41,7 @@ specifier.  This data type is declared in the header file
 <table width="100%">
 <tr>
 <td align="left"><b>struct printf_info</b><i>
-</i></td>
+     </i></td>
 <td align="right">Type</td>
 </tr>
 </table>
@@ -42,75 +52,75 @@ in an instance of a conversion specifier in a <code>printf</code> template
 string to the handler and arginfo functions for that specifier.  It
 contains the following members:
 
-<dl>
+          <dl>
 <dt><code>int prec</code>
-<dd>This is the precision specified.  The value is <code>-1</code> if no precision
+          <dd>This is the precision specified.  The value is <code>-1</code> if no precision
 was specified.  If the precision was given as <code>*</code>, the
 <code>printf_info</code> structure passed to the handler function contains the
 actual value retrieved from the argument list.  But the structure passed
 to the arginfo function contains a value of <code>INT_MIN</code>, since the
 actual value is not known.
 
-<br><dt><code>int width</code>
-<dd>This is the minimum field width specified.  The value is <code>0</code> if no
+          <br><dt><code>int width</code>
+          <dd>This is the minimum field width specified.  The value is <code>0</code> if no
 width was specified.  If the field width was given as <code>*</code>, the
 <code>printf_info</code> structure passed to the handler function contains the
 actual value retrieved from the argument list.  But the structure passed
 to the arginfo function contains a value of <code>INT_MIN</code>, since the
 actual value is not known.
 
-<br><dt><code>wchar_t spec</code>
-<dd>This is the conversion specifier character specified.  It's stored in
+          <br><dt><code>wchar_t spec</code>
+          <dd>This is the conversion specifier character specified.  It's stored in
 the structure so that you can register the same handler function for
 multiple characters, but still have a way to tell them apart when the
 handler function is called.
 
-<br><dt><code>unsigned int is_long_double</code>
-<dd>This is a boolean that is true if the <code>L</code>, <code>ll</code>, or <code>q</code>
+          <br><dt><code>unsigned int is_long_double</code>
+          <dd>This is a boolean that is true if the <code>L</code>, <code>ll</code>, or <code>q</code>
 type modifier was specified.  For integer conversions, this indicates
 <code>long long int</code>, as opposed to <code>long double</code> for floating
 point conversions.
 
-<br><dt><code>unsigned int is_char</code>
-<dd>This is a boolean that is true if the <code>hh</code> type modifier was specified.
+          <br><dt><code>unsigned int is_char</code>
+          <dd>This is a boolean that is true if the <code>hh</code> type modifier was specified.
 
-<br><dt><code>unsigned int is_short</code>
-<dd>This is a boolean that is true if the <code>h</code> type modifier was specified.
+          <br><dt><code>unsigned int is_short</code>
+          <dd>This is a boolean that is true if the <code>h</code> type modifier was specified.
 
-<br><dt><code>unsigned int is_long</code>
-<dd>This is a boolean that is true if the <code>l</code> type modifier was specified.
+          <br><dt><code>unsigned int is_long</code>
+          <dd>This is a boolean that is true if the <code>l</code> type modifier was specified.
 
-<br><dt><code>unsigned int alt</code>
-<dd>This is a boolean that is true if the <code>#</code> flag was specified.
+          <br><dt><code>unsigned int alt</code>
+          <dd>This is a boolean that is true if the <code>#</code> flag was specified.
 
-<br><dt><code>unsigned int space</code>
-<dd>This is a boolean that is true if the <code> </code> flag was specified.
+          <br><dt><code>unsigned int space</code>
+          <dd>This is a boolean that is true if the <code> </code> flag was specified.
 
-<br><dt><code>unsigned int left</code>
-<dd>This is a boolean that is true if the <code>-</code> flag was specified.
+          <br><dt><code>unsigned int left</code>
+          <dd>This is a boolean that is true if the <code>-</code> flag was specified.
 
-<br><dt><code>unsigned int showsign</code>
-<dd>This is a boolean that is true if the <code>+</code> flag was specified.
+          <br><dt><code>unsigned int showsign</code>
+          <dd>This is a boolean that is true if the <code>+</code> flag was specified.
 
-<br><dt><code>unsigned int group</code>
-<dd>This is a boolean that is true if the <code>'</code> flag was specified.
+          <br><dt><code>unsigned int group</code>
+          <dd>This is a boolean that is true if the <code>'</code> flag was specified.
 
-<br><dt><code>unsigned int extra</code>
-<dd>This flag has a special meaning depending on the context.  It could
+          <br><dt><code>unsigned int extra</code>
+          <dd>This flag has a special meaning depending on the context.  It could
 be used freely by the user-defined handlers but when called from
 the <code>printf</code> function this variable always contains the value
 <code>0</code>.
 
-<br><dt><code>unsigned int wide</code>
-<dd>This flag is set if the stream is wide oriented.
+          <br><dt><code>unsigned int wide</code>
+          <dd>This flag is set if the stream is wide oriented.
 
-<br><dt><code>wchar_t pad</code>
-<dd>This is the character to use for padding the output to the minimum field
+          <br><dt><code>wchar_t pad</code>
+          <dd>This is the character to use for padding the output to the minimum field
 width.  The value is <code>'0'</code> if the <code>0</code> flag was specified, and
 <code>' '</code> otherwise. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Aborting%20a%20Program">Aborting a Program</a>,
-Next:<a rel=next accesskey=n href="Termination-Internals.html#Termination%20Internals">Termination Internals</a>,
-Previous:<a rel=previous accesskey=p href="Cleanups-on-Exit.html#Cleanups%20on%20Exit">Cleanups on Exit</a>,
-Up:<a rel=up accesskey=u href="Program-Termination.html#Program%20Termination">Program Termination</a>
+Node:&nbsp;<a name="Aborting%20a%20Program">Aborting a Program</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Termination-Internals.html#Termination%20Internals">Termination Internals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Cleanups-on-Exit.html#Cleanups%20on%20Exit">Cleanups on Exit</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Program-Termination.html#Program%20Termination">Program Termination</a>
 <hr><br>
+</div>
 
-<h4>Aborting a Program</h4>
+<h3 class="subsection">Aborting a Program</h4>
 
 <p>You can abort your program using the <code>abort</code> function.  The prototype
 for this function is in <code>stdlib.h</code>.
@@ -22,8 +32,8 @@ for this function is in <code>stdlib.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>abort</b><i> (void)
-</i></td>
+<td align="left">void <b>abort</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -33,16 +43,18 @@ The <code>abort</code> function causes abnormal program termination.  This
 does not execute cleanup functions registered with <code>atexit</code> or
 <code>on_exit</code>.
 
-<p>This function actually terminates the process by raising a
+     <p>This function actually terminates the process by raising a
 <code>SIGABRT</code> signal, and your program can include a handler to
 intercept this signal; see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>. 
 </td></tr>
 </table>
 
-<p><strong>Future Change Warning:</strong> Proposed Federal censorship regulations
+   <table class="cartouche" border=1><tr><td>
+<strong>Future Change Warning:</strong> Proposed Federal censorship regulations
 may prohibit us from giving you information about the possibility of
 calling this function.  We would be required to say that this is not an
-acceptable way of terminating a program.
+acceptable way of terminating a program. 
+</td></tr></table>
 
-</body></html>
+   </body></html>
 

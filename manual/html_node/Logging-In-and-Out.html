@@ -2,31 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Logging%20In%20and%20Out">Logging In and Out</a>,
-Previous:<a rel=previous accesskey=p href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>,
-Up:<a rel=up accesskey=u href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
+Node:&nbsp;<a name="Logging%20In%20and%20Out">Logging In and Out</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
 <hr><br>
+</div>
 
-<h4>Logging In and Out</h4>
+<h3 class="subsection">Logging In and Out</h4>
 
 <p>These functions, derived from BSD, are available in the separate
 <code>libutil</code> library, and declared in <code>utmp.h</code>.
 
-<p>Note that the <code>ut_user</code> member of <code>struct utmp</code> is called
+   <p>Note that the <code>ut_user</code> member of <code>struct utmp</code> is called
 <code>ut_name</code> in BSD.  Therefore, <code>ut_name</code> is defined as an alias
 for <code>ut_user</code> in <code>utmp.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>login_tty</b><i> (int <var>filedes</var>)
-</i></td>
+<td align="left">int <b>login_tty</b><i> </i>(<i>int </i><var>filedes</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,7 +46,7 @@ This function makes <var>filedes</var> the controlling terminal of the
 current process, redirects standard input, standard output and
 standard error output to this terminal, and closes <var>filedes</var>.
 
-<p>This function returns <code>0</code> on successful completion, and <code>-1</code>
+     <p>This function returns <code>0</code> on successful completion, and <code>-1</code>
 on error. 
 </td></tr>
 </table>
@@ -44,8 +54,8 @@ on error.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>login</b><i> (const struct utmp *<var>entry</var>)
-</i></td>
+<td align="left">void <b>login</b><i> </i>(<i>const struct utmp *</i><var>entry</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,15 +70,15 @@ the terminal.  If <code>struct utmp</code> has a <code>ut_type</code> member,
 <code>ut_pid</code> member, it will be set to the process ID of the current
 process.  The remaining entries are copied from <var>entry</var>.
 
-<p>A copy of the entry is written to the user accounting log file. 
+     <p>A copy of the entry is written to the user accounting log file. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>logout</b><i> (const char *<var>ut_line</var>)
-</i></td>
+<td align="left">int <b>logout</b><i> </i>(<i>const char *</i><var>ut_line</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -77,7 +87,7 @@ process.  The remaining entries are copied from <var>entry</var>.
 This function modifies the user accounting database to indicate that the
 user on <var>ut_line</var> has logged out.
 
-<p>The <code>logout</code> function returns <code>1</code> if the entry was successfully
+     <p>The <code>logout</code> function returns <code>1</code> if the entry was successfully
 written to the database, or <code>0</code> on error. 
 </td></tr>
 </table>
@@ -85,8 +95,8 @@ written to the database, or <code>0</code> on error.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>logwtmp</b><i> (const char *<var>ut_line</var>, const char *<var>ut_name</var>, const char *<var>ut_host</var>)
-</i></td>
+<td align="left">void <b>logwtmp</b><i> </i>(<i>const char *</i><var>ut_line</var><i>, const char *</i><var>ut_name</var><i>, const char *</i><var>ut_host</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -98,9 +108,9 @@ file, for the current time and the information provided in the
 </td></tr>
 </table>
 
-<p><strong>Portability Note:</strong> The BSD <code>struct utmp</code> only has the
+   <p><strong>Portability Note:</strong> The BSD <code>struct utmp</code> only has the
 <code>ut_line</code>, <code>ut_name</code>, <code>ut_host</code> and <code>ut_time</code>
 members.  Older systems do not even have the <code>ut_host</code> member.
 
-</body></html>
+   </body></html>
 

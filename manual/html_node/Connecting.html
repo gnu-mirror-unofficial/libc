@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Connecting">Connecting</a>,
-Next:<a rel=next accesskey=n href="Listening.html#Listening">Listening</a>,
-Up:<a rel=up accesskey=u href="Connections.html#Connections">Connections</a>
+Node:&nbsp;<a name="Connecting">Connecting</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Listening.html#Listening">Listening</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Connections.html#Connections">Connections</a>
 <hr><br>
+</div>
 
-<h4>Making a Connection</h4>
+<h3 class="subsection">Making a Connection</h4>
 
 <p>In making a connection, the client makes a connection while the server
 waits for and accepts the connection.  Here we discuss what the client
@@ -23,8 +33,8 @@ program must do with the <code>connect</code> function, which is declared in
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>connect</b><i> (int <var>socket</var>, struct sockaddr *<var>addr</var>, socklen_t <var>length</var>)
-</i></td>
+<td align="left">int <b>connect</b><i> </i>(<i>int </i><var>socket</var><i>, struct sockaddr *</i><var>addr</var><i>, socklen_t </i><var>length</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -37,62 +47,62 @@ is typically on another machine, and it must be already set up as a
 server.)  See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>, for information about how these
 arguments are interpreted.
 
-<p>Normally, <code>connect</code> waits until the server responds to the request
+     <p>Normally, <code>connect</code> waits until the server responds to the request
 before it returns.  You can set nonblocking mode on the socket
 <var>socket</var> to make <code>connect</code> return immediately without waiting
 for the response.  See <a href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>, for information about
 nonblocking mode.
 
-<p>The normal return value from <code>connect</code> is <code>0</code>.  If an error
+     <p>The normal return value from <code>connect</code> is <code>0</code>.  If an error
 occurs, <code>connect</code> returns <code>-1</code>.  The following <code>errno</code>
 error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The socket <var>socket</var> is not a valid file descriptor.
+          <dd>The socket <var>socket</var> is not a valid file descriptor.
 
-<br><dt><code>ENOTSOCK</code>
-<dd>File descriptor <var>socket</var> is not a socket.
+          <br><dt><code>ENOTSOCK</code>
+          <dd>File descriptor <var>socket</var> is not a socket.
 
-<br><dt><code>EADDRNOTAVAIL</code>
-<dd>The specified address is not available on the remote machine.
+          <br><dt><code>EADDRNOTAVAIL</code>
+          <dd>The specified address is not available on the remote machine.
 
-<br><dt><code>EAFNOSUPPORT</code>
-<dd>The namespace of the <var>addr</var> is not supported by this socket.
+          <br><dt><code>EAFNOSUPPORT</code>
+          <dd>The namespace of the <var>addr</var> is not supported by this socket.
 
-<br><dt><code>EISCONN</code>
-<dd>The socket <var>socket</var> is already connected.
+          <br><dt><code>EISCONN</code>
+          <dd>The socket <var>socket</var> is already connected.
 
-<br><dt><code>ETIMEDOUT</code>
-<dd>The attempt to establish the connection timed out.
+          <br><dt><code>ETIMEDOUT</code>
+          <dd>The attempt to establish the connection timed out.
 
-<br><dt><code>ECONNREFUSED</code>
-<dd>The server has actively refused to establish the connection.
+          <br><dt><code>ECONNREFUSED</code>
+          <dd>The server has actively refused to establish the connection.
 
-<br><dt><code>ENETUNREACH</code>
-<dd>The network of the given <var>addr</var> isn't reachable from this host.
+          <br><dt><code>ENETUNREACH</code>
+          <dd>The network of the given <var>addr</var> isn't reachable from this host.
 
-<br><dt><code>EADDRINUSE</code>
-<dd>The socket address of the given <var>addr</var> is already in use.
+          <br><dt><code>EADDRINUSE</code>
+          <dd>The socket address of the given <var>addr</var> is already in use.
 
-<br><dt><code>EINPROGRESS</code>
-<dd>The socket <var>socket</var> is non-blocking and the connection could not be
+          <br><dt><code>EINPROGRESS</code>
+          <dd>The socket <var>socket</var> is non-blocking and the connection could not be
 established immediately.  You can determine when the connection is
 completely established with <code>select</code>; see <a href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>. 
 Another <code>connect</code> call on the same socket, before the connection is
 completely established, will fail with <code>EALREADY</code>.
 
-<br><dt><code>EALREADY</code>
-<dd>The socket <var>socket</var> is non-blocking and already has a pending
+          <br><dt><code>EALREADY</code>
+          <dd>The socket <var>socket</var> is non-blocking and already has a pending
 connection in progress (see <code>EINPROGRESS</code> above). 
 </dl>
 
-<p>This function is defined as a cancellation point in multi-threaded
+     <p>This function is defined as a cancellation point in multi-threaded
 programs, so one has to be prepared for this and make sure that
 allocated resources (like memory, files descriptors, semaphores or
 whatever) are freed even if the thread is canceled. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Helper%20Functions">Argp Helper Functions</a>,
-Previous:<a rel=previous accesskey=p href="Argp-Parsing-State.html#Argp%20Parsing%20State">Argp Parsing State</a>,
-Up:<a rel=up accesskey=u href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>
+Node:&nbsp;<a name="Argp%20Helper%20Functions">Argp Helper Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Parsing-State.html#Argp%20Parsing%20State">Argp Parsing State</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>
 <hr><br>
+</div>
 
-<h5>Functions For Use in Argp Parsers</h5>
+<h3 class="subsubsection">Functions For Use in Argp Parsers</h5>
 
 <p>Argp provides a number of functions available to the user of argp
 (see <a href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>), mostly for producing error messages. 
@@ -23,15 +33,15 @@ parser function.  See <a href="Argp-Parsing-State.html#Argp%20Parsing%20State">A
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>argp_usage</b><i> (const struct argp_state *<var>state</var>)
-</i></td>
+<td align="left">void <b>argp_usage</b><i> </i>(<i>const struct argp_state *</i><var>state</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 Outputs the standard usage message for the argp parser referred to by
-<var>state</var> to <code><var>state</var>-&gt;err_stream</code> and terminate the program
+<var>state</var> to <code></code><var>state</var><code>-&gt;err_stream</code> and terminate the program
 with <code>exit (argp_err_exit_status)</code>.  See <a href="Argp-Global-Variables.html#Argp%20Global%20Variables">Argp Global Variables</a>. 
 </td></tr>
 </table>
@@ -39,15 +49,15 @@ with <code>exit (argp_err_exit_status)</code>.  See <a href="Argp-Global-Variabl
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>argp_error</b><i> (const struct argp_state *<var>state</var>, const char *<var>fmt</var>, <small>...</small>)
-</i></td>
+<td align="left">void <b>argp_error</b><i> </i>(<i>const struct argp_state *</i><var>state</var><i>, const char *</i><var>fmt</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 Prints the printf format string <var>fmt</var> and following args, preceded
-by the program name and <code>:</code>, and followed by a <code>Try&nbsp;<small>...</small>&nbsp;--help</code> message, and terminates the program with an exit status of
+by the program name and <code>:</code>, and followed by a <code>Try&nbsp;...&nbsp;--help</code> message, and terminates the program with an exit status of
 <code>argp_err_exit_status</code>.  See <a href="Argp-Global-Variables.html#Argp%20Global%20Variables">Argp Global Variables</a>. 
 </td></tr>
 </table>
@@ -55,8 +65,8 @@ by the program name and <code>:</code>, and followed by a <code>Try&nbsp;<small>
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>argp_failure</b><i> (const struct argp_state *<var>state</var>, int <var>status</var>, int <var>errnum</var>, const char *<var>fmt</var>, <small>...</small>)
-</i></td>
+<td align="left">void <b>argp_failure</b><i> </i>(<i>const struct argp_state *</i><var>state</var><i>, int </i><var>status</var><i>, int </i><var>errnum</var><i>, const char *</i><var>fmt</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -68,7 +78,7 @@ prints the program name and <code>:</code>, the printf format string
 standard unix error text for <var>errnum</var> is printed.  If <var>status</var> is
 non-zero, it terminates the program with that value as its exit status.
 
-<p>The difference between <code>argp_failure</code> and <code>argp_error</code> is that
+     <p>The difference between <code>argp_failure</code> and <code>argp_error</code> is that
 <code>argp_error</code> is for <em>parsing errors</em>, whereas
 <code>argp_failure</code> is for other problems that occur during parsing but
 don't reflect a syntactic problem with the input, such as illegal values
@@ -79,8 +89,8 @@ for options, bad phase of the moon, etc.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>argp_state_help</b><i> (const struct argp_state *<var>state</var>, FILE *<var>stream</var>, unsigned <var>flags</var>)
-</i></td>
+<td align="left">void <b>argp_state_help</b><i> </i>(<i>const struct argp_state *</i><var>state</var><i>, FILE *</i><var>stream</var><i>, unsigned </i><var>flags</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -92,29 +102,29 @@ message is produced.  See <a href="Argp-Help-Flags.html#Argp%20Help%20Flags">Arg
 </td></tr>
 </table>
 
-<p>Error output is sent to <code><var>state</var>-&gt;err_stream</code>, and the program
-name printed is <code><var>state</var>-&gt;name</code>.
+   <p>Error output is sent to <code></code><var>state</var><code>-&gt;err_stream</code>, and the program
+name printed is <code></code><var>state</var><code>-&gt;name</code>.
 
-<p>The output or program termination behavior of these functions may be
+   <p>The output or program termination behavior of these functions may be
 suppressed if the <code>ARGP_NO_EXIT</code> or <code>ARGP_NO_ERRS</code> flags are
 passed to <code>argp_parse</code>.  See <a href="Argp-Flags.html#Argp%20Flags">Argp Flags</a>.
 
-<p>This behavior is useful if an argp parser is exported for use by other
+   <p>This behavior is useful if an argp parser is exported for use by other
 programs (e.g., by a library), and may be used in a context where it is
 not desirable to terminate the program in response to parsing errors.  In
 argp parsers intended for such general use, and for the case where the
 program <em>doesn't</em> terminate, calls to any of these functions should
 be followed by code that returns the appropriate error code:
 
-<br><pre>if (<var>bad argument syntax</var>)
-  {
-     argp_usage (<var>state</var>);
-     return EINVAL;
-  }
-</pre>
+<pre class="smallexample">     if (<var>bad argument syntax</var>)
+       {
+          argp_usage (<var>state</var>);
+          return EINVAL;
+       }
+     </pre>
 
 <p>If a parser function will <em>only</em> be used when <code>ARGP_NO_EXIT</code>
 is not set, the return may be omitted.
 
-</body></html>
+   </body></html>
 

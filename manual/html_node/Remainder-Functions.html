@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Remainder%20Functions">Remainder Functions</a>,
-Next:<a rel=next accesskey=n href="FP-Bit-Twiddling.html#FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
-Previous:<a rel=previous accesskey=p href="Rounding-Functions.html#Rounding%20Functions">Rounding Functions</a>,
-Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+Node:&nbsp;<a name="Remainder%20Functions">Remainder Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="FP-Bit-Twiddling.html#FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Rounding-Functions.html#Rounding%20Functions">Rounding Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
 <hr><br>
+</div>
 
-<h4>Remainder Functions</h4>
+<h3 class="subsection">Remainder Functions</h4>
 
 <p>The functions in this section compute the remainder on division of two
 floating-point numbers.  Each is a little different; pick the one that
@@ -23,8 +33,8 @@ suits your problem.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>fmod</b><i> (double <var>numerator</var>, double <var>denominator</var>)
-</i></td>
+<td align="left">double <b>fmod</b><i> </i>(<i>double </i><var>numerator</var><i>, double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -32,8 +42,8 @@ suits your problem.
 <tr><td>
 
 <tr>
-<td align="left">float <b>fmodf</b><i> (float <var>numerator</var>, float <var>denominator</var>)
-</i></td>
+<td align="left">float <b>fmodf</b><i> </i>(<i>float </i><var>numerator</var><i>, float </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -41,8 +51,8 @@ suits your problem.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>fmodl</b><i> (long double <var>numerator</var>, long double <var>denominator</var>)
-</i></td>
+<td align="left">long double <b>fmodl</b><i> </i>(<i>long double </i><var>numerator</var><i>, long double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,23 +60,23 @@ suits your problem.
 <tr><td>
 These functions compute the remainder from the division of
 <var>numerator</var> by <var>denominator</var>.  Specifically, the return value is
-<code><var>numerator</var> - <var>n</var>&nbsp;*&nbsp;<var>denominator</var></code>, where <var>n</var>
+<code></code><var>numerator</var><code> - </code><var>n</var><code>&nbsp;*&nbsp;</code><var>denominator</var><code></code>, where <var>n</var>
 is the quotient of <var>numerator</var> divided by <var>denominator</var>, rounded
 towards zero to an integer.  Thus, <code>fmod&nbsp;(6.5,&nbsp;2.3)</code> returns
 <code>1.9</code>, which is <code>6.5</code> minus <code>4.6</code>.
 
-<p>The result has the same sign as the <var>numerator</var> and has magnitude
+     <p>The result has the same sign as the <var>numerator</var> and has magnitude
 less than the magnitude of the <var>denominator</var>.
 
-<p>If <var>denominator</var> is zero, <code>fmod</code> signals a domain error. 
+     <p>If <var>denominator</var> is zero, <code>fmod</code> signals a domain error. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>drem</b><i> (double <var>numerator</var>, double <var>denominator</var>)
-</i></td>
+<td align="left">double <b>drem</b><i> </i>(<i>double </i><var>numerator</var><i>, double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -74,8 +84,8 @@ less than the magnitude of the <var>denominator</var>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>dremf</b><i> (float <var>numerator</var>, float <var>denominator</var>)
-</i></td>
+<td align="left">float <b>dremf</b><i> </i>(<i>float </i><var>numerator</var><i>, float </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -83,8 +93,8 @@ less than the magnitude of the <var>denominator</var>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>dreml</b><i> (long double <var>numerator</var>, long double <var>denominator</var>)
-</i></td>
+<td align="left">long double <b>dreml</b><i> </i>(<i>long double </i><var>numerator</var><i>, long double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -95,21 +105,21 @@ internal quotient <var>n</var> to the nearest integer instead of towards zero
 to an integer.  For example, <code>drem (6.5, 2.3)</code> returns <code>-0.4</code>,
 which is <code>6.5</code> minus <code>6.9</code>.
 
-<p>The absolute value of the result is less than or equal to half the
+     <p>The absolute value of the result is less than or equal to half the
 absolute value of the <var>denominator</var>.  The difference between
-<code>fmod (<var>numerator</var>, <var>denominator</var>)</code> and <code>drem
-(<var>numerator</var>, <var>denominator</var>)</code> is always either
+<code>fmod (</code><var>numerator</var><code>, </code><var>denominator</var><code>)</code> and <code>drem
+(</code><var>numerator</var><code>, </code><var>denominator</var><code>)</code> is always either
 <var>denominator</var>, minus <var>denominator</var>, or zero.
 
-<p>If <var>denominator</var> is zero, <code>drem</code> signals a domain error. 
+     <p>If <var>denominator</var> is zero, <code>drem</code> signals a domain error. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>remainder</b><i> (double <var>numerator</var>, double <var>denominator</var>)
-</i></td>
+<td align="left">double <b>remainder</b><i> </i>(<i>double </i><var>numerator</var><i>, double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -117,8 +127,8 @@ absolute value of the <var>denominator</var>.  The difference between
 <tr><td>
 
 <tr>
-<td align="left">float <b>remainderf</b><i> (float <var>numerator</var>, float <var>denominator</var>)
-</i></td>
+<td align="left">float <b>remainderf</b><i> </i>(<i>float </i><var>numerator</var><i>, float </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -126,8 +136,8 @@ absolute value of the <var>denominator</var>.  The difference between
 <tr><td>
 
 <tr>
-<td align="left">long double <b>remainderl</b><i> (long double <var>numerator</var>, long double <var>denominator</var>)
-</i></td>
+<td align="left">long double <b>remainderl</b><i> </i>(<i>long double </i><var>numerator</var><i>, long double </i><var>denominator</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -137,5 +147,5 @@ This function is another name for <code>drem</code>.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

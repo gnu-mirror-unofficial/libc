@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Random%20Access%20Directory">Random Access Directory</a>,
-Next:<a rel=next accesskey=n href="Scanning-Directory-Content.html#Scanning%20Directory%20Content">Scanning Directory Content</a>,
-Previous:<a rel=previous accesskey=p href="Simple-Directory-Lister.html#Simple%20Directory%20Lister">Simple Directory Lister</a>,
-Up:<a rel=up accesskey=u href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
+Node:&nbsp;<a name="Random%20Access%20Directory">Random Access Directory</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Scanning-Directory-Content.html#Scanning%20Directory%20Content">Scanning Directory Content</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Simple-Directory-Lister.html#Simple%20Directory%20Lister">Simple Directory Lister</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
 <hr><br>
+</div>
 
-<h4>Random Access in a Directory Stream</h4>
+<h3 class="subsection">Random Access in a Directory Stream</h4>
 
 <p>This section describes how to reread parts of a directory that you have
 already read from an open directory stream.  All the symbols are
@@ -23,8 +33,8 @@ declared in the header file <code>dirent.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>rewinddir</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">void <b>rewinddir</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -44,8 +54,8 @@ added or removed since you last called <code>opendir</code> or
 <p>
 <table width="100%">
 <tr>
-<td align="left">off_t <b>telldir</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">off_t <b>telldir</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,8 +70,8 @@ restore the directory stream to that position.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>seekdir</b><i> (DIR *<var>dirstream</var>, off_t <var>pos</var>)
-</i></td>
+<td align="left">void <b>seekdir</b><i> </i>(<i>DIR *</i><var>dirstream</var><i>, off_t </i><var>pos</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -75,5 +85,5 @@ closing and reopening the directory can invalidate values returned by
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Opening%20a%20Directory">Opening a Directory</a>,
-Next:<a rel=next accesskey=n href="Reading-Closing-Directory.html#Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
-Previous:<a rel=previous accesskey=p href="Directory-Entries.html#Directory%20Entries">Directory Entries</a>,
-Up:<a rel=up accesskey=u href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
+Node:&nbsp;<a name="Opening%20a%20Directory">Opening a Directory</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Reading-Closing-Directory.html#Reading%2fClosing%20Directory">Reading/Closing Directory</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Directory-Entries.html#Directory%20Entries">Directory Entries</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>
 <hr><br>
+</div>
 
-<h4>Opening a Directory Stream</h4>
+<h3 class="subsection">Opening a Directory Stream</h4>
 
 <p>This section describes how to open a directory stream.  All the symbols
 are declared in the header file <code>dirent.h</code>.
@@ -23,7 +33,7 @@ are declared in the header file <code>dirent.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>DIR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -33,7 +43,7 @@ The <code>DIR</code> data type represents a directory stream.
 </td></tr>
 </table>
 
-<p>You shouldn't ever allocate objects of the <code>struct dirent</code> or
+   <p>You shouldn't ever allocate objects of the <code>struct dirent</code> or
 <code>DIR</code> data types, since the directory access functions do that for
 you.  Instead, you refer to these objects using the pointers returned by
 the following functions.
@@ -41,8 +51,8 @@ the following functions.
 <p>
 <table width="100%">
 <tr>
-<td align="left">DIR * <b>opendir</b><i> (const char *<var>dirname</var>)
-</i></td>
+<td align="left">DIR * <b>opendir</b><i> </i>(<i>const char *</i><var>dirname</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -52,31 +62,31 @@ The <code>opendir</code> function opens and returns a directory stream for
 reading the directory whose file name is <var>dirname</var>.  The stream has
 type <code>DIR *</code>.
 
-<p>If unsuccessful, <code>opendir</code> returns a null pointer.  In addition to
+     <p>If unsuccessful, <code>opendir</code> returns a null pointer.  In addition to
 the usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EACCES</code>
-<dd>Read permission is denied for the directory named by <code>dirname</code>.
+          <dd>Read permission is denied for the directory named by <code>dirname</code>.
 
-<br><dt><code>EMFILE</code>
-<dd>The process has too many files open.
+          <br><dt><code>EMFILE</code>
+          <dd>The process has too many files open.
 
-<br><dt><code>ENFILE</code>
-<dd>The entire system, or perhaps the file system which contains the
+          <br><dt><code>ENFILE</code>
+          <dd>The entire system, or perhaps the file system which contains the
 directory, cannot support any additional open files at the moment. 
 (This problem cannot happen on the GNU system.) 
 </dl>
 
-<p>The <code>DIR</code> type is typically implemented using a file descriptor,
+     <p>The <code>DIR</code> type is typically implemented using a file descriptor,
 and the <code>opendir</code> function in terms of the <code>open</code> function. 
 See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>.  Directory streams and the underlying
 file descriptors are closed on <code>exec</code> (see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>). 
 </td></tr>
 </table>
 
-<p>In some situations it can be desirable to get hold of the file
+   <p>In some situations it can be desirable to get hold of the file
 descriptor which is created by the <code>opendir</code> call.  For instance,
 to switch the current working directory to the directory just read the
 <code>fchdir</code> function could be used.  Historically the <code>DIR</code> type
@@ -87,8 +97,8 @@ access.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>dirfd</b><i> (DIR *<var>dirstream</var>)
-</i></td>
+<td align="left">int <b>dirfd</b><i> </i>(<i>DIR *</i><var>dirstream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -102,5 +112,5 @@ implementation is not using file descriptors the return value is
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Closing%20a%20Socket">Closing a Socket</a>,
-Next:<a rel=next accesskey=n href="Socket-Pairs.html#Socket%20Pairs">Socket Pairs</a>,
-Previous:<a rel=previous accesskey=p href="Creating-a-Socket.html#Creating%20a%20Socket">Creating a Socket</a>,
-Up:<a rel=up accesskey=u href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
+Node:&nbsp;<a name="Closing%20a%20Socket">Closing a Socket</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Socket-Pairs.html#Socket%20Pairs">Socket Pairs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Creating-a-Socket.html#Creating%20a%20Socket">Creating a Socket</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
 <hr><br>
+</div>
 
-<h4>Closing a Socket</h4>
+<h3 class="subsection">Closing a Socket</h4>
 
 <p>When you have finished using a socket, you can simply close its
 file descriptor with <code>close</code>; see <a href="Opening-and-Closing-Files.html#Opening%20and%20Closing%20Files">Opening and Closing Files</a>. 
@@ -23,15 +33,15 @@ normally <code>close</code> tries to complete this transmission.  You
 can control this behavior using the <code>SO_LINGER</code> socket option to
 specify a timeout period; see <a href="Socket-Options.html#Socket%20Options">Socket Options</a>.
 
-<p>You can also shut down only reception or transmission on a
+   <p>You can also shut down only reception or transmission on a
 connection by calling <code>shutdown</code>, which is declared in
 <code>sys/socket.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>shutdown</b><i> (int <var>socket</var>, int <var>how</var>)
-</i></td>
+<td align="left">int <b>shutdown</b><i> </i>(<i>int </i><var>socket</var><i>, int </i><var>how</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -41,35 +51,35 @@ The <code>shutdown</code> function shuts down the connection of socket
 <var>socket</var>.  The argument <var>how</var> specifies what action to
 perform:
 
-<dl>
+          <dl>
 <dt><code>0</code>
-<dd>Stop receiving data for this socket.  If further data arrives,
+          <dd>Stop receiving data for this socket.  If further data arrives,
 reject it.
 
-<br><dt><code>1</code>
-<dd>Stop trying to transmit data from this socket.  Discard any data
+          <br><dt><code>1</code>
+          <dd>Stop trying to transmit data from this socket.  Discard any data
 waiting to be sent.  Stop looking for acknowledgement of data already
 sent; don't retransmit it if it is lost.
 
-<br><dt><code>2</code>
-<dd>Stop both reception and transmission. 
+          <br><dt><code>2</code>
+          <dd>Stop both reception and transmission. 
 </dl>
 
-<p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
+     <p>The return value is <code>0</code> on success and <code>-1</code> on failure.  The
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd><var>socket</var> is not a valid file descriptor.
+          <dd><var>socket</var> is not a valid file descriptor.
 
-<br><dt><code>ENOTSOCK</code>
-<dd><var>socket</var> is not a socket.
+          <br><dt><code>ENOTSOCK</code>
+          <dd><var>socket</var> is not a socket.
 
-<br><dt><code>ENOTCONN</code>
-<dd><var>socket</var> is not connected. 
+          <br><dt><code>ENOTCONN</code>
+          <dd><var>socket</var> is not connected. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

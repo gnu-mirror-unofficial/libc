@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Blocking%20in%20BSD">Blocking in BSD</a>,
-Previous:<a rel=previous accesskey=p href="BSD-Handler.html#BSD%20Handler">BSD Handler</a>,
-Up:<a rel=up accesskey=u href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
+Node:&nbsp;<a name="Blocking%20in%20BSD">Blocking in BSD</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BSD-Handler.html#BSD%20Handler">BSD Handler</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
 <hr><br>
+</div>
 
-<h4>BSD Functions for Blocking Signals</h4>
+<h3 class="subsection">BSD Functions for Blocking Signals</h4>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigmask</b><i> (int <var>signum</var>)
-</i></td>
+<td align="left">int <b>sigmask</b><i> </i>(<i>int </i><var>signum</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -29,19 +39,19 @@ This macro returns a signal mask that has the bit for signal <var>signum</var>
 set.  You can bitwise-OR the results of several calls to <code>sigmask</code>
 together to specify more than one signal.  For example,
 
-<br><pre>(sigmask (SIGTSTP) | sigmask (SIGSTOP)
- | sigmask (SIGTTIN) | sigmask (SIGTTOU))
-</pre>
+     <pre class="smallexample">          (sigmask (SIGTSTP) | sigmask (SIGSTOP)
+           | sigmask (SIGTTIN) | sigmask (SIGTTOU))
+          </pre>
 
-<p>specifies a mask that includes all the job-control stop signals. 
+     <p>specifies a mask that includes all the job-control stop signals. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigblock</b><i> (int <var>mask</var>)
-</i></td>
+<td align="left">int <b>sigblock</b><i> </i>(<i>int </i><var>mask</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -56,8 +66,8 @@ signals.  The return value is the previous set of blocked signals.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigsetmask</b><i> (int <var>mask</var>)
-</i></td>
+<td align="left">int <b>sigsetmask</b><i> </i>(<i>int </i><var>mask</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,8 +82,8 @@ the previous set of blocked signals.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigpause</b><i> (int <var>mask</var>)
-</i></td>
+<td align="left">int <b>sigpause</b><i> </i>(<i>int </i><var>mask</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -85,5 +95,5 @@ signals is restored.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,35 +2,45 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Implementing%20a%20Shell">Implementing a Shell</a>,
-Next:<a rel=next accesskey=n href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>,
-Previous:<a rel=previous accesskey=p href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>,
-Up:<a rel=up accesskey=u href="Job-Control.html#Job%20Control">Job Control</a>
+Node:&nbsp;<a name="Implementing%20a%20Shell">Implementing a Shell</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Job-Control.html#Job%20Control">Job Control</a>
 <hr><br>
+</div>
 
-<h3>Implementing a Job Control Shell</h3>
+<h3 class="section">Implementing a Job Control Shell</h3>
 
 <p>This section describes what a shell must do to implement job control, by
 presenting an extensive sample program to illustrate the concepts
 involved.
 
-<ul>
-<li><a accesskey=1 href="Data-Structures.html#Data%20Structures">Data Structures</a>:              Introduction to the sample shell. 
-<li><a accesskey=2 href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>:       What the shell must do to take
+<ul class="menu">
+<li><a accesskey="1" href="Data-Structures.html#Data%20Structures">Data Structures</a>:              Introduction to the sample shell. 
+<li><a accesskey="2" href="Initializing-the-Shell.html#Initializing%20the%20Shell">Initializing the Shell</a>:       What the shell must do to take
 				 responsibility for job control. 
-<li><a accesskey=3 href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>:               Creating jobs to execute commands. 
-<li><a accesskey=4 href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>:    Putting a job in foreground of background. 
-<li><a accesskey=5 href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>:   Reporting job status. 
-<li><a accesskey=6 href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>:      How to continue a stopped job in
+<li><a accesskey="3" href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>:               Creating jobs to execute commands. 
+<li><a accesskey="4" href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>:    Putting a job in foreground of background. 
+<li><a accesskey="5" href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>:   Reporting job status. 
+<li><a accesskey="6" href="Continuing-Stopped-Jobs.html#Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>:      How to continue a stopped job in
 				 the foreground or background. 
-<li><a accesskey=7 href="Missing-Pieces.html#Missing%20Pieces">Missing Pieces</a>:               Other parts of the shell. 
+<li><a accesskey="7" href="Missing-Pieces.html#Missing%20Pieces">Missing Pieces</a>:               Other parts of the shell. 
 </ul>
 
-</body></html>
+   </body></html>
 

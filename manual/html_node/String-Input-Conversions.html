@@ -2,46 +2,56 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="String%20Input%20Conversions">String Input Conversions</a>,
-Next:<a rel=next accesskey=n href="Dynamic-String-Input.html#Dynamic%20String%20Input">Dynamic String Input</a>,
-Previous:<a rel=previous accesskey=p href="Numeric-Input-Conversions.html#Numeric%20Input%20Conversions">Numeric Input Conversions</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="String%20Input%20Conversions">String Input Conversions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Dynamic-String-Input.html#Dynamic%20String%20Input">Dynamic String Input</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Numeric-Input-Conversions.html#Numeric%20Input%20Conversions">Numeric Input Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>String Input Conversions</h4>
+<h3 class="subsection">String Input Conversions</h4>
 
 <p>This section describes the <code>scanf</code> input conversions for reading
 string and character values: <code>%s</code>, <code>%S</code>, <code>%[</code>, <code>%c</code>,
 and <code>%C</code>.
 
-<p>You have two options for how to receive the input from these
+   <p>You have two options for how to receive the input from these
 conversions:
 
-<ul>
+     <ul>
 <li>Provide a buffer to store it in.  This is the default.  You should
 provide an argument of type <code>char *</code> or <code>wchar_t *</code> (the
 latter of the <code>l</code> modifier is present).
 
-<p><strong>Warning:</strong> To make a robust program, you must make sure that the
+     <p><strong>Warning:</strong> To make a robust program, you must make sure that the
 input (plus its terminating null) cannot possibly exceed the size of the
 buffer you provide.  In general, the only way to do this is to specify a
 maximum field width one less than the buffer size.  <strong>If you
 provide the buffer, always specify a maximum field width to prevent
 overflow.</strong>
 
-<li>Ask <code>scanf</code> to allocate a big enough buffer, by specifying the
+     <li>Ask <code>scanf</code> to allocate a big enough buffer, by specifying the
 <code>a</code> flag character.  This is a GNU extension.  You should provide
 an argument of type <code>char **</code> for the buffer address to be stored
 in.  See <a href="Dynamic-String-Input.html#Dynamic%20String%20Input">Dynamic String Input</a>. 
 </ul>
 
-<p>The <code>%c</code> conversion is the simplest: it matches a fixed number of
+   <p>The <code>%c</code> conversion is the simplest: it matches a fixed number of
 characters, always.  The maximum field width says how many characters to
 read; if you don't specify the maximum, the default is 1.  This
 conversion doesn't append a null character to the end of the text it
@@ -51,32 +61,32 @@ that many.  Since there is always a maximum field width with <code>%c</code>
 (whether specified, or 1 by default), you can always prevent overflow by
 making the buffer long enough.
 
-<p>If the format is <code>%lc</code> or <code>%C</code> the function stores wide
+   <p>If the format is <code>%lc</code> or <code>%C</code> the function stores wide
 characters which are converted using the conversion determined at the
 time the stream was opened from the external byte stream.  The number of
-bytes read from the medium is limited by <code>MB_CUR_LEN * <var>n</var></code> but
+bytes read from the medium is limited by <code>MB_CUR_LEN * </code><var>n</var><code></code> but
 at most <var>n</var> wide character get stored in the output string.
 
-<p>The <code>%s</code> conversion matches a string of non-whitespace characters. 
+   <p>The <code>%s</code> conversion matches a string of non-whitespace characters. 
 It skips and discards initial whitespace, but stops when it encounters
 more whitespace after having read something.  It stores a null character
 at the end of the text that it reads.
 
-<p>For example, reading the input:
+   <p>For example, reading the input:
 
-<br><pre> hello, world
-</pre>
+<pre class="smallexample">      hello, world
+     </pre>
 
 <p>with the conversion <code>%10c</code> produces <code>" hello, wo"</code>, but
 reading the same input with the conversion <code>%10s</code> produces
 <code>"hello,"</code>.
 
-<p><strong>Warning:</strong> If you do not specify a field width for <code>%s</code>,
+   <p><strong>Warning:</strong> If you do not specify a field width for <code>%s</code>,
 then the number of characters read is limited only by where the next
 whitespace character appears.  This almost certainly means that invalid
 input can make your program crash--which is a bug.
 
-<p>The <code>%ls</code> and <code>%S</code> format are handled just like <code>%s</code>
+   <p>The <code>%ls</code> and <code>%S</code> format are handled just like <code>%s</code>
 except that the external byte sequence is converted using the conversion
 associated with the stream to wide characters with their own encoding. 
 A width or precision specified with the format do not directly determine
@@ -84,56 +94,56 @@ how many bytes are read from the stream since they measure wide
 characters.  But an upper limit can be computed by multiplying the value
 of the width or precision by <code>MB_CUR_MAX</code>.
 
-<p>To read in characters that belong to an arbitrary set of your choice,
+   <p>To read in characters that belong to an arbitrary set of your choice,
 use the <code>%[</code> conversion.  You specify the set between the <code>[</code>
 character and a following <code>]</code> character, using the same syntax used
 in regular expressions.  As special cases:
 
-<ul>
+     <ul>
 <li>A literal <code>]</code> character can be specified as the first character
 of the set.
 
-<li>An embedded <code>-</code> character (that is, one that is not the first or
+     <li>An embedded <code>-</code> character (that is, one that is not the first or
 last character of the set) is used to specify a range of characters.
 
-<li>If a caret character <code>^</code> immediately follows the initial <code>[</code>,
+     <li>If a caret character <code>^</code> immediately follows the initial <code>[</code>,
 then the set of allowed input characters is the everything <em>except</em>
 the characters listed. 
 </ul>
 
-<p>The <code>%[</code> conversion does not skip over initial whitespace
+   <p>The <code>%[</code> conversion does not skip over initial whitespace
 characters.
 
-<p>Here are some examples of <code>%[</code> conversions and what they mean:
+   <p>Here are some examples of <code>%[</code> conversions and what they mean:
 
-<dl>
+     <dl>
 <dt><code>%25[1234567890]</code>
-<dd>Matches a string of up to 25 digits.
+     <dd>Matches a string of up to 25 digits.
 
-<br><dt><code>%25[][]</code>
-<dd>Matches a string of up to 25 square brackets.
+     <br><dt><code>%25[][]</code>
+     <dd>Matches a string of up to 25 square brackets.
 
-<br><dt><code>%25[^ \f\n\r\t\v]</code>
-<dd>Matches a string up to 25 characters long that doesn't contain any of
+     <br><dt><code>%25[^ \f\n\r\t\v]</code>
+     <dd>Matches a string up to 25 characters long that doesn't contain any of
 the standard whitespace characters.  This is slightly different from
 <code>%s</code>, because if the input begins with a whitespace character,
 <code>%[</code> reports a matching failure while <code>%s</code> simply discards the
 initial whitespace.
 
-<br><dt><code>%25[a-z]</code>
-<dd>Matches up to 25 lowercase characters. 
+     <br><dt><code>%25[a-z]</code>
+     <dd>Matches up to 25 lowercase characters. 
 </dl>
 
-<p>As for <code>%c</code> and <code>%s</code> the <code>%[</code> format is also modified to
+   <p>As for <code>%c</code> and <code>%s</code> the <code>%[</code> format is also modified to
 produce wide characters if the <code>l</code> modifier is present.  All what
 is said about <code>%ls</code> above is true for <code>%l[</code>.
 
-<p>One more reminder: the <code>%s</code> and <code>%[</code> conversions are
+   <p>One more reminder: the <code>%s</code> and <code>%[</code> conversions are
 <strong>dangerous</strong> if you don't specify a maximum width or use the
 <code>a</code> flag, because input too long would overflow whatever buffer you
 have provided for it.  No matter how long your buffer is, a user could
 supply input that is longer.  A well-written program reports invalid
 input with a comprehensible error message, not with a crash.
 
-</body></html>
+   </body></html>
 

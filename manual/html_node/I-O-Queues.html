@@ -2,30 +2,40 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="I%2fO%20Queues">I/O Queues</a>,
-Next:<a rel=next accesskey=n href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>,
-Previous:<a rel=previous accesskey=p href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>,
-Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+Node:&nbsp;<a name="I%2fO%20Queues">I/O Queues</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
 <hr><br>
+</div>
 
-<h3>I/O Queues</h3>
+<h3 class="section">I/O Queues</h3>
 
 <p>Many of the remaining functions in this section refer to the input and
 output queues of a terminal device.  These queues implement a form of
 buffering <em>within the kernel</em> independent of the buffering
 implemented by I/O streams (see <a href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>).
 
-<p>The <dfn>terminal input queue</dfn> is also sometimes referred to as its
+   <p>The <dfn>terminal input queue</dfn> is also sometimes referred to as its
 <dfn>typeahead buffer</dfn>.  It holds the characters that have been received
 from the terminal but not yet read by any process.
 
-<p>The size of the input queue is described by the <code>MAX_INPUT</code> and
+   <p>The size of the input queue is described by the <code>MAX_INPUT</code> and
 <code>_POSIX_MAX_INPUT</code> parameters; see <a href="Limits-for-Files.html#Limits%20for%20Files">Limits for Files</a>.  You
 are guaranteed a queue size of at least <code>MAX_INPUT</code>, but the queue
 might be larger, and might even dynamically change size.  If input flow
@@ -37,17 +47,17 @@ the terminal.  In canonical mode, all input stays in the queue until a
 newline character is received, so the terminal input queue can fill up
 when you type a very long line.  See <a href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>.
 
-<p>The <dfn>terminal output queue</dfn> is like the input queue, but for output;
+   <p>The <dfn>terminal output queue</dfn> is like the input queue, but for output;
 it contains characters that have been written by processes, but not yet
 transmitted to the terminal.  If output flow control is enabled by
 setting the <code>IXON</code> input mode bit (see <a href="Input-Modes.html#Input%20Modes">Input Modes</a>), the
 terminal driver obeys START and STOP characters sent by the terminal to
 stop and restart transmission of output.
 
-<p><dfn>Clearing</dfn> the terminal input queue means discarding any characters
+   <p><dfn>Clearing</dfn> the terminal input queue means discarding any characters
 that have been received but not yet read.  Similarly, clearing the
 terminal output queue means discarding any characters that have been
 written but not yet transmitted.
 
-</body></html>
+   </body></html>
 

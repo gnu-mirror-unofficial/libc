@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Status%20of%20an%20Obstack">Status of an Obstack</a>,
-Next:<a rel=next accesskey=n href="Obstacks-Data-Alignment.html#Obstacks%20Data%20Alignment">Obstacks Data Alignment</a>,
-Previous:<a rel=previous accesskey=p href="Extra-Fast-Growing.html#Extra%20Fast%20Growing">Extra Fast Growing</a>,
-Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+Node:&nbsp;<a name="Status%20of%20an%20Obstack">Status of an Obstack</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Obstacks-Data-Alignment.html#Obstacks%20Data%20Alignment">Obstacks Data Alignment</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Extra-Fast-Growing.html#Extra%20Fast%20Growing">Extra Fast Growing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Obstacks.html#Obstacks">Obstacks</a>
 <hr><br>
+</div>
 
-<h5>Status of an Obstack</h5>
+<h3 class="subsubsection">Status of an Obstack</h5>
 
 <p>Here are functions that provide information on the current status of
 allocation in an obstack.  You can use them to learn about an object while
@@ -23,8 +33,8 @@ still growing it.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>obstack_base</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">void * <b>obstack_base</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,7 +45,7 @@ currently growing object in <var>obstack-ptr</var>.  If you finish the object
 immediately, it will have that address.  If you make it larger first, it
 may outgrow the current chunk--then its address will change!
 
-<p>If no object is growing, this value says where the next object you
+     <p>If no object is growing, this value says where the next object you
 allocate will start (once again assuming it fits in the current
 chunk). 
 </td></tr>
@@ -44,8 +54,8 @@ chunk).
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>obstack_next_free</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">void * <b>obstack_next_free</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -61,8 +71,8 @@ returns the same value as <code>obstack_base</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>obstack_object_size</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">int <b>obstack_object_size</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -71,10 +81,10 @@ returns the same value as <code>obstack_base</code>.
 This function returns the size in bytes of the currently growing object. 
 This is equivalent to
 
-<br><pre>obstack_next_free (<var>obstack-ptr</var>) - obstack_base (<var>obstack-ptr</var>)
-</pre>
-</td></tr>
+     <pre class="smallexample">          obstack_next_free (<var>obstack-ptr</var>) - obstack_base (<var>obstack-ptr</var>)
+          </pre>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="General%20Limits">General Limits</a>,
-Next:<a rel=next accesskey=n href="System-Options.html#System%20Options">System Options</a>,
-Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+Node:&nbsp;<a name="General%20Limits">General Limits</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="System-Options.html#System%20Options">System Options</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
 <hr><br>
+</div>
 
-<h3>General Capacity Limits</h3>
+<h3 class="section">General Capacity Limits</h3>
 
 <p>The POSIX.1 and POSIX.2 standards specify a number of parameters that
 describe capacity limitations of the system.  These limits can be fixed
@@ -22,14 +32,14 @@ machine.  For example, some limit values may be configurable by the
 system administrator, either at run time or by rebuilding the kernel,
 and this should not require recompiling application programs.
 
-<p>Each of the following limit parameters has a macro that is defined in
+   <p>Each of the following limit parameters has a macro that is defined in
 <code>limits.h</code> only if the system has a fixed, uniform limit for the
 parameter in question.  If the system allows different file systems or
 files to have different limits, then the macro is undefined; use
 <code>sysconf</code> to find out the limit that applies at a particular time
 on a particular machine.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
 
-<p>Each of these parameters also has another macro, with a name starting
+   <p>Each of these parameters also has another macro, with a name starting
 with <code>_POSIX</code>, which gives the lowest value that the limit is
 allowed to have on <em>any</em> POSIX system.  See <a href="Minimums.html#Minimums">Minimums</a>.
 
@@ -37,7 +47,7 @@ allowed to have on <em>any</em> POSIX system.  See <a href="Minimums.html#Minimu
 <table width="100%">
 <tr>
 <td align="left">int <b>ARG_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -52,7 +62,7 @@ If defined, the unvarying maximum combined length of the <var>argv</var> and
 <table width="100%">
 <tr>
 <td align="left">int <b>CHILD_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -68,7 +78,7 @@ controlled by the <code>RLIMIT_NPROC</code> resource limit; see <a href="Limits-
 <table width="100%">
 <tr>
 <td align="left">int <b>OPEN_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -84,7 +94,7 @@ by the <code>RLIMIT_NOFILE</code> resource limit; see <a href="Limits-on-Resourc
 <table width="100%">
 <tr>
 <td align="left">int <b>STREAM_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -99,7 +109,7 @@ process can have open simultaneously.  See <a href="Opening-Streams.html#Opening
 <table width="100%">
 <tr>
 <td align="left">int <b>TZNAME_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -110,13 +120,13 @@ See <a href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functio
 </td></tr>
 </table>
 
-<p>These limit macros are always defined in <code>limits.h</code>.
+   <p>These limit macros are always defined in <code>limits.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>NGROUPS_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -124,7 +134,7 @@ See <a href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functio
 <tr><td>
 The maximum number of supplementary group IDs that one process can have.
 
-<p>The value of this macro is actually a lower bound for the maximum.  That
+     <p>The value of this macro is actually a lower bound for the maximum.  That
 is, you can count on being able to have that many supplementary group
 IDs, but a particular machine might let you have even more.  You can use
 <code>sysconf</code> to see whether a particular machine will let you have
@@ -136,7 +146,7 @@ more (see <a href="Sysconf.html#Sysconf">Sysconf</a>).
 <table width="100%">
 <tr>
 <td align="left">int <b>SSIZE_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -146,7 +156,7 @@ The largest value that can fit in an object of type <code>ssize_t</code>.
 Effectively, this is the limit on the number of bytes that can be read
 or written in a single operation.
 
-<p>This macro is defined in all POSIX systems because this limit is never
+     <p>This macro is defined in all POSIX systems because this limit is never
 configurable. 
 </td></tr>
 </table>
@@ -155,26 +165,26 @@ configurable.
 <table width="100%">
 <tr>
 <td align="left">int <b>RE_DUP_MAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 The largest number of repetitions you are guaranteed is allowed in the
-construct <code>\{<var>min</var>,<var>max</var>\}</code> in a regular expression.
+construct <code>\{</code><var>min</var><code>,</code><var>max</var><code>\}</code> in a regular expression.
 
-<p>The value of this macro is actually a lower bound for the maximum.  That
+     <p>The value of this macro is actually a lower bound for the maximum.  That
 is, you can count on being able to have that many repetitions, but a
 particular machine might let you have even more.  You can use
 <code>sysconf</code> to see whether a particular machine will let you have
 more (see <a href="Sysconf.html#Sysconf">Sysconf</a>).  And even the value that <code>sysconf</code> tells
 you is just a lower bound--larger values might work.
 
-<p>This macro is defined in all POSIX.2 systems, because POSIX.2 says it
+     <p>This macro is defined in all POSIX.2 systems, because POSIX.2 says it
 should always be defined even if there is no specific imposed limit. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

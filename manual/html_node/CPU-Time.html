@@ -2,43 +2,53 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="CPU%20Time">CPU Time</a>,
-Next:<a rel=next accesskey=n href="Processor-Time.html#Processor%20Time">Processor Time</a>,
-Up:<a rel=up accesskey=u href="Processor-And-CPU-Time.html#Processor%20And%20CPU%20Time">Processor And CPU Time</a>
+Node:&nbsp;<a name="CPU%20Time">CPU Time</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Processor-Time.html#Processor%20Time">Processor Time</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processor-And-CPU-Time.html#Processor%20And%20CPU%20Time">Processor And CPU Time</a>
 <hr><br>
+</div>
 
-<h4>CPU Time Inquiry</h4>
+<h3 class="subsection">CPU Time Inquiry</h4>
 
 <p>To get a process' CPU time, you can use the <code>clock</code> function.  This
 facility is declared in the header file <code>time.h</code>.
 
-<p>In typical usage, you call the <code>clock</code> function at the beginning
+   <p>In typical usage, you call the <code>clock</code> function at the beginning
 and end of the interval you want to time, subtract the values, and then
 divide by <code>CLOCKS_PER_SEC</code> (the number of clock ticks per second)
 to get processor time, like this:
 
-<br><pre>#include &lt;time.h&gt;
+<pre class="smallexample">     #include &lt;time.h&gt;
+     
+     clock_t start, end;
+     double cpu_time_used;
+     
+     start = clock();
+     ... /* Do the work. */
+     end = clock();
+     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+     </pre>
 
-clock_t start, end;
-double cpu_time_used;
-
-start = clock();
-<small>...</small> /* Do the work. */
-end = clock();
-cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-</pre>
-
-<p>Do not use a single CPU time as an amount of time; it doesn't work that
+   <p>Do not use a single CPU time as an amount of time; it doesn't work that
 way.  Either do a subtraction as shown above or query processor time
 directly.  See <a href="Processor-Time.html#Processor%20Time">Processor Time</a>.
 
-<p>Different computers and operating systems vary wildly in how they keep
+   <p>Different computers and operating systems vary wildly in how they keep
 track of CPU time.  It's common for the internal processor clock
 to have a resolution somewhere between a hundredth and millionth of a
 second.
@@ -47,7 +57,7 @@ second.
 <table width="100%">
 <tr>
 <td align="left">int <b>CLOCKS_PER_SEC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -63,7 +73,7 @@ million independent of the actual resolution.
 <table width="100%">
 <tr>
 <td align="left">int <b>CLK_TCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -77,7 +87,7 @@ This is an obsolete name for <code>CLOCKS_PER_SEC</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>clock_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -91,8 +101,8 @@ Values of type <code>clock_t</code> are numbers of clock ticks.
 <p>
 <table width="100%">
 <tr>
-<td align="left">clock_t <b>clock</b><i> (void)
-</i></td>
+<td align="left">clock_t <b>clock</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -104,5 +114,5 @@ value <code>(clock_t)(-1)</code>.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

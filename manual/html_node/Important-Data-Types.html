@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Important%20Data%20Types">Important Data Types</a>,
-Next:<a rel=next accesskey=n href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>,
-Previous:<a rel=previous accesskey=p href="Null-Pointer-Constant.html#Null%20Pointer%20Constant">Null Pointer Constant</a>,
-Up:<a rel=up accesskey=u href="Language-Features.html#Language%20Features">Language Features</a>
+Node:&nbsp;<a name="Important%20Data%20Types">Important Data Types</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Null-Pointer-Constant.html#Null%20Pointer%20Constant">Null Pointer Constant</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Language-Features.html#Language%20Features">Language Features</a>
 <hr><br>
+</div>
 
-<h3>Important Data Types</h3>
+<h3 class="section">Important Data Types</h3>
 
 <p>The result of subtracting two pointers in C is always an integer, but the
 precise data type varies from C compiler to C compiler.  Likewise, the
@@ -27,7 +37,7 @@ them in a portable fashion.  They are defined in the header file
 <table width="100%">
 <tr>
 <td align="left"><b>ptrdiff_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -45,7 +55,7 @@ type that exists only for this purpose.
 <table width="100%">
 <tr>
 <td align="left"><b>size_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -57,18 +67,18 @@ such as <code>malloc</code> (see <a href="Unconstrained-Allocation.html#Unconstr
 <code>memcpy</code> (see <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>) accept arguments of
 this type to specify object sizes.
 
-<p><strong>Usage Note:</strong> <code>size_t</code> is the preferred way to declare any
+     <p><strong>Usage Note:</strong> <code>size_t</code> is the preferred way to declare any
 arguments or variables that hold the size of an object. 
 </td></tr>
 </table>
 
-<p>In the GNU system <code>size_t</code> is equivalent to either
+   <p>In the GNU system <code>size_t</code> is equivalent to either
 <code>unsigned&nbsp;int</code> or <code>unsigned&nbsp;long&nbsp;int</code>.  These types
 have identical properties on the GNU system and, for most purposes, you
 can use them interchangeably.  However, they are distinct as data types,
 which makes a difference in certain contexts.
 
-<p>For example, when you specify the type of a function argument in a
+   <p>For example, when you specify the type of a function argument in a
 function prototype, it makes a difference which one you use.  If the
 system header files declare <code>malloc</code> with an argument of type
 <code>size_t</code> and you declare <code>malloc</code> with an argument of type
@@ -77,12 +87,12 @@ happens to be <code>unsigned long int</code> on your system.  To avoid any
 possibility of error, when a function argument or value is supposed to
 have type <code>size_t</code>, never declare its type in any other way.
 
-<p><strong>Compatibility Note:</strong> Implementations of C before the advent of
+   <p><strong>Compatibility Note:</strong> Implementations of C before the advent of
 ISO&nbsp;C generally used <code>unsigned int</code> for representing object sizes
 and <code>int</code> for pointer subtraction results.  They did not
 necessarily define either <code>size_t</code> or <code>ptrdiff_t</code>.  Unix
 systems did define <code>size_t</code>, in <code>sys/types.h</code>, but the
 definition was usually a signed type.
 
-</body></html>
+   </body></html>
 

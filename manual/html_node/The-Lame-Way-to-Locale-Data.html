@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>,
-Next:<a rel=next accesskey=n href="The-Elegant-and-Fast-Way.html#The%20Elegant%20and%20Fast%20Way">The Elegant and Fast Way</a>,
-Up:<a rel=up accesskey=u href="Locale-Information.html#Locale%20Information">Locale Information</a>
+Node:&nbsp;<a name="The%20Lame%20Way%20to%20Locale%20Data">The Lame Way to Locale Data</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="The-Elegant-and-Fast-Way.html#The%20Elegant%20and%20Fast%20Way">The Elegant and Fast Way</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locale-Information.html#Locale%20Information">Locale Information</a>
 <hr><br>
+</div>
 
-<h4><code>localeconv</code>: It is portable but <small>...</small></h4>
+<h3 class="subsection"><code>localeconv</code>: It is portable but <small class="dots">...</small></h4>
 
 <p>Together with the <code>setlocale</code> function the ISO&nbsp;C people
 invented the <code>localeconv</code> function.  It is a masterpiece of poor
@@ -27,8 +37,8 @@ according to the selected locale using this information.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct lconv * <b>localeconv</b><i> (void)
-</i></td>
+<td align="left">struct lconv * <b>localeconv</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,7 +48,7 @@ The <code>localeconv</code> function returns a pointer to a structure whose
 components contain information about how numeric and monetary values
 should be formatted in the current locale.
 
-<p>You should not modify the structure or its contents.  The structure might
+     <p>You should not modify the structure or its contents.  The structure might
 be overwritten by subsequent calls to <code>localeconv</code>, or by calls to
 <code>setlocale</code>, but no other function in the library overwrites this
 value. 
@@ -49,7 +59,7 @@ value.
 <table width="100%">
 <tr>
 <td align="left"><b>struct lconv</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -60,18 +70,18 @@ described in the following subsections.
 </td></tr>
 </table>
 
-<p>If a member of the structure <code>struct lconv</code> has type <code>char</code>,
+   <p>If a member of the structure <code>struct lconv</code> has type <code>char</code>,
 and the value is <code>CHAR_MAX</code>, it means that the current locale has
 no value for that parameter.
 
-<ul>
-<li><a accesskey=1 href="General-Numeric.html#General%20Numeric">General Numeric</a>:              Parameters for formatting numbers and
+<ul class="menu">
+<li><a accesskey="1" href="General-Numeric.html#General%20Numeric">General Numeric</a>:              Parameters for formatting numbers and
                                  currency amounts. 
-<li><a accesskey=2 href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>:              How to print the symbol that identifies an
+<li><a accesskey="2" href="Currency-Symbol.html#Currency%20Symbol">Currency Symbol</a>:              How to print the symbol that identifies an
                                  amount of money (e.g. <code>$</code>). 
-<li><a accesskey=3 href="Sign-of-Money-Amount.html#Sign%20of%20Money%20Amount">Sign of Money Amount</a>:         How to print the (positive or negative) sign
+<li><a accesskey="3" href="Sign-of-Money-Amount.html#Sign%20of%20Money%20Amount">Sign of Money Amount</a>:         How to print the (positive or negative) sign
                                  for a monetary amount, if one exists. 
 </ul>
 
-</body></html>
+   </body></html>
 

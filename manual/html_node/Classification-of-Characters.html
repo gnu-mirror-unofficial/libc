@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Classification%20of%20Characters">Classification of Characters</a>,
-Next:<a rel=next accesskey=n href="Case-Conversion.html#Case%20Conversion">Case Conversion</a>,
-Up:<a rel=up accesskey=u href="Character-Handling.html#Character%20Handling">Character Handling</a>
+Node:&nbsp;<a name="Classification%20of%20Characters">Classification of Characters</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Case-Conversion.html#Case%20Conversion">Case Conversion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Character-Handling.html#Character%20Handling">Character Handling</a>
 <hr><br>
+</div>
 
-<h3>Classification of Characters</h3>
+<h3 class="section">Classification of Characters</h3>
 
 <p>This section explains the library functions for classifying characters. 
 For example, <code>isalpha</code> is the function to test for an alphabetic
@@ -21,27 +31,27 @@ character.  It takes one argument, the character to test, and returns a
 nonzero integer if the character is alphabetic, and zero otherwise.  You
 would use it like this:
 
-<br><pre>if (isalpha (c))
-  printf ("The character `%c' is alphabetic.\n", c);
-</pre>
+<pre class="smallexample">     if (isalpha (c))
+       printf ("The character `%c' is alphabetic.\n", c);
+     </pre>
 
-<p>Each of the functions in this section tests for membership in a
+   <p>Each of the functions in this section tests for membership in a
 particular class of characters; each has a name starting with <code>is</code>. 
 Each of them takes one argument, which is a character to test, and
 returns an <code>int</code> which is treated as a boolean value.  The
 character argument is passed as an <code>int</code>, and it may be the
 constant value <code>EOF</code> instead of a real character.
 
-<p>The attributes of any given character can vary between locales. 
+   <p>The attributes of any given character can vary between locales. 
 See <a href="Locales.html#Locales">Locales</a>, for more information on locales.
 
-<p>These functions are declared in the header file <code>ctype.h</code>.
+   <p>These functions are declared in the header file <code>ctype.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>islower</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>islower</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -55,8 +65,8 @@ from the Latin alphabet, any alphabet representable is valid.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isupper</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isupper</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -70,8 +80,8 @@ from the Latin alphabet, any alphabet representable is valid.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isalpha</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isalpha</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -81,7 +91,7 @@ Returns true if <var>c</var> is an alphabetic character (a letter).  If
 <code>islower</code> or <code>isupper</code> is true of a character, then
 <code>isalpha</code> is also true.
 
-<p>In some locales, there may be additional characters for which
+     <p>In some locales, there may be additional characters for which
 <code>isalpha</code> is true--letters which are neither upper case nor lower
 case.  But in the standard <code>"C"</code> locale, there are no such
 additional characters. 
@@ -91,8 +101,8 @@ additional characters.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isdigit</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isdigit</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -105,8 +115,8 @@ Returns true if <var>c</var> is a decimal digit (<code>0</code> through <code>9<
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isalnum</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isalnum</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -121,8 +131,8 @@ true of a character, then <code>isalnum</code> is also true.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isxdigit</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isxdigit</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -138,8 +148,8 @@ Hexadecimal digits include the normal decimal digits <code>0</code> through
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>ispunct</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>ispunct</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -154,8 +164,8 @@ character.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isspace</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isspace</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -165,33 +175,33 @@ Returns true if <var>c</var> is a <dfn>whitespace</dfn> character.  In the stand
 <code>"C"</code> locale, <code>isspace</code> returns true for only the standard
 whitespace characters:
 
-<dl>
+          <dl>
 <dt><code>' '</code>
-<dd>space
+          <dd>space
 
-<br><dt><code>'\f'</code>
-<dd>formfeed
+          <br><dt><code>'\f'</code>
+          <dd>formfeed
 
-<br><dt><code>'\n'</code>
-<dd>newline
+          <br><dt><code>'\n'</code>
+          <dd>newline
 
-<br><dt><code>'\r'</code>
-<dd>carriage return
+          <br><dt><code>'\r'</code>
+          <dd>carriage return
 
-<br><dt><code>'\t'</code>
-<dd>horizontal tab
+          <br><dt><code>'\t'</code>
+          <dd>horizontal tab
 
-<br><dt><code>'\v'</code>
-<dd>vertical tab
+          <br><dt><code>'\v'</code>
+          <dd>vertical tab
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isblank</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isblank</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -205,8 +215,8 @@ This function is a GNU extension.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isgraph</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isgraph</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -221,8 +231,8 @@ considered graphic.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isprint</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isprint</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -236,8 +246,8 @@ include all the graphic characters, plus the space (<code> </code>) character.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>iscntrl</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>iscntrl</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -251,8 +261,8 @@ is not a printing character).
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>isascii</b><i> (int <var>c</var>)
-</i></td>
+<td align="left">int <b>isascii</b><i> </i>(<i>int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -264,5 +274,5 @@ and is also an SVID extension.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="User%20Accounting%20Database">User Accounting Database</a>,
-Next:<a rel=next accesskey=n href="User-Database.html#User%20Database">User Database</a>,
-Previous:<a rel=previous accesskey=p href="Who-Logged-In.html#Who%20Logged%20In">Who Logged In</a>,
-Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+Node:&nbsp;<a name="User%20Accounting%20Database">User Accounting Database</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="User-Database.html#User%20Database">User Database</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Who-Logged-In.html#Who%20Logged%20In">Who Logged In</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
 <hr><br>
+</div>
 
-<h3>The User Accounting Database</h3>
+<h3 class="section">The User Accounting Database</h3>
 
 <p>Most Unix-like operating systems keep track of logged in users by
 maintaining a user accounting database.  This user accounting database
@@ -23,19 +33,19 @@ ID of the user's login shell, etc., etc., but also stores information
 about the run level of the system, the time of the last system reboot,
 and possibly more.
 
-<p>The user accounting database typically lives in <code>/etc/utmp</code>,
+   <p>The user accounting database typically lives in <code>/etc/utmp</code>,
 <code>/var/adm/utmp</code> or <code>/var/run/utmp</code>.  However, these files
 should <strong>never</strong> be accessed directly.  For reading information
 from and writing information to the user accounting database, the
 functions described in this section should be used.
 
-<ul>
-<li><a accesskey=1 href="Manipulating-the-Database.html#Manipulating%20the%20Database">Manipulating the Database</a>:    Scanning and modifying the user
+<ul class="menu">
+<li><a accesskey="1" href="Manipulating-the-Database.html#Manipulating%20the%20Database">Manipulating the Database</a>:    Scanning and modifying the user
                                  accounting database. 
-<li><a accesskey=2 href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>:                A standardized way for doing the same thing. 
-<li><a accesskey=3 href="Logging-In-and-Out.html#Logging%20In%20and%20Out">Logging In and Out</a>:           Functions from BSD that modify the user
+<li><a accesskey="2" href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>:                A standardized way for doing the same thing. 
+<li><a accesskey="3" href="Logging-In-and-Out.html#Logging%20In%20and%20Out">Logging In and Out</a>:           Functions from BSD that modify the user
                                  accounting database. 
 </ul>
 
-</body></html>
+   </body></html>
 

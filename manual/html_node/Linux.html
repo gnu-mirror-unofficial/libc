@@ -2,21 +2,31 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Linux">Linux</a>,
-Next:<a rel=next accesskey=n href="Reporting-Bugs.html#Reporting%20Bugs">Reporting Bugs</a>,
-Previous:<a rel=previous accesskey=p href="Supported-Configurations.html#Supported%20Configurations">Supported Configurations</a>,
-Up:<a rel=up accesskey=u href="Installation.html#Installation">Installation</a>
+Node:&nbsp;<a name="Linux">Linux</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Reporting-Bugs.html#Reporting%20Bugs">Reporting Bugs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Supported-Configurations.html#Supported%20Configurations">Supported Configurations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
 <hr><br>
+</div>
 
-<h3>Specific advice for Linux systems</h3>
+<h3 class="appendixsec">Specific advice for GNU/Linux systems</h3>
 
-<p>If you are installing GNU libc on a Linux system, you need to have the
+<p>If you are installing GNU libc on a GNU/Linux system, you need to have the
 header files from a 2.2 or newer kernel around for reference.  For some
 architectures, like ia64, sh and hppa, you need at least headers from
 kernel 2.3.99 (sh and hppa) or 2.4.0 (ia64).  You do not need to use
@@ -28,34 +38,46 @@ include/linux/version.h</code>.  Finally, configure glibc with the option
 <code>--with-headers=/usr/src/linux-2.2.1/include</code>.  Use the most recent
 kernel you can get your hands on.
 
-<p>An alternate tactic is to unpack the 2.2 kernel and run <code>make
-config</code> as above.  Then rename or delete <code>/usr/include</code>, create
-a new <code>/usr/include</code>, and make the usual symbolic links of
-<code>/usr/include/linux</code> and <code>/usr/include/asm</code> into the 2.2
-kernel sources.  You can then configure glibc with no special options. 
-This tactic is recommended if you are upgrading from libc5, since you
-need to get rid of the old header files anyway.
+   <p>An alternate tactic is to unpack the 2.2 kernel and run <code>make
+config</code> as above; then, rename or delete <code>/usr/include</code>, create a
+new <code>/usr/include</code>, and make symbolic links of
+<code>/usr/include/linux</code> and <code>/usr/include/asm</code> into the kernel
+sources.  You can then configure glibc with no special options.  This
+tactic is recommended if you are upgrading from libc5, since you need to
+get rid of the old header files anyway.
 
-<p>Note that <code>/usr/include/net</code> and <code>/usr/include/scsi</code> should
+   <p>After installing GNU libc, you may need to remove or rename
+<code>/usr/include/linux</code> and <code>/usr/include/asm</code>, and replace them
+with copies of <code>include/linux</code> and
+<code>include/asm-$</code><var>ARCHITECTURE</var><code></code> taken from the Linux source
+package which supplied kernel headers for building the library. 
+<var>ARCHITECTURE</var> will be the machine architecture for which the
+library was built, such as <code>i386</code> or <code>alpha</code>.  You do not need
+to do this if you did not specify an alternate kernel header source
+using <code>--with-headers</code>.  The intent here is that these directories
+should be copies of, <strong>not</strong> symlinks to, the kernel headers used to
+build the library.
+
+   <p>Note that <code>/usr/include/net</code> and <code>/usr/include/scsi</code> should
 <strong>not</strong> be symlinks into the kernel sources.  GNU libc provides its
 own versions of these files.
 
-<p>Linux expects some components of the libc installation to be in
+   <p>GNU/Linux expects some components of the libc installation to be in
 <code>/lib</code> and some in <code>/usr/lib</code>.  This is handled automatically
 if you configure glibc with <code>--prefix=/usr</code>.  If you set some other
 prefix or allow it to default to <code>/usr/local</code>, then all the
 components are installed there.
 
-<p>If you are upgrading from libc5, you need to recompile every shared
+   <p>If you are upgrading from libc5, you need to recompile every shared
 library on your system against the new library for the sake of new code,
 but keep the old libraries around for old binaries to use.  This is
 complicated and difficult.  Consult the Glibc2 HOWTO at
 &lt;<code>http://www.imaxx.net/~thrytis/glibc</code>&gt; for details.
 
-<p>You cannot use <code>nscd</code> with 2.0 kernels, due to bugs in the
+   <p>You cannot use <code>nscd</code> with 2.0 kernels, due to bugs in the
 kernel-side thread support.  <code>nscd</code> happens to hit these bugs
 particularly hard, but you might have problems with any threaded
 program.
 
-</body></html>
+   </body></html>
 

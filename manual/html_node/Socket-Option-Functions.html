@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Socket%20Option%20Functions">Socket Option Functions</a>,
-Next:<a rel=next accesskey=n href="Socket-Level-Options.html#Socket-Level%20Options">Socket-Level Options</a>,
-Up:<a rel=up accesskey=u href="Socket-Options.html#Socket%20Options">Socket Options</a>
+Node:&nbsp;<a name="Socket%20Option%20Functions">Socket Option Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Socket-Level-Options.html#Socket-Level%20Options">Socket-Level Options</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Socket-Options.html#Socket%20Options">Socket Options</a>
 <hr><br>
+</div>
 
-<h4>Socket Option Functions</h4>
+<h3 class="subsection">Socket Option Functions</h4>
 
 <p>Here are the functions for examining and modifying socket options. 
 They are declared in <code>sys/socket.h</code>.
@@ -21,8 +31,8 @@ They are declared in <code>sys/socket.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getsockopt</b><i> (int <var>socket</var>, int <var>level</var>, int <var>optname</var>, void *<var>optval</var>, socklen_t *<var>optlen-ptr</var>)
-</i></td>
+<td align="left">int <b>getsockopt</b><i> </i>(<i>int </i><var>socket</var><i>, int </i><var>level</var><i>, int </i><var>optname</var><i>, void *</i><var>optval</var><i>, socklen_t *</i><var>optlen-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -31,36 +41,36 @@ They are declared in <code>sys/socket.h</code>.
 The <code>getsockopt</code> function gets information about the value of
 option <var>optname</var> at level <var>level</var> for socket <var>socket</var>.
 
-<p>The option value is stored in a buffer that <var>optval</var> points to. 
-Before the call, you should supply in <code>*<var>optlen-ptr</var></code> the
+     <p>The option value is stored in a buffer that <var>optval</var> points to. 
+Before the call, you should supply in <code>*</code><var>optlen-ptr</var><code></code> the
 size of this buffer; on return, it contains the number of bytes of
 information actually stored in the buffer.
 
-<p>Most options interpret the <var>optval</var> buffer as a single <code>int</code>
+     <p>Most options interpret the <var>optval</var> buffer as a single <code>int</code>
 value.
 
-<p>The actual return value of <code>getsockopt</code> is <code>0</code> on success
+     <p>The actual return value of <code>getsockopt</code> is <code>0</code> on success
 and <code>-1</code> on failure.  The following <code>errno</code> error conditions
 are defined:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>socket</var> argument is not a valid file descriptor.
+          <dd>The <var>socket</var> argument is not a valid file descriptor.
 
-<br><dt><code>ENOTSOCK</code>
-<dd>The descriptor <var>socket</var> is not a socket.
+          <br><dt><code>ENOTSOCK</code>
+          <dd>The descriptor <var>socket</var> is not a socket.
 
-<br><dt><code>ENOPROTOOPT</code>
-<dd>The <var>optname</var> doesn't make sense for the given <var>level</var>. 
+          <br><dt><code>ENOPROTOOPT</code>
+          <dd>The <var>optname</var> doesn't make sense for the given <var>level</var>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setsockopt</b><i> (int <var>socket</var>, int <var>level</var>, int <var>optname</var>, void *<var>optval</var>, socklen_t <var>optlen</var>)
-</i></td>
+<td align="left">int <b>setsockopt</b><i> </i>(<i>int </i><var>socket</var><i>, int </i><var>level</var><i>, int </i><var>optname</var><i>, void *</i><var>optval</var><i>, socklen_t </i><var>optlen</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -70,8 +80,8 @@ This function is used to set the socket option <var>optname</var> at level
 <var>level</var> for socket <var>socket</var>.  The value of the option is passed
 in the buffer <var>optval</var> of size <var>optlen</var>.
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

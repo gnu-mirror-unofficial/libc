@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="BSD%20Wait%20Functions">BSD Wait Functions</a>,
-Next:<a rel=next accesskey=n href="Process-Creation-Example.html#Process%20Creation%20Example">Process Creation Example</a>,
-Previous:<a rel=previous accesskey=p href="Process-Completion-Status.html#Process%20Completion%20Status">Process Completion Status</a>,
-Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+Node:&nbsp;<a name="BSD%20Wait%20Functions">BSD Wait Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Process-Creation-Example.html#Process%20Creation%20Example">Process Creation Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Completion-Status.html#Process%20Completion%20Status">Process Completion Status</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
 <hr><br>
+</div>
 
-<h3>BSD Process Wait Functions</h3>
+<h3 class="section">BSD Process Wait Functions</h3>
 
 <p>The GNU library also provides these related facilities for compatibility
 with BSD Unix.  BSD uses the <code>union wait</code> data type to represent
@@ -24,13 +34,13 @@ C Library defines macros such as <code>WEXITSTATUS</code> so that they will
 work on either kind of object, and the <code>wait</code> function is defined
 to accept either type of pointer as its <var>status-ptr</var> argument.
 
-<p>These functions are declared in <code>sys/wait.h</code>.
+   <p>These functions are declared in <code>sys/wait.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>union wait</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -39,50 +49,50 @@ to accept either type of pointer as its <var>status-ptr</var> argument.
 This data type represents program termination status values.  It has
 the following members:
 
-<dl>
+          <dl>
 <dt><code>int w_termsig</code>
-<dd>The value of this member is the same as that of the
+          <dd>The value of this member is the same as that of the
 <code>WTERMSIG</code> macro.
 
-<br><dt><code>int w_coredump</code>
-<dd>The value of this member is the same as that of the
+          <br><dt><code>int w_coredump</code>
+          <dd>The value of this member is the same as that of the
 <code>WCOREDUMP</code> macro.
 
-<br><dt><code>int w_retcode</code>
-<dd>The value of this member is the same as that of the
+          <br><dt><code>int w_retcode</code>
+          <dd>The value of this member is the same as that of the
 <code>WEXITSTATUS</code> macro.
 
-<br><dt><code>int w_stopsig</code>
-<dd>The value of this member is the same as that of the
+          <br><dt><code>int w_stopsig</code>
+          <dd>The value of this member is the same as that of the
 <code>WSTOPSIG</code> macro. 
 </dl>
 
-<p>Instead of accessing these members directly, you should use the
+     <p>Instead of accessing these members directly, you should use the
 equivalent macros. 
 </td></tr>
 </table>
 
-<p>The <code>wait3</code> function is the predecessor to <code>wait4</code>, which is
+   <p>The <code>wait3</code> function is the predecessor to <code>wait4</code>, which is
 more flexible.  <code>wait3</code> is now obsolete.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>wait3</b><i> (union wait *<var>status-ptr</var>, int <var>options</var>, struct rusage *<var>usage</var>)
-</i></td>
+<td align="left">pid_t <b>wait3</b><i> </i>(<i>union wait *</i><var>status-ptr</var><i>, int </i><var>options</var><i>, struct rusage *</i><var>usage</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 If <var>usage</var> is a null pointer, <code>wait3</code> is equivalent to
-<code>waitpid (-1, <var>status-ptr</var>, <var>options</var>)</code>.
+<code>waitpid (-1, </code><var>status-ptr</var><code>, </code><var>options</var><code>)</code>.
 
-<p>If <var>usage</var> is not null, <code>wait3</code> stores usage figures for the
-child process in <code>*<var>rusage</var></code> (but only if the child has
+     <p>If <var>usage</var> is not null, <code>wait3</code> stores usage figures for the
+child process in <code>*</code><var>rusage</var><code></code> (but only if the child has
 terminated, not if it has stopped).  See <a href="Resource-Usage.html#Resource%20Usage">Resource Usage</a>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

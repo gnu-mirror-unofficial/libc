@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Completion">Process Completion</a>,
-Next:<a rel=next accesskey=n href="Process-Completion-Status.html#Process%20Completion%20Status">Process Completion Status</a>,
-Previous:<a rel=previous accesskey=p href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>,
-Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+Node:&nbsp;<a name="Process%20Completion">Process Completion</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Process-Completion-Status.html#Process%20Completion%20Status">Process Completion Status</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
 <hr><br>
+</div>
 
-<h3>Process Completion</h3>
+<h3 class="section">Process Completion</h3>
 
 <p>The functions described in this section are used to wait for a child
 process to terminate or stop, and determine its status.  These functions
@@ -23,8 +33,8 @@ are declared in the header file <code>sys/wait.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>waitpid</b><i> (pid_t <var>pid</var>, int *<var>status-ptr</var>, int <var>options</var>)
-</i></td>
+<td align="left">pid_t <b>waitpid</b><i> </i>(<i>pid_t </i><var>pid</var><i>, int *</i><var>status-ptr</var><i>, int </i><var>options</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -35,7 +45,7 @@ child process whose process ID is <var>pid</var>.  Normally, the calling
 process is suspended until the child process makes status information
 available by terminating.
 
-<p>Other values for the <var>pid</var> argument have special interpretations.  A
+     <p>Other values for the <var>pid</var> argument have special interpretations.  A
 value of <code>-1</code> or <code>WAIT_ANY</code> requests status information for
 any child process; a value of <code>0</code> or <code>WAIT_MYPGRP</code> requests
 information for any child process in the same process group as the
@@ -43,86 +53,86 @@ calling process; and any other negative value - <var>pgid</var>
 requests information for any child process whose process group ID is
 <var>pgid</var>.
 
-<p>If status information for a child process is available immediately, this
+     <p>If status information for a child process is available immediately, this
 function returns immediately without waiting.  If more than one eligible
 child process has status information available, one of them is chosen
 randomly, and its status is returned immediately.  To get the status
 from the other eligible child processes, you need to call <code>waitpid</code>
 again.
 
-<p>The <var>options</var> argument is a bit mask.  Its value should be the
+     <p>The <var>options</var> argument is a bit mask.  Its value should be the
 bitwise OR (that is, the <code>|</code> operator) of zero or more of the
 <code>WNOHANG</code> and <code>WUNTRACED</code> flags.  You can use the
 <code>WNOHANG</code> flag to indicate that the parent process shouldn't wait;
 and the <code>WUNTRACED</code> flag to request status information from stopped
 processes as well as processes that have terminated.
 
-<p>The status information from the child process is stored in the object
+     <p>The status information from the child process is stored in the object
 that <var>status-ptr</var> points to, unless <var>status-ptr</var> is a null pointer.
 
-<p>This function is a cancellation point in multi-threaded programs.  This
+     <p>This function is a cancellation point in multi-threaded programs.  This
 is a problem if the thread allocates some resources (like memory, file
 descriptors, semaphores or whatever) at the time <code>waitpid</code> is
 called.  If the thread gets canceled these resources stay allocated
 until the program ends.  To avoid this calls to <code>waitpid</code> should be
 protected using cancellation handlers.
 
-<p>The return value is normally the process ID of the child process whose
+     <p>The return value is normally the process ID of the child process whose
 status is reported.  If there are child processes but none of them is
 waiting to be noticed, <code>waitpid</code> will block until one is.  However,
 if the <code>WNOHANG</code> option was specified, <code>waitpid</code> will return
 zero instead of blocking.
 
-<p>If a specific PID to wait for was given to <code>waitpid</code>, it will
+     <p>If a specific PID to wait for was given to <code>waitpid</code>, it will
 ignore all other children (if any).  Therefore if there are children
 waiting to be noticed but the child whose PID was specified is not one
 of them, <code>waitpid</code> will block or return zero as described above.
 
-<p>A value of <code>-1</code> is returned in case of error.  The following
+     <p>A value of <code>-1</code> is returned in case of error.  The following
 <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EINTR</code>
-<dd>The function was interrupted by delivery of a signal to the calling
+          <dd>The function was interrupted by delivery of a signal to the calling
 process.  See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>.
 
-<br><dt><code>ECHILD</code>
-<dd>There are no child processes to wait for, or the specified <var>pid</var>
+          <br><dt><code>ECHILD</code>
+          <dd>There are no child processes to wait for, or the specified <var>pid</var>
 is not a child of the calling process.
 
-<br><dt><code>EINVAL</code>
-<dd>An invalid value was provided for the <var>options</var> argument. 
+          <br><dt><code>EINVAL</code>
+          <dd>An invalid value was provided for the <var>options</var> argument. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>These symbolic constants are defined as values for the <var>pid</var> argument
+   <p>These symbolic constants are defined as values for the <var>pid</var> argument
 to the <code>waitpid</code> function.
 
-<dl>
+     <dl>
 <dt><code>WAIT_ANY</code>
-<dd>
+     <dd>
 This constant macro (whose value is <code>-1</code>) specifies that
 <code>waitpid</code> should return status information about any child process.
 
-<br><dt><code>WAIT_MYPGRP</code>
-<dd>This constant (with value <code>0</code>) specifies that <code>waitpid</code> should
+     <br><dt><code>WAIT_MYPGRP</code>
+     <dd>This constant (with value <code>0</code>) specifies that <code>waitpid</code> should
 return status information about any child process in the same process
 group as the calling process. 
 </dl>
 
-<p>These symbolic constants are defined as flags for the <var>options</var>
+   <p>These symbolic constants are defined as flags for the <var>options</var>
 argument to the <code>waitpid</code> function.  You can bitwise-OR the flags
 together to obtain a value to use as the argument.
 
-<dl>
+     <dl>
 <dt><code>WNOHANG</code>
-<dd>
+     <dd>
 This flag specifies that <code>waitpid</code> should return immediately
 instead of waiting, if there is no child process ready to be noticed.
 
-<br><dt><code>WUNTRACED</code>
-<dd>
+     <br><dt><code>WUNTRACED</code>
+     <dd>
 This flag specifies that <code>waitpid</code> should report the status of any
 child processes that have been stopped as well as those that have
 terminated. 
@@ -131,8 +141,8 @@ terminated.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>wait</b><i> (int *<var>status-ptr</var>)
-</i></td>
+<td align="left">pid_t <b>wait</b><i> </i>(<i>int *</i><var>status-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -141,15 +151,15 @@ terminated.
 This is a simplified version of <code>waitpid</code>, and is used to wait
 until any one child process terminates.  The call:
 
-<br><pre>wait (&amp;status)
-</pre>
+     <pre class="smallexample">          wait (&amp;status)
+          </pre>
 
-<p>is exactly equivalent to:
+     <p>is exactly equivalent to:
 
-<br><pre>waitpid (-1, &amp;status, 0)
-</pre>
+     <pre class="smallexample">          waitpid (-1, &amp;status, 0)
+          </pre>
 
-<p>This function is a cancellation point in multi-threaded programs.  This
+     <p>This function is a cancellation point in multi-threaded programs.  This
 is a problem if the thread allocates some resources (like memory, file
 descriptors, semaphores or whatever) at the time <code>wait</code> is
 called.  If the thread gets canceled these resources stay allocated
@@ -161,49 +171,49 @@ protected using cancellation handlers.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>wait4</b><i> (pid_t <var>pid</var>, int *<var>status-ptr</var>, int <var>options</var>, struct rusage *<var>usage</var>)
-</i></td>
+<td align="left">pid_t <b>wait4</b><i> </i>(<i>pid_t </i><var>pid</var><i>, int *</i><var>status-ptr</var><i>, int </i><var>options</var><i>, struct rusage *</i><var>usage</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 If <var>usage</var> is a null pointer, <code>wait4</code> is equivalent to
-<code>waitpid (<var>pid</var>, <var>status-ptr</var>, <var>options</var>)</code>.
+<code>waitpid (</code><var>pid</var><code>, </code><var>status-ptr</var><code>, </code><var>options</var><code>)</code>.
 
-<p>If <var>usage</var> is not null, <code>wait4</code> stores usage figures for the
-child process in <code>*<var>rusage</var></code> (but only if the child has
+     <p>If <var>usage</var> is not null, <code>wait4</code> stores usage figures for the
+child process in <code>*</code><var>rusage</var><code></code> (but only if the child has
 terminated, not if it has stopped).  See <a href="Resource-Usage.html#Resource%20Usage">Resource Usage</a>.
 
-<p>This function is a BSD extension. 
+     <p>This function is a BSD extension. 
 </td></tr>
 </table>
 
-<p>Here's an example of how to use <code>waitpid</code> to get the status from
+   <p>Here's an example of how to use <code>waitpid</code> to get the status from
 all child processes that have terminated, without ever waiting.  This
 function is designed to be a handler for <code>SIGCHLD</code>, the signal that
 indicates that at least one child process has terminated.
 
-<br><pre>void
-sigchld_handler (int signum)
-{
-  int pid, status, serrno;
-  serrno = errno;
-  while (1)
-    {
-      pid = waitpid (WAIT_ANY, &amp;status, WNOHANG);
-      if (pid &lt; 0)
-        {
-          perror ("waitpid");
-          break;
-        }
-      if (pid == 0)
-        break;
-      notice_termination (pid, status);
-    }
-  errno = serrno;
-}
-</pre>
+<pre class="smallexample">     void
+     sigchld_handler (int signum)
+     {
+       int pid, status, serrno;
+       serrno = errno;
+       while (1)
+         {
+           pid = waitpid (WAIT_ANY, &amp;status, WNOHANG);
+           if (pid &lt; 0)
+             {
+               perror ("waitpid");
+               break;
+             }
+           if (pid == 0)
+             break;
+           notice_termination (pid, status);
+         }
+       errno = serrno;
+     }
+     </pre>
 
-</body></html>
+   </body></html>
 

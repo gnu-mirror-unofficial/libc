@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Complex%20Numbers">Complex Numbers</a>,
-Next:<a rel=next accesskey=n href="Operations-on-Complex.html#Operations%20on%20Complex">Operations on Complex</a>,
-Previous:<a rel=previous accesskey=p href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>,
-Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+Node:&nbsp;<a name="Complex%20Numbers">Complex Numbers</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Operations-on-Complex.html#Operations%20on%20Complex">Operations on Complex</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
 <hr><br>
+</div>
 
-<h3>Complex Numbers</h3>
+<h3 class="section">Complex Numbers</h3>
 
 <p>ISO&nbsp;C99 introduces support for complex numbers in C.  This is done
 with a new type qualifier, <code>complex</code>.  It is a keyword if and only
@@ -22,7 +32,7 @@ if <code>complex.h</code> has been included.  There are three complex types,
 corresponding to the three real types:  <code>float complex</code>,
 <code>double complex</code>, and <code>long double complex</code>.
 
-<p>To construct complex numbers you need a way to indicate the imaginary
+   <p>To construct complex numbers you need a way to indicate the imaginary
 part of a number.  There is no standard notation for an imaginary
 floating point constant.  Instead, <code>complex.h</code> defines two macros
 that can be used to create complex numbers.
@@ -31,7 +41,7 @@ that can be used to create complex numbers.
 <table width="100%">
 <tr>
 <td align="left">const float complex <b>_Complex_I</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -42,10 +52,10 @@ Multiplying a real floating-point value by <code>_Complex_I</code> gives a
 complex number whose value is purely imaginary.  You can use this to
 construct complex constants:
 
-<br><pre>3.0 + 4.0i = <code>3.0 + 4.0 * _Complex_I</code>
-</pre>
+     <pre class="smallexample">          3.0 + 4.0i = <code>3.0 + 4.0 * _Complex_I</code>
+          </pre>
 
-<p>Note that <code>_Complex_I * _Complex_I</code> has the value <code>-1</code>, but
+     <p>Note that <code>_Complex_I * _Complex_I</code> has the value <code>-1</code>, but
 the type of that value is <code>complex</code>. 
 </td></tr>
 </table>
@@ -57,7 +67,7 @@ a shorter name for the same constant.
 <table width="100%">
 <tr>
 <td align="left">const float complex <b>I</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -67,16 +77,16 @@ This macro has exactly the same value as <code>_Complex_I</code>.  Most of the
 time it is preferable.  However, it causes problems if you want to use
 the identifier <code>I</code> for something else.  You can safely write
 
-<br><pre>#include &lt;complex.h&gt;
-#undef I
-</pre>
+     <pre class="smallexample">          #include &lt;complex.h&gt;
+          #undef I
+          </pre>
 
-<p>if you need <code>I</code> for your own purposes.  (In that case we recommend
+     <p>if you need <code>I</code> for your own purposes.  (In that case we recommend
 you also define some other short name for <code>_Complex_I</code>, such as
 <code>J</code>.)
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

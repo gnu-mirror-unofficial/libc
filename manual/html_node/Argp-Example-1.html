@@ -2,40 +2,50 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Example%201">Argp Example 1</a>,
-Next:<a rel=next accesskey=n href="Argp-Example-2.html#Argp%20Example%202">Argp Example 2</a>,
-Up:<a rel=up accesskey=u href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>
+Node:&nbsp;<a name="Argp%20Example%201">Argp Example 1</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Example-2.html#Argp%20Example%202">Argp Example 2</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>
 <hr><br>
+</div>
 
-<h5>A Minimal Program Using Argp</h5>
+<h3 class="subsubsection">A Minimal Program Using Argp</h5>
 
 <p>This is perhaps the smallest program possible that uses argp.  It won't
 do much except give an error messages and exit when there are any
 arguments, and prints a rather pointless message for <code>--help</code>.
 
-<br><pre>
+<pre class="smallexample">
 
-/* Argp example #1 - a minimal program using argp */
+     /* Argp example #1 - a minimal program using argp */
+     
+     /* This is (probably) the smallest possible program that
+        uses argp.  It won't do much except give an error
+        messages and exit when there are any arguments, and print
+        a (rather pointless) messages for -help. */
+     
+     #include &lt;argp.h&gt;
+     
+     int main (int argc, char **argv)
+     {
+       argp_parse (0, argc, argv, 0, 0, 0);
+       exit (0);
+     }
+     </pre>
 
-/* This is (probably) the smallest possible program that
-   uses argp.  It won't do much except give an error
-   messages and exit when there are any arguments, and print
-   a (rather pointless) messages for -help. */
-
-#include &lt;argp.h&gt;
-
-int main (int argc, char **argv)
-{
-  argp_parse (0, argc, argv, 0, 0, 0);
-  exit (0);
-}
-</pre>
-
-</body></html>
+   </body></html>
 

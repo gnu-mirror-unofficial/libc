@@ -2,30 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Hash%20Search%20Function">Hash Search Function</a>,
-Next:<a rel=next accesskey=n href="Tree-Search-Function.html#Tree%20Search%20Function">Tree Search Function</a>,
-Previous:<a rel=previous accesskey=p href="Search-Sort-Example.html#Search%2fSort%20Example">Search/Sort Example</a>,
-Up:<a rel=up accesskey=u href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
+Node:&nbsp;<a name="Hash%20Search%20Function">Hash Search Function</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Tree-Search-Function.html#Tree%20Search%20Function">Tree Search Function</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Search-Sort-Example.html#Search%2fSort%20Example">Search/Sort Example</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
 <hr><br>
+</div>
 
-<h3>The <code>hsearch</code> function.</h3>
+<h3 class="section">The <code>hsearch</code> function.</h3>
 
 <p>The functions mentioned so far in this chapter are searching in a sorted
 or unsorted array.  There are other methods to organize information
 which later should be searched.  The costs of insert, delete and search
-differ.  One possible implementation is using hashing tables.
+differ.  One possible implementation is using hashing tables. 
+The following functions are declared in the the header file <code>search.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>hcreate</b><i> (size_t <var>nel</var>)
-</i></td>
+<td align="left">int <b>hcreate</b><i> </i>(<i>size_t </i><var>nel</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -42,17 +53,17 @@ only be achieved if few collisions exist.  See Knuth's "The Art of
 Computer Programming, Part 3: Searching and Sorting" for more
 information.
 
-<p>The weakest aspect of this function is that there can be at most one
+     <p>The weakest aspect of this function is that there can be at most one
 hashing table used through the whole program.  The table is allocated
 in local memory out of control of the programmer.  As an extension the
 GNU C library provides an additional set of functions with an reentrant
 interface which provide a similar interface but which allow to keep
 arbitrarily many hashing tables.
 
-<p>It is possible to use more than one hashing table in the program run if
+     <p>It is possible to use more than one hashing table in the program run if
 the former table is first destroyed by a call to <code>hdestroy</code>.
 
-<p>The function returns a non-zero value if successful.  If it return zero
+     <p>The function returns a non-zero value if successful.  If it return zero
 something went wrong.  This could either mean there is already a hashing
 table in use or the program runs out of memory. 
 </td></tr>
@@ -61,8 +72,8 @@ table in use or the program runs out of memory.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>hdestroy</b><i> (void)
-</i></td>
+<td align="left">void <b>hdestroy</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -73,7 +84,7 @@ allocated in a previous call of <code>hcreate</code>.  After a call to this
 function it is again possible to call <code>hcreate</code> and allocate a new
 table with possibly different size.
 
-<p>It is important to remember that the elements contained in the hashing
+     <p>It is important to remember that the elements contained in the hashing
 table at the time <code>hdestroy</code> is called are <em>not</em> freed by this
 function.  It is the responsibility of the program code to free those
 strings (if necessary at all).  Freeing all the element memory is not
@@ -88,14 +99,14 @@ used until the end of the program run.
 </td></tr>
 </table>
 
-<p>Entries of the hashing table and keys for the search are defined using
+   <p>Entries of the hashing table and keys for the search are defined using
 this type:
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct ENTRY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data type</td>
 </tr>
 </table>
@@ -107,23 +118,23 @@ This is a limiting restriction of the functionality of the
 the NUL character always and solely to terminate the records.  It is not
 possible to handle general binary data.
 
-<dl>
+          <dl>
 <dt><code>char *key</code>
-<dd>Pointer to a zero-terminated string of characters describing the key for
+          <dd>Pointer to a zero-terminated string of characters describing the key for
 the search or the element in the hashing table. 
 <br><dt><code>char *data</code>
-<dd>Pointer to a zero-terminated string of characters describing the data. 
+          <dd>Pointer to a zero-terminated string of characters describing the data. 
 If the functions will be called only for searching an existing entry
 this element might stay undefined since it is not used. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">ENTRY * <b>hsearch</b><i> (ENTRY <var>item</var>, ACTION <var>action</var>)
-</i></td>
+<td align="left">ENTRY * <b>hsearch</b><i> </i>(<i>ENTRY </i><var>item</var><i>, ACTION </i><var>action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -132,24 +143,24 @@ this element might stay undefined since it is not used.
 To search in a hashing table created using <code>hcreate</code> the
 <code>hsearch</code> function must be used.  This function can perform simple
 search for an element (if <var>action</var> has the <code>FIND</code>) or it can
-alternatively insert the key element into the hashing table, possibly
-replacing a previous value (if <var>action</var> is <code>ENTER</code>).
+alternatively insert the key element into the hashing table.  Entries
+are never replaced.
 
-<p>The key is denoted by a pointer to an object of type <code>ENTRY</code>.  For
+     <p>The key is denoted by a pointer to an object of type <code>ENTRY</code>.  For
 locating the corresponding position in the hashing table only the
 <code>key</code> element of the structure is used.
 
-<p>The return value depends on the <var>action</var> parameter value.  If it is
-<code>FIND</code> the value is a pointer to the matching element in the
-hashing table or <code>NULL</code> if no matching element exists.  If
-<var>action</var> is <code>ENTER</code> the return value is only <code>NULL</code> if the
-programs runs out of memory while adding the new element to the table. 
-Otherwise the return value is a pointer to the element in the hashing
-table which contains newly added element based on the data in <var>key</var>. 
+     <p>If an entry with matching key is found the <var>action</var> parameter is
+irrelevant.  The found entry is returned.  If no matching entry is found
+and the <var>action</var> parameter has the value <code>FIND</code> the function
+returns a <code>NULL</code> pointer.  If no entry is found and the
+<var>action</var> parameter has the value <code>ENTER</code> a new entry is added
+to the hashing table which is initialized with the parameter <var>item</var>. 
+A pointer to the newly added entry is returned. 
 </td></tr>
 </table>
 
-<p>As mentioned before the hashing table used by the functions described so
+   <p>As mentioned before the hashing table used by the functions described so
 far is global and there can be at any time at most one hashing table in
 the program.  A solution is to use the following functions which are a
 GNU extension.  All have in common that they operate on a hashing table
@@ -160,8 +171,8 @@ members should be changed directly.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>hcreate_r</b><i> (size_t <var>nel</var>, struct hsearch_data *<var>htab</var>)
-</i></td>
+<td align="left">int <b>hcreate_r</b><i> </i>(<i>size_t </i><var>nel</var><i>, struct hsearch_data *</i><var>htab</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -172,11 +183,12 @@ The <code>hcreate_r</code> function initializes the object pointed to by
 So this function is equivalent to the <code>hcreate</code> function except
 that the initialized data structure is controlled by the user.
 
-<p>This allows having more than one hashing table at one time.  The
-memory necessary for the <code>struct hsearch_data</code> object can be
-allocated dynamically.
+     <p>This allows having more than one hashing table at one time.  The memory
+necessary for the <code>struct hsearch_data</code> object can be allocated
+dynamically.  It must be initialized with zero before calling this
+function.
 
-<p>The return value is non-zero if the operation were successful.  if the
+     <p>The return value is non-zero if the operation were successful.  if the
 return value is zero something went wrong which probably means the
 programs runs out of memory. 
 </td></tr>
@@ -185,8 +197,8 @@ programs runs out of memory.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>hdestroy_r</b><i> (struct hsearch_data *<var>htab</var>)
-</i></td>
+<td align="left">void <b>hdestroy_r</b><i> </i>(<i>struct hsearch_data *</i><var>htab</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -202,8 +214,8 @@ for the elements of the table.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>hsearch_r</b><i> (ENTRY <var>item</var>, ACTION <var>action</var>, ENTRY **<var>retval</var>, struct hsearch_data *<var>htab</var>)
-</i></td>
+<td align="left">int <b>hsearch_r</b><i> </i>(<i>ENTRY </i><var>item</var><i>, ACTION </i><var>action</var><i>, ENTRY **</i><var>retval</var><i>, struct hsearch_data *</i><var>htab</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -215,7 +227,7 @@ operating on a single global hashing table the function works on the
 table described by the object pointed to by <var>htab</var> (which is
 initialized by a call to <code>hcreate_r</code>).
 
-<p>Another difference to <code>hcreate</code> is that the pointer to the found
+     <p>Another difference to <code>hcreate</code> is that the pointer to the found
 entry in the table is not the return value of the functions.  It is
 returned by storing it in a pointer variables pointed to by the
 <var>retval</var> parameter.  The return value of the function is an integer
@@ -223,16 +235,16 @@ value indicating success if it is non-zero and failure if it is zero.
 In the latter case the global variable <var>errno</var> signals the reason for
 the failure.
 
-<dl>
+          <dl>
 <dt><code>ENOMEM</code>
-<dd>The table is filled and <code>hsearch_r</code> was called with an so far
+          <dd>The table is filled and <code>hsearch_r</code> was called with an so far
 unknown key and <var>action</var> set to <code>ENTER</code>. 
 <br><dt><code>ESRCH</code>
-<dd>The <var>action</var> parameter is <code>FIND</code> and no corresponding element
+          <dd>The <var>action</var> parameter is <code>FIND</code> and no corresponding element
 is found in the table. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

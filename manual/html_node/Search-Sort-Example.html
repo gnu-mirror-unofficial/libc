@@ -2,158 +2,168 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Search%2fSort%20Example">Search/Sort Example</a>,
-Next:<a rel=next accesskey=n href="Hash-Search-Function.html#Hash%20Search%20Function">Hash Search Function</a>,
-Previous:<a rel=previous accesskey=p href="Array-Sort-Function.html#Array%20Sort%20Function">Array Sort Function</a>,
-Up:<a rel=up accesskey=u href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
+Node:&nbsp;<a name="Search%2fSort%20Example">Search/Sort Example</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Hash-Search-Function.html#Hash%20Search%20Function">Hash Search Function</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Array-Sort-Function.html#Array%20Sort%20Function">Array Sort Function</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
 <hr><br>
+</div>
 
-<h3>Searching and Sorting Example</h3>
+<h3 class="section">Searching and Sorting Example</h3>
 
 <p>Here is an example showing the use of <code>qsort</code> and <code>bsearch</code>
 with an array of structures.  The objects in the array are sorted
 by comparing their <code>name</code> fields with the <code>strcmp</code> function. 
 Then, we can look up individual objects based on their names.
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+     #include &lt;stdlib.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;string.h&gt;
+     
+     /* Define an array of critters to sort. */
+     
+     struct critter
+       {
+         const char *name;
+         const char *species;
+       };
+     
+     struct critter muppets[] =
+       {
+         {"Kermit", "frog"},
+         {"Piggy", "pig"},
+         {"Gonzo", "whatever"},
+         {"Fozzie", "bear"},
+         {"Sam", "eagle"},
+         {"Robin", "frog"},
+         {"Animal", "animal"},
+         {"Camilla", "chicken"},
+         {"Sweetums", "monster"},
+         {"Dr. Strangepork", "pig"},
+         {"Link Hogthrob", "pig"},
+         {"Zoot", "human"},
+         {"Dr. Bunsen Honeydew", "human"},
+         {"Beaker", "human"},
+         {"Swedish Chef", "human"}
+       };
+     
+     int count = sizeof (muppets) / sizeof (struct critter);
+     
+     
+     
+     /* This is the comparison function used for sorting and searching. */
+     
+     int
+     critter_cmp (const struct critter *c1, const struct critter *c2)
+     {
+       return strcmp (c1-&gt;name, c2-&gt;name);
+     }
+     
+     
+     /* Print information about a critter. */
+     
+     void
+     print_critter (const struct critter *c)
+     {
+       printf ("%s, the %s\n", c-&gt;name, c-&gt;species);
+     }
+     
+     
+     /* Do the lookup into the sorted array. */
+     
+     void
+     find_critter (const char *name)
+     {
+       struct critter target, *result;
+       target.name = name;
+       result = bsearch (&amp;target, muppets, count, sizeof (struct critter),
+                         critter_cmp);
+       if (result)
+         print_critter (result);
+       else
+         printf ("Couldn't find %s.\n", name);
+     }
+     
+     /* Main program. */
+     
+     int
+     main (void)
+     {
+       int i;
+     
+       for (i = 0; i &lt; count; i++)
+         print_critter (&amp;muppets[i]);
+       printf ("\n");
+     
+       qsort (muppets, count, sizeof (struct critter), critter_cmp);
+     
+       for (i = 0; i &lt; count; i++)
+         print_critter (&amp;muppets[i]);
+       printf ("\n");
+     
+       find_critter ("Kermit");
+       find_critter ("Gonzo");
+       find_critter ("Janice");
+     
+       return 0;
+     }
+     </pre>
 
-/* Define an array of critters to sort. */
+   <p>The output from this program looks like:
 
-struct critter
-  {
-    const char *name;
-    const char *species;
-  };
+<pre class="smallexample">     Kermit, the frog
+     Piggy, the pig
+     Gonzo, the whatever
+     Fozzie, the bear
+     Sam, the eagle
+     Robin, the frog
+     Animal, the animal
+     Camilla, the chicken
+     Sweetums, the monster
+     Dr. Strangepork, the pig
+     Link Hogthrob, the pig
+     Zoot, the human
+     Dr. Bunsen Honeydew, the human
+     Beaker, the human
+     Swedish Chef, the human
+     
+     Animal, the animal
+     Beaker, the human
+     Camilla, the chicken
+     Dr. Bunsen Honeydew, the human
+     Dr. Strangepork, the pig
+     Fozzie, the bear
+     Gonzo, the whatever
+     Kermit, the frog
+     Link Hogthrob, the pig
+     Piggy, the pig
+     Robin, the frog
+     Sam, the eagle
+     Swedish Chef, the human
+     Sweetums, the monster
+     Zoot, the human
+     
+     Kermit, the frog
+     Gonzo, the whatever
+     Couldn't find Janice.
+     </pre>
 
-struct critter muppets[] =
-  {
-    {"Kermit", "frog"},
-    {"Piggy", "pig"},
-    {"Gonzo", "whatever"},
-    {"Fozzie", "bear"},
-    {"Sam", "eagle"},
-    {"Robin", "frog"},
-    {"Animal", "animal"},
-    {"Camilla", "chicken"},
-    {"Sweetums", "monster"},
-    {"Dr. Strangepork", "pig"},
-    {"Link Hogthrob", "pig"},
-    {"Zoot", "human"},
-    {"Dr. Bunsen Honeydew", "human"},
-    {"Beaker", "human"},
-    {"Swedish Chef", "human"}
-  };
-
-int count = sizeof (muppets) / sizeof (struct critter);
-
-
-
-/* This is the comparison function used for sorting and searching. */
-
-int
-critter_cmp (const struct critter *c1, const struct critter *c2)
-{
-  return strcmp (c1-&gt;name, c2-&gt;name);
-}
-
-
-/* Print information about a critter. */
-
-void
-print_critter (const struct critter *c)
-{
-  printf ("%s, the %s\n", c-&gt;name, c-&gt;species);
-}
-
-
-/* Do the lookup into the sorted array. */
-
-void
-find_critter (const char *name)
-{
-  struct critter target, *result;
-  target.name = name;
-  result = bsearch (&amp;target, muppets, count, sizeof (struct critter),
-                    critter_cmp);
-  if (result)
-    print_critter (result);
-  else
-    printf ("Couldn't find %s.\n", name);
-}
-
-/* Main program. */
-
-int
-main (void)
-{
-  int i;
-
-  for (i = 0; i &lt; count; i++)
-    print_critter (&amp;muppets[i]);
-  printf ("\n");
-
-  qsort (muppets, count, sizeof (struct critter), critter_cmp);
-
-  for (i = 0; i &lt; count; i++)
-    print_critter (&amp;muppets[i]);
-  printf ("\n");
-
-  find_critter ("Kermit");
-  find_critter ("Gonzo");
-  find_critter ("Janice");
-
-  return 0;
-}
-</pre>
-
-<p>The output from this program looks like:
-
-<br><pre>Kermit, the frog
-Piggy, the pig
-Gonzo, the whatever
-Fozzie, the bear
-Sam, the eagle
-Robin, the frog
-Animal, the animal
-Camilla, the chicken
-Sweetums, the monster
-Dr. Strangepork, the pig
-Link Hogthrob, the pig
-Zoot, the human
-Dr. Bunsen Honeydew, the human
-Beaker, the human
-Swedish Chef, the human
-
-Animal, the animal
-Beaker, the human
-Camilla, the chicken
-Dr. Bunsen Honeydew, the human
-Dr. Strangepork, the pig
-Fozzie, the bear
-Gonzo, the whatever
-Kermit, the frog
-Link Hogthrob, the pig
-Piggy, the pig
-Robin, the frog
-Sam, the eagle
-Swedish Chef, the human
-Sweetums, the monster
-Zoot, the human
-
-Kermit, the frog
-Gonzo, the whatever
-Couldn't find Janice.
-</pre>
-
-</body></html>
+   </body></html>
 

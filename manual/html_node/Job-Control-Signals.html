@@ -2,32 +2,42 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Job%20Control%20Signals">Job Control Signals</a>,
-Next:<a rel=next accesskey=n href="Operation-Error-Signals.html#Operation%20Error%20Signals">Operation Error Signals</a>,
-Previous:<a rel=previous accesskey=p href="Asynchronous-I-O-Signals.html#Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>,
-Up:<a rel=up accesskey=u href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
+Node:&nbsp;<a name="Job%20Control%20Signals">Job Control Signals</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Operation-Error-Signals.html#Operation%20Error%20Signals">Operation Error Signals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Asynchronous-I-O-Signals.html#Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
 <hr><br>
+</div>
 
-<h4>Job Control Signals</h4>
+<h3 class="subsection">Job Control Signals</h4>
 
 <p>These signals are used to support job control.  If your system
 doesn't support job control, then these macros are defined but the
 signals themselves can't be raised or handled.
 
-<p>You should generally leave these signals alone unless you really
+   <p>You should generally leave these signals alone unless you really
 understand how job control works.  See <a href="Job-Control.html#Job%20Control">Job Control</a>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGCHLD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -36,7 +46,7 @@ understand how job control works.  See <a href="Job-Control.html#Job%20Control">
 This signal is sent to a parent process whenever one of its child
 processes terminates or stops.
 
-<p>The default action for this signal is to ignore it.  If you establish a
+     <p>The default action for this signal is to ignore it.  If you establish a
 handler for this signal while there are child processes that have
 terminated but not reported their status via <code>wait</code> or
 <code>waitpid</code> (see <a href="Process-Completion.html#Process%20Completion">Process Completion</a>), whether your new handler
@@ -49,7 +59,7 @@ system.
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGCLD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -63,7 +73,7 @@ This is an obsolete name for <code>SIGCHLD</code>.
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGCONT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -75,7 +85,7 @@ stopped, before the signal is delivered.  The default behavior is to do
 nothing else.  You cannot block this signal.  You can set a handler, but
 <code>SIGCONT</code> always makes the process continue regardless.
 
-<p>Most programs have no reason to handle <code>SIGCONT</code>; they simply
+     <p>Most programs have no reason to handle <code>SIGCONT</code>; they simply
 resume execution without realizing they were ever stopped.  You can use
 a handler for <code>SIGCONT</code> to make a program do something special when
 it is stopped and continued--for example, to reprint a prompt when it
@@ -87,7 +97,7 @@ is suspended while waiting for input.
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGSTOP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -102,7 +112,7 @@ ignored, or blocked.
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGTSTP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -111,12 +121,12 @@ ignored, or blocked.
 The <code>SIGTSTP</code> signal is an interactive stop signal.  Unlike
 <code>SIGSTOP</code>, this signal can be handled and ignored.
 
-<p>Your program should handle this signal if you have a special need to
+     <p>Your program should handle this signal if you have a special need to
 leave files or system tables in a secure state when a process is
 stopped.  For example, programs that turn off echoing should handle
 <code>SIGTSTP</code> so they can turn echoing back on before stopping.
 
-<p>This signal is generated when the user types the SUSP character
+     <p>This signal is generated when the user types the SUSP character
 (normally <kbd>C-z</kbd>).  For more information about terminal driver
 support, see <a href="Special-Characters.html#Special%20Characters">Special Characters</a>. 
 </td></tr>
@@ -126,7 +136,7 @@ support, see <a href="Special-Characters.html#Special%20Characters">Special Char
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGTTIN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -145,7 +155,7 @@ the terminal driver, see <a href="Access-to-the-Terminal.html#Access%20to%20the%
 <table width="100%">
 <tr>
 <td align="left">int <b>SIGTTOU</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -159,7 +169,7 @@ only generated for an attempt to write to the terminal if the
 </td></tr>
 </table>
 
-<p>While a process is stopped, no more signals can be delivered to it until
+   <p>While a process is stopped, no more signals can be delivered to it until
 it is continued, except <code>SIGKILL</code> signals and (obviously)
 <code>SIGCONT</code> signals.  The signals are marked as pending, but not
 delivered until the process is continued.  The <code>SIGKILL</code> signal
@@ -170,7 +180,7 @@ process to be continued anyway if it is stopped.  Sending a
 that process to be discarded.  Likewise, any pending <code>SIGCONT</code>
 signals for a process are discarded when it receives a stop signal.
 
-<p>When a process in an orphaned process group (see <a href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>) receives a <code>SIGTSTP</code>, <code>SIGTTIN</code>, or <code>SIGTTOU</code>
+   <p>When a process in an orphaned process group (see <a href="Orphaned-Process-Groups.html#Orphaned%20Process%20Groups">Orphaned Process Groups</a>) receives a <code>SIGTSTP</code>, <code>SIGTTIN</code>, or <code>SIGTTOU</code>
 signal and does not handle it, the process does not stop.  Stopping the
 process would probably not be very useful, since there is no shell
 program that will notice it stop and allow the user to continue it. 
@@ -180,5 +190,5 @@ such as <code>SIGKILL</code> or <code>SIGHUP</code>.  In the GNU system, the pro
 dies with <code>SIGKILL</code>; this avoids the problem of many stopped,
 orphaned processes lying around the system.
 
-</body></html>
+   </body></html>
 

@@ -2,55 +2,65 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Status%20bit%20operations">Status bit operations</a>,
-Next:<a rel=next accesskey=n href="Math-Error-Reporting.html#Math%20Error%20Reporting">Math Error Reporting</a>,
-Previous:<a rel=previous accesskey=p href="Infinity-and-NaN.html#Infinity%20and%20NaN">Infinity and NaN</a>,
-Up:<a rel=up accesskey=u href="Floating-Point-Errors.html#Floating%20Point%20Errors">Floating Point Errors</a>
+Node:&nbsp;<a name="Status%20bit%20operations">Status bit operations</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Math-Error-Reporting.html#Math%20Error%20Reporting">Math Error Reporting</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Infinity-and-NaN.html#Infinity%20and%20NaN">Infinity and NaN</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Floating-Point-Errors.html#Floating%20Point%20Errors">Floating Point Errors</a>
 <hr><br>
+</div>
 
-<h4>Examining the FPU status word</h4>
+<h3 class="subsection">Examining the FPU status word</h4>
 
 <p>ISO&nbsp;C99 defines functions to query and manipulate the
 floating-point status word.  You can use these functions to check for
 untrapped exceptions when it's convenient, rather than worrying about
 them in the middle of a calculation.
 
-<p>These constants represent the various IEEE&nbsp;754 exceptions.  Not all
+   <p>These constants represent the various IEEE&nbsp;754 exceptions.  Not all
 FPUs report all the different exceptions.  Each constant is defined if
 and only if the FPU you are compiling for supports that exception, so
 you can test for FPU support with <code>#ifdef</code>.  They are defined in
 <code>fenv.h</code>.
 
-<dl>
+     <dl>
 <dt><code>FE_INEXACT</code>
-<dd> The inexact exception. 
+     <dd> The inexact exception. 
 <br><dt><code>FE_DIVBYZERO</code>
-<dd> The divide by zero exception. 
+     <dd> The divide by zero exception. 
 <br><dt><code>FE_UNDERFLOW</code>
-<dd> The underflow exception. 
+     <dd> The underflow exception. 
 <br><dt><code>FE_OVERFLOW</code>
-<dd> The overflow exception. 
+     <dd> The overflow exception. 
 <br><dt><code>FE_INVALID</code>
-<dd> The invalid exception. 
+     <dd> The invalid exception. 
 </dl>
 
-<p>The macro <code>FE_ALL_EXCEPT</code> is the bitwise OR of all exception macros
+   <p>The macro <code>FE_ALL_EXCEPT</code> is the bitwise OR of all exception macros
 which are supported by the FP implementation.
 
-<p>These functions allow you to clear exception flags, test for exceptions,
+   <p>These functions allow you to clear exception flags, test for exceptions,
 and save and restore the set of exceptions flagged.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>feclearexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>feclearexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -59,7 +69,7 @@ and save and restore the set of exceptions flagged.
 This function clears all of the supported exception flags indicated by
 <var>excepts</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -67,8 +77,8 @@ non-zero value otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>feraiseexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>feraiseexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -82,7 +92,7 @@ raised before inexact (<code>FE_INEXACT</code>).  Whether for overflow or
 underflow the inexact exception is also raised is also implementation
 dependent.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -90,8 +100,8 @@ non-zero value otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fetestexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>fetestexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -103,38 +113,38 @@ which specifies which exceptions are set.  Otherwise the result is zero.
 </td></tr>
 </table>
 
-<p>To understand these functions, imagine that the status word is an
+   <p>To understand these functions, imagine that the status word is an
 integer variable named <var>status</var>.  <code>feclearexcept</code> is then
 equivalent to <code>status &amp;= ~excepts</code> and <code>fetestexcept</code> is
 equivalent to <code>(status &amp; excepts)</code>.  The actual implementation may
 be very different, of course.
 
-<p>Exception flags are only cleared when the program explicitly requests it,
+   <p>Exception flags are only cleared when the program explicitly requests it,
 by calling <code>feclearexcept</code>.  If you want to check for exceptions
 from a set of calculations, you should clear all the flags first.  Here
 is a simple example of the way to use <code>fetestexcept</code>:
 
-<br><pre>{
-  double f;
-  int raised;
-  feclearexcept (FE_ALL_EXCEPT);
-  f = compute ();
-  raised = fetestexcept (FE_OVERFLOW | FE_INVALID);
-  if (raised &amp; FE_OVERFLOW) { /* ... */ }
-  if (raised &amp; FE_INVALID) { /* ... */ }
-  /* ... */
-}
-</pre>
+<pre class="smallexample">     {
+       double f;
+       int raised;
+       feclearexcept (FE_ALL_EXCEPT);
+       f = compute ();
+       raised = fetestexcept (FE_OVERFLOW | FE_INVALID);
+       if (raised &amp; FE_OVERFLOW) { /* ... */ }
+       if (raised &amp; FE_INVALID) { /* ... */ }
+       /* ... */
+     }
+     </pre>
 
-<p>You cannot explicitly set bits in the status word.  You can, however,
+   <p>You cannot explicitly set bits in the status word.  You can, however,
 save the entire status word and restore it later.  This is done with the
 following functions:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fegetexceptflag</b><i> (fexcept_t *<var>flagp</var>, int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>fegetexceptflag</b><i> </i>(<i>fexcept_t *</i><var>flagp</var><i>, int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -144,7 +154,7 @@ This function stores in the variable pointed to by <var>flagp</var> an
 implementation-defined value representing the current setting of the
 exception flags indicated by <var>excepts</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -152,8 +162,8 @@ non-zero value otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fesetexceptflag</b><i> (const fexcept_t *<var>flagp</var>, int
-</i></td>
+<td align="left">int <b>fesetexceptflag</b><i> </i>(<i>const fexcept_t *</i><var>flagp</var><i>, int
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -164,14 +174,14 @@ This function restores the flags for the exceptions indicated by
 <var>excepts</var> to the values stored in the variable pointed to by
 <var>flagp</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
 
-<p>Note that the value stored in <code>fexcept_t</code> bears no resemblance to
+   <p>Note that the value stored in <code>fexcept_t</code> bears no resemblance to
 the bit mask returned by <code>fetestexcept</code>.  The type may not even be
 an integer.  Do not attempt to modify an <code>fexcept_t</code> variable.
 
-</body></html>
+   </body></html>
 

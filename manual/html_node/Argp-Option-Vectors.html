@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Argp%20Option%20Vectors">Argp Option Vectors</a>,
-Next:<a rel=next accesskey=n href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>,
-Previous:<a rel=previous accesskey=p href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>,
-Up:<a rel=up accesskey=u href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>
+Node:&nbsp;<a name="Argp%20Option%20Vectors">Argp Option Vectors</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>
 <hr><br>
+</div>
 
-<h4>Specifying Options in an Argp Parser</h4>
+<h3 class="subsection">Specifying Options in an Argp Parser</h4>
 
 <p>The <code>options</code> field in a <code>struct argp</code> points to a vector of
 <code>struct argp_option</code> structures, each of which specifies an option
@@ -27,7 +37,7 @@ array for options, writing <code>{ 0 }</code> is enough to achieve this.
 <table width="100%">
 <tr>
 <td align="left"><b>struct argp_option</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -37,62 +47,62 @@ This structure specifies a single option that an argp parser
 understands, as well as how to parse and document that option.  It has
 the following fields:
 
-<dl>
+          <dl>
 <dt><code>const char *name</code>
-<dd>The long name for this option, corresponding to the long option
-<code>--<var>name</var></code>; this field may be zero if this option <em>only</em>
+          <dd>The long name for this option, corresponding to the long option
+<code>--</code><var>name</var><code></code>; this field may be zero if this option <em>only</em>
 has a short name.  To specify multiple names for an option, additional
 entries may follow this one, with the <code>OPTION_ALIAS</code> flag
 set.  See <a href="Argp-Option-Flags.html#Argp%20Option%20Flags">Argp Option Flags</a>.
 
-<br><dt><code>int key</code>
-<dd>The integer key provided by the current option to the option parser.  If
+          <br><dt><code>int key</code>
+          <dd>The integer key provided by the current option to the option parser.  If
 <var>key</var> has a value that is a printable <small>ASCII</small> character (i.e.,
-<code>isascii (<var>key</var>)</code> is true), it <em>also</em> specifies a short
-option <code>-<var>char</var></code>, where <var>char</var> is the <small>ASCII</small> character
+<code>isascii (</code><var>key</var><code>)</code> is true), it <em>also</em> specifies a short
+option <code>-</code><var>char</var><code></code>, where <var>char</var> is the <small>ASCII</small> character
 with the code <var>key</var>.
 
-<br><dt><code>const char *arg</code>
-<dd>If non-zero, this is the name of an argument associated with this
+          <br><dt><code>const char *arg</code>
+          <dd>If non-zero, this is the name of an argument associated with this
 option, which must be provided (e.g., with the
-<code>--<var>name</var>=<var>value</var></code> or <code>-<var>char</var> <var>value</var></code>
+<code>--</code><var>name</var><code>=</code><var>value</var><code></code> or <code>-</code><var>char</var><code> </code><var>value</var><code></code>
 syntaxes), unless the <code>OPTION_ARG_OPTIONAL</code> flag (see <a href="Argp-Option-Flags.html#Argp%20Option%20Flags">Argp Option Flags</a>) is set, in which case it <em>may</em> be provided.
 
-<br><dt><code>int flags</code>
-<dd>Flags associated with this option, some of which are referred to above. 
+          <br><dt><code>int flags</code>
+          <dd>Flags associated with this option, some of which are referred to above. 
 See <a href="Argp-Option-Flags.html#Argp%20Option%20Flags">Argp Option Flags</a>.
 
-<br><dt><code>const char *doc</code>
-<dd>A documentation string for this option, for printing in help messages.
+          <br><dt><code>const char *doc</code>
+          <dd>A documentation string for this option, for printing in help messages.
 
-<p>If both the <code>name</code> and <code>key</code> fields are zero, this string
+          <p>If both the <code>name</code> and <code>key</code> fields are zero, this string
 will be printed tabbed left from the normal option column, making it
 useful as a group header.  This will be the first thing printed in its
 group.  In this usage, it's conventional to end the string with a
 <code>:</code> character.
 
-<br><dt><code>int group</code>
-<dd>Group identity for this option.
+          <br><dt><code>int group</code>
+          <dd>Group identity for this option.
 
-<p>In a long help message, options are sorted alphabetically within each
-group, and the groups presented in the order 0, 1, 2, <small>...</small>, <var>n</var>,
--<var>m</var>, <small>...</small>, -2, -1.
+          <p>In a long help message, options are sorted alphabetically within each
+group, and the groups presented in the order 0, 1, 2, <small class="dots">...</small>, <var>n</var>,
+-<var>m</var>, <small class="dots">...</small>, -2, -1.
 
-<p>Every entry in an options array with this field 0 will inherit the group
+          <p>Every entry in an options array with this field 0 will inherit the group
 number of the previous entry, or zero if it's the first one.  If it's a
 group header with <code>name</code> and <code>key</code> fields both zero, the
 previous entry + 1 is the default.  Automagic options such as
 <code>--help</code> are put into group -1.
 
-<p>Note that because of C structure initialization rules, this field often
+          <p>Note that because of C structure initialization rules, this field often
 need not be specified, because 0 is the correct value. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<ul>
-<li><a accesskey=1 href="Argp-Option-Flags.html#Argp%20Option%20Flags">Flags</a>:      Flags for options. 
+<ul class="menu">
+<li><a accesskey="1" href="Argp-Option-Flags.html#Argp%20Option%20Flags">Flags</a>:      Flags for options. 
 </ul>
 
-</body></html>
+   </body></html>
 

@@ -2,75 +2,85 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Receiving%20Arguments">Receiving Arguments</a>,
-Next:<a rel=next accesskey=n href="How-Many-Arguments.html#How%20Many%20Arguments">How Many Arguments</a>,
-Previous:<a rel=previous accesskey=p href="Variadic-Prototypes.html#Variadic%20Prototypes">Variadic Prototypes</a>,
-Up:<a rel=up accesskey=u href="How-Variadic.html#How%20Variadic">How Variadic</a>
+Node:&nbsp;<a name="Receiving%20Arguments">Receiving Arguments</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="How-Many-Arguments.html#How%20Many%20Arguments">How Many Arguments</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Variadic-Prototypes.html#Variadic%20Prototypes">Variadic Prototypes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="How-Variadic.html#How%20Variadic">How Variadic</a>
 <hr><br>
+</div>
 
-<h5>Receiving the Argument Values</h5>
+<h3 class="subsubsection">Receiving the Argument Values</h5>
 
 <p>Ordinary fixed arguments have individual names, and you can use these
 names to access their values.  But optional arguments have no
-names--nothing but <code><small>...</small></code>.  How can you access them?
+names--nothing but <code>...</code>.  How can you access them?
 
-<p>The only way to access them is sequentially, in the order they were
+   <p>The only way to access them is sequentially, in the order they were
 written, and you must use special macros from <code>stdarg.h</code> in the
 following three step process:
 
-<ol type=1 start=1>
-</p><li>You initialize an argument pointer variable of type <code>va_list</code> using
+     <ol type=1 start=1>
+<li>You initialize an argument pointer variable of type <code>va_list</code> using
 <code>va_start</code>.  The argument pointer when initialized points to the
 first optional argument.
 
-<li>You access the optional arguments by successive calls to <code>va_arg</code>. 
+     <li>You access the optional arguments by successive calls to <code>va_arg</code>. 
 The first call to <code>va_arg</code> gives you the first optional argument,
 the next call gives you the second, and so on.
 
-<p>You can stop at any time if you wish to ignore any remaining optional
+     <p>You can stop at any time if you wish to ignore any remaining optional
 arguments.  It is perfectly all right for a function to access fewer
 arguments than were supplied in the call, but you will get garbage
 values if you try to access too many arguments.
 
-</p><li>You indicate that you are finished with the argument pointer variable by
+     </p><li>You indicate that you are finished with the argument pointer variable by
 calling <code>va_end</code>.
 
-<p>(In practice, with most C compilers, calling <code>va_end</code> does nothing. 
+     <p>(In practice, with most C compilers, calling <code>va_end</code> does nothing. 
 This is always true in the GNU C compiler.  But you might as well call
 <code>va_end</code> just in case your program is someday compiled with a peculiar
 compiler.)
-</ol>
+        </ol>
 
-<p>See <a href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>, for the full definitions of <code>va_start</code>,
+   <p>See <a href="Argument-Macros.html#Argument%20Macros">Argument Macros</a>, for the full definitions of <code>va_start</code>,
 <code>va_arg</code> and <code>va_end</code>.
 
-<p>Steps 1 and 3 must be performed in the function that accepts the
+   <p>Steps 1 and 3 must be performed in the function that accepts the
 optional arguments.  However, you can pass the <code>va_list</code> variable
 as an argument to another function and perform all or part of step 2
 there.
 
-<p>You can perform the entire sequence of three steps multiple times
+   <p>You can perform the entire sequence of three steps multiple times
 within a single function invocation.  If you want to ignore the optional
 arguments, you can do these steps zero times.
 
-<p>You can have more than one argument pointer variable if you like.  You
+   <p>You can have more than one argument pointer variable if you like.  You
 can initialize each variable with <code>va_start</code> when you wish, and
 then you can fetch arguments with each argument pointer as you wish. 
 Each argument pointer variable will sequence through the same set of
 argument values, but at its own pace.
 
-<p><strong>Portability note:</strong> With some compilers, once you pass an
+   <p><strong>Portability note:</strong> With some compilers, once you pass an
 argument pointer value to a subroutine, you must not keep using the same
 argument pointer value after that subroutine returns.  For full
 portability, you should just pass it to <code>va_end</code>.  This is actually
 an ISO&nbsp;C requirement, but most ANSI C compilers work happily
 regardless.
 
-</body></html>
+   </body></html>
 

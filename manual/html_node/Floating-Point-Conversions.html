@@ -2,31 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Floating-Point%20Conversions">Floating-Point Conversions</a>,
-Next:<a rel=next accesskey=n href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>,
-Previous:<a rel=previous accesskey=p href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>,
-Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+Node:&nbsp;<a name="Floating-Point%20Conversions">Floating-Point Conversions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Integer-Conversions.html#Integer%20Conversions">Integer Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
 <hr><br>
+</div>
 
-<h4>Floating-Point Conversions</h4>
+<h3 class="subsection">Floating-Point Conversions</h4>
 
 <p>This section discusses the conversion specifications for floating-point
 numbers: the <code>%f</code>, <code>%e</code>, <code>%E</code>, <code>%g</code>, and <code>%G</code>
 conversions.
 
-<p>The <code>%f</code> conversion prints its argument in fixed-point notation,
+   <p>The <code>%f</code> conversion prints its argument in fixed-point notation,
 producing output of the form
 [<code>-</code>]<var>ddd</var><code>.</code><var>ddd</var>,
 where the number of digits following the decimal point is controlled
 by the precision you specify.
 
-<p>The <code>%e</code> conversion prints its argument in exponential notation,
+   <p>The <code>%e</code> conversion prints its argument in exponential notation,
 producing output of the form
 [<code>-</code>]<var>d</var><code>.</code><var>ddd</var><code>e</code>[<code>+</code>|<code>-</code>]<var>dd</var>. 
 Again, the number of digits following the decimal point is controlled by
@@ -34,14 +44,14 @@ the precision.  The exponent always contains at least two digits.  The
 <code>%E</code> conversion is similar but the exponent is marked with the letter
 <code>E</code> instead of <code>e</code>.
 
-<p>The <code>%g</code> and <code>%G</code> conversions print the argument in the style
+   <p>The <code>%g</code> and <code>%G</code> conversions print the argument in the style
 of <code>%e</code> or <code>%E</code> (respectively) if the exponent would be less
 than -4 or greater than or equal to the precision; otherwise they use
 the <code>%f</code> style.  A precision of <code>0</code>, is taken as 1. is
 Trailing zeros are removed from the fractional portion of the result and
 a decimal-point character appears only if it is followed by a digit.
 
-<p>The <code>%a</code> and <code>%A</code> conversions are meant for representing
+   <p>The <code>%a</code> and <code>%A</code> conversions are meant for representing
 floating-point numbers exactly in textual form so that they can be
 exchanged as texts between different programs and/or machines.  The
 numbers are represented is the form
@@ -63,45 +73,45 @@ string.  The exponent to the base of two is printed as a decimal number
 using at least one digit but at most as many digits as necessary to
 represent the value exactly.
 
-<p>If the value to be printed represents infinity or a NaN, the output is
+   <p>If the value to be printed represents infinity or a NaN, the output is
 [<code>-</code>]<code>inf</code> or <code>nan</code> respectively if the conversion
 specifier is <code>%a</code>, <code>%e</code>, <code>%f</code>, or <code>%g</code> and it is
 [<code>-</code>]<code>INF</code> or <code>NAN</code> respectively if the conversion is
 <code>%A</code>, <code>%E</code>, or <code>%G</code>.
 
-<p>The following flags can be used to modify the behavior:
+   <p>The following flags can be used to modify the behavior:
 
-<dl>
+     <dl>
 <dt><code>-</code>
-<dd>Left-justify the result in the field.  Normally the result is
+     <dd>Left-justify the result in the field.  Normally the result is
 right-justified.
 
-<br><dt><code>+</code>
-<dd>Always include a plus or minus sign in the result.
+     <br><dt><code>+</code>
+     <dd>Always include a plus or minus sign in the result.
 
-<br><dt><code> </code>
-<dd>If the result doesn't start with a plus or minus sign, prefix it with a
+     <br><dt><code> </code>
+     <dd>If the result doesn't start with a plus or minus sign, prefix it with a
 space instead.  Since the <code>+</code> flag ensures that the result includes
 a sign, this flag is ignored if you supply both of them.
 
-<br><dt><code>#</code>
-<dd>Specifies that the result should always include a decimal point, even
+     <br><dt><code>#</code>
+     <dd>Specifies that the result should always include a decimal point, even
 if no digits follow it.  For the <code>%g</code> and <code>%G</code> conversions,
 this also forces trailing zeros after the decimal point to be left
 in place where they would otherwise be removed.
 
-<br><dt><code>'</code>
-<dd>Separate the digits of the integer part of the result into groups as
+     <br><dt><code>'</code>
+     <dd>Separate the digits of the integer part of the result into groups as
 specified by the locale specified for the <code>LC_NUMERIC</code> category;
 see <a href="General-Numeric.html#General%20Numeric">General Numeric</a>.  This flag is a GNU extension.
 
-<br><dt><code>0</code>
-<dd>Pad the field with zeros instead of spaces; the zeros are placed
+     <br><dt><code>0</code>
+     <dd>Pad the field with zeros instead of spaces; the zeros are placed
 after any sign.  This flag is ignored if the <code>-</code> flag is also
 specified. 
 </dl>
 
-<p>The precision specifies how many digits follow the decimal-point
+   <p>The precision specifies how many digits follow the decimal-point
 character for the <code>%f</code>, <code>%e</code>, and <code>%E</code> conversions.  For
 these conversions, the default precision is <code>6</code>.  If the precision
 is explicitly <code>0</code>, this suppresses the decimal point character
@@ -113,39 +123,39 @@ it is treated like a value of <code>1</code>.  If the value being printed
 cannot be expressed accurately in the specified number of digits, the
 value is rounded to the nearest number that fits.
 
-<p>Without a type modifier, the floating-point conversions use an argument
+   <p>Without a type modifier, the floating-point conversions use an argument
 of type <code>double</code>.  (By the default argument promotions, any
 <code>float</code> arguments are automatically converted to <code>double</code>.) 
 The following type modifier is supported:
 
-<dl>
+     <dl>
 <dt><code>L</code>
-<dd>An uppercase <code>L</code> specifies that the argument is a <code>long
+     <dd>An uppercase <code>L</code> specifies that the argument is a <code>long
 double</code>. 
 </dl>
 
-<p>Here are some examples showing how numbers print using the various
+   <p>Here are some examples showing how numbers print using the various
 floating-point conversions.  All of the numbers were printed using
 this template string:
 
-<br><pre>"|%13.4a|%13.4f|%13.4e|%13.4g|\n"
-</pre>
+<pre class="smallexample">     "|%13.4a|%13.4f|%13.4e|%13.4g|\n"
+     </pre>
 
-<p>Here is the output:
+   <p>Here is the output:
 
-<br><pre>|  0x0.0000p+0|       0.0000|   0.0000e+00|            0|
-|  0x1.0000p-1|       0.5000|   5.0000e-01|          0.5|
-|  0x1.0000p+0|       1.0000|   1.0000e+00|            1|
-| -0x1.0000p+0|      -1.0000|  -1.0000e+00|           -1|
-|  0x1.9000p+6|     100.0000|   1.0000e+02|          100|
-|  0x1.f400p+9|    1000.0000|   1.0000e+03|         1000|
-| 0x1.3880p+13|   10000.0000|   1.0000e+04|        1e+04|
-| 0x1.81c8p+13|   12345.0000|   1.2345e+04|    1.234e+04|
-| 0x1.86a0p+16|  100000.0000|   1.0000e+05|        1e+05|
-| 0x1.e240p+16|  123456.0000|   1.2346e+05|    1.235e+05|
-</pre>
+<pre class="smallexample">     |  0x0.0000p+0|       0.0000|   0.0000e+00|            0|
+     |  0x1.0000p-1|       0.5000|   5.0000e-01|          0.5|
+     |  0x1.0000p+0|       1.0000|   1.0000e+00|            1|
+     | -0x1.0000p+0|      -1.0000|  -1.0000e+00|           -1|
+     |  0x1.9000p+6|     100.0000|   1.0000e+02|          100|
+     |  0x1.f400p+9|    1000.0000|   1.0000e+03|         1000|
+     | 0x1.3880p+13|   10000.0000|   1.0000e+04|        1e+04|
+     | 0x1.81c8p+13|   12345.0000|   1.2345e+04|    1.234e+04|
+     | 0x1.86a0p+16|  100000.0000|   1.0000e+05|        1e+05|
+     | 0x1.e240p+16|  123456.0000|   1.2346e+05|    1.235e+05|
+     </pre>
 
-<p>Notice how the <code>%g</code> conversion drops trailing zeros.
+   <p>Notice how the <code>%g</code> conversion drops trailing zeros.
 
-</body></html>
+   </body></html>
 

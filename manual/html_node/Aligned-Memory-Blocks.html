@@ -2,27 +2,38 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>,
-Next:<a rel=next accesskey=n href="Malloc-Tunable-Parameters.html#Malloc%20Tunable%20Parameters">Malloc Tunable Parameters</a>,
-Previous:<a rel=previous accesskey=p href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
-Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+Node:&nbsp;<a name="Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Malloc-Tunable-Parameters.html#Malloc%20Tunable%20Parameters">Malloc Tunable Parameters</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
 <hr><br>
+</div>
 
-<h5>Allocating Aligned Memory Blocks</h5>
+<h3 class="subsubsection">Allocating Aligned Memory Blocks</h5>
 
 <p>The address of a block returned by <code>malloc</code> or <code>realloc</code> in
 the GNU system is always a multiple of eight (or sixteen on 64-bit
 systems).  If you need a block whose address is a multiple of a higher
 power of two than that, use <code>memalign</code>, <code>posix_memalign</code>, or
-<code>valloc</code>.  These functions are declared in <code>stdlib.h</code>.
+<code>valloc</code>.  <code>memalign</code> is declared in <code>malloc.h</code> and
+<code>posix_memalign</code> is declared in <code>stdlib.h</code>.
 
-<p>With the GNU library, you can use <code>free</code> to free the blocks that
+   <p>With the GNU library, you can use <code>free</code> to free the blocks that
 <code>memalign</code>, <code>posix_memalign</code>, and <code>valloc</code> return.  That
 does not work in BSD, however--BSD does not provide any way to free
 such blocks.
@@ -30,8 +41,8 @@ such blocks.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>memalign</b><i> (size_t <var>boundary</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">void * <b>memalign</b><i> </i>(<i>size_t </i><var>boundary</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -48,8 +59,8 @@ that is on the specified boundary.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>posix_memalign</b><i> (void **<var>memptr</var>, size_t <var>alignment</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">int <b>posix_memalign</b><i> </i>(<i>void **</i><var>memptr</var><i>, size_t </i><var>alignment</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -61,19 +72,19 @@ multiple of <var>alignment</var>.  But it adds one requirement to the
 parameter <var>alignment</var>: the value must be a power of two multiple of
 <code>sizeof (void *)</code>.
 
-<p>If the function succeeds in allocation memory a pointer to the allocated
-memory is returned in <code>*<var>memptr</var></code> and the return value is zero. 
+     <p>If the function succeeds in allocation memory a pointer to the allocated
+memory is returned in <code>*</code><var>memptr</var><code></code> and the return value is zero. 
 Otherwise the function returns an error value indicating the problem.
 
-<p>This function was introduced in POSIX 1003.1d. 
+     <p>This function was introduced in POSIX 1003.1d. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>valloc</b><i> (size_t <var>size</var>)
-</i></td>
+<td align="left">void * <b>valloc</b><i> </i>(<i>size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -82,17 +93,17 @@ Otherwise the function returns an error value indicating the problem.
 Using <code>valloc</code> is like using <code>memalign</code> and passing the page size
 as the value of the second argument.  It is implemented like this:
 
-<br><pre>void *
-valloc (size_t size)
-{
-  return memalign (getpagesize (), size);
-}
-</pre>
+     <pre class="smallexample">          void *
+          valloc (size_t size)
+          {
+            return memalign (getpagesize (), size);
+          }
+          </pre>
 
-<a href="Query-Memory-Parameters.html#Query%20Memory%20Parameters">Query Memory Parameters</a> for more information about the memory
+     <a href="Query-Memory-Parameters.html#Query%20Memory%20Parameters">Query Memory Parameters</a> for more information about the memory
 subsystem. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

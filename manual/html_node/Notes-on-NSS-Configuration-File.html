@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Notes%20on%20NSS%20Configuration%20File">Notes on NSS Configuration File</a>,
-Previous:<a rel=previous accesskey=p href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>,
-Up:<a rel=up accesskey=u href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>
+Node:&nbsp;<a name="Notes%20on%20NSS%20Configuration%20File">Notes on NSS Configuration File</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>
 <hr><br>
+</div>
 
-<h4>Notes on the NSS Configuration File</h4>
+<h3 class="subsection">Notes on the NSS Configuration File</h4>
 
 <p>Finally a few more hints.  The NSS implementation is not completely
 helpless if <code>/etc/nsswitch.conf</code> does not exist.  For
@@ -21,12 +31,12 @@ all supported databases there is a default value so it should normally
 be possible to get the system running even if the file is corrupted or
 missing.
 
-<p>For the <code>hosts</code> and <code>networks</code> databases the default value is
+   <p>For the <code>hosts</code> and <code>networks</code> databases the default value is
 <code>dns [!UNAVAIL=return] files</code>.  I.e., the system is prepared for
 the DNS service not to be available but if it is available the answer it
 returns is definitive.
 
-<p>The <code>passwd</code>, <code>group</code>, and <code>shadow</code> databases are
+   <p>The <code>passwd</code>, <code>group</code>, and <code>shadow</code> databases are
 traditionally handled in a special way.  The appropriate files in the
 <code>/etc</code> directory are read but if an entry with a name starting
 with a <code>+</code> character is found NIS is used.  This kind of lookup
@@ -34,20 +44,20 @@ remains possible by using the special lookup service <code>compat</code>
 and the default value for the three databases above is
 <code>compat [NOTFOUND=return] files</code>.
 
-<p>For all other databases the default value is
+   <p>For all other databases the default value is
 <code>nis [NOTFOUND=return] files</code>.  This solution give the best
 chance to be correct since NIS and file based lookup is used.
 
-<p>A second point is that the user should try to optimize the lookup
+   <p>A second point is that the user should try to optimize the lookup
 process.  The different service have different response times. 
 A simple file look up on a local file could be fast, but if the file
 is long and the needed entry is near the end of the file this may take
 quite some time.  In this case it might be better to use the <code>db</code>
 service which allows fast local access to large data sets.
 
-<p>Often the situation is that some global information like NIS must be
+   <p>Often the situation is that some global information like NIS must be
 used.  So it is unavoidable to use service entries like <code>nis</code> etc. 
 But one should avoid slow services like this if possible.
 
-</body></html>
+   </body></html>
 

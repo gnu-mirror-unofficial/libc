@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Trivial%20Encryption">Trivial Encryption</a>,
-Next:<a rel=next accesskey=n href="Encode-Binary-Data.html#Encode%20Binary%20Data">Encode Binary Data</a>,
-Previous:<a rel=previous accesskey=p href="strfry.html#strfry">strfry</a>,
-Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+Node:&nbsp;<a name="Trivial%20Encryption">Trivial Encryption</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Encode-Binary-Data.html#Encode%20Binary%20Data">Encode Binary Data</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="strfry.html#strfry">strfry</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
 <hr><br>
+</div>
 
-<h3>Trivial Encryption</h3>
+<h3 class="section">Trivial Encryption</h3>
 
 <p>The <code>memfrob</code> function converts an array of data to something
 unrecognizable and back again.  It is not encryption in its usual sense
@@ -24,38 +34,38 @@ method for obscuring offensive jokes from sensitive eyes and such.
 Unlike Rot13, <code>memfrob</code> works on arbitrary binary data, not just
 text.
 
-<p>For true encryption, See <a href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>.
+   <p>For true encryption, See <a href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>.
 
-<p>This function is declared in <code>string.h</code>.
+   <p>This function is declared in <code>string.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>memfrob</b><i> (void *<var>mem</var>, size_t <var>length</var>)
-</i></td>
+<td align="left">void * <b>memfrob</b><i> </i>(<i>void *</i><var>mem</var><i>, size_t </i><var>length</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>memfrob</code> transforms (frobnicates) each byte of the data structure
+     <p><code>memfrob</code> transforms (frobnicates) each byte of the data structure
 at <var>mem</var>, which is <var>length</var> bytes long, by bitwise exclusive
 oring it with binary 00101010.  It does the transformation in place and
 its return value is always <var>mem</var>.
 
-<p>Note that <code>memfrob</code> a second time on the same data structure
+     <p>Note that <code>memfrob</code> a second time on the same data structure
 returns it to its original state.
 
-<p>This is a good function for hiding information from someone who doesn't
+     <p>This is a good function for hiding information from someone who doesn't
 want to see it or doesn't want to see it very much.  To really prevent
 people from retrieving the information, use stronger encryption such as
 that described in See <a href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>.
 
-<p><strong>Portability Note:</strong>  This function is unique to the GNU C library.
+     <p><strong>Portability Note:</strong>  This function is unique to the GNU C library.
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

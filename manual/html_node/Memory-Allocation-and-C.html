@@ -2,43 +2,53 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Memory%20Allocation%20and%20C">Memory Allocation and C</a>,
-Next:<a rel=next accesskey=n href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>,
-Up:<a rel=up accesskey=u href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>
+Node:&nbsp;<a name="Memory%20Allocation%20and%20C">Memory Allocation and C</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>
 <hr><br>
+</div>
 
-<h4>Memory Allocation in C Programs</h4>
+<h3 class="subsection">Memory Allocation in C Programs</h4>
 
 <p>The C language supports two kinds of memory allocation through the
 variables in C programs:
 
-<ul>
+     <ul>
 <li><dfn>Static allocation</dfn> is what happens when you declare a static or
 global variable.  Each static or global variable defines one block of
 space, of a fixed size.  The space is allocated once, when your program
 is started (part of the exec operation), and is never freed.
 
-<li><dfn>Automatic allocation</dfn> happens when you declare an automatic
+     <li><dfn>Automatic allocation</dfn> happens when you declare an automatic
 variable, such as a function argument or a local variable.  The space
 for an automatic variable is allocated when the compound statement
 containing the declaration is entered, and is freed when that
 compound statement is exited.
 
-<p>In GNU C, the size of the automatic storage can be an expression
+     <p>In GNU C, the size of the automatic storage can be an expression
 that varies.  In other C implementations, it must be a constant. 
 </ul>
 
-<p>A third important kind of memory allocation, <dfn>dynamic allocation</dfn>,
+   <p>A third important kind of memory allocation, <dfn>dynamic allocation</dfn>,
 is not supported by C variables but is available via GNU C library
 functions.
 
-<h5>Dynamic Memory Allocation</h5>
+<h3 class="subsubsection">Dynamic Memory Allocation</h5>
 
 <p><dfn>Dynamic memory allocation</dfn> is a technique in which programs
 determine as they are running where to store some information.  You need
@@ -46,23 +56,23 @@ dynamic allocation when the amount of memory you need, or how long you
 continue to need it, depends on factors that are not known before the
 program runs.
 
-<p>For example, you may need a block to store a line read from an input
+   <p>For example, you may need a block to store a line read from an input
 file; since there is no limit to how long a line can be, you must
 allocate the memory dynamically and make it dynamically larger as you
 read more of the line.
 
-<p>Or, you may need a block for each record or each definition in the input
+   <p>Or, you may need a block for each record or each definition in the input
 data; since you can't know in advance how many there will be, you must
 allocate a new block for each record or definition as you read it.
 
-<p>When you use dynamic allocation, the allocation of a block of memory is
+   <p>When you use dynamic allocation, the allocation of a block of memory is
 an action that the program requests explicitly.  You call a function or
 macro when you want to allocate space, and specify the size with an
 argument.  If you want to free the space, you do so by calling another
 function or macro.  You can do these things whenever you want, as often
 as you want.
 
-<p>Dynamic allocation is not supported by C variables; there is no storage
+   <p>Dynamic allocation is not supported by C variables; there is no storage
 class "dynamic", and there can never be a C variable whose value is
 stored in dynamically allocated space.  The only way to get dynamically
 allocated memory is via a system call (which is generally via a GNU C
@@ -72,21 +82,21 @@ and because the actual process of dynamic allocation requires more
 computation time, programmers generally use dynamic allocation only when
 neither static nor automatic allocation will serve.
 
-<p>For example, if you want to allocate dynamically some space to hold a
+   <p>For example, if you want to allocate dynamically some space to hold a
 <code>struct foobar</code>, you cannot declare a variable of type <code>struct
 foobar</code> whose contents are the dynamically allocated space.  But you can
 declare a variable of pointer type <code>struct foobar *</code> and assign it the
 address of the space.  Then you can use the operators <code>*</code> and
 <code>-&gt;</code> on this pointer variable to refer to the contents of the space:
 
-<br><pre>{
-  struct foobar *ptr
-     = (struct foobar *) malloc (sizeof (struct foobar));
-  ptr-&gt;name = x;
-  ptr-&gt;next = current_foobar;
-  current_foobar = ptr;
-}
-</pre>
+<pre class="smallexample">     {
+       struct foobar *ptr
+          = (struct foobar *) malloc (sizeof (struct foobar));
+       ptr-&gt;name = x;
+       ptr-&gt;next = current_foobar;
+       current_foobar = ptr;
+     }
+     </pre>
 
-</body></html>
+   </body></html>
 

@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="BSD%20Handler">BSD Handler</a>,
-Next:<a rel=next accesskey=n href="Blocking-in-BSD.html#Blocking%20in%20BSD">Blocking in BSD</a>,
-Up:<a rel=up accesskey=u href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
+Node:&nbsp;<a name="BSD%20Handler">BSD Handler</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Blocking-in-BSD.html#Blocking%20in%20BSD">Blocking in BSD</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
 <hr><br>
+</div>
 
-<h4>BSD Function to Establish a Handler</h4>
+<h3 class="subsection">BSD Function to Establish a Handler</h4>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct sigvec</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -29,23 +39,23 @@ This data type is the BSD equivalent of <code>struct sigaction</code>
 (see <a href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>); it is used to specify signal actions
 to the <code>sigvec</code> function.  It contains the following members:
 
-<dl>
+          <dl>
 <dt><code>sighandler_t sv_handler</code>
-<dd>This is the handler function.
+          <dd>This is the handler function.
 
-<br><dt><code>int sv_mask</code>
-<dd>This is the mask of additional signals to be blocked while the handler
+          <br><dt><code>int sv_mask</code>
+          <dd>This is the mask of additional signals to be blocked while the handler
 function is being called.
 
-<br><dt><code>int sv_flags</code>
-<dd>This is a bit mask used to specify various flags which affect the
+          <br><dt><code>int sv_flags</code>
+          <dd>This is a bit mask used to specify various flags which affect the
 behavior of the signal.  You can also refer to this field as
 <code>sv_onstack</code>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>These symbolic constants can be used to provide values for the
+   <p>These symbolic constants can be used to provide values for the
 <code>sv_flags</code> field of a <code>sigvec</code> structure.  This field is a bit
 mask value, so you bitwise-OR the flags of interest to you together.
 
@@ -53,7 +63,7 @@ mask value, so you bitwise-OR the flags of interest to you together.
 <table width="100%">
 <tr>
 <td align="left">int <b>SV_ONSTACK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -68,7 +78,7 @@ structure, it means to use the signal stack when delivering the signal.
 <table width="100%">
 <tr>
 <td align="left">int <b>SV_INTERRUPT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -85,7 +95,7 @@ calls should return with a <code>EINTR</code> error status.  See <a href="Interr
 <table width="100%">
 <tr>
 <td align="left">int <b>SV_RESETHAND</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -100,8 +110,8 @@ structure, it means to reset the action for the signal back to
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>sigvec</b><i> (int <var>signum</var>, const struct sigvec *<var>action</var>,struct sigvec *<var>old-action</var>)
-</i></td>
+<td align="left">int <b>sigvec</b><i> </i>(<i>int </i><var>signum</var><i>, const struct sigvec *</i><var>action</var><i>,struct sigvec *</i><var>old-action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -116,8 +126,8 @@ in <var>old-action</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>siginterrupt</b><i> (int <var>signum</var>, int <var>failflag</var>)
-</i></td>
+<td align="left">int <b>siginterrupt</b><i> </i>(<i>int </i><var>signum</var><i>, int </i><var>failflag</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -131,5 +141,5 @@ code <code>EINTR</code>.  See <a href="Interrupted-Primitives.html#Interrupted%2
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,39 +2,74 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
-<h1>The GNU C Library</h1>
-<p>
-Node:<a name="Top">Top</a>,
-Next:<a rel=next accesskey=n href="Introduction.html#Introduction">Introduction</a>,
-Previous:<a rel=previous accesskey=p href="../index.html#dir">(dir)</a>,
-Up:<a rel=up accesskey=u href="../index.html#dir">(dir)</a>
-<hr><br>
+This file documents the GNU C library.
 
-<h2>Main Menu</h2>
+   <p>This is Edition 0.10, last updated 2001-07-06,
+of <cite>The GNU C Library Reference Manual</cite>, for Version 2.3.x.
+
+   <p>Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001, 2002, 2003 Free Software Foundation, Inc.
+
+   <p>Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software Needs Free Documentation" and
+"GNU Lesser General Public License", the Front-Cover texts being (a)
+(see below), and with the Back-Cover Texts being (b) (see below).  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   <p>(a) The FSF's Front-Cover Text is:
+
+   <p>A GNU Manual
+
+   <p>(b) The FSF's Back-Cover Text is:
+
+   <p>You have freedom to copy and modify this GNU Manual, like GNU
+     software.  Copies published by the Free Software Foundation raise
+     funds for GNU development.
+
+<div class="node">
+<p>
+Node:&nbsp;<a name="Top">Top</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Introduction.html#Introduction">Introduction</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="../index.html#dir">(dir)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="../index.html#dir">(dir)</a>
+<hr><br>
+</div>
+
+<h2 class="unnumbered">Main Menu</h2>
 
 <p>This is Edition 0.10, last updated 2001-07-06, of
-<cite>The GNU C Library Reference Manual</cite>, for Version 2.2.x
+<cite>The GNU C Library Reference Manual</cite>, for Version 2.3.x
 of the GNU C Library.
 
-<ul>
-<li><a accesskey=1 href="Introduction.html#Introduction">Introduction</a>:                  Purpose of the GNU C Library. 
-<li><a accesskey=2 href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>:               How library functions report errors. 
-<li><a accesskey=3 href="Memory.html#Memory">Memory</a>:                        Allocating virtual memory and controlling
+<ul class="menu">
+<li><a accesskey="1" href="Introduction.html#Introduction">Introduction</a>:                  Purpose of the GNU C Library. 
+<li><a accesskey="2" href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>:               How library functions report errors. 
+<li><a accesskey="3" href="Memory.html#Memory">Memory</a>:                        Allocating virtual memory and controlling
                                    paging. 
-<li><a accesskey=4 href="Character-Handling.html#Character%20Handling">Character Handling</a>:            Character testing and conversion functions. 
-<li><a accesskey=5 href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>:    Utilities for copying and comparing strings
+<li><a accesskey="4" href="Character-Handling.html#Character%20Handling">Character Handling</a>:            Character testing and conversion functions. 
+<li><a accesskey="5" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>:    Utilities for copying and comparing strings
                                    and arrays. 
-<li><a accesskey=6 href="Character-Set-Handling.html#Character%20Set%20Handling">Character Set Handling</a>:        Support for extended character sets. 
-<li><a accesskey=7 href="Locales.html#Locales">Locales</a>:                       The country and language can affect the
+<li><a accesskey="6" href="Character-Set-Handling.html#Character%20Set%20Handling">Character Set Handling</a>:        Support for extended character sets. 
+<li><a accesskey="7" href="Locales.html#Locales">Locales</a>:                       The country and language can affect the
                                    behavior of library functions. 
-<li><a accesskey=8 href="Message-Translation.html#Message%20Translation">Message Translation</a>:           How to make the program speak the user's
+<li><a accesskey="8" href="Message-Translation.html#Message%20Translation">Message Translation</a>:           How to make the program speak the user's
                                    language. 
-<li><a accesskey=9 href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>:         General searching and sorting functions. 
+<li><a accesskey="9" href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>:         General searching and sorting functions. 
 <li><a href="Pattern-Matching.html#Pattern%20Matching">Pattern Matching</a>:              Matching shell ``globs'' and regular
                                    expressions. 
 <li><a href="I-O-Overview.html#I%2fO%20Overview">I/O Overview</a>:                  Introduction to the I/O facilities. 
@@ -69,7 +104,11 @@ of the GNU C Library.
 <li><a href="System-Configuration.html#System%20Configuration">System Configuration</a>:          Parameters describing operating system
                                    limits. 
 <li><a href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>:       DES encryption and password handling. 
-<li><a href="Debugging-Support.html#Debugging%20Support">Debugging Support</a>:             Functions to help debugging applications..
+<li><a href="Debugging-Support.html#Debugging%20Support">Debugging Support</a>:             Functions to help debugging applications.
+
+<p>Add-ons
+
+</p><li><a href="POSIX-Threads.html#POSIX%20Threads">POSIX Threads</a>:                 The standard threads library.
 
 <p>Appendices
 
@@ -730,7 +769,7 @@ of the GNU C Library.
                                  signals, editing.  Posix. 
 <li><a href="BSD-Terminal-Modes.html#BSD%20Terminal%20Modes">BSD Terminal Modes</a>:           BSD compatible terminal mode setting
 <li><a href="Line-Control.html#Line%20Control">Line Control</a>:                 Sending break sequences, clearing
-                                 terminal buffers <small>...</small>
+                                 terminal buffers ... 
 <li><a href="Noncanon-Example.html#Noncanon%20Example">Noncanon Example</a>:             How to read single characters without echo. 
 <li><a href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>:             How to open a pseudo-terminal.
 
@@ -887,6 +926,7 @@ of the GNU C Library.
 <li><a href="Realtime-Scheduling.html#Realtime%20Scheduling">Realtime Scheduling</a>:              Scheduling among the process nobility
 <li><a href="Basic-Scheduling-Functions.html#Basic%20Scheduling%20Functions">Basic Scheduling Functions</a>:       Get/set scheduling policy, priority
 <li><a href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a>:           Scheduling among the vulgar masses
+<li><a href="CPU-Affinity.html#CPU%20Affinity">CPU Affinity</a>:                     Limiting execution to certain CPUs
 
 <p>Traditional Scheduling
 
@@ -1235,13 +1275,33 @@ of the GNU C Library.
 
 </p><li><a href="Legal-Problems.html#Legal%20Problems">Legal Problems</a>:               This software can get you locked up, or worse. 
 <li><a href="getpass.html#getpass">getpass</a>:                      Prompting the user for a password. 
-<li><a href="crypt.html#crypt">crypt</a>:                        A one-way function for UNIX passwords. 
+<li><a href="crypt.html#crypt">crypt</a>:                        A one-way function for passwords. 
 <li><a href="DES-Encryption.html#DES%20Encryption">DES Encryption</a>:               Routines for DES encryption.
 
 <p>Debugging Support
 
 </p><li><a href="Backtraces.html#Backtraces">Backtraces</a>:                 Obtaining and printing a back trace of the
                                current stack.
+
+<p>POSIX Threads
+
+</p><li><a href="Basic-Thread-Operations.html#Basic%20Thread%20Operations">Basic Thread Operations</a>:      Creating, terminating, and waiting for threads. 
+<li><a href="Thread-Attributes.html#Thread%20Attributes">Thread Attributes</a>:            Tuning thread scheduling. 
+<li><a href="Cancellation.html#Cancellation">Cancellation</a>:                 Stopping a thread before it's done. 
+<li><a href="Cleanup-Handlers.html#Cleanup%20Handlers">Cleanup Handlers</a>:             Deallocating resources when a thread is
+                                  canceled. 
+<li><a href="Mutexes.html#Mutexes">Mutexes</a>:                      One way to synchronize threads. 
+<li><a href="Condition-Variables.html#Condition%20Variables">Condition Variables</a>:          Another way. 
+<li><a href="POSIX-Semaphores.html#POSIX%20Semaphores">POSIX Semaphores</a>:             And a third way. 
+<li><a href="Thread-Specific-Data.html#Thread-Specific%20Data">Thread-Specific Data</a>:         Variables with different values in
+                                  different threads. 
+<li><a href="Threads-and-Signal-Handling.html#Threads%20and%20Signal%20Handling">Threads and Signal Handling</a>:  Why you should avoid mixing the two, and
+                                  how to do it if you must. 
+<li><a href="Threads-and-Fork.html#Threads%20and%20Fork">Threads and Fork</a>:             Interactions between threads and the
+                                  <code>fork</code> function. 
+<li><a href="Streams-and-Fork.html#Streams%20and%20Fork">Streams and Fork</a>:             Interactions between stdio streams and
+                                  <code>fork</code>. 
+<li><a href="Miscellaneous-Thread-Functions.html#Miscellaneous%20Thread%20Functions">Miscellaneous Thread Functions</a>:  A grab bag of utility routines.
 
 <p>Language Features
 
@@ -1291,10 +1351,11 @@ of the GNU C Library.
 <p>Installation
 
 </p><li><a href="Configuring-and-compiling.html#Configuring%20and%20compiling">Configuring and compiling</a>:    How to compile and test GNU libc. 
-<li><a href="Running-make-install.html#Running%20make%20install">Running make install</a>:         How to install it once you've got it compiled. 
+<li><a href="Running-make-install.html#Running%20make%20install">Running make install</a>:         How to install it once you've got it
+ compiled. 
 <li><a href="Tools-for-Compilation.html#Tools%20for%20Compilation">Tools for Compilation</a>:        You'll need these first. 
 <li><a href="Supported-Configurations.html#Supported%20Configurations">Supported Configurations</a>:     What it runs on, what it doesn't. 
-<li><a href="Linux.html#Linux">Linux</a>:                        Specific advice for Linux systems. 
+<li><a href="Linux.html#Linux">Linux</a>:                        Specific advice for GNU/Linux systems. 
 <li><a href="Reporting-Bugs.html#Reporting%20Bugs">Reporting Bugs</a>:               So they'll get fixed.
 
 <p>Maintenance
@@ -1311,5 +1372,5 @@ of the GNU C Library.
                                    Unix-like system. 
 </ul>
 
-</body></html>
+   </body></html>
 

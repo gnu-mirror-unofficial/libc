@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Mode%20Functions">Mode Functions</a>,
-Next:<a rel=next accesskey=n href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>,
-Previous:<a rel=previous accesskey=p href="Mode-Data-Types.html#Mode%20Data%20Types">Mode Data Types</a>,
-Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+Node:&nbsp;<a name="Mode%20Functions">Mode Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mode-Data-Types.html#Mode%20Data%20Types">Mode Data Types</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
 <hr><br>
+</div>
 
-<h4>Terminal Mode Functions</h4>
+<h3 class="subsection">Terminal Mode Functions</h4>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>tcgetattr</b><i> (int <var>filedes</var>, struct termios *<var>termios-p</var>)
-</i></td>
+<td align="left">int <b>tcgetattr</b><i> </i>(<i>int </i><var>filedes</var><i>, struct termios *</i><var>termios-p</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -30,25 +40,25 @@ This function is used to examine the attributes of the terminal
 device with file descriptor <var>filedes</var>.  The attributes are returned
 in the structure that <var>termios-p</var> points to.
 
-<p>If successful, <code>tcgetattr</code> returns 0.  A return value of -1
+     <p>If successful, <code>tcgetattr</code> returns 0.  A return value of -1
 indicates an error.  The following <code>errno</code> error conditions are
 defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> argument is not a valid file descriptor.
+          <dd>The <var>filedes</var> argument is not a valid file descriptor.
 
-<br><dt><code>ENOTTY</code>
-<dd>The <var>filedes</var> is not associated with a terminal. 
+          <br><dt><code>ENOTTY</code>
+          <dd>The <var>filedes</var> is not associated with a terminal. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>tcsetattr</b><i> (int <var>filedes</var>, int <var>when</var>, const struct termios *<var>termios-p</var>)
-</i></td>
+<td align="left">int <b>tcsetattr</b><i> </i>(<i>int </i><var>filedes</var><i>, int </i><var>when</var><i>, const struct termios *</i><var>termios-p</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -58,58 +68,58 @@ This function sets the attributes of the terminal device with file
 descriptor <var>filedes</var>.  The new attributes are taken from the
 structure that <var>termios-p</var> points to.
 
-<p>The <var>when</var> argument specifies how to deal with input and output
+     <p>The <var>when</var> argument specifies how to deal with input and output
 already queued.  It can be one of the following values:
 
-<dl>
+          <dl>
 <dt><code>TCSANOW</code>
-<dd>Make the change immediately.
+          <dd>Make the change immediately.
 
-<br><dt><code>TCSADRAIN</code>
-<dd>Make the change after waiting until all queued output has been written. 
+          <br><dt><code>TCSADRAIN</code>
+          <dd>Make the change after waiting until all queued output has been written. 
 You should usually use this option when changing parameters that affect
 output.
 
-<br><dt><code>TCSAFLUSH</code>
-<dd>This is like <code>TCSADRAIN</code>, but also discards any queued input.
+          <br><dt><code>TCSAFLUSH</code>
+          <dd>This is like <code>TCSADRAIN</code>, but also discards any queued input.
 
-<br><dt><code>TCSASOFT</code>
-<dd>This is a flag bit that you can add to any of the above alternatives. 
+          <br><dt><code>TCSASOFT</code>
+          <dd>This is a flag bit that you can add to any of the above alternatives. 
 Its meaning is to inhibit alteration of the state of the terminal
 hardware.  It is a BSD extension; it is only supported on BSD systems
 and the GNU system.
 
-<p>Using <code>TCSASOFT</code> is exactly the same as setting the <code>CIGNORE</code>
+          <p>Using <code>TCSASOFT</code> is exactly the same as setting the <code>CIGNORE</code>
 bit in the <code>c_cflag</code> member of the structure <var>termios-p</var> points
 to.  See <a href="Control-Modes.html#Control%20Modes">Control Modes</a>, for a description of <code>CIGNORE</code>. 
 </dl>
 
-<p>If this function is called from a background process on its controlling
+     <p>If this function is called from a background process on its controlling
 terminal, normally all processes in the process group are sent a
 <code>SIGTTOU</code> signal, in the same way as if the process were trying to
 write to the terminal.  The exception is if the calling process itself
 is ignoring or blocking <code>SIGTTOU</code> signals, in which case the
 operation is performed and no signal is sent.  See <a href="Job-Control.html#Job%20Control">Job Control</a>.
 
-<p>If successful, <code>tcsetattr</code> returns 0.  A return value of
+     <p>If successful, <code>tcsetattr</code> returns 0.  A return value of
 -1 indicates an error.  The following <code>errno</code> error
 conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> argument is not a valid file descriptor.
+          <dd>The <var>filedes</var> argument is not a valid file descriptor.
 
-<br><dt><code>ENOTTY</code>
-<dd>The <var>filedes</var> is not associated with a terminal.
+          <br><dt><code>ENOTTY</code>
+          <dd>The <var>filedes</var> is not associated with a terminal.
 
-<br><dt><code>EINVAL</code>
-<dd>Either the value of the <code>when</code> argument is not valid, or there is
+          <br><dt><code>EINVAL</code>
+          <dd>Either the value of the <code>when</code> argument is not valid, or there is
 something wrong with the data in the <var>termios-p</var> argument. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>Although <code>tcgetattr</code> and <code>tcsetattr</code> specify the terminal
+   <p>Although <code>tcgetattr</code> and <code>tcsetattr</code> specify the terminal
 device with a file descriptor, the attributes are those of the terminal
 device itself and not of the file descriptor.  This means that the
 effects of changing terminal attributes are persistent; if another
@@ -117,7 +127,7 @@ process opens the terminal file later on, it will see the changed
 attributes even though it doesn't have anything to do with the open file
 descriptor you originally specified in changing the attributes.
 
-<p>Similarly, if a single process has multiple or duplicated file
+   <p>Similarly, if a single process has multiple or duplicated file
 descriptors for the same terminal device, changing the terminal
 attributes affects input and output to all of these file
 descriptors.  This means, for example, that you can't open one file
@@ -127,5 +137,5 @@ descriptor for the same terminal that you use to read from it in
 single-character, non-echoed mode.  Instead, you have to explicitly
 switch the terminal back and forth between the two modes.
 
-</body></html>
+   </body></html>
 

@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Input%20Modes">Input Modes</a>,
-Next:<a rel=next accesskey=n href="Output-Modes.html#Output%20Modes">Output Modes</a>,
-Previous:<a rel=previous accesskey=p href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>,
-Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+Node:&nbsp;<a name="Input%20Modes">Input Modes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Output-Modes.html#Output%20Modes">Output Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
 <hr><br>
+</div>
 
-<h4>Input Modes</h4>
+<h3 class="subsection">Input Modes</h4>
 
 <p>This section describes the terminal attribute flags that control
 fairly low-level aspects of input processing: handling of parity errors,
 break signals, flow control, and &lt;RET&gt; and &lt;LFD&gt; characters.
 
-<p>All of these flags are bits in the <code>c_iflag</code> member of the
+   <p>All of these flags are bits in the <code>c_iflag</code> member of the
 <code>struct termios</code> structure.  The member is an integer, and you
 change flags using the operators <code>&amp;</code>, <code>|</code> and <code>^</code>.  Don't
 try to specify the entire value for <code>c_iflag</code>--instead, change
@@ -30,7 +40,7 @@ only specific flags and leave the rest untouched (see <a href="Setting-Modes.htm
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>INPCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -40,13 +50,13 @@ If this bit is set, input parity checking is enabled.  If it is not set,
 no checking at all is done for parity errors on input; the
 characters are simply passed through to the application.
 
-<p>Parity checking on input processing is independent of whether parity
+     <p>Parity checking on input processing is independent of whether parity
 detection and generation on the underlying terminal hardware is enabled;
 see <a href="Control-Modes.html#Control%20Modes">Control Modes</a>.  For example, you could clear the <code>INPCK</code>
 input mode flag and set the <code>PARENB</code> control mode flag to ignore
 parity errors on input, but still generate parity on output.
 
-<p>If this bit is set, what happens when a parity error is detected depends
+     <p>If this bit is set, what happens when a parity error is detected depends
 on whether the <code>IGNPAR</code> or <code>PARMRK</code> bits are set.  If neither
 of these bits are set, a byte with a parity error is passed to the
 application as a <code>'\0'</code> character. 
@@ -57,7 +67,7 @@ application as a <code>'\0'</code> character.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IGNPAR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -72,7 +82,7 @@ This is only useful if <code>INPCK</code> is also set.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>PARMRK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -82,11 +92,11 @@ If this bit is set, input bytes with parity or framing errors are marked
 when passed to the program.  This bit is meaningful only when
 <code>INPCK</code> is set and <code>IGNPAR</code> is not set.
 
-<p>The way erroneous bytes are marked is with two preceding bytes,
+     <p>The way erroneous bytes are marked is with two preceding bytes,
 <code>377</code> and <code>0</code>.  Thus, the program actually reads three bytes
 for one erroneous byte received from the terminal.
 
-<p>If a valid byte has the value <code>0377</code>, and <code>ISTRIP</code> (see below)
+     <p>If a valid byte has the value <code>0377</code>, and <code>ISTRIP</code> (see below)
 is not set, the program might confuse it with the prefix that marks a
 parity error.  So a valid byte <code>0377</code> is passed to the program as
 two bytes, <code>0377</code> <code>0377</code>, in this case. 
@@ -97,7 +107,7 @@ two bytes, <code>0377</code> <code>0377</code>, in this case.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>ISTRIP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -112,7 +122,7 @@ otherwise, all eight bits are available for programs to read.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IGNBRK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -120,7 +130,7 @@ otherwise, all eight bits are available for programs to read.
 <tr><td>
 If this bit is set, break conditions are ignored.
 
-<p>A <dfn>break condition</dfn> is defined in the context of asynchronous
+     <p>A <dfn>break condition</dfn> is defined in the context of asynchronous
 serial data transmission as a series of zero-value bits longer than a
 single byte. 
 </td></tr>
@@ -130,7 +140,7 @@ single byte.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>BRKINT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -140,7 +150,7 @@ If this bit is set and <code>IGNBRK</code> is not set, a break condition
 clears the terminal input and output queues and raises a <code>SIGINT</code>
 signal for the foreground process group associated with the terminal.
 
-<p>If neither <code>BRKINT</code> nor <code>IGNBRK</code> are set, a break condition is
+     <p>If neither <code>BRKINT</code> nor <code>IGNBRK</code> are set, a break condition is
 passed to the application as a single <code>'\0'</code> character if
 <code>PARMRK</code> is not set, or otherwise as a three-character sequence
 <code>'\377'</code>, <code>'\0'</code>, <code>'\0'</code>. 
@@ -151,7 +161,7 @@ passed to the application as a single <code>'\0'</code> character if
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IGNCR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -168,7 +178,7 @@ terminals that send both carriage return and linefeed when you type the
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>ICRNL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -184,7 +194,7 @@ characters (<code>'\n'</code>).
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>INLCR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -199,7 +209,7 @@ are passed to the application as carriage return characters (<code>'\r'</code>).
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IXOFF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -218,7 +228,7 @@ START character by resuming transmission.  See <a href="Start-Stop-Characters.ht
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IXON</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -237,7 +247,7 @@ See <a href="Start-Stop-Characters.html#Start%2fStop%20Characters">Start/Stop Ch
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IXANY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -247,7 +257,7 @@ If this bit is set, any input character restarts output when output has
 been suspended with the STOP character.  Otherwise, only the START
 character restarts output.
 
-<p>This is a BSD extension; it exists only on BSD systems and the GNU system. 
+     <p>This is a BSD extension; it exists only on BSD systems and the GNU system. 
 </td></tr>
 </table>
 
@@ -255,7 +265,7 @@ character restarts output.
 <table width="100%">
 <tr>
 <td align="left">tcflag_t <b>IMAXBEL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -264,9 +274,9 @@ character restarts output.
 If this bit is set, then filling up the terminal input buffer sends a
 BEL character (code <code>007</code>) to the terminal to ring the bell.
 
-<p>This is a BSD extension. 
+     <p>This is a BSD extension. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

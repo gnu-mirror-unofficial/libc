@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Completion%20Status">Process Completion Status</a>,
-Next:<a rel=next accesskey=n href="BSD-Wait-Functions.html#BSD%20Wait%20Functions">BSD Wait Functions</a>,
-Previous:<a rel=previous accesskey=p href="Process-Completion.html#Process%20Completion">Process Completion</a>,
-Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+Node:&nbsp;<a name="Process%20Completion%20Status">Process Completion Status</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="BSD-Wait-Functions.html#BSD%20Wait%20Functions">BSD Wait Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Completion.html#Process%20Completion">Process Completion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
 <hr><br>
+</div>
 
-<h3>Process Completion Status</h3>
+<h3 class="section">Process Completion Status</h3>
 
 <p>If the exit status value (see <a href="Program-Termination.html#Program%20Termination">Program Termination</a>) of the child
 process is zero, then the status value reported by <code>waitpid</code> or
@@ -25,8 +35,8 @@ These macros are defined in the header file <code>sys/wait.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WIFEXITED</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WIFEXITED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -40,8 +50,8 @@ normally with <code>exit</code> or <code>_exit</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WEXITSTATUS</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WEXITSTATUS</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -56,8 +66,8 @@ See <a href="Exit-Status.html#Exit%20Status">Exit Status</a>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WIFSIGNALED</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WIFSIGNALED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -72,8 +82,8 @@ See <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WTERMSIG</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WTERMSIG</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -87,8 +97,8 @@ signal number of the signal that terminated the child process.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WCOREDUMP</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WCOREDUMP</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -102,8 +112,8 @@ and produced a core dump.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WIFSTOPPED</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WIFSTOPPED</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -116,8 +126,8 @@ This macro returns a nonzero value if the child process is stopped.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>WSTOPSIG</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">int <b>WSTOPSIG</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -128,5 +138,5 @@ signal number of the signal that caused the child process to stop.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

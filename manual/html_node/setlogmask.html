@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="setlogmask">setlogmask</a>,
-Next:<a rel=next accesskey=n href="Syslog-Example.html#Syslog%20Example">Syslog Example</a>,
-Previous:<a rel=previous accesskey=p href="closelog.html#closelog">closelog</a>,
-Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+Node:&nbsp;<a name="setlogmask">setlogmask</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Syslog-Example.html#Syslog%20Example">Syslog Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="closelog.html#closelog">closelog</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
 <hr><br>
+</div>
 
-<h4>setlogmask</h4>
+<h3 class="subsection">setlogmask</h4>
 
 <p>The symbols referred to in this section are declared in the file
 <code>syslog.h</code>.
@@ -22,56 +32,56 @@ Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Sysl
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setlogmask</b><i> (int <var>mask</var>)
-</i></td>
+<td align="left">int <b>setlogmask</b><i> </i>(<i>int </i><var>mask</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>setlogmask</code> sets a mask (the "logmask") that determines which
+     <p><code>setlogmask</code> sets a mask (the "logmask") that determines which
 future <code>syslog</code> calls shall be ignored.  If a program has not
 called <code>setlogmask</code>, <code>syslog</code> doesn't ignore any calls.  You
 can use <code>setlogmask</code> to specify that messages of particular
 priorities shall be ignored in the future.
 
-<p>A <code>setlogmask</code> call overrides any previous <code>setlogmask</code> call.
+     <p>A <code>setlogmask</code> call overrides any previous <code>setlogmask</code> call.
 
-<p>Note that the logmask exists entirely independently of opening and
+     <p>Note that the logmask exists entirely independently of opening and
 closing of Syslog connections.
 
-<p>Setting the logmask has a similar effect to, but is not the same as,
+     <p>Setting the logmask has a similar effect to, but is not the same as,
 configuring Syslog.  The Syslog configuration may cause Syslog to
 discard certain messages it receives, but the logmask causes certain
 messages never to get submitted to Syslog in the first place.
 
-<p><var>mask</var> is a bit string with one bit corresponding to each of the
+     <p><var>mask</var> is a bit string with one bit corresponding to each of the
 possible message priorities.  If the bit is on, <code>syslog</code> handles
 messages of that priority normally.  If it is off, <code>syslog</code>
 discards messages of that priority.  Use the message priority macros
 described in <a href="syslog--vsyslog.html#syslog%3b%20vsyslog">syslog; vsyslog</a> and the <code>LOG_MASK</code> to construct
 an appropriate <var>mask</var> value, as in this example:
 
-<br><pre>LOG_MASK(LOG_EMERG) | LOG_MASK(LOG_ERROR)
-</pre>
+     <pre class="smallexample">          LOG_MASK(LOG_EMERG) | LOG_MASK(LOG_ERROR)
+          </pre>
 
-<p>or
+     <p>or
 
-<br><pre>~(LOG_MASK(LOG_INFO))
-</pre>
+     <pre class="smallexample">          ~(LOG_MASK(LOG_INFO))
+          </pre>
 
-<p>There is also a <code>LOG_UPTO</code> macro, which generates a mask with the bits
+     <p>There is also a <code>LOG_UPTO</code> macro, which generates a mask with the bits
 on for a certain priority and all priorities above it:
 
-<br><pre>LOG_UPTO(LOG_ERROR)
-</pre>
+     <pre class="smallexample">          LOG_UPTO(LOG_ERROR)
+          </pre>
 
-<p>The unfortunate naming of the macro is due to the fact that internally,
+     <p>The unfortunate naming of the macro is due to the fact that internally,
 higher numbers are used for lower message priorities.
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

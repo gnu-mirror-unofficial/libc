@@ -2,47 +2,57 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="GNU%20C%20Variable-Size%20Arrays">GNU C Variable-Size Arrays</a>,
-Previous:<a rel=previous accesskey=p href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>,
-Up:<a rel=up accesskey=u href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>
+Node:&nbsp;<a name="GNU%20C%20Variable-Size%20Arrays">GNU C Variable-Size Arrays</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Variable-Size-Automatic.html#Variable%20Size%20Automatic">Variable Size Automatic</a>
 <hr><br>
+</div>
 
-<h5>GNU C Variable-Size Arrays</h5>
+<h3 class="subsubsection">GNU C Variable-Size Arrays</h5>
 
 <p>In GNU C, you can replace most uses of <code>alloca</code> with an array of
 variable size.  Here is how <code>open2</code> would look then:
 
-<br><pre>int open2 (char *str1, char *str2, int flags, int mode)
-{
-  char name[strlen (str1) + strlen (str2) + 1];
-  stpcpy (stpcpy (name, str1), str2);
-  return open (name, flags, mode);
-}
-</pre>
+<pre class="smallexample">     int open2 (char *str1, char *str2, int flags, int mode)
+     {
+       char name[strlen (str1) + strlen (str2) + 1];
+       stpcpy (stpcpy (name, str1), str2);
+       return open (name, flags, mode);
+     }
+     </pre>
 
-<p>But <code>alloca</code> is not always equivalent to a variable-sized array, for
+   <p>But <code>alloca</code> is not always equivalent to a variable-sized array, for
 several reasons:
 
-<ul>
+     <ul>
 <li>A variable size array's space is freed at the end of the scope of the
 name of the array.  The space allocated with <code>alloca</code>
 remains until the end of the function.
 
-<li>It is possible to use <code>alloca</code> within a loop, allocating an
+     <li>It is possible to use <code>alloca</code> within a loop, allocating an
 additional block on each iteration.  This is impossible with
 variable-sized arrays. 
 </ul>
 
-<p><strong>Note:</strong> If you mix use of <code>alloca</code> and variable-sized arrays
+   <p><strong>Note:</strong> If you mix use of <code>alloca</code> and variable-sized arrays
 within one function, exiting a scope in which a variable-sized array was
 declared frees all blocks allocated with <code>alloca</code> during the
 execution of that scope.
 
-</body></html>
+   </body></html>
 

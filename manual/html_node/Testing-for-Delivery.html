@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Testing%20for%20Delivery">Testing for Delivery</a>,
-Next:<a rel=next accesskey=n href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>,
-Previous:<a rel=previous accesskey=p href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>,
-Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+Node:&nbsp;<a name="Testing%20for%20Delivery">Testing for Delivery</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
 <hr><br>
+</div>
 
-<h4>Blocking to Test for Delivery of a Signal</h4>
+<h3 class="subsection">Blocking to Test for Delivery of a Signal</h4>
 
 <p>Now for a simple example.  Suppose you establish a handler for
 <code>SIGALRM</code> signals that sets a flag whenever a signal arrives, and
@@ -23,35 +33,35 @@ You can prevent additional <code>SIGALRM</code> signals from arriving in the
 meantime by wrapping the critical part of the code with calls to
 <code>sigprocmask</code>, like this:
 
-<br><pre>/* This variable is set by the SIGALRM signal handler. */
-volatile sig_atomic_t flag = 0;
+<pre class="smallexample">     /* This variable is set by the SIGALRM signal handler. */
+     volatile sig_atomic_t flag = 0;
+     
+     int
+     main (void)
+     {
+       sigset_t block_alarm;
+     
+       ...
+     
+       /* Initialize the signal mask. */
+       sigemptyset (&amp;block_alarm);
+       sigaddset (&amp;block_alarm, SIGALRM);
+     
+       while (1)
+         {
+           /* Check if a signal has arrived; if so, reset the flag. */
+           sigprocmask (SIG_BLOCK, &amp;block_alarm, NULL);
+           if (flag)
+             {
+               <var>actions-if-not-arrived</var>
+               flag = 0;
+             }
+           sigprocmask (SIG_UNBLOCK, &amp;block_alarm, NULL);
+     
+           ...
+         }
+     }
+     </pre>
 
-int
-main (void)
-{
-  sigset_t block_alarm;
-
-  <small>...</small>
-
-  /* Initialize the signal mask. */
-  sigemptyset (&amp;block_alarm);
-  sigaddset (&amp;block_alarm, SIGALRM);
-
-  while (1)
-    {
-      /* Check if a signal has arrived; if so, reset the flag. */
-      sigprocmask (SIG_BLOCK, &amp;block_alarm, NULL);
-      if (flag)
-        {
-          <var>actions-if-not-arrived</var>
-          flag = 0;
-        }
-      sigprocmask (SIG_UNBLOCK, &amp;block_alarm, NULL);
-
-      <small>...</small>
-    }
-}
-</pre>
-
-</body></html>
+   </body></html>
 

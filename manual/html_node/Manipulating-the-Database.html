@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Manipulating%20the%20Database">Manipulating the Database</a>,
-Next:<a rel=next accesskey=n href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>,
-Up:<a rel=up accesskey=u href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
+Node:&nbsp;<a name="Manipulating%20the%20Database">Manipulating the Database</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
 <hr><br>
+</div>
 
-<h4>Manipulating the User Accounting Database</h4>
+<h3 class="subsection">Manipulating the User Accounting Database</h4>
 
 <p>These functions and the corresponding data structures are declared in
 the header file <code>utmp.h</code>.
@@ -22,7 +32,7 @@ the header file <code>utmp.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>struct exit_status</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -32,21 +42,21 @@ The <code>exit_status</code> data structure is used to hold information about
 the exit status of processes marked as <code>DEAD_PROCESS</code> in the user
 accounting database.
 
-<dl>
+          <dl>
 <dt><code>short int e_termination</code>
-<dd>The exit status of the process.
+          <dd>The exit status of the process.
 
-<br><dt><code>short int e_exit</code>
-<dd>The exit status of the process. 
+          <br><dt><code>short int e_exit</code>
+          <dd>The exit status of the process. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct utmp</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -56,46 +66,46 @@ The <code>utmp</code> data structure is used to hold information about entries
 in the user accounting database.  On the GNU system it has the following
 members:
 
-<dl>
+          <dl>
 <dt><code>short int ut_type</code>
-<dd>Specifies the type of login; one of <code>EMPTY</code>, <code>RUN_LVL</code>,
+          <dd>Specifies the type of login; one of <code>EMPTY</code>, <code>RUN_LVL</code>,
 <code>BOOT_TIME</code>, <code>OLD_TIME</code>, <code>NEW_TIME</code>, <code>INIT_PROCESS</code>,
 <code>LOGIN_PROCESS</code>, <code>USER_PROCESS</code>, <code>DEAD_PROCESS</code> or
 <code>ACCOUNTING</code>.
 
-<br><dt><code>pid_t ut_pid</code>
-<dd>The process ID number of the login process.
+          <br><dt><code>pid_t ut_pid</code>
+          <dd>The process ID number of the login process.
 
-<br><dt><code>char ut_line[]</code>
-<dd>The device name of the tty (without <code>/dev/</code>).
+          <br><dt><code>char ut_line[]</code>
+          <dd>The device name of the tty (without <code>/dev/</code>).
 
-<br><dt><code>char ut_id[]</code>
-<dd>The inittab ID of the process.
+          <br><dt><code>char ut_id[]</code>
+          <dd>The inittab ID of the process.
 
-<br><dt><code>char ut_user[]</code>
-<dd>The user's login name.
+          <br><dt><code>char ut_user[]</code>
+          <dd>The user's login name.
 
-<br><dt><code>char ut_host[]</code>
-<dd>The name of the host from which the user logged in.
+          <br><dt><code>char ut_host[]</code>
+          <dd>The name of the host from which the user logged in.
 
-<br><dt><code>struct exit_status ut_exit</code>
-<dd>The exit status of a process marked as <code>DEAD_PROCESS</code>.
+          <br><dt><code>struct exit_status ut_exit</code>
+          <dd>The exit status of a process marked as <code>DEAD_PROCESS</code>.
 
-<br><dt><code>long ut_session</code>
-<dd>The Session ID, used for windowing.
+          <br><dt><code>long ut_session</code>
+          <dd>The Session ID, used for windowing.
 
-<br><dt><code>struct timeval ut_tv</code>
-<dd>Time the entry was made.  For entries of type <code>OLD_TIME</code> this is
+          <br><dt><code>struct timeval ut_tv</code>
+          <dd>Time the entry was made.  For entries of type <code>OLD_TIME</code> this is
 the time when the system clock changed, and for entries of type
 <code>NEW_TIME</code> this is the time the system clock was set to.
 
-<br><dt><code>int32_t ut_addr_v6[4]</code>
-<dd>The Internet address of a remote host. 
+          <br><dt><code>int32_t ut_addr_v6[4]</code>
+          <dd>The Internet address of a remote host. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>The <code>ut_type</code>, <code>ut_pid</code>, <code>ut_id</code>, <code>ut_tv</code>, and
+   <p>The <code>ut_type</code>, <code>ut_pid</code>, <code>ut_id</code>, <code>ut_tv</code>, and
 <code>ut_host</code> fields are not available on all systems.  Portable
 applications therefore should be prepared for these situations.  To help
 doing this the <code>utmp.h</code> header provides macros
@@ -104,47 +114,47 @@ doing this the <code>utmp.h</code> header provides macros
 available.  The programmer can handle the situations by using
 <code>#ifdef</code> in the program code.
 
-<p>The following macros are defined for use as values for the
+   <p>The following macros are defined for use as values for the
 <code>ut_type</code> member of the <code>utmp</code> structure.  The values are
 integer constants.
 
-<dl>
+     <dl>
 <dt><code>EMPTY</code>
-<dd>This macro is used to indicate that the entry contains no valid user
+     <dd>This macro is used to indicate that the entry contains no valid user
 accounting information.
 
-<br><dt><code>RUN_LVL</code>
-<dd>This macro is used to identify the systems runlevel.
+     <br><dt><code>RUN_LVL</code>
+     <dd>This macro is used to identify the systems runlevel.
 
-<br><dt><code>BOOT_TIME</code>
-<dd>This macro is used to identify the time of system boot.
+     <br><dt><code>BOOT_TIME</code>
+     <dd>This macro is used to identify the time of system boot.
 
-<br><dt><code>OLD_TIME</code>
-<dd>This macro is used to identify the time when the system clock changed.
+     <br><dt><code>OLD_TIME</code>
+     <dd>This macro is used to identify the time when the system clock changed.
 
-<br><dt><code>NEW_TIME</code>
-<dd>This macro is used to identify the time after the system changed.
+     <br><dt><code>NEW_TIME</code>
+     <dd>This macro is used to identify the time after the system changed.
 
-<br><dt><code>INIT_PROCESS</code>
-<dd>This macro is used to identify a process spawned by the init process.
+     <br><dt><code>INIT_PROCESS</code>
+     <dd>This macro is used to identify a process spawned by the init process.
 
-<br><dt><code>LOGIN_PROCESS</code>
-<dd>This macro is used to identify the session leader of a logged in user.
+     <br><dt><code>LOGIN_PROCESS</code>
+     <dd>This macro is used to identify the session leader of a logged in user.
 
-<br><dt><code>USER_PROCESS</code>
-<dd>This macro is used to identify a user process.
+     <br><dt><code>USER_PROCESS</code>
+     <dd>This macro is used to identify a user process.
 
-<br><dt><code>DEAD_PROCESS</code>
-<dd>This macro is used to identify a terminated process.
+     <br><dt><code>DEAD_PROCESS</code>
+     <dd>This macro is used to identify a terminated process.
 
-<br><dt><code>ACCOUNTING</code>
-<dd>??? 
+     <br><dt><code>ACCOUNTING</code>
+     <dd>??? 
 </dl>
 
-<p>The size of the <code>ut_line</code>, <code>ut_id</code>, <code>ut_user</code> and
+   <p>The size of the <code>ut_line</code>, <code>ut_id</code>, <code>ut_user</code> and
 <code>ut_host</code> arrays can be found using the <code>sizeof</code> operator.
 
-<p>Many older systems have, instead of an <code>ut_tv</code> member, an
+   <p>Many older systems have, instead of an <code>ut_tv</code> member, an
 <code>ut_time</code> member, usually of type <code>time_t</code>, for representing
 the time associated with the entry.  Therefore, for backwards
 compatibility only, <code>utmp.h</code> defines <code>ut_time</code> as an alias for
@@ -153,8 +163,8 @@ compatibility only, <code>utmp.h</code> defines <code>ut_time</code> as an alias
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>setutent</b><i> (void)
-</i></td>
+<td align="left">void <b>setutent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -164,7 +174,7 @@ This function opens the user accounting database to begin scanning it.
 You can then call <code>getutent</code>, <code>getutid</code> or <code>getutline</code> to
 read entries and <code>pututline</code> to write entries.
 
-<p>If the database is already open, it resets the input to the beginning of
+     <p>If the database is already open, it resets the input to the beginning of
 the database. 
 </td></tr>
 </table>
@@ -172,8 +182,8 @@ the database.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmp * <b>getutent</b><i> (void)
-</i></td>
+<td align="left">struct utmp * <b>getutent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -186,15 +196,15 @@ statically allocated and may be overwritten by subsequent calls to
 wish to save the information or you can use the <code>getutent_r</code>
 function which stores the data in a user-provided buffer.
 
-<p>A null pointer is returned in case no further entry is available. 
+     <p>A null pointer is returned in case no further entry is available. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endutent</b><i> (void)
-</i></td>
+<td align="left">void <b>endutent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -207,8 +217,8 @@ This function closes the user accounting database.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmp * <b>getutid</b><i> (const struct utmp *<var>id</var>)
-</i></td>
+<td align="left">struct utmp * <b>getutid</b><i> </i>(<i>const struct utmp *</i><var>id</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -231,10 +241,10 @@ subsequent call to <code>getutent</code>, <code>getutid</code> or <code>getutlin
 You must copy the contents of the structure if you wish to save the
 information.
 
-<p>A null pointer is returned in case the end of the database is reached
+     <p>A null pointer is returned in case the end of the database is reached
 without a match.
 
-<p>The <code>getutid</code> function may cache the last read entry.  Therefore,
+     <p>The <code>getutid</code> function may cache the last read entry.  Therefore,
 if you are using <code>getutid</code> to search for multiple occurrences, it
 is necessary to zero out the static data after each call.  Otherwise
 <code>getutid</code> could just return a pointer to the same entry over and
@@ -245,8 +255,8 @@ over again.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmp * <b>getutline</b><i> (const struct utmp *<var>line</var>)
-</i></td>
+<td align="left">struct utmp * <b>getutline</b><i> </i>(<i>const struct utmp *</i><var>line</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -261,10 +271,10 @@ statically allocated, and may be overwritten by a subsequent call to
 <code>getutent</code>, <code>getutid</code> or <code>getutline</code>.  You must copy the
 contents of the structure if you wish to save the information.
 
-<p>A null pointer is returned in case the end of the database is reached
+     <p>A null pointer is returned in case the end of the database is reached
 without a match.
 
-<p>The <code>getutline</code> function may cache the last read entry.  Therefore
+     <p>The <code>getutline</code> function may cache the last read entry.  Therefore
 if you are using <code>getutline</code> to search for multiple occurrences, it
 is necessary to zero out the static data after each call.  Otherwise
 <code>getutline</code> could just return a pointer to the same entry over and
@@ -275,14 +285,14 @@ over again.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmp * <b>pututline</b><i> (const struct utmp *<var>utmp</var>)
-</i></td>
+<td align="left">struct utmp * <b>pututline</b><i> </i>(<i>const struct utmp *</i><var>utmp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-The <code>pututline</code> function inserts the entry <code>*<var>utmp</var></code> at
+The <code>pututline</code> function inserts the entry <code>*</code><var>utmp</var><code></code> at
 the appropriate place in the user accounting database.  If it finds that
 it is not already at the correct place in the database, it uses
 <code>getutid</code> to search for the position to insert the entry, however
@@ -290,20 +300,20 @@ this will not modify the static structure returned by <code>getutent</code>,
 <code>getutid</code> and <code>getutline</code>.  If this search fails, the entry
 is appended to the database.
 
-<p>The <code>pututline</code> function returns a pointer to a copy of the entry
+     <p>The <code>pututline</code> function returns a pointer to a copy of the entry
 inserted in the user accounting database, or a null pointer if the entry
 could not be added.  The following <code>errno</code> error conditions are
 defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EPERM</code>
-<dd>The process does not have the appropriate privileges; you cannot modify
+          <dd>The process does not have the appropriate privileges; you cannot modify
 the user accounting database. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>All the <code>get*</code> functions mentioned before store the information
+   <p>All the <code>get*</code> functions mentioned before store the information
 they return in a static buffer.  This can be a problem in multi-threaded
 programs since the data returned for the request is overwritten by the
 return value data in another thread.  Therefore the GNU C Library
@@ -313,8 +323,8 @@ user-provided buffer.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getutent_r</b><i> (struct utmp *<var>buffer</var>, struct utmp **<var>result</var>)
-</i></td>
+<td align="left">int <b>getutent_r</b><i> </i>(<i>struct utmp *</i><var>buffer</var><i>, struct utmp **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -325,21 +335,21 @@ returns the next entry from the database.  But instead of storing the
 information in a static buffer it stores it in the buffer pointed to by
 the parameter <var>buffer</var>.
 
-<p>If the call was successful, the function returns <code>0</code> and the
+     <p>If the call was successful, the function returns <code>0</code> and the
 pointer variable pointed to by the parameter <var>result</var> contains a
 pointer to the buffer which contains the result (this is most probably
 the same value as <var>buffer</var>).  If something went wrong during the
 execution of <code>getutent_r</code> the function returns <code>-1</code>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getutid_r</b><i> (const struct utmp *<var>id</var>, struct utmp *<var>buffer</var>, struct utmp **<var>result</var>)
-</i></td>
+<td align="left">int <b>getutid_r</b><i> </i>(<i>const struct utmp *</i><var>id</var><i>, struct utmp *</i><var>buffer</var><i>, struct utmp **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -349,20 +359,20 @@ This function retrieves just like <code>getutid</code> the next entry matching
 the information stored in <var>id</var>.  But the result is stored in the
 buffer pointed to by the parameter <var>buffer</var>.
 
-<p>If successful the function returns <code>0</code> and the pointer variable
+     <p>If successful the function returns <code>0</code> and the pointer variable
 pointed to by the parameter <var>result</var> contains a pointer to the
 buffer with the result (probably the same as <var>result</var>.  If not
 successful the function return <code>-1</code>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getutline_r</b><i> (const struct utmp *<var>line</var>, struct utmp *<var>buffer</var>, struct utmp **<var>result</var>)
-</i></td>
+<td align="left">int <b>getutline_r</b><i> </i>(<i>const struct utmp *</i><var>line</var><i>, struct utmp *</i><var>buffer</var><i>, struct utmp **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -372,27 +382,27 @@ This function retrieves just like <code>getutline</code> the next entry
 matching the information stored in <var>line</var>.  But the result is stored
 in the buffer pointed to by the parameter <var>buffer</var>.
 
-<p>If successful the function returns <code>0</code> and the pointer variable
+     <p>If successful the function returns <code>0</code> and the pointer variable
 pointed to by the parameter <var>result</var> contains a pointer to the
 buffer with the result (probably the same as <var>result</var>.  If not
 successful the function return <code>-1</code>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
-<p>In addition to the user accounting database, most systems keep a number
+   <p>In addition to the user accounting database, most systems keep a number
 of similar databases.  For example most systems keep a log file with all
 previous logins (usually in <code>/etc/wtmp</code> or <code>/var/log/wtmp</code>).
 
-<p>For specifying which database to examine, the following function should
+   <p>For specifying which database to examine, the following function should
 be used.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>utmpname</b><i> (const char *<var>file</var>)
-</i></td>
+<td align="left">int <b>utmpname</b><i> </i>(<i>const char *</i><var>file</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -403,13 +413,13 @@ examined to <var>file</var>, and closes any previously opened database.  By
 default <code>getutent</code>, <code>getutid</code>, <code>getutline</code> and
 <code>pututline</code> read from and write to the user accounting database.
 
-<p>The following macros are defined for use as the <var>file</var> argument:
+     <p>The following macros are defined for use as the <var>file</var> argument:
 
-<p>
+     <p>
 <table width="100%">
 <tr>
 <td align="left">char * <b>_PATH_UTMP</b><i>
-</i></td>
+          </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -419,11 +429,11 @@ This macro is used to specify the user accounting database.
 </td></tr>
 </table>
 
-<p>
+     <p>
 <table width="100%">
 <tr>
 <td align="left">char * <b>_PATH_WTMP</b><i>
-</i></td>
+          </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -433,7 +443,7 @@ This macro is used to specify the user accounting log file.
 </td></tr>
 </table>
 
-<p>The <code>utmpname</code> function returns a value of <code>0</code> if the new name
+     <p>The <code>utmpname</code> function returns a value of <code>0</code> if the new name
 was successfully stored, and a value of <code>-1</code> to indicate an error. 
 Note that <code>utmpname</code> does not try to open the database, and that
 therefore the return value does not say anything about whether the
@@ -441,14 +451,14 @@ database can be successfully opened.
 </td></tr>
 </table>
 
-<p>Specially for maintaining log-like databases the GNU C Library provides
+   <p>Specially for maintaining log-like databases the GNU C Library provides
 the following function:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>updwtmp</b><i> (const char *<var>wtmp_file</var>, const struct utmp *<var>utmp</var>)
-</i></td>
+<td align="left">void <b>updwtmp</b><i> </i>(<i>const char *</i><var>wtmp_file</var><i>, const struct utmp *</i><var>utmp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -460,7 +470,7 @@ database specified by <var>wtmp_file</var>.  For possible values for the
 </td></tr>
 </table>
 
-<p><strong>Portability Note:</strong> Although many operating systems provide a
+   <p><strong>Portability Note:</strong> Although many operating systems provide a
 subset of these functions, they are not standardized.  There are often
 subtle differences in the return types, and there are considerable
 differences between the various definitions of <code>struct utmp</code>.  When
@@ -470,5 +480,5 @@ program to be portable, consider using the XPG functions described in
 <a href="XPG-Functions.html#XPG%20Functions">XPG Functions</a>, or take a look at the BSD compatible functions in
 <a href="Logging-In-and-Out.html#Logging%20In%20and%20Out">Logging In and Out</a>.
 
-</body></html>
+   </body></html>
 

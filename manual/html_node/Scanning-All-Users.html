@@ -2,32 +2,42 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Scanning%20All%20Users">Scanning All Users</a>,
-Next:<a rel=next accesskey=n href="Writing-a-User-Entry.html#Writing%20a%20User%20Entry">Writing a User Entry</a>,
-Previous:<a rel=previous accesskey=p href="Lookup-User.html#Lookup%20User">Lookup User</a>,
-Up:<a rel=up accesskey=u href="User-Database.html#User%20Database">User Database</a>
+Node:&nbsp;<a name="Scanning%20All%20Users">Scanning All Users</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Writing-a-User-Entry.html#Writing%20a%20User%20Entry">Writing a User Entry</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Lookup-User.html#Lookup%20User">Lookup User</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Database.html#User%20Database">User Database</a>
 <hr><br>
+</div>
 
-<h4>Scanning the List of All Users</h4>
+<h3 class="subsection">Scanning the List of All Users</h4>
 
 <p>This section explains how a program can read the list of all users in
 the system, one user at a time.  The functions described here are
 declared in <code>pwd.h</code>.
 
-<p>You can use the <code>fgetpwent</code> function to read user entries from a
+   <p>You can use the <code>fgetpwent</code> function to read user entries from a
 particular file.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct passwd * <b>fgetpwent</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">struct passwd * <b>fgetpwent</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,7 +48,7 @@ pointer to the entry.  The structure is statically allocated and is
 rewritten on subsequent calls to <code>fgetpwent</code>.  You must copy the
 contents of the structure if you wish to save the information.
 
-<p>The stream must correspond to a file in the same format as the standard
+     <p>The stream must correspond to a file in the same format as the standard
 password database file. 
 </td></tr>
 </table>
@@ -46,8 +56,8 @@ password database file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fgetpwent_r</b><i> (FILE *<var>stream</var>, struct passwd *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct passwd **<var>result</var>)
-</i></td>
+<td align="left">int <b>fgetpwent_r</b><i> </i>(<i>FILE *</i><var>stream</var><i>, struct passwd *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, size_t </i><var>buflen</var><i>, struct passwd **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -60,24 +70,24 @@ first <var>buflen</var> bytes of the additional buffer pointed to by
 <var>buffer</var> are used to contain additional information, normally
 strings which are pointed to by the elements of the result structure.
 
-<p>The stream must correspond to a file in the same format as the standard
+     <p>The stream must correspond to a file in the same format as the standard
 password database file.
 
-<p>If the function returns zero <var>result</var> points to the structure with
+     <p>If the function returns zero <var>result</var> points to the structure with
 the wanted data (normally this is in <var>result_buf</var>).  If errors
 occurred the return value is nonzero and <var>result</var> contains a null
 pointer. 
 </td></tr>
 </table>
 
-<p>The way to scan all the entries in the user database is with
+   <p>The way to scan all the entries in the user database is with
 <code>setpwent</code>, <code>getpwent</code>, and <code>endpwent</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>setpwent</b><i> (void)
-</i></td>
+<td align="left">void <b>setpwent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -91,8 +101,8 @@ This function initializes a stream which <code>getpwent</code> and
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct passwd * <b>getpwent</b><i> (void)
-</i></td>
+<td align="left">struct passwd * <b>getpwent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -104,15 +114,15 @@ structure is statically allocated and is rewritten on subsequent calls
 to <code>getpwent</code>.  You must copy the contents of the structure if you
 wish to save the information.
 
-<p>A null pointer is returned when no more entries are available. 
+     <p>A null pointer is returned when no more entries are available. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpwent_r</b><i> (struct passwd *<var>result_buf</var>, char *<var>buffer</var>, int <var>buflen</var>, struct passwd **<var>result</var>)
-</i></td>
+<td align="left">int <b>getpwent_r</b><i> </i>(<i>struct passwd *</i><var>result_buf</var><i>, char *</i><var>buffer</var><i>, int </i><var>buflen</var><i>, struct passwd **</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -123,16 +133,16 @@ entry from the stream initialized by <code>setpwent</code>.  Like
 <code>fgetpwent_r</code>, it uses the user-supplied buffers in
 <var>result_buf</var> and <var>buffer</var> to return the information requested.
 
-<p>The return values are the same as for <code>fgetpwent_r</code>.
+     <p>The return values are the same as for <code>fgetpwent_r</code>.
 
-</td></tr>
+        </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endpwent</b><i> (void)
-</i></td>
+<td align="left">void <b>endpwent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -143,5 +153,5 @@ This function closes the internal stream used by <code>getpwent</code> or
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

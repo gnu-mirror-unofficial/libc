@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Error%20Reporting">Error Reporting</a>,
-Next:<a rel=next accesskey=n href="Memory.html#Memory">Memory</a>,
-Previous:<a rel=previous accesskey=p href="Introduction.html#Introduction">Introduction</a>,
-Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+Node:&nbsp;<a name="Error%20Reporting">Error Reporting</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Memory.html#Memory">Memory</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Introduction.html#Introduction">Introduction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
 <hr><br>
+</div>
 
-<h2>Error Reporting</h2>
+<h2 class="chapter">Error Reporting</h2>
 
 <p>Many functions in the GNU C library detect and report error conditions,
 and sometimes your programs need to check for these error conditions. 
@@ -22,16 +32,16 @@ For example, when you open an input file, you should verify that the
 file was actually opened correctly, and print an error message or take
 other appropriate action if the call to the library function failed.
 
-<p>This chapter describes how the error reporting facility works.  Your
+   <p>This chapter describes how the error reporting facility works.  Your
 program should include the header file <code>errno.h</code> to use this
 facility.
 
-<ul>
-<li><a accesskey=1 href="Checking-for-Errors.html#Checking%20for%20Errors">Checking for Errors</a>:          How errors are reported by library functions. 
-<li><a accesskey=2 href="Error-Codes.html#Error%20Codes">Error Codes</a>:                  Error code macros; all of these expand
+<ul class="menu">
+<li><a accesskey="1" href="Checking-for-Errors.html#Checking%20for%20Errors">Checking for Errors</a>:          How errors are reported by library functions. 
+<li><a accesskey="2" href="Error-Codes.html#Error%20Codes">Error Codes</a>:                  Error code macros; all of these expand
                                  into integer constant values. 
-<li><a accesskey=3 href="Error-Messages.html#Error%20Messages">Error Messages</a>:               Mapping error codes onto error messages. 
+<li><a accesskey="3" href="Error-Messages.html#Error%20Messages">Error Messages</a>:               Mapping error codes onto error messages. 
 </ul>
 
-</body></html>
+   </body></html>
 

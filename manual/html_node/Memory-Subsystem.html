@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Memory%20Subsystem">Memory Subsystem</a>,
-Next:<a rel=next accesskey=n href="Query-Memory-Parameters.html#Query%20Memory%20Parameters">Query Memory Parameters</a>,
-Up:<a rel=up accesskey=u href="Memory-Resources.html#Memory%20Resources">Memory Resources</a>
+Node:&nbsp;<a name="Memory%20Subsystem">Memory Subsystem</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Query-Memory-Parameters.html#Query%20Memory%20Parameters">Query Memory Parameters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Memory-Resources.html#Memory%20Resources">Memory Resources</a>
 <hr><br>
+</div>
 
-<h4>Overview about traditional Unix memory handling</h4>
+<h3 class="subsection">Overview about traditional Unix memory handling</h4>
 
 <p>Unix systems normally provide processes virtual address spaces.  This
 means that the addresses of the memory regions do not have to correspond
@@ -22,13 +32,13 @@ data.  An extra level of indirection is introduced which translates
 virtual addresses into physical addresses.  This is normally done by the
 hardware of the processor.
 
-<p>Using a virtual address space has several advantage.  The most important
+   <p>Using a virtual address space has several advantage.  The most important
 is process isolation.  The different processes running on the system
 cannot interfere directly with each other.  No process can write into
 the address space of another process (except when shared memory is used
 but then it is wanted and controlled).
 
-<p>Another advantage of virtual memory is that the address space the
+   <p>Another advantage of virtual memory is that the address space the
 processes see can actually be larger than the physical memory available. 
 The physical memory can be extended by storage on an external media
 where the content of currently unused memory regions is stored.  The
@@ -42,7 +52,7 @@ the system will slow down dramatically due to constant swapping of
 memory content from the memory to the storage media and back.  This is
 called "thrashing".
 
-<p>A final aspect of virtual memory which is important and follows from
+   <p>A final aspect of virtual memory which is important and follows from
 what is said in the last paragraph is the granularity of the virtual
 address space handling.  When we said that the virtual address handling
 stores memory content externally it cannot do this on a byte-by-byte
@@ -52,5 +62,5 @@ together and form a <dfn>page</dfn>.  The size of each page is always a power
 of two byte.  The smallest page size in use today is 4096, with 8192,
 16384, and 65536 being other popular sizes.
 
-</body></html>
+   </body></html>
 

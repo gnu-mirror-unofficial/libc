@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="closelog">closelog</a>,
-Next:<a rel=next accesskey=n href="setlogmask.html#setlogmask">setlogmask</a>,
-Previous:<a rel=previous accesskey=p href="syslog--vsyslog.html#syslog%3b%20vsyslog">syslog; vsyslog</a>,
-Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+Node:&nbsp;<a name="closelog">closelog</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="setlogmask.html#setlogmask">setlogmask</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="syslog--vsyslog.html#syslog%3b%20vsyslog">syslog; vsyslog</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
 <hr><br>
+</div>
 
-<h4>closelog</h4>
+<h3 class="subsection">closelog</h4>
 
 <p>The symbols referred to in this section are declared in the file
 <code>syslog.h</code>.
@@ -22,24 +32,33 @@ Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Sysl
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>closelog</b><i> (void)
-</i></td>
+<td align="left">void <b>closelog</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>closelog</code> closes the current Syslog connection, if there is one. 
-This include closing the <code>dev/log</code> socket, if it is open.
+     <p><code>closelog</code> closes the current Syslog connection, if there is one. 
+This includes closing the <code>dev/log</code> socket, if it is open. 
+<code>closelog</code> also sets the identification string for Syslog messages
+back to the default, if <code>openlog</code> was called with a non-NULL argument
+to <var>ident</var>.  The default identification string is the program name
+taken from argv[0].
 
-<p>There is very little reason to use this function.  It does not flush any
-buffers; you can reopen a Syslog connection without closing it first;
-The connection gets closed automatically on exec or exit. 
-<code>closelog</code> has primarily aesthetic value.
+     <p>If you are writing shared library code that uses <code>openlog</code> to
+generate custom syslog output, you should use <code>closelog</code> to drop the
+GNU C library's internal reference to the <var>ident</var> pointer when you are
+done.  Please read the section on <code>openlog</code> for more information:
+See <a href="openlog.html#openlog">openlog</a>.
 
-</td></tr>
+     <p><code>closelog</code> does not flush any buffers.  You do not have to call
+<code>closelog</code> before re-opening a Syslog connection with <code>initlog</code>. 
+Syslog connections are automatically closed on exec or exit.
+
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

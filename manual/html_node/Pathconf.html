@@ -2,32 +2,42 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Pathconf">Pathconf</a>,
-Next:<a rel=next accesskey=n href="Utility-Limits.html#Utility%20Limits">Utility Limits</a>,
-Previous:<a rel=previous accesskey=p href="File-Minimums.html#File%20Minimums">File Minimums</a>,
-Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+Node:&nbsp;<a name="Pathconf">Pathconf</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Utility-Limits.html#Utility%20Limits">Utility Limits</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Minimums.html#File%20Minimums">File Minimums</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
 <hr><br>
+</div>
 
-<h3>Using <code>pathconf</code></h3>
+<h3 class="section">Using <code>pathconf</code></h3>
 
 <p>When your machine allows different files to have different values for a
 file system parameter, you can use the functions in this section to find
 out the value that applies to any particular file.
 
-<p>These functions and the associated constants for the <var>parameter</var>
+   <p>These functions and the associated constants for the <var>parameter</var>
 argument are declared in the header file <code>unistd.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>pathconf</b><i> (const char *<var>filename</var>, int <var>parameter</var>)
-</i></td>
+<td align="left">long int <b>pathconf</b><i> </i>(<i>const char *</i><var>filename</var><i>, int </i><var>parameter</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,10 +46,10 @@ argument are declared in the header file <code>unistd.h</code>.
 This function is used to inquire about the limits that apply to
 the file named <var>filename</var>.
 
-<p>The <var>parameter</var> argument should be one of the <code>_PC_</code> constants
+     <p>The <var>parameter</var> argument should be one of the <code>_PC_</code> constants
 listed below.
 
-<p>The normal return value from <code>pathconf</code> is the value you requested. 
+     <p>The normal return value from <code>pathconf</code> is the value you requested. 
 A value of <code>-1</code> is returned both if the implementation does not
 impose a limit, and in case of an error.  In the former case,
 <code>errno</code> is not set, while in the latter case, <code>errno</code> is set
@@ -47,22 +57,22 @@ to indicate the cause of the problem.  So the only way to use this
 function robustly is to store <code>0</code> into <code>errno</code> just before
 calling it.
 
-<p>Besides the usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>),
+     <p>Besides the usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>),
 the following error condition is defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EINVAL</code>
-<dd>The value of <var>parameter</var> is invalid, or the implementation doesn't
+          <dd>The value of <var>parameter</var> is invalid, or the implementation doesn't
 support the <var>parameter</var> for the specific file. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>fpathconf</b><i> (int <var>filedes</var>, int <var>parameter</var>)
-</i></td>
+<td align="left">long int <b>fpathconf</b><i> </i>(<i>int </i><var>filedes</var><i>, int </i><var>parameter</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,78 +82,78 @@ This is just like <code>pathconf</code> except that an open file descriptor
 is used to specify the file for which information is requested, instead
 of a file name.
 
-<p>The following <code>errno</code> error conditions are defined for this function:
+     <p>The following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> argument is not a valid file descriptor.
+          <dd>The <var>filedes</var> argument is not a valid file descriptor.
 
-<br><dt><code>EINVAL</code>
-<dd>The value of <var>parameter</var> is invalid, or the implementation doesn't
+          <br><dt><code>EINVAL</code>
+          <dd>The value of <var>parameter</var> is invalid, or the implementation doesn't
 support the <var>parameter</var> for the specific file. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>Here are the symbolic constants that you can use as the <var>parameter</var>
+   <p>Here are the symbolic constants that you can use as the <var>parameter</var>
 argument to <code>pathconf</code> and <code>fpathconf</code>.  The values are all
 integer constants.
 
-<dl>
+     <dl>
 <dt><code>_PC_LINK_MAX</code>
-<dd>Inquire about the value of <code>LINK_MAX</code>.
+     <dd>Inquire about the value of <code>LINK_MAX</code>.
 
-<br><dt><code>_PC_MAX_CANON</code>
-<dd>Inquire about the value of <code>MAX_CANON</code>.
+     <br><dt><code>_PC_MAX_CANON</code>
+     <dd>Inquire about the value of <code>MAX_CANON</code>.
 
-<br><dt><code>_PC_MAX_INPUT</code>
-<dd>Inquire about the value of <code>MAX_INPUT</code>.
+     <br><dt><code>_PC_MAX_INPUT</code>
+     <dd>Inquire about the value of <code>MAX_INPUT</code>.
 
-<br><dt><code>_PC_NAME_MAX</code>
-<dd>Inquire about the value of <code>NAME_MAX</code>.
+     <br><dt><code>_PC_NAME_MAX</code>
+     <dd>Inquire about the value of <code>NAME_MAX</code>.
 
-<br><dt><code>_PC_PATH_MAX</code>
-<dd>Inquire about the value of <code>PATH_MAX</code>.
+     <br><dt><code>_PC_PATH_MAX</code>
+     <dd>Inquire about the value of <code>PATH_MAX</code>.
 
-<br><dt><code>_PC_PIPE_BUF</code>
-<dd>Inquire about the value of <code>PIPE_BUF</code>.
+     <br><dt><code>_PC_PIPE_BUF</code>
+     <dd>Inquire about the value of <code>PIPE_BUF</code>.
 
-<br><dt><code>_PC_CHOWN_RESTRICTED</code>
-<dd>Inquire about the value of <code>_POSIX_CHOWN_RESTRICTED</code>.
+     <br><dt><code>_PC_CHOWN_RESTRICTED</code>
+     <dd>Inquire about the value of <code>_POSIX_CHOWN_RESTRICTED</code>.
 
-<br><dt><code>_PC_NO_TRUNC</code>
-<dd>Inquire about the value of <code>_POSIX_NO_TRUNC</code>.
+     <br><dt><code>_PC_NO_TRUNC</code>
+     <dd>Inquire about the value of <code>_POSIX_NO_TRUNC</code>.
 
-<br><dt><code>_PC_VDISABLE</code>
-<dd>Inquire about the value of <code>_POSIX_VDISABLE</code>.
+     <br><dt><code>_PC_VDISABLE</code>
+     <dd>Inquire about the value of <code>_POSIX_VDISABLE</code>.
 
-<br><dt><code>_PC_SYNC_IO</code>
-<dd>Inquire about the value of <code>_POSIX_SYNC_IO</code>.
+     <br><dt><code>_PC_SYNC_IO</code>
+     <dd>Inquire about the value of <code>_POSIX_SYNC_IO</code>.
 
-<br><dt><code>_PC_ASYNC_IO</code>
-<dd>Inquire about the value of <code>_POSIX_ASYNC_IO</code>.
+     <br><dt><code>_PC_ASYNC_IO</code>
+     <dd>Inquire about the value of <code>_POSIX_ASYNC_IO</code>.
 
-<br><dt><code>_PC_PRIO_IO</code>
-<dd>Inquire about the value of <code>_POSIX_PRIO_IO</code>.
+     <br><dt><code>_PC_PRIO_IO</code>
+     <dd>Inquire about the value of <code>_POSIX_PRIO_IO</code>.
 
-<br><dt><code>_PC_SOCK_MAXBUF</code>
-<dd>Inquire about the value of <code>_POSIX_PIPE_BUF</code>.
+     <br><dt><code>_PC_SOCK_MAXBUF</code>
+     <dd>Inquire about the value of <code>_POSIX_PIPE_BUF</code>.
 
-<br><dt><code>_PC_FILESIZEBITS</code>
-<dd>Inquire about the availability of large files on the filesystem.
+     <br><dt><code>_PC_FILESIZEBITS</code>
+     <dd>Inquire about the availability of large files on the filesystem.
 
-<br><dt><code>_PC_REC_INCR_XFER_SIZE</code>
-<dd>Inquire about the value of <code>POSIX_REC_INCR_XFER_SIZE</code>.
+     <br><dt><code>_PC_REC_INCR_XFER_SIZE</code>
+     <dd>Inquire about the value of <code>POSIX_REC_INCR_XFER_SIZE</code>.
 
-<br><dt><code>_PC_REC_MAX_XFER_SIZE</code>
-<dd>Inquire about the value of <code>POSIX_REC_MAX_XFER_SIZE</code>.
+     <br><dt><code>_PC_REC_MAX_XFER_SIZE</code>
+     <dd>Inquire about the value of <code>POSIX_REC_MAX_XFER_SIZE</code>.
 
-<br><dt><code>_PC_REC_MIN_XFER_SIZE</code>
-<dd>Inquire about the value of <code>POSIX_REC_MIN_XFER_SIZE</code>.
+     <br><dt><code>_PC_REC_MIN_XFER_SIZE</code>
+     <dd>Inquire about the value of <code>POSIX_REC_MIN_XFER_SIZE</code>.
 
-<br><dt><code>_PC_REC_XFER_ALIGN</code>
-<dd>Inquire about the value of <code>POSIX_REC_XFER_ALIGN</code>. 
+     <br><dt><code>_PC_REC_XFER_ALIGN</code>
+     <dd>Inquire about the value of <code>POSIX_REC_XFER_ALIGN</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

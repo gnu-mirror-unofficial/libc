@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Search%20Functions">Search Functions</a>,
-Next:<a rel=next accesskey=n href="Finding-Tokens-in-a-String.html#Finding%20Tokens%20in%20a%20String">Finding Tokens in a String</a>,
-Previous:<a rel=previous accesskey=p href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>,
-Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+Node:&nbsp;<a name="Search%20Functions">Search Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Finding-Tokens-in-a-String.html#Finding%20Tokens%20in%20a%20String">Finding Tokens in a String</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
 <hr><br>
+</div>
 
-<h3>Search Functions</h3>
+<h3 class="section">Search Functions</h3>
 
 <p>This section describes library functions which perform various kinds
 of searching operations on strings and arrays.  These functions are
@@ -23,8 +33,8 @@ declared in the header file <code>string.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>memchr</b><i> (const void *<var>block</var>, int <var>c</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">void * <b>memchr</b><i> </i>(<i>const void *</i><var>block</var><i>, int </i><var>c</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -40,8 +50,8 @@ located byte, or a null pointer if no match was found.
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wmemchr</b><i> (const wchar_t *<var>block</var>, wchar_t <var>wc</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">wchar_t * <b>wmemchr</b><i> </i>(<i>const wchar_t *</i><var>block</var><i>, wchar_t </i><var>wc</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -57,8 +67,8 @@ character, or a null pointer if no match was found.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>rawmemchr</b><i> (const void *<var>block</var>, int <var>c</var>)
-</i></td>
+<td align="left">void * <b>rawmemchr</b><i> </i>(<i>const void *</i><var>block</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -70,7 +80,7 @@ parameters.  But this means that the <var>size</var> parameter is not really
 needed and that the tests performed with it at runtime (to check whether
 the end of the block is reached) are not needed.
 
-<p>The <code>rawmemchr</code> function exists for just this situation which is
+     <p>The <code>rawmemchr</code> function exists for just this situation which is
 surprisingly frequent.  The interface is similar to <code>memchr</code> except
 that the <var>size</var> parameter is missing.  The function will look beyond
 the end of the block pointed to by <var>block</var> in case the programmer
@@ -78,23 +88,23 @@ made an error in assuming that the byte <var>c</var> is present in the block.
 In this case the result is unspecified.  Otherwise the return value is a
 pointer to the located byte.
 
-<p>This function is of special interest when looking for the end of a
+     <p>This function is of special interest when looking for the end of a
 string.  Since all strings are terminated by a null byte a call like
 
-<br><pre>   rawmemchr (str, '\0')
-</pre>
+     <pre class="smallexample">             rawmemchr (str, '\0')
+          </pre>
 
-<p>will never go beyond the end of the string.
+     <p>will never go beyond the end of the string.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>memrchr</b><i> (const void *<var>block</var>, int <var>c</var>, size_t <var>size</var>)
-</i></td>
+<td align="left">void * <b>memrchr</b><i> </i>(<i>const void *</i><var>block</var><i>, int </i><var>c</var><i>, size_t </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -109,8 +119,8 @@ backwards from the end of the block defined by <var>block</var> and <var>size</v
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strchr</b><i> (const char *<var>string</var>, int <var>c</var>)
-</i></td>
+<td align="left">char * <b>strchr</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -121,14 +131,14 @@ The <code>strchr</code> function finds the first occurrence of the character
 beginning at <var>string</var>.  The return value is a pointer to the located
 character, or a null pointer if no match was found.
 
-<p>For example,
-<br><pre>strchr ("hello, world", 'l')
-    =&gt; "llo, world"
-strchr ("hello, world", '?')
-    =&gt; NULL
-</pre>
+     <p>For example,
+     <pre class="smallexample">          strchr ("hello, world", 'l')
+              =&gt; "llo, world"
+          strchr ("hello, world", '?')
+              =&gt; NULL
+          </pre>
 
-<p>The terminating null character is considered to be part of the string,
+     <p>The terminating null character is considered to be part of the string,
 so you can use this function get a pointer to the end of a string by
 specifying a null character as the value of the <var>c</var> argument.  It
 would be better (but less portable) to use <code>strchrnul</code> in this
@@ -139,8 +149,8 @@ case, though.
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcschr</b><i> (const wchar_t *<var>wstring</var>, int <var>wc</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcschr</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, int </i><var>wc</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -151,7 +161,7 @@ character <var>wc</var> in the null-terminated wide character string
 beginning at <var>wstring</var>.  The return value is a pointer to the
 located wide character, or a null pointer if no match was found.
 
-<p>The terminating null character is considered to be part of the wide
+     <p>The terminating null character is considered to be part of the wide
 character string, so you can use this function get a pointer to the end
 of a wide character string by specifying a null wude character as the
 value of the <var>wc</var> argument.  It would be better (but less portable)
@@ -162,8 +172,8 @@ to use <code>wcschrnul</code> in this case, though.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strchrnul</b><i> (const char *<var>string</var>, int <var>c</var>)
-</i></td>
+<td align="left">char * <b>strchrnul</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -173,15 +183,15 @@ to use <code>wcschrnul</code> in this case, though.
 not find the character, it returns a pointer to string's terminating
 null character rather than a null pointer.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcschrnul</b><i> (const wchar_t *<var>wstring</var>, wchar_t <var>wc</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcschrnul</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, wchar_t </i><var>wc</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -191,25 +201,25 @@ null character rather than a null pointer.
 find the wide character, it returns a pointer to wide character string's
 terminating null wide character rather than a null pointer.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
-<p>One useful, but unusual, use of the <code>strchr</code>
+   <p>One useful, but unusual, use of the <code>strchr</code>
 function is when one wants to have a pointer pointing to the NUL byte
 terminating a string.  This is often written in this way:
 
-<br><pre>  s += strlen (s);
-</pre>
+<pre class="smallexample">       s += strlen (s);
+     </pre>
 
 <p>This is almost optimal but the addition operation duplicated a bit of
 the work already done in the <code>strlen</code> function.  A better solution
 is this:
 
-<br><pre>  s = strchr (s, '\0');
-</pre>
+<pre class="smallexample">       s = strchr (s, '\0');
+     </pre>
 
-<p>There is no restriction on the second parameter of <code>strchr</code> so it
+   <p>There is no restriction on the second parameter of <code>strchr</code> so it
 could very well also be the NUL character.  Those readers thinking very
 hard about this might now point out that the <code>strchr</code> function is
 more expensive than the <code>strlen</code> function since we have two abort
@@ -220,8 +230,8 @@ actually is faster.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strrchr</b><i> (const char *<var>string</var>, int <var>c</var>)
-</i></td>
+<td align="left">char * <b>strrchr</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -231,18 +241,18 @@ The function <code>strrchr</code> is like <code>strchr</code>, except that it se
 backwards from the end of the string <var>string</var> (instead of forwards
 from the front).
 
-<p>For example,
-<br><pre>strrchr ("hello, world", 'l')
-    =&gt; "ld"
-</pre>
-</td></tr>
+     <p>For example,
+     <pre class="smallexample">          strrchr ("hello, world", 'l')
+              =&gt; "ld"
+          </pre>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcsrchr</b><i> (const wchar_t *<var>wstring</var>, wchar_t <var>c</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcsrchr</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, wchar_t </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -257,8 +267,8 @@ from the front).
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strstr</b><i> (const char *<var>haystack</var>, const char *<var>needle</var>)
-</i></td>
+<td align="left">char * <b>strstr</b><i> </i>(<i>const char *</i><var>haystack</var><i>, const char *</i><var>needle</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -270,20 +280,20 @@ returns a pointer into the string <var>haystack</var> that is the first
 character of the substring, or a null pointer if no match was found.  If
 <var>needle</var> is an empty string, the function returns <var>haystack</var>.
 
-<p>For example,
-<br><pre>strstr ("hello, world", "l")
-    =&gt; "llo, world"
-strstr ("hello, world", "wo")
-    =&gt; "world"
-</pre>
-</td></tr>
+     <p>For example,
+     <pre class="smallexample">          strstr ("hello, world", "l")
+              =&gt; "llo, world"
+          strstr ("hello, world", "wo")
+              =&gt; "world"
+          </pre>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcsstr</b><i> (const wchar_t *<var>haystack</var>, const wchar_t *<var>needle</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcsstr</b><i> </i>(<i>const wchar_t *</i><var>haystack</var><i>, const wchar_t *</i><var>needle</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -300,14 +310,14 @@ character of the substring, or a null pointer if no match was found.  If
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcswcs</b><i> (const wchar_t *<var>haystack</var>, const wchar_t *<var>needle</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcswcs</b><i> </i>(<i>const wchar_t *</i><var>haystack</var><i>, const wchar_t *</i><var>needle</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-<code>wcsstr</code> is an depricated alias for <code>wcsstr</code>.  This is the
+<code>wcswcs</code> is an deprecated alias for <code>wcsstr</code>.  This is the
 name originally used in the X/Open Portability Guide before the
 Amendment&nbsp;1 to ISO&nbsp;C90 was published. 
 </td></tr>
@@ -316,8 +326,8 @@ Amendment&nbsp;1 to ISO&nbsp;C90 was published.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strcasestr</b><i> (const char *<var>haystack</var>, const char *<var>needle</var>)
-</i></td>
+<td align="left">char * <b>strcasestr</b><i> </i>(<i>const char *</i><var>haystack</var><i>, const char *</i><var>needle</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -327,20 +337,20 @@ This is like <code>strstr</code>, except that it ignores case in searching for
 the substring.   Like <code>strcasecmp</code>, it is locale dependent how
 uppercase and lowercase characters are related.
 
-<p>For example,
-<br><pre>strstr ("hello, world", "L")
-    =&gt; "llo, world"
-strstr ("hello, World", "wo")
-    =&gt; "World"
-</pre>
-</td></tr>
+     <p>For example,
+     <pre class="smallexample">          strstr ("hello, world", "L")
+              =&gt; "llo, world"
+          strstr ("hello, World", "wo")
+              =&gt; "World"
+          </pre>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>memmem</b><i> (const void *<var>haystack</var>, size_t <var>haystack-len</var>,<br>const void *<var>needle</var>, size_t <var>needle-len</var>)
-</i></td>
+<td align="left">void * <b>memmem</b><i> </i>(<i>const void *</i><var>haystack</var><i>, size_t </i><var>haystack-len</var><i>,<br>const void *</i><var>needle</var><i>, size_t </i><var>needle-len</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -351,15 +361,15 @@ arrays rather than null-terminated strings.  <var>needle-len</var> is the
 length of <var>needle</var> and <var>haystack-len</var> is the length of
 <var>haystack</var>.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">size_t <b>strspn</b><i> (const char *<var>string</var>, const char *<var>skipset</var>)
-</i></td>
+<td align="left">size_t <b>strspn</b><i> </i>(<i>const char *</i><var>string</var><i>, const char *</i><var>skipset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -370,12 +380,12 @@ initial substring of <var>string</var> that consists entirely of characters that
 are members of the set specified by the string <var>skipset</var>.  The order
 of the characters in <var>skipset</var> is not important.
 
-<p>For example,
-<br><pre>strspn ("hello, world", "abcdefghijklmnopqrstuvwxyz")
-    =&gt; 5
-</pre>
+     <p>For example,
+     <pre class="smallexample">          strspn ("hello, world", "abcdefghijklmnopqrstuvwxyz")
+              =&gt; 5
+          </pre>
 
-<p>Note that "character" is here used in the sense of byte.  In a string
+     <p>Note that "character" is here used in the sense of byte.  In a string
 using a multibyte character encoding (abstract) character consisting of
 more than one byte are not treated as an entity.  Each byte is treated
 separately.  The function is not locale-dependent. 
@@ -385,8 +395,8 @@ separately.  The function is not locale-dependent.
 <p>
 <table width="100%">
 <tr>
-<td align="left">size_t <b>wcsspn</b><i> (const wchar_t *<var>wstring</var>, const wchar_t *<var>skipset</var>)
-</i></td>
+<td align="left">size_t <b>wcsspn</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, const wchar_t *</i><var>skipset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -403,8 +413,8 @@ important.
 <p>
 <table width="100%">
 <tr>
-<td align="left">size_t <b>strcspn</b><i> (const char *<var>string</var>, const char *<var>stopset</var>)
-</i></td>
+<td align="left">size_t <b>strcspn</b><i> </i>(<i>const char *</i><var>string</var><i>, const char *</i><var>stopset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -416,12 +426,12 @@ that are <em>not</em> members of the set specified by the string <var>stopset</v
 (In other words, it returns the offset of the first character in <var>string</var>
 that is a member of the set <var>stopset</var>.)
 
-<p>For example,
-<br><pre>strcspn ("hello, world", " \t\n,.;!?")
-    =&gt; 5
-</pre>
+     <p>For example,
+     <pre class="smallexample">          strcspn ("hello, world", " \t\n,.;!?")
+              =&gt; 5
+          </pre>
 
-<p>Note that "character" is here used in the sense of byte.  In a string
+     <p>Note that "character" is here used in the sense of byte.  In a string
 using a multibyte character encoding (abstract) character consisting of
 more than one byte are not treated as an entity.  Each byte is treated
 separately.  The function is not locale-dependent. 
@@ -431,8 +441,8 @@ separately.  The function is not locale-dependent.
 <p>
 <table width="100%">
 <tr>
-<td align="left">size_t <b>wcscspn</b><i> (const wchar_t *<var>wstring</var>, const wchar_t *<var>stopset</var>)
-</i></td>
+<td align="left">size_t <b>wcscspn</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, const wchar_t *</i><var>stopset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -450,8 +460,8 @@ the set <var>stopset</var>.)
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>strpbrk</b><i> (const char *<var>string</var>, const char *<var>stopset</var>)
-</i></td>
+<td align="left">char * <b>strpbrk</b><i> </i>(<i>const char *</i><var>string</var><i>, const char *</i><var>stopset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -463,13 +473,13 @@ in <var>string</var> that is a member of the set <var>stopset</var> instead of t
 length of the initial substring.  It returns a null pointer if no such
 character from <var>stopset</var> is found.
 
-<p>For example,
+     <p>For example,
 
-<br><pre>strpbrk ("hello, world", " \t\n,.;!?")
-    =&gt; ", world"
-</pre>
+     <pre class="smallexample">          strpbrk ("hello, world", " \t\n,.;!?")
+              =&gt; ", world"
+          </pre>
 
-<p>Note that "character" is here used in the sense of byte.  In a string
+     <p>Note that "character" is here used in the sense of byte.  In a string
 using a multibyte character encoding (abstract) character consisting of
 more than one byte are not treated as an entity.  Each byte is treated
 separately.  The function is not locale-dependent. 
@@ -479,8 +489,8 @@ separately.  The function is not locale-dependent.
 <p>
 <table width="100%">
 <tr>
-<td align="left">wchar_t * <b>wcspbrk</b><i> (const wchar_t *<var>wstring</var>, const wchar_t *<var>stopset</var>)
-</i></td>
+<td align="left">wchar_t * <b>wcspbrk</b><i> </i>(<i>const wchar_t *</i><var>wstring</var><i>, const wchar_t *</i><var>stopset</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -494,13 +504,13 @@ returns a null pointer if no such character from <var>stopset</var> is found.
 </td></tr>
 </table>
 
-<h4>Compatibility String Search Functions</h4>
+<h3 class="subsection">Compatibility String Search Functions</h4>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>index</b><i> (const char *<var>string</var>, int <var>c</var>)
-</i></td>
+<td align="left">char * <b>index</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -516,8 +526,8 @@ on System&nbsp;V derived systems.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>rindex</b><i> (const char *<var>string</var>, int <var>c</var>)
-</i></td>
+<td align="left">char * <b>rindex</b><i> </i>(<i>const char *</i><var>string</var><i>, int </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -530,5 +540,5 @@ on System&nbsp;V derived systems.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

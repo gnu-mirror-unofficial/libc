@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="XPG%20Functions">XPG Functions</a>,
-Next:<a rel=next accesskey=n href="Logging-In-and-Out.html#Logging%20In%20and%20Out">Logging In and Out</a>,
-Previous:<a rel=previous accesskey=p href="Manipulating-the-Database.html#Manipulating%20the%20Database">Manipulating the Database</a>,
-Up:<a rel=up accesskey=u href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
+Node:&nbsp;<a name="XPG%20Functions">XPG Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Logging-In-and-Out.html#Logging%20In%20and%20Out">Logging In and Out</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Manipulating-the-Database.html#Manipulating%20the%20Database">Manipulating the Database</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>
 <hr><br>
+</div>
 
-<h4>XPG User Accounting Database Functions</h4>
+<h3 class="subsection">XPG User Accounting Database Functions</h4>
 
 <p>These functions, described in the X/Open Portability Guide, are declared
 in the header file <code>utmpx.h</code>.
@@ -23,7 +33,7 @@ in the header file <code>utmpx.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>struct utmpx</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -31,78 +41,78 @@ in the header file <code>utmpx.h</code>.
 <tr><td>
 The <code>utmpx</code> data structure contains at least the following members:
 
-<dl>
+          <dl>
 <dt><code>short int ut_type</code>
-<dd>Specifies the type of login; one of <code>EMPTY</code>, <code>RUN_LVL</code>,
+          <dd>Specifies the type of login; one of <code>EMPTY</code>, <code>RUN_LVL</code>,
 <code>BOOT_TIME</code>, <code>OLD_TIME</code>, <code>NEW_TIME</code>, <code>INIT_PROCESS</code>,
 <code>LOGIN_PROCESS</code>, <code>USER_PROCESS</code> or <code>DEAD_PROCESS</code>.
 
-<br><dt><code>pid_t ut_pid</code>
-<dd>The process ID number of the login process.
+          <br><dt><code>pid_t ut_pid</code>
+          <dd>The process ID number of the login process.
 
-<br><dt><code>char ut_line[]</code>
-<dd>The device name of the tty (without <code>/dev/</code>).
+          <br><dt><code>char ut_line[]</code>
+          <dd>The device name of the tty (without <code>/dev/</code>).
 
-<br><dt><code>char ut_id[]</code>
-<dd>The inittab ID of the process.
+          <br><dt><code>char ut_id[]</code>
+          <dd>The inittab ID of the process.
 
-<br><dt><code>char ut_user[]</code>
-<dd>The user's login name.
+          <br><dt><code>char ut_user[]</code>
+          <dd>The user's login name.
 
-<br><dt><code>struct timeval ut_tv</code>
-<dd>Time the entry was made.  For entries of type <code>OLD_TIME</code> this is
+          <br><dt><code>struct timeval ut_tv</code>
+          <dd>Time the entry was made.  For entries of type <code>OLD_TIME</code> this is
 the time when the system clock changed, and for entries of type
 <code>NEW_TIME</code> this is the time the system clock was set to. 
 </dl>
-On the GNU system, <code>struct utmpx</code> is identical to <code>struct
+     On the GNU system, <code>struct utmpx</code> is identical to <code>struct
 utmp</code> except for the fact that including <code>utmpx.h</code> does not make
 visible the declaration of <code>struct exit_status</code>. 
 </td></tr>
 </table>
 
-<p>The following macros are defined for use as values for the
+   <p>The following macros are defined for use as values for the
 <code>ut_type</code> member of the <code>utmpx</code> structure.  The values are
 integer constants and are, on the GNU system, identical to the
 definitions in <code>utmp.h</code>.
 
-<dl>
+     <dl>
 <dt><code>EMPTY</code>
-<dd>This macro is used to indicate that the entry contains no valid user
+     <dd>This macro is used to indicate that the entry contains no valid user
 accounting information.
 
-<br><dt><code>RUN_LVL</code>
-<dd>This macro is used to identify the systems runlevel.
+     <br><dt><code>RUN_LVL</code>
+     <dd>This macro is used to identify the systems runlevel.
 
-<br><dt><code>BOOT_TIME</code>
-<dd>This macro is used to identify the time of system boot.
+     <br><dt><code>BOOT_TIME</code>
+     <dd>This macro is used to identify the time of system boot.
 
-<br><dt><code>OLD_TIME</code>
-<dd>This macro is used to identify the time when the system clock changed.
+     <br><dt><code>OLD_TIME</code>
+     <dd>This macro is used to identify the time when the system clock changed.
 
-<br><dt><code>NEW_TIME</code>
-<dd>This macro is used to identify the time after the system changed.
+     <br><dt><code>NEW_TIME</code>
+     <dd>This macro is used to identify the time after the system changed.
 
-<br><dt><code>INIT_PROCESS</code>
-<dd>This macro is used to identify a process spawned by the init process.
+     <br><dt><code>INIT_PROCESS</code>
+     <dd>This macro is used to identify a process spawned by the init process.
 
-<br><dt><code>LOGIN_PROCESS</code>
-<dd>This macro is used to identify the session leader of a logged in user.
+     <br><dt><code>LOGIN_PROCESS</code>
+     <dd>This macro is used to identify the session leader of a logged in user.
 
-<br><dt><code>USER_PROCESS</code>
-<dd>This macro is used to identify a user process.
+     <br><dt><code>USER_PROCESS</code>
+     <dd>This macro is used to identify a user process.
 
-<br><dt><code>DEAD_PROCESS</code>
-<dd>This macro is used to identify a terminated process. 
+     <br><dt><code>DEAD_PROCESS</code>
+     <dd>This macro is used to identify a terminated process. 
 </dl>
 
-<p>The size of the <code>ut_line</code>, <code>ut_id</code> and <code>ut_user</code> arrays
+   <p>The size of the <code>ut_line</code>, <code>ut_id</code> and <code>ut_user</code> arrays
 can be found using the <code>sizeof</code> operator.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>setutxent</b><i> (void)
-</i></td>
+<td align="left">void <b>setutxent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -116,8 +126,8 @@ simply an alias for <code>setutent</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmpx * <b>getutxent</b><i> (void)
-</i></td>
+<td align="left">struct utmpx * <b>getutxent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -132,8 +142,8 @@ the GNU system it simply is an alias for <code>getutent</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endutxent</b><i> (void)
-</i></td>
+<td align="left">void <b>endutxent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -147,8 +157,8 @@ simply an alias for <code>endutent</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmpx * <b>getutxid</b><i> (const struct utmpx *<var>id</var>)
-</i></td>
+<td align="left">struct utmpx * <b>getutxid</b><i> </i>(<i>const struct utmpx *</i><var>id</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -163,8 +173,8 @@ for <code>getutid</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmpx * <b>getutxline</b><i> (const struct utmpx *<var>line</var>)
-</i></td>
+<td align="left">struct utmpx * <b>getutxline</b><i> </i>(<i>const struct utmpx *</i><var>line</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -179,8 +189,8 @@ for <code>getutline</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct utmpx * <b>pututxline</b><i> (const struct utmpx *<var>utmp</var>)
-</i></td>
+<td align="left">struct utmpx * <b>pututxline</b><i> </i>(<i>const struct utmpx *</i><var>utmp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -196,8 +206,8 @@ utmp</code>.  On the GNU system, <code>pututxline</code> is simply an alias for
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>utmpxname</b><i> (const char *<var>file</var>)
-</i></td>
+<td align="left">int <b>utmpxname</b><i> </i>(<i>const char *</i><var>file</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -209,7 +219,7 @@ alias for <code>utmpname</code>.
 </td></tr>
 </table>
 
-<p>You can translate between a traditional <code>struct utmp</code> and an XPG
+   <p>You can translate between a traditional <code>struct utmp</code> and an XPG
 <code>struct utmpx</code> with the following functions.  On the GNU system,
 these functions are merely copies, since the two structures are
 identical.
@@ -217,8 +227,8 @@ identical.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getutmp</b><i> (const struct utmpx *utmpx, struct utmp *utmp)
-</i></td>
+<td align="left">int <b>getutmp</b><i> </i>(<i>const struct utmpx *utmpx, struct utmp *utmp</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -232,8 +242,8 @@ compatible, from <var>utmpx</var> to <var>utmp</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getutmpx</b><i> (const struct utmp *utmp, struct utmpx *utmpx)
-</i></td>
+<td align="left">int <b>getutmpx</b><i> </i>(<i>const struct utmp *utmp, struct utmpx *utmpx</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -244,5 +254,5 @@ compatible, from <var>utmp</var> to <var>utmpx</var>.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

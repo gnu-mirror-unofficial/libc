@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Cleaning%20Streams">Cleaning Streams</a>,
-Previous:<a rel=previous accesskey=p href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
-Up:<a rel=up accesskey=u href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
+Node:&nbsp;<a name="Cleaning%20Streams">Cleaning Streams</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
 <hr><br>
+</div>
 
-<h4>Cleaning Streams</h4>
+<h3 class="subsection">Cleaning Streams</h4>
 
 <p>On the GNU system, you can clean up any stream with <code>fclean</code>:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fclean</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>fclean</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -34,16 +44,17 @@ reread it.
 </td></tr>
 </table>
 
-<p>On other systems, you can use <code>fflush</code> to clean a stream in most
+   <p>On other systems, you can use <code>fflush</code> to clean a stream in most
 cases.
 
-<p>You can skip the <code>fclean</code> or <code>fflush</code> if you know the stream
+   <p>You can skip the <code>fclean</code> or <code>fflush</code> if you know the stream
 is already clean.  A stream is clean whenever its buffer is empty.  For
 example, an unbuffered stream is always clean.  An input stream that is
 at end-of-file is clean.  A line-buffered stream is clean when the last
-character output was a newline.
+character output was a newline.  However, a just-opened input stream
+might not be clean, as its input buffer might not be empty.
 
-<p>There is one case in which cleaning a stream is impossible on most
+   <p>There is one case in which cleaning a stream is impossible on most
 systems.  This is when the stream is doing input from a file that is not
 random-access.  Such streams typically read ahead, and when the file is
 not random access, there is no way to give back the excess data already
@@ -53,11 +64,11 @@ unpredictable place; you must set the file pointer before doing any
 further I/O.  On the GNU system, using <code>fclean</code> avoids both of
 these problems.
 
-<p>Closing an output-only stream also does <code>fflush</code>, so this is a
+   <p>Closing an output-only stream also does <code>fflush</code>, so this is a
 valid way of cleaning an output stream.  On the GNU system, closing an
 input stream does <code>fclean</code>.
 
-<p>You need not clean a stream before using its descriptor for control
+   <p>You need not clean a stream before using its descriptor for control
 operations such as setting terminal modes; these operations don't affect
 the file position and are not affected by it.  You can use any
 descriptor for these operations, and all channels are affected
@@ -67,5 +78,5 @@ subsequently flushed.  To make sure "past" output is covered by the
 terminal settings that were in effect at the time, flush the output
 streams for that terminal before setting the modes.  See <a href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>.
 
-</body></html>
+   </body></html>
 

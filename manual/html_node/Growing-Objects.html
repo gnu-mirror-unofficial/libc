@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Growing%20Objects">Growing Objects</a>,
-Next:<a rel=next accesskey=n href="Extra-Fast-Growing.html#Extra%20Fast%20Growing">Extra Fast Growing</a>,
-Previous:<a rel=previous accesskey=p href="Obstack-Functions.html#Obstack%20Functions">Obstack Functions</a>,
-Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+Node:&nbsp;<a name="Growing%20Objects">Growing Objects</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Extra-Fast-Growing.html#Extra%20Fast%20Growing">Extra Fast Growing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Obstack-Functions.html#Obstack%20Functions">Obstack Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Obstacks.html#Obstacks">Obstacks</a>
 <hr><br>
+</div>
 
-<h5>Growing Objects</h5>
+<h3 class="subsubsection">Growing Objects</h5>
 
 <p>Because memory in obstack chunks is used sequentially, it is possible to
 build up an object step by step, adding one or more bytes at a time to the
@@ -23,24 +33,24 @@ data you will put in the object until you come to the end of it.  We call
 this the technique of <dfn>growing objects</dfn>.  The special functions
 for adding data to the growing object are described in this section.
 
-<p>You don't need to do anything special when you start to grow an object. 
+   <p>You don't need to do anything special when you start to grow an object. 
 Using one of the functions to add data to the object automatically
 starts it.  However, it is necessary to say explicitly when the object is
 finished.  This is done with the function <code>obstack_finish</code>.
 
-<p>The actual address of the object thus built up is not known until the
+   <p>The actual address of the object thus built up is not known until the
 object is finished.  Until then, it always remains possible that you will
 add so much data that the object must be copied into a new chunk.
 
-<p>While the obstack is in use for a growing object, you cannot use it for
+   <p>While the obstack is in use for a growing object, you cannot use it for
 ordinary allocation of another object.  If you try to do so, the space
 already added to the growing object will become part of the other object.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_blank</b><i> (struct obstack *<var>obstack-ptr</var>, int <var>size</var>)
-</i></td>
+<td align="left">void <b>obstack_blank</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, int </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -54,8 +64,8 @@ The most basic function for adding to a growing object is
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_grow</b><i> (struct obstack *<var>obstack-ptr</var>, void *<var>data</var>, int <var>size</var>)
-</i></td>
+<td align="left">void <b>obstack_grow</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, void *</i><var>data</var><i>, int </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -71,8 +81,8 @@ bytes of data to the growing object, copying the contents from
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_grow0</b><i> (struct obstack *<var>obstack-ptr</var>, void *<var>data</var>, int <var>size</var>)
-</i></td>
+<td align="left">void <b>obstack_grow0</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, void *</i><var>data</var><i>, int </i><var>size</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -87,8 +97,8 @@ character.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_1grow</b><i> (struct obstack *<var>obstack-ptr</var>, char <var>c</var>)
-</i></td>
+<td align="left">void <b>obstack_1grow</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, char </i><var>c</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -102,8 +112,8 @@ It adds a single byte containing <var>c</var> to the growing object.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_ptr_grow</b><i> (struct obstack *<var>obstack-ptr</var>, void *<var>data</var>)
-</i></td>
+<td align="left">void <b>obstack_ptr_grow</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, void *</i><var>data</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -118,8 +128,8 @@ containing the value of <var>data</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>obstack_int_grow</b><i> (struct obstack *<var>obstack-ptr</var>, int <var>data</var>)
-</i></td>
+<td align="left">void <b>obstack_int_grow</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i>, int </i><var>data</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -134,8 +144,8 @@ the growing object and initializes them with the value of <var>data</var>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void * <b>obstack_finish</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">void * <b>obstack_finish</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -144,15 +154,15 @@ the growing object and initializes them with the value of <var>data</var>.
 When you are finished growing the object, use the function
 <code>obstack_finish</code> to close it off and return its final address.
 
-<p>Once you have finished the object, the obstack is available for ordinary
+     <p>Once you have finished the object, the obstack is available for ordinary
 allocation or for growing another object.
 
-<p>This function can return a null pointer under the same conditions as
+     <p>This function can return a null pointer under the same conditions as
 <code>obstack_alloc</code> (see <a href="Allocation-in-an-Obstack.html#Allocation%20in%20an%20Obstack">Allocation in an Obstack</a>). 
 </td></tr>
 </table>
 
-<p>When you build an object by growing it, you will probably need to know
+   <p>When you build an object by growing it, you will probably need to know
 afterward how long it became.  You need not keep track of this as you grow
 the object, because you can find out the length from the obstack just
 before finishing the object with the function <code>obstack_object_size</code>,
@@ -161,8 +171,8 @@ declared as follows:
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>obstack_object_size</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">int <b>obstack_object_size</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -174,17 +184,17 @@ After it is finished, <code>obstack_object_size</code> will return zero.
 </td></tr>
 </table>
 
-<p>If you have started growing an object and wish to cancel it, you should
+   <p>If you have started growing an object and wish to cancel it, you should
 finish it and then free it, like this:
 
-<br><pre>obstack_free (obstack_ptr, obstack_finish (obstack_ptr));
-</pre>
+<pre class="smallexample">     obstack_free (obstack_ptr, obstack_finish (obstack_ptr));
+     </pre>
 
 <p>This has no effect if no object was growing.
 
-<p>You can use <code>obstack_blank</code> with a negative size argument to make
+   <p>You can use <code>obstack_blank</code> with a negative size argument to make
 the current object smaller.  Just don't try to shrink it beyond zero
 length--there's no telling what will happen if you do that.
 
-</body></html>
+   </body></html>
 

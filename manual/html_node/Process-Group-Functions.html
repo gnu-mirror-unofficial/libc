@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Group%20Functions">Process Group Functions</a>,
-Next:<a rel=next accesskey=n href="Terminal-Access-Functions.html#Terminal%20Access%20Functions">Terminal Access Functions</a>,
-Previous:<a rel=previous accesskey=p href="Identifying-the-Terminal.html#Identifying%20the%20Terminal">Identifying the Terminal</a>,
-Up:<a rel=up accesskey=u href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
+Node:&nbsp;<a name="Process%20Group%20Functions">Process Group Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Terminal-Access-Functions.html#Terminal%20Access%20Functions">Terminal Access Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Identifying-the-Terminal.html#Identifying%20the%20Terminal">Identifying the Terminal</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
 <hr><br>
+</div>
 
-<h4>Process Group Functions</h4>
+<h3 class="subsection">Process Group Functions</h4>
 
 <p>Here are descriptions of the functions for manipulating process groups. 
 Your program should include the header files <code>sys/types.h</code> and
@@ -23,8 +33,8 @@ Your program should include the header files <code>sys/types.h</code> and
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>setsid</b><i> (void)
-</i></td>
+<td align="left">pid_t <b>setsid</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,53 +46,53 @@ process group ID is the same as the process ID of that process.  There
 are initially no other processes in the new process group, and no other
 process groups in the new session.
 
-<p>This function also makes the calling process have no controlling terminal.
+     <p>This function also makes the calling process have no controlling terminal.
 
-<p>The <code>setsid</code> function returns the new process group ID of the
+     <p>The <code>setsid</code> function returns the new process group ID of the
 calling process if successful.  A return value of <code>-1</code> indicates an
 error.  The following <code>errno</code> error conditions are defined for this
 function:
 
-<dl>
+          <dl>
 <dt><code>EPERM</code>
-<dd>The calling process is already a process group leader, or there is
+          <dd>The calling process is already a process group leader, or there is
 already another process group around that has the same process group ID. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>getsid</b><i> (pid_t <var>pid</var>)
-</i></td>
+<td align="left">pid_t <b>getsid</b><i> </i>(<i>pid_t </i><var>pid</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p>The <code>getsid</code> function returns the process group ID of the session
+     <p>The <code>getsid</code> function returns the process group ID of the session
 leader of the specified process.  If a <var>pid</var> is <code>0</code>, the
 process group ID of the session leader of the current process is
 returned.
 
-<p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
+     <p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>ESRCH</code>
-<dd>There is no process with the given process ID <var>pid</var>. 
+          <dd>There is no process with the given process ID <var>pid</var>. 
 <br><dt><code>EPERM</code>
-<dd>The calling process and the process specified by <var>pid</var> are in
+          <dd>The calling process and the process specified by <var>pid</var> are in
 different sessions, and the implementation doesn't allow to access the
 process group ID of the session leader of the process with ID <var>pid</var>
 from the calling process. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>The <code>getpgrp</code> function has two definitions: one derived from BSD
+   <p>The <code>getpgrp</code> function has two definitions: one derived from BSD
 Unix, and one from the POSIX.1 standard.  The feature test macros you
 have selected (see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>) determine which definition
 you get.  Specifically, you get the BSD version if you define
@@ -95,8 +105,8 @@ programs with the <code>-lbsd-compat</code> option to get the BSD definition.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>getpgrp</b><i> (void)
-</i></td>
+<td align="left">pid_t <b>getpgrp</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">POSIX.1 Function</td>
 </tr>
 </table>
@@ -110,8 +120,8 @@ the calling process.
 <p>
 <table width="100%">
 <tr>
-<td align="left">pid_t <b>getpgrp</b><i> (pid_t <var>pid</var>)
-</i></td>
+<td align="left">pid_t <b>getpgrp</b><i> </i>(<i>pid_t </i><var>pid</var><i></i>)<i>
+     </i></td>
 <td align="right">BSD Function</td>
 </tr>
 </table>
@@ -126,38 +136,38 @@ argument to get information about the calling process.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpgid</b><i> (pid_t <var>pid</var>)
-</i></td>
+<td align="left">int <b>getpgid</b><i> </i>(<i>pid_t </i><var>pid</var><i></i>)<i>
+     </i></td>
 <td align="right">System V Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>getpgid</code> is the same as the BSD function <code>getpgrp</code>.  It
+     <p><code>getpgid</code> is the same as the BSD function <code>getpgrp</code>.  It
 returns the process group ID of the process <var>pid</var>.  You can supply a
 value of <code>0</code> for the <var>pid</var> argument to get information about
 the calling process.
 
-<p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
+     <p>In case of error <code>-1</code> is returned and <code>errno</code> is set.  The
 following <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>ESRCH</code>
-<dd>There is no process with the given process ID <var>pid</var>. 
+          <dd>There is no process with the given process ID <var>pid</var>. 
 The calling process and the process specified by <var>pid</var> are in
 different sessions, and the implementation doesn't allow to access the
 process group ID of the process with ID <var>pid</var> from the calling
 process. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setpgid</b><i> (pid_t <var>pid</var>, pid_t <var>pgid</var>)
-</i></td>
+<td align="left">int <b>setpgid</b><i> </i>(<i>pid_t </i><var>pid</var><i>, pid_t </i><var>pgid</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -167,42 +177,42 @@ The <code>setpgid</code> function puts the process <var>pid</var> into the proce
 group <var>pgid</var>.  As a special case, either <var>pid</var> or <var>pgid</var> can
 be zero to indicate the process ID of the calling process.
 
-<p>This function fails on a system that does not support job control. 
+     <p>This function fails on a system that does not support job control. 
 See <a href="Job-Control-is-Optional.html#Job%20Control%20is%20Optional">Job Control is Optional</a>, for more information.
 
-<p>If the operation is successful, <code>setpgid</code> returns zero.  Otherwise
+     <p>If the operation is successful, <code>setpgid</code> returns zero.  Otherwise
 it returns <code>-1</code>.  The following <code>errno</code> error conditions are
 defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EACCES</code>
-<dd>The child process named by <var>pid</var> has executed an <code>exec</code>
+          <dd>The child process named by <var>pid</var> has executed an <code>exec</code>
 function since it was forked.
 
-<br><dt><code>EINVAL</code>
-<dd>The value of the <var>pgid</var> is not valid.
+          <br><dt><code>EINVAL</code>
+          <dd>The value of the <var>pgid</var> is not valid.
 
-<br><dt><code>ENOSYS</code>
-<dd>The system doesn't support job control.
+          <br><dt><code>ENOSYS</code>
+          <dd>The system doesn't support job control.
 
-<br><dt><code>EPERM</code>
-<dd>The process indicated by the <var>pid</var> argument is a session leader,
+          <br><dt><code>EPERM</code>
+          <dd>The process indicated by the <var>pid</var> argument is a session leader,
 or is not in the same session as the calling process, or the value of
 the <var>pgid</var> argument doesn't match a process group ID in the same
 session as the calling process.
 
-<br><dt><code>ESRCH</code>
-<dd>The process indicated by the <var>pid</var> argument is not the calling
+          <br><dt><code>ESRCH</code>
+          <dd>The process indicated by the <var>pid</var> argument is not the calling
 process or a child of the calling process. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setpgrp</b><i> (pid_t <var>pid</var>, pid_t <var>pgid</var>)
-</i></td>
+<td align="left">int <b>setpgrp</b><i> </i>(<i>pid_t </i><var>pid</var><i>, pid_t </i><var>pgid</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -213,5 +223,5 @@ the same thing.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

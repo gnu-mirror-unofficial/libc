@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Datagrams">Datagrams</a>,
-Next:<a rel=next accesskey=n href="Inetd.html#Inetd">Inetd</a>,
-Previous:<a rel=previous accesskey=p href="Connections.html#Connections">Connections</a>,
-Up:<a rel=up accesskey=u href="Sockets.html#Sockets">Sockets</a>
+Node:&nbsp;<a name="Datagrams">Datagrams</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Inetd.html#Inetd">Inetd</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Connections.html#Connections">Connections</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Sockets.html#Sockets">Sockets</a>
 <hr><br>
+</div>
 
-<h3>Datagram Socket Operations</h3>
+<h3 class="section">Datagram Socket Operations</h3>
 
 <p>This section describes how to use communication styles that don't use
 connections (styles <code>SOCK_DGRAM</code> and <code>SOCK_RDM</code>).  Using
@@ -22,20 +32,20 @@ these styles, you group data into packets and each packet is an
 independent communication.  You specify the destination for each
 packet individually.
 
-<p>Datagram packets are like letters: you send each one independently
+   <p>Datagram packets are like letters: you send each one independently
 with its own destination address, and they may arrive in the wrong
 order or not at all.
 
-<p>The <code>listen</code> and <code>accept</code> functions are not allowed for
+   <p>The <code>listen</code> and <code>accept</code> functions are not allowed for
 sockets using connectionless communication styles.
 
-<ul>
-<li><a accesskey=1 href="Sending-Datagrams.html#Sending%20Datagrams">Sending Datagrams</a>:     Sending packets on a datagram socket. 
-<li><a accesskey=2 href="Receiving-Datagrams.html#Receiving%20Datagrams">Receiving Datagrams</a>:   Receiving packets on a datagram socket. 
-<li><a accesskey=3 href="Datagram-Example.html#Datagram%20Example">Datagram Example</a>:      An example program: packets sent over a
+<ul class="menu">
+<li><a accesskey="1" href="Sending-Datagrams.html#Sending%20Datagrams">Sending Datagrams</a>:     Sending packets on a datagram socket. 
+<li><a accesskey="2" href="Receiving-Datagrams.html#Receiving%20Datagrams">Receiving Datagrams</a>:   Receiving packets on a datagram socket. 
+<li><a accesskey="3" href="Datagram-Example.html#Datagram%20Example">Datagram Example</a>:      An example program: packets sent over a
                            datagram socket in the local namespace. 
-<li><a accesskey=4 href="Example-Receiver.html#Example%20Receiver">Example Receiver</a>: 	 Another program, that receives those packets. 
+<li><a accesskey="4" href="Example-Receiver.html#Example%20Receiver">Example Receiver</a>: 	 Another program, that receives those packets. 
 </ul>
 
-</body></html>
+   </body></html>
 

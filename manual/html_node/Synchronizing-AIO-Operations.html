@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Synchronizing%20AIO%20Operations">Synchronizing AIO Operations</a>,
-Next:<a rel=next accesskey=n href="Cancel-AIO-Operations.html#Cancel%20AIO%20Operations">Cancel AIO Operations</a>,
-Previous:<a rel=previous accesskey=p href="Status-of-AIO-Operations.html#Status%20of%20AIO%20Operations">Status of AIO Operations</a>,
-Up:<a rel=up accesskey=u href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>
+Node:&nbsp;<a name="Synchronizing%20AIO%20Operations">Synchronizing AIO Operations</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Cancel-AIO-Operations.html#Cancel%20AIO%20Operations">Cancel AIO Operations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Status-of-AIO-Operations.html#Status%20of%20AIO%20Operations">Status of AIO Operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>
 <hr><br>
+</div>
 
-<h4>Getting into a Consistent State</h4>
+<h3 class="subsection">Getting into a Consistent State</h4>
 
 <p>When dealing with asynchronous operations it is sometimes necessary to
 get into a consistent state.  This would mean for AIO that one wants to
@@ -24,14 +34,14 @@ after the operation terminated, but this sometimes would mean wasting
 resources (mainly computation time).  Instead POSIX.1b defines two
 functions which will help with most kinds of consistency.
 
-<p>The <code>aio_fsync</code> and <code>aio_fsync64</code> functions are only available
+   <p>The <code>aio_fsync</code> and <code>aio_fsync64</code> functions are only available
 if the symbol <code>_POSIX_SYNCHRONIZED_IO</code> is defined in <code>unistd.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_fsync</b><i> (int <var>op</var>, struct aiocb *<var>aiocbp</var>)
-</i></td>
+<td align="left">int <b>aio_fsync</b><i> </i>(<i>int </i><var>op</var><i>, struct aiocb *</i><var>aiocbp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -47,11 +57,11 @@ file descriptor have terminated and the file is synchronized.  This also
 means that requests for this very same file descriptor which are queued
 after the synchronization request are not affected.
 
-<p>If <var>op</var> is <code>O_DSYNC</code> the synchronization happens as with a call
+     <p>If <var>op</var> is <code>O_DSYNC</code> the synchronization happens as with a call
 to <code>fdatasync</code>.  Otherwise <var>op</var> should be <code>O_SYNC</code> and
 the synchronization happens as with <code>fsync</code>.
 
-<p>As long as the synchronization has not happened, a call to
+     <p>As long as the synchronization has not happened, a call to
 <code>aio_error</code> with the reference to the object pointed to by
 <var>aiocbp</var> returns <code>EINPROGRESS</code>.  Once the synchronization is
 done <code>aio_error</code> return 0 if the synchronization was not
@@ -60,25 +70,25 @@ successful.  Otherwise the value returned is the value to which the
 <code>errno</code> variable.  In this case nothing can be assumed about the
 consistency for the data written to this file descriptor.
 
-<p>The return value of this function is 0 if the request was
+     <p>The return value of this function is 0 if the request was
 successfully enqueued.  Otherwise the return value is -1 and
 <code>errno</code> is set to one of the following values:
 
-<dl>
+          <dl>
 <dt><code>EAGAIN</code>
-<dd>The request could not be enqueued due to temporary lack of resources. 
+          <dd>The request could not be enqueued due to temporary lack of resources. 
 <br><dt><code>EBADF</code>
-<dd>The file descriptor <code>aiocbp-&gt;aio_fildes</code> is not valid or not open
+          <dd>The file descriptor <code>aiocbp-&gt;aio_fildes</code> is not valid or not open
 for writing. 
 <br><dt><code>EINVAL</code>
-<dd>The implementation does not support I/O synchronization or the <var>op</var>
+          <dd>The implementation does not support I/O synchronization or the <var>op</var>
 parameter is other than <code>O_DSYNC</code> and <code>O_SYNC</code>. 
 <br><dt><code>ENOSYS</code>
-<dd>This function is not implemented. 
+          <dd>This function is not implemented. 
 </dl>
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
-function is in fact <code>aio_return64</code> since the LFS interface
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>aio_fsync64</code> since the LFS interface
 transparently replaces the normal implementation. 
 </td></tr>
 </table>
@@ -86,8 +96,8 @@ transparently replaces the normal implementation.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_fsync64</b><i> (int <var>op</var>, struct aiocb64 *<var>aiocbp</var>)
-</i></td>
+<td align="left">int <b>aio_fsync64</b><i> </i>(<i>int </i><var>op</var><i>, struct aiocb64 *</i><var>aiocbp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -97,14 +107,14 @@ This function is similar to <code>aio_fsync</code> with the only difference
 that the argument is a reference to a variable of type <code>struct
 aiocb64</code>.
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
 function is available under the name <code>aio_fsync</code> and so
 transparently replaces the interface for small files on 32 bit
 machines. 
 </td></tr>
 </table>
 
-<p>Another method of synchronization is to wait until one or more requests of a
+   <p>Another method of synchronization is to wait until one or more requests of a
 specific set terminated.  This could be achieved by the <code>aio_*</code>
 functions to notify the initiating process about the termination but in
 some situations this is not the ideal solution.  In a program which
@@ -120,8 +130,8 @@ before the current client is served.  For situations like this
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_suspend</b><i> (const struct aiocb *const <var>list</var>[], int <var>nent</var>, const struct timespec *<var>timeout</var>)
-</i></td>
+<td align="left">int <b>aio_suspend</b><i> </i>(<i>const struct aiocb *const </i><var>list</var><i></i>[<i></i>]<i>, int </i><var>nent</var><i>, const struct timespec *</i><var>timeout</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -135,29 +145,29 @@ immediately.  Whether a request has terminated or not is determined by
 comparing the error status of the request with <code>EINPROGRESS</code>.  If
 an element of <var>list</var> is <code>NULL</code>, the entry is simply ignored.
 
-<p>If no request has finished, the calling process is suspended.  If
+     <p>If no request has finished, the calling process is suspended.  If
 <var>timeout</var> is <code>NULL</code>, the process is not woken until a request
 has finished.  If <var>timeout</var> is not <code>NULL</code>, the process remains
 suspended at least as long as specified in <var>timeout</var>.  In this case,
 <code>aio_suspend</code> returns with an error.
 
-<p>The return value of the function is 0 if one or more requests
+     <p>The return value of the function is 0 if one or more requests
 from the <var>list</var> have terminated.  Otherwise the function returns
 -1 and <code>errno</code> is set to one of the following values:
 
-<dl>
+          <dl>
 <dt><code>EAGAIN</code>
-<dd>None of the requests from the <var>list</var> completed in the time specified
+          <dd>None of the requests from the <var>list</var> completed in the time specified
 by <var>timeout</var>. 
 <br><dt><code>EINTR</code>
-<dd>A signal interrupted the <code>aio_suspend</code> function.  This signal might
+          <dd>A signal interrupted the <code>aio_suspend</code> function.  This signal might
 also be sent by the AIO implementation while signalling the termination
 of one of the requests. 
 <br><dt><code>ENOSYS</code>
-<dd>The <code>aio_suspend</code> function is not implemented. 
+          <dd>The <code>aio_suspend</code> function is not implemented. 
 </dl>
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
 function is in fact <code>aio_suspend64</code> since the LFS interface
 transparently replaces the normal implementation. 
 </td></tr>
@@ -166,8 +176,8 @@ transparently replaces the normal implementation.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>aio_suspend64</b><i> (const struct aiocb64 *const <var>list</var>[], int <var>nent</var>, const struct timespec *<var>timeout</var>)
-</i></td>
+<td align="left">int <b>aio_suspend64</b><i> </i>(<i>const struct aiocb64 *const </i><var>list</var><i></i>[<i></i>]<i>, int </i><var>nent</var><i>, const struct timespec *</i><var>timeout</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -177,12 +187,12 @@ This function is similar to <code>aio_suspend</code> with the only difference
 that the argument is a reference to a variable of type <code>struct
 aiocb64</code>.
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
 function is available under the name <code>aio_suspend</code> and so
 transparently replaces the interface for small files on 32 bit
 machines. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

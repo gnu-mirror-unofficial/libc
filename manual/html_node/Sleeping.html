@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Sleeping">Sleeping</a>,
-Previous:<a rel=previous accesskey=p href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>,
-Up:<a rel=up accesskey=u href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
+Node:&nbsp;<a name="Sleeping">Sleeping</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
 <hr><br>
+</div>
 
-<h3>Sleeping</h3>
+<h3 class="section">Sleeping</h3>
 
 <p>The function <code>sleep</code> gives a simple way to make the program wait
 for a short interval.  If your program doesn't use signals (except to
@@ -26,8 +36,8 @@ any descriptors to wait for.
 <p>
 <table width="100%">
 <tr>
-<td align="left">unsigned int <b>sleep</b><i> (unsigned int <var>seconds</var>)
-</i></td>
+<td align="left">unsigned int <b>sleep</b><i> </i>(<i>unsigned int </i><var>seconds</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -36,15 +46,15 @@ any descriptors to wait for.
 The <code>sleep</code> function waits for <var>seconds</var> or until a signal
 is delivered, whichever happens first.
 
-<p>If <code>sleep</code> function returns because the requested interval is over,
+     <p>If <code>sleep</code> function returns because the requested interval is over,
 it returns a value of zero.  If it returns because of delivery of a
 signal, its return value is the remaining time in the sleep interval.
 
-<p>The <code>sleep</code> function is declared in <code>unistd.h</code>. 
+     <p>The <code>sleep</code> function is declared in <code>unistd.h</code>. 
 </td></tr>
 </table>
 
-<p>Resist the temptation to implement a sleep for a fixed amount of time by
+   <p>Resist the temptation to implement a sleep for a fixed amount of time by
 using the return value of <code>sleep</code>, when nonzero, to call
 <code>sleep</code> again.  This will work with a certain amount of accuracy as
 long as signals arrive infrequently.  But each signal can cause the
@@ -52,7 +62,7 @@ eventual wakeup time to be off by an additional second or so.  Suppose a
 few signals happen to arrive in rapid succession by bad luck--there is
 no limit on how much this could shorten or lengthen the wait.
 
-<p>Instead, compute the calendar time at which the program should stop
+   <p>Instead, compute the calendar time at which the program should stop
 waiting, and keep trying to wait until that calendar time.  This won't
 be off by more than a second.  With just a little more work, you can use
 <code>select</code> and make the waiting period quite accurate.  (Of course,
@@ -60,7 +70,7 @@ heavy system load can cause additional unavoidable delays--unless the
 machine is dedicated to one application, there is no way you can avoid
 this.)
 
-<p>On some systems, <code>sleep</code> can do strange things if your program uses
+   <p>On some systems, <code>sleep</code> can do strange things if your program uses
 <code>SIGALRM</code> explicitly.  Even if <code>SIGALRM</code> signals are being
 ignored or blocked when <code>sleep</code> is called, <code>sleep</code> might
 return prematurely on delivery of a <code>SIGALRM</code> signal.  If you have
@@ -71,15 +81,15 @@ handler.  And, if <code>sleep</code> is interrupted by delivery of a signal
 whose handler requests an alarm or alters the handling of <code>SIGALRM</code>,
 this handler and <code>sleep</code> will interfere.
 
-<p>On the GNU system, it is safe to use <code>sleep</code> and <code>SIGALRM</code> in
+   <p>On the GNU system, it is safe to use <code>sleep</code> and <code>SIGALRM</code> in
 the same program, because <code>sleep</code> does not work by means of
 <code>SIGALRM</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>nanosleep</b><i> (const struct timespec *<var>requested_time</var>, struct timespec *<var>remaining</var>)
-</i></td>
+<td align="left">int <b>nanosleep</b><i> </i>(<i>const struct timespec *</i><var>requested_time</var><i>, struct timespec *</i><var>remaining</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -91,42 +101,42 @@ nanoseconds.  The actual elapsed time of the sleep interval might be
 longer since the system rounds the elapsed time you request up to the
 next integer multiple of the actual resolution the system can deliver.
 
-<p>*<code>requested_time</code> is the elapsed time of the interval you want to
+     <p>*<code>requested_time</code> is the elapsed time of the interval you want to
 sleep.
 
-<p>The function returns as *<code>remaining</code> the elapsed time left in the
+     <p>The function returns as *<code>remaining</code> the elapsed time left in the
 interval for which you requested to sleep.  If the interval completed
 without getting interrupted by a signal, this is zero.
 
-<p><code>struct timespec</code> is described in See <a href="Elapsed-Time.html#Elapsed%20Time">Elapsed Time</a>.
+     <p><code>struct timespec</code> is described in See <a href="Elapsed-Time.html#Elapsed%20Time">Elapsed Time</a>.
 
-<p>If the function returns because the interval is over the return value is
+     <p>If the function returns because the interval is over the return value is
 zero.  If the function returns -1 the global variable <var>errno</var>
 is set to the following values:
 
-<dl>
+          <dl>
 <dt><code>EINTR</code>
-<dd>The call was interrupted because a signal was delivered to the thread. 
+          <dd>The call was interrupted because a signal was delivered to the thread. 
 If the <var>remaining</var> parameter is not the null pointer the structure
 pointed to by <var>remaining</var> is updated to contain the remaining
 elapsed time.
 
-<br><dt><code>EINVAL</code>
-<dd>The nanosecond value in the <var>requested_time</var> parameter contains an
+          <br><dt><code>EINVAL</code>
+          <dd>The nanosecond value in the <var>requested_time</var> parameter contains an
 illegal value.  Either the value is negative or greater than or equal to
 1000 million. 
 </dl>
 
-<p>This function is a cancellation point in multi-threaded programs.  This
+     <p>This function is a cancellation point in multi-threaded programs.  This
 is a problem if the thread allocates some resources (like memory, file
 descriptors, semaphores or whatever) at the time <code>nanosleep</code> is
 called.  If the thread gets canceled these resources stay allocated
 until the program ends.  To avoid this calls to <code>nanosleep</code> should
 be protected using cancellation handlers.
 
-<p>The <code>nanosleep</code> function is declared in <code>time.h</code>. 
+     <p>The <code>nanosleep</code> function is declared in <code>time.h</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

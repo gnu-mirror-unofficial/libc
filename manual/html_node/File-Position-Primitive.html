@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="File%20Position%20Primitive">File Position Primitive</a>,
-Next:<a rel=next accesskey=n href="Descriptors-and-Streams.html#Descriptors%20and%20Streams">Descriptors and Streams</a>,
-Previous:<a rel=previous accesskey=p href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>,
-Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+Node:&nbsp;<a name="File%20Position%20Primitive">File Position Primitive</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Descriptors-and-Streams.html#Descriptors%20and%20Streams">Descriptors and Streams</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
 <hr><br>
+</div>
 
-<h3>Setting the File Position of a Descriptor</h3>
+<h3 class="section">Setting the File Position of a Descriptor</h3>
 
 <p>Just as you can set the file position of a stream with <code>fseek</code>, you
 can set the file position of a descriptor with <code>lseek</code>.  This
@@ -22,14 +32,14 @@ specifies the position in the file for the next <code>read</code> or
 <code>write</code> operation.  See <a href="File-Positioning.html#File%20Positioning">File Positioning</a>, for more information
 on the file position and what it means.
 
-<p>To read the current file position value from a descriptor, use
-<code>lseek (<var>desc</var>, 0, SEEK_CUR)</code>.
+   <p>To read the current file position value from a descriptor, use
+<code>lseek (</code><var>desc</var><code>, 0, SEEK_CUR)</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">off_t <b>lseek</b><i> (int <var>filedes</var>, off_t <var>offset</var>, int <var>whence</var>)
-</i></td>
+<td align="left">off_t <b>lseek</b><i> </i>(<i>int </i><var>filedes</var><i>, off_t </i><var>offset</var><i>, int </i><var>whence</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,22 +48,22 @@ on the file position and what it means.
 The <code>lseek</code> function is used to change the file position of the
 file with descriptor <var>filedes</var>.
 
-<p>The <var>whence</var> argument specifies how the <var>offset</var> should be
+     <p>The <var>whence</var> argument specifies how the <var>offset</var> should be
 interpreted, in the same way as for the <code>fseek</code> function, and it must
 be one of the symbolic constants <code>SEEK_SET</code>, <code>SEEK_CUR</code>, or
 <code>SEEK_END</code>.
 
-<dl>
+          <dl>
 <dt><code>SEEK_SET</code>
-<dd>Specifies that <var>whence</var> is a count of characters from the beginning
+          <dd>Specifies that <var>whence</var> is a count of characters from the beginning
 of the file.
 
-<br><dt><code>SEEK_CUR</code>
-<dd>Specifies that <var>whence</var> is a count of characters from the current
+          <br><dt><code>SEEK_CUR</code>
+          <dd>Specifies that <var>whence</var> is a count of characters from the current
 file position.  This count may be positive or negative.
 
-<br><dt><code>SEEK_END</code>
-<dd>Specifies that <var>whence</var> is a count of characters from the end of
+          <br><dt><code>SEEK_END</code>
+          <dd>Specifies that <var>whence</var> is a count of characters from the end of
 the file.  A negative count specifies a position within the current
 extent of the file; a positive count specifies a position past the
 current end.  If you set the position past the current end, and
@@ -61,18 +71,18 @@ actually write data, you will extend the file with zeros up to that
 position. 
 </dl>
 
-<p>The return value from <code>lseek</code> is normally the resulting file
+     <p>The return value from <code>lseek</code> is normally the resulting file
 position, measured in bytes from the beginning of the file. 
 You can use this feature together with <code>SEEK_CUR</code> to read the
 current file position.
 
-<p>If you want to append to the file, setting the file position to the
+     <p>If you want to append to the file, setting the file position to the
 current end of file with <code>SEEK_END</code> is not sufficient.  Another
 process may write more data after you seek but before you write,
 extending the file so the position you write onto clobbers their data. 
 Instead, use the <code>O_APPEND</code> operating mode; see <a href="Operating-Modes.html#Operating%20Modes">Operating Modes</a>.
 
-<p>You can set the file position past the current end of the file.  This
+     <p>You can set the file position past the current end of the file.  This
 does not by itself make the file longer; <code>lseek</code> never changes the
 file.  But subsequent output at that position will extend the file. 
 Characters between the previous end of file and the new position are
@@ -81,38 +91,38 @@ filled with zeros.  Extending the file in this way can create a
 file takes up less space than it appears to; it is then called a
 "sparse file".
 
-<p>If the file position cannot be changed, or the operation is in some way
+     <p>If the file position cannot be changed, or the operation is in some way
 invalid, <code>lseek</code> returns a value of -1.  The following
 <code>errno</code> error conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> is not a valid file descriptor.
+          <dd>The <var>filedes</var> is not a valid file descriptor.
 
-<br><dt><code>EINVAL</code>
-<dd>The <var>whence</var> argument value is not valid, or the resulting
+          <br><dt><code>EINVAL</code>
+          <dd>The <var>whence</var> argument value is not valid, or the resulting
 file offset is not valid.  A file offset is invalid.
 
-<br><dt><code>ESPIPE</code>
-<dd>The <var>filedes</var> corresponds to an object that cannot be positioned,
+          <br><dt><code>ESPIPE</code>
+          <dd>The <var>filedes</var> corresponds to an object that cannot be positioned,
 such as a pipe, FIFO or terminal device.  (POSIX.1 specifies this error
 only for pipes and FIFOs, but in the GNU system, you always get
 <code>ESPIPE</code> if the object is not seekable.) 
 </dl>
 
-<p>When the source file is compiled with <code>_FILE_OFFSET_BITS == 64</code> the
+     <p>When the source file is compiled with <code>_FILE_OFFSET_BITS == 64</code> the
 <code>lseek</code> function is in fact <code>lseek64</code> and the type
 <code>off_t</code> has 64 bits which makes it possible to handle files up to
 2^63 bytes in length.
 
-<p>This function is a cancellation point in multi-threaded programs.  This
+     <p>This function is a cancellation point in multi-threaded programs.  This
 is a problem if the thread allocates some resources (like memory, file
 descriptors, semaphores or whatever) at the time <code>lseek</code> is
 called.  If the thread gets canceled these resources stay allocated
 until the program ends.  To avoid this calls to <code>lseek</code> should be
 protected using cancellation handlers.
 
-<p>The <code>lseek</code> function is the underlying primitive for the
+     <p>The <code>lseek</code> function is the underlying primitive for the
 <code>fseek</code>, <code>fseeko</code>, <code>ftell</code>, <code>ftello</code> and
 <code>rewind</code> functions, which operate on streams instead of file
 descriptors. 
@@ -122,8 +132,8 @@ descriptors.
 <p>
 <table width="100%">
 <tr>
-<td align="left">off64_t <b>lseek64</b><i> (int <var>filedes</var>, off64_t <var>offset</var>, int <var>whence</var>)
-</i></td>
+<td align="left">off64_t <b>lseek64</b><i> </i>(<i>int </i><var>filedes</var><i>, off64_t </i><var>offset</var><i>, int </i><var>whence</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -137,48 +147,48 @@ file descriptor <code>filedes</code> must be opened using <code>open64</code> si
 otherwise the large offsets possible with <code>off64_t</code> will lead to
 errors with a descriptor in small file mode.
 
-<p>When the source file is compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+     <p>When the source file is compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
 32 bits machine this function is actually available under the name
 <code>lseek</code> and so transparently replaces the 32 bit interface. 
 </td></tr>
 </table>
 
-<p>You can have multiple descriptors for the same file if you open the file
+   <p>You can have multiple descriptors for the same file if you open the file
 more than once, or if you duplicate a descriptor with <code>dup</code>. 
 Descriptors that come from separate calls to <code>open</code> have independent
 file positions; using <code>lseek</code> on one descriptor has no effect on the
 other.  For example,
 
-<br><pre>{
-  int d1, d2;
-  char buf[4];
-  d1 = open ("foo", O_RDONLY);
-  d2 = open ("foo", O_RDONLY);
-  lseek (d1, 1024, SEEK_SET);
-  read (d2, buf, 4);
-}
-</pre>
+<pre class="smallexample">     {
+       int d1, d2;
+       char buf[4];
+       d1 = open ("foo", O_RDONLY);
+       d2 = open ("foo", O_RDONLY);
+       lseek (d1, 1024, SEEK_SET);
+       read (d2, buf, 4);
+     }
+     </pre>
 
 <p>will read the first four characters of the file <code>foo</code>.  (The
 error-checking code necessary for a real program has been omitted here
 for brevity.)
 
-<p>By contrast, descriptors made by duplication share a common file
+   <p>By contrast, descriptors made by duplication share a common file
 position with the original descriptor that was duplicated.  Anything
 which alters the file position of one of the duplicates, including
 reading or writing data, affects all of them alike.  Thus, for example,
 
-<br><pre>{
-  int d1, d2, d3;
-  char buf1[4], buf2[4];
-  d1 = open ("foo", O_RDONLY);
-  d2 = dup (d1);
-  d3 = dup (d2);
-  lseek (d3, 1024, SEEK_SET);
-  read (d1, buf1, 4);
-  read (d2, buf2, 4);
-}
-</pre>
+<pre class="smallexample">     {
+       int d1, d2, d3;
+       char buf1[4], buf2[4];
+       d1 = open ("foo", O_RDONLY);
+       d2 = dup (d1);
+       d3 = dup (d2);
+       lseek (d3, 1024, SEEK_SET);
+       read (d1, buf1, 4);
+       read (d2, buf2, 4);
+     }
+     </pre>
 
 <p>will read four characters starting with the 1024'th character of
 <code>foo</code>, and then four more characters starting with the 1028'th
@@ -188,7 +198,7 @@ character.
 <table width="100%">
 <tr>
 <td align="left"><b>off_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -197,7 +207,7 @@ character.
 This is an arithmetic data type used to represent file sizes. 
 In the GNU system, this is equivalent to <code>fpos_t</code> or <code>long int</code>.
 
-<p>If the source is compiled with <code>_FILE_OFFSET_BITS == 64</code> this type
+     <p>If the source is compiled with <code>_FILE_OFFSET_BITS == 64</code> this type
 is transparently replaced by <code>off64_t</code>. 
 </td></tr>
 </table>
@@ -206,7 +216,7 @@ is transparently replaced by <code>off64_t</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>off64_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -217,25 +227,25 @@ on 32 bit machines, where the <code>off_t</code> type would have 32 bits,
 <code>off64_t</code> has 64 bits and so is able to address files up to
 2^63 bytes in length.
 
-<p>When compiling with <code>_FILE_OFFSET_BITS == 64</code> this type is
+     <p>When compiling with <code>_FILE_OFFSET_BITS == 64</code> this type is
 available under the name <code>off_t</code>. 
 </td></tr>
 </table>
 
-<p>These aliases for the <code>SEEK_<small>...</small></code> constants exist for the sake
+   <p>These aliases for the <code>SEEK_...</code> constants exist for the sake
 of compatibility with older BSD systems.  They are defined in two
 different header files: <code>fcntl.h</code> and <code>sys/file.h</code>.
 
-<dl>
+     <dl>
 <dt><code>L_SET</code>
-<dd>An alias for <code>SEEK_SET</code>.
+     <dd>An alias for <code>SEEK_SET</code>.
 
-<br><dt><code>L_INCR</code>
-<dd>An alias for <code>SEEK_CUR</code>.
+     <br><dt><code>L_INCR</code>
+     <dd>An alias for <code>SEEK_CUR</code>.
 
-<br><dt><code>L_XTND</code>
-<dd>An alias for <code>SEEK_END</code>. 
+     <br><dt><code>L_XTND</code>
+     <dd>An alias for <code>SEEK_END</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

@@ -2,46 +2,56 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="BSD%20Signal%20Handling">BSD Signal Handling</a>,
-Previous:<a rel=previous accesskey=p href="Signal-Stack.html#Signal%20Stack">Signal Stack</a>,
-Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+Node:&nbsp;<a name="BSD%20Signal%20Handling">BSD Signal Handling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Signal-Stack.html#Signal%20Stack">Signal Stack</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
 <hr><br>
+</div>
 
-<h3>BSD Signal Handling</h3>
+<h3 class="section">BSD Signal Handling</h3>
 
 <p>This section describes alternative signal handling functions derived
 from BSD Unix.  These facilities were an advance, in their time; today,
 they are mostly obsolete, and supported mainly for compatibility with
 BSD Unix.
 
-<p>There are many similarities between the BSD and POSIX signal handling
+   <p>There are many similarities between the BSD and POSIX signal handling
 facilities, because the POSIX facilities were inspired by the BSD
 facilities.  Besides having different names for all the functions to
 avoid conflicts, the main differences between the two are:
 
-<ul>
+     <ul>
 <li>BSD Unix represents signal masks as an <code>int</code> bit mask, rather than
 as a <code>sigset_t</code> object.
 
-<li>The BSD facilities use a different default for whether an interrupted
+     <li>The BSD facilities use a different default for whether an interrupted
 primitive should fail or resume.  The POSIX facilities make system
 calls fail unless you specify that they should resume.  With the BSD
 facility, the default is to make system calls resume unless you say they
 should fail.  See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>. 
 </ul>
 
-<p>The BSD facilities are declared in <code>signal.h</code>.
+   <p>The BSD facilities are declared in <code>signal.h</code>.
 
-<ul>
-<li><a accesskey=1 href="BSD-Handler.html#BSD%20Handler">BSD Handler</a>:                  BSD Function to Establish a Handler. 
-<li><a accesskey=2 href="Blocking-in-BSD.html#Blocking%20in%20BSD">Blocking in BSD</a>:              BSD Functions for Blocking Signals. 
+<ul class="menu">
+<li><a accesskey="1" href="BSD-Handler.html#BSD%20Handler">BSD Handler</a>:                  BSD Function to Establish a Handler. 
+<li><a accesskey="2" href="Blocking-in-BSD.html#Blocking%20in%20BSD">Blocking in BSD</a>:              BSD Functions for Blocking Signals. 
 </ul>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Error%20Codes">Error Codes</a>,
-Next:<a rel=next accesskey=n href="Error-Messages.html#Error%20Messages">Error Messages</a>,
-Previous:<a rel=previous accesskey=p href="Checking-for-Errors.html#Checking%20for%20Errors">Checking for Errors</a>,
-Up:<a rel=up accesskey=u href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>
+Node:&nbsp;<a name="Error%20Codes">Error Codes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Error-Messages.html#Error%20Messages">Error Messages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Checking-for-Errors.html#Checking%20for%20Errors">Checking for Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>
 <hr><br>
+</div>
 
-<h3>Error Codes</h3>
+<h3 class="section">Error Codes</h3>
 
 <p>The error code macros are defined in the header file <code>errno.h</code>. 
 All of them expand into integer constant values.  Some of these error
@@ -25,7 +35,7 @@ library on other systems.
 <table width="100%">
 <tr>
 <td align="left">int <b>EPERM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -40,7 +50,7 @@ or processes with special privileges can perform the operation.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOENT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -56,7 +66,7 @@ expected to already exist.
 <table width="100%">
 <tr>
 <td align="left">int <b>ESRCH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -70,7 +80,7 @@ No process matches the specified process ID.
 <table width="100%">
 <tr>
 <td align="left">int <b>EINTR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -80,7 +90,7 @@ Interrupted function call; an asynchronous signal occurred and prevented
 completion of the call.  When this happens, you should try the call
 again.
 
-<p>You can choose to have functions resume after a signal that is handled,
+     <p>You can choose to have functions resume after a signal that is handled,
 rather than failing with <code>EINTR</code>; see <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>. 
 </td></tr>
 </table>
@@ -89,7 +99,7 @@ rather than failing with <code>EINTR</code>; see <a href="Interrupted-Primitives
 <table width="100%">
 <tr>
 <td align="left">int <b>EIO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -103,7 +113,7 @@ Input/output error; usually used for physical read or write errors.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENXIO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -121,7 +131,7 @@ computer.
 <table width="100%">
 <tr>
 <td align="left">int <b>E2BIG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -137,7 +147,7 @@ GNU system.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOEXEC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -152,7 +162,7 @@ Invalid executable file format.  This condition is detected by the
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -168,7 +178,7 @@ versa).
 <table width="100%">
 <tr>
 <td align="left">int <b>ECHILD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -184,7 +194,7 @@ to manipulate.
 <table width="100%">
 <tr>
 <td align="left">int <b>EDEADLK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -201,7 +211,7 @@ noticed; it might just hang.  See <a href="File-Locks.html#File%20Locks">File Lo
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOMEM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -216,7 +226,7 @@ because its capacity is full.
 <table width="100%">
 <tr>
 <td align="left">int <b>EACCES</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -230,7 +240,7 @@ Permission denied; the file permissions do not allow the attempted operation.
 <table width="100%">
 <tr>
 <td align="left">int <b>EFAULT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -245,7 +255,7 @@ In the GNU system, this error never happens; you get a signal instead.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTBLK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -261,7 +271,7 @@ system in Unix gives this error.
 <table width="100%">
 <tr>
 <td align="left">int <b>EBUSY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -277,7 +287,7 @@ mounted filesystem, you get this error.
 <table width="100%">
 <tr>
 <td align="left">int <b>EEXIST</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -292,7 +302,7 @@ makes sense to specify a new file.
 <table width="100%">
 <tr>
 <td align="left">int <b>EXDEV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -308,7 +318,7 @@ also when you rename a file with <code>rename</code> (see <a href="Renaming-File
 <table width="100%">
 <tr>
 <td align="left">int <b>ENODEV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -323,7 +333,7 @@ particular sort of device.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTDIR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -337,7 +347,7 @@ A file that isn't a directory was specified when a directory is required.
 <table width="100%">
 <tr>
 <td align="left">int <b>EISDIR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -352,7 +362,7 @@ or create or remove hard links to it.
 <table width="100%">
 <tr>
 <td align="left">int <b>EINVAL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -367,7 +377,7 @@ with passing the wrong argument to a library function.
 <table width="100%">
 <tr>
 <td align="left">int <b>EMFILE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -376,7 +386,7 @@ with passing the wrong argument to a library function.
 The current process has too many files open and can't open any more. 
 Duplicate descriptors do count toward this limit.
 
-<p>In BSD and GNU, the number of open files is controlled by a resource
+     <p>In BSD and GNU, the number of open files is controlled by a resource
 limit that can usually be increased.  If you get this error, you might
 want to increase the <code>RLIMIT_NOFILE</code> limit or make it unlimited;
 see <a href="Limits-on-Resources.html#Limits%20on%20Resources">Limits on Resources</a>. 
@@ -387,7 +397,7 @@ see <a href="Limits-on-Resources.html#Limits%20on%20Resources">Limits on Resourc
 <table width="100%">
 <tr>
 <td align="left">int <b>ENFILE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -403,7 +413,7 @@ that any number of linked channels count as just one file opening; see
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTTY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -418,7 +428,7 @@ modes on an ordinary file.
 <table width="100%">
 <tr>
 <td align="left">int <b>ETXTBSY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -436,7 +446,7 @@ is not an error in the GNU system; the text is copied as necessary.
 <table width="100%">
 <tr>
 <td align="left">int <b>EFBIG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -450,7 +460,7 @@ File too big; the size of a file would be larger than allowed by the system.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOSPC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -465,7 +475,7 @@ disk is full.
 <table width="100%">
 <tr>
 <td align="left">int <b>ESPIPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -479,7 +489,7 @@ Invalid seek operation (such as on a pipe).
 <table width="100%">
 <tr>
 <td align="left">int <b>EROFS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -493,7 +503,7 @@ An attempt was made to modify something on a read-only file system.
 <table width="100%">
 <tr>
 <td align="left">int <b>EMLINK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -509,7 +519,7 @@ as many links as it can take (see <a href="Renaming-Files.html#Renaming%20Files"
 <table width="100%">
 <tr>
 <td align="left">int <b>EPIPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -527,7 +537,7 @@ unless it has handled or blocked <code>SIGPIPE</code>.
 <table width="100%">
 <tr>
 <td align="left">int <b>EDOM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -542,7 +552,7 @@ not fall into the domain over which the function is defined.
 <table width="100%">
 <tr>
 <td align="left">int <b>ERANGE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -557,7 +567,7 @@ not representable because of overflow or underflow.
 <table width="100%">
 <tr>
 <td align="left">int <b>EAGAIN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -567,21 +577,21 @@ Resource temporarily unavailable; the call might work if you try again
 later.  The macro <code>EWOULDBLOCK</code> is another name for <code>EAGAIN</code>;
 they are always the same in the GNU C library.
 
-<p>This error can happen in a few different situations:
+     <p>This error can happen in a few different situations:
 
-<ul>
+          <ul>
 <li>An operation that would block was attempted on an object that has
 non-blocking mode selected.  Trying the same operation again will block
 until some external condition makes it possible to read, write, or
 connect (whatever the operation).  You can use <code>select</code> to find out
 when the operation will be possible; see <a href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>.
 
-<p><strong>Portability Note:</strong> In many older Unix systems, this condition
+          <p><strong>Portability Note:</strong> In many older Unix systems, this condition
 was indicated by <code>EWOULDBLOCK</code>, which was a distinct error code
 different from <code>EAGAIN</code>.  To make your program portable, you should
 check for both codes and treat them the same.
 
-<li>A temporary resource shortage made an operation impossible.  <code>fork</code>
+          <li>A temporary resource shortage made an operation impossible.  <code>fork</code>
 can return this error.  It indicates that the shortage is expected to
 pass, so your program can try the call again later and it may succeed. 
 It is probably a good idea to delay for a few seconds before trying it
@@ -590,14 +600,14 @@ Such shortages are usually fairly serious and affect the whole system,
 so usually an interactive program should report the error to the user
 and return to its command loop. 
 </ul>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>EWOULDBLOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -606,7 +616,7 @@ and return to its command loop.
 In the GNU C library, this is another name for <code>EAGAIN</code> (above). 
 The values are always the same, on every operating system.
 
-<p>C libraries in many older Unix systems have <code>EWOULDBLOCK</code> as a
+     <p>C libraries in many older Unix systems have <code>EWOULDBLOCK</code> as a
 separate error code. 
 </td></tr>
 </table>
@@ -615,7 +625,7 @@ separate error code.
 <table width="100%">
 <tr>
 <td align="left">int <b>EINPROGRESS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -636,7 +646,7 @@ has completed; see <a href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting 
 <table width="100%">
 <tr>
 <td align="left">int <b>EALREADY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -651,7 +661,7 @@ mode selected.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTSOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -665,7 +675,7 @@ A file that isn't a socket was specified when a socket is required.
 <table width="100%">
 <tr>
 <td align="left">int <b>EMSGSIZE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -680,7 +690,7 @@ maximum size.
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROTOTYPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -694,7 +704,7 @@ The socket type does not support the requested communications protocol.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOPROTOOPT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -709,7 +719,7 @@ particular protocol being used by the socket.  See <a href="Socket-Options.html#
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROTONOSUPPORT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -725,7 +735,7 @@ See <a href="Creating-a-Socket.html#Creating%20a%20Socket">Creating a Socket</a>
 <table width="100%">
 <tr>
 <td align="left">int <b>ESOCKTNOSUPPORT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -739,7 +749,7 @@ The socket type is not supported.
 <table width="100%">
 <tr>
 <td align="left">int <b>EOPNOTSUPP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -758,7 +768,7 @@ nothing to do for that call.
 <table width="100%">
 <tr>
 <td align="left">int <b>EPFNOSUPPORT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -772,7 +782,7 @@ The socket communications protocol family you requested is not supported.
 <table width="100%">
 <tr>
 <td align="left">int <b>EAFNOSUPPORT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -787,7 +797,7 @@ inconsistent with the protocol being used on the socket.  See <a href="Sockets.h
 <table width="100%">
 <tr>
 <td align="left">int <b>EADDRINUSE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -801,7 +811,7 @@ The requested socket address is already in use.  See <a href="Socket-Addresses.h
 <table width="100%">
 <tr>
 <td align="left">int <b>EADDRNOTAVAIL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -817,7 +827,7 @@ See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENETDOWN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -831,7 +841,7 @@ A socket operation failed because the network was down.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENETUNREACH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -846,7 +856,7 @@ was unreachable.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENETRESET</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -860,7 +870,7 @@ A network connection was reset because the remote host crashed.
 <table width="100%">
 <tr>
 <td align="left">int <b>ECONNABORTED</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -874,7 +884,7 @@ A network connection was aborted locally.
 <table width="100%">
 <tr>
 <td align="left">int <b>ECONNRESET</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -890,7 +900,7 @@ protocol violation.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOBUFS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -906,7 +916,7 @@ other from network operations.
 <table width="100%">
 <tr>
 <td align="left">int <b>EISCONN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -921,7 +931,7 @@ See <a href="Connecting.html#Connecting">Connecting</a>.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTCONN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -938,7 +948,7 @@ protocols, such as UDP), you get <code>EDESTADDRREQ</code> instead.
 <table width="100%">
 <tr>
 <td align="left">int <b>EDESTADDRREQ</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -954,7 +964,7 @@ without first specifying a destination for the data with <code>connect</code>.
 <table width="100%">
 <tr>
 <td align="left">int <b>ESHUTDOWN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -968,7 +978,7 @@ The socket has already been shut down.
 <table width="100%">
 <tr>
 <td align="left">int <b>ETOOMANYREFS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -982,7 +992,7 @@ The socket has already been shut down.
 <table width="100%">
 <tr>
 <td align="left">int <b>ETIMEDOUT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -997,7 +1007,7 @@ the timeout period.
 <table width="100%">
 <tr>
 <td align="left">int <b>ECONNREFUSED</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1012,7 +1022,7 @@ it is not running the requested service).
 <table width="100%">
 <tr>
 <td align="left">int <b>ELOOP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1027,7 +1037,7 @@ This often indicates a cycle of symbolic links.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENAMETOOLONG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1042,7 +1052,7 @@ Filename too long (longer than <code>PATH_MAX</code>; see <a href="Limits-for-Fi
 <table width="100%">
 <tr>
 <td align="left">int <b>EHOSTDOWN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1056,7 +1066,7 @@ The remote host for a requested network connection is down.
 <table width="100%">
 <tr>
 <td align="left">int <b>EHOSTUNREACH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1070,7 +1080,7 @@ The remote host for a requested network connection is not reachable.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTEMPTY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1085,7 +1095,7 @@ this error occurs when you are trying to delete a directory.
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROCLIM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1101,7 +1111,7 @@ the <code>RLIMIT_NPROC</code> limit.
 <table width="100%">
 <tr>
 <td align="left">int <b>EUSERS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1115,7 +1125,7 @@ The file quota system is confused because there are too many users.
 <table width="100%">
 <tr>
 <td align="left">int <b>EDQUOT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1129,7 +1139,7 @@ The user's disk quota was exceeded.
 <table width="100%">
 <tr>
 <td align="left">int <b>ESTALE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1146,7 +1156,7 @@ the NFS file system on the local host.
 <table width="100%">
 <tr>
 <td align="left">int <b>EREMOTE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1163,7 +1173,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADRPC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1177,7 +1187,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>ERPCMISMATCH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1191,7 +1201,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROGUNAVAIL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1205,7 +1215,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROGMISMATCH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1219,7 +1229,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROCUNAVAIL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1233,7 +1243,7 @@ properly on the GNU system, making this error code impossible.)
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOLCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1250,7 +1260,7 @@ operating system.
 <table width="100%">
 <tr>
 <td align="left">int <b>EFTYPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1259,7 +1269,7 @@ operating system.
 Inappropriate file type or format.  The file was the wrong type for the
 operation, or a data file had the wrong format.
 
-<p>On some systems <code>chmod</code> returns this error if you try to set the
+     <p>On some systems <code>chmod</code> returns this error if you try to set the
 sticky bit on a non-directory file; see <a href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>. 
 </td></tr>
 </table>
@@ -1268,7 +1278,7 @@ sticky bit on a non-directory file; see <a href="Setting-Permissions.html#Settin
 <table width="100%">
 <tr>
 <td align="left">int <b>EAUTH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1282,7 +1292,7 @@ sticky bit on a non-directory file; see <a href="Setting-Permissions.html#Settin
 <table width="100%">
 <tr>
 <td align="left">int <b>ENEEDAUTH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1296,7 +1306,7 @@ sticky bit on a non-directory file; see <a href="Setting-Permissions.html#Settin
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOSYS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1314,7 +1324,7 @@ install a new version of the C library or the operating system.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTSUP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1330,7 +1340,7 @@ descriptor, port, etc.) is unable to support the other parameters given;
 different file descriptors might support different ranges of parameter
 values.
 
-<p>If the entire function is not available at all in the implementation,
+     <p>If the entire function is not available at all in the implementation,
 it returns <code>ENOSYS</code> instead. 
 </td></tr>
 </table>
@@ -1339,7 +1349,7 @@ it returns <code>ENOSYS</code> instead.
 <table width="100%">
 <tr>
 <td align="left">int <b>EILSEQ</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1354,7 +1364,7 @@ or an incomplete sequence of bytes or the given wide character is invalid.
 <table width="100%">
 <tr>
 <td align="left">int <b>EBACKGROUND</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1373,7 +1383,7 @@ for information on process groups and these signals.
 <table width="100%">
 <tr>
 <td align="left">int <b>EDIED</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1389,7 +1399,7 @@ up, before it has connected to the file.
 <table width="100%">
 <tr>
 <td align="left">int <b>ED</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1403,7 +1413,7 @@ The experienced user will know what is wrong.
 <table width="100%">
 <tr>
 <td align="left">int <b>EGREGIOUS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1417,7 +1427,7 @@ You did <strong>what</strong>?
 <table width="100%">
 <tr>
 <td align="left">int <b>EIEIO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1431,7 +1441,7 @@ Go home and have a glass of warm, dairy-fresh milk.
 <table width="100%">
 <tr>
 <td align="left">int <b>EGRATUITOUS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1445,7 +1455,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADMSG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1458,7 +1468,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>EIDRM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1471,7 +1481,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>EMULTIHOP</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1484,7 +1494,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENODATA</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1497,7 +1507,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOLINK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1510,7 +1520,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOMSG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1523,7 +1533,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOSR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1536,7 +1546,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOSTR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1549,7 +1559,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>EOVERFLOW</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1562,7 +1572,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>EPROTO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1575,7 +1585,7 @@ This error code has no purpose.
 <table width="100%">
 <tr>
 <td align="left">int <b>ETIME</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1584,14 +1594,31 @@ This error code has no purpose.
 </td></tr>
 </table>
 
-<p><em>The following error codes are defined by the Linux/i386 kernel. 
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ECANCELED</b><i>
+     </i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Operation canceled; an asynchronous operation was canceled before it
+completed.  See <a href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>.  When you call <code>aio_cancel</code>,
+the normal result is for the operations affected to complete with this
+error; see <a href="Cancel-AIO-Operations.html#Cancel%20AIO%20Operations">Cancel AIO Operations</a>. 
+</td></tr>
+</table>
+
+   <p><em>The following error codes are defined by the Linux/i386 kernel. 
 They are not yet documented.</em>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>ERESTART</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1604,7 +1631,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ECHRNG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1617,7 +1644,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EL2NSYNC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1630,7 +1657,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EL3HLT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1643,7 +1670,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EL3RST</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1656,7 +1683,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELNRNG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1669,7 +1696,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EUNATCH</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1682,7 +1709,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOCSI</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1695,7 +1722,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EL2HLT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1708,7 +1735,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1721,7 +1748,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1734,7 +1761,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EXFULL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1747,7 +1774,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOANO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1760,7 +1787,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADRQC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1773,7 +1800,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADSLT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1786,7 +1813,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EDEADLOCK</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1799,7 +1826,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBFONT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1812,7 +1839,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENONET</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1825,7 +1852,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOPKG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1838,7 +1865,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EADV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1851,7 +1878,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ESRMNT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1864,7 +1891,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ECOMM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1877,7 +1904,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EDOTDOT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1890,7 +1917,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTUNIQ</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1903,7 +1930,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EBADFD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1916,7 +1943,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EREMCHG</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1929,7 +1956,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELIBACC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1942,7 +1969,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELIBBAD</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1955,7 +1982,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELIBSCN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1968,7 +1995,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELIBMAX</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1981,7 +2008,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ELIBEXEC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -1994,7 +2021,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ESTRPIPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2007,7 +2034,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EUCLEAN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2020,7 +2047,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOTNAM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2033,7 +2060,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENAVAIL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2046,7 +2073,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EISNAM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2059,7 +2086,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EREMOTEIO</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2072,7 +2099,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>ENOMEDIUM</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2085,7 +2112,7 @@ They are not yet documented.</em>
 <table width="100%">
 <tr>
 <td align="left">int <b>EMEDIUMTYPE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -2094,5 +2121,5 @@ They are not yet documented.</em>
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

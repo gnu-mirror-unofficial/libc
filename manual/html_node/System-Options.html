@@ -2,30 +2,40 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="System%20Options">System Options</a>,
-Next:<a rel=next accesskey=n href="Version-Supported.html#Version%20Supported">Version Supported</a>,
-Previous:<a rel=previous accesskey=p href="General-Limits.html#General%20Limits">General Limits</a>,
-Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+Node:&nbsp;<a name="System%20Options">System Options</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Version-Supported.html#Version%20Supported">Version Supported</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="General-Limits.html#General%20Limits">General Limits</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="System-Configuration.html#System%20Configuration">System Configuration</a>
 <hr><br>
+</div>
 
-<h3>Overall System Options</h3>
+<h3 class="section">Overall System Options</h3>
 
 <p>POSIX defines certain system-specific options that not all POSIX systems
 support.  Since these options are provided in the kernel, not in the
 library, simply using the GNU C library does not guarantee any of these
 features is supported; it depends on the system you are using.
 
-<p>You can test for the availability of a given option using the macros in
+   <p>You can test for the availability of a given option using the macros in
 this section, together with the function <code>sysconf</code>.  The macros are
 defined only if you include <code>unistd.h</code>.
 
-<p>For the following macros, if the macro is defined in <code>unistd.h</code>,
+   <p>For the following macros, if the macro is defined in <code>unistd.h</code>,
 then the option is supported.  Otherwise, the option may or may not be
 supported; use <code>sysconf</code> to find out.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
 
@@ -33,7 +43,7 @@ supported; use <code>sysconf</code> to find out.  See <a href="Sysconf.html#Sysc
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX_JOB_CONTROL</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -49,7 +59,7 @@ within a session belong to a single process group.  See <a href="Job-Control.htm
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX_SAVED_IDS</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -65,7 +75,7 @@ ID of the process, it can't change it back again.  See <a href="Enable-Disable-S
 </td></tr>
 </table>
 
-<p>For the following macros, if the macro is defined in <code>unistd.h</code>,
+   <p>For the following macros, if the macro is defined in <code>unistd.h</code>,
 then its value indicates whether the option is supported.  A value of
 <code>-1</code> means no, and any other value means yes.  If the macro is not
 defined, then the option may or may not be supported; use <code>sysconf</code>
@@ -75,7 +85,7 @@ to find out.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX2_C_DEV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -92,7 +102,7 @@ you didn't have a C compiler.
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX2_FORT_DEV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -108,7 +118,7 @@ defines this, because we don't know what the system has.
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX2_FORT_RUN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -124,7 +134,7 @@ library never defines this, because we don't know what the system has.
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX2_LOCALEDEF</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -140,7 +150,7 @@ we don't know what the system has.
 <table width="100%">
 <tr>
 <td align="left">int <b>_POSIX2_SW_DEV</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -154,5 +164,5 @@ always defines this as <code>1</code>, on the assumption that you had to have
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,35 +2,45 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Process%20Creation%20Concepts">Process Creation Concepts</a>,
-Next:<a rel=next accesskey=n href="Process-Identification.html#Process%20Identification">Process Identification</a>,
-Previous:<a rel=previous accesskey=p href="Running-a-Command.html#Running%20a%20Command">Running a Command</a>,
-Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+Node:&nbsp;<a name="Process%20Creation%20Concepts">Process Creation Concepts</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Process-Identification.html#Process%20Identification">Process Identification</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Running-a-Command.html#Running%20a%20Command">Running a Command</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Processes.html#Processes">Processes</a>
 <hr><br>
+</div>
 
-<h3>Process Creation Concepts</h3>
+<h3 class="section">Process Creation Concepts</h3>
 
 <p>This section gives an overview of processes and of the steps involved in
 creating a process and making it run another program.
 
-<p>Each process is named by a <dfn>process ID</dfn> number.  A unique process ID
+   <p>Each process is named by a <dfn>process ID</dfn> number.  A unique process ID
 is allocated to each process when it is created.  The <dfn>lifetime</dfn> of
 a process ends when its termination is reported to its parent process;
 at that time, all of the process resources, including its process ID,
 are freed.
 
-<p>Processes are created with the <code>fork</code> system call (so the operation
+   <p>Processes are created with the <code>fork</code> system call (so the operation
 of creating a new process is sometimes called <dfn>forking</dfn> a process). 
 The <dfn>child process</dfn> created by <code>fork</code> is a copy of the original
 <dfn>parent process</dfn>, except that it has its own process ID.
 
-<p>After forking a child process, both the parent and child processes
+   <p>After forking a child process, both the parent and child processes
 continue to execute normally.  If you want your program to wait for a
 child process to finish executing before continuing, you must do this
 explicitly after the fork operation, by calling <code>wait</code> or
@@ -38,12 +48,12 @@ explicitly after the fork operation, by calling <code>wait</code> or
 limited information about why the child terminated--for example, its
 exit status code.
 
-<p>A newly forked child process continues to execute the same program as
+   <p>A newly forked child process continues to execute the same program as
 its parent process, at the point where the <code>fork</code> call returns. 
 You can use the return value from <code>fork</code> to tell whether the program
 is running in the parent process or the child.
 
-<p>Having several processes run the same program is only occasionally
+   <p>Having several processes run the same program is only occasionally
 useful.  But the child can execute another program using one of the
 <code>exec</code> functions; see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>.  The program that the
 process is executing is called its <dfn>process image</dfn>.  Starting
@@ -51,5 +61,5 @@ execution of a new program causes the process to forget all about its
 previous process image; when the new program exits, the process exits
 too, instead of returning to the previous process image.
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Pipes%20and%20FIFOs">Pipes and FIFOs</a>,
-Next:<a rel=next accesskey=n href="Sockets.html#Sockets">Sockets</a>,
-Previous:<a rel=previous accesskey=p href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>,
-Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+Node:&nbsp;<a name="Pipes%20and%20FIFOs">Pipes and FIFOs</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Sockets.html#Sockets">Sockets</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-System-Interface.html#File%20System%20Interface">File System Interface</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
 <hr><br>
+</div>
 
-<h2>Pipes and FIFOs</h2>
+<h2 class="chapter">Pipes and FIFOs</h2>
 
 <p>A <dfn>pipe</dfn> is a mechanism for interprocess communication; data written
 to the pipe by one process can be read by another process.  The data is
@@ -22,12 +32,12 @@ handled in a first-in, first-out (FIFO) order.  The pipe has no name; it
 is created for one use and both ends must be inherited from the single
 process which created the pipe.
 
-<p>A <dfn>FIFO special file</dfn> is similar to a pipe, but instead of being an
+   <p>A <dfn>FIFO special file</dfn> is similar to a pipe, but instead of being an
 anonymous, temporary connection, a FIFO has a name or names like any
 other file.  Processes open the FIFO by name in order to communicate
 through it.
 
-<p>A pipe or FIFO has to be open at both ends simultaneously.  If you read
+   <p>A pipe or FIFO has to be open at both ends simultaneously.  If you read
 from a pipe or FIFO file that doesn't have any processes writing to it
 (perhaps because they have all closed the file, or exited), the read
 returns end-of-file.  Writing to a pipe or FIFO that doesn't have a
@@ -35,17 +45,17 @@ reading process is treated as an error condition; it generates a
 <code>SIGPIPE</code> signal, and fails with error code <code>EPIPE</code> if the
 signal is handled or blocked.
 
-<p>Neither pipes nor FIFO special files allow file positioning.  Both
+   <p>Neither pipes nor FIFO special files allow file positioning.  Both
 reading and writing operations happen sequentially; reading from the
 beginning of the file and writing at the end.
 
-<ul>
-<li><a accesskey=1 href="Creating-a-Pipe.html#Creating%20a%20Pipe">Creating a Pipe</a>:              Making a pipe with the <code>pipe</code> function. 
-<li><a accesskey=2 href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>:         Using a pipe to communicate with a
+<ul class="menu">
+<li><a accesskey="1" href="Creating-a-Pipe.html#Creating%20a%20Pipe">Creating a Pipe</a>:              Making a pipe with the <code>pipe</code> function. 
+<li><a accesskey="2" href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>:         Using a pipe to communicate with a
 				 child process. 
-<li><a accesskey=3 href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>:           Making a FIFO special file. 
-<li><a accesskey=4 href="Pipe-Atomicity.html#Pipe%20Atomicity">Pipe Atomicity</a>: 		When pipe (or FIFO) I/O is atomic. 
+<li><a accesskey="3" href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>:           Making a FIFO special file. 
+<li><a accesskey="4" href="Pipe-Atomicity.html#Pipe%20Atomicity">Pipe Atomicity</a>: 		When pipe (or FIFO) I/O is atomic. 
 </ul>
 
-</body></html>
+   </body></html>
 

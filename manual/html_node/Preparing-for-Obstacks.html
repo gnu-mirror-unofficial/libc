@@ -2,27 +2,37 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Preparing%20for%20Obstacks">Preparing for Obstacks</a>,
-Next:<a rel=next accesskey=n href="Allocation-in-an-Obstack.html#Allocation%20in%20an%20Obstack">Allocation in an Obstack</a>,
-Previous:<a rel=previous accesskey=p href="Creating-Obstacks.html#Creating%20Obstacks">Creating Obstacks</a>,
-Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+Node:&nbsp;<a name="Preparing%20for%20Obstacks">Preparing for Obstacks</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Allocation-in-an-Obstack.html#Allocation%20in%20an%20Obstack">Allocation in an Obstack</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Creating-Obstacks.html#Creating%20Obstacks">Creating Obstacks</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Obstacks.html#Obstacks">Obstacks</a>
 <hr><br>
+</div>
 
-<h5>Preparing for Using Obstacks</h5>
+<h3 class="subsubsection">Preparing for Using Obstacks</h5>
 
 <p>Each source file in which you plan to use the obstack functions
 must include the header file <code>obstack.h</code>, like this:
 
-<br><pre>#include &lt;obstack.h&gt;
-</pre>
+<pre class="smallexample">     #include &lt;obstack.h&gt;
+     </pre>
 
-<p>Also, if the source file uses the macro <code>obstack_init</code>, it must
+   <p>Also, if the source file uses the macro <code>obstack_init</code>, it must
 declare or define two functions or macros that will be called by the
 obstack library.  One, <code>obstack_chunk_alloc</code>, is used to allocate
 the chunks of memory into which objects are packed.  The other,
@@ -30,27 +40,27 @@ the chunks of memory into which objects are packed.  The other,
 them are freed.  These macros should appear before any use of obstacks
 in the source file.
 
-<p>Usually these are defined to use <code>malloc</code> via the intermediary
+   <p>Usually these are defined to use <code>malloc</code> via the intermediary
 <code>xmalloc</code> (see <a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>).  This is done with
 the following pair of macro definitions:
 
-<br><pre>#define obstack_chunk_alloc xmalloc
-#define obstack_chunk_free free
-</pre>
+<pre class="smallexample">     #define obstack_chunk_alloc xmalloc
+     #define obstack_chunk_free free
+     </pre>
 
 <p>Though the memory you get using obstacks really comes from <code>malloc</code>,
 using obstacks is faster because <code>malloc</code> is called less often, for
 larger blocks of memory.  See <a href="Obstack-Chunks.html#Obstack%20Chunks">Obstack Chunks</a>, for full details.
 
-<p>At run time, before the program can use a <code>struct obstack</code> object
+   <p>At run time, before the program can use a <code>struct obstack</code> object
 as an obstack, it must initialize the obstack by calling
 <code>obstack_init</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>obstack_init</b><i> (struct obstack *<var>obstack-ptr</var>)
-</i></td>
+<td align="left">int <b>obstack_init</b><i> </i>(<i>struct obstack *</i><var>obstack-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -65,27 +75,27 @@ obstack returned 0 if allocation failed).
 </td></tr>
 </table>
 
-<p>Here are two examples of how to allocate the space for an obstack and
+   <p>Here are two examples of how to allocate the space for an obstack and
 initialize it.  First, an obstack that is a static variable:
 
-<br><pre>static struct obstack myobstack;
-<small>...</small>
-obstack_init (&amp;myobstack);
-</pre>
+<pre class="smallexample">     static struct obstack myobstack;
+     ...
+     obstack_init (&amp;myobstack);
+     </pre>
 
 <p>Second, an obstack that is itself dynamically allocated:
 
-<br><pre>struct obstack *myobstack_ptr
-  = (struct obstack *) xmalloc (sizeof (struct obstack));
-
-obstack_init (myobstack_ptr);
-</pre>
+<pre class="smallexample">     struct obstack *myobstack_ptr
+       = (struct obstack *) xmalloc (sizeof (struct obstack));
+     
+     obstack_init (myobstack_ptr);
+     </pre>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>obstack_alloc_failed_handler</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -97,13 +107,13 @@ memory.  The default action is to print a message and abort.
 You should supply a function that either calls <code>exit</code>
 (see <a href="Program-Termination.html#Program%20Termination">Program Termination</a>) or <code>longjmp</code> (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>) and doesn't return.
 
-<br><pre>void my_obstack_alloc_failed (void)
-<small>...</small>
-obstack_alloc_failed_handler = &amp;my_obstack_alloc_failed;
-</pre>
+     <pre class="smallexample">          void my_obstack_alloc_failed (void)
+          ...
+          obstack_alloc_failed_handler = &amp;my_obstack_alloc_failed;
+          </pre>
 
-</td></tr>
+        </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Generic%20Conversion%20Interface">Generic Conversion Interface</a>,
-Next:<a rel=next accesskey=n href="iconv-Examples.html#iconv%20Examples">iconv Examples</a>,
-Up:<a rel=up accesskey=u href="Generic-Charset-Conversion.html#Generic%20Charset%20Conversion">Generic Charset Conversion</a>
+Node:&nbsp;<a name="Generic%20Conversion%20Interface">Generic Conversion Interface</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="iconv-Examples.html#iconv%20Examples">iconv Examples</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Generic-Charset-Conversion.html#Generic%20Charset%20Conversion">Generic Charset Conversion</a>
 <hr><br>
+</div>
 
-<h4>Generic Character Set Conversion Interface</h4>
+<h3 class="subsection">Generic Character Set Conversion Interface</h4>
 
 <p>This set of functions follows the traditional cycle of using a resource:
 open-use-close.  The interface consists of three functions, each of
 which implements one step.
 
-<p>Before the interfaces are described it is necessary to introduce a
+   <p>Before the interfaces are described it is necessary to introduce a
 data type.  Just like other open-use-close interfaces the functions
 introduced here work using handles and the <code>iconv.h</code> header
 defines a special type for the handles used.
@@ -28,7 +38,7 @@ defines a special type for the handles used.
 <table width="100%">
 <tr>
 <td align="left"><b>iconv_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -38,7 +48,7 @@ This data type is an abstract type defined in <code>iconv.h</code>.  The user
 must not assume anything about the definition of this type; it must be
 completely opaque.
 
-<p>Objects of this type can get assigned handles for the conversions using
+     <p>Objects of this type can get assigned handles for the conversions using
 the <code>iconv</code> functions.  The objects themselves need not be freed, but
 the conversions for which the handles stand for have to. 
 </td></tr>
@@ -49,8 +59,8 @@ the conversions for which the handles stand for have to.
 <p>
 <table width="100%">
 <tr>
-<td align="left">iconv_t <b>iconv_open</b><i> (const char *<var>tocode</var>, const char *<var>fromcode</var>)
-</i></td>
+<td align="left">iconv_t <b>iconv_open</b><i> </i>(<i>const char *</i><var>tocode</var><i>, const char *</i><var>fromcode</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -62,31 +72,31 @@ source and destination character set for the conversion, and if the
 implementation has the possibility to perform such a conversion, the
 function returns a handle.
 
-<p>If the wanted conversion is not available, the <code>iconv_open</code> function
+     <p>If the wanted conversion is not available, the <code>iconv_open</code> function
 returns <code>(iconv_t) -1</code>. In this case the global variable
 <code>errno</code> can have the following values:
 
-<dl>
+          <dl>
 <dt><code>EMFILE</code>
-<dd>The process already has <code>OPEN_MAX</code> file descriptors open. 
+          <dd>The process already has <code>OPEN_MAX</code> file descriptors open. 
 <br><dt><code>ENFILE</code>
-<dd>The system limit of open file is reached. 
+          <dd>The system limit of open file is reached. 
 <br><dt><code>ENOMEM</code>
-<dd>Not enough memory to carry out the operation. 
+          <dd>Not enough memory to carry out the operation. 
 <br><dt><code>EINVAL</code>
-<dd>The conversion from <var>fromcode</var> to <var>tocode</var> is not supported. 
+          <dd>The conversion from <var>fromcode</var> to <var>tocode</var> is not supported. 
 </dl>
 
-<p>It is not possible to use the same descriptor in different threads to
+     <p>It is not possible to use the same descriptor in different threads to
 perform independent conversions.  The data structures associated
 with the descriptor include information about the conversion state. 
 This must not be messed up by using it in different conversions.
 
-<p>An <code>iconv</code> descriptor is like a file descriptor as for every use a
+     <p>An <code>iconv</code> descriptor is like a file descriptor as for every use a
 new descriptor must be created.  The descriptor does not stand for all
 of the conversions from <var>fromset</var> to <var>toset</var>.
 
-<p>The GNU C library implementation of <code>iconv_open</code> has one
+     <p>The GNU C library implementation of <code>iconv_open</code> has one
 significant extension to other implementations.  To ease the extension
 of the set of available conversions, the implementation allows storing
 the necessary files with data and code in an arbitrary number of
@@ -99,12 +109,12 @@ administrator.  In fact, this extension is introduced to help users
 writing and using their own, new conversions.  Of course, this does not
 work for security reasons in SUID binaries; in this case only the system
 directory is considered and this normally is
-<code><var>prefix</var>/lib/gconv</code>.  The <code>GCONV_PATH</code> environment
+<code></code><var>prefix</var><code>/lib/gconv</code>.  The <code>GCONV_PATH</code> environment
 variable is examined exactly once at the first call of the
 <code>iconv_open</code> function.  Later modifications of the variable have no
 effect.
 
-<p>The <code>iconv_open</code> function was introduced early in the X/Open
+     <p>The <code>iconv_open</code> function was introduced early in the X/Open
 Portability Guide, version&nbsp;2.  It is supported by all commercial
 Unices as it is required for the Unix branding.  However, the quality and
 completeness of the implementation varies widely.  The <code>iconv_open</code>
@@ -112,7 +122,7 @@ function is declared in <code>iconv.h</code>.
 </td></tr>
 </table>
 
-<p>The <code>iconv</code> implementation can associate large data structure with
+   <p>The <code>iconv</code> implementation can associate large data structure with
 the handle returned by <code>iconv_open</code>.  Therefore, it is crucial to
 free all the resources once all conversions are carried out and the
 conversion is not needed anymore.
@@ -120,8 +130,8 @@ conversion is not needed anymore.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>iconv_close</b><i> (iconv_t <var>cd</var>)
-</i></td>
+<td align="left">int <b>iconv_close</b><i> </i>(<i>iconv_t </i><var>cd</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -131,21 +141,21 @@ The <code>iconv_close</code> function frees all resources associated with the
 handle <var>cd</var>, which must have been returned by a successful call to
 the <code>iconv_open</code> function.
 
-<p>If the function call was successful the return value is 0. 
+     <p>If the function call was successful the return value is 0. 
 Otherwise it is -1 and <code>errno</code> is set appropriately. 
 Defined error are:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The conversion descriptor is invalid. 
+          <dd>The conversion descriptor is invalid. 
 </dl>
 
-<p>The <code>iconv_close</code> function was introduced together with the rest
+     <p>The <code>iconv_close</code> function was introduced together with the rest
 of the <code>iconv</code> functions in XPG2 and is declared in <code>iconv.h</code>. 
 </td></tr>
 </table>
 
-<p>The standard defines only one actual conversion function.  This has,
+   <p>The standard defines only one actual conversion function.  This has,
 therefore, the most general interface: it allows conversion from one
 buffer to another.  Conversion from a file to a buffer, vice versa, or
 even file to file can be implemented on top of it.
@@ -153,8 +163,8 @@ even file to file can be implemented on top of it.
 <p>
 <table width="100%">
 <tr>
-<td align="left">size_t <b>iconv</b><i> (iconv_t <var>cd</var>, char **<var>inbuf</var>, size_t *<var>inbytesleft</var>, char **<var>outbuf</var>, size_t *<var>outbytesleft</var>)
-</i></td>
+<td align="left">size_t <b>iconv</b><i> </i>(<i>iconv_t </i><var>cd</var><i>, char **</i><var>inbuf</var><i>, size_t *</i><var>inbytesleft</var><i>, char **</i><var>outbuf</var><i>, size_t *</i><var>outbytesleft</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -167,21 +177,21 @@ function for the same text several times in a row since for stateful
 character sets the necessary state information is kept in the data
 structures associated with the descriptor.
 
-<p>The input buffer is specified by <code>*<var>inbuf</var></code> and it contains
-<code>*<var>inbytesleft</var></code> bytes.  The extra indirection is necessary for
+     <p>The input buffer is specified by <code>*</code><var>inbuf</var><code></code> and it contains
+<code>*</code><var>inbytesleft</var><code></code> bytes.  The extra indirection is necessary for
 communicating the used input back to the caller (see below).  It is
 important to note that the buffer pointer is of type <code>char</code> and the
 length is measured in bytes even if the input text is encoded in wide
 characters.
 
-<p>The output buffer is specified in a similar way.  <code>*<var>outbuf</var></code>
+     <p>The output buffer is specified in a similar way.  <code>*</code><var>outbuf</var><code></code>
 points to the beginning of the buffer with at least
-<code>*<var>outbytesleft</var></code> bytes room for the result.  The buffer
+<code>*</code><var>outbytesleft</var><code></code> bytes room for the result.  The buffer
 pointer again is of type <code>char</code> and the length is measured in
-bytes.  If <var>outbuf</var> or <code>*<var>outbuf</var></code> is a null pointer, the
+bytes.  If <var>outbuf</var> or <code>*</code><var>outbuf</var><code></code> is a null pointer, the
 conversion is performed but no output is available.
 
-<p>If <var>inbuf</var> is a null pointer, the <code>iconv</code> function performs the
+     <p>If <var>inbuf</var> is a null pointer, the <code>iconv</code> function performs the
 necessary action to put the state of the conversion into the initial
 state.  This is obviously a no-op for non-stateful encodings, but if the
 encoding has a state, such a function call might put some byte sequences
@@ -195,7 +205,7 @@ implementation chosen for the GNU C library as it is described below.
 Therefore an <code>iconv</code> call to reset the state should always be
 performed if some protocol requires this for the output text.
 
-<p>The conversion stops for one of three reasons. The first is that all
+     <p>The conversion stops for one of three reasons. The first is that all
 characters from the input buffer are converted.  This actually can mean
 two things: either all bytes from the input buffer are consumed or
 there are some bytes at the end of the buffer that possibly can form a
@@ -203,12 +213,12 @@ complete character but the input is incomplete.  The second reason for a
 stop is that the output buffer is full.  And the third reason is that
 the input contains invalid characters.
 
-<p>In all of these cases the buffer pointers after the last successful
+     <p>In all of these cases the buffer pointers after the last successful
 conversion, for input and output buffer, are stored in <var>inbuf</var> and
 <var>outbuf</var>, and the available room in each buffer is stored in
 <var>inbytesleft</var> and <var>outbytesleft</var>.
 
-<p>Since the character sets selected in the <code>iconv_open</code> call can be
+     <p>Since the character sets selected in the <code>iconv_open</code> call can be
 almost arbitrary, there can be situations where the input buffer contains
 valid characters, which have no identical representation in the output
 character set.  The behavior in this situation is undefined.  The
@@ -217,35 +227,35 @@ return with an error immediately.  This certainly is not the most
 desirable solution; therefore, future versions will provide better ones,
 but they are not yet finished.
 
-<p>If all input from the input buffer is successfully converted and stored
+     <p>If all input from the input buffer is successfully converted and stored
 in the output buffer, the function returns the number of non-reversible
 conversions performed.  In all other cases the return value is
 <code>(size_t) -1</code> and <code>errno</code> is set appropriately.  In such cases
 the value pointed to by <var>inbytesleft</var> is nonzero.
 
-<dl>
+          <dl>
 <dt><code>EILSEQ</code>
-<dd>The conversion stopped because of an invalid byte sequence in the input. 
-After the call, <code>*<var>inbuf</var></code> points at the first byte of the
+          <dd>The conversion stopped because of an invalid byte sequence in the input. 
+After the call, <code>*</code><var>inbuf</var><code></code> points at the first byte of the
 invalid byte sequence.
 
-<br><dt><code>E2BIG</code>
-<dd>The conversion stopped because it ran out of space in the output buffer.
+          <br><dt><code>E2BIG</code>
+          <dd>The conversion stopped because it ran out of space in the output buffer.
 
-<br><dt><code>EINVAL</code>
-<dd>The conversion stopped because of an incomplete byte sequence at the end
+          <br><dt><code>EINVAL</code>
+          <dd>The conversion stopped because of an incomplete byte sequence at the end
 of the input buffer.
 
-<br><dt><code>EBADF</code>
-<dd>The <var>cd</var> argument is invalid. 
+          <br><dt><code>EBADF</code>
+          <dd>The <var>cd</var> argument is invalid. 
 </dl>
 
-<p>The <code>iconv</code> function was introduced in the XPG2 standard and is
+     <p>The <code>iconv</code> function was introduced in the XPG2 standard and is
 declared in the <code>iconv.h</code> header. 
 </td></tr>
 </table>
 
-<p>The definition of the <code>iconv</code> function is quite good overall.  It
+   <p>The definition of the <code>iconv</code> function is quite good overall.  It
 provides quite flexible functionality.  The only problems lie in the
 boundary cases, which are incomplete byte sequences at the end of the
 input buffer and invalid input.  A third problem, which is not really
@@ -254,5 +264,5 @@ does not say anything about the legitimate names, a minimal set of
 available conversions.  We will see how this negatively impacts other
 implementations, as demonstrated below.
 
-</body></html>
+   </body></html>
 

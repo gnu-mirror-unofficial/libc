@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Testing%20File%20Type">Testing File Type</a>,
-Next:<a rel=next accesskey=n href="File-Owner.html#File%20Owner">File Owner</a>,
-Previous:<a rel=previous accesskey=p href="Reading-Attributes.html#Reading%20Attributes">Reading Attributes</a>,
-Up:<a rel=up accesskey=u href="File-Attributes.html#File%20Attributes">File Attributes</a>
+Node:&nbsp;<a name="Testing%20File%20Type">Testing File Type</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Owner.html#File%20Owner">File Owner</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Reading-Attributes.html#Reading%20Attributes">Reading Attributes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Attributes.html#File%20Attributes">File Attributes</a>
 <hr><br>
+</div>
 
-<h4>Testing the Type of a File</h4>
+<h3 class="subsection">Testing the Type of a File</h4>
 
 <p>The <dfn>file mode</dfn>, stored in the <code>st_mode</code> field of the file
 attributes, contains two kinds of information: the file type code, and
@@ -23,25 +33,25 @@ which you can use to tell whether the file is a directory, socket,
 symbolic link, and so on.  For details about access permissions see
 <a href="Permission-Bits.html#Permission%20Bits">Permission Bits</a>.
 
-<p>There are two ways you can access the file type information in a file
+   <p>There are two ways you can access the file type information in a file
 mode.  Firstly, for each file type there is a <dfn>predicate macro</dfn>
 which examines a given file mode and returns whether it is of that type
 or not.  Secondly, you can mask out the rest of the file mode to leave
 just the file type code, and compare this against constants for each of
 the supported file types.
 
-<p>All of the symbols listed in this section are defined in the header file
+   <p>All of the symbols listed in this section are defined in the header file
 <code>sys/stat.h</code>.
 
-<p>The following predicate macros test the type of a file, given the value
+   <p>The following predicate macros test the type of a file, given the value
 <var>m</var> which is the <code>st_mode</code> field returned by <code>stat</code> on
 that file:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISDIR</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISDIR</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -54,8 +64,8 @@ This macro returns non-zero if the file is a directory.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISCHR</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISCHR</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -69,8 +79,8 @@ device like a terminal).
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISBLK</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISBLK</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -84,8 +94,8 @@ like a disk).
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISREG</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISREG</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -98,8 +108,8 @@ This macro returns non-zero if the file is a regular file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISFIFO</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISFIFO</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -113,8 +123,8 @@ pipe.  See <a href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISLNK</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISLNK</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -128,8 +138,8 @@ See <a href="Symbolic-Links.html#Symbolic%20Links">Symbolic Links</a>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_ISSOCK</b><i> (mode_t <var>m</var>)
-</i></td>
+<td align="left">int <b>S_ISSOCK</b><i> </i>(<i>mode_t </i><var>m</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -139,24 +149,24 @@ This macro returns non-zero if the file is a socket.  See <a href="Sockets.html#
 </td></tr>
 </table>
 
-<p>An alternate non-POSIX method of testing the file type is supported for
+   <p>An alternate non-POSIX method of testing the file type is supported for
 compatibility with BSD.  The mode can be bitwise AND-ed with
 <code>S_IFMT</code> to extract the file type code, and compared to the
 appropriate constant.  For example,
 
-<br><pre>S_ISCHR (<var>mode</var>)
-</pre>
+<pre class="smallexample">     S_ISCHR (<var>mode</var>)
+     </pre>
 
 <p>is equivalent to:
 
-<br><pre>((<var>mode</var> &amp; S_IFMT) == S_IFCHR)
-</pre>
+<pre class="smallexample">     ((<var>mode</var> &amp; S_IFMT) == S_IFCHR)
+     </pre>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>S_IFMT</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -166,32 +176,32 @@ This is a bit mask used to extract the file type code from a mode value.
 </td></tr>
 </table>
 
-<p>These are the symbolic names for the different file type codes:
+   <p>These are the symbolic names for the different file type codes:
 
-<dl>
+     <dl>
 <dt><code>S_IFDIR</code>
-<dd>This is the file type constant of a directory file.
+     <dd>This is the file type constant of a directory file.
 
-<br><dt><code>S_IFCHR</code>
-<dd>This is the file type constant of a character-oriented device file.
+     <br><dt><code>S_IFCHR</code>
+     <dd>This is the file type constant of a character-oriented device file.
 
-<br><dt><code>S_IFBLK</code>
-<dd>This is the file type constant of a block-oriented device file.
+     <br><dt><code>S_IFBLK</code>
+     <dd>This is the file type constant of a block-oriented device file.
 
-<br><dt><code>S_IFREG</code>
-<dd>This is the file type constant of a regular file.
+     <br><dt><code>S_IFREG</code>
+     <dd>This is the file type constant of a regular file.
 
-<br><dt><code>S_IFLNK</code>
-<dd>This is the file type constant of a symbolic link.
+     <br><dt><code>S_IFLNK</code>
+     <dd>This is the file type constant of a symbolic link.
 
-<br><dt><code>S_IFSOCK</code>
-<dd>This is the file type constant of a socket.
+     <br><dt><code>S_IFSOCK</code>
+     <dd>This is the file type constant of a socket.
 
-<br><dt><code>S_IFIFO</code>
-<dd>This is the file type constant of a FIFO or pipe. 
+     <br><dt><code>S_IFIFO</code>
+     <dd>This is the file type constant of a FIFO or pipe. 
 </dl>
 
-<p>The POSIX.1b standard introduced a few more objects which possibly can
+   <p>The POSIX.1b standard introduced a few more objects which possibly can
 be implemented as object in the filesystem.  These are message queues,
 semaphores, and shared memory objects.  To allow differentiating these
 objects from other files the POSIX standard introduces three new test
@@ -202,8 +212,8 @@ the whole <code>struct stat</code> structure.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_TYPEISMQ</b><i> (struct stat *<var>s</var>)
-</i></td>
+<td align="left">int <b>S_TYPEISMQ</b><i> </i>(<i>struct stat *</i><var>s</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -218,8 +228,8 @@ In all other cases the result is zero.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_TYPEISSEM</b><i> (struct stat *<var>s</var>)
-</i></td>
+<td align="left">int <b>S_TYPEISSEM</b><i> </i>(<i>struct stat *</i><var>s</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -234,8 +244,8 @@ In all other cases the result is zero.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>S_TYPEISSHM</b><i> (struct stat *<var>s</var>)
-</i></td>
+<td align="left">int <b>S_TYPEISSHM</b><i> </i>(<i>struct stat *</i><var>s</var><i></i>)<i>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -247,5 +257,5 @@ value.  In all other cases the result is zero.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

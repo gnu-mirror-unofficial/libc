@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Using%20Getopt">Using Getopt</a>,
-Next:<a rel=next accesskey=n href="Example-of-Getopt.html#Example%20of%20Getopt">Example of Getopt</a>,
-Up:<a rel=up accesskey=u href="Getopt.html#Getopt">Getopt</a>
+Node:&nbsp;<a name="Using%20Getopt">Using Getopt</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Example-of-Getopt.html#Example%20of%20Getopt">Example of Getopt</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Getopt.html#Getopt">Getopt</a>
 <hr><br>
+</div>
 
-<h4>Using the <code>getopt</code> function</h4>
+<h3 class="subsection">Using the <code>getopt</code> function</h4>
 
 <p>Here are the details about how to call the <code>getopt</code> function.  To
 use this facility, your program must include the header file
@@ -23,7 +33,7 @@ use this facility, your program must include the header file
 <table width="100%">
 <tr>
 <td align="left">int <b>opterr</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -42,7 +52,7 @@ to indicate an error.
 <table width="100%">
 <tr>
 <td align="left">int <b>optopt</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -59,7 +69,7 @@ messages.
 <table width="100%">
 <tr>
 <td align="left">int <b>optind</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -77,7 +87,7 @@ this variable is <code>1</code>.
 <table width="100%">
 <tr>
 <td align="left">char * <b>optarg</b><i>
-</i></td>
+     </i></td>
 <td align="right">Variable</td>
 </tr>
 </table>
@@ -91,8 +101,8 @@ option argument, for those options that accept arguments.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getopt</b><i> (int <var>argc</var>, char **<var>argv</var>, const char *<var>options</var>)
-</i></td>
+<td align="left">int <b>getopt</b><i> </i>(<i>int </i><var>argc</var><i>, char **</i><var>argv</var><i>, const char *</i><var>options</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -103,44 +113,44 @@ argument list specified by the <var>argv</var> and <var>argc</var> arguments.
 Normally these values come directly from the arguments received by
 <code>main</code>.
 
-<p>The <var>options</var> argument is a string that specifies the option
+     <p>The <var>options</var> argument is a string that specifies the option
 characters that are valid for this program.  An option character in this
 string can be followed by a colon (<code>:</code>) to indicate that it takes a
 required argument.  If an option character is followed by two colons
 (<code>::</code>), its argument is optional; this is a GNU extension.
 
-<p><code>getopt</code> has three ways to deal with options that follow
+     <p><code>getopt</code> has three ways to deal with options that follow
 non-options <var>argv</var> elements.  The special argument <code>--</code> forces
 in all cases the end of option scanning.
 
-<ul>
+          <ul>
 <li>The default is to permute the contents of <var>argv</var> while scanning it
 so that eventually all the non-options are at the end.  This allows
 options to be given in any order, even with programs that were not
 written to expect this.
 
-<li>If the <var>options</var> argument string begins with a hyphen (<code>-</code>), this
+          <li>If the <var>options</var> argument string begins with a hyphen (<code>-</code>), this
 is treated specially.  It permits arguments that are not options to be
 returned as if they were associated with option character <code>\1</code>.
 
-<li>POSIX demands the following behavior: The first non-option stops option
+          <li>POSIX demands the following behavior: The first non-option stops option
 processing.  This mode is selected by either setting the environment
 variable <code>POSIXLY_CORRECT</code> or beginning the <var>options</var> argument
 string with a plus sign (<code>+</code>). 
 </ul>
 
-<p>The <code>getopt</code> function returns the option character for the next
+     <p>The <code>getopt</code> function returns the option character for the next
 command line option.  When no more option arguments are available, it
 returns <code>-1</code>.  There may still be more non-option arguments; you
 must compare the external variable <code>optind</code> against the <var>argc</var>
 parameter to check this.
 
-<p>If the option has an argument, <code>getopt</code> returns the argument by
+     <p>If the option has an argument, <code>getopt</code> returns the argument by
 storing it in the variable <var>optarg</var>.  You don't ordinarily need to
 copy the <code>optarg</code> string, since it is a pointer into the original
 <var>argv</var> array, not into a static area that might be overwritten.
 
-<p>If <code>getopt</code> finds an option character in <var>argv</var> that was not
+     <p>If <code>getopt</code> finds an option character in <var>argv</var> that was not
 included in <var>options</var>, or a missing option argument, it returns
 <code>?</code> and sets the external variable <code>optopt</code> to the actual
 option character.  If the first character of <var>options</var> is a colon
@@ -151,5 +161,5 @@ prints an error message.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

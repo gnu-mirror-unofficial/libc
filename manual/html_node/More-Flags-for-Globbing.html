@@ -2,45 +2,55 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="More%20Flags%20for%20Globbing">More Flags for Globbing</a>,
-Previous:<a rel=previous accesskey=p href="Flags-for-Globbing.html#Flags%20for%20Globbing">Flags for Globbing</a>,
-Up:<a rel=up accesskey=u href="Globbing.html#Globbing">Globbing</a>
+Node:&nbsp;<a name="More%20Flags%20for%20Globbing">More Flags for Globbing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-Globbing.html#Flags%20for%20Globbing">Flags for Globbing</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Globbing.html#Globbing">Globbing</a>
 <hr><br>
+</div>
 
-<h4>More Flags for Globbing</h4>
+<h3 class="subsection">More Flags for Globbing</h4>
 
 <p>Beside the flags described in the last section, the GNU implementation of
 <code>glob</code> allows a few more flags which are also defined in the
 <code>glob.h</code> file.  Some of the extensions implement functionality
 which is available in modern shell implementations.
 
-<dl>
+     <dl>
 <dt><code>GLOB_PERIOD</code>
-<dd>The <code>.</code> character (period) is treated special.  It cannot be
+     <dd>The <code>.</code> character (period) is treated special.  It cannot be
 matched by wildcards.  See <a href="Wildcard-Matching.html#Wildcard%20Matching">Wildcard Matching</a>, <code>FNM_PERIOD</code>.
 
-<br><dt><code>GLOB_MAGCHAR</code>
-<dd>The <code>GLOB_MAGCHAR</code> value is not to be given to <code>glob</code> in the
+     <br><dt><code>GLOB_MAGCHAR</code>
+     <dd>The <code>GLOB_MAGCHAR</code> value is not to be given to <code>glob</code> in the
 <var>flags</var> parameter.  Instead, <code>glob</code> sets this bit in the
 <var>gl_flags</var> element of the <var>glob_t</var> structure provided as the
 result if the pattern used for matching contains any wildcard character.
 
-<br><dt><code>GLOB_ALTDIRFUNC</code>
-<dd>Instead of the using the using the normal functions for accessing the
+     <br><dt><code>GLOB_ALTDIRFUNC</code>
+     <dd>Instead of the using the using the normal functions for accessing the
 filesystem the <code>glob</code> implementation uses the user-supplied
 functions specified in the structure pointed to by <var>pglob</var>
 parameter.  For more information about the functions refer to the
 sections about directory handling see <a href="Accessing-Directories.html#Accessing%20Directories">Accessing Directories</a>, and
 <a href="Reading-Attributes.html#Reading%20Attributes">Reading Attributes</a>.
 
-<br><dt><code>GLOB_BRACE</code>
-<dd>If this flag is given the handling of braces in the pattern is changed. 
+     <br><dt><code>GLOB_BRACE</code>
+     <dd>If this flag is given the handling of braces in the pattern is changed. 
 It is now required that braces appear correctly grouped.  I.e., for each
 opening brace there must be a closing one.  Braces can be used
 recursively.  So it is possible to define one brace expression in
@@ -48,7 +58,7 @@ another one.  It is important to note that the range of each brace
 expression is completely contained in the outer brace expression (if
 there is one).
 
-<p>The string between the matching braces is separated into single
+     <p>The string between the matching braces is separated into single
 expressions by splitting at <code>,</code> (comma) characters.  The commas
 themselves are discarded.  Please note what we said above about recursive
 brace expressions.  The commas used to separate the subexpressions must
@@ -56,80 +66,80 @@ be at the same level.  Commas in brace subexpressions are not matched.
 They are used during expansion of the brace expression of the deeper
 level.  The example below shows this
 
-<br><pre>glob ("{foo/{,bar,biz},baz}", GLOB_BRACE, NULL, &amp;result)
-</pre>
+     <pre class="smallexample">          glob ("{foo/{,bar,biz},baz}", GLOB_BRACE, NULL, &amp;result)
+          </pre>
 
-<p>is equivalent to the sequence
+     <p>is equivalent to the sequence
 
-<br><pre>glob ("foo/", GLOB_BRACE, NULL, &amp;result)
-glob ("foo/bar", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
-glob ("foo/biz", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
-glob ("baz", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
-</pre>
+     <pre class="smallexample">          glob ("foo/", GLOB_BRACE, NULL, &amp;result)
+          glob ("foo/bar", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
+          glob ("foo/biz", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
+          glob ("baz", GLOB_BRACE|GLOB_APPEND, NULL, &amp;result)
+          </pre>
 
-<p>if we leave aside error handling.
+     <p>if we leave aside error handling.
 
-<br><dt><code>GLOB_NOMAGIC</code>
-<dd>If the pattern contains no wildcard constructs (it is a literal file name),
+     <br><dt><code>GLOB_NOMAGIC</code>
+     <dd>If the pattern contains no wildcard constructs (it is a literal file name),
 return it as the sole "matching" word, even if no file exists by that name.
 
-<br><dt><code>GLOB_TILDE</code>
-<dd>If this flag is used the character <code>~</code> (tilde) is handled special
+     <br><dt><code>GLOB_TILDE</code>
+     <dd>If this flag is used the character <code>~</code> (tilde) is handled special
 if it appears at the beginning of the pattern.  Instead of being taken
 verbatim it is used to represent the home directory of a known user.
 
-<p>If <code>~</code> is the only character in pattern or it is followed by a
+     <p>If <code>~</code> is the only character in pattern or it is followed by a
 <code>/</code> (slash), the home directory of the process owner is
 substituted.  Using <code>getlogin</code> and <code>getpwnam</code> the information
 is read from the system databases.  As an example take user <code>bart</code>
 with his home directory at <code>/home/bart</code>.  For him a call like
 
-<br><pre>glob ("~/bin/*", GLOB_TILDE, NULL, &amp;result)
-</pre>
+     <pre class="smallexample">          glob ("~/bin/*", GLOB_TILDE, NULL, &amp;result)
+          </pre>
 
-<p>would return the contents of the directory <code>/home/bart/bin</code>. 
+     <p>would return the contents of the directory <code>/home/bart/bin</code>. 
 Instead of referring to the own home directory it is also possible to
 name the home directory of other users.  To do so one has to append the
 user name after the tilde character.  So the contents of user
 <code>homer</code>'s <code>bin</code> directory can be retrieved by
 
-<br><pre>glob ("~homer/bin/*", GLOB_TILDE, NULL, &amp;result)
-</pre>
+     <pre class="smallexample">          glob ("~homer/bin/*", GLOB_TILDE, NULL, &amp;result)
+          </pre>
 
-<p>If the user name is not valid or the home directory cannot be determined
+     <p>If the user name is not valid or the home directory cannot be determined
 for some reason the pattern is left untouched and itself used as the
 result.  I.e., if in the last example <code>home</code> is not available the
 tilde expansion yields to <code>"~homer/bin/*"</code> and <code>glob</code> is not
 looking for a directory named <code>~homer</code>.
 
-<p>This functionality is equivalent to what is available in C-shells if the
+     <p>This functionality is equivalent to what is available in C-shells if the
 <code>nonomatch</code> flag is set.
 
-<br><dt><code>GLOB_TILDE_CHECK</code>
-<dd>If this flag is used <code>glob</code> behaves like as if <code>GLOB_TILDE</code> is
+     <br><dt><code>GLOB_TILDE_CHECK</code>
+     <dd>If this flag is used <code>glob</code> behaves like as if <code>GLOB_TILDE</code> is
 given.  The only difference is that if the user name is not available or
 the home directory cannot be determined for other reasons this leads to
 an error.  <code>glob</code> will return <code>GLOB_NOMATCH</code> instead of using
 the pattern itself as the name.
 
-<p>This functionality is equivalent to what is available in C-shells if
+     <p>This functionality is equivalent to what is available in C-shells if
 <code>nonomatch</code> flag is not set.
 
-<br><dt><code>GLOB_ONLYDIR</code>
-<dd>If this flag is used the globbing function takes this as a
+     <br><dt><code>GLOB_ONLYDIR</code>
+     <dd>If this flag is used the globbing function takes this as a
 <strong>hint</strong> that the caller is only interested in directories
 matching the pattern.  If the information about the type of the file
 is easily available non-directories will be rejected but no extra
 work will be done to determine the information for each file.  I.e.,
 the caller must still be able to filter directories out.
 
-<p>This functionality is only available with the GNU <code>glob</code>
+     <p>This functionality is only available with the GNU <code>glob</code>
 implementation.  It is mainly used internally to increase the
 performance but might be useful for a user as well and therefore is
 documented here. 
 </dl>
 
-<p>Calling <code>glob</code> will in most cases allocate resources which are used
+   <p>Calling <code>glob</code> will in most cases allocate resources which are used
 to represent the result of the function call.  If the same object of
 type <code>glob_t</code> is used in multiple call to <code>glob</code> the resources
 are freed or reused so that no leaks appear.  But this does not include
@@ -138,8 +148,8 @@ the time when all <code>glob</code> calls are done.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>globfree</b><i> (glob_t *<var>pglob</var>)
-</i></td>
+<td align="left">void <b>globfree</b><i> </i>(<i>glob_t *</i><var>pglob</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -155,8 +165,8 @@ calls to <code>glob</code> associated with the object pointed to by
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>globfree64</b><i> (glob64_t *<var>pglob</var>)
-</i></td>
+<td align="left">void <b>globfree64</b><i> </i>(<i>glob64_t *</i><var>pglob</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -167,5 +177,5 @@ type <code>glob64_t</code> which were allocated by <code>glob64</code>.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

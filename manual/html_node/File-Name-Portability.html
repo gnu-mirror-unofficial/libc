@@ -2,32 +2,42 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="File%20Name%20Portability">File Name Portability</a>,
-Previous:<a rel=previous accesskey=p href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>,
-Up:<a rel=up accesskey=u href="File-Names.html#File%20Names">File Names</a>
+Node:&nbsp;<a name="File%20Name%20Portability">File Name Portability</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Names.html#File%20Names">File Names</a>
 <hr><br>
+</div>
 
-<h4>Portability of File Names</h4>
+<h3 class="subsection">Portability of File Names</h4>
 
 <p>The rules for the syntax of file names discussed in <a href="File-Names.html#File%20Names">File Names</a>,
 are the rules normally used by the GNU system and by other POSIX
 systems.  However, other operating systems may use other conventions.
 
-<p>There are two reasons why it can be important for you to be aware of
+   <p>There are two reasons why it can be important for you to be aware of
 file name portability issues:
 
-<ul>
+     <ul>
 <li>If your program makes assumptions about file name syntax, or contains
 embedded literal file name strings, it is more difficult to get it to
 run under other operating systems that use different syntax conventions.
 
-<li>Even if you are not concerned about running your program on machines
+     <li>Even if you are not concerned about running your program on machines
 that run other operating systems, it may still be possible to access
 files that use different naming conventions.  For example, you may be
 able to access file systems on another computer running a different
@@ -35,7 +45,7 @@ operating system over a network, or read and write disks in formats used
 by other operating systems. 
 </ul>
 
-<p>The ISO&nbsp;C standard says very little about file name syntax, only that
+   <p>The ISO&nbsp;C standard says very little about file name syntax, only that
 file names are strings.  In addition to varying restrictions on the
 length of file names and what characters can validly appear in a file
 name, different operating systems use different conventions and syntax
@@ -43,7 +53,7 @@ for concepts such as structured directories and file types or
 extensions.  Some concepts such as file versions might be supported in
 some operating systems and not by others.
 
-<p>The POSIX.1 standard allows implementations to put additional
+   <p>The POSIX.1 standard allows implementations to put additional
 restrictions on file name syntax, concerning what characters are
 permitted in file names and on the length of file name and file name
 component strings.  However, in the GNU system, you do not need to worry
@@ -51,5 +61,5 @@ about these restrictions; any character except the null character is
 permitted in a file name string, and there are no limits on the length
 of file name strings.
 
-</body></html>
+   </body></html>
 

@@ -2,175 +2,186 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Configuring%20and%20compiling">Configuring and compiling</a>,
-Next:<a rel=next accesskey=n href="Running-make-install.html#Running%20make%20install">Running make install</a>,
-Up:<a rel=up accesskey=u href="Installation.html#Installation">Installation</a>
+Node:&nbsp;<a name="Configuring%20and%20compiling">Configuring and compiling</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Running-make-install.html#Running%20make%20install">Running make install</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Installation.html#Installation">Installation</a>
 <hr><br>
+</div>
 
-<h3>Configuring and compiling GNU Libc</h3>
+<h3 class="appendixsec">Configuring and compiling GNU Libc</h3>
 
-<p>GNU libc can be compiled in the source directory, but we strongly advise to
-build it in a separate build directory.  For example, if you have unpacked
-the glibc sources in <code>/src/gnu/glibc-2.2.0</code>, create a directory
+<p>GNU libc can be compiled in the source directory, but we strongly advise
+building it in a separate build directory.  For example, if you have
+ unpacked
+the glibc sources in <code>/src/gnu/glibc-2.3</code>, create a directory
 <code>/src/gnu/glibc-build</code> to put the object files in.  This allows
 removing the whole build directory in case an error occurs, which is the
 safest way to get a fresh start and should always be done.
 
-<p>From your object directory, run the shell script <code>configure</code> found
+   <p>From your object directory, run the shell script <code>configure</code> located
 at the top level of the source tree.  In the scenario above, you'd type
 
-<br><pre>$ ../glibc-2.2.0/configure <var>args...</var>
-</pre>
+<pre class="smallexample">     $ ../glibc-2.3/configure <var>args<small class="dots">...</small></var>
+     </pre>
 
-<p>Please note that even if you're building in a separate build directory,
+   <p>Please note that even if you're building in a separate build directory,
 the compilation needs to modify a few files in the source
 directory, especially some files in the manual subdirectory.
 
 <p><code>configure</code> takes many options, but you can get away with knowing
 only two: <code>--prefix</code> and <code>--enable-add-ons</code>.  The
-<code>--prefix</code> option tells configure where you want glibc installed. 
-This defaults to <code>/usr/local</code>.  The <code>--enable-add-ons</code> option
-tells configure to use all the add-on bundles it finds in the source
-directory.  Since important functionality is provided in add-ons, you
-should always specify this option.
+<code>--prefix</code> option tells <code>configure</code> where you want glibc
+installed. This defaults to <code>/usr/local</code>.  The
+<code>--enable-add-ons</code> option tells <code>configure</code> to use all the
+add-on bundles it finds in the source directory.  Since important
+functionality is provided in add-ons, you should always specify this
+option.
 
-<p>It may also be useful to set the <var>CC</var> and <var>CFLAGS</var> variables in
+   <p>It may also be useful to set the <var>CC</var> and <var>CFLAGS</var> variables in
 the environment when running <code>configure</code>.  <var>CC</var> selects the C
 compiler that will be used, and <var>CFLAGS</var> sets optimization options
 for the compiler.
 
-<p>The following list describes all of the available options for <code>configure</code>:
+   <p>The following list describes all of the available options for
+ <code>configure</code>:
 
-<dl>
-<dt><code>--prefix=<var>directory</var></code>
-<dd>Install machine-independent data files in subdirectories of
-<code><var>directory</var></code>.  The default is to install in <code>/usr/local</code>.
+     <dl>
+<dt><code>--prefix=</code><var>directory</var><code></code>
+     <dd>Install machine-independent data files in subdirectories of
+<code></code><var>directory</var><code></code>.  The default is to install in <code>/usr/local</code>.
 
-<br><dt><code>--exec-prefix=<var>directory</var></code>
-<dd>Install the library and other machine-dependent files in subdirectories
-of <code><var>directory</var></code>.  The default is to the <code>--prefix</code>
+     <br><dt><code>--exec-prefix=</code><var>directory</var><code></code>
+     <dd>Install the library and other machine-dependent files in subdirectories
+of <code></code><var>directory</var><code></code>.  The default is to the <code>--prefix</code>
 directory if that option is specified, or <code>/usr/local</code> otherwise.
 
-<br><dt><code>--with-headers=<var>directory</var></code>
-<dd>Look for kernel header files in <var>directory</var>, not
+     <br><dt><code>--with-headers=</code><var>directory</var><code></code>
+     <dd>Look for kernel header files in <var>directory</var>, not
 <code>/usr/include</code>.  Glibc needs information from the kernel's private
-header files.  It will normally look in <code>/usr/include</code> for them,
+header files.  Glibc will normally look in <code>/usr/include</code> for them,
 but if you specify this option, it will look in <var>DIRECTORY</var> instead.
 
-<p>This option is primarily of use on a system where the headers in
+     <p>This option is primarily of use on a system where the headers in
 <code>/usr/include</code> come from an older version of glibc.  Conflicts can
 occasionally happen in this case.  Note that Linux libc5 qualifies as an
 older version of glibc.  You can also use this option if you want to
 compile glibc with a newer set of kernel headers than the ones found in
 <code>/usr/include</code>.
 
-<br><dt><code>--enable-add-ons[=<var>list</var>]</code>
-<dd>Enable add-on packages in your source tree.  If this option is specified
+     <br><dt><code>--enable-add-ons[=</code><var>list</var><code>]</code>
+     <dd>Enable add-on packages in your source tree.  If this option is specified
 with no list, it enables all the add-on packages it finds.  If you do
-not wish to use some add-on package that you have present in your source
+not wish to use some add-on packages that you have present in your source
 tree, give this option a list of the add-ons that you <em>do</em> want
 used, like this: <code>--enable-add-ons=linuxthreads</code>
 
-<br><dt><code>--enable-kernel=<var>version</var></code>
-<dd>This option is currently only useful on Linux systems.  The
+     <br><dt><code>--enable-kernel=</code><var>version</var><code></code>
+     <dd>This option is currently only useful on GNU/Linux systems.  The
 <var>version</var> parameter should have the form X.Y.Z and describes the
 smallest version of the Linux kernel the generated library is expected
 to support.  The higher the <var>version</var> number is, the less
 compatibility code is added, and the faster the code gets.
 
-<br><dt><code>--with-binutils=<var>directory</var></code>
-<dd>Use the binutils (assembler and linker) in <code><var>directory</var></code>, not
-the ones the C compiler would default to.  You could use this option if
+     <br><dt><code>--with-binutils=</code><var>directory</var><code></code>
+     <dd>Use the binutils (assembler and linker) in <code></code><var>directory</var><code></code>, not
+the ones the C compiler would default to.  You can use this option if
 the default binutils on your system cannot deal with all the constructs
-in the GNU C library.  In that case, <code>configure</code> will detect the problem and
-suppress these constructs, so that the library will still be usable, but
-functionality may be lost--for example, you can't build a shared libc
-with old binutils.
+in the GNU C library.  In that case, <code>configure</code> will detect the
+problem and suppress these constructs, so that the library will still be
+usable, but functionality may be lost--for example, you can't build a
+shared libc with old binutils.
 
-<br><dt><code>--without-fp</code>
-<dd>Use this option if your computer lacks hardware floating-point support
+     <br><dt><code>--without-fp</code>
+     <dd>Use this option if your computer lacks hardware floating-point support
 and your operating system does not emulate an FPU.
 
-<br><dt><code>--disable-shared</code>
-<dd>Don't build shared libraries even if it is possible.  Not all systems support
-shared libraries; you need ELF support and (currently) the GNU linker.
+     <p>these
 
-<br><dt><code>--disable-profile</code>
-<dd>Don't build libraries with profiling information.  You may want to use
+     <br><dt><code>--disable-shared</code>
+     <dd>Don't build shared libraries even if it is possible.  Not all systems
+support shared libraries; you need ELF support and (currently) the GNU
+linker.
+
+     <br><dt><code>--disable-profile</code>
+     <dd>Don't build libraries with profiling information.  You may want to use
 this option if you don't plan to do profiling.
 
-<br><dt><code>--enable-omitfp</code>
-<dd>Use maximum optimization for the normal (static and shared)
+     <br><dt><code>--enable-omitfp</code>
+     <dd>Use maximum optimization for the normal (static and shared)
 libraries, and compile separate static libraries with debugging
-information and no optimization.  We recommend against this.  The extra
-optimization doesn't gain you much, it may provoke compiler bugs, and
-you won't be able to trace bugs through the C library.
+information and no optimization.  We recommend not doing this.  The extra
+optimization doesn't gain you much, it may provoke compiler bugs, and you
+won't be able to trace bugs through the C library.
 
-<br><dt><code>--disable-versioning</code>
-<dd>Don't compile the shared libraries with symbol version information. 
+     <br><dt><code>--disable-versioning</code>
+     <dd>Don't compile the shared libraries with symbol version information. 
 Doing this will make the resulting library incompatible with old
 binaries, so it's not recommended.
 
-<br><dt><code>--enable-static-nss</code>
-<dd>Compile static versions of the NSS (Name Service Switch) libraries. 
+     <br><dt><code>--enable-static-nss</code>
+     <dd>Compile static versions of the NSS (Name Service Switch) libraries. 
 This is not recommended because it defeats the purpose of NSS; a program
 linked statically with the NSS libraries cannot be dynamically
 reconfigured to use a different name database.
 
-<br><dt><code>--build=<var>build-system</var></code>
-<dt><code>--host=<var>host-system</var></code>
-<dd>These options are for cross-compiling.  If you specify both options and
+     <br><dt><code>--without-tls</code>
+     <dd>By default the C library is built with support for thread-local storage
+if the used tools support it.  By using <code>--without-tls</code> this can be
+prevented though there generally is no reason since it creates
+compatibility problems.
+
+     <br><dt><code>--build=</code><var>build-system</var><code></code>
+     <dd><dt><code>--host=</code><var>host-system</var><code></code>
+     <dd>These options are for cross-compiling.  If you specify both options and
 <var>build-system</var> is different from <var>host-system</var>, <code>configure</code>
 will prepare to cross-compile glibc from <var>build-system</var> to be used
 on <var>host-system</var>.  You'll probably need the <code>--with-headers</code>
 option too, and you may have to override <var>configure</var>'s selection of
 the compiler and/or binutils.
 
-<p>If you only specify <code>--host</code>, configure will prepare for a native
-compile but use what you specify instead of guessing what your system is. 
-This is most useful to change the CPU submodel.  For example, if
-configure guesses your machine as <code>i586-pc-linux-gnu</code> but you want
-to compile a library for 386es, give <code>--host=i386-pc-linux-gnu</code> or
-just <code>--host=i386-linux</code> and add the appropriate compiler flags
-(<code>-mcpu=i386</code> will do the trick) to <var>CFLAGS</var>.
+     <p>If you only specify <code>--host</code>, <code>configure</code> will prepare for a
+native compile but use what you specify instead of guessing what your
+system is. This is most useful to change the CPU submodel.  For example,
+if <code>configure</code> guesses your machine as <code>i586-pc-linux-gnu</code> but
+you want to compile a library for 386es, give
+<code>--host=i386-pc-linux-gnu</code> or just <code>--host=i386-linux</code> and add
+the appropriate compiler flags (<code>-mcpu=i386</code> will do the trick) to
+<var>CFLAGS</var>.
 
-<p>If you specify just <code>--build</code>, configure will get confused. 
+     <p>If you specify just <code>--build</code>, <code>configure</code> will get confused. 
 </dl>
 
-<p>To build the library and related programs, type <code>make</code>.  This will
+   <p>To build the library and related programs, type <code>make</code>.  This will
 produce a lot of output, some of which may look like errors from
 <code>make</code> but isn't.  Look for error messages from <code>make</code>
-containing <code>***</code>.  Those indicate that something is really wrong.
+containing <code>***</code>.  Those indicate that something is seriously wrong.
 
-<p>The compilation process takes several hours even on fast hardware. 
-Expect at least two hours for the default configuration on i586 for
-Linux.  For Hurd times are much longer.  Except for EGCS 1.1 and GCC
-2.95 (and later versions of GCC), all supported versions of GCC have a
-problem which causes them to take several minutes to compile certain
-files in the iconvdata directory.  Do not panic if the compiler appears
-to hang.
+   <p>The compilation process can take several hours.  Expect at least two
+hours for the default configuration on i586 for GNU/Linux.  For Hurd,
+times are much longer.  Some complex modules may take a very long time
+to compile, as much as several minutes on slower machines.  Do not
+panic if the compiler appears to hang.
 
-<p>If you want to run a parallel make, you can't just give <code>make</code> the
-<code>-j</code> option, because it won't be passed down to the sub-makes. 
-Instead, edit the generated <code>Makefile</code> and uncomment the line
+   <p>If you want to run a parallel make, simply pass the <code>-j</code> option
+with an appropriate numeric parameter to <code>make</code>.  You need a recent
+GNU <code>make</code> version, though.
 
-<br><pre># PARALLELMFLAGS = -j 4
-</pre>
-
-<p>You can change the <code>4</code> to some other number as appropriate for
-your system.  Instead of changing the <code>Makefile</code>, you could give
-this option directly to <code>make</code> and call it as, for example,
-<code>make PARALLELMFLAGS=-j4</code>.  If you're building in the source
-directory, you must use the latter approach since in this case no
-new <code>Makefile</code> is generated for you to change.
-
-<p>To build and run test programs which exercise some of the library
+   <p>To build and run test programs which exercise some of the library
 facilities, type <code>make check</code>.  If it does not complete
 successfully, do not use the built library, and report a bug after
 verifying that the problem is not already known.  See <a href="Reporting-Bugs.html#Reporting%20Bugs">Reporting Bugs</a>,
@@ -178,28 +189,33 @@ for instructions on reporting bugs.  Note that some of the tests assume
 they are not being run by <code>root</code>.  We recommend you compile and
 test glibc as an unprivileged user.
 
-<p>To format the <cite>GNU C Library Reference Manual</cite> for printing, type
+   <p>Before reporting bugs make sure there is no problem with your system. 
+The tests (and later installation) use some pre-existing files of the
+system such as <code>/etc/passwd</code>, <code>/etc/nsswitch.conf</code> and others. 
+These files must all contain correct and sensible content.
+
+   <p>To format the <cite>GNU C Library Reference Manual</cite> for printing, type
 <code>make&nbsp;dvi</code>.  You need a working TeX installation to do this. 
 The distribution already includes the on-line formatted version of the
 manual, as Info files.  You can regenerate those with <code>make&nbsp;info</code>, but it shouldn't be necessary.
 
-<p>The library has a number of special-purpose configuration parameters
+   <p>The library has a number of special-purpose configuration parameters
 which you can find in <code>Makeconfig</code>.  These can be overwritten with
 the file <code>configparms</code>.  To change them, create a
 <code>configparms</code> in your build directory and add values as appropriate
 for your system.  The file is included and parsed by <code>make</code> and has
 to follow the conventions for makefiles.
 
-<p>It is easy to configure the GNU C library for cross-compilation by
+   <p>It is easy to configure the GNU C library for cross-compilation by
 setting a few variables in <code>configparms</code>.  Set <code>CC</code> to the
 cross-compiler for the target you configured the library for; it is
 important to use this same <code>CC</code> value when running
-<code>configure</code>, like this: <code>CC=<var>target</var>-gcc configure
-<var>target</var></code>.  Set <code>BUILD_CC</code> to the compiler to use for for
-programs run on the build system as part of compiling the library.  You
-may need to set <code>AR</code> and <code>RANLIB</code> to cross-compiling versions
-of <code>ar</code> and <code>ranlib</code> if the native tools are not configured to
-work with object files for the target you configured for.
+<code>configure</code>, like this: <code>CC=</code><var>target</var><code>-gcc configure
+</code><var>target</var><code></code>.  Set <code>BUILD_CC</code> to the compiler to use for programs
+run on the build system as part of compiling the library.  You may need to
+set <code>AR</code> and <code>RANLIB</code> to cross-compiling versions of <code>ar</code>
+and <code>ranlib</code> if the native tools are not configured to work with
+object files for the target you configured for.
 
-</body></html>
+   </body></html>
 

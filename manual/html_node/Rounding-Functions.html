@@ -2,26 +2,36 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Rounding%20Functions">Rounding Functions</a>,
-Next:<a rel=next accesskey=n href="Remainder-Functions.html#Remainder%20Functions">Remainder Functions</a>,
-Previous:<a rel=previous accesskey=p href="Normalization-Functions.html#Normalization%20Functions">Normalization Functions</a>,
-Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+Node:&nbsp;<a name="Rounding%20Functions">Rounding Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Remainder-Functions.html#Remainder%20Functions">Remainder Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Normalization-Functions.html#Normalization%20Functions">Normalization Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
 <hr><br>
+</div>
 
-<h4>Rounding Functions</h4>
+<h3 class="subsection">Rounding Functions</h4>
 
 <p>The functions listed here perform operations such as rounding and
 truncation of floating-point values. Some of these functions convert
 floating point numbers to integer values.  They are all declared in
 <code>math.h</code>.
 
-<p>You can also convert floating-point numbers to integers simply by
+   <p>You can also convert floating-point numbers to integers simply by
 casting them to <code>int</code>.  This discards the fractional part,
 effectively rounding towards zero.  However, this only works if the
 result can actually be represented as an <code>int</code>--for very large
@@ -31,8 +41,8 @@ result as a <code>double</code> instead to get around this problem.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>ceil</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>ceil</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -40,8 +50,8 @@ result as a <code>double</code> instead to get around this problem.
 <tr><td>
 
 <tr>
-<td align="left">float <b>ceilf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>ceilf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -49,8 +59,8 @@ result as a <code>double</code> instead to get around this problem.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>ceill</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>ceill</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -65,8 +75,8 @@ is <code>2.0</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>floor</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>floor</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -74,8 +84,8 @@ is <code>2.0</code>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>floorf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>floorf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -83,8 +93,8 @@ is <code>2.0</code>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>floorl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>floorl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -99,8 +109,8 @@ integer, returning that value as a <code>double</code>.  Thus, <code>floor
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>trunc</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>trunc</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -108,8 +118,8 @@ integer, returning that value as a <code>double</code>.  Thus, <code>floor
 <tr><td>
 
 <tr>
-<td align="left">float <b>truncf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>truncf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -117,8 +127,8 @@ integer, returning that value as a <code>double</code>.  Thus, <code>floor
 <tr><td>
 
 <tr>
-<td align="left">long double <b>truncl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>truncl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -133,8 +143,8 @@ is <code>1.0</code> and <code>trunc (-1.5)</code> is <code>-1.0</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>rint</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>rint</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -142,8 +152,8 @@ is <code>1.0</code> and <code>trunc (-1.5)</code> is <code>-1.0</code>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>rintf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>rintf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -151,8 +161,8 @@ is <code>1.0</code> and <code>trunc (-1.5)</code> is <code>-1.0</code>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>rintl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>rintl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -165,7 +175,7 @@ rounding mode is to round to the nearest integer; some machines
 support other modes, but round-to-nearest is always used unless
 you explicitly select another.
 
-<p>If <var>x</var> was not initially an integer, these functions raise the
+     <p>If <var>x</var> was not initially an integer, these functions raise the
 inexact exception. 
 </td></tr>
 </table>
@@ -173,8 +183,8 @@ inexact exception.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>nearbyint</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>nearbyint</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -182,8 +192,8 @@ inexact exception.
 <tr><td>
 
 <tr>
-<td align="left">float <b>nearbyintf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>nearbyintf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -191,8 +201,8 @@ inexact exception.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>nearbyintl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>nearbyintl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -206,8 +216,8 @@ do not raise the inexact exception if <var>x</var> is not an integer.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>round</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">double <b>round</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -215,8 +225,8 @@ do not raise the inexact exception if <var>x</var> is not an integer.
 <tr><td>
 
 <tr>
-<td align="left">float <b>roundf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">float <b>roundf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -224,8 +234,8 @@ do not raise the inexact exception if <var>x</var> is not an integer.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>roundl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long double <b>roundl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -239,8 +249,8 @@ cases away from zero instead of to the nearest even integer.
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>lrint</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">long int <b>lrint</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -248,8 +258,8 @@ cases away from zero instead of to the nearest even integer.
 <tr><td>
 
 <tr>
-<td align="left">long int <b>lrintf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">long int <b>lrintf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -257,8 +267,8 @@ cases away from zero instead of to the nearest even integer.
 <tr><td>
 
 <tr>
-<td align="left">long int <b>lrintl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long int <b>lrintl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -272,8 +282,8 @@ These functions are just like <code>rint</code>, but they return a
 <p>
 <table width="100%">
 <tr>
-<td align="left">long long int <b>llrint</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llrint</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -281,8 +291,8 @@ These functions are just like <code>rint</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long long int <b>llrintf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llrintf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -290,8 +300,8 @@ These functions are just like <code>rint</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long long int <b>llrintl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llrintl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -305,8 +315,8 @@ These functions are just like <code>rint</code>, but they return a
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>lround</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">long int <b>lround</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -314,8 +324,8 @@ These functions are just like <code>rint</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long int <b>lroundf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">long int <b>lroundf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -323,8 +333,8 @@ These functions are just like <code>rint</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long int <b>lroundl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long int <b>lroundl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -338,8 +348,8 @@ These functions are just like <code>round</code>, but they return a
 <p>
 <table width="100%">
 <tr>
-<td align="left">long long int <b>llround</b><i> (double <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llround</b><i> </i>(<i>double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -347,8 +357,8 @@ These functions are just like <code>round</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long long int <b>llroundf</b><i> (float <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llroundf</b><i> </i>(<i>float </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -356,8 +366,8 @@ These functions are just like <code>round</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long long int <b>llroundl</b><i> (long double <var>x</var>)
-</i></td>
+<td align="left">long long int <b>llroundl</b><i> </i>(<i>long double </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -371,8 +381,8 @@ These functions are just like <code>round</code>, but they return a
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>modf</b><i> (double <var>value</var>, double *<var>integer-part</var>)
-</i></td>
+<td align="left">double <b>modf</b><i> </i>(<i>double </i><var>value</var><i>, double *</i><var>integer-part</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -380,8 +390,8 @@ These functions are just like <code>round</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">float <b>modff</b><i> (float <var>value</var>, float *<var>integer-part</var>)
-</i></td>
+<td align="left">float <b>modff</b><i> </i>(<i>float </i><var>value</var><i>, float *</i><var>integer-part</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -389,8 +399,8 @@ These functions are just like <code>round</code>, but they return a
 <tr><td>
 
 <tr>
-<td align="left">long double <b>modfl</b><i> (long double <var>value</var>, long double *<var>integer-part</var>)
-</i></td>
+<td align="left">long double <b>modfl</b><i> </i>(<i>long double </i><var>value</var><i>, long double *</i><var>integer-part</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -401,11 +411,11 @@ fractional part (between <code>-1</code> and <code>1</code>, exclusive).  Their 
 equals <var>value</var>.  Each of the parts has the same sign as <var>value</var>,
 and the integer part is always rounded toward zero.
 
-<p><code>modf</code> stores the integer part in <code>*<var>integer-part</var></code>, and
+     <p><code>modf</code> stores the integer part in <code>*</code><var>integer-part</var><code></code>, and
 returns the fractional part.  For example, <code>modf (2.5, &amp;intpart)</code>
 returns <code>0.5</code> and stores <code>2.0</code> into <code>intpart</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

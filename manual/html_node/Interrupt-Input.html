@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Interrupt%20Input">Interrupt Input</a>,
-Next:<a rel=next accesskey=n href="IOCTLs.html#IOCTLs">IOCTLs</a>,
-Previous:<a rel=previous accesskey=p href="File-Locks.html#File%20Locks">File Locks</a>,
-Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+Node:&nbsp;<a name="Interrupt%20Input">Interrupt Input</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="IOCTLs.html#IOCTLs">IOCTLs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Locks.html#File%20Locks">File Locks</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
 <hr><br>
+</div>
 
-<h3>Interrupt-Driven Input</h3>
+<h3 class="section">Interrupt-Driven Input</h3>
 
 <p>If you set the <code>O_ASYNC</code> status flag on a file descriptor
 (see <a href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>), a <code>SIGIO</code> signal is sent whenever
@@ -27,18 +37,18 @@ see <a href="Out-of-Band-Data.html#Out-of-Band%20Data">Out-of-Band Data</a>.  (<
 where <code>select</code> would report the socket as having an "exceptional
 condition".  See <a href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>.)
 
-<p>If the file descriptor corresponds to a terminal device, then <code>SIGIO</code>
+   <p>If the file descriptor corresponds to a terminal device, then <code>SIGIO</code>
 signals are sent to the foreground process group of the terminal. 
 See <a href="Job-Control.html#Job%20Control">Job Control</a>.
 
-<p>The symbols in this section are defined in the header file
+   <p>The symbols in this section are defined in the header file
 <code>fcntl.h</code>.
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>F_GETOWN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -50,23 +60,23 @@ group to which <code>SIGIO</code> signals are sent.  (For a terminal, this is
 actually the foreground process group ID, which you can get using
 <code>tcgetpgrp</code>; see <a href="Terminal-Access-Functions.html#Terminal%20Access%20Functions">Terminal Access Functions</a>.)
 
-<p>The return value is interpreted as a process ID; if negative, its
+     <p>The return value is interpreted as a process ID; if negative, its
 absolute value is the process group ID.
 
-<p>The following <code>errno</code> error condition is defined for this command:
+     <p>The following <code>errno</code> error condition is defined for this command:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> argument is invalid. 
+          <dd>The <var>filedes</var> argument is invalid. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>F_SETOWN</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -78,25 +88,25 @@ specify that it should set the process or process group to which
 of type <code>pid_t</code> to be passed to <code>fcntl</code>, so that the form of
 the call is:
 
-<br><pre>fcntl (<var>filedes</var>, F_SETOWN, <var>pid</var>)
-</pre>
+     <pre class="smallexample">          fcntl (<var>filedes</var>, F_SETOWN, <var>pid</var>)
+          </pre>
 
-<p>The <var>pid</var> argument should be a process ID.  You can also pass a
+     <p>The <var>pid</var> argument should be a process ID.  You can also pass a
 negative number whose absolute value is a process group ID.
 
-<p>The return value from <code>fcntl</code> with this command is -1
+     <p>The return value from <code>fcntl</code> with this command is -1
 in case of error and some other value if successful.  The following
 <code>errno</code> error conditions are defined for this command:
 
-<dl>
+          <dl>
 <dt><code>EBADF</code>
-<dd>The <var>filedes</var> argument is invalid.
+          <dd>The <var>filedes</var> argument is invalid.
 
-<br><dt><code>ESRCH</code>
-<dd>There is no process or process group corresponding to <var>pid</var>. 
+          <br><dt><code>ESRCH</code>
+          <dd>There is no process or process group corresponding to <var>pid</var>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

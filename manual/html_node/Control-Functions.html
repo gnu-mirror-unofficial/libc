@@ -2,49 +2,59 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Control%20Functions">Control Functions</a>,
-Next:<a rel=next accesskey=n href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>,
-Previous:<a rel=previous accesskey=p href="Rounding.html#Rounding">Rounding</a>,
-Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+Node:&nbsp;<a name="Control%20Functions">Control Functions</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Rounding.html#Rounding">Rounding</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic.html#Arithmetic">Arithmetic</a>
 <hr><br>
+</div>
 
-<h3>Floating-Point Control Functions</h3>
+<h3 class="section">Floating-Point Control Functions</h3>
 
 <p>IEEE&nbsp;754 floating-point implementations allow the programmer to
 decide whether traps will occur for each of the exceptions, by setting
 bits in the <dfn>control word</dfn>.  In C, traps result in the program
 receiving the <code>SIGFPE</code> signal; see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.
 
-<p><strong>Note:</strong> IEEE&nbsp;754 says that trap handlers are given details of
+   <p><strong>Note:</strong> IEEE&nbsp;754 says that trap handlers are given details of
 the exceptional situation, and can set the result value.  C signals do
 not provide any mechanism to pass this information back and forth. 
 Trapping exceptions in C is therefore not very useful.
 
-<p>It is sometimes necessary to save the state of the floating-point unit
+   <p>It is sometimes necessary to save the state of the floating-point unit
 while you perform some calculation.  The library provides functions
 which save and restore the exception flags, the set of exceptions that
 generate traps, and the rounding mode.  This information is known as the
 <dfn>floating-point environment</dfn>.
 
-<p>The functions to save and restore the floating-point environment all use
+   <p>The functions to save and restore the floating-point environment all use
 a variable of type <code>fenv_t</code> to store information.  This type is
 defined in <code>fenv.h</code>.  Its size and contents are
 implementation-defined.  You should not attempt to manipulate a variable
 of this type directly.
 
-<p>To save the state of the FPU, use one of these functions:
+   <p>To save the state of the FPU, use one of these functions:
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fegetenv</b><i> (fenv_t *<var>envp</var>)
-</i></td>
+<td align="left">int <b>fegetenv</b><i> </i>(<i>fenv_t *</i><var>envp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -53,7 +63,7 @@ of this type directly.
 Store the floating-point environment in the variable pointed to by
 <var>envp</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -61,8 +71,8 @@ non-zero value otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>feholdexcept</b><i> (fenv_t *<var>envp</var>)
-</i></td>
+<td align="left">int <b>feholdexcept</b><i> </i>(<i>fenv_t *</i><var>envp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -76,10 +86,10 @@ succeeds, it returns zero.
 </td></tr>
 </table>
 
-<p>The functions which restore the floating-point environment can take these
+   <p>The functions which restore the floating-point environment can take these
 kinds of arguments:
 
-<ul>
+     <ul>
 <li>Pointers to <code>fenv_t</code> objects, which were initialized previously by a
 call to <code>fegetenv</code> or <code>feholdexcept</code>. 
 <li>The special macro <code>FE_DFL_ENV</code> which represents the floating-point
@@ -87,12 +97,12 @@ environment as it was available at program start.
 <li>Implementation defined macros with names starting with <code>FE_</code> and
 having type <code>fenv_t *</code>.
 
-<p>If possible, the GNU C Library defines a macro <code>FE_NOMASK_ENV</code>
+     <p>If possible, the GNU C Library defines a macro <code>FE_NOMASK_ENV</code>
 which represents an environment where every exception raised causes a
 trap to occur.  You can test for this macro using <code>#ifdef</code>.  It is
 only defined if <code>_GNU_SOURCE</code> is defined.
 
-<p>Some platforms might define other predefined environments. 
+     <p>Some platforms might define other predefined environments. 
 </ul>
 
 <p>To set the floating-point environment, you can use either of these
@@ -101,8 +111,8 @@ functions:
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fesetenv</b><i> (const fenv_t *<var>envp</var>)
-</i></td>
+<td align="left">int <b>fesetenv</b><i> </i>(<i>const fenv_t *</i><var>envp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -110,7 +120,7 @@ functions:
 <tr><td>
 Set the floating-point environment to that described by <var>envp</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -118,8 +128,8 @@ non-zero value otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>feupdateenv</b><i> (const fenv_t *<var>envp</var>)
-</i></td>
+<td align="left">int <b>feupdateenv</b><i> </i>(<i>const fenv_t *</i><var>envp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -132,7 +142,7 @@ remain flagged after the call.  In other words, after <code>feupdateenv</code>
 is called, the status word is the bitwise OR of the previous status word
 and the one saved in <var>envp</var>.
 
-<p>The function returns zero in case the operation was successful, a
+     <p>The function returns zero in case the operation was successful, a
 non-zero value otherwise. 
 </td></tr>
 </table>
@@ -140,13 +150,13 @@ non-zero value otherwise.
 <p>To control for individual exceptions if raising them causes a trap to
 occur, you can use the following two functions.
 
-<p><strong>Portability Note:</strong> These functions are all GNU extensions.
+   <p><strong>Portability Note:</strong> These functions are all GNU extensions.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>feenableexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>feenableexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -157,7 +167,7 @@ the parameter <var>except</var>.  The individual excepetions are described in
 <a href="Status-bit-operations.html#Status%20bit%20operations">Status bit operations</a>.  Only the specified exceptions are
 enabled, the status of the other exceptions is not changed.
 
-<p>The function returns the previous enabled exceptions in case the
+     <p>The function returns the previous enabled exceptions in case the
 operation was successful, <code>-1</code> otherwise. 
 </td></tr>
 </table>
@@ -165,8 +175,8 @@ operation was successful, <code>-1</code> otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fedisableexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>fedisableexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -177,7 +187,7 @@ the parameter <var>except</var>.  The individual excepetions are described in
 <a href="Status-bit-operations.html#Status%20bit%20operations">Status bit operations</a>.  Only the specified exceptions are
 disabled, the status of the other exceptions is not changed.
 
-<p>The function returns the previous enabled exceptions in case the
+     <p>The function returns the previous enabled exceptions in case the
 operation was successful, <code>-1</code> otherwise. 
 </td></tr>
 </table>
@@ -185,8 +195,8 @@ operation was successful, <code>-1</code> otherwise.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fegetexcept</b><i> (int <var>excepts</var>)
-</i></td>
+<td align="left">int <b>fegetexcept</b><i> </i>(<i>int </i><var>excepts</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -197,5 +207,5 @@ returns <code>-1</code> in case of failure.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="File%20Positioning">File Positioning</a>,
-Next:<a rel=next accesskey=n href="Portable-Positioning.html#Portable%20Positioning">Portable Positioning</a>,
-Previous:<a rel=previous accesskey=p href="Binary-Streams.html#Binary%20Streams">Binary Streams</a>,
-Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+Node:&nbsp;<a name="File%20Positioning">File Positioning</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Portable-Positioning.html#Portable%20Positioning">Portable Positioning</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Binary-Streams.html#Binary%20Streams">Binary Streams</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
 <hr><br>
+</div>
 
-<h3>File Positioning</h3>
+<h3 class="section">File Positioning</h3>
 
 <p>The <dfn>file position</dfn> of a stream describes where in the file the
 stream is currently reading or writing.  I/O on the stream advances the
@@ -22,21 +32,21 @@ file position through the file.  In the GNU system, the file position is
 represented as an integer, which counts the number of bytes from the
 beginning of the file.  See <a href="File-Position.html#File%20Position">File Position</a>.
 
-<p>During I/O to an ordinary disk file, you can change the file position
+   <p>During I/O to an ordinary disk file, you can change the file position
 whenever you wish, so as to read or write any portion of the file.  Some
 other kinds of files may also permit this.  Files which support changing
 the file position are sometimes referred to as <dfn>random-access</dfn>
 files.
 
-<p>You can use the functions in this section to examine or modify the file
+   <p>You can use the functions in this section to examine or modify the file
 position indicator associated with a stream.  The symbols listed below
 are declared in the header file <code>stdio.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>ftell</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">long int <b>ftell</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -45,7 +55,7 @@ are declared in the header file <code>stdio.h</code>.
 This function returns the current file position of the stream
 <var>stream</var>.
 
-<p>This function can fail if the stream doesn't support file positioning,
+     <p>This function can fail if the stream doesn't support file positioning,
 or if the file position can't be represented in a <code>long int</code>, and
 possibly for other reasons as well.  If a failure occurs, a value of
 <code>-1</code> is returned. 
@@ -55,8 +65,8 @@ possibly for other reasons as well.  If a failure occurs, a value of
 <p>
 <table width="100%">
 <tr>
-<td align="left">off_t <b>ftello</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">off_t <b>ftello</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -70,14 +80,14 @@ Therefore, using ftell can lead to problems if the implementation is
 written on top of a POSIX compliant low-level I/O implementation, and using
 <code>ftello</code> is preferable whenever it is available.
 
-<p>If this function fails it returns <code>(off_t) -1</code>.  This can happen due
+     <p>If this function fails it returns <code>(off_t) -1</code>.  This can happen due
 to missing support for file positioning or internal errors.  Otherwise
 the return value is the current file position.
 
-<p>The function is an extension defined in the Unix Single Specification
+     <p>The function is an extension defined in the Unix Single Specification
 version 2.
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
 32 bit system this function is in fact <code>ftello64</code>.  I.e., the
 LFS interface transparently replaces the old interface. 
 </td></tr>
@@ -86,8 +96,8 @@ LFS interface transparently replaces the old interface.
 <p>
 <table width="100%">
 <tr>
-<td align="left">off64_t <b>ftello64</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">off64_t <b>ftello64</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -100,7 +110,7 @@ stream <var>stream</var> was opened using either <code>fopen64</code>,
 file operations to position the file pointer beyond the 2^31
 bytes limit might fail.
 
-<p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+     <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
 bits machine this function is available under the name <code>ftello</code>
 and so transparently replaces the old interface. 
 </td></tr>
@@ -109,8 +119,8 @@ and so transparently replaces the old interface.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fseek</b><i> (FILE *<var>stream</var>, long int <var>offset</var>, int <var>whence</var>)
-</i></td>
+<td align="left">int <b>fseek</b><i> </i>(<i>FILE *</i><var>stream</var><i>, long int </i><var>offset</var><i>, int </i><var>whence</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -122,12 +132,12 @@ constants <code>SEEK_SET</code>, <code>SEEK_CUR</code>, or <code>SEEK_END</code>
 indicate whether the <var>offset</var> is relative to the beginning of the
 file, the current file position, or the end of the file, respectively.
 
-<p>This function returns a value of zero if the operation was successful,
+     <p>This function returns a value of zero if the operation was successful,
 and a nonzero value to indicate failure.  A successful call also clears
 the end-of-file indicator of <var>stream</var> and discards any characters
 that were "pushed back" by the use of <code>ungetc</code>.
 
-<p><code>fseek</code> either flushes any buffered output before setting the file
+     <p><code>fseek</code> either flushes any buffered output before setting the file
 position or else remembers it so it will be written later in its proper
 place in the file. 
 </td></tr>
@@ -136,8 +146,8 @@ place in the file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fseeko</b><i> (FILE *<var>stream</var>, off_t <var>offset</var>, int <var>whence</var>)
-</i></td>
+<td align="left">int <b>fseeko</b><i> </i>(<i>FILE *</i><var>stream</var><i>, off_t </i><var>offset</var><i>, int </i><var>whence</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -149,16 +159,16 @@ This function is similar to <code>fseek</code> but it corrects a problem with
 <code>fseeko</code> uses the correct type <code>off_t</code> for the <var>offset</var>
 parameter.
 
-<p>For this reason it is a good idea to prefer <code>ftello</code> whenever it is
+     <p>For this reason it is a good idea to prefer <code>ftello</code> whenever it is
 available since its functionality is (if different at all) closer the
 underlying definition.
 
-<p>The functionality and return value is the same as for <code>fseek</code>.
+     <p>The functionality and return value is the same as for <code>fseek</code>.
 
-<p>The function is an extension defined in the Unix Single Specification
+     <p>The function is an extension defined in the Unix Single Specification
 version 2.
 
-<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+     <p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
 32 bit system this function is in fact <code>fseeko64</code>.  I.e., the
 LFS interface transparently replaces the old interface. 
 </td></tr>
@@ -167,8 +177,8 @@ LFS interface transparently replaces the old interface.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>fseeko64</b><i> (FILE *<var>stream</var>, off64_t <var>offset</var>, int <var>whence</var>)
-</i></td>
+<td align="left">int <b>fseeko64</b><i> </i>(<i>FILE *</i><var>stream</var><i>, off64_t </i><var>offset</var><i>, int </i><var>whence</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -181,17 +191,17 @@ requires that the stream <var>stream</var> was opened using either
 the underlying file operations to position the file pointer beyond the
 2^31 bytes limit might fail.
 
-<p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+     <p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
 bits machine this function is available under the name <code>fseeko</code>
 and so transparently replaces the old interface. 
 </td></tr>
 </table>
 
-<p><strong>Portability Note:</strong> In non-POSIX systems, <code>ftell</code>,
+   <p><strong>Portability Note:</strong> In non-POSIX systems, <code>ftell</code>,
 <code>ftello</code>, <code>fseek</code> and <code>fseeko</code> might work reliably only
 on binary streams.  See <a href="Binary-Streams.html#Binary%20Streams">Binary Streams</a>.
 
-<p>The following symbolic constants are defined for use as the <var>whence</var>
+   <p>The following symbolic constants are defined for use as the <var>whence</var>
 argument to <code>fseek</code>.  They are also used with the <code>lseek</code>
 function (see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>) and to specify offsets for file locks
 (see <a href="Control-Operations.html#Control%20Operations">Control Operations</a>).
@@ -200,7 +210,7 @@ function (see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a
 <table width="100%">
 <tr>
 <td align="left">int <b>SEEK_SET</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -216,7 +226,7 @@ the offset provided is relative to the beginning of the file.
 <table width="100%">
 <tr>
 <td align="left">int <b>SEEK_CUR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -232,7 +242,7 @@ the offset provided is relative to the current file position.
 <table width="100%">
 <tr>
 <td align="left">int <b>SEEK_END</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -247,8 +257,8 @@ the offset provided is relative to the end of the file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>rewind</b><i> (FILE *<var>stream</var>)
-</i></td>
+<td align="left">void <b>rewind</b><i> </i>(<i>FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -263,20 +273,20 @@ reset.
 </td></tr>
 </table>
 
-<p>These three aliases for the <code>SEEK_<small>...</small></code> constants exist for the
+   <p>These three aliases for the <code>SEEK_...</code> constants exist for the
 sake of compatibility with older BSD systems.  They are defined in two
 different header files: <code>fcntl.h</code> and <code>sys/file.h</code>.
 
-<dl>
+     <dl>
 <dt><code>L_SET</code>
-<dd>An alias for <code>SEEK_SET</code>.
+     <dd>An alias for <code>SEEK_SET</code>.
 
-<br><dt><code>L_INCR</code>
-<dd>An alias for <code>SEEK_CUR</code>.
+     <br><dt><code>L_INCR</code>
+     <dd>An alias for <code>SEEK_CUR</code>.
 
-<br><dt><code>L_XTND</code>
-<dd>An alias for <code>SEEK_END</code>. 
+     <br><dt><code>L_XTND</code>
+     <dd>An alias for <code>SEEK_END</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

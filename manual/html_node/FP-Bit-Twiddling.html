@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
-Next:<a rel=next accesskey=n href="FP-Comparison-Functions.html#FP%20Comparison%20Functions">FP Comparison Functions</a>,
-Previous:<a rel=previous accesskey=p href="Remainder-Functions.html#Remainder%20Functions">Remainder Functions</a>,
-Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+Node:&nbsp;<a name="FP%20Bit%20Twiddling">FP Bit Twiddling</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="FP-Comparison-Functions.html#FP%20Comparison%20Functions">FP Comparison Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Remainder-Functions.html#Remainder%20Functions">Remainder Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
 <hr><br>
+</div>
 
-<h4>Setting and modifying single bits of FP values</h4>
+<h3 class="subsection">Setting and modifying single bits of FP values</h4>
 
 <p>There are some operations that are too complicated or expensive to
 perform by hand on floating-point numbers.  ISO&nbsp;C99 defines
@@ -24,8 +34,8 @@ bits.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>copysign</b><i> (double <var>x</var>, double <var>y</var>)
-</i></td>
+<td align="left">double <b>copysign</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -33,8 +43,8 @@ bits.
 <tr><td>
 
 <tr>
-<td align="left">float <b>copysignf</b><i> (float <var>x</var>, float <var>y</var>)
-</i></td>
+<td align="left">float <b>copysignf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -42,8 +52,8 @@ bits.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>copysignl</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>copysignl</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -54,9 +64,9 @@ even if <var>x</var> or <var>y</var> are NaN or zero.  Both of these can carry a
 sign (although not all implementations support it) and this is one of
 the few operations that can tell the difference.
 
-<p><code>copysign</code> never raises an exception.
+     <p><code>copysign</code> never raises an exception.
 
-<p>This function is defined in IEC&nbsp;559 (and the appendix with
+     <p>This function is defined in IEC&nbsp;559 (and the appendix with
 recommended functions in IEEE&nbsp;754/IEEE&nbsp;854). 
 </td></tr>
 </table>
@@ -64,8 +74,8 @@ recommended functions in IEEE&nbsp;754/IEEE&nbsp;854).
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>signbit</b><i> (<em>float-type</em> <var>x</var>)
-</i></td>
+<td align="left">int <b>signbit</b><i> </i>(<i></i><em>float-type</em><i> </i><var>x</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -75,7 +85,7 @@ recommended functions in IEEE&nbsp;754/IEEE&nbsp;854).
 types.  It returns a nonzero value if the value of <var>x</var> has its sign
 bit set.
 
-<p>This is not the same as <code>x &lt; 0.0</code>, because IEEE&nbsp;754 floating
+     <p>This is not the same as <code>x &lt; 0.0</code>, because IEEE&nbsp;754 floating
 point allows zero to be signed.  The comparison <code>-0.0 &lt; 0.0</code> is
 false, but <code>signbit (-0.0)</code> will return a nonzero value. 
 </td></tr>
@@ -84,8 +94,8 @@ false, but <code>signbit (-0.0)</code> will return a nonzero value.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>nextafter</b><i> (double <var>x</var>, double <var>y</var>)
-</i></td>
+<td align="left">double <b>nextafter</b><i> </i>(<i>double </i><var>x</var><i>, double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -93,8 +103,8 @@ false, but <code>signbit (-0.0)</code> will return a nonzero value.
 <tr><td>
 
 <tr>
-<td align="left">float <b>nextafterf</b><i> (float <var>x</var>, float <var>y</var>)
-</i></td>
+<td align="left">float <b>nextafterf</b><i> </i>(<i>float </i><var>x</var><i>, float </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -102,8 +112,8 @@ false, but <code>signbit (-0.0)</code> will return a nonzero value.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>nextafterl</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>nextafterl</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -119,7 +129,7 @@ mantissa is added or subtracted, depending on the direction.
 <code>nextafter</code> will signal overflow or underflow if the result goes
 outside of the range of normalized numbers.
 
-<p>This function is defined in IEC&nbsp;559 (and the appendix with
+     <p>This function is defined in IEC&nbsp;559 (and the appendix with
 recommended functions in IEEE&nbsp;754/IEEE&nbsp;854). 
 </td></tr>
 </table>
@@ -127,8 +137,8 @@ recommended functions in IEEE&nbsp;754/IEEE&nbsp;854).
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>nexttoward</b><i> (double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">double <b>nexttoward</b><i> </i>(<i>double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -136,8 +146,8 @@ recommended functions in IEEE&nbsp;754/IEEE&nbsp;854).
 <tr><td>
 
 <tr>
-<td align="left">float <b>nexttowardf</b><i> (float <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">float <b>nexttowardf</b><i> </i>(<i>float </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -145,8 +155,8 @@ recommended functions in IEEE&nbsp;754/IEEE&nbsp;854).
 <tr><td>
 
 <tr>
-<td align="left">long double <b>nexttowardl</b><i> (long double <var>x</var>, long double <var>y</var>)
-</i></td>
+<td align="left">long double <b>nexttowardl</b><i> </i>(<i>long double </i><var>x</var><i>, long double </i><var>y</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -161,8 +171,8 @@ double</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>nan</b><i> (const char *<var>tagp</var>)
-</i></td>
+<td align="left">double <b>nan</b><i> </i>(<i>const char *</i><var>tagp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -170,8 +180,8 @@ double</code>.
 <tr><td>
 
 <tr>
-<td align="left">float <b>nanf</b><i> (const char *<var>tagp</var>)
-</i></td>
+<td align="left">float <b>nanf</b><i> </i>(<i>const char *</i><var>tagp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -179,8 +189,8 @@ double</code>.
 <tr><td>
 
 <tr>
-<td align="left">long double <b>nanl</b><i> (const char *<var>tagp</var>)
-</i></td>
+<td align="left">long double <b>nanl</b><i> </i>(<i>const char *</i><var>tagp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -188,13 +198,13 @@ double</code>.
 <tr><td>
 The <code>nan</code> function returns a representation of NaN, provided that
 NaN is supported by the target platform. 
-<code>nan ("<var>n-char-sequence</var>")</code> is equivalent to
-<code>strtod ("NAN(<var>n-char-sequence</var>)")</code>.
+<code>nan ("</code><var>n-char-sequence</var><code>")</code> is equivalent to
+<code>strtod ("NAN(</code><var>n-char-sequence</var><code>)")</code>.
 
-<p>The argument <var>tagp</var> is used in an unspecified manner.  On IEEE&nbsp;754 systems, there are many representations of NaN, and <var>tagp</var>
+     <p>The argument <var>tagp</var> is used in an unspecified manner.  On IEEE&nbsp;754 systems, there are many representations of NaN, and <var>tagp</var>
 selects one.  On other systems it may do nothing. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

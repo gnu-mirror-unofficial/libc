@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Host%20Names">Host Names</a>,
-Previous:<a rel=previous accesskey=p href="Host-Address-Functions.html#Host%20Address%20Functions">Host Address Functions</a>,
-Up:<a rel=up accesskey=u href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>
+Node:&nbsp;<a name="Host%20Names">Host Names</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Host-Address-Functions.html#Host%20Address%20Functions">Host Address Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>
 <hr><br>
+</div>
 
-<h5>Host Names</h5>
+<h3 class="subsubsection">Host Names</h5>
 
 <p>Besides the standard numbers-and-dots notation for Internet addresses,
 you can also refer to a host by a symbolic name.  The advantage of a
@@ -22,7 +32,7 @@ the machine with Internet address <code>158.121.106.19</code> is also known as
 <code>alpha.gnu.org</code>; and other machines in the <code>gnu.org</code>
 domain can refer to it simply as <code>alpha</code>.
 
-<p>Internally, the system uses a database to keep track of the mapping
+   <p>Internally, the system uses a database to keep track of the mapping
 between host names and host numbers.  This database is usually either
 the file <code>/etc/hosts</code> or an equivalent provided by a name server. 
 The functions and other symbols for accessing this database are declared
@@ -33,7 +43,7 @@ you include <code>netdb.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>struct hostent</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -42,45 +52,45 @@ you include <code>netdb.h</code>.
 This data type is used to represent an entry in the hosts database.  It
 has the following members:
 
-<dl>
+          <dl>
 <dt><code>char *h_name</code>
-<dd>This is the "official" name of the host.
+          <dd>This is the "official" name of the host.
 
-<br><dt><code>char **h_aliases</code>
-<dd>These are alternative names for the host, represented as a null-terminated
+          <br><dt><code>char **h_aliases</code>
+          <dd>These are alternative names for the host, represented as a null-terminated
 vector of strings.
 
-<br><dt><code>int h_addrtype</code>
-<dd>This is the host address type; in practice, its value is always either
+          <br><dt><code>int h_addrtype</code>
+          <dd>This is the host address type; in practice, its value is always either
 <code>AF_INET</code> or <code>AF_INET6</code>, with the latter being used for IPv6
 hosts.  In principle other kinds of addresses could be represented in
 the database as well as Internet addresses; if this were done, you
 might find a value in this field other than <code>AF_INET</code> or
 <code>AF_INET6</code>.  See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>.
 
-<br><dt><code>int h_length</code>
-<dd>This is the length, in bytes, of each address.
+          <br><dt><code>int h_length</code>
+          <dd>This is the length, in bytes, of each address.
 
-<br><dt><code>char **h_addr_list</code>
-<dd>This is the vector of addresses for the host.  (Recall that the host
+          <br><dt><code>char **h_addr_list</code>
+          <dd>This is the vector of addresses for the host.  (Recall that the host
 might be connected to multiple networks and have different addresses on
 each one.)  The vector is terminated by a null pointer.
 
-<br><dt><code>char *h_addr</code>
-<dd>This is a synonym for <code>h_addr_list[0]</code>; in other words, it is the
+          <br><dt><code>char *h_addr</code>
+          <dd>This is a synonym for <code>h_addr_list[0]</code>; in other words, it is the
 first host address. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p>As far as the host database is concerned, each address is just a block
+   <p>As far as the host database is concerned, each address is just a block
 of memory <code>h_length</code> bytes long.  But in other contexts there is an
 implicit assumption that you can convert IPv4 addresses to a
 <code>struct in_addr</code> or an <code>uint32_t</code>.  Host addresses in
 a <code>struct hostent</code> structure are always given in network byte
 order; see <a href="Byte-Order.html#Byte%20Order">Byte Order</a>.
 
-<p>You can use <code>gethostbyname</code>, <code>gethostbyname2</code> or
+   <p>You can use <code>gethostbyname</code>, <code>gethostbyname2</code> or
 <code>gethostbyaddr</code> to search the hosts database for information about
 a particular host.  The information is returned in a
 statically-allocated structure; you must copy the information if you
@@ -90,8 +100,8 @@ need to save it across calls.  You can also use <code>getaddrinfo</code> and
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct hostent * <b>gethostbyname</b><i> (const char *<var>name</var>)
-</i></td>
+<td align="left">struct hostent * <b>gethostbyname</b><i> </i>(<i>const char *</i><var>name</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -105,8 +115,8 @@ named <var>name</var>.  If the lookup fails, it returns a null pointer.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct hostent * <b>gethostbyname2</b><i> (const char *<var>name</var>, int <var>af</var>)
-</i></td>
+<td align="left">struct hostent * <b>gethostbyname2</b><i> </i>(<i>const char *</i><var>name</var><i>, int </i><var>af</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -121,8 +131,8 @@ allows the caller to specify the desired address family (e.g.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct hostent * <b>gethostbyaddr</b><i> (const char *<var>addr</var>, size_t <var>length</var>, int <var>format</var>)
-</i></td>
+<td align="left">struct hostent * <b>gethostbyaddr</b><i> </i>(<i>const char *</i><var>addr</var><i>, size_t </i><var>length</var><i>, int </i><var>format</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -136,35 +146,35 @@ at <var>addr</var>.  <var>format</var> specifies the address format; for an IPv4
 Internet address, specify a value of <code>AF_INET</code>; for an IPv6
 Internet address, use <code>AF_INET6</code>.
 
-<p>If the lookup fails, <code>gethostbyaddr</code> returns a null pointer. 
+     <p>If the lookup fails, <code>gethostbyaddr</code> returns a null pointer. 
 </td></tr>
 </table>
 
-<p>If the name lookup by <code>gethostbyname</code> or <code>gethostbyaddr</code>
+   <p>If the name lookup by <code>gethostbyname</code> or <code>gethostbyaddr</code>
 fails, you can find out the reason by looking at the value of the
 variable <code>h_errno</code>.  (It would be cleaner design for these
 functions to set <code>errno</code>, but use of <code>h_errno</code> is compatible
 with other systems.)
 
-<p>Here are the error codes that you may find in <code>h_errno</code>:
+   <p>Here are the error codes that you may find in <code>h_errno</code>:
 
-<dl>
+     <dl>
 <dt><code>HOST_NOT_FOUND</code>
-<dd>No such host is known in the database.
+     <dd>No such host is known in the database.
 
-<br><dt><code>TRY_AGAIN</code>
-<dd>This condition happens when the name server could not be contacted.  If
+     <br><dt><code>TRY_AGAIN</code>
+     <dd>This condition happens when the name server could not be contacted.  If
 you try again later, you may succeed then.
 
-<br><dt><code>NO_RECOVERY</code>
-<dd>A non-recoverable error occurred.
+     <br><dt><code>NO_RECOVERY</code>
+     <dd>A non-recoverable error occurred.
 
-<br><dt><code>NO_ADDRESS</code>
-<dd>The host database contains an entry for the name, but it doesn't have an
+     <br><dt><code>NO_ADDRESS</code>
+     <dd>The host database contains an entry for the name, but it doesn't have an
 associated Internet address. 
 </dl>
 
-<p>The lookup functions above all have one in common: they are not
+   <p>The lookup functions above all have one in common: they are not
 reentrant and therefore unusable in multi-threaded applications. 
 Therefore provides the GNU C library a new set of functions which can be
 used in this context.
@@ -172,8 +182,8 @@ used in this context.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>gethostbyname_r</b><i> (const char *restrict <var>name</var>, struct hostent *restrict <var>result_buf</var>, char *restrict <var>buf</var>, size_t <var>buflen</var>, struct hostent **restrict <var>result</var>, int *restrict <var>h_errnop</var>)
-</i></td>
+<td align="left">int <b>gethostbyname_r</b><i> </i>(<i>const char *restrict </i><var>name</var><i>, struct hostent *restrict </i><var>result_buf</var><i>, char *restrict </i><var>buf</var><i>, size_t </i><var>buflen</var><i>, struct hostent **restrict </i><var>result</var><i>, int *restrict </i><var>h_errnop</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -186,9 +196,9 @@ the function may need extra buffer space and the caller must pass an
 pointer and the size of the buffer in the <var>buf</var> and <var>buflen</var>
 parameters.
 
-<p>A pointer to the buffer, in which the result is stored, is available in
-<code>*<var>result</var></code> after the function call successfully returned.  If
-an error occurs or if no entry is found, the pointer <code>*<var>result</var></code>
+     <p>A pointer to the buffer, in which the result is stored, is available in
+<code>*</code><var>result</var><code></code> after the function call successfully returned.  If
+an error occurs or if no entry is found, the pointer <code>*</code><var>result</var><code></code>
 is a null pointer.  Success is signalled by a zero return value.  If the
 function failed the return value is an error number.  In addition to the
 errors defined for <code>gethostbyname</code> it can also be <code>ERANGE</code>. 
@@ -196,41 +206,41 @@ In this case the call should be repeated with a larger buffer.
 Additional error information is not stored in the global variable
 <code>h_errno</code> but instead in the object pointed to by <var>h_errnop</var>.
 
-<p>Here's a small example:
-<br><pre>struct hostent *
-gethostname (char *host)
-{
-  struct hostent hostbuf, *hp;
-  size_t hstbuflen;
-  char *tmphstbuf;
-  int res;
-  int herr;
-
-  hstbuflen = 1024;
-  /* Allocate buffer, remember to free it to avoid memory leakage.  */
-  tmphstbuf = malloc (hstbuflen);
-
-  while ((res = gethostbyname_r (host, &amp;hostbuf, tmphstbuf, hstbuflen,
-                                 &amp;hp, &amp;herr)) == ERANGE)
-    {
-      /* Enlarge the buffer.  */
-      hstbuflen *= 2;
-      tmphstbuf = realloc (tmphstbuf, hstbuflen);
-    }
-  /*  Check for errors.  */
-  if (res || hp == NULL)
-    return NULL;
-  return hp;
-}
-</pre>
-</td></tr>
+     <p>Here's a small example:
+     <pre class="smallexample">          struct hostent *
+          gethostname (char *host)
+          {
+            struct hostent hostbuf, *hp;
+            size_t hstbuflen;
+            char *tmphstbuf;
+            int res;
+            int herr;
+          
+            hstbuflen = 1024;
+            /* Allocate buffer, remember to free it to avoid memory leakage.  */
+            tmphstbuf = malloc (hstbuflen);
+          
+            while ((res = gethostbyname_r (host, &amp;hostbuf, tmphstbuf, hstbuflen,
+                                           &amp;hp, &amp;herr)) == ERANGE)
+              {
+                /* Enlarge the buffer.  */
+                hstbuflen *= 2;
+                tmphstbuf = realloc (tmphstbuf, hstbuflen);
+              }
+            /*  Check for errors.  */
+            if (res || hp == NULL)
+              return NULL;
+            return hp;
+          }
+          </pre>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>gethostbyname2_r</b><i> (const char *<var>name</var>, int <var>af</var>, struct hostent *restrict <var>result_buf</var>, char *restrict <var>buf</var>, size_t <var>buflen</var>, struct hostent **restrict <var>result</var>, int *restrict <var>h_errnop</var>)
-</i></td>
+<td align="left">int <b>gethostbyname2_r</b><i> </i>(<i>const char *</i><var>name</var><i>, int </i><var>af</var><i>, struct hostent *restrict </i><var>result_buf</var><i>, char *restrict </i><var>buf</var><i>, size_t </i><var>buflen</var><i>, struct hostent **restrict </i><var>result</var><i>, int *restrict </i><var>h_errnop</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -245,8 +255,8 @@ allows the caller to specify the desired address family (e.g.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>gethostbyaddr_r</b><i> (const char *<var>addr</var>, size_t <var>length</var>, int <var>format</var>, struct hostent *restrict <var>result_buf</var>, char *restrict <var>buf</var>, size_t <var>buflen</var>, struct hostent **restrict <var>result</var>, int *restrict <var>h_errnop</var>)
-</i></td>
+<td align="left">int <b>gethostbyaddr_r</b><i> </i>(<i>const char *</i><var>addr</var><i>, size_t </i><var>length</var><i>, int </i><var>format</var><i>, struct hostent *restrict </i><var>result_buf</var><i>, char *restrict </i><var>buf</var><i>, size_t </i><var>buflen</var><i>, struct hostent **restrict </i><var>result</var><i>, int *restrict </i><var>h_errnop</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -260,7 +270,7 @@ at <var>addr</var>.  <var>format</var> specifies the address format; for an IPv4
 Internet address, specify a value of <code>AF_INET</code>; for an IPv6
 Internet address, use <code>AF_INET6</code>.
 
-<p>Similar to the <code>gethostbyname_r</code> function, the caller must provide
+     <p>Similar to the <code>gethostbyname_r</code> function, the caller must provide
 buffers for the result and memory used internally.  In case of success
 the function returns zero.  Otherwise the value is an error number where
 <code>ERANGE</code> has the special meaning that the caller-provided buffer is
@@ -268,15 +278,15 @@ too small.
 </td></tr>
 </table>
 
-<p>You can also scan the entire hosts database one entry at a time using
+   <p>You can also scan the entire hosts database one entry at a time using
 <code>sethostent</code>, <code>gethostent</code> and <code>endhostent</code>.  Be careful
 when using these functions because they are not reentrant.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>sethostent</b><i> (int <var>stayopen</var>)
-</i></td>
+<td align="left">void <b>sethostent</b><i> </i>(<i>int </i><var>stayopen</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -285,7 +295,7 @@ when using these functions because they are not reentrant.
 This function opens the hosts database to begin scanning it.  You can
 then call <code>gethostent</code> to read the entries.
 
-<p>If the <var>stayopen</var> argument is nonzero, this sets a flag so that
+     <p>If the <var>stayopen</var> argument is nonzero, this sets a flag so that
 subsequent calls to <code>gethostbyname</code> or <code>gethostbyaddr</code> will
 not close the database (as they usually would).  This makes for more
 efficiency if you call those functions several times, by avoiding
@@ -296,8 +306,8 @@ reopening the database for each call.
 <p>
 <table width="100%">
 <tr>
-<td align="left">struct hostent * <b>gethostent</b><i> (void)
-</i></td>
+<td align="left">struct hostent * <b>gethostent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -311,8 +321,8 @@ returns a null pointer if there are no more entries.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>endhostent</b><i> (void)
-</i></td>
+<td align="left">void <b>endhostent</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -322,5 +332,5 @@ This function closes the hosts database.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

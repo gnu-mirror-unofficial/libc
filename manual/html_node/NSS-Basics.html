@@ -2,31 +2,41 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="NSS%20Basics">NSS Basics</a>,
-Next:<a rel=next accesskey=n href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>,
-Previous:<a rel=previous accesskey=p href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>,
-Up:<a rel=up accesskey=u href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>
+Node:&nbsp;<a name="NSS%20Basics">NSS Basics</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>
 <hr><br>
+</div>
 
-<h3>NSS Basics</h3>
+<h3 class="section">NSS Basics</h3>
 
 <p>The basic idea is to put the implementation of the different services
 offered to access the databases in separate modules.  This has some
 advantages:
 
-<ol type=1 start=1>
-</p><li>Contributors can add new services without adding them to GNU C Library. 
+     <ol type=1 start=1>
+<li>Contributors can add new services without adding them to GNU C Library. 
 <li>The modules can be updated separately. 
 <li>The C library image is smaller.
-</ol>
+        </ol>
 
-<p>To fulfill the first goal above the ABI of the modules will be described
+   <p>To fulfill the first goal above the ABI of the modules will be described
 below.  For getting the implementation of a new service right it is
 important to understand how the functions in the modules get called. 
 They are in no way designed to be used by the programmer directly. 
@@ -35,33 +45,33 @@ functions to access the databases.
 
 <p>The databases available in the NSS are
 
-<dl>
+     <dl>
 <dt><code>aliases</code>
-<dd>Mail aliases
+     <dd>Mail aliases
 <br><dt><code>ethers</code>
-<dd>Ethernet numbers,
+     <dd>Ethernet numbers,
 <br><dt><code>group</code>
-<dd>Groups of users, see <a href="Group-Database.html#Group%20Database">Group Database</a>. 
+     <dd>Groups of users, see <a href="Group-Database.html#Group%20Database">Group Database</a>. 
 <br><dt><code>hosts</code>
-<dd>Host names and numbers, see <a href="Host-Names.html#Host%20Names">Host Names</a>. 
+     <dd>Host names and numbers, see <a href="Host-Names.html#Host%20Names">Host Names</a>. 
 <br><dt><code>netgroup</code>
-<dd>Network wide list of host and users, see <a href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>. 
+     <dd>Network wide list of host and users, see <a href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>. 
 <br><dt><code>networks</code>
-<dd>Network names and numbers, see <a href="Networks-Database.html#Networks%20Database">Networks Database</a>. 
+     <dd>Network names and numbers, see <a href="Networks-Database.html#Networks%20Database">Networks Database</a>. 
 <br><dt><code>protocols</code>
-<dd>Network protocols, see <a href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>. 
+     <dd>Network protocols, see <a href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>. 
 <br><dt><code>passwd</code>
-<dd>User passwords, see <a href="User-Database.html#User%20Database">User Database</a>. 
+     <dd>User passwords, see <a href="User-Database.html#User%20Database">User Database</a>. 
 <br><dt><code>rpc</code>
-<dd>Remote procedure call names and numbers,
+     <dd>Remote procedure call names and numbers,
 <br><dt><code>services</code>
-<dd>Network services, see <a href="Services-Database.html#Services%20Database">Services Database</a>. 
+     <dd>Network services, see <a href="Services-Database.html#Services%20Database">Services Database</a>. 
 <br><dt><code>shadow</code>
-<dd>Shadow user passwords,
+     <dd>Shadow user passwords,
 </dl>
 
 <p>There will be some more added later (<code>automount</code>, <code>bootparams</code>,
 <code>netmasks</code>, and <code>publickey</code>).
 
-</body></html>
+   </body></html>
 

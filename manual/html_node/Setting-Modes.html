@@ -2,70 +2,80 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Setting%20Modes">Setting Modes</a>,
-Next:<a rel=next accesskey=n href="Input-Modes.html#Input%20Modes">Input Modes</a>,
-Previous:<a rel=previous accesskey=p href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>,
-Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+Node:&nbsp;<a name="Setting%20Modes">Setting Modes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Input-Modes.html#Input%20Modes">Input Modes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
 <hr><br>
+</div>
 
-<h4>Setting Terminal Modes Properly</h4>
+<h3 class="subsection">Setting Terminal Modes Properly</h4>
 
 <p>When you set terminal modes, you should call <code>tcgetattr</code> first to
 get the current modes of the particular terminal device, modify only
 those modes that you are really interested in, and store the result with
 <code>tcsetattr</code>.
 
-<p>It's a bad idea to simply initialize a <code>struct termios</code> structure
+   <p>It's a bad idea to simply initialize a <code>struct termios</code> structure
 to a chosen set of attributes and pass it directly to <code>tcsetattr</code>. 
 Your program may be run years from now, on systems that support members
 not documented in this manual.  The way to avoid setting these members
 to unreasonable values is to avoid changing them.
 
-<p>What's more, different terminal devices may require different mode
+   <p>What's more, different terminal devices may require different mode
 settings in order to function properly.  So you should avoid blindly
 copying attributes from one terminal device to another.
 
-<p>When a member contains a collection of independent flags, as the
+   <p>When a member contains a collection of independent flags, as the
 <code>c_iflag</code>, <code>c_oflag</code> and <code>c_cflag</code> members do, even
 setting the entire member is a bad idea, because particular operating
 systems have their own flags.  Instead, you should start with the
 current value of the member and alter only the flags whose values matter
 in your program, leaving any other flags unchanged.
 
-<p>Here is an example of how to set one flag (<code>ISTRIP</code>) in the
+   <p>Here is an example of how to set one flag (<code>ISTRIP</code>) in the
 <code>struct termios</code> structure while properly preserving all the other
 data in the structure:
 
-<br><pre>int
-set_istrip (int desc, int value)
-{
-  struct termios settings;
-  int result;
+<pre class="smallexample">     int
+     set_istrip (int desc, int value)
+     {
+       struct termios settings;
+       int result;
+     
+       result = tcgetattr (desc, &amp;settings);
+       if (result &lt; 0)
+         {
+           perror ("error in tcgetattr");
+           return 0;
+         }
+       settings.c_iflag &amp;= ~ISTRIP;
+       if (value)
+         settings.c_iflag |= ISTRIP;
+       result = tcsetattr (desc, TCSANOW, &amp;settings);
+       if (result &lt; 0)
+         {
+           perror ("error in tcsetattr");
+           return 0;
+        }
+       return 1;
+     }
+     </pre>
 
-  result = tcgetattr (desc, &amp;settings);
-  if (result &lt; 0)
-    {
-      perror ("error in tcgetattr");
-      return 0;
-    }
-  settings.c_iflag &amp;= ~ISTRIP;
-  if (value)
-    settings.c_iflag |= ISTRIP;
-  result = tcsetattr (desc, TCSANOW, &amp;settings);
-  if (result &lt; 0)
-    {
-      perror ("error in tcgetattr");
-      return;
-   }
-  return 1;
-}
-</pre>
-
-</body></html>
+   </body></html>
 

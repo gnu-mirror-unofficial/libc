@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Socket-Level%20Options">Socket-Level Options</a>,
-Previous:<a rel=previous accesskey=p href="Socket-Option-Functions.html#Socket%20Option%20Functions">Socket Option Functions</a>,
-Up:<a rel=up accesskey=u href="Socket-Options.html#Socket%20Options">Socket Options</a>
+Node:&nbsp;<a name="Socket-Level%20Options">Socket-Level Options</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Socket-Option-Functions.html#Socket%20Option%20Functions">Socket Option Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Socket-Options.html#Socket%20Options">Socket Options</a>
 <hr><br>
+</div>
 
-<h4>Socket-Level Options</h4>
+<h3 class="subsection">Socket-Level Options</h4>
 
 <p>
 <table width="100%">
 <tr>
 <td align="left">int <b>SOL_SOCKET</b><i>
-</i></td>
+     </i></td>
 <td align="right">Constant</td>
 </tr>
 </table>
@@ -34,15 +44,15 @@ this section.
 <p>Here is a table of socket-level option names; all are defined in the
 header file <code>sys/socket.h</code>.
 
-<dl>
+     <dl>
 <dt><code>SO_DEBUG</code>
-<dd>
+     <dd>
 This option toggles recording of debugging information in the underlying
 protocol modules.  The value has type <code>int</code>; a nonzero value means
 "yes".
 
-<br><dt><code>SO_REUSEADDR</code>
-<dd>This option controls whether <code>bind</code> (see <a href="Setting-Address.html#Setting%20Address">Setting Address</a>)
+     <br><dt><code>SO_REUSEADDR</code>
+     <dd>This option controls whether <code>bind</code> (see <a href="Setting-Address.html#Setting%20Address">Setting Address</a>)
 should permit reuse of local addresses for this socket.  If you enable
 this option, you can actually have two sockets with the same Internet
 port number; but the system won't allow you to use the two
@@ -50,32 +60,32 @@ identically-named sockets in a way that would confuse the Internet.  The
 reason for this option is that some higher-level Internet protocols,
 including FTP, require you to keep reusing the same port number.
 
-<p>The value has type <code>int</code>; a nonzero value means "yes".
+     <p>The value has type <code>int</code>; a nonzero value means "yes".
 
-<br><dt><code>SO_KEEPALIVE</code>
-<dd>This option controls whether the underlying protocol should
+     <br><dt><code>SO_KEEPALIVE</code>
+     <dd>This option controls whether the underlying protocol should
 periodically transmit messages on a connected socket.  If the peer
 fails to respond to these messages, the connection is considered
 broken.  The value has type <code>int</code>; a nonzero value means
 "yes".
 
-<br><dt><code>SO_DONTROUTE</code>
-<dd>This option controls whether outgoing messages bypass the normal
+     <br><dt><code>SO_DONTROUTE</code>
+     <dd>This option controls whether outgoing messages bypass the normal
 message routing facilities.  If set, messages are sent directly to the
 network interface instead.  The value has type <code>int</code>; a nonzero
 value means "yes".
 
-<br><dt><code>SO_LINGER</code>
-<dd>This option specifies what should happen when the socket of a type
+     <br><dt><code>SO_LINGER</code>
+     <dd>This option specifies what should happen when the socket of a type
 that promises reliable delivery still has untransmitted messages when
 it is closed; see <a href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>.  The value has type
 <code>struct linger</code>.
 
-<p>
+     <p>
 <table width="100%">
 <tr>
 <td align="left"><b>struct linger</b><i>
-</i></td>
+          </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -83,50 +93,50 @@ it is closed; see <a href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a
 <tr><td>
 This structure type has the following members:
 
-<dl>
+               <dl>
 <dt><code>int l_onoff</code>
-<dd>This field is interpreted as a boolean.  If nonzero, <code>close</code>
+               <dd>This field is interpreted as a boolean.  If nonzero, <code>close</code>
 blocks until the data are transmitted or the timeout period has expired.
 
-<br><dt><code>int l_linger</code>
-<dd>This specifies the timeout period, in seconds. 
+               <br><dt><code>int l_linger</code>
+               <dd>This specifies the timeout period, in seconds. 
 </dl>
-</td></tr>
+          </td></tr>
 </table>
 
-<br><dt><code>SO_BROADCAST</code>
-<dd>This option controls whether datagrams may be broadcast from the socket. 
+     <br><dt><code>SO_BROADCAST</code>
+     <dd>This option controls whether datagrams may be broadcast from the socket. 
 The value has type <code>int</code>; a nonzero value means "yes".
 
-<br><dt><code>SO_OOBINLINE</code>
-<dd>If this option is set, out-of-band data received on the socket is
+     <br><dt><code>SO_OOBINLINE</code>
+     <dd>If this option is set, out-of-band data received on the socket is
 placed in the normal input queue.  This permits it to be read using
 <code>read</code> or <code>recv</code> without specifying the <code>MSG_OOB</code>
 flag.  See <a href="Out-of-Band-Data.html#Out-of-Band%20Data">Out-of-Band Data</a>.  The value has type <code>int</code>; a
 nonzero value means "yes".
 
-<br><dt><code>SO_SNDBUF</code>
-<dd>This option gets or sets the size of the output buffer.  The value is a
+     <br><dt><code>SO_SNDBUF</code>
+     <dd>This option gets or sets the size of the output buffer.  The value is a
 <code>size_t</code>, which is the size in bytes.
 
-<br><dt><code>SO_RCVBUF</code>
-<dd>This option gets or sets the size of the input buffer.  The value is a
+     <br><dt><code>SO_RCVBUF</code>
+     <dd>This option gets or sets the size of the input buffer.  The value is a
 <code>size_t</code>, which is the size in bytes.
 
-<br><dt><code>SO_STYLE</code>
-<dt><code>SO_TYPE</code>
-<dd>This option can be used with <code>getsockopt</code> only.  It is used to
+     <br><dt><code>SO_STYLE</code>
+     <dd><dt><code>SO_TYPE</code>
+     <dd>This option can be used with <code>getsockopt</code> only.  It is used to
 get the socket's communication style.  <code>SO_TYPE</code> is the
 historical name, and <code>SO_STYLE</code> is the preferred name in GNU. 
 The value has type <code>int</code> and its value designates a communication
 style; see <a href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>.
 
-<br><dt><code>SO_ERROR</code>
-<dd>
+     <br><dt><code>SO_ERROR</code>
+     <dd>
 This option can be used with <code>getsockopt</code> only.  It is used to reset
 the error status of the socket.  The value is an <code>int</code>, which represents
 the previous error status. 
 </dl>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="POSIX%20Regexp%20Compilation">POSIX Regexp Compilation</a>,
-Next:<a rel=next accesskey=n href="Flags-for-POSIX-Regexps.html#Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>,
-Up:<a rel=up accesskey=u href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
+Node:&nbsp;<a name="POSIX%20Regexp%20Compilation">POSIX Regexp Compilation</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Flags-for-POSIX-Regexps.html#Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
 <hr><br>
+</div>
 
-<h4>POSIX Regular Expression Compilation</h4>
+<h3 class="subsection">POSIX Regular Expression Compilation</h4>
 
 <p>Before you can actually match a regular expression, you must
 <dfn>compile</dfn> it.  This is not true compilation--it produces a special
@@ -22,13 +32,13 @@ compilation in that its purpose is to enable you to "execute" the
 pattern fast.  (See <a href="Matching-POSIX-Regexps.html#Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>, for how to use the
 compiled regular expression for matching.)
 
-<p>There is a special data type for compiled regular expressions:
+   <p>There is a special data type for compiled regular expressions:
 
 <p>
 <table width="100%">
 <tr>
 <td align="left"><b>regex_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -38,25 +48,25 @@ This type of object holds a compiled regular expression.
 It is actually a structure.  It has just one field that your programs
 should look at:
 
-<dl>
+          <dl>
 <dt><code>re_nsub</code>
-<dd>This field holds the number of parenthetical subexpressions in the
+          <dd>This field holds the number of parenthetical subexpressions in the
 regular expression that was compiled. 
 </dl>
 
-<p>There are several other fields, but we don't describe them here, because
+     <p>There are several other fields, but we don't describe them here, because
 only the functions in the library should use them. 
 </td></tr>
 </table>
 
-<p>After you create a <code>regex_t</code> object, you can compile a regular
+   <p>After you create a <code>regex_t</code> object, you can compile a regular
 expression into it by calling <code>regcomp</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>regcomp</b><i> (regex_t *<var>compiled</var>, const char *<var>pattern</var>, int <var>cflags</var>)
-</i></td>
+<td align="left">int <b>regcomp</b><i> </i>(<i>regex_t *</i><var>compiled</var><i>, const char *</i><var>pattern</var><i>, int </i><var>cflags</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -65,80 +75,80 @@ expression into it by calling <code>regcomp</code>.
 The function <code>regcomp</code> "compiles" a regular expression into a
 data structure that you can use with <code>regexec</code> to match against a
 string.  The compiled regular expression format is designed for
-efficient matching.  <code>regcomp</code> stores it into <code>*<var>compiled</var></code>.
+efficient matching.  <code>regcomp</code> stores it into <code>*</code><var>compiled</var><code></code>.
 
-<p>It's up to you to allocate an object of type <code>regex_t</code> and pass its
+     <p>It's up to you to allocate an object of type <code>regex_t</code> and pass its
 address to <code>regcomp</code>.
 
-<p>The argument <var>cflags</var> lets you specify various options that control
+     <p>The argument <var>cflags</var> lets you specify various options that control
 the syntax and semantics of regular expressions.  See <a href="Flags-for-POSIX-Regexps.html#Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>.
 
-<p>If you use the flag <code>REG_NOSUB</code>, then <code>regcomp</code> omits from
+     <p>If you use the flag <code>REG_NOSUB</code>, then <code>regcomp</code> omits from
 the compiled regular expression the information necessary to record
 how subexpressions actually match.  In this case, you might as well
 pass <code>0</code> for the <var>matchptr</var> and <var>nmatch</var> arguments when
 you call <code>regexec</code>.
 
-<p>If you don't use <code>REG_NOSUB</code>, then the compiled regular expression
+     <p>If you don't use <code>REG_NOSUB</code>, then the compiled regular expression
 does have the capacity to record how subexpressions match.  Also,
 <code>regcomp</code> tells you how many subexpressions <var>pattern</var> has, by
-storing the number in <code><var>compiled</var>-&gt;re_nsub</code>.  You can use that
+storing the number in <code></code><var>compiled</var><code>-&gt;re_nsub</code>.  You can use that
 value to decide how long an array to allocate to hold information about
 subexpression matches.
 
-<p><code>regcomp</code> returns <code>0</code> if it succeeds in compiling the regular
+     <p><code>regcomp</code> returns <code>0</code> if it succeeds in compiling the regular
 expression; otherwise, it returns a nonzero error code (see the table
 below).  You can use <code>regerror</code> to produce an error message string
 describing the reason for a nonzero value; see <a href="Regexp-Cleanup.html#Regexp%20Cleanup">Regexp Cleanup</a>.
 
-</td></tr>
+        </td></tr>
 </table>
 
-<p>Here are the possible nonzero values that <code>regcomp</code> can return:
+   <p>Here are the possible nonzero values that <code>regcomp</code> can return:
 
-<dl>
+     <dl>
 <dt><code>REG_BADBR</code>
-<dd>There was an invalid <code>\{<small>...</small>\}</code> construct in the regular
-expression.  A valid <code>\{<small>...</small>\}</code> construct must contain either
+     <dd>There was an invalid <code>\{...\}</code> construct in the regular
+expression.  A valid <code>\{...\}</code> construct must contain either
 a single number, or two numbers in increasing order separated by a
 comma.
 
-<br><dt><code>REG_BADPAT</code>
-<dd>There was a syntax error in the regular expression.
+     <br><dt><code>REG_BADPAT</code>
+     <dd>There was a syntax error in the regular expression.
 
-<br><dt><code>REG_BADRPT</code>
-<dd>A repetition operator such as <code>?</code> or <code>*</code> appeared in a bad
+     <br><dt><code>REG_BADRPT</code>
+     <dd>A repetition operator such as <code>?</code> or <code>*</code> appeared in a bad
 position (with no preceding subexpression to act on).
 
-<br><dt><code>REG_ECOLLATE</code>
-<dd>The regular expression referred to an invalid collating element (one not
+     <br><dt><code>REG_ECOLLATE</code>
+     <dd>The regular expression referred to an invalid collating element (one not
 defined in the current locale for string collation).  See <a href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>.
 
-<br><dt><code>REG_ECTYPE</code>
-<dd>The regular expression referred to an invalid character class name.
+     <br><dt><code>REG_ECTYPE</code>
+     <dd>The regular expression referred to an invalid character class name.
 
-<br><dt><code>REG_EESCAPE</code>
-<dd>The regular expression ended with <code>\</code>.
+     <br><dt><code>REG_EESCAPE</code>
+     <dd>The regular expression ended with <code>\</code>.
 
-<br><dt><code>REG_ESUBREG</code>
-<dd>There was an invalid number in the <code>\<var>digit</var></code> construct.
+     <br><dt><code>REG_ESUBREG</code>
+     <dd>There was an invalid number in the <code>\</code><var>digit</var><code></code> construct.
 
-<br><dt><code>REG_EBRACK</code>
-<dd>There were unbalanced square brackets in the regular expression.
+     <br><dt><code>REG_EBRACK</code>
+     <dd>There were unbalanced square brackets in the regular expression.
 
-<br><dt><code>REG_EPAREN</code>
-<dd>An extended regular expression had unbalanced parentheses,
+     <br><dt><code>REG_EPAREN</code>
+     <dd>An extended regular expression had unbalanced parentheses,
 or a basic regular expression had unbalanced <code>\(</code> and <code>\)</code>.
 
-<br><dt><code>REG_EBRACE</code>
-<dd>The regular expression had unbalanced <code>\{</code> and <code>\}</code>.
+     <br><dt><code>REG_EBRACE</code>
+     <dd>The regular expression had unbalanced <code>\{</code> and <code>\}</code>.
 
-<br><dt><code>REG_ERANGE</code>
-<dd>One of the endpoints in a range expression was invalid.
+     <br><dt><code>REG_ERANGE</code>
+     <dd>One of the endpoints in a range expression was invalid.
 
-<br><dt><code>REG_ESPACE</code>
-<dd><code>regcomp</code> ran out of memory. 
+     <br><dt><code>REG_ESPACE</code>
+     <dd><code>regcomp</code> ran out of memory. 
 </dl>
 
-</body></html>
+   </body></html>
 

@@ -2,97 +2,107 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Flags%20for%20Globbing">Flags for Globbing</a>,
-Next:<a rel=next accesskey=n href="More-Flags-for-Globbing.html#More%20Flags%20for%20Globbing">More Flags for Globbing</a>,
-Previous:<a rel=previous accesskey=p href="Calling-Glob.html#Calling%20Glob">Calling Glob</a>,
-Up:<a rel=up accesskey=u href="Globbing.html#Globbing">Globbing</a>
+Node:&nbsp;<a name="Flags%20for%20Globbing">Flags for Globbing</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="More-Flags-for-Globbing.html#More%20Flags%20for%20Globbing">More Flags for Globbing</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Calling-Glob.html#Calling%20Glob">Calling Glob</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Globbing.html#Globbing">Globbing</a>
 <hr><br>
+</div>
 
-<h4>Flags for Globbing</h4>
+<h3 class="subsection">Flags for Globbing</h4>
 
 <p>This section describes the flags that you can specify in the
 <var>flags</var> argument to <code>glob</code>.  Choose the flags you want,
 and combine them with the C bitwise OR operator <code>|</code>.
 
-<dl>
+     <dl>
 <dt><code>GLOB_APPEND</code>
-<dd>Append the words from this expansion to the vector of words produced by
+     <dd>Append the words from this expansion to the vector of words produced by
 previous calls to <code>glob</code>.  This way you can effectively expand
 several words as if they were concatenated with spaces between them.
 
-<p>In order for appending to work, you must not modify the contents of the
+     <p>In order for appending to work, you must not modify the contents of the
 word vector structure between calls to <code>glob</code>.  And, if you set
 <code>GLOB_DOOFFS</code> in the first call to <code>glob</code>, you must also
 set it when you append to the results.
 
-<p>Note that the pointer stored in <code>gl_pathv</code> may no longer be valid
+     <p>Note that the pointer stored in <code>gl_pathv</code> may no longer be valid
 after you call <code>glob</code> the second time, because <code>glob</code> might
 have relocated the vector.  So always fetch <code>gl_pathv</code> from the
 <code>glob_t</code> structure after each <code>glob</code> call; <strong>never</strong> save
 the pointer across calls.
 
-<br><dt><code>GLOB_DOOFFS</code>
-<dd>Leave blank slots at the beginning of the vector of words. 
+     <br><dt><code>GLOB_DOOFFS</code>
+     <dd>Leave blank slots at the beginning of the vector of words. 
 The <code>gl_offs</code> field says how many slots to leave. 
 The blank slots contain null pointers.
 
-<br><dt><code>GLOB_ERR</code>
-<dd>Give up right away and report an error if there is any difficulty
+     <br><dt><code>GLOB_ERR</code>
+     <dd>Give up right away and report an error if there is any difficulty
 reading the directories that must be read in order to expand <var>pattern</var>
 fully.  Such difficulties might include a directory in which you don't
 have the requisite access.  Normally, <code>glob</code> tries its best to keep
 on going despite any errors, reading whatever directories it can.
 
-<p>You can exercise even more control than this by specifying an
+     <p>You can exercise even more control than this by specifying an
 error-handler function <var>errfunc</var> when you call <code>glob</code>.  If
 <var>errfunc</var> is not a null pointer, then <code>glob</code> doesn't give up
 right away when it can't read a directory; instead, it calls
 <var>errfunc</var> with two arguments, like this:
 
-<br><pre>(*<var>errfunc</var>) (<var>filename</var>, <var>error-code</var>)
-</pre>
+     <pre class="smallexample">          (*<var>errfunc</var>) (<var>filename</var>, <var>error-code</var>)
+          </pre>
 
-<p>The argument <var>filename</var> is the name of the directory that
+     <p>The argument <var>filename</var> is the name of the directory that
 <code>glob</code> couldn't open or couldn't read, and <var>error-code</var> is the
 <code>errno</code> value that was reported to <code>glob</code>.
 
-<p>If the error handler function returns nonzero, then <code>glob</code> gives up
+     <p>If the error handler function returns nonzero, then <code>glob</code> gives up
 right away.  Otherwise, it continues.
 
-<br><dt><code>GLOB_MARK</code>
-<dd>If the pattern matches the name of a directory, append <code>/</code> to the
+     <br><dt><code>GLOB_MARK</code>
+     <dd>If the pattern matches the name of a directory, append <code>/</code> to the
 directory's name when returning it.
 
-<br><dt><code>GLOB_NOCHECK</code>
-<dd>If the pattern doesn't match any file names, return the pattern itself
+     <br><dt><code>GLOB_NOCHECK</code>
+     <dd>If the pattern doesn't match any file names, return the pattern itself
 as if it were a file name that had been matched.  (Normally, when the
 pattern doesn't match anything, <code>glob</code> returns that there were no
 matches.)
 
-<br><dt><code>GLOB_NOSORT</code>
-<dd>Don't sort the file names; return them in no particular order. 
+     <br><dt><code>GLOB_NOSORT</code>
+     <dd>Don't sort the file names; return them in no particular order. 
 (In practice, the order will depend on the order of the entries in
 the directory.)  The only reason <em>not</em> to sort is to save time.
 
-<br><dt><code>GLOB_NOESCAPE</code>
-<dd>Don't treat the <code>\</code> character specially in patterns.  Normally,
+     <br><dt><code>GLOB_NOESCAPE</code>
+     <dd>Don't treat the <code>\</code> character specially in patterns.  Normally,
 <code>\</code> quotes the following character, turning off its special meaning
 (if any) so that it matches only itself.  When quoting is enabled, the
 pattern <code>\?</code> matches only the string <code>?</code>, because the question
 mark in the pattern acts like an ordinary character.
 
-<p>If you use <code>GLOB_NOESCAPE</code>, then <code>\</code> is an ordinary character.
+     <p>If you use <code>GLOB_NOESCAPE</code>, then <code>\</code> is an ordinary character.
 
-<p><code>glob</code> does its work by calling the function <code>fnmatch</code>
+     <p><code>glob</code> does its work by calling the function <code>fnmatch</code>
 repeatedly.  It handles the flag <code>GLOB_NOESCAPE</code> by turning on the
 <code>FNM_NOESCAPE</code> flag in calls to <code>fnmatch</code>. 
 </dl>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="How%20Unread">How Unread</a>,
-Previous:<a rel=previous accesskey=p href="Unreading-Idea.html#Unreading%20Idea">Unreading Idea</a>,
-Up:<a rel=up accesskey=u href="Unreading.html#Unreading">Unreading</a>
+Node:&nbsp;<a name="How%20Unread">How Unread</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Unreading-Idea.html#Unreading%20Idea">Unreading Idea</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Unreading.html#Unreading">Unreading</a>
 <hr><br>
+</div>
 
-<h4>Using <code>ungetc</code> To Do Unreading</h4>
+<h3 class="subsection">Using <code>ungetc</code> To Do Unreading</h4>
 
 <p>The function to unread a character is called <code>ungetc</code>, because it
 reverses the action of <code>getc</code>.
@@ -21,8 +31,8 @@ reverses the action of <code>getc</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>ungetc</b><i> (int <var>c</var>, FILE *<var>stream</var>)
-</i></td>
+<td align="left">int <b>ungetc</b><i> </i>(<i>int </i><var>c</var><i>, FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -32,29 +42,30 @@ The <code>ungetc</code> function pushes back the character <var>c</var> onto the
 input stream <var>stream</var>.  So the next input from <var>stream</var> will
 read <var>c</var> before anything else.
 
-<p>If <var>c</var> is <code>EOF</code>, <code>ungetc</code> does nothing and just returns
+     <p>If <var>c</var> is <code>EOF</code>, <code>ungetc</code> does nothing and just returns
 <code>EOF</code>.  This lets you call <code>ungetc</code> with the return value of
 <code>getc</code> without needing to check for an error from <code>getc</code>.
 
-<p>The character that you push back doesn't have to be the same as the last
+     <p>The character that you push back doesn't have to be the same as the last
 character that was actually read from the stream.  In fact, it isn't
 necessary to actually read any characters from the stream before
-unreading them with <code>ungetc</code>!  But that is a strange way to write
-a program; usually <code>ungetc</code> is used only to unread a character
-that was just read from the same stream.
+unreading them with <code>ungetc</code>!  But that is a strange way to write a
+program; usually <code>ungetc</code> is used only to unread a character that
+was just read from the same stream.  The GNU C library supports this
+even on files opened in binary mode, but other systems might not.
 
-<p>The GNU C library only supports one character of pushback--in other
+     <p>The GNU C library only supports one character of pushback--in other
 words, it does not work to call <code>ungetc</code> twice without doing input
 in between.  Other systems might let you push back multiple characters;
 then reading from the stream retrieves the characters in the reverse
 order that they were pushed.
 
-<p>Pushing back characters doesn't alter the file; only the internal
+     <p>Pushing back characters doesn't alter the file; only the internal
 buffering for the stream is affected.  If a file positioning function
 (such as <code>fseek</code>, <code>fseeko</code> or <code>rewind</code>; see <a href="File-Positioning.html#File%20Positioning">File Positioning</a>) is called, any pending pushed-back characters are
 discarded.
 
-<p>Unreading a character on a stream that is at end of file clears the
+     <p>Unreading a character on a stream that is at end of file clears the
 end-of-file indicator for the stream, because it makes the character of
 input available.  After you read that character, trying to read again
 will encounter end of file. 
@@ -64,8 +75,8 @@ will encounter end of file.
 <p>
 <table width="100%">
 <tr>
-<td align="left">wint_t <b>ungetwc</b><i> (wint_t <var>wc</var>, FILE *<var>stream</var>)
-</i></td>
+<td align="left">wint_t <b>ungetwc</b><i> </i>(<i>wint_t </i><var>wc</var><i>, FILE *</i><var>stream</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -76,26 +87,26 @@ pushes back a wide character.
 </td></tr>
 </table>
 
-<p>Here is an example showing the use of <code>getc</code> and <code>ungetc</code> to
+   <p>Here is an example showing the use of <code>getc</code> and <code>ungetc</code> to
 skip over whitespace characters.  When this function reaches a
 non-whitespace character, it unreads that character to be seen again on
 the next read operation on the stream.
 
-<br><pre>#include &lt;stdio.h&gt;
-#include &lt;ctype.h&gt;
+<pre class="smallexample">     #include &lt;stdio.h&gt;
+     #include &lt;ctype.h&gt;
+     
+     void
+     skip_whitespace (FILE *stream)
+     {
+       int c;
+       do
+         /* No need to check for <code>EOF</code> because it is not
+            <code>isspace</code>, and <code>ungetc</code> ignores <code>EOF</code>.  */
+         c = getc (stream);
+       while (isspace (c));
+       ungetc (c, stream);
+     }
+     </pre>
 
-void
-skip_whitespace (FILE *stream)
-{
-  int c;
-  do
-    /* No need to check for <code>EOF</code> because it is not
-       <code>isspace</code>, and <code>ungetc</code> ignores <code>EOF</code>.  */
-    c = getc (stream);
-  while (isspace (c));
-  ungetc (c, stream);
-}
-</pre>
-
-</body></html>
+   </body></html>
 

@@ -2,44 +2,54 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Traditional%20Scheduling%20Functions">Traditional Scheduling Functions</a>,
-Previous:<a rel=previous accesskey=p href="Traditional-Scheduling-Intro.html#Traditional%20Scheduling%20Intro">Traditional Scheduling Intro</a>,
-Up:<a rel=up accesskey=u href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a>
+Node:&nbsp;<a name="Traditional%20Scheduling%20Functions">Traditional Scheduling Functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Traditional-Scheduling-Intro.html#Traditional%20Scheduling%20Intro">Traditional Scheduling Intro</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Traditional-Scheduling.html#Traditional%20Scheduling">Traditional Scheduling</a>
 <hr><br>
+</div>
 
-<h5>Functions For Traditional Scheduling</h5>
+<h3 class="subsubsection">Functions For Traditional Scheduling</h5>
 
 <p>This section describes how you can read and set the nice value of a
 process.  All these symbols are declared in <code>sys/resource.h</code>.
 
-<p>The function and macro names are defined by POSIX, and refer to
+   <p>The function and macro names are defined by POSIX, and refer to
 "priority," but the functions actually have to do with nice values, as
 the terms are used both in the manual and POSIX.
 
-<p>The range of valid nice values depends on the kernel, but typically it
+   <p>The range of valid nice values depends on the kernel, but typically it
 runs from <code>-20</code> to <code>20</code>.  A lower nice value corresponds to
 higher priority for the process.  These constants describe the range of
 priority values:
 
-<dl>
+     <dl>
 <dt><code>PRIO_MIN</code>
-<dd>The lowest valid nice value.
+     <dd>The lowest valid nice value.
 
-<br><dt><code>PRIO_MAX</code>
-<dd>The highest valid nice value. 
+     <br><dt><code>PRIO_MAX</code>
+     <dd>The highest valid nice value. 
 </dl>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpriority</b><i> (int <var>class</var>, int <var>id</var>)
-</i></td>
+<td align="left">int <b>getpriority</b><i> </i>(<i>int </i><var>class</var><i>, int </i><var>id</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,20 +60,20 @@ specify which ones (see below).  If the processes specified do not all
 have the same nice value, this returns the lowest value that any of them
 has.
 
-<p>On success, the return value is <code>0</code>.  Otherwise, it is <code>-1</code>
+     <p>On success, the return value is <code>0</code>.  Otherwise, it is <code>-1</code>
 and <code>ERRNO</code> is set accordingly.  The <code>errno</code> values specific
 to this function are:
 
-<dl>
+          <dl>
 <dt><code>ESRCH</code>
-<dd>The combination of <var>class</var> and <var>id</var> does not match any existing
+          <dd>The combination of <var>class</var> and <var>id</var> does not match any existing
 process.
 
-<br><dt><code>EINVAL</code>
-<dd>The value of <var>class</var> is not valid. 
+          <br><dt><code>EINVAL</code>
+          <dd>The value of <var>class</var> is not valid. 
 </dl>
 
-<p>If the return value is <code>-1</code>, it could indicate failure, or it could
+     <p>If the return value is <code>-1</code>, it could indicate failure, or it could
 be the nice value.  The only way to make certain is to set <code>errno =
 0</code> before calling <code>getpriority</code>, then use <code>errno != 0</code>
 afterward as the criterion for failure. 
@@ -73,8 +83,8 @@ afterward as the criterion for failure.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>setpriority</b><i> (int <var>class</var>, int <var>id</var>, int <var>niceval</var>)
-</i></td>
+<td align="left">int <b>setpriority</b><i> </i>(<i>int </i><var>class</var><i>, int </i><var>id</var><i>, int </i><var>niceval</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -83,57 +93,57 @@ afterward as the criterion for failure.
 Set the nice value of a set of processes to <var>niceval</var>; <var>class</var>
 and <var>id</var> specify which ones (see below).
 
-<p>The return value is <code>0</code> on success, and <code>-1</code> on
+     <p>The return value is <code>0</code> on success, and <code>-1</code> on
 failure.  The following <code>errno</code> error condition are possible for
 this function:
 
-<dl>
+          <dl>
 <dt><code>ESRCH</code>
-<dd>The combination of <var>class</var> and <var>id</var> does not match any existing
+          <dd>The combination of <var>class</var> and <var>id</var> does not match any existing
 process.
 
-<br><dt><code>EINVAL</code>
-<dd>The value of <var>class</var> is not valid.
+          <br><dt><code>EINVAL</code>
+          <dd>The value of <var>class</var> is not valid.
 
-<br><dt><code>EPERM</code>
-<dd>The call would set the nice value of a process which is owned by a different
+          <br><dt><code>EPERM</code>
+          <dd>The call would set the nice value of a process which is owned by a different
 user than the calling process (i.e. the target process' real or effective
 uid does not match the calling process' effective uid) and the calling
 process does not have <code>CAP_SYS_NICE</code> permission.
 
-<br><dt><code>EACCES</code>
-<dd>The call would lower the process' nice value and the process does not have
+          <br><dt><code>EACCES</code>
+          <dd>The call would lower the process' nice value and the process does not have
 <code>CAP_SYS_NICE</code> permission. 
 </dl>
 
-</td></tr>
+        </td></tr>
 </table>
 
-<p>The arguments <var>class</var> and <var>id</var> together specify a set of
+   <p>The arguments <var>class</var> and <var>id</var> together specify a set of
 processes in which you are interested.  These are the possible values of
 <var>class</var>:
 
-<dl>
+     <dl>
 <dt><code>PRIO_PROCESS</code>
-<dd>One particular process.  The argument <var>id</var> is a process ID (pid).
+     <dd>One particular process.  The argument <var>id</var> is a process ID (pid).
 
-<br><dt><code>PRIO_PGRP</code>
-<dd>All the processes in a particular process group.  The argument <var>id</var> is
+     <br><dt><code>PRIO_PGRP</code>
+     <dd>All the processes in a particular process group.  The argument <var>id</var> is
 a process group ID (pgid).
 
-<br><dt><code>PRIO_USER</code>
-<dd>All the processes owned by a particular user (i.e. whose real uid
+     <br><dt><code>PRIO_USER</code>
+     <dd>All the processes owned by a particular user (i.e. whose real uid
 indicates the user).  The argument <var>id</var> is a user ID (uid). 
 </dl>
 
-<p>If the argument <var>id</var> is 0, it stands for the calling process, its
+   <p>If the argument <var>id</var> is 0, it stands for the calling process, its
 process group, or its owner (real uid), according to <var>class</var>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>nice</b><i> (int <var>increment</var>)
-</i></td>
+<td align="left">int <b>nice</b><i> </i>(<i>int </i><var>increment</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -144,21 +154,21 @@ The return value is the new nice value on success, and <code>-1</code> on
 failure.  In the case of failure, <code>errno</code> will be set to the
 same values as for <code>setpriority</code>.
 
-<p>Here is an equivalent definition of <code>nice</code>:
+     <p>Here is an equivalent definition of <code>nice</code>:
 
-<br><pre>int
-nice (int increment)
-{
-  int result, old = getpriority (PRIO_PROCESS, 0);
-  result = setpriority (PRIO_PROCESS, 0, old + increment);
-  if (result != -1)
-      return old + increment;
-  else
-      return -1;
-}
-</pre>
-</td></tr>
+     <pre class="smallexample">          int
+          nice (int increment)
+          {
+            int result, old = getpriority (PRIO_PROCESS, 0);
+            result = setpriority (PRIO_PROCESS, 0, old + increment);
+            if (result != -1)
+                return old + increment;
+            else
+                return -1;
+          }
+          </pre>
+     </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

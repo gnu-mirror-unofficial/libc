@@ -2,53 +2,63 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="SVID%20Random">SVID Random</a>,
-Previous:<a rel=previous accesskey=p href="BSD-Random.html#BSD%20Random">BSD Random</a>,
-Up:<a rel=up accesskey=u href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>
+Node:&nbsp;<a name="SVID%20Random">SVID Random</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="BSD-Random.html#BSD%20Random">BSD Random</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>
 <hr><br>
+</div>
 
-<h4>SVID Random Number Function</h4>
+<h3 class="subsection">SVID Random Number Function</h4>
 
 <p>The C library on SVID systems contains yet another kind of random number
 generator functions.  They use a state of 48 bits of data.  The user can
 choose among a collection of functions which return the random bits
 in different forms.
 
-<p>Generally there are two kinds of function.  The first uses a state of
+   <p>Generally there are two kinds of function.  The first uses a state of
 the random number generator which is shared among several functions and
 by all threads of the process.  The second requires the user to handle
 the state.
 
-<p>All functions have in common that they use the same congruential
+   <p>All functions have in common that they use the same congruential
 formula with the same constants.  The formula is
 
-<br><pre>Y = (a * X + c) mod m
-</pre>
+<pre class="smallexample">     Y = (a * X + c) mod m
+     </pre>
 
 <p>where <var>X</var> is the state of the generator at the beginning and
 <var>Y</var> the state at the end.  <code>a</code> and <code>c</code> are constants
 determining the way the generator works.  By default they are
 
-<br><pre>a = 0x5DEECE66D = 25214903917
-c = 0xb = 11
-</pre>
+<pre class="smallexample">     a = 0x5DEECE66D = 25214903917
+     c = 0xb = 11
+     </pre>
 
 <p>but they can also be changed by the user.  <code>m</code> is of course 2^48
 since the state consists of a 48-bit array.
 
-<p>The prototypes for these functions are in <code>stdlib.h</code>.
+   <p>The prototypes for these functions are in <code>stdlib.h</code>.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>drand48</b><i> (void)
-</i></td>
+<td align="left">double <b>drand48</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -58,7 +68,7 @@ This function returns a <code>double</code> value in the range of <code>0.0</cod
 to <code>1.0</code> (exclusive).  The random bits are determined by the global
 state of the random number generator in the C library.
 
-<p>Since the <code>double</code> type according to IEEE&nbsp;754 has a 52-bit
+     <p>Since the <code>double</code> type according to IEEE&nbsp;754 has a 52-bit
 mantissa this means 4 bits are not initialized by the random number
 generator.  These are (of course) chosen to be the least significant
 bits and they are initialized to <code>0</code>. 
@@ -68,8 +78,8 @@ bits and they are initialized to <code>0</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">double <b>erand48</b><i> (unsigned short int <var>xsubi</var>[3])
-</i></td>
+<td align="left">double <b>erand48</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -79,7 +89,7 @@ This function returns a <code>double</code> value in the range of <code>0.0</cod
 to <code>1.0</code> (exclusive), similarly to <code>drand48</code>.  The argument is
 an array describing the state of the random number generator.
 
-<p>This function can be called subsequently since it updates the array to
+     <p>This function can be called subsequently since it updates the array to
 guarantee random numbers.  The array should have been initialized before
 initial use to obtain reproducible results. 
 </td></tr>
@@ -88,8 +98,8 @@ initial use to obtain reproducible results.
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>lrand48</b><i> (void)
-</i></td>
+<td align="left">long int <b>lrand48</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -106,8 +116,8 @@ generator in the C library.
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>nrand48</b><i> (unsigned short int <var>xsubi</var>[3])
-</i></td>
+<td align="left">long int <b>nrand48</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -118,7 +128,7 @@ returns a number in the range of <code>0</code> to <code>2^31</code> (exclusive)
 the state of the random number generator used to produce the random bits
 is determined by the array provided as the parameter to the function.
 
-<p>The numbers in the array are updated afterwards so that subsequent calls
+     <p>The numbers in the array are updated afterwards so that subsequent calls
 to this function yield different results (as is expected of a random
 number generator).  The array should have been initialized before the
 first call to obtain reproducible results. 
@@ -128,8 +138,8 @@ first call to obtain reproducible results.
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>mrand48</b><i> (void)
-</i></td>
+<td align="left">long int <b>mrand48</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -144,8 +154,8 @@ difference is that the numbers returned are in the range <code>-2^31</code> to
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>jrand48</b><i> (unsigned short int <var>xsubi</var>[3])
-</i></td>
+<td align="left">long int <b>jrand48</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -158,15 +168,15 @@ requirements are necessary.
 </td></tr>
 </table>
 
-<p>The internal state of the random number generator can be initialized in
+   <p>The internal state of the random number generator can be initialized in
 several ways.  The methods differ in the completeness of the
 information provided.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>srand48</b><i> (long int <var>seedval</var>)
-</i></td>
+<td align="left">void <b>srand48</b><i> </i>(<i>long int </i><var>seedval</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -178,11 +188,11 @@ significant 32 bits of the <var>seedval</var> parameter.  The lower 16 bits
 are initialized to the value <code>0x330E</code>.  Even if the <code>long
 int</code> type contains more than 32 bits only the lower 32 bits are used.
 
-<p>Owing to this limitation, initialization of the state of this
+     <p>Owing to this limitation, initialization of the state of this
 function is not very useful.  But it makes it easy to use a construct
 like <code>srand48 (time (0))</code>.
 
-<p>A side-effect of this function is that the values <code>a</code> and <code>c</code>
+     <p>A side-effect of this function is that the values <code>a</code> and <code>c</code>
 from the internal state, which are used in the congruential formula,
 are reset to the default values given above.  This is of importance once
 the user has called the <code>lcong48</code> function (see below). 
@@ -192,8 +202,8 @@ the user has called the <code>lcong48</code> function (see below).
 <p>
 <table width="100%">
 <tr>
-<td align="left">unsigned short int * <b>seed48</b><i> (unsigned short int <var>seed16v</var>[3])
-</i></td>
+<td align="left">unsigned short int * <b>seed48</b><i> </i>(<i>unsigned short int </i><var>seed16v</var><i></i>[<i>3</i>]<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -203,32 +213,32 @@ The <code>seed48</code> function initializes all 48 bits of the state of the
 internal random number generator from the contents of the parameter
 <var>seed16v</var>.  Here the lower 16 bits of the first element of
 <var>see16v</var> initialize the least significant 16 bits of the internal
-state, the lower 16 bits of <code><var>seed16v</var>[1]</code> initialize the mid-order
-16 bits of the state and the 16 lower bits of <code><var>seed16v</var>[2]</code>
+state, the lower 16 bits of <code></code><var>seed16v</var><code>[1]</code> initialize the mid-order
+16 bits of the state and the 16 lower bits of <code></code><var>seed16v</var><code>[2]</code>
 initialize the most significant 16 bits of the state.
 
-<p>Unlike <code>srand48</code> this function lets the user initialize all 48 bits
+     <p>Unlike <code>srand48</code> this function lets the user initialize all 48 bits
 of the state.
 
-<p>The value returned by <code>seed48</code> is a pointer to an array containing
+     <p>The value returned by <code>seed48</code> is a pointer to an array containing
 the values of the internal state before the change.  This might be
 useful to restart the random number generator at a certain state. 
 Otherwise the value can simply be ignored.
 
-<p>As for <code>srand48</code>, the values <code>a</code> and <code>c</code> from the
+     <p>As for <code>srand48</code>, the values <code>a</code> and <code>c</code> from the
 congruential formula are reset to the default values. 
 </td></tr>
 </table>
 
-<p>There is one more function to initialize the random number generator
+   <p>There is one more function to initialize the random number generator
 which enables you to specify even more information by allowing you to
 change the parameters in the congruential formula.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>lcong48</b><i> (unsigned short int <var>param</var>[7])
-</i></td>
+<td align="left">void <b>lcong48</b><i> </i>(<i>unsigned short int </i><var>param</var><i></i>[<i>7</i>]<i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -239,36 +249,36 @@ of the random number generator.  Unlike <code>srand48</code> and
 <code>seed48</code>, this function also changes the constants in the
 congruential formula.
 
-<p>From the seven elements in the array <var>param</var> the least significant
-16 bits of the entries <code><var>param</var>[0]</code> to <code><var>param</var>[2]</code>
+     <p>From the seven elements in the array <var>param</var> the least significant
+16 bits of the entries <code></code><var>param</var><code>[0]</code> to <code></code><var>param</var><code>[2]</code>
 determine the initial state, the least significant 16 bits of
-<code><var>param</var>[3]</code> to <code><var>param</var>[5]</code> determine the 48 bit
-constant <code>a</code> and <code><var>param</var>[6]</code> determines the 16-bit value
+<code></code><var>param</var><code>[3]</code> to <code></code><var>param</var><code>[5]</code> determine the 48 bit
+constant <code>a</code> and <code></code><var>param</var><code>[6]</code> determines the 16-bit value
 <code>c</code>. 
 </td></tr>
 </table>
 
-<p>All the above functions have in common that they use the global
+   <p>All the above functions have in common that they use the global
 parameters for the congruential formula.  In multi-threaded programs it
 might sometimes be useful to have different parameters in different
 threads.  For this reason all the above functions have a counterpart
 which works on a description of the random number generator in the
 user-supplied buffer instead of the global state.
 
-<p>Please note that it is no problem if several threads use the global
+   <p>Please note that it is no problem if several threads use the global
 state if all threads use the functions which take a pointer to an array
 containing the state.  The random numbers are computed following the
 same loop but if the state in the array is different all threads will
 obtain an individual random number generator.
 
-<p>The user-supplied buffer must be of type <code>struct drand48_data</code>. 
+   <p>The user-supplied buffer must be of type <code>struct drand48_data</code>. 
 This type should be regarded as opaque and not manipulated directly.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>drand48_r</b><i> (struct drand48_data *<var>buffer</var>, double *<var>result</var>)
-</i></td>
+<td align="left">int <b>drand48_r</b><i> </i>(<i>struct drand48_data *</i><var>buffer</var><i>, double *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -280,11 +290,11 @@ parameters but instead the parameters in the buffer supplied through the
 pointer <var>buffer</var>.  The random number is returned in the variable
 pointed to by <var>result</var>.
 
-<p>The return value of the function indicates whether the call succeeded. 
+     <p>The return value of the function indicates whether the call succeeded. 
 If the value is less than <code>0</code> an error occurred and <var>errno</var> is
 set to indicate the problem.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -292,8 +302,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>erand48_r</b><i> (unsigned short int <var>xsubi</var>[3], struct drand48_data *<var>buffer</var>, double *<var>result</var>)
-</i></td>
+<td align="left">int <b>erand48_r</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i>, struct drand48_data *</i><var>buffer</var><i>, double *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -306,9 +316,9 @@ generator.  The state of the random number generator is taken from the
 global random number generator data.  The random number is returned in
 the variable pointed to by <var>result</var>.
 
-<p>The return value is non-negative if the call succeeded.
+     <p>The return value is non-negative if the call succeeded.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -316,8 +326,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>lrand48_r</b><i> (struct drand48_data *<var>buffer</var>, double *<var>result</var>)
-</i></td>
+<td align="left">int <b>lrand48_r</b><i> </i>(<i>struct drand48_data *</i><var>buffer</var><i>, double *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -327,10 +337,10 @@ This function is similar to <code>lrand48</code>, but in addition it takes a
 pointer to a buffer describing the state of the random number generator
 just like <code>drand48</code>.
 
-<p>If the return value of the function is non-negative the variable pointed
+     <p>If the return value of the function is non-negative the variable pointed
 to by <var>result</var> contains the result.  Otherwise an error occurred.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -338,8 +348,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>nrand48_r</b><i> (unsigned short int <var>xsubi</var>[3], struct drand48_data *<var>buffer</var>, long int *<var>result</var>)
-</i></td>
+<td align="left">int <b>nrand48_r</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i>, struct drand48_data *</i><var>buffer</var><i>, long int *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -351,10 +361,10 @@ of using the global parameters for the congruential formula it uses the
 information from the buffer pointed to by <var>buffer</var>.  The state is
 described by the values in <var>xsubi</var>.
 
-<p>If the return value is non-negative the variable pointed to by
+     <p>If the return value is non-negative the variable pointed to by
 <var>result</var> contains the result.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -362,8 +372,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>mrand48_r</b><i> (struct drand48_data *<var>buffer</var>, double *<var>result</var>)
-</i></td>
+<td align="left">int <b>mrand48_r</b><i> </i>(<i>struct drand48_data *</i><var>buffer</var><i>, double *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -373,10 +383,10 @@ This function is similar to <code>mrand48</code> but like the other reentrant
 functions it uses the random number generator described by the value in
 the buffer pointed to by <var>buffer</var>.
 
-<p>If the return value is non-negative the variable pointed to by
+     <p>If the return value is non-negative the variable pointed to by
 <var>result</var> contains the result.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -384,8 +394,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>jrand48_r</b><i> (unsigned short int <var>xsubi</var>[3], struct drand48_data *<var>buffer</var>, long int *<var>result</var>)
-</i></td>
+<td align="left">int <b>jrand48_r</b><i> </i>(<i>unsigned short int </i><var>xsubi</var><i></i>[<i>3</i>]<i>, struct drand48_data *</i><var>buffer</var><i>, long int *</i><var>result</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -396,26 +406,26 @@ other reentrant functions of this function family it uses the
 congruential formula parameters from the buffer pointed to by
 <var>buffer</var>.
 
-<p>If the return value is non-negative the variable pointed to by
+     <p>If the return value is non-negative the variable pointed to by
 <var>result</var> contains the result.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
 
-<p>Before any of the above functions are used the buffer of type
+   <p>Before any of the above functions are used the buffer of type
 <code>struct drand48_data</code> should be initialized.  The easiest way to do
 this is to fill the whole buffer with null bytes, e.g. by
 
-<br><pre>memset (buffer, '\0', sizeof (struct drand48_data));
-</pre>
+<pre class="smallexample">     memset (buffer, '\0', sizeof (struct drand48_data));
+     </pre>
 
 <p>Using any of the reentrant functions of this family now will
 automatically initialize the random number generator to the default
 values for the state and the parameters of the congruential formula.
 
-<p>The other possibility is to use any of the functions which explicitly
+   <p>The other possibility is to use any of the functions which explicitly
 initialize the buffer.  Though it might be obvious how to initialize the
 buffer from looking at the parameter to the function, it is highly
 recommended to use these functions since the result might not always be
@@ -424,8 +434,8 @@ what you expect.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>srand48_r</b><i> (long int <var>seedval</var>, struct drand48_data *<var>buffer</var>)
-</i></td>
+<td align="left">int <b>srand48_r</b><i> </i>(<i>long int </i><var>seedval</var><i>, struct drand48_data *</i><var>buffer</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -437,9 +447,9 @@ information in <var>buffer</var> is initialized similarly to what the function
 <var>seedval</var> and the parameters for the congruential formula are
 initialized to their default values.
 
-<p>If the return value is non-negative the function call succeeded.
+     <p>If the return value is non-negative the function call succeeded.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -447,8 +457,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>seed48_r</b><i> (unsigned short int <var>seed16v</var>[3], struct drand48_data *<var>buffer</var>)
-</i></td>
+<td align="left">int <b>seed48_r</b><i> </i>(<i>unsigned short int </i><var>seed16v</var><i></i>[<i>3</i>]<i>, struct drand48_data *</i><var>buffer</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -457,13 +467,13 @@ programs.
 This function is similar to <code>srand48_r</code> but like <code>seed48</code> it
 initializes all 48 bits of the state from the parameter <var>seed16v</var>.
 
-<p>If the return value is non-negative the function call succeeded.  It
+     <p>If the return value is non-negative the function call succeeded.  It
 does not return a pointer to the previous state of the random number
 generator like the <code>seed48</code> function does.  If the user wants to
 preserve the state for a later re-run s/he can copy the whole buffer
 pointed to by <var>buffer</var>.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
@@ -471,8 +481,8 @@ programs.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>lcong48_r</b><i> (unsigned short int <var>param</var>[7], struct drand48_data *<var>buffer</var>)
-</i></td>
+<td align="left">int <b>lcong48_r</b><i> </i>(<i>unsigned short int </i><var>param</var><i></i>[<i>7</i>]<i>, struct drand48_data *</i><var>buffer</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -485,12 +495,12 @@ contents of <var>param</var> and <var>buffer</var>.  More work is required and
 therefore it is important to use this function rather than initializing
 the random number generator directly.
 
-<p>If the return value is non-negative the function call succeeded.
+     <p>If the return value is non-negative the function call succeeded.
 
-<p>This function is a GNU extension and should not be used in portable
+     <p>This function is a GNU extension and should not be used in portable
 programs. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Query%20Memory%20Parameters">Query Memory Parameters</a>,
-Previous:<a rel=previous accesskey=p href="Memory-Subsystem.html#Memory%20Subsystem">Memory Subsystem</a>,
-Up:<a rel=up accesskey=u href="Memory-Resources.html#Memory%20Resources">Memory Resources</a>
+Node:&nbsp;<a name="Query%20Memory%20Parameters">Query Memory Parameters</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Memory-Subsystem.html#Memory%20Subsystem">Memory Subsystem</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Memory-Resources.html#Memory%20Resources">Memory Resources</a>
 <hr><br>
+</div>
 
-<h4>How to get information about the memory subsystem?</h4>
+<h3 class="subsection">How to get information about the memory subsystem?</h4>
 
 <p>The page size of the virtual memory the process sees is essential to
 know in several situations.  Some programming interface (e.g.,
@@ -31,22 +41,22 @@ this optimization it is necessary to know a bit about the memory
 allocator which will require a bit of memory itself for each block and
 this overhead must not push the total size over the page size multiple.
 
-<p>The page size traditionally was a compile time constant.  But recent
+   <p>The page size traditionally was a compile time constant.  But recent
 development of processors changed this.  Processors now support
 different page sizes and they can possibly even vary among different
 processes on the same system.  Therefore the system should be queried at
 runtime about the current page size and no assumptions (except about it
 being a power of two) should be made.
 
-<p>The correct interface to query about the page size is <code>sysconf</code>
+   <p>The correct interface to query about the page size is <code>sysconf</code>
 (see <a href="Sysconf-Definition.html#Sysconf%20Definition">Sysconf Definition</a>) with the parameter <code>_SC_PAGESIZE</code>. 
 There is a much older interface available, too.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>getpagesize</b><i> (void)
-</i></td>
+<td align="left">int <b>getpagesize</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -56,24 +66,24 @@ The <code>getpagesize</code> function returns the page size of the process.
 This value is fixed for the runtime of the process but can vary in
 different runs of the application.
 
-<p>The function is declared in <code>unistd.h</code>. 
+     <p>The function is declared in <code>unistd.h</code>. 
 </td></tr>
 </table>
 
-<p>Widely available on System&nbsp;V derived systems is a method to get
+   <p>Widely available on System&nbsp;V derived systems is a method to get
 information about the physical memory the system has.  The call
 
-<br><pre>  sysconf (_SC_PHYS_PAGES)
-</pre>
+<pre class="smallexample">       sysconf (_SC_PHYS_PAGES)
+     </pre>
 
 <p>returns the total number of pages of physical the system has. 
 This does not mean all this memory is available.  This information can
 be found using
 
-<br><pre>  sysconf (_SC_AVPHYS_PAGES)
-</pre>
+<pre class="smallexample">       sysconf (_SC_AVPHYS_PAGES)
+     </pre>
 
-<p>These two values help to optimize applications.  The value returned for
+   <p>These two values help to optimize applications.  The value returned for
 <code>_SC_AVPHYS_PAGES</code> is the amount of memory the application can use
 without hindering any other process (given that no other process
 increases its memory usage).  The value returned for
@@ -81,7 +91,7 @@ increases its memory usage).  The value returned for
 If all applications together constantly use more than that amount of
 memory the system is in trouble.
 
-<p>The GNU C library provides in addition to these already described way to
+   <p>The GNU C library provides in addition to these already described way to
 get this information two functions.  They are declared in the file
 <code>sys/sysinfo.h</code>.  Programmers should prefer to use the
 <code>sysconf</code> method described above.
@@ -89,8 +99,8 @@ get this information two functions.  They are declared in the file
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>get_phys_pages</b><i> (void)
-</i></td>
+<td align="left">long int <b>get_phys_pages</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -100,15 +110,15 @@ The <code>get_phys_pages</code> function returns the total number of pages of
 physical the system has.  To get the amount of memory this number has to
 be multiplied by the page size.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">long int <b>get_avphys_pages</b><i> (void)
-</i></td>
+<td align="left">long int <b>get_avphys_pages</b><i> </i>(<i>void</i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -118,9 +128,9 @@ The <code>get_phys_pages</code> function returns the number of available pages o
 physical the system has.  To get the amount of memory this number has to
 be multiplied by the page size.
 
-<p>This function is a GNU extension. 
+     <p>This function is a GNU extension. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

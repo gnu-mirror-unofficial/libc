@@ -2,24 +2,34 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Calling%20Wordexp">Calling Wordexp</a>,
-Next:<a rel=next accesskey=n href="Flags-for-Wordexp.html#Flags%20for%20Wordexp">Flags for Wordexp</a>,
-Previous:<a rel=previous accesskey=p href="Expansion-Stages.html#Expansion%20Stages">Expansion Stages</a>,
-Up:<a rel=up accesskey=u href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
+Node:&nbsp;<a name="Calling%20Wordexp">Calling Wordexp</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Flags-for-Wordexp.html#Flags%20for%20Wordexp">Flags for Wordexp</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Expansion-Stages.html#Expansion%20Stages">Expansion Stages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
 <hr><br>
+</div>
 
-<h4>Calling <code>wordexp</code></h4>
+<h3 class="subsection">Calling <code>wordexp</code></h4>
 
 <p>All the functions, constants and data types for word expansion are
 declared in the header file <code>wordexp.h</code>.
 
-<p>Word expansion produces a vector of words (strings).  To return this
+   <p>Word expansion produces a vector of words (strings).  To return this
 vector, <code>wordexp</code> uses a special data type, <code>wordexp_t</code>, which
 is a structure.  You pass <code>wordexp</code> the address of the structure,
 and it fills in the structure's fields to tell you about the results.
@@ -28,7 +38,7 @@ and it fills in the structure's fields to tell you about the results.
 <table width="100%">
 <tr>
 <td align="left"><b>wordexp_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -37,35 +47,35 @@ and it fills in the structure's fields to tell you about the results.
 This data type holds a pointer to a word vector.  More precisely, it
 records both the address of the word vector and its size.
 
-<dl>
+          <dl>
 <dt><code>we_wordc</code>
-<dd>The number of elements in the vector.
+          <dd>The number of elements in the vector.
 
-<br><dt><code>we_wordv</code>
-<dd>The address of the vector.  This field has type <code>char&nbsp;**</code>.
+          <br><dt><code>we_wordv</code>
+          <dd>The address of the vector.  This field has type <code>char&nbsp;**</code>.
 
-<br><dt><code>we_offs</code>
-<dd>The offset of the first real element of the vector, from its nominal
+          <br><dt><code>we_offs</code>
+          <dd>The offset of the first real element of the vector, from its nominal
 address in the <code>we_wordv</code> field.  Unlike the other fields, this
 is always an input to <code>wordexp</code>, rather than an output from it.
 
-<p>If you use a nonzero offset, then that many elements at the beginning of
+          <p>If you use a nonzero offset, then that many elements at the beginning of
 the vector are left empty.  (The <code>wordexp</code> function fills them with
 null pointers.)
 
-<p>The <code>we_offs</code> field is meaningful only if you use the
+          <p>The <code>we_offs</code> field is meaningful only if you use the
 <code>WRDE_DOOFFS</code> flag.  Otherwise, the offset is always zero
 regardless of what is in this field, and the first real element comes at
 the beginning of the vector. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>wordexp</b><i> (const char *<var>words</var>, wordexp_t *<var>word-vector-ptr</var>, int <var>flags</var>)
-</i></td>
+<td align="left">int <b>wordexp</b><i> </i>(<i>const char *</i><var>words</var><i>, wordexp_t *</i><var>word-vector-ptr</var><i>, int </i><var>flags</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -73,71 +83,71 @@ the beginning of the vector.
 <tr><td>
 Perform word expansion on the string <var>words</var>, putting the result in
 a newly allocated vector, and store the size and address of this vector
-into <code>*<var>word-vector-ptr</var></code>.  The argument <var>flags</var> is a
+into <code>*</code><var>word-vector-ptr</var><code></code>.  The argument <var>flags</var> is a
 combination of bit flags; see <a href="Flags-for-Wordexp.html#Flags%20for%20Wordexp">Flags for Wordexp</a>, for details of
 the flags.
 
-<p>You shouldn't use any of the characters <code>|&amp;;&lt;&gt;</code> in the string
+     <p>You shouldn't use any of the characters <code>|&amp;;&lt;&gt;</code> in the string
 <var>words</var> unless they are quoted; likewise for newline.  If you use
 these characters unquoted, you will get the <code>WRDE_BADCHAR</code> error
 code.  Don't use parentheses or braces unless they are quoted or part of
 a word expansion construct.  If you use quotation characters <code>'"`</code>,
 they should come in pairs that balance.
 
-<p>The results of word expansion are a sequence of words.  The function
+     <p>The results of word expansion are a sequence of words.  The function
 <code>wordexp</code> allocates a string for each resulting word, then
 allocates a vector of type <code>char **</code> to store the addresses of
 these strings.  The last element of the vector is a null pointer. 
 This vector is called the <dfn>word vector</dfn>.
 
-<p>To return this vector, <code>wordexp</code> stores both its address and its
+     <p>To return this vector, <code>wordexp</code> stores both its address and its
 length (number of elements, not counting the terminating null pointer)
-into <code>*<var>word-vector-ptr</var></code>.
+into <code>*</code><var>word-vector-ptr</var><code></code>.
 
-<p>If <code>wordexp</code> succeeds, it returns 0.  Otherwise, it returns one
+     <p>If <code>wordexp</code> succeeds, it returns 0.  Otherwise, it returns one
 of these error codes:
 
-<dl>
+          <dl>
 <dt><code>WRDE_BADCHAR</code>
-<dd>The input string <var>words</var> contains an unquoted invalid character such
+          <dd>The input string <var>words</var> contains an unquoted invalid character such
 as <code>|</code>.
 
-<br><dt><code>WRDE_BADVAL</code>
-<dd>The input string refers to an undefined shell variable, and you used the flag
+          <br><dt><code>WRDE_BADVAL</code>
+          <dd>The input string refers to an undefined shell variable, and you used the flag
 <code>WRDE_UNDEF</code> to forbid such references.
 
-<br><dt><code>WRDE_CMDSUB</code>
-<dd>The input string uses command substitution, and you used the flag
+          <br><dt><code>WRDE_CMDSUB</code>
+          <dd>The input string uses command substitution, and you used the flag
 <code>WRDE_NOCMD</code> to forbid command substitution.
 
-<br><dt><code>WRDE_NOSPACE</code>
-<dd>It was impossible to allocate memory to hold the result.  In this case,
+          <br><dt><code>WRDE_NOSPACE</code>
+          <dd>It was impossible to allocate memory to hold the result.  In this case,
 <code>wordexp</code> can store part of the results--as much as it could
 allocate room for.
 
-<br><dt><code>WRDE_SYNTAX</code>
-<dd>There was a syntax error in the input string.  For example, an unmatched
+          <br><dt><code>WRDE_SYNTAX</code>
+          <dd>There was a syntax error in the input string.  For example, an unmatched
 quoting character is a syntax error. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>wordfree</b><i> (wordexp_t *<var>word-vector-ptr</var>)
-</i></td>
+<td align="left">void <b>wordfree</b><i> </i>(<i>wordexp_t *</i><var>word-vector-ptr</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 Free the storage used for the word-strings and vector that
-<code>*<var>word-vector-ptr</var></code> points to.  This does not free the
-structure <code>*<var>word-vector-ptr</var></code> itself--only the other
+<code>*</code><var>word-vector-ptr</var><code></code> points to.  This does not free the
+structure <code>*</code><var>word-vector-ptr</var><code></code> itself--only the other
 data it points to. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

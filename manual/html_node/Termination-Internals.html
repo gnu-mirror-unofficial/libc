@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Termination%20Internals">Termination Internals</a>,
-Previous:<a rel=previous accesskey=p href="Aborting-a-Program.html#Aborting%20a%20Program">Aborting a Program</a>,
-Up:<a rel=up accesskey=u href="Program-Termination.html#Program%20Termination">Program Termination</a>
+Node:&nbsp;<a name="Termination%20Internals">Termination Internals</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Aborting-a-Program.html#Aborting%20a%20Program">Aborting a Program</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Program-Termination.html#Program%20Termination">Program Termination</a>
 <hr><br>
+</div>
 
-<h4>Termination Internals</h4>
+<h3 class="subsection">Termination Internals</h4>
 
 <p>The <code>_exit</code> function is the primitive used for process termination
 by <code>exit</code>.  It is declared in the header file <code>unistd.h</code>.
@@ -21,8 +31,8 @@ by <code>exit</code>.  It is declared in the header file <code>unistd.h</code>.
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>_exit</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">void <b>_exit</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -38,8 +48,8 @@ execute cleanup functions registered with <code>atexit</code> or
 <p>
 <table width="100%">
 <tr>
-<td align="left">void <b>_Exit</b><i> (int <var>status</var>)
-</i></td>
+<td align="left">void <b>_Exit</b><i> </i>(<i>int </i><var>status</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -50,41 +60,41 @@ The ISO&nbsp;C committee members were not sure whether the definitions of
 <code>_exit</code> and <code>_Exit</code> were compatible so they have not used the
 POSIX name.
 
-<p>This function was introduced in ISO&nbsp;C99 and is declared in
+     <p>This function was introduced in ISO&nbsp;C99 and is declared in
 <code>stdlib.h</code>. 
 </td></tr>
 </table>
 
-<p>When a process terminates for any reason--either because the program
+   <p>When a process terminates for any reason--either because the program
 terminates, or as a result of a signal--the
 following things happen:
 
-<ul>
+     <ul>
 <li>All open file descriptors in the process are closed.  See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>. 
 Note that streams are not flushed automatically when the process
 terminates; see <a href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>.
 
-<li>A process exit status is saved to be reported back to the parent process
+     <li>A process exit status is saved to be reported back to the parent process
 via <code>wait</code> or <code>waitpid</code>; see <a href="Process-Completion.html#Process%20Completion">Process Completion</a>.  If the
 program exited, this status includes as its low-order 8 bits the program
 exit status.
 
-<li>Any child processes of the process being terminated are assigned a new
+     <li>Any child processes of the process being terminated are assigned a new
 parent process.  (On most systems, including GNU, this is the <code>init</code>
 process, with process ID 1.)
 
-<li>A <code>SIGCHLD</code> signal is sent to the parent process.
+     <li>A <code>SIGCHLD</code> signal is sent to the parent process.
 
-<li>If the process is a session leader that has a controlling terminal, then
+     <li>If the process is a session leader that has a controlling terminal, then
 a <code>SIGHUP</code> signal is sent to each process in the foreground job,
 and the controlling terminal is disassociated from that session. 
 See <a href="Job-Control.html#Job%20Control">Job Control</a>.
 
-<li>If termination of a process causes a process group to become orphaned,
+     <li>If termination of a process causes a process group to become orphaned,
 and any member of that process group is stopped, then a <code>SIGHUP</code>
 signal and a <code>SIGCONT</code> signal are sent to each process in the
 group.  See <a href="Job-Control.html#Job%20Control">Job Control</a>. 
 </ul>
 
-</body></html>
+   </body></html>
 

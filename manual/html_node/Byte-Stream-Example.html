@@ -2,90 +2,100 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Byte%20Stream%20Example">Byte Stream Example</a>,
-Next:<a rel=next accesskey=n href="Server-Example.html#Server%20Example">Server Example</a>,
-Previous:<a rel=previous accesskey=p href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>,
-Up:<a rel=up accesskey=u href="Connections.html#Connections">Connections</a>
+Node:&nbsp;<a name="Byte%20Stream%20Example">Byte Stream Example</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Server-Example.html#Server%20Example">Server Example</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Connections.html#Connections">Connections</a>
 <hr><br>
+</div>
 
-<h4>Byte Stream Socket Example</h4>
+<h3 class="subsection">Byte Stream Socket Example</h4>
 
 <p>Here is an example client program that makes a connection for a byte
 stream socket in the Internet namespace.  It doesn't do anything
 particularly interesting once it has connected to the server; it just
 sends a text string to the server and exits.
 
-<p>This program uses <code>init_sockaddr</code> to set up the socket address; see
+   <p>This program uses <code>init_sockaddr</code> to set up the socket address; see
 <a href="Inet-Example.html#Inet%20Example">Inet Example</a>.
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;stdio.h&gt;
-#include &lt;errno.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/types.h&gt;
-#include &lt;sys/socket.h&gt;
-#include &lt;netinet/in.h&gt;
-#include &lt;netdb.h&gt;
+     #include &lt;stdio.h&gt;
+     #include &lt;errno.h&gt;
+     #include &lt;stdlib.h&gt;
+     #include &lt;unistd.h&gt;
+     #include &lt;sys/types.h&gt;
+     #include &lt;sys/socket.h&gt;
+     #include &lt;netinet/in.h&gt;
+     #include &lt;netdb.h&gt;
+     
+     #define PORT            5555
+     #define MESSAGE         "Yow!!! Are we having fun yet?!?"
+     #define SERVERHOST      "mescaline.gnu.org"
+     
+     void
+     write_to_server (int filedes)
+     {
+       int nbytes;
+     
+       nbytes = write (filedes, MESSAGE, strlen (MESSAGE) + 1);
+       if (nbytes &lt; 0)
+         {
+           perror ("write");
+           exit (EXIT_FAILURE);
+         }
+     }
+     
+     
+     int
+     main (void)
+     {
+       extern void init_sockaddr (struct sockaddr_in *name,
+                                  const char *hostname,
+                                  uint16_t port);
+       int sock;
+       struct sockaddr_in servername;
+     
+       /* Create the socket. */
+       sock = socket (PF_INET, SOCK_STREAM, 0);
+       if (sock &lt; 0)
+         {
+           perror ("socket (client)");
+           exit (EXIT_FAILURE);
+         }
+     
+       /* Connect to the server. */
+       init_sockaddr (&amp;servername, SERVERHOST, PORT);
+       if (0 &gt; connect (sock,
+                        (struct sockaddr *) &amp;servername,
+                        sizeof (servername)))
+         {
+           perror ("connect (client)");
+           exit (EXIT_FAILURE);
+         }
+     
+       /* Send data to the server. */
+       write_to_server (sock);
+       close (sock);
+       exit (EXIT_SUCCESS);
+     }
+     </pre>
 
-#define PORT            5555
-#define MESSAGE         "Yow!!! Are we having fun yet?!?"
-#define SERVERHOST      "mescaline.gnu.org"
-
-void
-write_to_server (int filedes)
-{
-  int nbytes;
-
-  nbytes = write (filedes, MESSAGE, strlen (MESSAGE) + 1);
-  if (nbytes &lt; 0)
-    {
-      perror ("write");
-      exit (EXIT_FAILURE);
-    }
-}
-
-
-int
-main (void)
-{
-  extern void init_sockaddr (struct sockaddr_in *name,
-                             const char *hostname,
-                             uint16_t port);
-  int sock;
-  struct sockaddr_in servername;
-
-  /* Create the socket. */
-  sock = socket (PF_INET, SOCK_STREAM, 0);
-  if (sock &lt; 0)
-    {
-      perror ("socket (client)");
-      exit (EXIT_FAILURE);
-    }
-
-  /* Connect to the server. */
-  init_sockaddr (&amp;servername, SERVERHOST, PORT);
-  if (0 &gt; connect (sock,
-                   (struct sockaddr *) &amp;servername,
-                   sizeof (servername)))
-    {
-      perror ("connect (client)");
-      exit (EXIT_FAILURE);
-    }
-
-  /* Send data to the server. */
-  write_to_server (sock);
-  close (sock);
-  exit (EXIT_SUCCESS);
-}
-</pre>
-
-</body></html>
+   </body></html>
 

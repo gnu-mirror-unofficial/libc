@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>,
-Next:<a rel=next accesskey=n href="Missing-Pieces.html#Missing%20Pieces">Missing Pieces</a>,
-Previous:<a rel=previous accesskey=p href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>,
-Up:<a rel=up accesskey=u href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
+Node:&nbsp;<a name="Continuing%20Stopped%20Jobs">Continuing Stopped Jobs</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Missing-Pieces.html#Missing%20Pieces">Missing Pieces</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
 <hr><br>
+</div>
 
-<h4>Continuing Stopped Jobs</h4>
+<h3 class="subsection">Continuing Stopped Jobs</h4>
 
 <p>The shell can continue a stopped job by sending a <code>SIGCONT</code> signal
 to its process group.  If the job is being continued in the foreground,
@@ -23,7 +33,7 @@ the terminal, and restore the saved terminal settings.  After continuing
 a job in the foreground, the shell should wait for the job to stop or
 complete, as if the job had just been launched in the foreground.
 
-<p>The sample shell program handles both newly created and continued jobs
+   <p>The sample shell program handles both newly created and continued jobs
 with the same pair of functions, <code>put_job_in_foreground</code> and
 <code>put_job_in_background</code>.  The definitions of these functions
 were given in <a href="Foreground-and-Background.html#Foreground%20and%20Background">Foreground and Background</a>.  When continuing a
@@ -31,33 +41,33 @@ stopped job, a nonzero value is passed as the <var>cont</var> argument to
 ensure that the <code>SIGCONT</code> signal is sent and the terminal modes
 reset, as appropriate.
 
-<p>This leaves only a function for updating the shell's internal bookkeeping
+   <p>This leaves only a function for updating the shell's internal bookkeeping
 about the job being continued:
 
-<br><pre>/* Mark a stopped job J as being running again.  */
+<pre class="smallexample">     /* Mark a stopped job J as being running again.  */
+     
+     void
+     mark_job_as_running (job *j)
+     {
+       Process *p;
+     
+       for (p = j-&gt;first_process; p; p = p-&gt;next)
+         p-&gt;stopped = 0;
+       j-&gt;notified = 0;
+     }
+     
+     /* Continue the job J.  */
+     
+     void
+     continue_job (job *j, int foreground)
+     {
+       mark_job_as_running (j);
+       if (foreground)
+         put_job_in_foreground (j, 1);
+       else
+         put_job_in_background (j, 1);
+     }
+     </pre>
 
-void
-mark_job_as_running (job *j)
-{
-  Process *p;
-
-  for (p = j-&gt;first_process; p; p = p-&gt;next)
-    p-&gt;stopped = 0;
-  j-&gt;notified = 0;
-}
-
-/* Continue the job J.  */
-
-void
-continue_job (job *j, int foreground)
-{
-  mark_job_as_running (j);
-  if (foreground)
-    put_job_in_foreground (j, 1);
-  else
-    put_job_in_background (j, 1);
-}
-</pre>
-
-</body></html>
+   </body></html>
 

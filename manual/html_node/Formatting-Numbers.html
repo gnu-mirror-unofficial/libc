@@ -2,34 +2,44 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Formatting%20Numbers">Formatting Numbers</a>,
-Next:<a rel=next accesskey=n href="Yes-or-No-Questions.html#Yes-or-No%20Questions">Yes-or-No Questions</a>,
-Previous:<a rel=previous accesskey=p href="Locale-Information.html#Locale%20Information">Locale Information</a>,
-Up:<a rel=up accesskey=u href="Locales.html#Locales">Locales</a>
+Node:&nbsp;<a name="Formatting%20Numbers">Formatting Numbers</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Yes-or-No-Questions.html#Yes-or-No%20Questions">Yes-or-No Questions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Locale-Information.html#Locale%20Information">Locale Information</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Locales.html#Locales">Locales</a>
 <hr><br>
+</div>
 
-<h3>A dedicated function to format numbers</h3>
+<h3 class="section">A dedicated function to format numbers</h3>
 
 <p>We have seen that the structure returned by <code>localeconv</code> as well as
 the values given to <code>nl_langinfo</code> allow you to retrieve the various
 pieces of locale-specific information to format numbers and monetary
 amounts.  We have also seen that the underlying rules are quite complex.
 
-<p>Therefore the X/Open standards introduce a function which uses such
+   <p>Therefore the X/Open standards introduce a function which uses such
 locale information, making it easier for the user to format
 numbers according to these rules.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">ssize_t <b>strfmon</b><i> (char *<var>s</var>, size_t <var>maxsize</var>, const char *<var>format</var>, <small>...</small>)
-</i></td>
+<td align="left">ssize_t <b>strfmon</b><i> </i>(<i>char *</i><var>s</var><i>, size_t </i><var>maxsize</var><i>, const char *</i><var>format</var><i>, <small class="dots">...</small></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -41,7 +51,7 @@ and values to write into the buffer as text in a form specified
 by the format string.  Like <code>strftime</code>, the function
 also returns the number of bytes written into the buffer.
 
-<p>There are two differences: <code>strfmon</code> can take more than one
+     <p>There are two differences: <code>strfmon</code> can take more than one
 argument, and, of course, the format specification is different.  Like
 <code>strftime</code>, the format string consists of normal text, which is
 output as is, and format specifiers, which are indicated by a <code>%</code>. 
@@ -49,34 +59,34 @@ Immediately after the <code>%</code>, you can optionally specify various flags
 and formatting information before the main formatting character, in a
 similar way to <code>printf</code>:
 
-<ul>
+          <ul>
 <li>Immediately following the <code>%</code> there can be one or more of the
 following flags:
-<dl>
-<dt><code>=<var>f</var></code>
-<dd>The single byte character <var>f</var> is used for this field as the numeric
+               <dl>
+<dt><code>=</code><var>f</var><code></code>
+               <dd>The single byte character <var>f</var> is used for this field as the numeric
 fill character.  By default this character is a space character. 
 Filling with this character is only performed if a left precision
 is specified.  It is not just to fill to the given field width. 
 <br><dt><code>^</code>
-<dd>The number is printed without grouping the digits according to the rules
+               <dd>The number is printed without grouping the digits according to the rules
 of the current locale.  By default grouping is enabled. 
 <br><dt><code>+</code>, <code>(</code>
-<dd>At most one of these flags can be used.  They select which format to
+               <dd>At most one of these flags can be used.  They select which format to
 represent the sign of a currency amount.  By default, and if
 <code>+</code> is given, the locale equivalent of +/- is used.  If
 <code>(</code> is given, negative amounts are enclosed in parentheses.  The
 exact format is determined by the values of the <code>LC_MONETARY</code>
 category of the locale selected at program runtime. 
 <br><dt><code>!</code>
-<dd>The output will not contain the currency symbol. 
+               <dd>The output will not contain the currency symbol. 
 <br><dt><code>-</code>
-<dd>The output will be formatted left-justified instead of right-justified if
+               <dd>The output will be formatted left-justified instead of right-justified if
 it does not fill the entire field width. 
 </dl>
-</ul>
+          </ul>
 
-<p>The next part of a specification is an optional field width.  If no
+     <p>The next part of a specification is an optional field width.  If no
 width is specified 0 is taken.  During output, the function first
 determines how much space is required.  If it requires at least as many
 characters as given by the field width, it is output using as much space
@@ -86,7 +96,7 @@ filling with the space character.  The presence or absence of the
 present, the spaces are added at the right making the output
 left-justified, and vice versa.
 
-<p>So far the format looks familiar, being similar to the <code>printf</code> and
+     <p>So far the format looks familiar, being similar to the <code>printf</code> and
 <code>strftime</code> formats.  However, the next two optional fields
 introduce something new.  The first one is a <code>#</code> character followed
 by a decimal digit string.  The value of the digit string specifies the
@@ -99,7 +109,7 @@ default is a space.  For example, if the field width is selected as 6
 and the number is 123, the fill character is <code>*</code> the result
 will be <code>***123</code>.
 
-<p>The second optional field starts with a <code>.</code> (period) and consists
+     <p>The second optional field starts with a <code>.</code> (period) and consists
 of another decimal digit string.  Its value describes the number of
 characters printed after the decimal point.  The default is selected
 from the current locale (<code>frac_digits</code>, <code>int_frac_digits</code>, see
@@ -108,32 +118,32 @@ than given by the field width, the displayed value is rounded.  If the
 number of fractional digits is selected to be zero, no decimal point is
 printed.
 
-<p>As a GNU extension, the <code>strfmon</code> implementation in the GNU libc
+     <p>As a GNU extension, the <code>strfmon</code> implementation in the GNU libc
 allows an optional <code>L</code> next as a format modifier.  If this modifier
 is given, the argument is expected to be a <code>long double</code> instead of
 a <code>double</code> value.
 
-<p>Finally, the last component is a format specifier.  There are three
+     <p>Finally, the last component is a format specifier.  There are three
 specifiers defined:
 
-<dl>
+          <dl>
 <dt><code>i</code>
-<dd>Use the locale's rules for formatting an international currency value. 
+          <dd>Use the locale's rules for formatting an international currency value. 
 <br><dt><code>n</code>
-<dd>Use the locale's rules for formatting a national currency value. 
+          <dd>Use the locale's rules for formatting a national currency value. 
 <br><dt><code>%</code>
-<dd>Place a <code>%</code> in the output.  There must be no flag, width
+          <dd>Place a <code>%</code> in the output.  There must be no flag, width
 specifier or modifier given, only <code>%%</code> is allowed. 
 </dl>
 
-<p>As for <code>printf</code>, the function reads the format string
+     <p>As for <code>printf</code>, the function reads the format string
 from left to right and uses the values passed to the function following
 the format string.  The values are expected to be either of type
 <code>double</code> or <code>long double</code>, depending on the presence of the
 modifier <code>L</code>.  The result is stored in the buffer pointed to by
 <var>s</var>.  At most <var>maxsize</var> characters are stored.
 
-<p>The return value of the function is the number of characters stored in
+     <p>The return value of the function is the number of characters stored in
 <var>s</var>, including the terminating <code>NULL</code> byte.  If the number of
 characters stored would exceed <var>maxsize</var>, the function returns
 -1 and the content of the buffer <var>s</var> is unspecified.  In this
@@ -141,19 +151,19 @@ case <code>errno</code> is set to <code>E2BIG</code>.
 </td></tr>
 </table>
 
-<p>A few examples should make clear how the function works.  It is
+   <p>A few examples should make clear how the function works.  It is
 assumed that all the following pieces of code are executed in a program
 which uses the USA locale (<code>en_US</code>).  The simplest
 form of the format is this:
 
-<br><pre>strfmon (buf, 100, "@%n@%n@%n@", 123.45, -567.89, 12345.678);
-</pre>
+<pre class="smallexample">     strfmon (buf, 100, "@%n@%n@%n@", 123.45, -567.89, 12345.678);
+     </pre>
 
 <p>The output produced is
-<br><pre>"@$123.45@-$567.89@$12,345.68@"
-</pre>
+<pre class="smallexample">     "@$123.45@-$567.89@$12,345.68@"
+     </pre>
 
-<p>We can notice several things here.  First, the widths of the output
+   <p>We can notice several things here.  First, the widths of the output
 numbers are different.  We have not specified a width in the format
 string, and so this is no wonder.  Second, the third number is printed
 using thousands separators.  The thousands separator for the
@@ -163,15 +173,15 @@ precision and the default value in the locale is 2.  Finally,
 note that the national currency symbol is printed since <code>%n</code> was
 used, not <code>i</code>.  The next example shows how we can align the output.
 
-<br><pre>strfmon (buf, 100, "@%=*11n@%=*11n@%=*11n@", 123.45, -567.89, 12345.678);
-</pre>
+<pre class="smallexample">     strfmon (buf, 100, "@%=*11n@%=*11n@%=*11n@", 123.45, -567.89, 12345.678);
+     </pre>
 
 <p>The output this time is:
 
-<br><pre>"@    $123.45@   -$567.89@ $12,345.68@"
-</pre>
+<pre class="smallexample">     "@    $123.45@   -$567.89@ $12,345.68@"
+     </pre>
 
-<p>Two things stand out.  Firstly, all fields have the same width (eleven
+   <p>Two things stand out.  Firstly, all fields have the same width (eleven
 characters) since this is the width given in the format and since no
 number required more characters to be printed.  The second important
 point is that the fill character is not used.  This is correct since the
@@ -179,16 +189,16 @@ white space was not used to achieve a precision given by a <code>#</code>
 modifier, but instead to fill to the given width.  The difference
 becomes obvious if we now add a width specification.
 
-<br><pre>strfmon (buf, 100, "@%=*11#5n@%=*11#5n@%=*11#5n@",
-         123.45, -567.89, 12345.678);
-</pre>
+<pre class="smallexample">     strfmon (buf, 100, "@%=*11#5n@%=*11#5n@%=*11#5n@",
+              123.45, -567.89, 12345.678);
+     </pre>
 
 <p>The output is
 
-<br><pre>"@ $***123.45@-$***567.89@ $12,456.68@"
-</pre>
+<pre class="smallexample">     "@ $***123.45@-$***567.89@ $12,456.68@"
+     </pre>
 
-<p>Here we can see that all the currency symbols are now aligned, and that
+   <p>Here we can see that all the currency symbols are now aligned, and that
 the space between the currency sign and the number is filled with the
 selected fill character.  Note that although the width is selected to be
 5 and 123.45 has three digits left of the decimal point,
@@ -197,16 +207,16 @@ explained above, the width does not include the positions used to store
 thousands separators.  One last example should explain the remaining
 functionality.
 
-<br><pre>strfmon (buf, 100, "@%=0(16#5.3i@%=0(16#5.3i@%=0(16#5.3i@",
-         123.45, -567.89, 12345.678);
-</pre>
+<pre class="smallexample">     strfmon (buf, 100, "@%=0(16#5.3i@%=0(16#5.3i@%=0(16#5.3i@",
+              123.45, -567.89, 12345.678);
+     </pre>
 
 <p>This rather complex format string produces the following output:
 
-<br><pre>"@ USD 000123,450 @(USD 000567.890)@ USD 12,345.678 @"
-</pre>
+<pre class="smallexample">     "@ USD 000123,450 @(USD 000567.890)@ USD 12,345.678 @"
+     </pre>
 
-<p>The most noticeable change is the alternative way of representing
+   <p>The most noticeable change is the alternative way of representing
 negative numbers.  In financial circles this is often done using
 parentheses, and this is what the <code>(</code> flag selected.  The fill
 character is now <code>0</code>.  Note that this <code>0</code> character is not
@@ -219,5 +229,5 @@ decimal point is selected to be three, the first and second numbers are
 printed with an extra zero at the end and the third number is printed
 without rounding.
 
-</body></html>
+   </body></html>
 

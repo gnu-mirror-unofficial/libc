@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Access%20Modes">Access Modes</a>,
-Next:<a rel=next accesskey=n href="Open-time-Flags.html#Open-time%20Flags">Open-time Flags</a>,
-Up:<a rel=up accesskey=u href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>
+Node:&nbsp;<a name="Access%20Modes">Access Modes</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Open-time-Flags.html#Open-time%20Flags">Open-time Flags</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>
 <hr><br>
+</div>
 
-<h4>File Access Modes</h4>
+<h3 class="subsection">File Access Modes</h4>
 
 <p>The file access modes allow a file descriptor to be used for reading,
 writing, or both.  (In the GNU system, they can also allow none of these,
@@ -24,7 +34,7 @@ when the file is opened, and never change.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_RDONLY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -38,7 +48,7 @@ Open the file for read access.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_WRONLY</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -52,7 +62,7 @@ Open the file for write access.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_RDWR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -62,7 +72,7 @@ Open the file for both reading and writing.
 </td></tr>
 </table>
 
-<p>In the GNU system (and not in other systems), <code>O_RDONLY</code> and
+   <p>In the GNU system (and not in other systems), <code>O_RDONLY</code> and
 <code>O_WRONLY</code> are independent bits that can be bitwise-ORed together,
 and it is valid for either bit to be set or clear.  This means that
 <code>O_RDWR</code> is the same as <code>O_RDONLY|O_WRONLY</code>.  A file access
@@ -78,13 +88,13 @@ should use the POSIX.1 names above instead.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_READ</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-Open the file for reading.  Same as <code>O_RDWR</code>; only defined on GNU. 
+Open the file for reading.  Same as <code>O_RDONLY</code>; only defined on GNU. 
 </td></tr>
 </table>
 
@@ -92,13 +102,13 @@ Open the file for reading.  Same as <code>O_RDWR</code>; only defined on GNU.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_WRITE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
-Open the file for reading.  Same as <code>O_WRONLY</code>; only defined on GNU. 
+Open the file for writing.  Same as <code>O_WRONLY</code>; only defined on GNU. 
 </td></tr>
 </table>
 
@@ -106,7 +116,7 @@ Open the file for reading.  Same as <code>O_WRONLY</code>; only defined on GNU.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_EXEC</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -116,7 +126,7 @@ Open the file for executing.  Only defined on GNU.
 </td></tr>
 </table>
 
-<p>To determine the file access mode with <code>fcntl</code>, you must extract
+   <p>To determine the file access mode with <code>fcntl</code>, you must extract
 the access mode bits from the retrieved file status flags.  In the GNU
 system, you can just test the <code>O_READ</code> and <code>O_WRITE</code> bits in
 the flags word.  But in other POSIX.1 systems, reading and writing
@@ -127,7 +137,7 @@ extract the file access mode bits is with <code>O_ACCMODE</code>.
 <table width="100%">
 <tr>
 <td align="left">int <b>O_ACCMODE</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -141,5 +151,5 @@ The mode will be <code>O_RDONLY</code>, <code>O_WRONLY</code>, or <code>O_RDWR</
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

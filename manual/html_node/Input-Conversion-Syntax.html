@@ -2,25 +2,35 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Input%20Conversion%20Syntax">Input Conversion Syntax</a>,
-Next:<a rel=next accesskey=n href="Table-of-Input-Conversions.html#Table%20of%20Input%20Conversions">Table of Input Conversions</a>,
-Previous:<a rel=previous accesskey=p href="Formatted-Input-Basics.html#Formatted%20Input%20Basics">Formatted Input Basics</a>,
-Up:<a rel=up accesskey=u href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
+Node:&nbsp;<a name="Input%20Conversion%20Syntax">Input Conversion Syntax</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Table-of-Input-Conversions.html#Table%20of%20Input%20Conversions">Table of Input Conversions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatted-Input-Basics.html#Formatted%20Input%20Basics">Formatted Input Basics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>
 <hr><br>
+</div>
 
-<h4>Input Conversion Syntax</h4>
+<h3 class="subsection">Input Conversion Syntax</h4>
 
 <p>A <code>scanf</code> template string is a string that contains ordinary
 multibyte characters interspersed with conversion specifications that
 start with <code>%</code>.
 
-<p>Any whitespace character (as defined by the <code>isspace</code> function;
+   <p>Any whitespace character (as defined by the <code>isspace</code> function;
 see <a href="Classification-of-Characters.html#Classification%20of%20Characters">Classification of Characters</a>) in the template causes any number
 of whitespace characters in the input stream to be read and discarded. 
 The whitespace characters that are matched need not be exactly the same
@@ -28,20 +38,20 @@ whitespace characters that appear in the template string.  For example,
 write <code> , </code> in the template to recognize a comma with optional
 whitespace before and after.
 
-<p>Other characters in the template string that are not part of conversion
+   <p>Other characters in the template string that are not part of conversion
 specifications must match characters in the input stream exactly; if
 this is not the case, a matching failure occurs.
 
-<p>The conversion specifications in a <code>scanf</code> template string
+   <p>The conversion specifications in a <code>scanf</code> template string
 have the general form:
 
-<br><pre>% <var>flags</var> <var>width</var> <var>type</var> <var>conversion</var>
-</pre>
+<pre class="smallexample">     % <var>flags</var> <var>width</var> <var>type</var> <var>conversion</var>
+     </pre>
 
-<p>In more detail, an input conversion specification consists of an initial
+   <p>In more detail, an input conversion specification consists of an initial
 <code>%</code> character followed in sequence by:
 
-<ul>
+     <ul>
 <li>An optional <dfn>flag character</dfn> <code>*</code>, which says to ignore the text
 read for this specification.  When <code>scanf</code> finds a conversion
 specification that uses this flag, it reads input as directed by the
@@ -49,12 +59,12 @@ rest of the conversion specification, but it discards this input, does
 not use a pointer argument, and does not increment the count of
 successful assignments.
 
-<li>An optional flag character <code>a</code> (valid with string conversions only)
+     <li>An optional flag character <code>a</code> (valid with string conversions only)
 which requests allocation of a buffer long enough to store the string in. 
 (This is a GNU extension.) 
 See <a href="Dynamic-String-Input.html#Dynamic%20String%20Input">Dynamic String Input</a>.
 
-<li>An optional decimal integer that specifies the <dfn>maximum field
+     <li>An optional decimal integer that specifies the <dfn>maximum field
 width</dfn>.  Reading of characters from the input stream stops either when
 this maximum is reached or when a non-matching character is found,
 whichever happens first.  Most conversions discard initial whitespace
@@ -63,25 +73,25 @@ discarded characters don't count towards the maximum field width.
 String input conversions store a null character to mark the end of the
 input; the maximum field width does not include this terminator.
 
-<li>An optional <dfn>type modifier character</dfn>.  For example, you can
+     <li>An optional <dfn>type modifier character</dfn>.  For example, you can
 specify a type modifier of <code>l</code> with integer conversions such as
 <code>%d</code> to specify that the argument is a pointer to a <code>long int</code>
 rather than a pointer to an <code>int</code>.
 
-<li>A character that specifies the conversion to be applied. 
+     <li>A character that specifies the conversion to be applied. 
 </ul>
 
-<p>The exact options that are permitted and how they are interpreted vary
+   <p>The exact options that are permitted and how they are interpreted vary
 between the different conversion specifiers.  See the descriptions of the
 individual conversions for information about the particular options that
 they allow.
 
-<p>With the <code>-Wformat</code> option, the GNU C compiler checks calls to
+   <p>With the <code>-Wformat</code> option, the GNU C compiler checks calls to
 <code>scanf</code> and related functions.  It examines the format string and
 verifies that the correct number and types of arguments are supplied. 
 There is also a GNU C syntax to tell the compiler that a function you
 write uses a <code>scanf</code>-style format string. 
 See <a href="../gcc.info/Function-Attributes.html#Function%20Attributes">Declaring Attributes of Functions</a>, for more information.
 
-</body></html>
+   </body></html>
 

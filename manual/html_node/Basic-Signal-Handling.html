@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Basic%20Signal%20Handling">Basic Signal Handling</a>,
-Next:<a rel=next accesskey=n href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>,
-Up:<a rel=up accesskey=u href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
+Node:&nbsp;<a name="Basic%20Signal%20Handling">Basic Signal Handling</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>
 <hr><br>
+</div>
 
-<h4>Basic Signal Handling</h4>
+<h3 class="subsection">Basic Signal Handling</h4>
 
 <p>The <code>signal</code> function provides a simple interface for establishing
 an action for a particular signal.  The function and associated macros
@@ -23,7 +33,7 @@ are declared in the header file <code>signal.h</code>.
 <table width="100%">
 <tr>
 <td align="left"><b>sighandler_t</b><i>
-</i></td>
+     </i></td>
 <td align="right">Data Type</td>
 </tr>
 </table>
@@ -33,18 +43,18 @@ This is the type of signal handler functions.  Signal handlers take one
 integer argument specifying the signal number, and have return type
 <code>void</code>.  So, you should define handler functions like this:
 
-<br><pre>void <var>handler</var> (int <code>signum</code>) { <small>...</small> }
-</pre>
+     <pre class="smallexample">          void <var>handler</var> (int <code>signum</code>) { ... }
+          </pre>
 
-<p>The name <code>sighandler_t</code> for this data type is a GNU extension. 
+     <p>The name <code>sighandler_t</code> for this data type is a GNU extension. 
 </td></tr>
 </table>
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">sighandler_t <b>signal</b><i> (int <var>signum</var>, sighandler_t <var>action</var>)
-</i></td>
+<td align="left">sighandler_t <b>signal</b><i> </i>(<i>int </i><var>signum</var><i>, sighandler_t </i><var>action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -53,26 +63,26 @@ integer argument specifying the signal number, and have return type
 The <code>signal</code> function establishes <var>action</var> as the action for
 the signal <var>signum</var>.
 
-<p>The first argument, <var>signum</var>, identifies the signal whose behavior
+     <p>The first argument, <var>signum</var>, identifies the signal whose behavior
 you want to control, and should be a signal number.  The proper way to
 specify a signal number is with one of the symbolic signal names
 (see <a href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>)--don't use an explicit number, because
 the numerical code for a given kind of signal may vary from operating
 system to operating system.
 
-<p>The second argument, <var>action</var>, specifies the action to use for the
+     <p>The second argument, <var>action</var>, specifies the action to use for the
 signal <var>signum</var>.  This can be one of the following:
 
-<dl>
+          <dl>
 <dt><code>SIG_DFL</code>
-<dd><code>SIG_DFL</code> specifies the default action for the particular signal. 
+          <dd><code>SIG_DFL</code> specifies the default action for the particular signal. 
 The default actions for various kinds of signals are stated in
 <a href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>.
 
-<br><dt><code>SIG_IGN</code>
-<dd><code>SIG_IGN</code> specifies that the signal should be ignored.
+          <br><dt><code>SIG_IGN</code>
+          <dd><code>SIG_IGN</code> specifies that the signal should be ignored.
 
-<p>Your program generally should not ignore signals that represent serious
+          <p>Your program generally should not ignore signals that represent serious
 events or that are normally used to request termination.  You cannot
 ignore the <code>SIGKILL</code> or <code>SIGSTOP</code> signals at all.  You can
 ignore program error signals like <code>SIGSEGV</code>, but ignoring the error
@@ -80,42 +90,42 @@ won't enable the program to continue executing meaningfully.  Ignoring
 user requests such as <code>SIGINT</code>, <code>SIGQUIT</code>, and <code>SIGTSTP</code>
 is unfriendly.
 
-<p>When you do not wish signals to be delivered during a certain part of
+          <p>When you do not wish signals to be delivered during a certain part of
 the program, the thing to do is to block them, not ignore them. 
 See <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.
 
-<br><dt><code><var>handler</var></code>
-<dd>Supply the address of a handler function in your program, to specify
+          <br><dt><code></code><var>handler</var><code></code>
+          <dd>Supply the address of a handler function in your program, to specify
 running this handler as the way to deliver the signal.
 
-<p>For more information about defining signal handler functions,
+          <p>For more information about defining signal handler functions,
 see <a href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>. 
 </dl>
 
-<p>If you set the action for a signal to <code>SIG_IGN</code>, or if you set it
+     <p>If you set the action for a signal to <code>SIG_IGN</code>, or if you set it
 to <code>SIG_DFL</code> and the default action is to ignore that signal, then
 any pending signals of that type are discarded (even if they are
 blocked).  Discarding the pending signals means that they will never be
 delivered, not even if you subsequently specify another action and
 unblock this kind of signal.
 
-<p>The <code>signal</code> function returns the action that was previously in
+     <p>The <code>signal</code> function returns the action that was previously in
 effect for the specified <var>signum</var>.  You can save this value and
 restore it later by calling <code>signal</code> again.
 
-<p>If <code>signal</code> can't honor the request, it returns <code>SIG_ERR</code>
+     <p>If <code>signal</code> can't honor the request, it returns <code>SIG_ERR</code>
 instead.  The following <code>errno</code> error conditions are defined for
 this function:
 
-<dl>
+          <dl>
 <dt><code>EINVAL</code>
-<dd>You specified an invalid <var>signum</var>; or you tried to ignore or provide
+          <dd>You specified an invalid <var>signum</var>; or you tried to ignore or provide
 a handler for <code>SIGKILL</code> or <code>SIGSTOP</code>. 
 </dl>
-</td></tr>
+     </td></tr>
 </table>
 
-<p><strong>Compatibility Note:</strong> A problem encountered when working with the
+   <p><strong>Compatibility Note:</strong> A problem encountered when working with the
 <code>signal</code> function is that it has different semantics on BSD and
 SVID systems.  The difference is that on SVID systems the signal handler
 is deinstalled after signal delivery.  On BSD systems the
@@ -127,48 +137,48 @@ functions should be avoided because of compatibility problems.  It
 is better to use <code>sigaction</code> if it is available since the results
 are much more reliable.
 
-<p>Here is a simple example of setting up a handler to delete temporary
+   <p>Here is a simple example of setting up a handler to delete temporary
 files when certain fatal signals happen:
 
-<br><pre>#include &lt;signal.h&gt;
-
-void
-termination_handler (int signum)
-{
-  struct temp_file *p;
-
-  for (p = temp_file_list; p; p = p-&gt;next)
-    unlink (p-&gt;name);
-}
-
-int
-main (void)
-{
-  <small>...</small>
-  if (signal (SIGINT, termination_handler) == SIG_IGN)
-    signal (SIGINT, SIG_IGN);
-  if (signal (SIGHUP, termination_handler) == SIG_IGN)
-    signal (SIGHUP, SIG_IGN);
-  if (signal (SIGTERM, termination_handler) == SIG_IGN)
-    signal (SIGTERM, SIG_IGN);
-  <small>...</small>
-}
-</pre>
+<pre class="smallexample">     #include &lt;signal.h&gt;
+     
+     void
+     termination_handler (int signum)
+     {
+       struct temp_file *p;
+     
+       for (p = temp_file_list; p; p = p-&gt;next)
+         unlink (p-&gt;name);
+     }
+     
+     int
+     main (void)
+     {
+       ...
+       if (signal (SIGINT, termination_handler) == SIG_IGN)
+         signal (SIGINT, SIG_IGN);
+       if (signal (SIGHUP, termination_handler) == SIG_IGN)
+         signal (SIGHUP, SIG_IGN);
+       if (signal (SIGTERM, termination_handler) == SIG_IGN)
+         signal (SIGTERM, SIG_IGN);
+       ...
+     }
+     </pre>
 
 <p>Note that if a given signal was previously set to be ignored, this code
 avoids altering that setting.  This is because non-job-control shells
 often ignore certain signals when starting children, and it is important
 for the children to respect this.
 
-<p>We do not handle <code>SIGQUIT</code> or the program error signals in this
+   <p>We do not handle <code>SIGQUIT</code> or the program error signals in this
 example because these are designed to provide information for debugging
 (a core dump), and the temporary files may give useful information.
 
 <p>
 <table width="100%">
 <tr>
-<td align="left">sighandler_t <b>sysv_signal</b><i> (int <var>signum</var>, sighandler_t <var>action</var>)
-</i></td>
+<td align="left">sighandler_t <b>sysv_signal</b><i> </i>(<i>int </i><var>signum</var><i>, sighandler_t </i><var>action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -178,7 +188,7 @@ The <code>sysv_signal</code> implements the behavior of the standard
 <code>signal</code> function as found on SVID systems.  The difference to BSD
 systems is that the handler is deinstalled after a delivery of a signal.
 
-<p><strong>Compatibility Note:</strong> As said above for <code>signal</code>, this
+     <p><strong>Compatibility Note:</strong> As said above for <code>signal</code>, this
 function should be avoided when possible.  <code>sigaction</code> is the
 preferred method. 
 </td></tr>
@@ -187,8 +197,8 @@ preferred method.
 <p>
 <table width="100%">
 <tr>
-<td align="left">sighandler_t <b>ssignal</b><i> (int <var>signum</var>, sighandler_t <var>action</var>)
-</i></td>
+<td align="left">sighandler_t <b>ssignal</b><i> </i>(<i>int </i><var>signum</var><i>, sighandler_t </i><var>action</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -203,7 +213,7 @@ provided only for compatibility with SVID.
 <table width="100%">
 <tr>
 <td align="left">sighandler_t <b>SIG_ERR</b><i>
-</i></td>
+     </i></td>
 <td align="right">Macro</td>
 </tr>
 </table>
@@ -214,5 +224,5 @@ to indicate an error.
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

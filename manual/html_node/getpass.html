@@ -2,19 +2,29 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="getpass">getpass</a>,
-Next:<a rel=next accesskey=n href="crypt.html#crypt">crypt</a>,
-Previous:<a rel=previous accesskey=p href="Legal-Problems.html#Legal%20Problems">Legal Problems</a>,
-Up:<a rel=up accesskey=u href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>
+Node:&nbsp;<a name="getpass">getpass</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="crypt.html#crypt">crypt</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Legal-Problems.html#Legal%20Problems">Legal Problems</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Cryptographic-Functions.html#Cryptographic%20Functions">Cryptographic Functions</a>
 <hr><br>
+</div>
 
-<h3>Reading Passwords</h3>
+<h3 class="section">Reading Passwords</h3>
 
 <p>When reading in a password, it is desirable to avoid displaying it on
 the screen, to help keep it secret.  The following function handles this
@@ -23,15 +33,15 @@ in a convenient way.
 <p>
 <table width="100%">
 <tr>
-<td align="left">char * <b>getpass</b><i> (const char *<var>prompt</var>)
-</i></td>
+<td align="left">char * <b>getpass</b><i> </i>(<i>const char *</i><var>prompt</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
 <table width="95%" align="center">
 <tr><td>
 
-<p><code>getpass</code> outputs <var>prompt</var>, then reads a string in from the
+     <p><code>getpass</code> outputs <var>prompt</var>, then reads a string in from the
 terminal without echoing it.  It tries to connect to the real terminal,
 <code>/dev/tty</code>, if possible, to encourage users not to put plaintext
 passwords in files; otherwise, it uses <code>stdin</code> and <code>stderr</code>. 
@@ -40,50 +50,50 @@ terminal using the <code>ISIG</code> terminal attribute (see <a href="Local-Mode
 The terminal is flushed before and after <code>getpass</code>, so that
 characters of a mistyped password are not accidentally visible.
 
-<p>In other C libraries, <code>getpass</code> may only return the first
+     <p>In other C libraries, <code>getpass</code> may only return the first
 <code>PASS_MAX</code> bytes of a password.  The GNU C library has no limit, so
 <code>PASS_MAX</code> is undefined.
 
-<p>The prototype for this function is in <code>unistd.h</code>.  <code>PASS_MAX</code>
+     <p>The prototype for this function is in <code>unistd.h</code>.  <code>PASS_MAX</code>
 would be defined in <code>limits.h</code>. 
 </td></tr>
 </table>
 
-<p>This precise set of operations may not suit all possible situations.  In
+   <p>This precise set of operations may not suit all possible situations.  In
 this case, it is recommended that users write their own <code>getpass</code>
 substitute.  For instance, a very simple substitute is as follows:
 
-<br><pre>
+<pre class="smallexample">
 
-#include &lt;termios.h&gt;
-#include &lt;stdio.h&gt;
+     #include &lt;termios.h&gt;
+     #include &lt;stdio.h&gt;
+     
+     ssize_t
+     my_getpass (char **lineptr, size_t *n, FILE *stream)
+     {
+       struct termios old, new;
+       int nread;
+     
+       /* Turn echoing off and fail if we can't. */
+       if (tcgetattr (fileno (stream), &amp;old) != 0)
+         return -1;
+       new = old;
+       new.c_lflag &amp;= ~ECHO;
+       if (tcsetattr (fileno (stream), TCSAFLUSH, &amp;new) != 0)
+         return -1;
+     
+       /* Read the password. */
+       nread = getline (lineptr, n, stream);
+     
+       /* Restore terminal. */
+       (void) tcsetattr (fileno (stream), TCSAFLUSH, &amp;old);
+     
+       return nread;
+     }
+     </pre>
 
-ssize_t
-my_getpass (char **lineptr, size_t *n, FILE *stream)
-{
-  struct termios old, new;
-  int nread;
-
-  /* Turn echoing off and fail if we can't. */
-  if (tcgetattr (fileno (stream), &amp;old) != 0)
-    return -1;
-  new = old;
-  new.c_lflag &amp;= ~ECHO;
-  if (tcsetattr (fileno (stream), TCSAFLUSH, &amp;new) != 0)
-    return -1;
-
-  /* Read the password. */
-  nread = getline (lineptr, n, stream);
-
-  /* Restore terminal. */
-  (void) tcsetattr (fileno (stream), TCSAFLUSH, &amp;old);
-
-  return nread;
-}
-</pre>
-
-<p>The substitute takes the same parameters as <code>getline</code>
+   <p>The substitute takes the same parameters as <code>getline</code>
 (see <a href="Line-Input.html#Line%20Input">Line Input</a>); the user must print any prompt desired.
 
-</body></html>
+   </body></html>
 

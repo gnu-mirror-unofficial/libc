@@ -2,18 +2,28 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Pseudo-Terminal%20Pairs">Pseudo-Terminal Pairs</a>,
-Previous:<a rel=previous accesskey=p href="Allocation.html#Allocation">Allocation</a>,
-Up:<a rel=up accesskey=u href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>
+Node:&nbsp;<a name="Pseudo-Terminal%20Pairs">Pseudo-Terminal Pairs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Allocation.html#Allocation">Allocation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>
 <hr><br>
+</div>
 
-<h4>Opening a Pseudo-Terminal Pair</h4>
+<h3 class="subsection">Opening a Pseudo-Terminal Pair</h4>
 
 <p>These functions, derived from BSD, are available in the separate
 <code>libutil</code> library, and declared in <code>pty.h</code>.
@@ -21,8 +31,8 @@ Up:<a rel=up accesskey=u href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Te
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>openpty</b><i> (int *<var>amaster</var>, int *<var>aslave</var>, char *<var>name</var>, struct termios *<var>termp</var>, struct winsize *<var>winp</var>)
-</i></td>
+<td align="left">int <b>openpty</b><i> </i>(<i>int *</i><var>amaster</var><i>, int *</i><var>aslave</var><i>, char *</i><var>name</var><i>, struct termios *</i><var>termp</var><i>, struct winsize *</i><var>winp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -39,16 +49,16 @@ Likewise, if the <var>winp</var> is not a null pointer, the screen size of
 the slave is set to the values specified in the structure that
 <var>winp</var> points to.
 
-<p>The normal return value from <code>openpty</code> is 0; a value of
+     <p>The normal return value from <code>openpty</code> is 0; a value of
 -1 is returned in case of failure.  The following <code>errno</code>
 conditions are defined for this function:
 
-<dl>
+          <dl>
 <dt><code>ENOENT</code>
-<dd>There are no free pseudo-terminal pairs available. 
+          <dd>There are no free pseudo-terminal pairs available. 
 </dl>
 
-<p><strong>Warning:</strong> Using the <code>openpty</code> function with <var>name</var> not
+     <p><strong>Warning:</strong> Using the <code>openpty</code> function with <var>name</var> not
 set to <code>NULL</code> is <strong>very dangerous</strong> because it provides no
 protection against overflowing the string <var>name</var>.  You should use
 the <code>ttyname</code> function on the file descriptor returned in
@@ -60,8 +70,8 @@ device instead.
 <p>
 <table width="100%">
 <tr>
-<td align="left">int <b>forkpty</b><i> (int *<var>amaster</var>, char *<var>name</var>, struct termios *<var>termp</var>, struct winsize *<var>winp</var>)
-</i></td>
+<td align="left">int <b>forkpty</b><i> </i>(<i>int *</i><var>amaster</var><i>, char *</i><var>name</var><i>, struct termios *</i><var>termp</var><i>, struct winsize *</i><var>winp</var><i></i>)<i>
+     </i></td>
 <td align="right">Function</td>
 </tr>
 </table>
@@ -72,19 +82,19 @@ addition, forks a new process (see <a href="Creating-a-Process.html#Creating%20a
 newly opened slave pseudo-terminal device the controlling terminal
 (see <a href="Controlling-Terminal.html#Controlling%20Terminal">Controlling Terminal</a>) for the child process.
 
-<p>If the operation is successful, there are then both parent and child
+     <p>If the operation is successful, there are then both parent and child
 processes and both see <code>forkpty</code> return, but with different values:
 it returns a value of 0 in the child process and returns the child's
 process ID in the parent process.
 
-<p>If the allocation of a pseudo-terminal pair or the process creation
+     <p>If the allocation of a pseudo-terminal pair or the process creation
 failed, <code>forkpty</code> returns a value of -1 in the parent
 process.
 
-<p><strong>Warning:</strong> The <code>forkpty</code> function has the same problems with
+     <p><strong>Warning:</strong> The <code>forkpty</code> function has the same problems with
 respect to the <var>name</var> argument as <code>openpty</code>. 
 </td></tr>
 </table>
 
-</body></html>
+   </body></html>
 

@@ -2,74 +2,84 @@
 <head>
 <title>The GNU C Library</title>
 <meta http-equiv="Content-Type" content="text/html">
-<meta name=description content="The GNU C Library">
-<meta name=generator content="makeinfo 4.2">
-<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+<meta name="description" content="The GNU C Library">
+<meta name="generator" content="makeinfo 4.6">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+--></style>
 </head>
 <body>
+<div class="node">
 <p>
-Node:<a name="Wordexp%20Example">Wordexp Example</a>,
-Next:<a rel=next accesskey=n href="Tilde-Expansion.html#Tilde%20Expansion">Tilde Expansion</a>,
-Previous:<a rel=previous accesskey=p href="Flags-for-Wordexp.html#Flags%20for%20Wordexp">Flags for Wordexp</a>,
-Up:<a rel=up accesskey=u href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
+Node:&nbsp;<a name="Wordexp%20Example">Wordexp Example</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="Tilde-Expansion.html#Tilde%20Expansion">Tilde Expansion</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Flags-for-Wordexp.html#Flags%20for%20Wordexp">Flags for Wordexp</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
 <hr><br>
+</div>
 
-<h4><code>wordexp</code> Example</h4>
+<h3 class="subsection"><code>wordexp</code> Example</h4>
 
 <p>Here is an example of using <code>wordexp</code> to expand several strings
 and use the results to run a shell command.  It also shows the use of
 <code>WRDE_APPEND</code> to concatenate the expansions and of <code>wordfree</code>
 to free the space allocated by <code>wordexp</code>.
 
-<br><pre>int
-expand_and_execute (const char *program, const char *options)
-{
-  wordexp_t result;
-  pid_t pid
-  int status, i;
+<pre class="smallexample">     int
+     expand_and_execute (const char *program, const char **options)
+     {
+       wordexp_t result;
+       pid_t pid
+       int status, i;
+     
+       /* Expand the string for the program to run.  */
+       switch (wordexp (program, &amp;result, 0))
+         {
+         case 0:			/* Successful.  */
+           break;
+         case WRDE_NOSPACE:
+           /* If the error was <code>WRDE_NOSPACE</code>,
+              then perhaps part of the result was allocated.  */
+           wordfree (&amp;result);
+         default:                    /* Some other error.  */
+           return -1;
+         }
+     
+       /* Expand the strings specified for the arguments.  */
+       for (i = 0; options[i] != NULL; i++)
+         {
+           if (wordexp (options[i], &amp;result, WRDE_APPEND))
+             {
+               wordfree (&amp;result);
+               return -1;
+             }
+         }
+     
+       pid = fork ();
+       if (pid == 0)
+         {
+           /* This is the child process.  Execute the command. */
+           execv (result.we_wordv[0], result.we_wordv);
+           exit (EXIT_FAILURE);
+         }
+       else if (pid &lt; 0)
+         /* The fork failed.  Report failure.  */
+         status = -1;
+       else
+         /* This is the parent process.  Wait for the child to complete.  */
+         if (waitpid (pid, &amp;status, 0) != pid)
+           status = -1;
+     
+       wordfree (&amp;result);
+       return status;
+     }
+     </pre>
 
-  /* Expand the string for the program to run.  */
-  switch (wordexp (program, &amp;result, 0))
-    {
-    case 0:			/* Successful.  */
-      break;
-    case WRDE_NOSPACE:
-      /* If the error was <code>WRDE_NOSPACE</code>,
-         then perhaps part of the result was allocated.  */
-      wordfree (&amp;result);
-    default:                    /* Some other error.  */
-      return -1;
-    }
-
-  /* Expand the strings specified for the arguments.  */
-  for (i = 0; args[i]; i++)
-    {
-      if (wordexp (options, &amp;result, WRDE_APPEND))
-        {
-          wordfree (&amp;result);
-          return -1;
-        }
-    }
-
-  pid = fork ();
-  if (pid == 0)
-    {
-      /* This is the child process.  Execute the command. */
-      execv (result.we_wordv[0], result.we_wordv);
-      exit (EXIT_FAILURE);
-    }
-  else if (pid &lt; 0)
-    /* The fork failed.  Report failure.  */
-    status = -1;
-  else
-    /* This is the parent process.  Wait for the child to complete.  */
-    if (waitpid (pid, &amp;status, 0) != pid)
-      status = -1;
-
-  wordfree (&amp;result);
-  return status;
-}
-</pre>
-
-</body></html>
+   </body></html>
 
