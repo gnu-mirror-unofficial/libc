@@ -1,10 +1,30 @@
-GNU C Library NEWS -- history of user-visible changes.  2001-7-27
+GNU C Library NEWS -- history of user-visible changes.  2001-10-31
 Copyright (C) 1992-2000, 2001 Free Software Foundation, Inc.
 See the end for copying conditions.
 
 Please send GNU C library bug reports using the `glibcbug' script to
 <bugs@gnu.org>.  Questions and suggestions should be send to
 <bug-glibc@gnu.org>.
+
+Version 2.2.5
+
+* Stephen Moshier implemented log2, log10, powl and cbrtl for the
+  128-bit long double format.
+
+* Masahide Washizawa contributed iconv modules for IBM1132, IBM1133, IBM1160,
+  IBM1161, and IBM1162 charsets.
+
+* Andreas Jaeger contributed a port to x86-64/Linux.
+
+* Peter Bruin contributed a port to PowerPC/Hurd.
+
+* libc functions using I/O streams now can handle wide-oriented streams
+  as well.
+
+* optimizations in the dynamic linker.  binaries created by recent binutils
+  versions start up quicker due to reduced time spend on relocations.
+
+* Support for use of gcc3 added by Jakub Jelinek and HJ Lu.
 
 Version 2.2.4
 
@@ -1315,4 +1335,4 @@ Copyright (C) 1992-1999, 2000 Free Software Foundation, Inc.
 
 Local variables:
 version-control: never
-end:
+End:
