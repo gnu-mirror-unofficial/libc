@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Allocating%20Cleared%20Space">Allocating Cleared Space</a>,
+Next:<a rel=next accesskey=n href="Efficiency-and-Malloc.html#Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
+Previous:<a rel=previous accesskey=p href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Allocating Cleared Space</h5>
+
+<p>The function <code>calloc</code> allocates memory and clears it to zero.  It
+is declared in <code>stdlib.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>calloc</b><i> (size_t <var>count</var>, size_t <var>eltsize</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function allocates a block long enough to contain a vector of
+<var>count</var> elements, each of size <var>eltsize</var>.  Its contents are
+cleared to zero before <code>calloc</code> returns. 
+</td></tr>
+</table>
+
+<p>You could define <code>calloc</code> as follows:
+
+<br><pre>void *
+calloc (size_t count, size_t eltsize)
+{
+  size_t size = count * eltsize;
+  void *value = malloc (size);
+  if (value != 0)
+    memset (value, 0, size);
+  return value;
+}
+</pre>
+
+<p>But in general, it is not guaranteed that <code>calloc</code> calls
+<code>malloc</code> internally.  Therefore, if an application provides its own
+<code>malloc</code>/<code>realloc</code>/<code>free</code> outside the C library, it
+should always define <code>calloc</code>, too.
+
+</body></html>
+

@@ -1,0 +1,345 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Simple%20Output">Simple Output</a>,
+Next:<a rel=next accesskey=n href="Character-Input.html#Character%20Input">Character Input</a>,
+Previous:<a rel=previous accesskey=p href="Streams-and-I18N.html#Streams%20and%20I18N">Streams and I18N</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>Simple Output by Characters or Lines</h3>
+
+<p>This section describes functions for performing character- and
+line-oriented output.
+
+<p>These narrow streams functions are declared in the header file
+<code>stdio.h</code> and the wide stream functions in <code>wchar.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputc</b><i> (int <var>c</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputc</code> function converts the character <var>c</var> to type
+<code>unsigned char</code>, and writes it to the stream <var>stream</var>. 
+<code>EOF</code> is returned if a write error occurs; otherwise the
+character <var>c</var> is returned. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>fputwc</b><i> (wchar_t <var>wc</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputwc</code> function writes the wide character <var>wc</var> to the
+stream <var>stream</var>.  <code>WEOF</code> is returned if a write error occurs;
+otherwise the character <var>wc</var> is returned. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputc_unlocked</b><i> (int <var>c</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputc_unlocked</code> function is equivalent to the <code>fputc</code>
+function except that it does not implicitly lock the stream. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>fputwc_unlocked</b><i> (wint_t <var>wc</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputwc_unlocked</code> function is equivalent to the <code>fputwc</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putc</b><i> (int <var>c</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is just like <code>fputc</code>, except that most systems implement it as
+a macro, making it faster.  One consequence is that it may evaluate the
+<var>stream</var> argument more than once, which is an exception to the
+general rule for macros.  <code>putc</code> is usually the best function to
+use for writing a single character. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>putwc</b><i> (wchar_t <var>wc</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is just like <code>fputwc</code>, except that it can be implement as
+a macro, making it faster.  One consequence is that it may evaluate the
+<var>stream</var> argument more than once, which is an exception to the
+general rule for macros.  <code>putwc</code> is usually the best function to
+use for writing a single wide character. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putc_unlocked</b><i> (int <var>c</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putc_unlocked</code> function is equivalent to the <code>putc</code>
+function except that it does not implicitly lock the stream. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>putwc_unlocked</b><i> (wchar_t <var>wc</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putwc_unlocked</code> function is equivalent to the <code>putwc</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putchar</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putchar</code> function is equivalent to <code>putc</code> with
+<code>stdout</code> as the value of the <var>stream</var> argument. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>putwchar</b><i> (wchar_t <var>wc</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putwchar</code> function is equivalent to <code>putwc</code> with
+<code>stdout</code> as the value of the <var>stream</var> argument. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putchar_unlocked</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putchar_unlocked</code> function is equivalent to the <code>putchar</code>
+function except that it does not implicitly lock the stream. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">wint_t <b>putwchar_unlocked</b><i> (wchar_t <var>wc</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>putwchar_unlocked</code> function is equivalent to the <code>putwchar</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputs</b><i> (const char *<var>s</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The function <code>fputs</code> writes the string <var>s</var> to the stream
+<var>stream</var>.  The terminating null character is not written. 
+This function does <em>not</em> add a newline character, either. 
+It outputs only the characters in the string.
+
+<p>This function returns <code>EOF</code> if a write error occurs, and otherwise
+a non-negative value.
+
+<p>For example:
+
+<br><pre>fputs ("Are ", stdout);
+fputs ("you ", stdout);
+fputs ("hungry?\n", stdout);
+</pre>
+
+<p>outputs the text <code>Are you hungry?</code> followed by a newline. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputws</b><i> (const wchar_t *<var>ws</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The function <code>fputws</code> writes the wide character string <var>ws</var> to
+the stream <var>stream</var>.  The terminating null character is not written. 
+This function does <em>not</em> add a newline character, either.  It
+outputs only the characters in the string.
+
+<p>This function returns <code>WEOF</code> if a write error occurs, and otherwise
+a non-negative value. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputs_unlocked</b><i> (const char *<var>s</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputs_unlocked</code> function is equivalent to the <code>fputs</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fputws_unlocked</b><i> (const wchar_t *<var>ws</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fputws_unlocked</code> function is equivalent to the <code>fputws</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>puts</b><i> (const char *<var>s</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>puts</code> function writes the string <var>s</var> to the stream
+<code>stdout</code> followed by a newline.  The terminating null character of
+the string is not written.  (Note that <code>fputs</code> does <em>not</em>
+write a newline as this function does.)
+
+<p><code>puts</code> is the most convenient function for printing simple
+messages.  For example:
+
+<br><pre>puts ("This is a message.");
+</pre>
+
+<p>outputs the text <code>This is a message.</code> followed by a newline. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putw</b><i> (int <var>w</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function writes the word <var>w</var> (that is, an <code>int</code>) to
+<var>stream</var>.  It is provided for compatibility with SVID, but we
+recommend you use <code>fwrite</code> instead (see <a href="Block-Input-Output.html#Block%20Input%2fOutput">Block Input/Output</a>). 
+</td></tr>
+</table>
+
+</body></html>
+

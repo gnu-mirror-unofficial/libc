@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>,
+Next:<a rel=next accesskey=n href="Matching-POSIX-Regexps.html#Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>,
+Previous:<a rel=previous accesskey=p href="POSIX-Regexp-Compilation.html#POSIX%20Regexp%20Compilation">POSIX Regexp Compilation</a>,
+Up:<a rel=up accesskey=u href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
+<hr><br>
+
+<h4>Flags for POSIX Regular Expressions</h4>
+
+<p>These are the bit flags that you can use in the <var>cflags</var> operand when
+compiling a regular expression with <code>regcomp</code>.
+
+<dl>
+<dt><code>REG_EXTENDED</code>
+<dd>Treat the pattern as an extended regular expression, rather than as a
+basic regular expression.
+
+<br><dt><code>REG_ICASE</code>
+<dd>Ignore case when matching letters.
+
+<br><dt><code>REG_NOSUB</code>
+<dd>Don't bother storing the contents of the <var>matches-ptr</var> array.
+
+<br><dt><code>REG_NEWLINE</code>
+<dd>Treat a newline in <var>string</var> as dividing <var>string</var> into multiple
+lines, so that <code>$</code> can match before the newline and <code>^</code> can
+match after.  Also, don't permit <code>.</code> to match a newline, and don't
+permit <code>[^<small>...</small>]</code> to match a newline.
+
+<p>Otherwise, newline acts like any other ordinary character. 
+</dl>
+
+</body></html>
+

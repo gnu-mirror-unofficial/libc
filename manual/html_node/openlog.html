@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="openlog">openlog</a>,
+Next:<a rel=next accesskey=n href="syslog--vsyslog.html#syslog%3b%20vsyslog">syslog; vsyslog</a>,
+Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+<hr><br>
+
+<h4>openlog</h4>
+
+<p>The symbols referred to in this section are declared in the file
+<code>syslog.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>openlog</b><i> (char *<var>ident</var>, int <var>option</var>,
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+        int <var>facility</var>)
+
+<p><code>openlog</code> opens or reopens a connection to Syslog in preparation
+for submitting messages.
+
+<p><var>ident</var> is an arbitrary identification string which future
+<code>syslog</code> invocations will prefix to each message.  This is intended
+to identify the source of the message, and people conventionally set it
+to the name of the program that will submit the messages.
+
+<p><code>openlog</code> may or may not open the <code>/dev/log</code> socket, depending
+on <var>option</var>.  If it does, it tries to open it and connect it as a
+stream socket.  If that doesn't work, it tries to open it and connect it
+as a datagram socket.  The socket has the "Close on Exec" attribute,
+so the kernel will close it if the process performs an exec.
+
+<p>You don't have to use <code>openlog</code>.  If you call <code>syslog</code> without
+having called <code>openlog</code>, <code>syslog</code> just opens the connection
+implicitly and uses defaults for the information in <var>ident</var> and
+<var>options</var>.
+
+<p><var>options</var> is a bit string, with the bits as defined by the following
+single bit masks:
+
+<dl>
+<dt><code>LOG_PERROR</code>
+<dd>If on, <code>openlog</code> sets up the connection so that any <code>syslog</code>
+on this connection writes its message to the calling process' Standard
+Error stream in addition to submitting it to Syslog.  If off, <code>syslog</code>
+does not write the message to Standard Error.
+
+<br><dt><code>LOG_CONS</code>
+<dd>If on, <code>openlog</code> sets up the connection so that a <code>syslog</code> on
+this connection that fails to submit a message to Syslog writes the
+message instead to system console.  If off, <code>syslog</code> does not write
+to the system console (but of course Syslog may write messages it
+receives to the console).
+
+<br><dt><code>LOG_PID</code>
+<dd>When on, <code>openlog</code> sets up the connection so that a <code>syslog</code>
+on this connection inserts the calling process' Process ID (PID) into
+the message.  When off, <code>openlog</code> does not insert the PID.
+
+<br><dt><code>LOG_NDELAY</code>
+<dd>When on, <code>openlog</code> opens and connects the <code>/dev/log</code> socket. 
+When off, a future <code>syslog</code> call must open and connect the socket.
+
+<p><strong>Portability note:</strong>  In early systems, the sense of this bit was
+exactly the opposite.
+
+<br><dt><code>LOG_ODELAY</code>
+<dd>This bit does nothing.  It exists for backward compatibility.
+
+</dl>
+
+<p>If any other bit in <var>options</var> is on, the result is undefined.
+
+<p><var>facility</var> is the default facility code for this connection.  A
+<code>syslog</code> on this connection that specifies default facility causes
+this facility to be associated with the message.  See <code>syslog</code> for
+possible values.  A value of zero means the default default, which is
+<code>LOG_USER</code>.
+
+<p>If a Syslog connection is already open when you call <code>openlog</code>,
+<code>openlog</code> "reopens" the connection.  Reopening is like opening
+except that if you specify zero for the default facility code, the
+default facility code simply remains unchanged and if you specify
+LOG_NDELAY and the socket is already open and connected, <code>openlog</code>
+just leaves it that way.
+
+</td></tr>
+</table>
+
+</body></html>
+

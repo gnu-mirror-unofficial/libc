@@ -1,0 +1,124 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Hook%20Functions">Hook Functions</a>,
+Previous:<a rel=previous accesskey=p href="Streams-and-Cookies.html#Streams%20and%20Cookies">Streams and Cookies</a>,
+Up:<a rel=up accesskey=u href="Custom-Streams.html#Custom%20Streams">Custom Streams</a>
+<hr><br>
+
+<h5>Custom Stream Hook Functions</h5>
+
+<p>Here are more details on how you should define the four hook functions
+that a custom stream needs.
+
+<p>You should define the function to read data from the cookie as:
+
+<br><pre>ssize_t <var>reader</var> (void *<var>cookie</var>, char *<var>buffer</var>, size_t <var>size</var>)
+</pre>
+
+<p>This is very similar to the <code>read</code> function; see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>.  Your function should transfer up to <var>size</var> bytes into
+the <var>buffer</var>, and return the number of bytes read, or zero to
+indicate end-of-file.  You can return a value of <code>-1</code> to indicate
+an error.
+
+<p>You should define the function to write data to the cookie as:
+
+<br><pre>ssize_t <var>writer</var> (void *<var>cookie</var>, const char *<var>buffer</var>, size_t <var>size</var>)
+</pre>
+
+<p>This is very similar to the <code>write</code> function; see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>.  Your function should transfer up to <var>size</var> bytes from
+the buffer, and return the number of bytes written.  You can return a
+value of <code>-1</code> to indicate an error.
+
+<p>You should define the function to perform seek operations on the cookie
+as:
+
+<br><pre>int <var>seeker</var> (void *<var>cookie</var>, fpos_t *<var>position</var>, int <var>whence</var>)
+</pre>
+
+<p>For this function, the <var>position</var> and <var>whence</var> arguments are
+interpreted as for <code>fgetpos</code>; see <a href="Portable-Positioning.html#Portable%20Positioning">Portable Positioning</a>.  In
+the GNU library, <code>fpos_t</code> is equivalent to <code>off_t</code> or
+<code>long int</code>, and simply represents the number of bytes from the
+beginning of the file.
+
+<p>After doing the seek operation, your function should store the resulting
+file position relative to the beginning of the file in <var>position</var>. 
+Your function should return a value of <code>0</code> on success and <code>-1</code>
+to indicate an error.
+
+<p>You should define the function to do cleanup operations on the cookie
+appropriate for closing the stream as:
+
+<br><pre>int <var>cleaner</var> (void *<var>cookie</var>)
+</pre>
+
+<p>Your function should return <code>-1</code> to indicate an error, and <code>0</code>
+otherwise.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cookie_read_function</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the data type that the read function for a custom stream should have. 
+If you declare the function as shown above, this is the type it will have. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cookie_write_function</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The data type of the write function for a custom stream. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cookie_seek_function</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The data type of the seek function for a custom stream. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cookie_close_function</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The data type of the close function for a custom stream. 
+</td></tr>
+</table>
+
+</body></html>
+

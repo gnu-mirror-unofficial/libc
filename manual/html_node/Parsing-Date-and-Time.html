@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Parsing%20Date%20and%20Time">Parsing Date and Time</a>,
+Next:<a rel=next accesskey=n href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>,
+Previous:<a rel=previous accesskey=p href="Formatting-Calendar-Time.html#Formatting%20Calendar%20Time">Formatting Calendar Time</a>,
+Up:<a rel=up accesskey=u href="Calendar-Time.html#Calendar%20Time">Calendar Time</a>
+<hr><br>
+
+<h4>Convert textual time and date information back</h4>
+
+<p>The ISO&nbsp;C standard does not specify any functions which can convert
+the output of the <code>strftime</code> function back into a binary format. 
+This led to a variety of more-or-less successful implementations with
+different interfaces over the years.  Then the Unix standard was
+extended by the addition of two functions: <code>strptime</code> and
+<code>getdate</code>.  Both have strange interfaces but at least they are
+widely available.
+
+<ul>
+<li><a accesskey=1 href="Low-Level-Time-String-Parsing.html#Low-Level%20Time%20String%20Parsing">Low-Level Time String Parsing</a>:   Interpret string according to given format. 
+<li><a accesskey=2 href="General-Time-String-Parsing.html#General%20Time%20String%20Parsing">General Time String Parsing</a>:     User-friendly function to parse data and
+                                    time strings. 
+</ul>
+
+</body></html>
+

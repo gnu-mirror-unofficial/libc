@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Program%20Arguments">Program Arguments</a>,
+Next:<a rel=next accesskey=n href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>,
+Up:<a rel=up accesskey=u href="Program-Basics.html#Program%20Basics">Program Basics</a>
+<hr><br>
+
+<h3>Program Arguments</h3>
+
+<p>The system starts a C program by calling the function <code>main</code>.  It
+is up to you to write a function named <code>main</code>--otherwise, you
+won't even be able to link your program without errors.
+
+<p>In ISO&nbsp;C you can define <code>main</code> either to take no arguments, or to
+take two arguments that represent the command line arguments to the
+program, like this:
+
+<br><pre>int main (int <var>argc</var>, char *<var>argv</var>[])
+</pre>
+
+<p>The command line arguments are the whitespace-separated tokens given in
+the shell command used to invoke the program; thus, in <code>cat foo
+bar</code>, the arguments are <code>foo</code> and <code>bar</code>.  The only way a
+program can look at its command line arguments is via the arguments of
+<code>main</code>.  If <code>main</code> doesn't take arguments, then you cannot get
+at the command line.
+
+<p>The value of the <var>argc</var> argument is the number of command line
+arguments.  The <var>argv</var> argument is a vector of C strings; its
+elements are the individual command line argument strings.  The file
+name of the program being run is also included in the vector as the
+first element; the value of <var>argc</var> counts this element.  A null
+pointer always follows the last element: <code><var>argv</var>[<var>argc</var>]</code>
+is this null pointer.
+
+<p>For the command <code>cat foo bar</code>, <var>argc</var> is 3 and <var>argv</var> has
+three elements, <code>"cat"</code>, <code>"foo"</code> and <code>"bar"</code>.
+
+<p>In Unix systems you can define <code>main</code> a third way, using three arguments:
+
+<br><pre>int main (int <var>argc</var>, char *<var>argv</var>[], char *<var>envp</var>[])
+</pre>
+
+<p>The first two arguments are just the same.  The third argument
+<var>envp</var> gives the program's environment; it is the same as the value
+of <code>environ</code>.  See <a href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>.  POSIX.1 does not
+allow this three-argument form, so to be portable it is best to write
+<code>main</code> to take two arguments, and use the value of <code>environ</code>.
+
+<ul>
+<li><a accesskey=1 href="Argument-Syntax.html#Argument%20Syntax">Argument Syntax</a>:              By convention, options start with a hyphen. 
+<li><a accesskey=2 href="Parsing-Program-Arguments.html#Parsing%20Program%20Arguments">Parsing Program Arguments</a>:    Ways to parse program options and arguments. 
+</ul>
+
+</body></html>
+

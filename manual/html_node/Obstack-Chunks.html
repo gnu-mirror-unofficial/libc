@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Obstack%20Chunks">Obstack Chunks</a>,
+Next:<a rel=next accesskey=n href="Summary-of-Obstacks.html#Summary%20of%20Obstacks">Summary of Obstacks</a>,
+Previous:<a rel=previous accesskey=p href="Obstacks-Data-Alignment.html#Obstacks%20Data%20Alignment">Obstacks Data Alignment</a>,
+Up:<a rel=up accesskey=u href="Obstacks.html#Obstacks">Obstacks</a>
+<hr><br>
+
+<h5>Obstack Chunks</h5>
+
+<p>Obstacks work by allocating space for themselves in large chunks, and
+then parceling out space in the chunks to satisfy your requests.  Chunks
+are normally 4096 bytes long unless you specify a different chunk size. 
+The chunk size includes 8 bytes of overhead that are not actually used
+for storing objects.  Regardless of the specified size, longer chunks
+will be allocated when necessary for long objects.
+
+<p>The obstack library allocates chunks by calling the function
+<code>obstack_chunk_alloc</code>, which you must define.  When a chunk is no
+longer needed because you have freed all the objects in it, the obstack
+library frees the chunk by calling <code>obstack_chunk_free</code>, which you
+must also define.
+
+<p>These two must be defined (as macros) or declared (as functions) in each
+source file that uses <code>obstack_init</code> (see <a href="Creating-Obstacks.html#Creating%20Obstacks">Creating Obstacks</a>). 
+Most often they are defined as macros like this:
+
+<br><pre>#define obstack_chunk_alloc malloc
+#define obstack_chunk_free free
+</pre>
+
+<p>Note that these are simple macros (no arguments).  Macro definitions with
+arguments will not work!  It is necessary that <code>obstack_chunk_alloc</code>
+or <code>obstack_chunk_free</code>, alone, expand into a function name if it is
+not itself a function name.
+
+<p>If you allocate chunks with <code>malloc</code>, the chunk size should be a
+power of 2.  The default chunk size, 4096, was chosen because it is long
+enough to satisfy many typical requests on the obstack yet short enough
+not to waste too much memory in the portion of the last chunk not yet used.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>obstack_chunk_size</b><i> (struct obstack *<var>obstack-ptr</var>)
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This returns the chunk size of the given obstack. 
+</td></tr>
+</table>
+
+<p>Since this macro expands to an lvalue, you can specify a new chunk size by
+assigning it a new value.  Doing so does not affect the chunks already
+allocated, but will change the size of chunks allocated for that particular
+obstack in the future.  It is unlikely to be useful to make the chunk size
+smaller, but making it larger might improve efficiency if you are
+allocating many objects whose size is comparable to the chunk size.  Here
+is how to do so cleanly:
+
+<br><pre>if (obstack_chunk_size (obstack_ptr) &lt; <var>new-chunk-size</var>)
+  obstack_chunk_size (obstack_ptr) = <var>new-chunk-size</var>;
+</pre>
+
+</body></html>
+

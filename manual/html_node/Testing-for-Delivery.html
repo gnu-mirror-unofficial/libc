@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Testing%20for%20Delivery">Testing for Delivery</a>,
+Next:<a rel=next accesskey=n href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>,
+Previous:<a rel=previous accesskey=p href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>,
+Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+<hr><br>
+
+<h4>Blocking to Test for Delivery of a Signal</h4>
+
+<p>Now for a simple example.  Suppose you establish a handler for
+<code>SIGALRM</code> signals that sets a flag whenever a signal arrives, and
+your main program checks this flag from time to time and then resets it. 
+You can prevent additional <code>SIGALRM</code> signals from arriving in the
+meantime by wrapping the critical part of the code with calls to
+<code>sigprocmask</code>, like this:
+
+<br><pre>/* This variable is set by the SIGALRM signal handler. */
+volatile sig_atomic_t flag = 0;
+
+int
+main (void)
+{
+  sigset_t block_alarm;
+
+  <small>...</small>
+
+  /* Initialize the signal mask. */
+  sigemptyset (&amp;block_alarm);
+  sigaddset (&amp;block_alarm, SIGALRM);
+
+  while (1)
+    {
+      /* Check if a signal has arrived; if so, reset the flag. */
+      sigprocmask (SIG_BLOCK, &amp;block_alarm, NULL);
+      if (flag)
+        {
+          <var>actions-if-not-arrived</var>
+          flag = 0;
+        }
+      sigprocmask (SIG_UNBLOCK, &amp;block_alarm, NULL);
+
+      <small>...</small>
+    }
+}
+</pre>
+
+</body></html>
+

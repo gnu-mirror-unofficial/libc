@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Setting%20User%20ID">Setting User ID</a>,
+Next:<a rel=next accesskey=n href="Setting-Groups.html#Setting%20Groups">Setting Groups</a>,
+Previous:<a rel=previous accesskey=p href="Reading-Persona.html#Reading%20Persona">Reading Persona</a>,
+Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+<hr><br>
+
+<h3>Setting the User ID</h3>
+
+<p>This section describes the functions for altering the user ID (real
+and/or effective) of a process.  To use these facilities, you must
+include the header files <code>sys/types.h</code> and <code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>seteuid</b><i> (uid_t <var>neweuid</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function sets the effective user ID of a process to <var>newuid</var>,
+provided that the process is allowed to change its effective user ID.  A
+privileged process (effective user ID zero) can change its effective
+user ID to any legal value.  An unprivileged process with a file user ID
+can change its effective user ID to its real user ID or to its file user
+ID.  Otherwise, a process may not change its effective user ID at all.
+
+<p>The <code>seteuid</code> function returns a value of <code>0</code> to indicate
+successful completion, and a value of <code>-1</code> to indicate an error. 
+The following <code>errno</code> error conditions are defined for this
+function:
+
+<dl>
+<dt><code>EINVAL</code>
+<dd>The value of the <var>newuid</var> argument is invalid.
+
+<br><dt><code>EPERM</code>
+<dd>The process may not change to the specified ID. 
+</dl>
+
+<p>Older systems (those without the <code>_POSIX_SAVED_IDS</code> feature) do not
+have this function. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>setuid</b><i> (uid_t <var>newuid</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If the calling process is privileged, this function sets both the real
+and effective user ID of the process to <var>newuid</var>.  It also deletes
+the file user ID of the process, if any.  <var>newuid</var> may be any
+legal value.  (Once this has been done, there is no way to recover the
+old effective user ID.)
+
+<p>If the process is not privileged, and the system supports the
+<code>_POSIX_SAVED_IDS</code> feature, then this function behaves like
+<code>seteuid</code>.
+
+<p>The return values and error conditions are the same as for <code>seteuid</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>setreuid</b><i> (uid_t <var>ruid</var>, uid_t <var>euid</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function sets the real user ID of the process to <var>ruid</var> and the
+effective user ID to <var>euid</var>.  If <var>ruid</var> is <code>-1</code>, it means
+not to change the real user ID; likewise if <var>euid</var> is <code>-1</code>, it
+means not to change the effective user ID.
+
+<p>The <code>setreuid</code> function exists for compatibility with 4.3 BSD Unix,
+which does not support file IDs.  You can use this function to swap the
+effective and real user IDs of the process.  (Privileged processes are
+not limited to this particular usage.)  If file IDs are supported, you
+should use that feature instead of this function.  See <a href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>.
+
+<p>The return value is <code>0</code> on success and <code>-1</code> on failure. 
+The following <code>errno</code> error conditions are defined for this
+function:
+
+<dl>
+<dt><code>EPERM</code>
+<dd>The process does not have the appropriate privileges; you do not
+have permission to change to the specified ID. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

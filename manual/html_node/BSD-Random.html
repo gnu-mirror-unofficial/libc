@@ -1,0 +1,209 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="BSD%20Random">BSD Random</a>,
+Next:<a rel=next accesskey=n href="SVID-Random.html#SVID%20Random">SVID Random</a>,
+Previous:<a rel=previous accesskey=p href="ISO-Random.html#ISO%20Random">ISO Random</a>,
+Up:<a rel=up accesskey=u href="Pseudo-Random-Numbers.html#Pseudo-Random%20Numbers">Pseudo-Random Numbers</a>
+<hr><br>
+
+<h4>BSD Random Number Functions</h4>
+
+<p>This section describes a set of random number generation functions that
+are derived from BSD.  There is no advantage to using these functions
+with the GNU C library; we support them for BSD compatibility only.
+
+<p>The prototypes for these functions are in <code>stdlib.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>random</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the next pseudo-random number in the sequence. 
+The value returned ranges from <code>0</code> to <code>RAND_MAX</code>.
+
+<p><strong>Note:</strong> Temporarily this function was defined to return a
+<code>int32_t</code> value to indicate that the return value always contains
+32 bits even if <code>long int</code> is wider.  The standard demands it
+differently.  Users must always be aware of the 32-bit limitation,
+though. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>srandom</b><i> (unsigned int <var>seed</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>srandom</code> function sets the state of the random number
+generator based on the integer <var>seed</var>.  If you supply a <var>seed</var> value
+of <code>1</code>, this will cause <code>random</code> to reproduce the default set
+of random numbers.
+
+<p>To produce a different set of pseudo-random numbers each time your
+program runs, do <code>srandom (time (0))</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>initstate</b><i> (unsigned int <var>seed</var>, void *<var>state</var>, size_t <var>size</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>initstate</code> function is used to initialize the random number
+generator state.  The argument <var>state</var> is an array of <var>size</var>
+bytes, used to hold the state information.  It is initialized based on
+<var>seed</var>.  The size must be between 8 and 256 bytes, and should be a
+power of two.  The bigger the <var>state</var> array, the better.
+
+<p>The return value is the previous value of the state information array. 
+You can use this value later as an argument to <code>setstate</code> to
+restore that state. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>setstate</b><i> (void *<var>state</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>setstate</code> function restores the random number state
+information <var>state</var>.  The argument must have been the result of
+a previous call to <var>initstate</var> or <var>setstate</var>.
+
+<p>The return value is the previous value of the state information array. 
+You can use this value later as an argument to <code>setstate</code> to
+restore that state.
+
+<p>If the function fails the return value is <code>NULL</code>. 
+</td></tr>
+</table>
+
+<p>The four functions described so far in this section all work on a state
+which is shared by all threads.  The state is not directly accessible to
+the user and can only be modified by these functions.  This makes it
+hard to deal with situations where each thread should have its own
+pseudo-random number generator.
+
+<p>The GNU C library contains four additional functions which contain the
+state as an explicit parameter and therefore make it possible to handle
+thread-local PRNGs.  Beside this there are no difference.  In fact, the
+four functions already discussed are implemented internally using the
+following interfaces.
+
+<p>The <code>stdlib.h</code> header contains a definition of the following type:
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct random_data</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>Objects of type <code>struct random_data</code> contain the information
+necessary to represent the state of the PRNG.  Although a complete
+definition of the type is present the type should be treated as opaque. 
+</td></tr>
+</table>
+
+<p>The functions modifying the state follow exactly the already described
+functions.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>random_r</b><i> (struct random_data *restrict <var>buf</var>, int32_t *restrict <var>result</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>random_r</code> function behaves exactly like the <code>random</code>
+function except that it uses and modifies the state in the object
+pointed to by the first parameter instead of the global state. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>srandom_r</b><i> (unsigned int <var>seed</var>, struct random_data *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>srandom_r</code> function behaves exactly like the <code>srandom</code>
+function except that it uses and modifies the state in the object
+pointed to by the second parameter instead of the global state. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>initstate_r</b><i> (unsigned int <var>seed</var>, char *restrict <var>statebuf</var>, size_t <var>statelen</var>, struct random_data *restrict <var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>initstate_r</code> function behaves exactly like the <code>initstate</code>
+function except that it uses and modifies the state in the object
+pointed to by the fourth parameter instead of the global state. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>setstate_r</b><i> (char *restrict <var>statebuf</var>, struct random_data *restrict <var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>setstate_r</code> function behaves exactly like the <code>setstate</code>
+function except that it uses and modifies the state in the object
+pointed to by the first parameter instead of the global state. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,154 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Absolute%20Value">Absolute Value</a>,
+Next:<a rel=next accesskey=n href="Normalization-Functions.html#Normalization%20Functions">Normalization Functions</a>,
+Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+<hr><br>
+
+<h4>Absolute Value</h4>
+
+<p>These functions are provided for obtaining the <dfn>absolute value</dfn> (or
+<dfn>magnitude</dfn>) of a number.  The absolute value of a real number
+<var>x</var> is <var>x</var> if <var>x</var> is positive, -<var>x</var> if <var>x</var> is
+negative.  For a complex number <var>z</var>, whose real part is <var>x</var> and
+whose imaginary part is <var>y</var>, the absolute value is <code>sqrt&nbsp;(<var>x</var>*<var>x</var>&nbsp;+&nbsp;<var>y</var>*<var>y</var>)</code>.
+
+<p>Prototypes for <code>abs</code>, <code>labs</code> and <code>llabs</code> are in <code>stdlib.h</code>;
+<code>imaxabs</code> is declared in <code>inttypes.h</code>;
+<code>fabs</code>, <code>fabsf</code> and <code>fabsl</code> are declared in <code>math.h</code>. 
+<code>cabs</code>, <code>cabsf</code> and <code>cabsl</code> are declared in <code>complex.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>abs</b><i> (int <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long int <b>labs</b><i> (long int <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>llabs</b><i> (long long int <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">intmax_t <b>imaxabs</b><i> (intmax_t <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the absolute value of <var>number</var>.
+
+<p>Most computers use a two's complement integer representation, in which
+the absolute value of <code>INT_MIN</code> (the smallest possible <code>int</code>)
+cannot be represented; thus, <code>abs&nbsp;(INT_MIN)</code> is not defined.
+
+<p><code>llabs</code> and <code>imaxdiv</code> are new to ISO&nbsp;C99.
+
+<p>See <a href="Integers.html#Integers">Integers</a> for a description of the <code>intmax_t</code> type.
+
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>fabs</b><i> (double <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>fabsf</b><i> (float <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>fabsl</b><i> (long double <var>number</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the absolute value of the floating-point number
+<var>number</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>cabs</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>cabsf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>cabsl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the absolute  value of the complex number <var>z</var>
+(see <a href="Complex-Numbers.html#Complex%20Numbers">Complex Numbers</a>).  The absolute value of a complex number is:
+
+<br><pre>sqrt (creal (<var>z</var>) * creal (<var>z</var>) + cimag (<var>z</var>) * cimag (<var>z</var>))
+</pre>
+
+<p>This function should always be used instead of the direct formula
+because it takes special care to avoid losing precision.  It may also
+take advantage of hardware support for this operation. See <code>hypot</code>
+in <a href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>. 
+</td></tr>
+</table>
+
+</body></html>
+

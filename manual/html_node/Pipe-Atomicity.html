@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Pipe%20Atomicity">Pipe Atomicity</a>,
+Previous:<a rel=previous accesskey=p href="FIFO-Special-Files.html#FIFO%20Special%20Files">FIFO Special Files</a>,
+Up:<a rel=up accesskey=u href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
+<hr><br>
+
+<h3>Atomicity of Pipe I/O</h3>
+
+<p>Reading or writing pipe data is <dfn>atomic</dfn> if the size of data written
+is not greater than <code>PIPE_BUF</code>.  This means that the data transfer
+seems to be an instantaneous unit, in that nothing else in the system
+can observe a state in which it is partially complete.  Atomic I/O may
+not begin right away (it may need to wait for buffer space or for data),
+but once it does begin it finishes immediately.
+
+<p>Reading or writing a larger amount of data may not be atomic; for
+example, output data from other processes sharing the descriptor may be
+interspersed.  Also, once <code>PIPE_BUF</code> characters have been written,
+further writes will block until some characters are read.
+
+<p>See <a href="Limits-for-Files.html#Limits%20for%20Files">Limits for Files</a>, for information about the <code>PIPE_BUF</code>
+parameter.
+
+</body></html>
+

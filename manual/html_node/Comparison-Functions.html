@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Comparison%20Functions">Comparison Functions</a>,
+Next:<a rel=next accesskey=n href="Array-Search-Function.html#Array%20Search%20Function">Array Search Function</a>,
+Up:<a rel=up accesskey=u href="Searching-and-Sorting.html#Searching%20and%20Sorting">Searching and Sorting</a>
+<hr><br>
+
+<h3>Defining the Comparison Function</h3>
+
+<p>In order to use the sorted array library functions, you have to describe
+how to compare the elements of the array.
+
+<p>To do this, you supply a comparison function to compare two elements of
+the array.  The library will call this function, passing as arguments
+pointers to two array elements to be compared.  Your comparison function
+should return a value the way <code>strcmp</code> (see <a href="String-Array-Comparison.html#String%2fArray%20Comparison">String/Array Comparison</a>) does: negative if the first argument is "less" than the
+second, zero if they are "equal", and positive if the first argument
+is "greater".
+
+<p>Here is an example of a comparison function which works with an array of
+numbers of type <code>double</code>:
+
+<br><pre>int
+compare_doubles (const void *a, const void *b)
+{
+  const double *da = (const double *) a;
+  const double *db = (const double *) b;
+
+  return (*da &gt; *db) - (*da &lt; *db);
+}
+</pre>
+
+<p>The header file <code>stdlib.h</code> defines a name for the data type of
+comparison functions.  This type is a GNU extension.
+
+<br><pre>int comparison_fn_t (const void *, const void *);
+</pre>
+
+</body></html>
+

@@ -1,0 +1,230 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Executing%20a%20File">Executing a File</a>,
+Next:<a rel=next accesskey=n href="Process-Completion.html#Process%20Completion">Process Completion</a>,
+Previous:<a rel=previous accesskey=p href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>,
+Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+<hr><br>
+
+<h3>Executing a File</h3>
+
+<p>This section describes the <code>exec</code> family of functions, for executing
+a file as a process image.  You can use these functions to make a child
+process execute a new program after it has been forked.
+
+<p>To see the effects of <code>exec</code> from the point of view of the called
+program, See <a href="Program-Basics.html#Program%20Basics">Program Basics</a>.
+
+<p>The functions in this family differ in how you specify the arguments,
+but otherwise they all do the same thing.  They are declared in the
+header file <code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execv</b><i> (const char *<var>filename</var>, char *const <var>argv</var><tt>[]</tt>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>execv</code> function executes the file named by <var>filename</var> as a
+new process image.
+
+<p>The <var>argv</var> argument is an array of null-terminated strings that is
+used to provide a value for the <code>argv</code> argument to the <code>main</code>
+function of the program to be executed.  The last element of this array
+must be a null pointer.  By convention, the first element of this array
+is the file name of the program sans directory names.  See <a href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>, for full details on how programs can access these arguments.
+
+<p>The environment for the new process image is taken from the
+<code>environ</code> variable of the current process image; see
+<a href="Environment-Variables.html#Environment%20Variables">Environment Variables</a>, for information about environments. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execl</b><i> (const char *<var>filename</var>, const char *<var>arg0</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is similar to <code>execv</code>, but the <var>argv</var> strings are
+specified individually instead of as an array.  A null pointer must be
+passed as the last such argument. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execve</b><i> (const char *<var>filename</var>, char *const <var>argv</var><tt>[]</tt>, char *const <var>env</var><tt>[]</tt>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is similar to <code>execv</code>, but permits you to specify the environment
+for the new program explicitly as the <var>env</var> argument.  This should
+be an array of strings in the same format as for the <code>environ</code>
+variable; see <a href="Environment-Access.html#Environment%20Access">Environment Access</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execle</b><i> (const char *<var>filename</var>, const char *<var>arg0</var>, char *const <var>env</var><tt>[]</tt>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is similar to <code>execl</code>, but permits you to specify the
+environment for the new program explicitly.  The environment argument is
+passed following the null pointer that marks the last <var>argv</var>
+argument, and should be an array of strings in the same format as for
+the <code>environ</code> variable. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execvp</b><i> (const char *<var>filename</var>, char *const <var>argv</var><tt>[]</tt>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>execvp</code> function is similar to <code>execv</code>, except that it
+searches the directories listed in the <code>PATH</code> environment variable
+(see <a href="Standard-Environment.html#Standard%20Environment">Standard Environment</a>) to find the full file name of a
+file from <var>filename</var> if <var>filename</var> does not contain a slash.
+
+<p>This function is useful for executing system utility programs, because
+it looks for them in the places that the user has chosen.  Shells use it
+to run the commands that users type. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>execlp</b><i> (const char *<var>filename</var>, const char *<var>arg0</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is like <code>execl</code>, except that it performs the same
+file name searching as the <code>execvp</code> function. 
+</td></tr>
+</table>
+
+<p>The size of the argument list and environment list taken together must
+not be greater than <code>ARG_MAX</code> bytes.  See <a href="General-Limits.html#General%20Limits">General Limits</a>.  In
+the GNU system, the size (which compares against <code>ARG_MAX</code>)
+includes, for each string, the number of characters in the string, plus
+the size of a <code>char *</code>, plus one, rounded up to a multiple of the
+size of a <code>char *</code>.  Other systems may have somewhat different
+rules for counting.
+
+<p>These functions normally don't return, since execution of a new program
+causes the currently executing program to go away completely.  A value
+of <code>-1</code> is returned in the event of a failure.  In addition to the
+usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following
+<code>errno</code> error conditions are defined for these functions:
+
+<dl>
+<dt><code>E2BIG</code>
+<dd>The combined size of the new program's argument list and environment
+list is larger than <code>ARG_MAX</code> bytes.  The GNU system has no
+specific limit on the argument list size, so this error code cannot
+result, but you may get <code>ENOMEM</code> instead if the arguments are too
+big for available memory.
+
+<br><dt><code>ENOEXEC</code>
+<dd>The specified file can't be executed because it isn't in the right format.
+
+<br><dt><code>ENOMEM</code>
+<dd>Executing the specified file requires more storage than is available. 
+</dl>
+
+<p>If execution of the new file succeeds, it updates the access time field
+of the file as if the file had been read.  See <a href="File-Times.html#File%20Times">File Times</a>, for more
+details about access times of files.
+
+<p>The point at which the file is closed again is not specified, but
+is at some point before the process exits or before another process
+image is executed.
+
+<p>Executing a new process image completely changes the contents of memory,
+copying only the argument and environment strings to new locations.  But
+many other attributes of the process are unchanged:
+
+<ul>
+<li>The process ID and the parent process ID.  See <a href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>.
+
+<li>Session and process group membership.  See <a href="Concepts-of-Job-Control.html#Concepts%20of%20Job%20Control">Concepts of Job Control</a>.
+
+<li>Real user ID and group ID, and supplementary group IDs.  See <a href="Process-Persona.html#Process%20Persona">Process Persona</a>.
+
+<li>Pending alarms.  See <a href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>.
+
+<li>Current working directory and root directory.  See <a href="Working-Directory.html#Working%20Directory">Working Directory</a>.  In the GNU system, the root directory is not copied when
+executing a setuid program; instead the system default root directory
+is used for the new program.
+
+<li>File mode creation mask.  See <a href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>.
+
+<li>Process signal mask; see <a href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>.
+
+<li>Pending signals; see <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.
+
+<li>Elapsed processor time associated with the process; see <a href="Processor-Time.html#Processor%20Time">Processor Time</a>. 
+</ul>
+
+<p>If the set-user-ID and set-group-ID mode bits of the process image file
+are set, this affects the effective user ID and effective group ID
+(respectively) of the process.  These concepts are discussed in detail
+in <a href="Process-Persona.html#Process%20Persona">Process Persona</a>.
+
+<p>Signals that are set to be ignored in the existing process image are
+also set to be ignored in the new process image.  All other signals are
+set to the default action in the new process image.  For more
+information about signals, see <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>.
+
+<p>File descriptors open in the existing process image remain open in the
+new process image, unless they have the <code>FD_CLOEXEC</code>
+(close-on-exec) flag set.  The files that remain open inherit all
+attributes of the open file description from the existing process image,
+including file locks.  File descriptors are discussed in <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>.
+
+<p>Streams, by contrast, cannot survive through <code>exec</code> functions,
+because they are located in the memory of the process itself.  The new
+process image has no streams except those it creates afresh.  Each of
+the streams in the pre-<code>exec</code> process image has a descriptor inside
+it, and these descriptors do survive through <code>exec</code> (provided that
+they do not have <code>FD_CLOEXEC</code> set).  The new process image can
+reconnect these to new streams using <code>fdopen</code> (see <a href="Descriptors-and-Streams.html#Descriptors%20and%20Streams">Descriptors and Streams</a>).
+
+</body></html>
+

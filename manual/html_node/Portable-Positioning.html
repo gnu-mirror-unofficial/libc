@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Portable%20Positioning">Portable Positioning</a>,
+Next:<a rel=next accesskey=n href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>,
+Previous:<a rel=previous accesskey=p href="File-Positioning.html#File%20Positioning">File Positioning</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>Portable File-Position Functions</h3>
+
+<p>On the GNU system, the file position is truly a character count.  You
+can specify any character count value as an argument to <code>fseek</code> or
+<code>fseeko</code> and get reliable results for any random access file. 
+However, some ISO&nbsp;C systems do not represent file positions in this
+way.
+
+<p>On some systems where text streams truly differ from binary streams, it
+is impossible to represent the file position of a text stream as a count
+of characters from the beginning of the file.  For example, the file
+position on some systems must encode both a record offset within the
+file, and a character offset within the record.
+
+<p>As a consequence, if you want your programs to be portable to these
+systems, you must observe certain rules:
+
+<ul>
+<li>The value returned from <code>ftell</code> on a text stream has no predictable
+relationship to the number of characters you have read so far.  The only
+thing you can rely on is that you can use it subsequently as the
+<var>offset</var> argument to <code>fseek</code> or <code>fseeko</code> to move back to
+the same file position.
+
+<li>In a call to <code>fseek</code> or <code>fseeko</code> on a text stream, either the
+<var>offset</var> must be zero, or <var>whence</var> must be <code>SEEK_SET</code> and
+and the <var>offset</var> must be the result of an earlier call to <code>ftell</code>
+on the same stream.
+
+<li>The value of the file position indicator of a text stream is undefined
+while there are characters that have been pushed back with <code>ungetc</code>
+that haven't been read or discarded.  See <a href="Unreading.html#Unreading">Unreading</a>. 
+</ul>
+
+<p>But even if you observe these rules, you may still have trouble for long
+files, because <code>ftell</code> and <code>fseek</code> use a <code>long int</code> value
+to represent the file position.  This type may not have room to encode
+all the file positions in a large file.  Using the <code>ftello</code> and
+<code>fseeko</code> functions might help here since the <code>off_t</code> type is
+expected to be able to hold all file position values but this still does
+not help to handle additional information which must be associated with
+a file position.
+
+<p>So if you do want to support systems with peculiar encodings for the
+file positions, it is better to use the functions <code>fgetpos</code> and
+<code>fsetpos</code> instead.  These functions represent the file position
+using the data type <code>fpos_t</code>, whose internal representation varies
+from system to system.
+
+<p>These symbols are declared in the header file <code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>fpos_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the type of an object that can encode information about the
+file position of a stream, for use by the functions <code>fgetpos</code> and
+<code>fsetpos</code>.
+
+<p>In the GNU system, <code>fpos_t</code> is an opaque data structure that
+contains internal data to represent file offset and conversion state
+information.  In other systems, it might have a different internal
+representation.
+
+<p>When compiling with <code>_FILE_OFFSET_BITS == 64</code> on a 32 bit machine
+this type is in fact equivalent to <code>fpos64_t</code> since the LFS
+interface transparently replaces the old interface. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>fpos64_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the type of an object that can encode information about the
+file position of a stream, for use by the functions <code>fgetpos64</code> and
+<code>fsetpos64</code>.
+
+<p>In the GNU system, <code>fpos64_t</code> is an opaque data structure that
+contains internal data to represent file offset and conversion state
+information.  In other systems, it might have a different internal
+representation. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fgetpos</b><i> (FILE *<var>stream</var>, fpos_t *<var>position</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function stores the value of the file position indicator for the
+stream <var>stream</var> in the <code>fpos_t</code> object pointed to by
+<var>position</var>.  If successful, <code>fgetpos</code> returns zero; otherwise
+it returns a nonzero value and stores an implementation-defined positive
+value in <code>errno</code>.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+32 bit system the function is in fact <code>fgetpos64</code>.  I.e., the LFS
+interface transparently replaces the old interface. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fgetpos64</b><i> (FILE *<var>stream</var>, fpos64_t *<var>position</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>fgetpos</code> but the file position is
+returned in a variable of type <code>fpos64_t</code> to which <var>position</var>
+points.
+
+<p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+bits machine this function is available under the name <code>fgetpos</code>
+and so transparently replaces the old interface. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fsetpos</b><i> (FILE *<var>stream</var>, const fpos_t *<var>position</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function sets the file position indicator for the stream <var>stream</var>
+to the position <var>position</var>, which must have been set by a previous
+call to <code>fgetpos</code> on the same stream.  If successful, <code>fsetpos</code>
+clears the end-of-file indicator on the stream, discards any characters
+that were "pushed back" by the use of <code>ungetc</code>, and returns a value
+of zero.  Otherwise, <code>fsetpos</code> returns a nonzero value and stores
+an implementation-defined positive value in <code>errno</code>.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a
+32 bit system the function is in fact <code>fsetpos64</code>.  I.e., the LFS
+interface transparently replaces the old interface. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fsetpos64</b><i> (FILE *<var>stream</var>, const fpos64_t *<var>position</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>fsetpos</code> but the file position used
+for positioning is provided in a variable of type <code>fpos64_t</code> to
+which <var>position</var> points.
+
+<p>If the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> on a 32
+bits machine this function is available under the name <code>fsetpos</code>
+and so transparently replaces the old interface. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Example%20of%20Parsing">Example of Parsing</a>,
+Previous:<a rel=previous accesskey=p href="Parsing-a-Template-String.html#Parsing%20a%20Template%20String">Parsing a Template String</a>,
+Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+<hr><br>
+
+<h4>Example of Parsing a Template String</h4>
+
+<p>Here is an example of decoding argument types for a format string.  We
+assume this is part of an interpreter which contains arguments of type
+<code>NUMBER</code>, <code>CHAR</code>, <code>STRING</code> and <code>STRUCTURE</code> (and
+perhaps others which are not valid here).
+
+<br><pre>/* Test whether the <var>nargs</var> specified objects
+   in the vector <var>args</var> are valid
+   for the format string <var>format</var>:
+   if so, return 1.
+   If not, return 0 after printing an error message.  */
+
+int
+validate_args (char *format, int nargs, OBJECT *args)
+{
+  int *argtypes;
+  int nwanted;
+
+  /* Get the information about the arguments.
+     Each conversion specification must be at least two characters
+     long, so there cannot be more specifications than half the
+     length of the string.  */
+
+  argtypes = (int *) alloca (strlen (format) / 2 * sizeof (int));
+  nwanted = parse_printf_format (string, nelts, argtypes);
+
+  /* Check the number of arguments.  */
+  if (nwanted &gt; nargs)
+    {
+      error ("too few arguments (at least %d required)", nwanted);
+      return 0;
+    }
+
+  /* Check the C type wanted for each argument
+     and see if the object given is suitable.  */
+  for (i = 0; i &lt; nwanted; i++)
+    {
+      int wanted;
+
+      if (argtypes[i] &amp; PA_FLAG_PTR)
+        wanted = STRUCTURE;
+      else
+        switch (argtypes[i] &amp; ~PA_FLAG_MASK)
+          {
+          case PA_INT:
+          case PA_FLOAT:
+          case PA_DOUBLE:
+            wanted = NUMBER;
+            break;
+          case PA_CHAR:
+            wanted = CHAR;
+            break;
+          case PA_STRING:
+            wanted = STRING;
+            break;
+          case PA_POINTER:
+            wanted = STRUCTURE;
+            break;
+          }
+      if (TYPE (args[i]) != wanted)
+        {
+          error ("type mismatch for arg number %d", i);
+          return 0;
+        }
+    }
+  return 1;
+}
+</pre>
+
+</body></html>
+

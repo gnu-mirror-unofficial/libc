@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Configuring%20Inetd">Configuring Inetd</a>,
+Previous:<a rel=previous accesskey=p href="Inetd-Servers.html#Inetd%20Servers">Inetd Servers</a>,
+Up:<a rel=up accesskey=u href="Inetd.html#Inetd">Inetd</a>
+<hr><br>
+
+<h4>Configuring <code>inetd</code></h4>
+
+<p>The file <code>/etc/inetd.conf</code> tells <code>inetd</code> which ports to listen to
+and what server programs to run for them.  Normally each entry in the
+file is one line, but you can split it onto multiple lines provided
+all but the first line of the entry start with whitespace.  Lines that
+start with <code>#</code> are comments.
+
+<p>Here are two standard entries in <code>/etc/inetd.conf</code>:
+
+<br><pre>ftp	stream	tcp	nowait	root	/libexec/ftpd	ftpd
+talk	dgram	udp	wait	root	/libexec/talkd	talkd
+</pre>
+
+<p>An entry has this format:
+
+<br><pre><var>service</var> <var>style</var> <var>protocol</var> <var>wait</var> <var>username</var> <var>program</var> <var>arguments</var>
+</pre>
+
+<p>The <var>service</var> field says which service this program provides.  It
+should be the name of a service defined in <code>/etc/services</code>. 
+<code>inetd</code> uses <var>service</var> to decide which port to listen on for
+this entry.
+
+<p>The fields <var>style</var> and <var>protocol</var> specify the communication
+style and the protocol to use for the listening socket.  The style
+should be the name of a communication style, converted to lower case
+and with <code>SOCK_</code> deleted--for example, <code>stream</code> or
+<code>dgram</code>.  <var>protocol</var> should be one of the protocols listed in
+<code>/etc/protocols</code>.  The typical protocol names are <code>tcp</code> for
+byte stream connections and <code>udp</code> for unreliable datagrams.
+
+<p>The <var>wait</var> field should be either <code>wait</code> or <code>nowait</code>. 
+Use <code>wait</code> if <var>style</var> is a connectionless style and the
+server, once started, handles multiple requests as they come in. 
+Use <code>nowait</code> if <code>inetd</code> should start a new process for each message
+or request that comes in.  If <var>style</var> uses connections, then
+<var>wait</var> <strong>must</strong> be <code>nowait</code>.
+
+<p><var>user</var> is the user name that the server should run as.  <code>inetd</code> runs
+as root, so it can set the user ID of its children arbitrarily.  It's
+best to avoid using <code>root</code> for <var>user</var> if you can; but some
+servers, such as Telnet and FTP, read a username and password
+themselves.  These servers need to be root initially so they can log
+in as commanded by the data coming over the network.
+
+<p><var>program</var> together with <var>arguments</var> specifies the command to
+run to start the server.  <var>program</var> should be an absolute file
+name specifying the executable file to run.  <var>arguments</var> consists
+of any number of whitespace-separated words, which become the
+command-line arguments of <var>program</var>.  The first word in
+<var>arguments</var> is argument zero, which should by convention be the
+program name itself (sans directories).
+
+<p>If you edit <code>/etc/inetd.conf</code>, you can tell <code>inetd</code> to reread the
+file and obey its new contents by sending the <code>inetd</code> process the
+<code>SIGHUP</code> signal.  You'll have to use <code>ps</code> to determine the
+process ID of the <code>inetd</code> process as it is not fixed.
+
+</body></html>
+

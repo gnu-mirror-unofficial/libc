@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Stream%20Buffering">Stream Buffering</a>,
+Next:<a rel=next accesskey=n href="Other-Kinds-of-Streams.html#Other%20Kinds%20of%20Streams">Other Kinds of Streams</a>,
+Previous:<a rel=previous accesskey=p href="Portable-Positioning.html#Portable%20Positioning">Portable Positioning</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>Stream Buffering</h3>
+
+<p>Characters that are written to a stream are normally accumulated and
+transmitted asynchronously to the file in a block, instead of appearing
+as soon as they are output by the application program.  Similarly,
+streams often retrieve input from the host environment in blocks rather
+than on a character-by-character basis.  This is called <dfn>buffering</dfn>.
+
+<p>If you are writing programs that do interactive input and output using
+streams, you need to understand how buffering works when you design the
+user interface to your program.  Otherwise, you might find that output
+(such as progress or prompt messages) doesn't appear when you intended
+it to, or displays some other unexpected behavior.
+
+<p>This section deals only with controlling when characters are transmitted
+between the stream and the file or device, and <em>not</em> with how
+things like echoing, flow control, and the like are handled on specific
+classes of devices.  For information on common control operations on
+terminal devices, see <a href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>.
+
+<p>You can bypass the stream buffering facilities altogether by using the
+low-level input and output functions that operate on file descriptors
+instead.  See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>.
+
+<ul>
+<li><a accesskey=1 href="Buffering-Concepts.html#Buffering%20Concepts">Buffering Concepts</a>:           Terminology is defined here. 
+<li><a accesskey=2 href="Flushing-Buffers.html#Flushing%20Buffers">Flushing Buffers</a>:             How to ensure that output buffers are flushed. 
+<li><a accesskey=3 href="Controlling-Buffering.html#Controlling%20Buffering">Controlling Buffering</a>:        How to specify what kind of buffering to use. 
+</ul>
+
+</body></html>
+

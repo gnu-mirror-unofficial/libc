@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Suboptions">Suboptions</a>,
+Next:<a rel=next accesskey=n href="Suboptions-Example.html#Suboptions%20Example">Suboptions Example</a>,
+Previous:<a rel=previous accesskey=p href="Argp.html#Argp">Argp</a>,
+Up:<a rel=up accesskey=u href="Parsing-Program-Arguments.html#Parsing%20Program%20Arguments">Parsing Program Arguments</a>
+<hr><br>
+
+<h5>Parsing of Suboptions</h5>
+
+<p>Having a single level of options is sometimes not enough.  There might
+be too many options which have to be available or a set of options is
+closely related.
+
+<p>For this case some programs use suboptions.  One of the most prominent
+programs is certainly <code>mount</code>(8).  The <code>-o</code> option take one
+argument which itself is a comma separated list of options.  To ease the
+programming of code like this the function <code>getsubopt</code> is
+available.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getsubopt</b><i> (char **<var>optionp</var>, const char* const *<var>tokens</var>, char **<var>valuep</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>The <var>optionp</var> parameter must be a pointer to a variable containing
+the address of the string to process.  When the function returns the
+reference is updated to point to the next suboption or to the
+terminating <code>\0</code> character if there is no more suboption available.
+
+<p>The <var>tokens</var> parameter references an array of strings containing the
+known suboptions.  All strings must be <code>\0</code> terminated and to mark
+the end a null pointer must be stored.  When <code>getsubopt</code> finds a
+possible legal suboption it compares it with all strings available in
+the <var>tokens</var> array and returns the index in the string as the
+indicator.
+
+<p>In case the suboption has an associated value introduced by a <code>=</code>
+character, a pointer to the value is returned in <var>valuep</var>.  The
+string is <code>\0</code> terminated.  If no argument is available
+<var>valuep</var> is set to the null pointer.  By doing this the caller can
+check whether a necessary value is given or whether no unexpected value
+is present.
+
+<p>In case the next suboption in the string is not mentioned in the
+<var>tokens</var> array the starting address of the suboption including a
+possible value is returned in <var>valuep</var> and the return value of the
+function is <code>-1</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

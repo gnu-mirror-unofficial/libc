@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Database%20Example">Database Example</a>,
+Next:<a rel=next accesskey=n href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>,
+Previous:<a rel=previous accesskey=p href="Group-Database.html#Group%20Database">Group Database</a>,
+Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+<hr><br>
+
+<h3>User and Group Database Example</h3>
+
+<p>Here is an example program showing the use of the system database inquiry
+functions.  The program prints some information about the user running
+the program.
+
+<br><pre>
+
+#include &lt;grp.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+int
+main (void)
+{
+  uid_t me;
+  struct passwd *my_passwd;
+  struct group *my_group;
+  char **members;
+
+  /* Get information about the user ID. */
+  me = getuid ();
+  my_passwd = getpwuid (me);
+  if (!my_passwd)
+    {
+      printf ("Couldn't find out about user %d.\n", (int) me);
+      exit (EXIT_FAILURE);
+    }
+
+  /* Print the information. */
+  printf ("I am %s.\n", my_passwd-&gt;pw_gecos);
+  printf ("My login name is %s.\n", my_passwd-&gt;pw_name);
+  printf ("My uid is %d.\n", (int) (my_passwd-&gt;pw_uid));
+  printf ("My home directory is %s.\n", my_passwd-&gt;pw_dir);
+  printf ("My default shell is %s.\n", my_passwd-&gt;pw_shell);
+
+  /* Get information about the default group ID. */
+  my_group = getgrgid (my_passwd-&gt;pw_gid);
+  if (!my_group)
+    {
+      printf ("Couldn't find out about group %d.\n",
+              (int) my_passwd-&gt;pw_gid);
+      exit (EXIT_FAILURE);
+    }
+
+  /* Print the information. */
+  printf ("My default group is %s (%d).\n",
+          my_group-&gt;gr_name, (int) (my_passwd-&gt;pw_gid));
+  printf ("The members of this group are:\n");
+  members = my_group-&gt;gr_mem;
+  while (*members)
+    {
+      printf ("  %s\n", *(members));
+      members++;
+    }
+
+  return EXIT_SUCCESS;
+}
+</pre>
+
+<p>Here is some output from this program:
+
+<br><pre>I am Throckmorton Snurd.
+My login name is snurd.
+My uid is 31093.
+My home directory is /home/fsg/snurd.
+My default shell is /bin/sh.
+My default group is guest (12).
+The members of this group are:
+  friedman
+  tami
+</pre>
+
+</body></html>
+

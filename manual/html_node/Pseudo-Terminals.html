@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Pseudo-Terminals">Pseudo-Terminals</a>,
+Previous:<a rel=previous accesskey=p href="Noncanon-Example.html#Noncanon%20Example">Noncanon Example</a>,
+Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+<hr><br>
+
+<h3>Pseudo-Terminals</h3>
+
+<p>A <dfn>pseudo-terminal</dfn> is a special interprocess communication channel
+that acts like a terminal.  One end of the channel is called the
+<dfn>master</dfn> side or <dfn>master pseudo-terminal device</dfn>, the other side
+is called the <dfn>slave</dfn> side.  Data written to the master side is
+received by the slave side as if it was the result of a user typing at
+an ordinary terminal, and data written to the slave side is sent to the
+master side as if it was written on an ordinary terminal.
+
+<p>Pseudo terminals are the way programs like <code>xterm</code> and <code>emacs</code>
+implement their terminal emulation functionality.
+
+<ul>
+<li><a accesskey=1 href="Allocation.html#Allocation">Allocation</a>:              Allocating a pseudo terminal. 
+<li><a accesskey=2 href="Pseudo-Terminal-Pairs.html#Pseudo-Terminal%20Pairs">Pseudo-Terminal Pairs</a>:   How to open both sides of a
+                            pseudo-terminal in a single operation. 
+</ul>
+
+</body></html>
+

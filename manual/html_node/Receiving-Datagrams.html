@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Receiving%20Datagrams">Receiving Datagrams</a>,
+Next:<a rel=next accesskey=n href="Datagram-Example.html#Datagram%20Example">Datagram Example</a>,
+Previous:<a rel=previous accesskey=p href="Sending-Datagrams.html#Sending%20Datagrams">Sending Datagrams</a>,
+Up:<a rel=up accesskey=u href="Datagrams.html#Datagrams">Datagrams</a>
+<hr><br>
+
+<h4>Receiving Datagrams</h4>
+
+<p>The <code>recvfrom</code> function reads a packet from a datagram socket and
+also tells you where it was sent from.  This function is declared in
+<code>sys/socket.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>recvfrom</b><i> (int <var>socket</var>, void *<var>buffer</var>, size_t <var>size</var>, int <var>flags</var>, struct sockaddr *<var>addr</var>, socklen_t *<var>length-ptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>recvfrom</code> function reads one packet from the socket
+<var>socket</var> into the buffer <var>buffer</var>.  The <var>size</var> argument
+specifies the maximum number of bytes to be read.
+
+<p>If the packet is longer than <var>size</var> bytes, then you get the first
+<var>size</var> bytes of the packet and the rest of the packet is lost. 
+There's no way to read the rest of the packet.  Thus, when you use a
+packet protocol, you must always know how long a packet to expect.
+
+<p>The <var>addr</var> and <var>length-ptr</var> arguments are used to return the
+address where the packet came from.  See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>.  For a
+socket in the local domain the address information won't be meaningful,
+since you can't read the address of such a socket (see <a href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>).  You can specify a null pointer as the <var>addr</var> argument
+if you are not interested in this information.
+
+<p>The <var>flags</var> are interpreted the same way as for <code>recv</code>
+(see <a href="Socket-Data-Options.html#Socket%20Data%20Options">Socket Data Options</a>).  The return value and error conditions
+are also the same as for <code>recv</code>.
+
+<p>This function is defined as a cancellation point in multi-threaded
+programs, so one has to be prepared for this and make sure that
+allocated resources (like memory, files descriptors, semaphores or
+whatever) are freed even if the thread is canceled. 
+</td></tr>
+</table>
+
+<p>You can use plain <code>recv</code> (see <a href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>) instead of
+<code>recvfrom</code> if you don't need to find out who sent the packet
+(either because you know where it should come from or because you
+treat all possible senders alike).  Even <code>read</code> can be used if
+you don't want to specify <var>flags</var> (see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>).
+
+</body></html>
+

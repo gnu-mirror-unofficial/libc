@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20User%20Customization">Argp User Customization</a>,
+Previous:<a rel=previous accesskey=p href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>,
+Up:<a rel=up accesskey=u href="Argp.html#Argp">Argp</a>
+<hr><br>
+
+<h4>Argp User Customization</h4>
+
+<p>The formatting of argp <code>--help</code> output may be controlled to some
+extent by a program's users, by setting the <code>ARGP_HELP_FMT</code>
+environment variable to a comma-separated list of tokens.  Whitespace is
+ignored:
+
+<dl>
+<dt><code>dup-args</code>
+<dt><code>no-dup-args</code>
+<dd>These turn <dfn>duplicate-argument-mode</dfn> on or off.  In duplicate
+argument mode, if an option that accepts an argument has multiple names,
+the argument is shown for each name.  Otherwise, it is only shown for the
+first long option.  A note is subsequently printed so the user knows that
+it applies to other names as well.  The default is <code>no-dup-args</code>,
+which is less consistent, but prettier.
+
+<br><dt><code>dup-args-note</code>
+<br><dt><code>no-dup-args-note</code>
+<dd>These will enable or disable the note informing the user of suppressed
+option argument duplication.  The default is <code>dup-args-note</code>.
+
+<br><dt><code>short-opt-col=<var>n</var></code>
+<dd>This prints the first short option in column <var>n</var>.  The default is 2.
+
+<br><dt><code>long-opt-col=<var>n</var></code>
+<dd>This prints the first long option in column <var>n</var>.  The default is 6.
+
+<br><dt><code>doc-opt-col=<var>n</var></code>
+<dd>This prints `documentation options' (see <a href="Argp-Option-Flags.html#Argp%20Option%20Flags">Argp Option Flags</a>) in
+column <var>n</var>.  The default is 2.
+
+<br><dt><code>opt-doc-col=<var>n</var></code>
+<dd>This prints the documentation for options starting in column
+<var>n</var>.  The default is 29.
+
+<br><dt><code>header-col=<var>n</var></code>
+<dd>This will indent the group headers that document groups of options to
+column <var>n</var>.  The default is 1.
+
+<br><dt><code>usage-indent=<var>n</var></code>
+<dd>This will indent continuation lines in <code>Usage:</code> messages to column
+<var>n</var>.  The default is 12.
+
+<br><dt><code>rmargin=<var>n</var></code>
+<dd>This will word wrap help output at or before column <var>n</var>.  The default
+is 79. 
+</dl>
+
+</body></html>
+

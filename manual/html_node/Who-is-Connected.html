@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Who%20is%20Connected">Who is Connected</a>,
+Next:<a rel=next accesskey=n href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>,
+Previous:<a rel=previous accesskey=p href="Accepting-Connections.html#Accepting%20Connections">Accepting Connections</a>,
+Up:<a rel=up accesskey=u href="Connections.html#Connections">Connections</a>
+<hr><br>
+
+<h4>Who is Connected to Me?</h4>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getpeername</b><i> (int <var>socket</var>, struct sockaddr *<var>addr</var>, socklen_t *<var>length-ptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getpeername</code> function returns the address of the socket that
+<var>socket</var> is connected to; it stores the address in the memory space
+specified by <var>addr</var> and <var>length-ptr</var>.  It stores the length of
+the address in <code>*<var>length-ptr</var></code>.
+
+<p>See <a href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>, for information about the format of the
+address.  In some operating systems, <code>getpeername</code> works only for
+sockets in the Internet domain.
+
+<p>The return value is <code>0</code> on success and <code>-1</code> on error.  The
+following <code>errno</code> error conditions are defined for this function:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The argument <var>socket</var> is not a valid file descriptor.
+
+<br><dt><code>ENOTSOCK</code>
+<dd>The descriptor <var>socket</var> is not a socket.
+
+<br><dt><code>ENOTCONN</code>
+<dd>The socket <var>socket</var> is not connected.
+
+<br><dt><code>ENOBUFS</code>
+<dd>There are not enough internal buffers available. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

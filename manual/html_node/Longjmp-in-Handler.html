@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Longjmp%20in%20Handler">Longjmp in Handler</a>,
+Next:<a rel=next accesskey=n href="Signals-in-Handler.html#Signals%20in%20Handler">Signals in Handler</a>,
+Previous:<a rel=previous accesskey=p href="Termination-in-Handler.html#Termination%20in%20Handler">Termination in Handler</a>,
+Up:<a rel=up accesskey=u href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
+<hr><br>
+
+<h4>Nonlocal Control Transfer in Handlers</h4>
+
+<p>You can do a nonlocal transfer of control out of a signal handler using
+the <code>setjmp</code> and <code>longjmp</code> facilities (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>).
+
+<p>When the handler does a nonlocal control transfer, the part of the
+program that was running will not continue.  If this part of the program
+was in the middle of updating an important data structure, the data
+structure will remain inconsistent.  Since the program does not
+terminate, the inconsistency is likely to be noticed later on.
+
+<p>There are two ways to avoid this problem.  One is to block the signal
+for the parts of the program that update important data structures. 
+Blocking the signal delays its delivery until it is unblocked, once the
+critical updating is finished.  See <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.
+
+<p>The other way to re-initialize the crucial data structures in the signal
+handler, or make their values consistent.
+
+<p>Here is a rather schematic example showing the reinitialization of one
+global variable.
+
+<br><pre>#include &lt;signal.h&gt;
+#include &lt;setjmp.h&gt;
+
+jmp_buf return_to_top_level;
+
+volatile sig_atomic_t waiting_for_input;
+
+void
+handle_sigint (int signum)
+{
+  /* We may have been waiting for input when the signal arrived,
+     but we are no longer waiting once we transfer control. */
+  waiting_for_input = 0;
+  longjmp (return_to_top_level, 1);
+}
+
+int
+main (void)
+{
+  <small>...</small>
+  signal (SIGINT, sigint_handler);
+  <small>...</small>
+  while (1) {
+    prepare_for_command ();
+    if (setjmp (return_to_top_level) == 0)
+      read_and_execute_command ();
+  }
+}
+
+/* Imagine this is a subroutine used by various commands. */
+char *
+read_data ()
+{
+  if (input_from_terminal) {
+    waiting_for_input = 1;
+    <small>...</small>
+    waiting_for_input = 0;
+  } else {
+    <small>...</small>
+  }
+}
+</pre>
+
+</body></html>
+

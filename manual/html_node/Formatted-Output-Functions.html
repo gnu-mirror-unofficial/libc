@@ -1,0 +1,217 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Formatted%20Output%20Functions">Formatted Output Functions</a>,
+Next:<a rel=next accesskey=n href="Dynamic-Output.html#Dynamic%20Output">Dynamic Output</a>,
+Previous:<a rel=previous accesskey=p href="Other-Output-Conversions.html#Other%20Output%20Conversions">Other Output Conversions</a>,
+Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+<hr><br>
+
+<h4>Formatted Output Functions</h4>
+
+<p>This section describes how to call <code>printf</code> and related functions. 
+Prototypes for these functions are in the header file <code>stdio.h</code>. 
+Because these functions take a variable number of arguments, you
+<em>must</em> declare prototypes for them before using them.  Of course,
+the easiest way to make sure you have all the right prototypes is to
+just include <code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>printf</b><i> (const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>printf</code> function prints the optional arguments under the
+control of the template string <var>template</var> to the stream
+<code>stdout</code>.  It returns the number of characters printed, or a
+negative value if there was an output error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>wprintf</b><i> (const wchar_t *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>wprintf</code> function prints the optional arguments under the
+control of the wide template string <var>template</var> to the stream
+<code>stdout</code>.  It returns the number of wide characters printed, or a
+negative value if there was an output error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fprintf</b><i> (FILE *<var>stream</var>, const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is just like <code>printf</code>, except that the output is
+written to the stream <var>stream</var> instead of <code>stdout</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fwprintf</b><i> (FILE *<var>stream</var>, const wchar_t *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is just like <code>wprintf</code>, except that the output is
+written to the stream <var>stream</var> instead of <code>stdout</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sprintf</b><i> (char *<var>s</var>, const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is like <code>printf</code>, except that the output is stored in the character
+array <var>s</var> instead of written to a stream.  A null character is written
+to mark the end of the string.
+
+<p>The <code>sprintf</code> function returns the number of characters stored in
+the array <var>s</var>, not including the terminating null character.
+
+<p>The behavior of this function is undefined if copying takes place
+between objects that overlap--for example, if <var>s</var> is also given
+as an argument to be printed under control of the <code>%s</code> conversion. 
+See <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>.
+
+<p><strong>Warning:</strong> The <code>sprintf</code> function can be <strong>dangerous</strong>
+because it can potentially output more characters than can fit in the
+allocation size of the string <var>s</var>.  Remember that the field width
+given in a conversion specification is only a <em>minimum</em> value.
+
+<p>To avoid this problem, you can use <code>snprintf</code> or <code>asprintf</code>,
+described below. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>swprintf</b><i> (wchar_t *<var>s</var>, size_t <var>size</var>, const wchar_t *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is like <code>wprintf</code>, except that the output is stored in the
+wide character array <var>ws</var> instead of written to a stream.  A null
+wide character is written to mark the end of the string.  The <var>size</var>
+argument specifies the maximum number of characters to produce.  The
+trailing null character is counted towards this limit, so you should
+allocate at least <var>size</var> wide characters for the string <var>ws</var>.
+
+<p>The return value is the number of characters generated for the given
+input, excluding the trailing null.  If not all output fits into the
+provided buffer a negative value is returned.  You should try again with
+a bigger output string.  <em>Note:</em> this is different from how
+<code>snprintf</code> handles this situation.
+
+<p>Note that the corresponding narrow stream function takes fewer
+parameters.  <code>swprintf</code> in fact corresponds to the <code>snprintf</code>
+function.  Since the <code>sprintf</code> function can be dangerous and should
+be avoided the ISO&nbsp;C committee refused to make the same mistake
+again and decided to not define an function exactly corresponding to
+<code>sprintf</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>snprintf</b><i> (char *<var>s</var>, size_t <var>size</var>, const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>snprintf</code> function is similar to <code>sprintf</code>, except that
+the <var>size</var> argument specifies the maximum number of characters to
+produce.  The trailing null character is counted towards this limit, so
+you should allocate at least <var>size</var> characters for the string <var>s</var>.
+
+<p>The return value is the number of characters which would be generated
+for the given input, excluding the trailing null.  If this value is
+greater or equal to <var>size</var>, not all characters from the result have
+been stored in <var>s</var>.  You should try again with a bigger output
+string.  Here is an example of doing this:
+
+<br><pre>/* Construct a message describing the value of a variable
+   whose name is <var>name</var> and whose value is <var>value</var>. */
+char *
+make_message (char *name, char *value)
+{
+  /* Guess we need no more than 100 chars of space. */
+  int size = 100;
+  char *buffer = (char *) xmalloc (size);
+  int nchars;
+  if (buffer == NULL)
+    return NULL;
+
+ /* Try to print in the allocated space. */
+  nchars = snprintf (buffer, size, "value of %s is %s",
+                     name, value);
+  if (nchars &gt;= size)
+    {
+      /* Reallocate buffer now that we know
+         how much space is needed. */
+      buffer = (char *) xrealloc (buffer, nchars + 1);
+
+      if (buffer != NULL)
+        /* Try again. */
+        snprintf (buffer, size, "value of %s is %s",
+                  name, value);
+    }
+  /* The last call worked, return the string. */
+  return buffer;
+}
+</pre>
+
+<p>In practice, it is often easier just to use <code>asprintf</code>, below.
+
+<p><strong>Attention:</strong> In versions of the GNU C library prior to 2.1 the
+return value is the number of characters stored, not including the
+terminating null; unless there was not enough space in <var>s</var> to
+store the result in which case <code>-1</code> is returned.  This was
+changed in order to comply with the ISO&nbsp;C99 standard. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Interface%20Naming">Interface Naming</a>,
+Next:<a rel=next accesskey=n href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>,
+Previous:<a rel=previous accesskey=p href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>,
+Up:<a rel=up accesskey=u href="Sockets.html#Sockets">Sockets</a>
+<hr><br>
+
+<h3>Interface Naming</h3>
+
+<p>Each network interface has a name.  This usually consists of a few
+letters that relate to the type of interface, which may be followed by a
+number if there is more than one interface of that type.  Examples
+might be <code>lo</code> (the loopback interface) and <code>eth0</code> (the first
+Ethernet interface).
+
+<p>Although such names are convenient for humans, it would be clumsy to
+have to use them whenever a program needs to refer to an interface.  In
+such situations an interface is referred to by its <dfn>index</dfn>, which is
+an arbitrarily-assigned small positive integer.
+
+<p>The following functions, constants and data types are declared in the
+header file <code>net/if.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>IFNAMSIZ</b><i>
+</i></td>
+<td align="right">Constant</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant defines the maximum buffer size needed to hold an
+interface name, including its terminating zero byte. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">unsigned int <b>if_nametoindex</b><i> (const char *ifname)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function yields the interface index corresponding to a particular
+name.  If no interface exists with the name given, it returns 0. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>if_indextoname</b><i> (unsigned int ifindex, char *ifname)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function maps an interface index to its corresponding name.  The
+returned name is placed in the buffer pointed to by <code>ifname</code>, which
+must be at least <code>IFNAMSIZ</code> bytes in length.  If the index was
+invalid, the function's return value is a null pointer, otherwise it is
+<code>ifname</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct if_nameindex</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used to hold the information about a single
+interface.  It has the following members:
+
+<dl>
+<dt><code>unsigned int if_index;</code>
+<dd>This is the interface index.
+
+<br><dt><code>char *if_name</code>
+<dd>This is the null-terminated index name.
+
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct if_nameindex * <b>if_nameindex</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns an array of <code>if_nameindex</code> structures, one
+for every interface that is present.  The end of the list is indicated
+by a structure with an interface of 0 and a null name pointer.  If an
+error occurs, this function returns a null pointer.
+
+<p>The returned structure must be freed with <code>if_freenameindex</code> after
+use. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>if_freenameindex</b><i> (struct if_nameindex *ptr)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function frees the structure returned by an earlier call to
+<code>if_nameindex</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

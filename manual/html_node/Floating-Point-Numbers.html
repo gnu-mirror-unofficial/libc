@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Floating%20Point%20Numbers">Floating Point Numbers</a>,
+Next:<a rel=next accesskey=n href="Floating-Point-Classes.html#Floating%20Point%20Classes">Floating Point Classes</a>,
+Previous:<a rel=previous accesskey=p href="Integer-Division.html#Integer%20Division">Integer Division</a>,
+Up:<a rel=up accesskey=u href="Arithmetic.html#Arithmetic">Arithmetic</a>
+<hr><br>
+
+<h3>Floating Point Numbers</h3>
+
+<p>Most computer hardware has support for two different kinds of numbers:
+integers (<small>...</small>-3, -2, -1, 0, 1, 2, 3<small>...</small>) and
+floating-point numbers.  Floating-point numbers have three parts: the
+<dfn>mantissa</dfn>, the <dfn>exponent</dfn>, and the <dfn>sign bit</dfn>.  The real
+number represented by a floating-point value is given by
+(s ? -1 : 1) &amp;middot; 2^e &amp;middot; M
+where s is the sign bit, e the exponent, and M
+the mantissa.  See <a href="Floating-Point-Concepts.html#Floating%20Point%20Concepts">Floating Point Concepts</a>, for details.  (It is
+possible to have a different <dfn>base</dfn> for the exponent, but all modern
+hardware uses 2.)
+
+<p>Floating-point numbers can represent a finite subset of the real
+numbers.  While this subset is large enough for most purposes, it is
+important to remember that the only reals that can be represented
+exactly are rational numbers that have a terminating binary expansion
+shorter than the width of the mantissa.  Even simple fractions such as
+1/5 can only be approximated by floating point.
+
+<p>Mathematical operations and functions frequently need to produce values
+that are not representable.  Often these values can be approximated
+closely enough for practical purposes, but sometimes they can't. 
+Historically there was no way to tell when the results of a calculation
+were inaccurate.  Modern computers implement the IEEE&nbsp;754 standard
+for numerical computations, which defines a framework for indicating to
+the program when the results of calculation are not trustworthy.  This
+framework consists of a set of <dfn>exceptions</dfn> that indicate why a
+result could not be represented, and the special values <dfn>infinity</dfn>
+and <dfn>not a number</dfn> (NaN).
+
+</body></html>
+

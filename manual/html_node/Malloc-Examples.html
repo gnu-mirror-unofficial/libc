@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Malloc%20Examples">Malloc Examples</a>,
+Next:<a rel=next accesskey=n href="Freeing-after-Malloc.html#Freeing%20after%20Malloc">Freeing after Malloc</a>,
+Previous:<a rel=previous accesskey=p href="Basic-Allocation.html#Basic%20Allocation">Basic Allocation</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Examples of <code>malloc</code></h5>
+
+<p>If no more space is available, <code>malloc</code> returns a null pointer. 
+You should check the value of <em>every</em> call to <code>malloc</code>.  It is
+useful to write a subroutine that calls <code>malloc</code> and reports an
+error if the value is a null pointer, returning only if the value is
+nonzero.  This function is conventionally called <code>xmalloc</code>.  Here
+it is:
+
+<br><pre>void *
+xmalloc (size_t size)
+{
+  register void *value = malloc (size);
+  if (value == 0)
+    fatal ("virtual memory exhausted");
+  return value;
+}
+</pre>
+
+<p>Here is a real example of using <code>malloc</code> (by way of <code>xmalloc</code>). 
+The function <code>savestring</code> will copy a sequence of characters into
+a newly allocated null-terminated string:
+
+<br><pre>char *
+savestring (const char *ptr, size_t len)
+{
+  register char *value = (char *) xmalloc (len + 1);
+  value[len] = '\0';
+  return (char *) memcpy (value, ptr, len);
+}
+</pre>
+
+<p>The block that <code>malloc</code> gives you is guaranteed to be aligned so
+that it can hold any type of data.  In the GNU system, the address is
+always a multiple of eight on most systems, and a multiple of 16 on
+64-bit systems.  Only rarely is any higher boundary (such as a page
+boundary) necessary; for those cases, use <code>memalign</code>,
+<code>posix_memalign</code> or <code>valloc</code> (see <a href="Aligned-Memory-Blocks.html#Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>).
+
+<p>Note that the memory located after the end of the block is likely to be
+in use for something else; perhaps a block already allocated by another
+call to <code>malloc</code>.  If you attempt to treat the block as longer than
+you asked for it to be, you are liable to destroy the data that
+<code>malloc</code> uses to keep track of its blocks, or you may destroy the
+contents of another block.  If you have already allocated a block and
+discover you want it to be bigger, use <code>realloc</code> (see <a href="Changing-Block-Size.html#Changing%20Block%20Size">Changing Block Size</a>).
+
+</body></html>
+

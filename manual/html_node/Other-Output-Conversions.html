@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Other%20Output%20Conversions">Other Output Conversions</a>,
+Next:<a rel=next accesskey=n href="Formatted-Output-Functions.html#Formatted%20Output%20Functions">Formatted Output Functions</a>,
+Previous:<a rel=previous accesskey=p href="Floating-Point-Conversions.html#Floating-Point%20Conversions">Floating-Point Conversions</a>,
+Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+<hr><br>
+
+<h4>Other Output Conversions</h4>
+
+<p>This section describes miscellaneous conversions for <code>printf</code>.
+
+<p>The <code>%c</code> conversion prints a single character.  In case there is no
+<code>l</code> modifier the <code>int</code> argument is first converted to an
+<code>unsigned char</code>.  Then, if used in a wide stream function, the
+character is converted into the corresponding wide character.  The
+<code>-</code> flag can be used to specify left-justification in the field,
+but no other flags are defined, and no precision or type modifier can be
+given.  For example:
+
+<br><pre>printf ("%c%c%c%c%c", 'h', 'e', 'l', 'l', 'o');
+</pre>
+
+<p>prints <code>hello</code>.
+
+<p>If there is a <code>l</code> modifier present the argument is expected to be
+of type <code>wint_t</code>.  If used in a multibyte function the wide
+character is converted into a multibyte character before being added to
+the output.  In this case more than one output byte can be produced.
+
+<p>The <code>%s</code> conversion prints a string.  If no <code>l</code> modifier is
+present the corresponding argument must be of type <code>char *</code> (or
+<code>const char *</code>).  If used in a wide stream function the string is
+first converted in a wide character string.  A precision can be
+specified to indicate the maximum number of characters to write;
+otherwise characters in the string up to but not including the
+terminating null character are written to the output stream.  The
+<code>-</code> flag can be used to specify left-justification in the field,
+but no other flags or type modifiers are defined for this conversion. 
+For example:
+
+<br><pre>printf ("%3s%-6s", "no", "where");
+</pre>
+
+<p>prints <code> nowhere </code>.
+
+<p>If there is a <code>l</code> modifier present the argument is expected to be of type <code>wchar_t</code> (or <code>const wchar_t *</code>).
+
+<p>If you accidentally pass a null pointer as the argument for a <code>%s</code>
+conversion, the GNU library prints it as <code>(null)</code>.  We think this
+is more useful than crashing.  But it's not good practice to pass a null
+argument intentionally.
+
+<p>The <code>%m</code> conversion prints the string corresponding to the error
+code in <code>errno</code>.  See <a href="Error-Messages.html#Error%20Messages">Error Messages</a>.  Thus:
+
+<br><pre>fprintf (stderr, "can't open `%s': %m\n", filename);
+</pre>
+
+<p>is equivalent to:
+
+<br><pre>fprintf (stderr, "can't open `%s': %s\n", filename, strerror (errno));
+</pre>
+
+<p>The <code>%m</code> conversion is a GNU C library extension.
+
+<p>The <code>%p</code> conversion prints a pointer value.  The corresponding
+argument must be of type <code>void *</code>.  In practice, you can use any
+type of pointer.
+
+<p>In the GNU system, non-null pointers are printed as unsigned integers,
+as if a <code>%#x</code> conversion were used.  Null pointers print as
+<code>(nil)</code>.  (Pointers might print differently in other systems.)
+
+<p>For example:
+
+<br><pre>printf ("%p", "testing");
+</pre>
+
+<p>prints <code>0x</code> followed by a hexadecimal number--the address of the
+string constant <code>"testing"</code>.  It does not print the word
+<code>testing</code>.
+
+<p>You can supply the <code>-</code> flag with the <code>%p</code> conversion to
+specify left-justification, but no other flags, precision, or type
+modifiers are defined.
+
+<p>The <code>%n</code> conversion is unlike any of the other output conversions. 
+It uses an argument which must be a pointer to an <code>int</code>, but
+instead of printing anything it stores the number of characters printed
+so far by this call at that location.  The <code>h</code> and <code>l</code> type
+modifiers are permitted to specify that the argument is of type
+<code>short int *</code> or <code>long int *</code> instead of <code>int *</code>, but no
+flags, field width, or precision are permitted.
+
+<p>For example,
+
+<br><pre>int nchar;
+printf ("%d %s%n\n", 3, "bears", &amp;nchar);
+</pre>
+
+<p>prints:
+
+<br><pre>3 bears
+</pre>
+
+<p>and sets <code>nchar</code> to <code>7</code>, because <code>3 bears</code> is seven
+characters.
+
+<p>The <code>%%</code> conversion prints a literal <code>%</code> character.  This
+conversion doesn't use an argument, and no flags, field width,
+precision, or type modifiers are permitted.
+
+</body></html>
+

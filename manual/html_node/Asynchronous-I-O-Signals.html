@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>,
+Next:<a rel=next accesskey=n href="Job-Control-Signals.html#Job%20Control%20Signals">Job Control Signals</a>,
+Previous:<a rel=previous accesskey=p href="Alarm-Signals.html#Alarm%20Signals">Alarm Signals</a>,
+Up:<a rel=up accesskey=u href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
+<hr><br>
+
+<h4>Asynchronous I/O Signals</h4>
+
+<p>The signals listed in this section are used in conjunction with
+asynchronous I/O facilities.  You have to take explicit action by
+calling <code>fcntl</code> to enable a particular file descriptor to generate
+these signals (see <a href="Interrupt-Input.html#Interrupt%20Input">Interrupt Input</a>).  The default action for these
+signals is to ignore them.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGIO</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This signal is sent when a file descriptor is ready to perform input
+or output.
+
+<p>On most operating systems, terminals and sockets are the only kinds of
+files that can generate <code>SIGIO</code>; other kinds, including ordinary
+files, never generate <code>SIGIO</code> even if you ask them to.
+
+<p>In the GNU system <code>SIGIO</code> will always be generated properly
+if you successfully set asynchronous mode with <code>fcntl</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGURG</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This signal is sent when "urgent" or out-of-band data arrives on a
+socket.  See <a href="Out-of-Band-Data.html#Out-of-Band%20Data">Out-of-Band Data</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGPOLL</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is a System V signal name, more or less similar to <code>SIGIO</code>. 
+It is defined only for compatibility. 
+</td></tr>
+</table>
+
+</body></html>
+

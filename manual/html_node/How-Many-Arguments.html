@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="How%20Many%20Arguments">How Many Arguments</a>,
+Next:<a rel=next accesskey=n href="Calling-Variadics.html#Calling%20Variadics">Calling Variadics</a>,
+Previous:<a rel=previous accesskey=p href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>,
+Up:<a rel=up accesskey=u href="How-Variadic.html#How%20Variadic">How Variadic</a>
+<hr><br>
+
+<h5>How Many Arguments Were Supplied</h5>
+
+<p>There is no general way for a function to determine the number and type
+of the optional arguments it was called with.  So whoever designs the
+function typically designs a convention for the caller to specify the number
+and type of arguments.  It is up to you to define an appropriate calling
+convention for each variadic function, and write all calls accordingly.
+
+<p>One kind of calling convention is to pass the number of optional
+arguments as one of the fixed arguments.  This convention works provided
+all of the optional arguments are of the same type.
+
+<p>A similar alternative is to have one of the required arguments be a bit
+mask, with a bit for each possible purpose for which an optional
+argument might be supplied.  You would test the bits in a predefined
+sequence; if the bit is set, fetch the value of the next argument,
+otherwise use a default value.
+
+<p>A required argument can be used as a pattern to specify both the number
+and types of the optional arguments.  The format string argument to
+<code>printf</code> is one example of this (see <a href="Formatted-Output-Functions.html#Formatted%20Output%20Functions">Formatted Output Functions</a>).
+
+<p>Another possibility is to pass an "end marker" value as the last
+optional argument.  For example, for a function that manipulates an
+arbitrary number of pointer arguments, a null pointer might indicate the
+end of the argument list.  (This assumes that a null pointer isn't
+otherwise meaningful to the function.)  The <code>execl</code> function works
+in just this way; see <a href="Executing-a-File.html#Executing%20a%20File">Executing a File</a>.
+
+</body></html>
+

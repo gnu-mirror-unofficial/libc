@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Regexp%20Subexpressions">Regexp Subexpressions</a>,
+Next:<a rel=next accesskey=n href="Subexpression-Complications.html#Subexpression%20Complications">Subexpression Complications</a>,
+Previous:<a rel=previous accesskey=p href="Matching-POSIX-Regexps.html#Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>,
+Up:<a rel=up accesskey=u href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>
+<hr><br>
+
+<h4>Match Results with Subexpressions</h4>
+
+<p>When <code>regexec</code> matches parenthetical subexpressions of
+<var>pattern</var>, it records which parts of <var>string</var> they match.  It
+returns that information by storing the offsets into an array whose
+elements are structures of type <code>regmatch_t</code>.  The first element of
+the array (index <code>0</code>) records the part of the string that matched
+the entire regular expression.  Each other element of the array records
+the beginning and end of the part that matched a single parenthetical
+subexpression.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>regmatch_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the data type of the <var>matcharray</var> array that you pass to
+<code>regexec</code>.  It contains two structure fields, as follows:
+
+<dl>
+<dt><code>rm_so</code>
+<dd>The offset in <var>string</var> of the beginning of a substring.  Add this
+value to <var>string</var> to get the address of that part.
+
+<br><dt><code>rm_eo</code>
+<dd>The offset in <var>string</var> of the end of the substring. 
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>regoff_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>regoff_t</code> is an alias for another signed integer type. 
+The fields of <code>regmatch_t</code> have type <code>regoff_t</code>. 
+</td></tr>
+</table>
+
+<p>The <code>regmatch_t</code> elements correspond to subexpressions
+positionally; the first element (index <code>1</code>) records where the first
+subexpression matched, the second element records the second
+subexpression, and so on.  The order of the subexpressions is the order
+in which they begin.
+
+<p>When you call <code>regexec</code>, you specify how long the <var>matchptr</var>
+array is, with the <var>nmatch</var> argument.  This tells <code>regexec</code> how
+many elements to store.  If the actual regular expression has more than
+<var>nmatch</var> subexpressions, then you won't get offset information about
+the rest of them.  But this doesn't alter whether the pattern matches a
+particular string or not.
+
+<p>If you don't want <code>regexec</code> to return any information about where
+the subexpressions matched, you can either supply <code>0</code> for
+<var>nmatch</var>, or use the flag <code>REG_NOSUB</code> when you compile the
+pattern with <code>regcomp</code>.
+
+</body></html>
+

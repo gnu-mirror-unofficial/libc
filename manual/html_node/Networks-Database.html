@@ -1,0 +1,152 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Networks%20Database">Networks Database</a>,
+Previous:<a rel=previous accesskey=p href="Socket-Options.html#Socket%20Options">Socket Options</a>,
+Up:<a rel=up accesskey=u href="Sockets.html#Sockets">Sockets</a>
+<hr><br>
+
+<h3>Networks Database</h3>
+
+<p>Many systems come with a database that records a list of networks known
+to the system developer.  This is usually kept either in the file
+<code>/etc/networks</code> or in an equivalent from a name server.  This data
+base is useful for routing programs such as <code>route</code>, but it is not
+useful for programs that simply communicate over the network.  We
+provide functions to access this database, which are declared in
+<code>netdb.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct netent</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used to represent information about entries in the
+networks database.  It has the following members:
+
+<dl>
+<dt><code>char *n_name</code>
+<dd>This is the "official" name of the network.
+
+<br><dt><code>char **n_aliases</code>
+<dd>These are alternative names for the network, represented as a vector
+of strings.  A null pointer terminates the array.
+
+<br><dt><code>int n_addrtype</code>
+<dd>This is the type of the network number; this is always equal to
+<code>AF_INET</code> for Internet networks.
+
+<br><dt><code>unsigned long int n_net</code>
+<dd>This is the network number.  Network numbers are returned in host
+byte order; see <a href="Byte-Order.html#Byte%20Order">Byte Order</a>. 
+</dl>
+</td></tr>
+</table>
+
+<p>Use the <code>getnetbyname</code> or <code>getnetbyaddr</code> functions to search
+the networks database for information about a specific network.  The
+information is returned in a statically-allocated structure; you must
+copy the information if you need to save it.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct netent * <b>getnetbyname</b><i> (const char *<var>name</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getnetbyname</code> function returns information about the network
+named <var>name</var>.  It returns a null pointer if there is no such
+network. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct netent * <b>getnetbyaddr</b><i> (unsigned long int <var>net</var>, int <var>type</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getnetbyaddr</code> function returns information about the network
+of type <var>type</var> with number <var>net</var>.  You should specify a value of
+<code>AF_INET</code> for the <var>type</var> argument for Internet networks.
+
+<p><code>getnetbyaddr</code> returns a null pointer if there is no such
+network. 
+</td></tr>
+</table>
+
+<p>You can also scan the networks database using <code>setnetent</code>,
+<code>getnetent</code> and <code>endnetent</code>.  Be careful when using these
+functions because they are not reentrant.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setnetent</b><i> (int <var>stayopen</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function opens and rewinds the networks database.
+
+<p>If the <var>stayopen</var> argument is nonzero, this sets a flag so that
+subsequent calls to <code>getnetbyname</code> or <code>getnetbyaddr</code> will
+not close the database (as they usually would).  This makes for more
+efficiency if you call those functions several times, by avoiding
+reopening the database for each call. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct netent * <b>getnetent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the next entry in the networks database.  It
+returns a null pointer if there are no more entries. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>endnetent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function closes the networks database. 
+</td></tr>
+</table>
+
+</body></html>
+

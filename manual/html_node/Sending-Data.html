@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Sending%20Data">Sending Data</a>,
+Next:<a rel=next accesskey=n href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>,
+Up:<a rel=up accesskey=u href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>
+<hr><br>
+
+<h5>Sending Data</h5>
+
+<p>The <code>send</code> function is declared in the header file
+<code>sys/socket.h</code>.  If your <var>flags</var> argument is zero, you can just
+as well use <code>write</code> instead of <code>send</code>; see <a href="I-O-Primitives.html#I%2fO%20Primitives">I/O Primitives</a>.  If the socket was connected but the connection has broken,
+you get a <code>SIGPIPE</code> signal for any use of <code>send</code> or
+<code>write</code> (see <a href="Miscellaneous-Signals.html#Miscellaneous%20Signals">Miscellaneous Signals</a>).
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>send</b><i> (int <var>socket</var>, void *<var>buffer</var>, size_t <var>size</var>, int <var>flags</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>send</code> function is like <code>write</code>, but with the additional
+flags <var>flags</var>.  The possible values of <var>flags</var> are described
+in <a href="Socket-Data-Options.html#Socket%20Data%20Options">Socket Data Options</a>.
+
+<p>This function returns the number of bytes transmitted, or <code>-1</code> on
+failure.  If the socket is nonblocking, then <code>send</code> (like
+<code>write</code>) can return after sending just part of the data. 
+See <a href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>, for information about nonblocking mode.
+
+<p>Note, however, that a successful return value merely indicates that
+the message has been sent without error, not necessarily that it has
+been received without error.
+
+<p>The following <code>errno</code> error conditions are defined for this function:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>socket</var> argument is not a valid file descriptor.
+
+<br><dt><code>EINTR</code>
+<dd>The operation was interrupted by a signal before any data was sent. 
+See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>.
+
+<br><dt><code>ENOTSOCK</code>
+<dd>The descriptor <var>socket</var> is not a socket.
+
+<br><dt><code>EMSGSIZE</code>
+<dd>The socket type requires that the message be sent atomically, but the
+message is too large for this to be possible.
+
+<br><dt><code>EWOULDBLOCK</code>
+<dd>Nonblocking mode has been set on the socket, and the write operation
+would block.  (Normally <code>send</code> blocks until the operation can be
+completed.)
+
+<br><dt><code>ENOBUFS</code>
+<dd>There is not enough internal buffer space available.
+
+<br><dt><code>ENOTCONN</code>
+<dd>You never connected this socket.
+
+<br><dt><code>EPIPE</code>
+<dd>This socket was connected but the connection is now broken.  In this
+case, <code>send</code> generates a <code>SIGPIPE</code> signal first; if that
+signal is ignored or blocked, or if its handler returns, then
+<code>send</code> fails with <code>EPIPE</code>. 
+</dl>
+
+<p>This function is defined as a cancellation point in multi-threaded
+programs, so one has to be prepared for this and make sure that
+allocated resources (like memory, files descriptors, semaphores or
+whatever) are freed even if the thread is canceled. 
+</td></tr>
+</table>
+
+</body></html>
+

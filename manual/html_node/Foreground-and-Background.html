@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Foreground%20and%20Background">Foreground and Background</a>,
+Next:<a rel=next accesskey=n href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>,
+Previous:<a rel=previous accesskey=p href="Launching-Jobs.html#Launching%20Jobs">Launching Jobs</a>,
+Up:<a rel=up accesskey=u href="Implementing-a-Shell.html#Implementing%20a%20Shell">Implementing a Shell</a>
+<hr><br>
+
+<h4>Foreground and Background</h4>
+
+<p>Now let's consider what actions must be taken by the shell when it
+launches a job into the foreground, and how this differs from what
+must be done when a background job is launched.
+
+<p>When a foreground job is launched, the shell must first give it access
+to the controlling terminal by calling <code>tcsetpgrp</code>.  Then, the
+shell should wait for processes in that process group to terminate or
+stop.  This is discussed in more detail in <a href="Stopped-and-Terminated-Jobs.html#Stopped%20and%20Terminated%20Jobs">Stopped and Terminated Jobs</a>.
+
+<p>When all of the processes in the group have either completed or stopped,
+the shell should regain control of the terminal for its own process
+group by calling <code>tcsetpgrp</code> again.  Since stop signals caused by
+I/O from a background process or a SUSP character typed by the user
+are sent to the process group, normally all the processes in the job
+stop together.
+
+<p>The foreground job may have left the terminal in a strange state, so the
+shell should restore its own saved terminal modes before continuing.  In
+case the job is merely stopped, the shell should first save the current
+terminal modes so that it can restore them later if the job is
+continued.  The functions for dealing with terminal modes are
+<code>tcgetattr</code> and <code>tcsetattr</code>; these are described in
+<a href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>.
+
+<p>Here is the sample shell's function for doing all of this.
+
+<br><pre>/* Put job <var>j</var> in the foreground.  If <var>cont</var> is nonzero,
+   restore the saved terminal modes and send the process group a
+   <code>SIGCONT</code> signal to wake it up before we block.  */
+
+void
+put_job_in_foreground (job *j, int cont)
+{
+  /* Put the job into the foreground.  */
+  tcsetpgrp (shell_terminal, j-&gt;pgid);
+
+  /* Send the job a continue signal, if necessary.  */
+  if (cont)
+    {
+      tcsetattr (shell_terminal, TCSADRAIN, &amp;j-&gt;tmodes);
+      if (kill (- j-&gt;pgid, SIGCONT) &lt; 0)
+        perror ("kill (SIGCONT)");
+    }
+
+  /* Wait for it to report.  */
+  wait_for_job (j);
+
+  /* Put the shell back in the foreground.  */
+  tcsetpgrp (shell_terminal, shell_pgid);
+
+  /* Restore the shell's terminal modes.  */
+  tcgetattr (shell_terminal, &amp;j-&gt;tmodes);
+  tcsetattr (shell_terminal, TCSADRAIN, &amp;shell_tmodes);
+}
+</pre>
+
+<p>If the process group is launched as a background job, the shell should
+remain in the foreground itself and continue to read commands from
+the terminal.
+
+<p>In the sample shell, there is not much that needs to be done to put
+a job into the background.  Here is the function it uses:
+
+<br><pre>/* Put a job in the background.  If the cont argument is true, send
+   the process group a <code>SIGCONT</code> signal to wake it up.  */
+
+void
+put_job_in_background (job *j, int cont)
+{
+  /* Send the job a continue signal, if necessary.  */
+  if (cont)
+    if (kill (-j-&gt;pgid, SIGCONT) &lt; 0)
+      perror ("kill (SIGCONT)");
+}
+</pre>
+
+</body></html>
+

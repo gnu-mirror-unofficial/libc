@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Globbing">Globbing</a>,
+Next:<a rel=next accesskey=n href="Regular-Expressions.html#Regular%20Expressions">Regular Expressions</a>,
+Previous:<a rel=previous accesskey=p href="Wildcard-Matching.html#Wildcard%20Matching">Wildcard Matching</a>,
+Up:<a rel=up accesskey=u href="Pattern-Matching.html#Pattern%20Matching">Pattern Matching</a>
+<hr><br>
+
+<h3>Globbing</h3>
+
+<p>The archetypal use of wildcards is for matching against the files in a
+directory, and making a list of all the matches.  This is called
+<dfn>globbing</dfn>.
+
+<p>You could do this using <code>fnmatch</code>, by reading the directory entries
+one by one and testing each one with <code>fnmatch</code>.  But that would be
+slow (and complex, since you would have to handle subdirectories by
+hand).
+
+<p>The library provides a function <code>glob</code> to make this particular use
+of wildcards convenient.  <code>glob</code> and the other symbols in this
+section are declared in <code>glob.h</code>.
+
+<ul>
+<li><a accesskey=1 href="Calling-Glob.html#Calling%20Glob">Calling Glob</a>:              Basic use of <code>glob</code>. 
+<li><a accesskey=2 href="Flags-for-Globbing.html#Flags%20for%20Globbing">Flags for Globbing</a>:        Flags that enable various options in <code>glob</code>. 
+<li><a accesskey=3 href="More-Flags-for-Globbing.html#More%20Flags%20for%20Globbing">More Flags for Globbing</a>:   GNU specific extensions to <code>glob</code>. 
+</ul>
+
+</body></html>
+

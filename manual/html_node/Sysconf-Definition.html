@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Sysconf%20Definition">Sysconf Definition</a>,
+Next:<a rel=next accesskey=n href="Constants-for-Sysconf.html#Constants%20for%20Sysconf">Constants for Sysconf</a>,
+Up:<a rel=up accesskey=u href="Sysconf.html#Sysconf">Sysconf</a>
+<hr><br>
+
+<h4>Definition of <code>sysconf</code></h4>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>sysconf</b><i> (int <var>parameter</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is used to inquire about runtime system parameters.  The
+<var>parameter</var> argument should be one of the <code>_SC_</code> symbols listed
+below.
+
+<p>The normal return value from <code>sysconf</code> is the value you requested. 
+A value of <code>-1</code> is returned both if the implementation does not
+impose a limit, and in case of an error.
+
+<p>The following <code>errno</code> error conditions are defined for this function:
+
+<dl>
+<dt><code>EINVAL</code>
+<dd>The value of the <var>parameter</var> is invalid. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

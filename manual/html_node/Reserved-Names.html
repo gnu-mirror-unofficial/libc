@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Reserved%20Names">Reserved Names</a>,
+Next:<a rel=next accesskey=n href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>,
+Previous:<a rel=previous accesskey=p href="Macro-Definitions.html#Macro%20Definitions">Macro Definitions</a>,
+Up:<a rel=up accesskey=u href="Using-the-Library.html#Using%20the%20Library">Using the Library</a>
+<hr><br>
+
+<h4>Reserved Names</h4>
+
+<p>The names of all library types, macros, variables and functions that
+come from the ISO&nbsp;C standard are reserved unconditionally; your program
+<strong>may not</strong> redefine these names.  All other library names are
+reserved if your program explicitly includes the header file that
+defines or declares them.  There are several reasons for these
+restrictions:
+
+<ul>
+<li>Other people reading your code could get very confused if you were using
+a function named <code>exit</code> to do something completely different from
+what the standard <code>exit</code> function does, for example.  Preventing
+this situation helps to make your programs easier to understand and
+contributes to modularity and maintainability.
+
+<li>It avoids the possibility of a user accidentally redefining a library
+function that is called by other library functions.  If redefinition
+were allowed, those other functions would not work properly.
+
+<li>It allows the compiler to do whatever special optimizations it pleases
+on calls to these functions, without the possibility that they may have
+been redefined by the user.  Some library facilities, such as those for
+dealing with variadic arguments (see <a href="Variadic-Functions.html#Variadic%20Functions">Variadic Functions</a>)
+and non-local exits (see <a href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>), actually require a
+considerable amount of cooperation on the part of the C compiler, and
+with respect to the implementation, it might be easier for the compiler
+to treat these as built-in parts of the language. 
+</ul>
+
+<p>In addition to the names documented in this manual, reserved names
+include all external identifiers (global functions and variables) that
+begin with an underscore (<code>_</code>) and all identifiers regardless of
+use that begin with either two underscores or an underscore followed by
+a capital letter are reserved names.  This is so that the library and
+header files can define functions, variables, and macros for internal
+purposes without risk of conflict with names in user programs.
+
+<p>Some additional classes of identifier names are reserved for future
+extensions to the C language or the POSIX.1 environment.  While using these
+names for your own purposes right now might not cause a problem, they do
+raise the possibility of conflict with future versions of the C
+or POSIX standards, so you should avoid these names.
+
+<ul>
+<li>Names beginning with a capital <code>E</code> followed a digit or uppercase
+letter may be used for additional error code names.  See <a href="Error-Reporting.html#Error%20Reporting">Error Reporting</a>.
+
+<li>Names that begin with either <code>is</code> or <code>to</code> followed by a
+lowercase letter may be used for additional character testing and
+conversion functions.  See <a href="Character-Handling.html#Character%20Handling">Character Handling</a>.
+
+<li>Names that begin with <code>LC_</code> followed by an uppercase letter may be
+used for additional macros specifying locale attributes. 
+See <a href="Locales.html#Locales">Locales</a>.
+
+<li>Names of all existing mathematics functions (see <a href="Mathematics.html#Mathematics">Mathematics</a>)
+suffixed with <code>f</code> or <code>l</code> are reserved for corresponding
+functions that operate on <code>float</code> and <code>long double</code> arguments,
+respectively.
+
+<li>Names that begin with <code>SIG</code> followed by an uppercase letter are
+reserved for additional signal names.  See <a href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>.
+
+<li>Names that begin with <code>SIG_</code> followed by an uppercase letter are
+reserved for additional signal actions.  See <a href="Basic-Signal-Handling.html#Basic%20Signal%20Handling">Basic Signal Handling</a>.
+
+<li>Names beginning with <code>str</code>, <code>mem</code>, or <code>wcs</code> followed by a
+lowercase letter are reserved for additional string and array functions. 
+See <a href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>.
+
+<li>Names that end with <code>_t</code> are reserved for additional type names. 
+</ul>
+
+<p>In addition, some individual header files reserve names beyond
+those that they actually define.  You only need to worry about these
+restrictions if your program includes that particular header file.
+
+<ul>
+<li>The header file <code>dirent.h</code> reserves names prefixed with
+<code>d_</code>.
+
+<li>The header file <code>fcntl.h</code> reserves names prefixed with
+<code>l_</code>, <code>F_</code>, <code>O_</code>, and <code>S_</code>.
+
+<li>The header file <code>grp.h</code> reserves names prefixed with <code>gr_</code>.
+
+<li>The header file <code>limits.h</code> reserves names suffixed with <code>_MAX</code>.
+
+<li>The header file <code>pwd.h</code> reserves names prefixed with <code>pw_</code>.
+
+<li>The header file <code>signal.h</code> reserves names prefixed with <code>sa_</code>
+and <code>SA_</code>.
+
+<li>The header file <code>sys/stat.h</code> reserves names prefixed with <code>st_</code>
+and <code>S_</code>.
+
+<li>The header file <code>sys/times.h</code> reserves names prefixed with <code>tms_</code>.
+
+<li>The header file <code>termios.h</code> reserves names prefixed with <code>c_</code>,
+<code>V</code>, <code>I</code>, <code>O</code>, and <code>TC</code>; and names prefixed with
+<code>B</code> followed by a digit. 
+</ul>
+
+</body></html>
+

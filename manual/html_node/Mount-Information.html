@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Mount%20Information">Mount Information</a>,
+Next:<a rel=next accesskey=n href="Mount-Unmount-Remount.html#Mount-Unmount-Remount">Mount-Unmount-Remount</a>,
+Up:<a rel=up accesskey=u href="Filesystem-Handling.html#Filesystem%20Handling">Filesystem Handling</a>
+<hr><br>
+
+<h4>Mount Information</h4>
+
+<p>For some programs it is desirable and necessary to access information
+about whether a certain filesystem is mounted and, if it is, where, or
+simply to get lists of all the available filesystems.  The GNU libc
+provides some functions to retrieve this information portably.
+
+<p>Traditionally Unix systems have a file named <code>/etc/fstab</code> which
+describes all possibly mounted filesystems.  The <code>mount</code> program
+uses this file to mount at startup time of the system all the necessary
+filesystems.  The information about all the filesystems actually mounted
+is normally kept in a file named <code>/etc/mtab</code>.  Both files share
+the same syntax and it is crucial that this syntax is followed all the
+time.  Therefore it is best to never directly write the files.  The
+functions described in this section can do this and they also provide
+the functionality to convert the external textual representation to the
+internal representation.
+
+<p>Note that the <code>fstab</code> and <code>mtab</code> files are maintained on a
+system by <em>convention</em>.  It is possible for the files not to exist
+or not to be consistent with what is really mounted or available to
+mount, if the system's administration policy allows it.  But programs
+that mount and unmount filesystems typically maintain and use these
+files as described herein.
+
+<p>The filenames given above should never be used directly.  The portable
+way to handle these file is to use the macros <code>_PATH_FSTAB</code>,
+defined in <code>fstab.h</code> and <code>_PATH_MNTTAB</code>, defined in
+<code>mntent.h</code>, respectively.  There are also two alternate macro names
+<code>FSTAB</code> and <code>_PATH_MOUNTED</code> defined but both names are
+deprecated and kept only for backward compatibility.  The two former
+names should always be used.
+
+<ul>
+<li><a accesskey=1 href="fstab.html#fstab">fstab</a>:                        The <code>fstab</code> file
+<li><a accesskey=2 href="mtab.html#mtab">mtab</a>:                         The <code>mtab</code> file
+<li><a accesskey=3 href="Other-Mount-Information.html#Other%20Mount%20Information">Other Mount Information</a>:      Other (non-libc) sources of mount information
+</ul>
+
+</body></html>
+

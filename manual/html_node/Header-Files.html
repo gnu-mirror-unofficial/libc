@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Header%20Files">Header Files</a>,
+Next:<a rel=next accesskey=n href="Macro-Definitions.html#Macro%20Definitions">Macro Definitions</a>,
+Up:<a rel=up accesskey=u href="Using-the-Library.html#Using%20the%20Library">Using the Library</a>
+<hr><br>
+
+<h4>Header Files</h4>
+
+<p>Libraries for use by C programs really consist of two parts: <dfn>header
+files</dfn> that define types and macros and declare variables and
+functions; and the actual library or <dfn>archive</dfn> that contains the
+definitions of the variables and functions.
+
+<p>(Recall that in C, a <dfn>declaration</dfn> merely provides information that
+a function or variable exists and gives its type.  For a function
+declaration, information about the types of its arguments might be
+provided as well.  The purpose of declarations is to allow the compiler
+to correctly process references to the declared variables and functions. 
+A <dfn>definition</dfn>, on the other hand, actually allocates storage for a
+variable or says what a function does.)
+
+<p>In order to use the facilities in the GNU C library, you should be sure
+that your program source files include the appropriate header files. 
+This is so that the compiler has declarations of these facilities
+available and can correctly process references to them.  Once your
+program has been compiled, the linker resolves these references to
+the actual definitions provided in the archive file.
+
+<p>Header files are included into a program source file by the
+<code>#include</code> preprocessor directive.  The C language supports two
+forms of this directive; the first,
+
+<br><pre>#include "<var>header</var>"
+</pre>
+
+<p>is typically used to include a header file <var>header</var> that you write
+yourself; this would contain definitions and declarations describing the
+interfaces between the different parts of your particular application. 
+By contrast,
+
+<br><pre>#include &lt;file.h&gt;
+</pre>
+
+<p>is typically used to include a header file <code>file.h</code> that contains
+definitions and declarations for a standard library.  This file would
+normally be installed in a standard place by your system administrator. 
+You should use this second form for the C library header files.
+
+<p>Typically, <code>#include</code> directives are placed at the top of the C
+source file, before any other code.  If you begin your source files with
+some comments explaining what the code in the file does (a good idea),
+put the <code>#include</code> directives immediately afterwards, following the
+feature test macro definition (see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>).
+
+<p>For more information about the use of header files and <code>#include</code>
+directives, see <a href="../cpp.info/Header-Files.html#Header%20Files">Header Files</a>.
+
+<p>The GNU C library provides several header files, each of which contains
+the type and macro definitions and variable and function declarations
+for a group of related facilities.  This means that your programs may
+need to include several header files, depending on exactly which
+facilities you are using.
+
+<p>Some library header files include other library header files
+automatically.  However, as a matter of programming style, you should
+not rely on this; it is better to explicitly include all the header
+files required for the library facilities you are using.  The GNU C
+library header files have been written in such a way that it doesn't
+matter if a header file is accidentally included more than once;
+including a header file a second time has no effect.  Likewise, if your
+program needs to include multiple header files, the order in which they
+are included doesn't matter.
+
+<p><strong>Compatibility Note:</strong> Inclusion of standard header files in any
+order and any number of times works in any ISO&nbsp;C implementation. 
+However, this has traditionally not been the case in many older C
+implementations.
+
+<p>Strictly speaking, you don't <em>have to</em> include a header file to use
+a function it declares; you could declare the function explicitly
+yourself, according to the specifications in this manual.  But it is
+usually better to include the header file because it may define types
+and macros that are not otherwise available and because it may define
+more efficient macro replacements for some functions.  It is also a sure
+way to have the correct declaration.
+
+</body></html>
+

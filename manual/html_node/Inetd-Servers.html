@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Inetd%20Servers">Inetd Servers</a>,
+Next:<a rel=next accesskey=n href="Configuring-Inetd.html#Configuring%20Inetd">Configuring Inetd</a>,
+Up:<a rel=up accesskey=u href="Inetd.html#Inetd">Inetd</a>
+<hr><br>
+
+<h4><code>inetd</code> Servers</h4>
+
+<p>Writing a server program to be run by <code>inetd</code> is very simple.  Each time
+someone requests a connection to the appropriate port, a new server
+process starts.  The connection already exists at this time; the
+socket is available as the standard input descriptor and as the
+standard output descriptor (descriptors 0 and 1) in the server
+process.  Thus the server program can begin reading and writing data
+right away.  Often the program needs only the ordinary I/O facilities;
+in fact, a general-purpose filter program that knows nothing about
+sockets can work as a byte stream server run by <code>inetd</code>.
+
+<p>You can also use <code>inetd</code> for servers that use connectionless
+communication styles.  For these servers, <code>inetd</code> does not try to accept
+a connection since no connection is possible.  It just starts the
+server program, which can read the incoming datagram packet from
+descriptor 0.  The server program can handle one request and then
+exit, or you can choose to write it to keep reading more requests
+until no more arrive, and then exit.  You must specify which of these
+two techniques the server uses when you configure <code>inetd</code>.
+
+</body></html>
+

@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Local%20Namespace%20Concepts">Local Namespace Concepts</a>,
+Next:<a rel=next accesskey=n href="Local-Namespace-Details.html#Local%20Namespace%20Details">Local Namespace Details</a>,
+Up:<a rel=up accesskey=u href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>
+<hr><br>
+
+<h4>Local Namespace Concepts</h4>
+
+<p>In the local namespace socket addresses are file names.  You can specify
+any file name you want as the address of the socket, but you must have
+write permission on the directory containing it. 
+It's common to put these files in the <code>/tmp</code> directory.
+
+<p>One peculiarity of the local namespace is that the name is only used
+when opening the connection; once open the address is not meaningful and
+may not exist.
+
+<p>Another peculiarity is that you cannot connect to such a socket from
+another machine-not even if the other machine shares the file system
+which contains the name of the socket.  You can see the socket in a
+directory listing, but connecting to it never succeeds.  Some programs
+take advantage of this, such as by asking the client to send its own
+process ID, and using the process IDs to distinguish between clients. 
+However, we recommend you not use this method in protocols you design,
+as we might someday permit connections from other machines that mount
+the same file systems.  Instead, send each new client an identifying
+number if you want it to have one.
+
+<p>After you close a socket in the local namespace, you should delete the
+file name from the file system.  Use <code>unlink</code> or <code>remove</code> to
+do this; see <a href="Deleting-Files.html#Deleting%20Files">Deleting Files</a>.
+
+<p>The local namespace supports just one protocol for any communication
+style; it is protocol number <code>0</code>.
+
+</body></html>
+

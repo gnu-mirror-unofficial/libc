@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Changing%20Block%20Size">Changing Block Size</a>,
+Next:<a rel=next accesskey=n href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>,
+Previous:<a rel=previous accesskey=p href="Freeing-after-Malloc.html#Freeing%20after%20Malloc">Freeing after Malloc</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Changing the Size of a Block</h5>
+
+<p>Often you do not know for certain how big a block you will ultimately need
+at the time you must begin to use the block.  For example, the block might
+be a buffer that you use to hold a line being read from a file; no matter
+how long you make the buffer initially, you may encounter a line that is
+longer.
+
+<p>You can make the block longer by calling <code>realloc</code>.  This function
+is declared in <code>stdlib.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>realloc</b><i> (void *<var>ptr</var>, size_t <var>newsize</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>realloc</code> function changes the size of the block whose address is
+<var>ptr</var> to be <var>newsize</var>.
+
+<p>Since the space after the end of the block may be in use, <code>realloc</code>
+may find it necessary to copy the block to a new address where more free
+space is available.  The value of <code>realloc</code> is the new address of the
+block.  If the block needs to be moved, <code>realloc</code> copies the old
+contents.
+
+<p>If you pass a null pointer for <var>ptr</var>, <code>realloc</code> behaves just
+like <code>malloc (<var>newsize</var>)</code>.  This can be convenient, but beware
+that older implementations (before ISO&nbsp;C) may not support this
+behavior, and will probably crash when <code>realloc</code> is passed a null
+pointer. 
+</td></tr>
+</table>
+
+<p>Like <code>malloc</code>, <code>realloc</code> may return a null pointer if no
+memory space is available to make the block bigger.  When this happens,
+the original block is untouched; it has not been modified or relocated.
+
+<p>In most cases it makes no difference what happens to the original block
+when <code>realloc</code> fails, because the application program cannot continue
+when it is out of memory, and the only thing to do is to give a fatal error
+message.  Often it is convenient to write and use a subroutine,
+conventionally called <code>xrealloc</code>, that takes care of the error message
+as <code>xmalloc</code> does for <code>malloc</code>:
+
+<br><pre>void *
+xrealloc (void *ptr, size_t size)
+{
+  register void *value = realloc (ptr, size);
+  if (value == 0)
+    fatal ("Virtual memory exhausted");
+  return value;
+}
+</pre>
+
+<p>You can also use <code>realloc</code> to make a block smaller.  The reason you
+would do this is to avoid tying up a lot of memory space when only a little
+is needed. 
+In several allocation implementations, making a block smaller sometimes
+necessitates copying it, so it can fail if no other space is available.
+
+<p>If the new size you specify is the same as the old size, <code>realloc</code>
+is guaranteed to change nothing and return the same address that you gave.
+
+</body></html>
+

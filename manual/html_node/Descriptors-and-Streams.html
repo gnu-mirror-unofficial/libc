@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Descriptors%20and%20Streams">Descriptors and Streams</a>,
+Next:<a rel=next accesskey=n href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>,
+Previous:<a rel=previous accesskey=p href="File-Position-Primitive.html#File%20Position%20Primitive">File Position Primitive</a>,
+Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+<hr><br>
+
+<h3>Descriptors and Streams</h3>
+
+<p>Given an open file descriptor, you can create a stream for it with the
+<code>fdopen</code> function.  You can get the underlying file descriptor for
+an existing stream with the <code>fileno</code> function.  These functions are
+declared in the header file <code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">FILE * <b>fdopen</b><i> (int <var>filedes</var>, const char *<var>opentype</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fdopen</code> function returns a new stream for the file descriptor
+<var>filedes</var>.
+
+<p>The <var>opentype</var> argument is interpreted in the same way as for the
+<code>fopen</code> function (see <a href="Opening-Streams.html#Opening%20Streams">Opening Streams</a>), except that
+the <code>b</code> option is not permitted; this is because GNU makes no
+distinction between text and binary files.  Also, <code>"w"</code> and
+<code>"w+"</code> do not cause truncation of the file; these have an effect only
+when opening a file, and in this case the file has already been opened. 
+You must make sure that the <var>opentype</var> argument matches the actual
+mode of the open file descriptor.
+
+<p>The return value is the new stream.  If the stream cannot be created
+(for example, if the modes for the file indicated by the file descriptor
+do not permit the access specified by the <var>opentype</var> argument), a
+null pointer is returned instead.
+
+<p>In some other systems, <code>fdopen</code> may fail to detect that the modes
+for file descriptor do not permit the access specified by
+<code>opentype</code>.  The GNU C library always checks for this. 
+</td></tr>
+</table>
+
+<p>For an example showing the use of the <code>fdopen</code> function,
+see <a href="Creating-a-Pipe.html#Creating%20a%20Pipe">Creating a Pipe</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fileno</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the file descriptor associated with the stream
+<var>stream</var>.  If an error is detected (for example, if the <var>stream</var>
+is not valid) or if <var>stream</var> does not do I/O to a file,
+<code>fileno</code> returns -1. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fileno_unlocked</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fileno_unlocked</code> function is equivalent to the <code>fileno</code>
+function except that it does not implicitly lock the stream if the state
+is <code>FSETLOCKING_INTERNAL</code>.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>There are also symbolic constants defined in <code>unistd.h</code> for the
+file descriptors belonging to the standard streams <code>stdin</code>,
+<code>stdout</code>, and <code>stderr</code>; see <a href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>.
+
+<dl>
+<dt><code>STDIN_FILENO</code>
+<dd>This macro has value <code>0</code>, which is the file descriptor for
+standard input.
+
+<br><dt><code>STDOUT_FILENO</code>
+<dd>This macro has value <code>1</code>, which is the file descriptor for
+standard output.
+
+<br><dt><code>STDERR_FILENO</code>
+<dd>This macro has value <code>2</code>, which is the file descriptor for
+standard error output. 
+</dl>
+
+</body></html>
+

@@ -1,0 +1,169 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Host%20Address%20Data%20Type">Host Address Data Type</a>,
+Next:<a rel=next accesskey=n href="Host-Address-Functions.html#Host%20Address%20Functions">Host Address Functions</a>,
+Previous:<a rel=previous accesskey=p href="Abstract-Host-Addresses.html#Abstract%20Host%20Addresses">Abstract Host Addresses</a>,
+Up:<a rel=up accesskey=u href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>
+<hr><br>
+
+<h5>Host Address Data Type</h5>
+
+<p>IPv4 Internet host addresses are represented in some contexts as integers
+(type <code>uint32_t</code>).  In other contexts, the integer is
+packaged inside a structure of type <code>struct in_addr</code>.  It would
+be better if the usage were made consistent, but it is not hard to extract
+the integer from the structure or put the integer into a structure.
+
+<p>You will find older code that uses <code>unsigned long int</code> for
+IPv4 Internet host addresses instead of <code>uint32_t</code> or <code>struct
+in_addr</code>.  Historically <code>unsigned long int</code> was a 32-bit number but
+with 64-bit machines this has changed.  Using <code>unsigned long int</code>
+might break the code if it is used on machines where this type doesn't
+have 32 bits.  <code>uint32_t</code> is specified by Unix98 and guaranteed to have
+32 bits.
+
+<p>IPv6 Internet host addresses have 128 bits and are packaged inside a
+structure of type <code>struct in6_addr</code>.
+
+<p>The following basic definitions for Internet addresses are declared in
+the header file <code>netinet/in.h</code>:
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct in_addr</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used in certain contexts to contain an IPv4 Internet
+host address.  It has just one field, named <code>s_addr</code>, which records
+the host address number as an <code>uint32_t</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>INADDR_LOOPBACK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+You can use this constant to stand for "the address of this machine,"
+instead of finding its actual address.  It is the IPv4 Internet address
+<code>127.0.0.1</code>, which is usually called <code>localhost</code>.  This
+special constant saves you the trouble of looking up the address of your
+own machine.  Also, the system usually implements <code>INADDR_LOOPBACK</code>
+specially, avoiding any network traffic for the case of one machine
+talking to itself. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>INADDR_ANY</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+You can use this constant to stand for "any incoming address" when
+binding to an address.  See <a href="Setting-Address.html#Setting%20Address">Setting Address</a>.  This is the usual
+address to give in the <code>sin_addr</code> member of <code>struct&nbsp;sockaddr_in</code> when you want to accept Internet connections. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>INADDR_BROADCAST</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant is the address you use to send a broadcast message. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>INADDR_NONE</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant is returned by some functions to indicate an error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct in6_addr</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used to store an IPv6 address.  It stores 128 bits of
+data, which can be accessed (via a union) in a variety of ways. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct in6_addr <b>in6addr_loopback</b><i>
+</i></td>
+<td align="right">Constant</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant is the IPv6 address <code>::1</code>, the loopback address.  See
+above for a description of what this means.  The macro
+<code>IN6ADDR_LOOPBACK_INIT</code> is provided to allow you to initialize your
+own variables to this value. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct in6_addr <b>in6addr_any</b><i>
+</i></td>
+<td align="right">Constant</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant is the IPv6 address <code>::</code>, the unspecified address.  See
+above for a description of what this means.  The macro
+<code>IN6ADDR_ANY_INIT</code> is provided to allow you to initialize your
+own variables to this value. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Multibyte%20Conversion%20Example">Multibyte Conversion Example</a>,
+Previous:<a rel=previous accesskey=p href="Converting-Strings.html#Converting%20Strings">Converting Strings</a>,
+Up:<a rel=up accesskey=u href="Restartable-multibyte-conversion.html#Restartable%20multibyte%20conversion">Restartable multibyte conversion</a>
+<hr><br>
+
+<h4>A Complete Multibyte Conversion Example</h4>
+
+<p>The example programs given in the last sections are only brief and do
+not contain all the error checking, etc.  Presented here is a complete
+and documented example.  It features the <code>mbrtowc</code> function but it
+should be easy to derive versions using the other functions.
+
+<br><pre>int
+file_mbsrtowcs (int input, int output)
+{
+  /* Note the use of <code>MB_LEN_MAX</code>.
+     <code>MB_CUR_MAX</code> cannot portably be used here.  */
+  char buffer[BUFSIZ + MB_LEN_MAX];
+  mbstate_t state;
+  int filled = 0;
+  int eof = 0;
+
+  /* Initialize the state.  */
+  memset (&amp;state, '\0', sizeof (state));
+
+  while (!eof)
+    {
+      ssize_t nread;
+      ssize_t nwrite;
+      char *inp = buffer;
+      wchar_t outbuf[BUFSIZ];
+      wchar_t *outp = outbuf;
+
+      /* Fill up the buffer from the input file.  */
+      nread = read (input, buffer + filled, BUFSIZ);
+      if (nread &lt; 0)
+        {
+          perror ("read");
+          return 0;
+        }
+      /* If we reach end of file, make a note to read no more. */
+      if (nread == 0)
+        eof = 1;
+
+      /* <code>filled</code> is now the number of bytes in <code>buffer</code>. */
+      filled += nread;
+
+      /* Convert those bytes to wide characters-as many as we can. */
+      while (1)
+        {
+          size_t thislen = mbrtowc (outp, inp, filled, &amp;state);
+          /* Stop converting at invalid character;
+             this can mean we have read just the first part
+             of a valid character.  */
+          if (thislen == (size_t) -1)
+            break;
+          /* We want to handle embedded NUL bytes
+             but the return value is 0.  Correct this.  */
+          if (thislen == 0)
+            thislen = 1;
+          /* Advance past this character. */
+          inp += thislen;
+          filled -= thislen;
+          ++outp;
+        }
+
+      /* Write the wide characters we just made.  */
+      nwrite = write (output, outbuf,
+                      (outp - outbuf) * sizeof (wchar_t));
+      if (nwrite &lt; 0)
+        {
+          perror ("write");
+          return 0;
+        }
+
+      /* See if we have a <em>real</em> invalid character. */
+      if ((eof &amp;&amp; filled &gt; 0) || filled &gt;= MB_CUR_MAX)
+        {
+          error (0, 0, "invalid multibyte character");
+          return 0;
+        }
+
+      /* If any characters must be carried forward,
+         put them at the beginning of <code>buffer</code>. */
+      if (filled &gt; 0)
+        memmove (inp, buffer, filled);
+    }
+
+  return 1;
+}
+</pre>
+
+</body></html>
+

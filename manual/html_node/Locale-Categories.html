@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Locale%20Categories">Locale Categories</a>,
+Next:<a rel=next accesskey=n href="Setting-the-Locale.html#Setting%20the%20Locale">Setting the Locale</a>,
+Previous:<a rel=previous accesskey=p href="Choosing-Locale.html#Choosing%20Locale">Choosing Locale</a>,
+Up:<a rel=up accesskey=u href="Locales.html#Locales">Locales</a>
+<hr><br>
+
+<h3>Categories of Activities that Locales Affect</h3>
+
+<p>The purposes that locales serve are grouped into <dfn>categories</dfn>, so
+that a user or a program can choose the locale for each category
+independently.  Here is a table of categories; each name is both an
+environment variable that a user can set, and a macro name that you can
+use as an argument to <code>setlocale</code>.
+
+<dl>
+<dt><code>LC_COLLATE</code>
+<dd>This category applies to collation of strings (functions <code>strcoll</code>
+and <code>strxfrm</code>); see <a href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>.
+
+<br><dt><code>LC_CTYPE</code>
+<dd>This category applies to classification and conversion of characters,
+and to multibyte and wide characters;
+see <a href="Character-Handling.html#Character%20Handling">Character Handling</a>, and <a href="Character-Set-Handling.html#Character%20Set%20Handling">Character Set Handling</a>.
+
+<br><dt><code>LC_MONETARY</code>
+<dd>This category applies to formatting monetary values; see <a href="General-Numeric.html#General%20Numeric">General Numeric</a>.
+
+<br><dt><code>LC_NUMERIC</code>
+<dd>This category applies to formatting numeric values that are not
+monetary; see <a href="General-Numeric.html#General%20Numeric">General Numeric</a>.
+
+<br><dt><code>LC_TIME</code>
+<dd>This category applies to formatting date and time values; see
+<a href="Formatting-Calendar-Time.html#Formatting%20Calendar%20Time">Formatting Calendar Time</a>.
+
+<br><dt><code>LC_MESSAGES</code>
+<dd>This category applies to selecting the language used in the user
+interface for message translation (see <a href="The-Uniforum-approach.html#The%20Uniforum%20approach">The Uniforum approach</a>;
+see <a href="Message-catalogs-a-la-X-Open.html#Message%20catalogs%20a%20la%20X%2fOpen">Message catalogs a la X/Open</a>)  and contains regular expressions
+for affirmative and negative responses.
+
+<br><dt><code>LC_ALL</code>
+<dd>This is not an environment variable; it is only a macro that you can use
+with <code>setlocale</code> to set a single locale for all purposes.  Setting
+this environment variable overwrites all selections by the other
+<code>LC_*</code> variables or <code>LANG</code>.
+
+<br><dt><code>LANG</code>
+<dd>If this environment variable is defined, its value specifies the locale
+to use for all purposes except as overridden by the variables above. 
+</dl>
+
+<p>When developing the message translation functions it was felt that the
+functionality provided by the variables above is not sufficient.  For
+example, it should be possible to specify more than one locale name. 
+Take a Swedish user who better speaks German than English, and a program
+whose messages are output in English by default.  It should be possible
+to specify that the first choice of language is Swedish, the second
+German, and if this also fails to use English.  This is
+possible with the variable <code>LANGUAGE</code>.  For further description of
+this GNU extension see <a href="Using-gettextized-software.html#Using%20gettextized%20software">Using gettextized software</a>.
+
+</body></html>
+

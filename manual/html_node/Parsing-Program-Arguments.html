@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Parsing%20Program%20Arguments">Parsing Program Arguments</a>,
+Previous:<a rel=previous accesskey=p href="Argument-Syntax.html#Argument%20Syntax">Argument Syntax</a>,
+Up:<a rel=up accesskey=u href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>
+<hr><br>
+
+<h4>Parsing Program Arguments</h4>
+
+<p>If the syntax for the command line arguments to your program is simple
+enough, you can simply pick the arguments off from <var>argv</var> by hand. 
+But unless your program takes a fixed number of arguments, or all of the
+arguments are interpreted in the same way (as file names, for example),
+you are usually better off using <code>getopt</code> (see <a href="Getopt.html#Getopt">Getopt</a>) or
+<code>argp_parse</code> (see <a href="Argp.html#Argp">Argp</a>) to do the parsing.
+
+<p><code>getopt</code> is more standard (the short-option only version of it is a
+part of the POSIX standard), but using <code>argp_parse</code> is often
+easier, both for very simple and very complex option structures, because
+it does more of the dirty work for you.
+
+<ul>
+<li><a accesskey=1 href="Getopt.html#Getopt">Getopt</a>:                       Parsing program options using <code>getopt</code>. 
+<li><a accesskey=2 href="Argp.html#Argp">Argp</a>:                         Parsing program options using <code>argp_parse</code>. 
+<li><a accesskey=3 href="Suboptions.html#Suboptions">Suboptions</a>:                   Some programs need more detailed options. 
+<li><a accesskey=4 href="Suboptions-Example.html#Suboptions%20Example">Suboptions Example</a>:           This shows how it could be done for <code>mount</code>. 
+</ul>
+
+</body></html>
+

@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Variadic%20Prototypes">Variadic Prototypes</a>,
+Next:<a rel=next accesskey=n href="Receiving-Arguments.html#Receiving%20Arguments">Receiving Arguments</a>,
+Up:<a rel=up accesskey=u href="How-Variadic.html#How%20Variadic">How Variadic</a>
+<hr><br>
+
+<h5>Syntax for Variable Arguments</h5>
+
+<p>A function that accepts a variable number of arguments must be declared
+with a prototype that says so.   You write the fixed arguments as usual,
+and then tack on <code><small>...</small></code> to indicate the possibility of
+additional arguments.  The syntax of ISO&nbsp;C requires at least one fixed
+argument before the <code><small>...</small></code>.  For example,
+
+<br><pre>int
+func (const char *a, int b, <small>...</small>)
+{
+  <small>...</small>
+}
+</pre>
+
+<p>defines a function <code>func</code> which returns an <code>int</code> and takes two
+required arguments, a <code>const char *</code> and an <code>int</code>.  These are
+followed by any number of anonymous arguments.
+
+<p><strong>Portability note:</strong> For some C compilers, the last required
+argument must not be declared <code>register</code> in the function
+definition.  Furthermore, this argument's type must be
+<dfn>self-promoting</dfn>: that is, the default promotions must not change
+its type.  This rules out array and function types, as well as
+<code>float</code>, <code>char</code> (whether signed or not) and <code>short&nbsp;int</code>
+(whether signed or not).  This is actually an ISO&nbsp;C requirement.
+
+</body></html>
+

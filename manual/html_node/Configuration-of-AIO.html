@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Configuration%20of%20AIO">Configuration of AIO</a>,
+Previous:<a rel=previous accesskey=p href="Cancel-AIO-Operations.html#Cancel%20AIO%20Operations">Cancel AIO Operations</a>,
+Up:<a rel=up accesskey=u href="Asynchronous-I-O.html#Asynchronous%20I%2fO">Asynchronous I/O</a>
+<hr><br>
+
+<h4>How to optimize the AIO implementation</h4>
+
+<p>The POSIX standard does not specify how the AIO functions are
+implemented.  They could be system calls, but it is also possible to
+emulate them at userlevel.
+
+<p>At the point of this writing, the available implementation is a userlevel
+implementation which uses threads for handling the enqueued requests. 
+While this implementation requires making some decisions about
+limitations, hard limitations are something which is best avoided
+in the GNU C library.  Therefore, the GNU C library provides a means
+for tuning the AIO implementation according to the individual use.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct aioinit</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used to pass the configuration or tunable parameters
+to the implementation.  The program has to initialize the members of
+this struct and pass it to the implementation using the <code>aio_init</code>
+function.
+
+<dl>
+<dt><code>int aio_threads</code>
+<dd>This member specifies the maximal number of threads which may be used
+at any one time. 
+<br><dt><code>int aio_num</code>
+<dd>This number provides an estimate on the maximal number of simultaneously
+enqueued requests. 
+<br><dt><code>int aio_locks</code>
+<dd>Unused. 
+<br><dt><code>int aio_usedba</code>
+<dd>Unused. 
+<br><dt><code>int aio_debug</code>
+<dd>Unused. 
+<br><dt><code>int aio_numusers</code>
+<dd>Unused. 
+<br><dt><code>int aio_reserved[2]</code>
+<dd>Unused. 
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>aio_init</b><i> (const struct aioinit *<var>init</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function must be called before any other AIO function.  Calling it
+is completely voluntary, as it is only meant to help the AIO
+implementation perform better.
+
+<p>Before calling the <code>aio_init</code>, function the members of a variable of
+type <code>struct aioinit</code> must be initialized.  Then a reference to
+this variable is passed as the parameter to <code>aio_init</code> which itself
+may or may not pay attention to the hints.
+
+<p>The function has no return value and no error cases are defined.  It is
+a extension which follows a proposal from the SGI implementation in
+Irix&nbsp;6.  It is not covered by POSIX.1b or Unix98. 
+</td></tr>
+</table>
+
+</body></html>
+

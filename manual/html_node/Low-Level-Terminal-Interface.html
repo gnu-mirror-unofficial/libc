@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>,
+Next:<a rel=next accesskey=n href="Syslog.html#Syslog">Syslog</a>,
+Previous:<a rel=previous accesskey=p href="Sockets.html#Sockets">Sockets</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>Low-Level Terminal Interface</h2>
+
+<p>This chapter describes functions that are specific to terminal devices. 
+You can use these functions to do things like turn off input echoing;
+set serial line characteristics such as line speed and flow control; and
+change which characters are used for end-of-file, command-line editing,
+sending signals, and similar control functions.
+
+<p>Most of the functions in this chapter operate on file descriptors. 
+See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>, for more information about what a file
+descriptor is and how to open a file descriptor for a terminal device.
+
+<ul>
+<li><a accesskey=1 href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>:             How to determine if a file is a terminal
+			         device, and what its name is. 
+<li><a accesskey=2 href="I-O-Queues.html#I%2fO%20Queues">I/O Queues</a>:                   About flow control and typeahead. 
+<li><a accesskey=3 href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>:             Two basic styles of input processing. 
+<li><a accesskey=4 href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>:               How to examine and modify flags controlling
+			         details of terminal I/O: echoing,
+                                 signals, editing.  Posix. 
+<li><a accesskey=5 href="BSD-Terminal-Modes.html#BSD%20Terminal%20Modes">BSD Terminal Modes</a>:           BSD compatible terminal mode setting
+<li><a accesskey=6 href="Line-Control.html#Line%20Control">Line Control</a>:                 Sending break sequences, clearing
+                                 terminal buffers <small>...</small>
+<li><a accesskey=7 href="Noncanon-Example.html#Noncanon%20Example">Noncanon Example</a>:             How to read single characters without echo. 
+<li><a accesskey=8 href="Pseudo-Terminals.html#Pseudo-Terminals">Pseudo-Terminals</a>:             How to open a pseudo-terminal. 
+</ul>
+
+</body></html>
+

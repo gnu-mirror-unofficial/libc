@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Alarm%20Signals">Alarm Signals</a>,
+Next:<a rel=next accesskey=n href="Asynchronous-I-O-Signals.html#Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>,
+Previous:<a rel=previous accesskey=p href="Termination-Signals.html#Termination%20Signals">Termination Signals</a>,
+Up:<a rel=up accesskey=u href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
+<hr><br>
+
+<h4>Alarm Signals</h4>
+
+<p>These signals are used to indicate the expiration of timers. 
+See <a href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>, for information about functions that cause
+these signals to be sent.
+
+<p>The default behavior for these signals is to cause program termination. 
+This default is rarely useful, but no other default would be useful;
+most of the ways of using these signals would require handler functions
+in any case.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGALRM</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This signal typically indicates expiration of a timer that measures real
+or clock time.  It is used by the <code>alarm</code> function, for example. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGVTALRM</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This signal typically indicates expiration of a timer that measures CPU
+time used by the current process.  The name is an abbreviation for
+"virtual time alarm". 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGPROF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This signal typically indicates expiration of a timer that measures
+both CPU time used by the current process, and CPU time expended on
+behalf of the process by the system.  Such a timer is used to implement
+code profiling facilities, hence the name of this signal. 
+</td></tr>
+</table>
+
+</body></html>
+

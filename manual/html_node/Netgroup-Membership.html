@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Netgroup%20Membership">Netgroup Membership</a>,
+Previous:<a rel=previous accesskey=p href="Lookup-Netgroup.html#Lookup%20Netgroup">Lookup Netgroup</a>,
+Up:<a rel=up accesskey=u href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>
+<hr><br>
+
+<h4>Testing for Netgroup Membership</h4>
+
+<p>It is often not necessary to scan the whole netgroup since often the
+only interesting question is whether a given entry is part of the
+selected netgroup.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>innetgr</b><i> (const char *<var>netgroup</var>, const char *<var>host</var>, const char *<var>user</var>, const char *<var>domain</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function tests whether the triple specified by the parameters
+<var>hostp</var>, <var>userp</var>, and <var>domainp</var> is part of the netgroup
+<var>netgroup</var>.  Using this function has the advantage that
+
+<ol type=1 start=1>
+</p><li>no other netgroup function can use the global netgroup state since
+internal locking is used and
+<li>the function is implemented more efficiently than successive calls
+to the other <code>set</code>/<code>get</code>/<code>endnetgrent</code> functions.
+</ol>
+
+<p>Any of the pointers <var>hostp</var>, <var>userp</var>, and <var>domainp</var> can be
+<code>NULL</code> which means any value is accepted in this position.  This is
+also true for the name <code>-</code> which should not match any other string
+otherwise.
+
+<p>The return value is <code>1</code> if an entry matching the given triple is
+found in the netgroup.  The return value is <code>0</code> if the netgroup
+itself is not found, the netgroup does not contain the triple or
+internal errors occurred. 
+</td></tr>
+</table>
+
+</body></html>
+

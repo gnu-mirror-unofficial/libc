@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Internet%20Namespace">Internet Namespace</a>,
+Next:<a rel=next accesskey=n href="Misc-Namespaces.html#Misc%20Namespaces">Misc Namespaces</a>,
+Previous:<a rel=previous accesskey=p href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>,
+Up:<a rel=up accesskey=u href="Sockets.html#Sockets">Sockets</a>
+<hr><br>
+
+<h3>The Internet Namespace</h3>
+
+<p>This section describes the details of the protocols and socket naming
+conventions used in the Internet namespace.
+
+<p>Originally the Internet namespace used only IP version 4 (IPv4).  With
+the growing number of hosts on the Internet, a new protocol with a
+larger address space was necessary: IP version 6 (IPv6).  IPv6
+introduces 128-bit addresses (IPv4 has 32-bit addresses) and other
+features, and will eventually replace IPv4.
+
+<p>To create a socket in the IPv4 Internet namespace, use the symbolic name
+<code>PF_INET</code> of this namespace as the <var>namespace</var> argument to
+<code>socket</code> or <code>socketpair</code>.  For IPv6 addresses you need the
+macro <code>PF_INET6</code>. These macros are defined in <code>sys/socket.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>PF_INET</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This designates the IPv4 Internet namespace and associated family of
+protocols. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>PF_INET6</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This designates the IPv6 Internet namespace and associated family of
+protocols. 
+</td></tr>
+</table>
+
+<p>A socket address for the Internet namespace includes the following components:
+
+<ul>
+<li>The address of the machine you want to connect to.  Internet addresses
+can be specified in several ways; these are discussed in <a href="Internet-Address-Formats.html#Internet%20Address%20Formats">Internet Address Formats</a>, <a href="Host-Addresses.html#Host%20Addresses">Host Addresses</a> and <a href="Host-Names.html#Host%20Names">Host Names</a>.
+
+<li>A port number for that machine.  See <a href="Ports.html#Ports">Ports</a>. 
+</ul>
+
+<p>You must ensure that the address and port number are represented in a
+canonical format called <dfn>network byte order</dfn>.  See <a href="Byte-Order.html#Byte%20Order">Byte Order</a>,
+for information about this.
+
+<ul>
+<li><a accesskey=1 href="Internet-Address-Formats.html#Internet%20Address%20Formats">Internet Address Formats</a>:     How socket addresses are specified in the
+                                 Internet namespace. 
+<li><a accesskey=2 href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>: 	        All about host addresses of Internet host. 
+<li><a accesskey=3 href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>: 		Referring to protocols by name. 
+<li><a accesskey=4 href="Ports.html#Ports">Ports</a>: 			Internet port numbers. 
+<li><a accesskey=5 href="Services-Database.html#Services%20Database">Services Database</a>:            Ports may have symbolic names. 
+<li><a accesskey=6 href="Byte-Order.html#Byte%20Order">Byte Order</a>: 		        Different hosts may use different byte
+                                 ordering conventions; you need to
+                                 canonicalize host address and port number. 
+<li><a accesskey=7 href="Inet-Example.html#Inet%20Example">Inet Example</a>: 	        Putting it all together. 
+</ul>
+
+</body></html>
+

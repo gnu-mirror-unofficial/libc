@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Variable%20Size%20Automatic">Variable Size Automatic</a>,
+Previous:<a rel=previous accesskey=p href="Obstacks.html#Obstacks">Obstacks</a>,
+Up:<a rel=up accesskey=u href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>
+<hr><br>
+
+<h4>Automatic Storage with Variable Size</h4>
+
+<p>The function <code>alloca</code> supports a kind of half-dynamic allocation in
+which blocks are allocated dynamically but freed automatically.
+
+<p>Allocating a block with <code>alloca</code> is an explicit action; you can
+allocate as many blocks as you wish, and compute the size at run time.  But
+all the blocks are freed when you exit the function that <code>alloca</code> was
+called from, just as if they were automatic variables declared in that
+function.  There is no way to free the space explicitly.
+
+<p>The prototype for <code>alloca</code> is in <code>stdlib.h</code>.  This function is
+a BSD extension.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>alloca</b><i> (size_t <var>size</var>);
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The return value of <code>alloca</code> is the address of a block of <var>size</var>
+bytes of memory, allocated in the stack frame of the calling function. 
+</td></tr>
+</table>
+
+<p>Do not use <code>alloca</code> inside the arguments of a function call--you
+will get unpredictable results, because the stack space for the
+<code>alloca</code> would appear on the stack in the middle of the space for
+the function arguments.  An example of what to avoid is <code>foo (x,
+alloca (4), y)</code>.
+
+<ul>
+<li><a accesskey=1 href="Alloca-Example.html#Alloca%20Example">Alloca Example</a>:               Example of using <code>alloca</code>. 
+<li><a accesskey=2 href="Advantages-of-Alloca.html#Advantages%20of%20Alloca">Advantages of Alloca</a>:         Reasons to use <code>alloca</code>. 
+<li><a accesskey=3 href="Disadvantages-of-Alloca.html#Disadvantages%20of%20Alloca">Disadvantages of Alloca</a>:      Reasons to avoid <code>alloca</code>. 
+<li><a accesskey=4 href="GNU-C-Variable-Size-Arrays.html#GNU%20C%20Variable-Size%20Arrays">GNU C Variable-Size Arrays</a>:   Only in GNU C, here is an alternative
+				 method of allocating dynamically and
+				 freeing automatically. 
+</ul>
+
+</body></html>
+

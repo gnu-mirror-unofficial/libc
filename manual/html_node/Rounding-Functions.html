@@ -1,0 +1,411 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Rounding%20Functions">Rounding Functions</a>,
+Next:<a rel=next accesskey=n href="Remainder-Functions.html#Remainder%20Functions">Remainder Functions</a>,
+Previous:<a rel=previous accesskey=p href="Normalization-Functions.html#Normalization%20Functions">Normalization Functions</a>,
+Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+<hr><br>
+
+<h4>Rounding Functions</h4>
+
+<p>The functions listed here perform operations such as rounding and
+truncation of floating-point values. Some of these functions convert
+floating point numbers to integer values.  They are all declared in
+<code>math.h</code>.
+
+<p>You can also convert floating-point numbers to integers simply by
+casting them to <code>int</code>.  This discards the fractional part,
+effectively rounding towards zero.  However, this only works if the
+result can actually be represented as an <code>int</code>--for very large
+numbers, this is impossible.  The functions listed here return the
+result as a <code>double</code> instead to get around this problem.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>ceil</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>ceilf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>ceill</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions round <var>x</var> upwards to the nearest integer,
+returning that value as a <code>double</code>.  Thus, <code>ceil (1.5)</code>
+is <code>2.0</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>floor</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>floorf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>floorl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions round <var>x</var> downwards to the nearest
+integer, returning that value as a <code>double</code>.  Thus, <code>floor
+(1.5)</code> is <code>1.0</code> and <code>floor (-1.5)</code> is <code>-2.0</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>trunc</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>truncf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>truncl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>trunc</code> functions round <var>x</var> towards zero to the nearest
+integer (returned in floating-point format).  Thus, <code>trunc (1.5)</code>
+is <code>1.0</code> and <code>trunc (-1.5)</code> is <code>-1.0</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>rint</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>rintf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>rintl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions round <var>x</var> to an integer value according to the
+current rounding mode.  See <a href="Floating-Point-Parameters.html#Floating%20Point%20Parameters">Floating Point Parameters</a>, for
+information about the various rounding modes.  The default
+rounding mode is to round to the nearest integer; some machines
+support other modes, but round-to-nearest is always used unless
+you explicitly select another.
+
+<p>If <var>x</var> was not initially an integer, these functions raise the
+inexact exception. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>nearbyint</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>nearbyintf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>nearbyintl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the same value as the <code>rint</code> functions, but
+do not raise the inexact exception if <var>x</var> is not an integer. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>round</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>roundf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>roundl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are similar to <code>rint</code>, but they round halfway
+cases away from zero instead of to the nearest even integer. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>lrint</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long int <b>lrintf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long int <b>lrintl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are just like <code>rint</code>, but they return a
+<code>long int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long long int <b>llrint</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>llrintf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>llrintl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are just like <code>rint</code>, but they return a
+<code>long long int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>lround</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long int <b>lroundf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long int <b>lroundl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are just like <code>round</code>, but they return a
+<code>long int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long long int <b>llround</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>llroundf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>llroundl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are just like <code>round</code>, but they return a
+<code>long long int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>modf</b><i> (double <var>value</var>, double *<var>integer-part</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>modff</b><i> (float <var>value</var>, float *<var>integer-part</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>modfl</b><i> (long double <var>value</var>, long double *<var>integer-part</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions break the argument <var>value</var> into an integer part and a
+fractional part (between <code>-1</code> and <code>1</code>, exclusive).  Their sum
+equals <var>value</var>.  Each of the parts has the same sign as <var>value</var>,
+and the integer part is always rounded toward zero.
+
+<p><code>modf</code> stores the integer part in <code>*<var>integer-part</var></code>, and
+returns the fractional part.  For example, <code>modf (2.5, &amp;intpart)</code>
+returns <code>0.5</code> and stores <code>2.0</code> into <code>intpart</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Normal%20Termination">Normal Termination</a>,
+Next:<a rel=next accesskey=n href="Exit-Status.html#Exit%20Status">Exit Status</a>,
+Up:<a rel=up accesskey=u href="Program-Termination.html#Program%20Termination">Program Termination</a>
+<hr><br>
+
+<h4>Normal Termination</h4>
+
+<p>A process terminates normally when its program signals it is done by
+calling <code>exit</code>.  Returning from <code>main</code> is equivalent to
+calling <code>exit</code>, and the value that <code>main</code> returns is used as
+the argument to <code>exit</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>exit</b><i> (int <var>status</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>exit</code> function tells the system that the program is done, which
+causes it to terminate the process.
+
+<p><var>status</var> is the program's exit status, which becomes part of the
+process' termination status.  This function does not return. 
+</td></tr>
+</table>
+
+<p>Normal termination causes the following actions:
+
+<ol type=1 start=1>
+</p><li>Functions that were registered with the <code>atexit</code> or <code>on_exit</code>
+functions are called in the reverse order of their registration.  This
+mechanism allows your application to specify its own "cleanup" actions
+to be performed at program termination.  Typically, this is used to do
+things like saving program state information in a file, or unlocking
+locks in shared data bases.
+
+<li>All open streams are closed, writing out any buffered output data.  See
+<a href="Closing-Streams.html#Closing%20Streams">Closing Streams</a>.  In addition, temporary files opened
+with the <code>tmpfile</code> function are removed; see <a href="Temporary-Files.html#Temporary%20Files">Temporary Files</a>.
+
+<li><code>_exit</code> is called, terminating the program.  See <a href="Termination-Internals.html#Termination%20Internals">Termination Internals</a>.
+</ol>
+
+</body></html>
+

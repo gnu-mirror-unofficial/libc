@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Parsing%20a%20Template%20String">Parsing a Template String</a>,
+Next:<a rel=next accesskey=n href="Example-of-Parsing.html#Example%20of%20Parsing">Example of Parsing</a>,
+Previous:<a rel=previous accesskey=p href="Variable-Arguments-Output.html#Variable%20Arguments%20Output">Variable Arguments Output</a>,
+Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+<hr><br>
+
+<h4>Parsing a Template String</h4>
+
+<p>You can use the function <code>parse_printf_format</code> to obtain
+information about the number and types of arguments that are expected by
+a given template string.  This function permits interpreters that
+provide interfaces to <code>printf</code> to avoid passing along invalid
+arguments from the user's program, which could cause a crash.
+
+<p>All the symbols described in this section are declared in the header
+file <code>printf.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>parse_printf_format</b><i> (const char *<var>template</var>, size_t <var>n</var>, int *<var>argtypes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns information about the number and types of
+arguments expected by the <code>printf</code> template string <var>template</var>. 
+The information is stored in the array <var>argtypes</var>; each element of
+this array describes one argument.  This information is encoded using
+the various <code>PA_</code> macros, listed below.
+
+<p>The argument <var>n</var> specifies the number of elements in the array
+<var>argtypes</var>.  This is the maximum number of elements that
+<code>parse_printf_format</code> will try to write.
+
+<p><code>parse_printf_format</code> returns the total number of arguments required
+by <var>template</var>.  If this number is greater than <var>n</var>, then the
+information returned describes only the first <var>n</var> arguments.  If you
+want information about additional arguments, allocate a bigger
+array and call <code>parse_printf_format</code> again. 
+</td></tr>
+</table>
+
+<p>The argument types are encoded as a combination of a basic type and
+modifier flag bits.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>PA_FLAG_MASK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This macro is a bitmask for the type modifier flag bits.  You can write
+the expression <code>(argtypes[i] &amp; PA_FLAG_MASK)</code> to extract just the
+flag bits for an argument, or <code>(argtypes[i] &amp; ~PA_FLAG_MASK)</code> to
+extract just the basic type code. 
+</td></tr>
+</table>
+
+<p>Here are symbolic constants that represent the basic types; they stand
+for integer values.
+
+<dl>
+<dt><code>PA_INT</code>
+<dd>This specifies that the base type is <code>int</code>.
+
+<br><dt><code>PA_CHAR</code>
+<dd>This specifies that the base type is <code>int</code>, cast to <code>char</code>.
+
+<br><dt><code>PA_STRING</code>
+<dd>This specifies that the base type is <code>char *</code>, a null-terminated string.
+
+<br><dt><code>PA_POINTER</code>
+<dd>This specifies that the base type is <code>void *</code>, an arbitrary pointer.
+
+<br><dt><code>PA_FLOAT</code>
+<dd>This specifies that the base type is <code>float</code>.
+
+<br><dt><code>PA_DOUBLE</code>
+<dd>This specifies that the base type is <code>double</code>.
+
+<br><dt><code>PA_LAST</code>
+<dd>You can define additional base types for your own programs as offsets
+from <code>PA_LAST</code>.  For example, if you have data types <code>foo</code>
+and <code>bar</code> with their own specialized <code>printf</code> conversions,
+you could define encodings for these types as:
+
+<br><pre>#define PA_FOO  PA_LAST
+#define PA_BAR  (PA_LAST + 1)
+</pre>
+</dl>
+
+<p>Here are the flag bits that modify a basic type.  They are combined with
+the code for the basic type using inclusive-or.
+
+<dl>
+<dt><code>PA_FLAG_PTR</code>
+<dd>If this bit is set, it indicates that the encoded type is a pointer to
+the base type, rather than an immediate value. 
+For example, <code>PA_INT|PA_FLAG_PTR</code> represents the type <code>int *</code>.
+
+<br><dt><code>PA_FLAG_SHORT</code>
+<dd>If this bit is set, it indicates that the base type is modified with
+<code>short</code>.  (This corresponds to the <code>h</code> type modifier.)
+
+<br><dt><code>PA_FLAG_LONG</code>
+<dd>If this bit is set, it indicates that the base type is modified with
+<code>long</code>.  (This corresponds to the <code>l</code> type modifier.)
+
+<br><dt><code>PA_FLAG_LONG_LONG</code>
+<dd>If this bit is set, it indicates that the base type is modified with
+<code>long long</code>.  (This corresponds to the <code>L</code> type modifier.)
+
+<br><dt><code>PA_FLAG_LONG_DOUBLE</code>
+<dd>This is a synonym for <code>PA_FLAG_LONG_LONG</code>, used by convention with
+a base type of <code>PA_DOUBLE</code> to indicate a type of <code>long double</code>. 
+</dl>
+
+</body></html>
+

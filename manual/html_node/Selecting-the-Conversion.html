@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Selecting%20the%20Conversion">Selecting the Conversion</a>,
+Next:<a rel=next accesskey=n href="Keeping-the-state.html#Keeping%20the%20state">Keeping the state</a>,
+Up:<a rel=up accesskey=u href="Restartable-multibyte-conversion.html#Restartable%20multibyte%20conversion">Restartable multibyte conversion</a>
+<hr><br>
+
+<h4>Selecting the conversion and its properties</h4>
+
+<p>We already said above that the currently selected locale for the
+<code>LC_CTYPE</code> category decides about the conversion that is performed
+by the functions we are about to describe.  Each locale uses its own
+character set (given as an argument to <code>localedef</code>) and this is the
+one assumed as the external multibyte encoding.  The wide character
+character set always is UCS-4, at least on GNU systems.
+
+<p>A characteristic of each multibyte character set is the maximum number
+of bytes that can be necessary to represent one character.  This
+information is quite important when writing code that uses the
+conversion functions (as shown in the examples below). 
+The ISO&nbsp;C standard defines two macros that provide this information.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MB_LEN_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>MB_LEN_MAX</code> specifies the maximum number of bytes in the multibyte
+sequence for a single character in any of the supported locales.  It is
+a compile-time constant and is defined in <code>limits.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MB_CUR_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>MB_CUR_MAX</code> expands into a positive integer expression that is the
+maximum number of bytes in a multibyte character in the current locale. 
+The value is never greater than <code>MB_LEN_MAX</code>.  Unlike
+<code>MB_LEN_MAX</code> this macro need not be a compile-time constant, and in
+the GNU C library it is not.
+
+<p><code>MB_CUR_MAX</code> is defined in <code>stdlib.h</code>. 
+</td></tr>
+</table>
+
+<p>Two different macros are necessary since strictly ISO&nbsp;C90 compilers
+do not allow variable length array definitions, but still it is desirable
+to avoid dynamic allocation.  This incomplete piece of code shows the
+problem:
+
+<br><pre>{
+  char buf[MB_LEN_MAX];
+  ssize_t len = 0;
+
+  while (! feof (fp))
+    {
+      fread (&amp;buf[len], 1, MB_CUR_MAX - len, fp);
+      /* ... process buf */
+      len -= used;
+    }
+}
+</pre>
+
+<p>The code in the inner loop is expected to have always enough bytes in
+the array <var>buf</var> to convert one multibyte character.  The array
+<var>buf</var> has to be sized statically since many compilers do not allow a
+variable size.  The <code>fread</code> call makes sure that <code>MB_CUR_MAX</code>
+bytes are always available in <var>buf</var>.  Note that it isn't
+a problem if <code>MB_CUR_MAX</code> is not a compile-time constant.
+
+</body></html>
+

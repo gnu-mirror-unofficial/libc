@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Utility%20Minimums">Utility Minimums</a>,
+Next:<a rel=next accesskey=n href="String-Parameters.html#String%20Parameters">String Parameters</a>,
+Previous:<a rel=previous accesskey=p href="Utility-Limits.html#Utility%20Limits">Utility Limits</a>,
+Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+<hr><br>
+
+<h3>Minimum Values for Utility Limits</h3>
+
+<dl>
+<dt><code>_POSIX2_BC_BASE_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum value of
+<code>obase</code> in the <code>bc</code> utility.  Its value is <code>99</code>.
+
+<br><dt><code>_POSIX2_BC_DIM_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum size of
+an array in the <code>bc</code> utility.  Its value is <code>2048</code>.
+
+<br><dt><code>_POSIX2_BC_SCALE_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum value of
+<code>scale</code> in the <code>bc</code> utility.  Its value is <code>99</code>.
+
+<br><dt><code>_POSIX2_BC_STRING_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum size of
+a string constant in the <code>bc</code> utility.  Its value is <code>1000</code>.
+
+<br><dt><code>_POSIX2_COLL_WEIGHTS_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum number
+of weights that can necessarily be used in defining the collating
+sequence for a locale.  Its value is <code>2</code>.
+
+<br><dt><code>_POSIX2_EXPR_NEST_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum number
+of expressions nested within parenthesis when using the <code>expr</code> utility. 
+Its value is <code>32</code>.
+
+<br><dt><code>_POSIX2_LINE_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum size of
+a text line that the text utilities can handle.  Its value is
+<code>2048</code>.
+
+<br><dt><code>_POSIX2_EQUIV_CLASS_MAX</code>
+<dd>The most restrictive limit permitted by POSIX.2 for the maximum number
+of weights that can be assigned to an entry of the <code>LC_COLLATE</code>
+category <code>order</code> keyword in a locale definition.  Its value is
+<code>2</code>.  The GNU C library does not presently support locale
+definitions. 
+</dl>
+
+</body></html>
+

@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Width%20of%20Type">Width of Type</a>,
+Next:<a rel=next accesskey=n href="Range-of-Type.html#Range%20of%20Type">Range of Type</a>,
+Up:<a rel=up accesskey=u href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>
+<hr><br>
+
+<h4>Computing the Width of an Integer Data Type</h4>
+
+<p>The most common reason that a program needs to know how many bits are in
+an integer type is for using an array of <code>long int</code> as a bit vector. 
+You can access the bit at index <var>n</var> with
+
+<br><pre>vector[<var>n</var> / LONGBITS] &amp; (1 &lt;&lt; (<var>n</var> % LONGBITS))
+</pre>
+
+<p>provided you define <code>LONGBITS</code> as the number of bits in a
+<code>long int</code>.
+
+<p>There is no operator in the C language that can give you the number of
+bits in an integer data type.  But you can compute it from the macro
+<code>CHAR_BIT</code>, defined in the header file <code>limits.h</code>.
+
+<dl>
+<dt><code>CHAR_BIT</code>
+<dd>This is the number of bits in a <code>char</code>--eight, on most systems. 
+The value has type <code>int</code>.
+
+<p>You can compute the number of bits in any data type <var>type</var> like
+this:
+
+<br><pre>sizeof (<var>type</var>) * CHAR_BIT
+</pre>
+</dl>
+
+</body></html>
+

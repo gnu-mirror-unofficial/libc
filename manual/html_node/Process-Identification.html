@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Process%20Identification">Process Identification</a>,
+Next:<a rel=next accesskey=n href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>,
+Previous:<a rel=previous accesskey=p href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>,
+Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+<hr><br>
+
+<h3>Process Identification</h3>
+
+<p>The <code>pid_t</code> data type represents process IDs.  You can get the
+process ID of a process by calling <code>getpid</code>.  The function
+<code>getppid</code> returns the process ID of the parent of the current
+process (this is also known as the <dfn>parent process ID</dfn>).  Your
+program should include the header files <code>unistd.h</code> and
+<code>sys/types.h</code> to use these functions.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>pid_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>pid_t</code> data type is a signed integer type which is capable
+of representing a process ID.  In the GNU library, this is an <code>int</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">pid_t <b>getpid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getpid</code> function returns the process ID of the current process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">pid_t <b>getppid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getppid</code> function returns the process ID of the parent of the
+current process. 
+</td></tr>
+</table>
+
+</body></html>
+

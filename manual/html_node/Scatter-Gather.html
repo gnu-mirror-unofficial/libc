@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Scatter-Gather">Scatter-Gather</a>,
+Next:<a rel=next accesskey=n href="Memory-mapped-I-O.html#Memory-mapped%20I%2fO">Memory-mapped I/O</a>,
+Previous:<a rel=previous accesskey=p href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>,
+Up:<a rel=up accesskey=u href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>
+<hr><br>
+
+<h3>Fast Scatter-Gather I/O</h3>
+
+<p>Some applications may need to read or write data to multiple buffers,
+which are separated in memory.  Although this can be done easily enough
+with multiple calls to <code>read</code> and <code>write</code>, it is inefficient
+because there is overhead associated with each kernel call.
+
+<p>Instead, many platforms provide special high-speed primitives to perform
+these <dfn>scatter-gather</dfn> operations in a single kernel call.  The GNU C
+library will provide an emulation on any system that lacks these
+primitives, so they are not a portability threat.  They are defined in
+<code>sys/uio.h</code>.
+
+<p>These functions are controlled with arrays of <code>iovec</code> structures,
+which describe the location and size of each buffer.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct iovec</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>The <code>iovec</code> structure describes a buffer. It contains two fields:
+
+<dl>
+
+<br><dt><code>void *iov_base</code>
+<dd>Contains the address of a buffer.
+
+<br><dt><code>size_t iov_len</code>
+<dd>Contains the length of the buffer.
+
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">ssize_t <b>readv</b><i> (int <var>filedes</var>, const struct iovec *<var>vector</var>, int <var>count</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>The <code>readv</code> function reads data from <var>filedes</var> and scatters it
+into the buffers described in <var>vector</var>, which is taken to be
+<var>count</var> structures long.  As each buffer is filled, data is sent to the
+next.
+
+<p>Note that <code>readv</code> is not guaranteed to fill all the buffers. 
+It may stop at any point, for the same reasons <code>read</code> would.
+
+<p>The return value is a count of bytes (<em>not</em> buffers) read, 0
+indicating end-of-file, or -1 indicating an error.  The possible
+errors are the same as in <code>read</code>.
+
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">ssize_t <b>writev</b><i> (int <var>filedes</var>, const struct iovec *<var>vector</var>, int <var>count</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>The <code>writev</code> function gathers data from the buffers described in
+<var>vector</var>, which is taken to be <var>count</var> structures long, and writes
+them to <code>filedes</code>.  As each buffer is written, it moves on to the
+next.
+
+<p>Like <code>readv</code>, <code>writev</code> may stop midstream under the same
+conditions <code>write</code> would.
+
+<p>The return value is a count of bytes written, or -1 indicating an
+error.  The possible errors are the same as in <code>write</code>.
+
+</td></tr>
+</table>
+
+<p>Note that if the buffers are small (under about 1kB), high-level streams
+may be easier to use than these functions.  However, <code>readv</code> and
+<code>writev</code> are more efficient when the individual buffers themselves
+(as opposed to the total output), are large.  In that case, a high-level
+stream would not be able to cache the data effectively.
+
+</body></html>
+

@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20Flags">Argp Flags</a>,
+Next:<a rel=next accesskey=n href="Argp-Help.html#Argp%20Help">Argp Help</a>,
+Previous:<a rel=previous accesskey=p href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>,
+Up:<a rel=up accesskey=u href="Argp.html#Argp">Argp</a>
+<hr><br>
+
+<h4>Flags for <code>argp_parse</code></h4>
+
+<p>The default behavior of <code>argp_parse</code> is designed to be convenient
+for the most common case of parsing program command line argument.  To
+modify these defaults, the following flags may be or'd together in the
+<var>flags</var> argument to <code>argp_parse</code>:
+
+<dl>
+<dt><code>ARGP_PARSE_ARGV0</code>
+<dd>Don't ignore the first element of the <var>argv</var> argument to
+<code>argp_parse</code>.  Unless <code>ARGP_NO_ERRS</code> is set, the first element
+of the argument vector is skipped for option parsing purposes, as it
+corresponds to the program name in a command line.
+
+<br><dt><code>ARGP_NO_ERRS</code>
+<dd>Don't print error messages for unknown options to <code>stderr</code>; unless
+this flag is set, <code>ARGP_PARSE_ARGV0</code> is ignored, as <code>argv[0]</code>
+is used as the program name in the error messages.  This flag implies
+<code>ARGP_NO_EXIT</code>.  This is based on the assumption that silent exiting
+upon errors is bad behavior.
+
+<br><dt><code>ARGP_NO_ARGS</code>
+<dd>Don't parse any non-option args.  Normally these are parsed by calling
+the parse functions with a key of <code>ARGP_KEY_ARG</code>, the actual
+argument being the value.  This flag needn't normally be set, as the
+default behavior is to stop parsing as soon as an argument fails to be
+parsed.  See <a href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>.
+
+<br><dt><code>ARGP_IN_ORDER</code>
+<dd>Parse options and arguments in the same order they occur on the command
+line.  Normally they're rearranged so that all options come first.
+
+<br><dt><code>ARGP_NO_HELP</code>
+<dd>Don't provide the standard long option <code>--help</code>, which ordinarily
+causes usage and option help information to be output to <code>stdout</code>
+and <code>exit (0)</code>.
+
+<br><dt><code>ARGP_NO_EXIT</code>
+<dd>Don't exit on errors, although they may still result in error messages.
+
+<br><dt><code>ARGP_LONG_ONLY</code>
+<dd>Use the gnu getopt `long-only' rules for parsing arguments.  This allows
+long-options to be recognized with only a single <code>-</code>
+(i.e.  <code>-help</code>).  This results in a less useful interface, and its
+use is discouraged as it conflicts with the way most GNU programs work
+as well as the GNU coding standards.
+
+<br><dt><code>ARGP_SILENT</code>
+<dd>Turns off any message-printing/exiting options, specifically
+<code>ARGP_NO_EXIT</code>, <code>ARGP_NO_ERRS</code>, and <code>ARGP_NO_HELP</code>. 
+</dl>
+
+</body></html>
+

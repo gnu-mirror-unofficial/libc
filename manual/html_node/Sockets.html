@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Sockets">Sockets</a>,
+Next:<a rel=next accesskey=n href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>,
+Previous:<a rel=previous accesskey=p href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>Sockets</h2>
+
+<p>This chapter describes the GNU facilities for interprocess
+communication using sockets.
+
+<p>A <dfn>socket</dfn> is a generalized interprocess communication channel. 
+Like a pipe, a socket is represented as a file descriptor.  Unlike pipes
+sockets support communication between unrelated processes, and even
+between processes running on different machines that communicate over a
+network.  Sockets are the primary means of communicating with other
+machines; <code>telnet</code>, <code>rlogin</code>, <code>ftp</code>, <code>talk</code> and the
+other familiar network programs use sockets.
+
+<p>Not all operating systems support sockets.  In the GNU library, the
+header file <code>sys/socket.h</code> exists regardless of the operating
+system, and the socket functions always exist, but if the system does
+not really support sockets these functions always fail.
+
+<p><strong>Incomplete:</strong> We do not currently document the facilities for
+broadcast messages or for configuring Internet interfaces.  The
+reentrant functions and some newer functions that are related to IPv6
+aren't documented either so far.
+
+<ul>
+<li><a accesskey=1 href="Socket-Concepts.html#Socket%20Concepts">Socket Concepts</a>: 	Basic concepts you need to know about. 
+<li><a accesskey=2 href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>: Stream communication, datagrams and other styles. 
+<li><a accesskey=3 href="Socket-Addresses.html#Socket%20Addresses">Socket Addresses</a>: 	How socket names (``addresses'') work. 
+<li><a accesskey=4 href="Interface-Naming.html#Interface%20Naming">Interface Naming</a>: 	Identifying specific network interfaces. 
+<li><a accesskey=5 href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>: 	Details about the local namespace. 
+<li><a accesskey=6 href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>: 	Details about the Internet namespace. 
+<li><a accesskey=7 href="Misc-Namespaces.html#Misc%20Namespaces">Misc Namespaces</a>: 	Other namespaces not documented fully here. 
+<li><a accesskey=8 href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>:   Creating sockets and destroying them. 
+<li><a accesskey=9 href="Connections.html#Connections">Connections</a>: 		Operations on sockets with connection state. 
+<li><a href="Datagrams.html#Datagrams">Datagrams</a>: 		Operations on datagram sockets. 
+<li><a href="Inetd.html#Inetd">Inetd</a>: 		Inetd is a daemon that starts servers on request. 
+			   The most convenient way to write a server
+			   is to make it work with Inetd. 
+<li><a href="Socket-Options.html#Socket%20Options">Socket Options</a>: 	Miscellaneous low-level socket options. 
+<li><a href="Networks-Database.html#Networks%20Database">Networks Database</a>:    Accessing the database of network names. 
+</ul>
+
+</body></html>
+

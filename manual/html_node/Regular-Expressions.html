@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Regular%20Expressions">Regular Expressions</a>,
+Next:<a rel=next accesskey=n href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>,
+Previous:<a rel=previous accesskey=p href="Globbing.html#Globbing">Globbing</a>,
+Up:<a rel=up accesskey=u href="Pattern-Matching.html#Pattern%20Matching">Pattern Matching</a>
+<hr><br>
+
+<h3>Regular Expression Matching</h3>
+
+<p>The GNU C library supports two interfaces for matching regular
+expressions.  One is the standard POSIX.2 interface, and the other is
+what the GNU system has had for many years.
+
+<p>Both interfaces are declared in the header file <code>regex.h</code>. 
+If you define <code>_POSIX_C_SOURCE</code>, then only the POSIX.2
+functions, structures, and constants are declared.
+
+<ul>
+<li><a accesskey=1 href="POSIX-Regexp-Compilation.html#POSIX%20Regexp%20Compilation">POSIX Regexp Compilation</a>:     Using <code>regcomp</code> to prepare to match. 
+<li><a accesskey=2 href="Flags-for-POSIX-Regexps.html#Flags%20for%20POSIX%20Regexps">Flags for POSIX Regexps</a>:      Syntax variations for <code>regcomp</code>. 
+<li><a accesskey=3 href="Matching-POSIX-Regexps.html#Matching%20POSIX%20Regexps">Matching POSIX Regexps</a>:       Using <code>regexec</code> to match the compiled
+				   pattern that you get from <code>regcomp</code>. 
+<li><a accesskey=4 href="Regexp-Subexpressions.html#Regexp%20Subexpressions">Regexp Subexpressions</a>:        Finding which parts of the string were matched. 
+<li><a accesskey=5 href="Subexpression-Complications.html#Subexpression%20Complications">Subexpression Complications</a>:  Find points of which parts were matched. 
+<li><a accesskey=6 href="Regexp-Cleanup.html#Regexp%20Cleanup">Regexp Cleanup</a>: 		Freeing storage; reporting errors. 
+</ul>
+
+</body></html>
+

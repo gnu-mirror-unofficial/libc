@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Example%20of%20Getopt">Example of Getopt</a>,
+Next:<a rel=next accesskey=n href="Getopt-Long-Options.html#Getopt%20Long%20Options">Getopt Long Options</a>,
+Previous:<a rel=previous accesskey=p href="Using-Getopt.html#Using%20Getopt">Using Getopt</a>,
+Up:<a rel=up accesskey=u href="Getopt.html#Getopt">Getopt</a>
+<hr><br>
+
+<h4>Example of Parsing Arguments with <code>getopt</code></h4>
+
+<p>Here is an example showing how <code>getopt</code> is typically used.  The
+key points to notice are:
+
+<ul>
+<li>Normally, <code>getopt</code> is called in a loop.  When <code>getopt</code> returns
+<code>-1</code>, indicating no more options are present, the loop terminates.
+
+<li>A <code>switch</code> statement is used to dispatch on the return value from
+<code>getopt</code>.  In typical use, each case just sets a variable that
+is used later in the program.
+
+<li>A second loop is used to process the remaining non-option arguments. 
+</ul>
+
+<br><pre>
+
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int
+main (int argc, char **argv)
+{
+  int aflag = 0;
+  int bflag = 0;
+  char *cvalue = NULL;
+  int index;
+  int c;
+
+  opterr = 0;
+
+  while ((c = getopt (argc, argv, "abc:")) != -1)
+    switch (c)
+      {
+      case 'a':
+        aflag = 1;
+        break;
+      case 'b':
+        bflag = 1;
+        break;
+      case 'c':
+        cvalue = optarg;
+        break;
+      case '?':
+        if (isprint (optopt))
+          fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+        else
+          fprintf (stderr,
+                   "Unknown option character `\\x%x'.\n",
+                   optopt);
+        return 1;
+      default:
+        abort ();
+      }
+
+  printf ("aflag = %d, bflag = %d, cvalue = %s\n",
+          aflag, bflag, cvalue);
+
+  for (index = optind; index &lt; argc; index++)
+    printf ("Non-option argument %s\n", argv[index]);
+  return 0;
+}
+</pre>
+
+<p>Here are some examples showing what this program prints with different
+combinations of arguments:
+
+<br><pre>% testopt
+aflag = 0, bflag = 0, cvalue = (null)
+
+% testopt -a -b
+aflag = 1, bflag = 1, cvalue = (null)
+
+% testopt -ab
+aflag = 1, bflag = 1, cvalue = (null)
+
+% testopt -c foo
+aflag = 0, bflag = 0, cvalue = foo
+
+% testopt -cfoo
+aflag = 0, bflag = 0, cvalue = foo
+
+% testopt arg1
+aflag = 0, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% testopt -a arg1
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument arg1
+
+% testopt -c foo arg1
+aflag = 0, bflag = 0, cvalue = foo
+Non-option argument arg1
+
+% testopt -a -- -b
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -b
+
+% testopt -a -
+aflag = 1, bflag = 0, cvalue = (null)
+Non-option argument -
+</pre>
+
+</body></html>
+

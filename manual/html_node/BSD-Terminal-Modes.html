@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="BSD%20Terminal%20Modes">BSD Terminal Modes</a>,
+Next:<a rel=next accesskey=n href="Line-Control.html#Line%20Control">Line Control</a>,
+Previous:<a rel=previous accesskey=p href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>,
+Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+<hr><br>
+
+<h3>BSD Terminal Modes</h3>
+
+<p>The usual way to get and set terminal modes is with the functions described
+in <a href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>.  However, on some systems you can use the
+BSD-derived functions in this section to do some of the same thing.  On
+many systems, these functions do not exist.  Even with the GNU C library,
+the functions simply fail with <code>errno</code> = <code>ENOSYS</code> with many
+kernels, including Linux.
+
+<p>The symbols used in this section are declared in <code>sgtty.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct sgttyb</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This structure is an input or output parameter list for <code>gtty</code> and
+<code>stty</code>.
+
+<dl>
+<dt><code>char sg_ispeed</code>
+<dd>Line speed for input
+<br><dt><code>char sg_ospeed</code>
+<dd>Line speed for output
+<br><dt><code>char sg_erase</code>
+<dd>Erase character
+<br><dt><code>char sg_kill</code>
+<dd>Kill character
+<br><dt><code>int sg_flags</code>
+<dd>Various flags
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>gtty</b><i> (int <var>filedes</var>, struct sgttyb *<var>attributes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function gets the attributes of a terminal.
+
+<p><code>gtty</code> sets *<var>attributes</var> to describe the terminal attributes
+of the terminal which is open with file descriptor <var>filedes</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>stty</b><i> (int <var>filedes</var>, struct sgttyb * attributes)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>This function sets the attributes of a terminal.
+
+<p><code>stty</code> sets the terminal attributes of the terminal which is open with
+file descriptor <var>filedes</var> to those described by *<var>filedes</var>. 
+</td></tr>
+</table>
+
+</body></html>
+

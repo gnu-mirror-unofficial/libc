@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Malloc%20Tunable%20Parameters">Malloc Tunable Parameters</a>,
+Next:<a rel=next accesskey=n href="Heap-Consistency-Checking.html#Heap%20Consistency%20Checking">Heap Consistency Checking</a>,
+Previous:<a rel=previous accesskey=p href="Aligned-Memory-Blocks.html#Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Malloc Tunable Parameters</h5>
+
+<p>You can adjust some parameters for dynamic memory allocation with the
+<code>mallopt</code> function.  This function is the general SVID/XPG
+interface, defined in <code>malloc.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>mallopt</b><i> (int <var>param</var>, int <var>value</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+When calling <code>mallopt</code>, the <var>param</var> argument specifies the
+parameter to be set, and <var>value</var> the new value to be set.  Possible
+choices for <var>param</var>, as defined in <code>malloc.h</code>, are:
+
+<dl>
+<dt><code>M_TRIM_THRESHOLD</code>
+<dd>This is the minimum size (in bytes) of the top-most, releasable chunk
+that will cause <code>sbrk</code> to be called with a negative argument in
+order to return memory to the system. 
+<br><dt><code>M_TOP_PAD</code>
+<dd>This parameter determines the amount of extra memory to obtain from the
+system when a call to <code>sbrk</code> is required.  It also specifies the
+number of bytes to retain when shrinking the heap by calling <code>sbrk</code>
+with a negative argument.  This provides the necessary hysteresis in
+heap size such that excessive amounts of system calls can be avoided. 
+<br><dt><code>M_MMAP_THRESHOLD</code>
+<dd>All chunks larger than this value are allocated outside the normal
+heap, using the <code>mmap</code> system call.  This way it is guaranteed
+that the memory for these chunks can be returned to the system on
+<code>free</code>. 
+<br><dt><code>M_MMAP_MAX</code>
+<dd>The maximum number of chunks to allocate with <code>mmap</code>.  Setting this
+to zero disables all use of <code>mmap</code>. 
+</dl>
+
+</td></tr>
+</table>
+
+</body></html>
+

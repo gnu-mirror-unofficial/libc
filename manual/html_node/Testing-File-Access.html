@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Testing%20File%20Access">Testing File Access</a>,
+Next:<a rel=next accesskey=n href="File-Times.html#File%20Times">File Times</a>,
+Previous:<a rel=previous accesskey=p href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>,
+Up:<a rel=up accesskey=u href="File-Attributes.html#File%20Attributes">File Attributes</a>
+<hr><br>
+
+<h4>Testing Permission to Access a File</h4>
+
+<p>In some situations it is desirable to allow programs to access files or
+devices even if this is not possible with the permissions granted to the
+user.  One possible solution is to set the setuid-bit of the program
+file.  If such a program is started the <em>effective</em> user ID of the
+process is changed to that of the owner of the program file.  So to
+allow write access to files like <code>/etc/passwd</code>, which normally can
+be written only by the super-user, the modifying program will have to be
+owned by <code>root</code> and the setuid-bit must be set.
+
+<p>But beside the files the program is intended to change the user should
+not be allowed to access any file to which s/he would not have access
+anyway.  The program therefore must explicitly check whether <em>the
+user</em> would have the necessary access to a file, before it reads or
+writes the file.
+
+<p>To do this, use the function <code>access</code>, which checks for access
+permission based on the process's <em>real</em> user ID rather than the
+effective user ID.  (The setuid feature does not alter the real user ID,
+so it reflects the user who actually ran the program.)
+
+<p>There is another way you could check this access, which is easy to
+describe, but very hard to use.  This is to examine the file mode bits
+and mimic the system's own access computation.  This method is
+undesirable because many systems have additional access control
+features; your program cannot portably mimic them, and you would not
+want to try to keep track of the diverse features that different systems
+have.  Using <code>access</code> is simple and automatically does whatever is
+appropriate for the system you are using.
+
+<p><code>access</code> is <em>only</em> only appropriate to use in setuid programs. 
+A non-setuid program will always use the effective ID rather than the
+real ID.
+
+<p>The symbols in this section are declared in <code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>access</b><i> (const char *<var>filename</var>, int <var>how</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>access</code> function checks to see whether the file named by
+<var>filename</var> can be accessed in the way specified by the <var>how</var>
+argument.  The <var>how</var> argument either can be the bitwise OR of the
+flags <code>R_OK</code>, <code>W_OK</code>, <code>X_OK</code>, or the existence test
+<code>F_OK</code>.
+
+<p>This function uses the <em>real</em> user and group IDs of the calling
+process, rather than the <em>effective</em> IDs, to check for access
+permission.  As a result, if you use the function from a <code>setuid</code>
+or <code>setgid</code> program (see <a href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>), it gives
+information relative to the user who actually ran the program.
+
+<p>The return value is <code>0</code> if the access is permitted, and <code>-1</code>
+otherwise.  (In other words, treated as a predicate function,
+<code>access</code> returns true if the requested access is <em>denied</em>.)
+
+<p>In addition to the usual file name errors (see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>), the following <code>errno</code> error conditions are defined for
+this function:
+
+<dl>
+<dt><code>EACCES</code>
+<dd>The access specified by <var>how</var> is denied.
+
+<br><dt><code>ENOENT</code>
+<dd>The file doesn't exist.
+
+<br><dt><code>EROFS</code>
+<dd>Write permission was requested for a file on a read-only file system. 
+</dl>
+</td></tr>
+</table>
+
+<p>These macros are defined in the header file <code>unistd.h</code> for use
+as the <var>how</var> argument to the <code>access</code> function.  The values
+are integer constants.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>R_OK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Flag meaning test for read permission. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>W_OK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Flag meaning test for write permission. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>X_OK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Flag meaning test for execute/search permission. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>F_OK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Flag meaning test for existence of the file. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Standard%20Signals">Standard Signals</a>,
+Next:<a rel=next accesskey=n href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>,
+Previous:<a rel=previous accesskey=p href="Concepts-of-Signals.html#Concepts%20of%20Signals">Concepts of Signals</a>,
+Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+<hr><br>
+
+<h3>Standard Signals</h3>
+
+<p>This section lists the names for various standard kinds of signals and
+describes what kind of event they mean.  Each signal name is a macro
+which stands for a positive integer--the <dfn>signal number</dfn> for that
+kind of signal.  Your programs should never make assumptions about the
+numeric code for a particular kind of signal, but rather refer to them
+always by the names defined here.  This is because the number for a
+given kind of signal can vary from system to system, but the meanings of
+the names are standardized and fairly uniform.
+
+<p>The signal names are defined in the header file <code>signal.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>NSIG</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this symbolic constant is the total number of signals
+defined.  Since the signal numbers are allocated consecutively,
+<code>NSIG</code> is also one greater than the largest defined signal number. 
+</td></tr>
+</table>
+
+<ul>
+<li><a accesskey=1 href="Program-Error-Signals.html#Program%20Error%20Signals">Program Error Signals</a>:        Used to report serious program errors. 
+<li><a accesskey=2 href="Termination-Signals.html#Termination%20Signals">Termination Signals</a>:          Used to interrupt and/or terminate the
+                                 program. 
+<li><a accesskey=3 href="Alarm-Signals.html#Alarm%20Signals">Alarm Signals</a>:                Used to indicate expiration of timers. 
+<li><a accesskey=4 href="Asynchronous-I-O-Signals.html#Asynchronous%20I%2fO%20Signals">Asynchronous I/O Signals</a>:     Used to indicate input is available. 
+<li><a accesskey=5 href="Job-Control-Signals.html#Job%20Control%20Signals">Job Control Signals</a>:          Signals used to support job control. 
+<li><a accesskey=6 href="Operation-Error-Signals.html#Operation%20Error%20Signals">Operation Error Signals</a>:      Used to report operational system errors. 
+<li><a accesskey=7 href="Miscellaneous-Signals.html#Miscellaneous%20Signals">Miscellaneous Signals</a>:        Miscellaneous Signals. 
+<li><a accesskey=8 href="Signal-Messages.html#Signal%20Messages">Signal Messages</a>:              Printing a message describing a signal. 
+</ul>
+
+</body></html>
+

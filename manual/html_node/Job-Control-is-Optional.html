@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Job%20Control%20is%20Optional">Job Control is Optional</a>,
+Next:<a rel=next accesskey=n href="Controlling-Terminal.html#Controlling%20Terminal">Controlling Terminal</a>,
+Previous:<a rel=previous accesskey=p href="Concepts-of-Job-Control.html#Concepts%20of%20Job%20Control">Concepts of Job Control</a>,
+Up:<a rel=up accesskey=u href="Job-Control.html#Job%20Control">Job Control</a>
+<hr><br>
+
+<h3>Job Control is Optional</h3>
+
+<p>Not all operating systems support job control.  The GNU system does
+support job control, but if you are using the GNU library on some other
+system, that system may not support job control itself.
+
+<p>You can use the <code>_POSIX_JOB_CONTROL</code> macro to test at compile-time
+whether the system supports job control.  See <a href="System-Options.html#System%20Options">System Options</a>.
+
+<p>If job control is not supported, then there can be only one process
+group per session, which behaves as if it were always in the foreground. 
+The functions for creating additional process groups simply fail with
+the error code <code>ENOSYS</code>.
+
+<p>The macros naming the various job control signals (see <a href="Job-Control-Signals.html#Job%20Control%20Signals">Job Control Signals</a>) are defined even if job control is not supported.  However,
+the system never generates these signals, and attempts to send a job
+control signal or examine or specify their actions report errors or do
+nothing.
+
+</body></html>
+

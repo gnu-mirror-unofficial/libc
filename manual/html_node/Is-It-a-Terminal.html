@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Is%20It%20a%20Terminal">Is It a Terminal</a>,
+Next:<a rel=next accesskey=n href="I-O-Queues.html#I%2fO%20Queues">I/O Queues</a>,
+Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+<hr><br>
+
+<h3>Identifying Terminals</h3>
+
+<p>The functions described in this chapter only work on files that
+correspond to terminal devices.  You can find out whether a file
+descriptor is associated with a terminal by using the <code>isatty</code>
+function.
+
+<p>Prototypes for the functions in this section are declared in the header
+file <code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isatty</b><i> (int <var>filedes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns <code>1</code> if <var>filedes</var> is a file descriptor
+associated with an open terminal device, and 0 otherwise. 
+</td></tr>
+</table>
+
+<p>If a file descriptor is associated with a terminal, you can get its
+associated file name using the <code>ttyname</code> function.  See also the
+<code>ctermid</code> function, described in <a href="Identifying-the-Terminal.html#Identifying%20the%20Terminal">Identifying the Terminal</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>ttyname</b><i> (int <var>filedes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If the file descriptor <var>filedes</var> is associated with a terminal
+device, the <code>ttyname</code> function returns a pointer to a
+statically-allocated, null-terminated string containing the file name of
+the terminal file.  The value is a null pointer if the file descriptor
+isn't associated with a terminal, or the file name cannot be determined. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ttyname_r</b><i> (int <var>filedes</var>, char *<var>buf</var>, size_t <var>len</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>ttyname_r</code> function is similar to the <code>ttyname</code> function
+except that it places its result into the user-specified buffer starting
+at <var>buf</var> with length <var>len</var>.
+
+<p>The normal return value from <code>ttyname_r</code> is 0.  Otherwise an
+error number is returned to indicate the error.  The following
+<code>errno</code> error conditions are defined for this function:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>filedes</var> argument is not a valid file descriptor.
+
+<br><dt><code>ENOTTY</code>
+<dd>The <var>filedes</var> is not associated with a terminal.
+
+<br><dt><code>ERANGE</code>
+<dd>The buffer length <var>len</var> is too small to store the string to be
+returned. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

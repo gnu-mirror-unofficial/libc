@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Block%20Input%2fOutput">Block Input/Output</a>,
+Next:<a rel=next accesskey=n href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>,
+Previous:<a rel=previous accesskey=p href="Unreading.html#Unreading">Unreading</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>Block Input/Output</h3>
+
+<p>This section describes how to do input and output operations on blocks
+of data.  You can use these functions to read and write binary data, as
+well as to read and write text in fixed-size blocks instead of by
+characters or lines.
+
+<p>Binary files are typically used to read and write blocks of data in the
+same format as is used to represent the data in a running program.  In
+other words, arbitrary blocks of memory--not just character or string
+objects--can be written to a binary file, and meaningfully read in
+again by the same program.
+
+<p>Storing data in binary form is often considerably more efficient than
+using the formatted I/O functions.  Also, for floating-point numbers,
+the binary form avoids possible loss of precision in the conversion
+process.  On the other hand, binary files can't be examined or modified
+easily using many standard file utilities (such as text editors), and
+are not portable between different implementations of the language, or
+different kinds of computers.
+
+<p>These functions are declared in <code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>fread</b><i> (void *<var>data</var>, size_t <var>size</var>, size_t <var>count</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function reads up to <var>count</var> objects of size <var>size</var> into
+the array <var>data</var>, from the stream <var>stream</var>.  It returns the
+number of objects actually read, which might be less than <var>count</var> if
+a read error occurs or the end of the file is reached.  This function
+returns a value of zero (and doesn't read anything) if either <var>size</var>
+or <var>count</var> is zero.
+
+<p>If <code>fread</code> encounters end of file in the middle of an object, it
+returns the number of complete objects read, and discards the partial
+object.  Therefore, the stream remains at the actual end of the file. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>fread_unlocked</b><i> (void *<var>data</var>, size_t <var>size</var>, size_t <var>count</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fread_unlocked</code> function is equivalent to the <code>fread</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>fwrite</b><i> (const void *<var>data</var>, size_t <var>size</var>, size_t <var>count</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function writes up to <var>count</var> objects of size <var>size</var> from
+the array <var>data</var>, to the stream <var>stream</var>.  The return value is
+normally <var>count</var>, if the call succeeds.  Any other value indicates
+some sort of error, such as running out of space. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>fwrite_unlocked</b><i> (const void *<var>data</var>, size_t <var>size</var>, size_t <var>count</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fwrite_unlocked</code> function is equivalent to the <code>fwrite</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+</body></html>
+

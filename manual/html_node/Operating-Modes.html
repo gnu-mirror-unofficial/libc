@@ -1,0 +1,152 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Operating%20Modes">Operating Modes</a>,
+Next:<a rel=next accesskey=n href="Getting-File-Status-Flags.html#Getting%20File%20Status%20Flags">Getting File Status Flags</a>,
+Previous:<a rel=previous accesskey=p href="Open-time-Flags.html#Open-time%20Flags">Open-time Flags</a>,
+Up:<a rel=up accesskey=u href="File-Status-Flags.html#File%20Status%20Flags">File Status Flags</a>
+<hr><br>
+
+<h4>I/O Operating Modes</h4>
+
+<p>The operating modes affect how input and output operations using a file
+descriptor work.  These flags are set by <code>open</code> and can be fetched
+and changed with <code>fcntl</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_APPEND</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The bit that enables append mode for the file.  If set, then all
+<code>write</code> operations write the data at the end of the file, extending
+it, regardless of the current file position.  This is the only reliable
+way to append to a file.  In append mode, you are guaranteed that the
+data you write will always go to the current end of the file, regardless
+of other processes writing to the file.  Conversely, if you simply set
+the file position to the end of file and write, then another process can
+extend the file after you set the file position but before you write,
+resulting in your data appearing someplace before the real end of file. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_NONBLOCK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The bit that enables nonblocking mode for the file.  If this bit is set,
+<code>read</code> requests on the file can return immediately with a failure
+status if there is no input immediately available, instead of blocking. 
+Likewise, <code>write</code> requests can also return immediately with a
+failure status if the output can't be written immediately.
+
+<p>Note that the <code>O_NONBLOCK</code> flag is overloaded as both an I/O
+operating mode and a file name translation flag; see <a href="Open-time-Flags.html#Open-time%20Flags">Open-time Flags</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_NDELAY</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is an obsolete name for <code>O_NONBLOCK</code>, provided for
+compatibility with BSD.  It is not defined by the POSIX.1 standard. 
+</td></tr>
+</table>
+
+<p>The remaining operating modes are BSD and GNU extensions.  They exist only
+on some systems.  On other systems, these macros are not defined.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_ASYNC</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The bit that enables asynchronous input mode.  If set, then <code>SIGIO</code>
+signals will be generated when input is available.  See <a href="Interrupt-Input.html#Interrupt%20Input">Interrupt Input</a>.
+
+<p>Asynchronous input mode is a BSD feature. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_FSYNC</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The bit that enables synchronous writing for the file.  If set, each
+<code>write</code> call will make sure the data is reliably stored on disk before
+returning. 
+Synchronous writing is a BSD feature. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_SYNC</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is another name for <code>O_FSYNC</code>.  They have the same value. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>O_NOATIME</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set, <code>read</code> will not update the access time of the
+file.  See <a href="File-Times.html#File%20Times">File Times</a>.  This is used by programs that do backups, so
+that backing a file up does not count as reading it. 
+Only the owner of the file or the superuser may use this bit.
+
+<p>This is a GNU extension. 
+</td></tr>
+</table>
+
+</body></html>
+

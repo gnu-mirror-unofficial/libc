@@ -1,0 +1,287 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Inverse%20Trig%20Functions">Inverse Trig Functions</a>,
+Next:<a rel=next accesskey=n href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>,
+Previous:<a rel=previous accesskey=p href="Trig-Functions.html#Trig%20Functions">Trig Functions</a>,
+Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+<hr><br>
+
+<h3>Inverse Trigonometric Functions</h3>
+
+<p>These are the usual arc sine, arc cosine and arc tangent functions,
+which are the inverses of the sine, cosine and tangent functions
+respectively.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>asin</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>asinf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>asinl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the arc sine of <var>x</var>--that is, the value whose
+sine is <var>x</var>.  The value is in units of radians.  Mathematically,
+there are infinitely many such values; the one actually returned is the
+one between <code>-pi/2</code> and <code>pi/2</code> (inclusive).
+
+<p>The arc sine function is defined mathematically only
+over the domain <code>-1</code> to <code>1</code>.  If <var>x</var> is outside the
+domain, <code>asin</code> signals a domain error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>acos</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>acosf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>acosl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the arc cosine of <var>x</var>--that is, the value
+whose cosine is <var>x</var>.  The value is in units of radians. 
+Mathematically, there are infinitely many such values; the one actually
+returned is the one between <code>0</code> and <code>pi</code> (inclusive).
+
+<p>The arc cosine function is defined mathematically only
+over the domain <code>-1</code> to <code>1</code>.  If <var>x</var> is outside the
+domain, <code>acos</code> signals a domain error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>atan</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>atanf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>atanl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the arc tangent of <var>x</var>--that is, the value
+whose tangent is <var>x</var>.  The value is in units of radians. 
+Mathematically, there are infinitely many such values; the one actually
+returned is the one between <code>-pi/2</code> and <code>pi/2</code> (inclusive). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>atan2</b><i> (double <var>y</var>, double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>atan2f</b><i> (float <var>y</var>, float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>atan2l</b><i> (long double <var>y</var>, long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function computes the arc tangent of <var>y</var>/<var>x</var>, but the signs
+of both arguments are used to determine the quadrant of the result, and
+<var>x</var> is permitted to be zero.  The return value is given in radians
+and is in the range <code>-pi</code> to <code>pi</code>, inclusive.
+
+<p>If <var>x</var> and <var>y</var> are coordinates of a point in the plane,
+<code>atan2</code> returns the signed angle between the line from the origin
+to that point and the x-axis.  Thus, <code>atan2</code> is useful for
+converting Cartesian coordinates to polar coordinates.  (To compute the
+radial coordinate, use <code>hypot</code>; see <a href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>.)
+
+<p>If both <var>x</var> and <var>y</var> are zero, <code>atan2</code> returns zero. 
+</td></tr>
+</table>
+
+<p>ISO&nbsp;C99 defines complex versions of the inverse trig functions.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>casin</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>casinf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>casinl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the complex arc sine of <var>z</var>--that is, the
+value whose sine is <var>z</var>.  The value returned is in radians.
+
+<p>Unlike the real-valued functions, <code>casin</code> is defined for all
+values of <var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>cacos</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>cacosf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>cacosl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the complex arc cosine of <var>z</var>--that is, the
+value whose cosine is <var>z</var>.  The value returned is in radians.
+
+<p>Unlike the real-valued functions, <code>cacos</code> is defined for all
+values of <var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>catan</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>catanf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>catanl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the complex arc tangent of <var>z</var>--that is,
+the value whose tangent is <var>z</var>.  The value is in units of radians. 
+</td></tr>
+</table>
+
+</body></html>
+

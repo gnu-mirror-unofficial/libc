@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Host%20Address%20Functions">Host Address Functions</a>,
+Next:<a rel=next accesskey=n href="Host-Names.html#Host%20Names">Host Names</a>,
+Previous:<a rel=previous accesskey=p href="Host-Address-Data-Type.html#Host%20Address%20Data%20Type">Host Address Data Type</a>,
+Up:<a rel=up accesskey=u href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>
+<hr><br>
+
+<h5>Host Address Functions</h5>
+
+<p>These additional functions for manipulating Internet addresses are
+declared in the header file <code>arpa/inet.h</code>.  They represent Internet
+addresses in network byte order, and network numbers and
+local-address-within-network numbers in host byte order.  See <a href="Byte-Order.html#Byte%20Order">Byte Order</a>, for an explanation of network and host byte order.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>inet_aton</b><i> (const char *<var>name</var>, struct in_addr *<var>addr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function converts the IPv4 Internet host address <var>name</var>
+from the standard numbers-and-dots notation into binary data and stores
+it in the <code>struct in_addr</code> that <var>addr</var> points to. 
+<code>inet_aton</code> returns nonzero if the address is valid, zero if not. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>inet_addr</b><i> (const char *<var>name</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function converts the IPv4 Internet host address <var>name</var> from the
+standard numbers-and-dots notation into binary data.  If the input is
+not valid, <code>inet_addr</code> returns <code>INADDR_NONE</code>.  This is an
+obsolete interface to <code>inet_aton</code>, described immediately above. It
+is obsolete because <code>INADDR_NONE</code> is a valid address
+(255.255.255.255), and <code>inet_aton</code> provides a cleaner way to
+indicate error return. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>inet_network</b><i> (const char *<var>name</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function extracts the network number from the address <var>name</var>,
+given in the standard numbers-and-dots notation. The returned address is
+in host order. If the input is not valid, <code>inet_network</code> returns
+<code>-1</code>.
+
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn't work with classless addresses and shouldn't be used
+anymore. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>inet_ntoa</b><i> (struct in_addr <var>addr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function converts the IPv4 Internet host address <var>addr</var> to a
+string in the standard numbers-and-dots notation.  The return value is
+a pointer into a statically-allocated buffer.  Subsequent calls will
+overwrite the same buffer, so you should copy the string if you need
+to save it.
+
+<p>In multi-threaded programs each thread has an own statically-allocated
+buffer.  But still subsequent calls of <code>inet_ntoa</code> in the same
+thread will overwrite the result of the last call.
+
+<p>Instead of <code>inet_ntoa</code> the newer function <code>inet_ntop</code> which is
+described below should be used since it handles both IPv4 and IPv6
+addresses. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct in_addr <b>inet_makeaddr</b><i> (uint32_t <var>net</var>, uint32_t <var>local</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function makes an IPv4 Internet host address by combining the network
+number <var>net</var> with the local-address-within-network number
+<var>local</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>inet_lnaof</b><i> (struct in_addr <var>addr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the local-address-within-network part of the
+Internet host address <var>addr</var>.
+
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn't work with classless addresses and shouldn't be used
+anymore. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uint32_t <b>inet_netof</b><i> (struct in_addr <var>addr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the network number part of the Internet host
+address <var>addr</var>.
+
+<p>The function works only with traditional IPv4 class A, B and C network
+types.  It doesn't work with classless addresses and shouldn't be used
+anymore. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>inet_pton</b><i> (int <var>af</var>, const char *<var>cp</var>, void *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function converts an Internet address (either IPv4 or IPv6) from
+presentation (textual) to network (binary) format.  <var>af</var> should be
+either <code>AF_INET</code> or <code>AF_INET6</code>, as appropriate for the type of
+address being converted.  <var>cp</var> is a pointer to the input string, and
+<var>buf</var> is a pointer to a buffer for the result.  It is the caller's
+responsibility to make sure the buffer is large enough. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">const char * <b>inet_ntop</b><i> (int <var>af</var>, const void *<var>cp</var>, char *<var>buf</var>, size_t <var>len</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function converts an Internet address (either IPv4 or IPv6) from
+network (binary) to presentation (textual) form.  <var>af</var> should be
+either <code>AF_INET</code> or <code>AF_INET6</code>, as appropriate.  <var>cp</var> is a
+pointer to the address to be converted.  <var>buf</var> should be a pointer
+to a buffer to hold the result, and <var>len</var> is the length of this
+buffer.  The return value from the function will be this buffer address. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Name%20Service%20Switch">Name Service Switch</a>,
+Next:<a rel=next accesskey=n href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>,
+Previous:<a rel=previous accesskey=p href="Job-Control.html#Job%20Control">Job Control</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>System Databases and Name Service Switch</h2>
+
+<p>Various functions in the C Library need to be configured to work
+correctly in the local environment.  Traditionally, this was done by
+using files (e.g., <code>/etc/passwd</code>), but other nameservices (like the
+Network Information Service (NIS) and the Domain Name Service (DNS))
+became popular, and were hacked into the C library, usually with a fixed
+search order (see <a href="../jargon/frobnicate.html#frobnicate">frobnicate</a>).
+
+<p>The GNU C Library contains a cleaner solution of this problem.  It is
+designed after a method used by Sun Microsystems in the C library of
+Solaris&nbsp;2.  GNU C Library follows their name and calls this
+scheme <dfn>Name Service Switch</dfn> (NSS).
+
+<p>Though the interface might be similar to Sun's version there is no
+common code.  We never saw any source code of Sun's implementation and
+so the internal interface is incompatible.  This also manifests in the
+file names we use as we will see later.
+
+<ul>
+<li><a accesskey=1 href="NSS-Basics.html#NSS%20Basics">NSS Basics</a>:                   What is this NSS good for. 
+<li><a accesskey=2 href="NSS-Configuration-File.html#NSS%20Configuration%20File">NSS Configuration File</a>:       Configuring NSS. 
+<li><a accesskey=3 href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>:         How does it work internally. 
+<li><a accesskey=4 href="Extending-NSS.html#Extending%20NSS">Extending NSS</a>:                What to do to add services or databases. 
+</ul>
+
+</body></html>
+

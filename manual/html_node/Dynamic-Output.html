@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Dynamic%20Output">Dynamic Output</a>,
+Next:<a rel=next accesskey=n href="Variable-Arguments-Output.html#Variable%20Arguments%20Output">Variable Arguments Output</a>,
+Previous:<a rel=previous accesskey=p href="Formatted-Output-Functions.html#Formatted%20Output%20Functions">Formatted Output Functions</a>,
+Up:<a rel=up accesskey=u href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>
+<hr><br>
+
+<h4>Dynamically Allocating Formatted Output</h4>
+
+<p>The functions in this section do formatted output and place the results
+in dynamically allocated memory.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>asprintf</b><i> (char **<var>ptr</var>, const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>sprintf</code>, except that it dynamically
+allocates a string (as with <code>malloc</code>; see <a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>) to hold the output, instead of putting the output in a
+buffer you allocate in advance.  The <var>ptr</var> argument should be the
+address of a <code>char *</code> object, and <code>asprintf</code> stores a pointer
+to the newly allocated string at that location.
+
+<p>The return value is the number of characters allocated for the buffer, or
+less than zero if an error occurred. Usually this means that the buffer
+could not be allocated.
+
+<p>Here is how to use <code>asprintf</code> to get the same result as the
+<code>snprintf</code> example, but more easily:
+
+<br><pre>/* Construct a message describing the value of a variable
+   whose name is <var>name</var> and whose value is <var>value</var>. */
+char *
+make_message (char *name, char *value)
+{
+  char *result;
+  if (asprintf (&amp;result, "value of %s is %s", name, value) &lt; 0)
+    return NULL;
+  return result;
+}
+</pre>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>obstack_printf</b><i> (struct obstack *<var>obstack</var>, const char *<var>template</var>, <small>...</small>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>asprintf</code>, except that it uses the
+obstack <var>obstack</var> to allocate the space.  See <a href="Obstacks.html#Obstacks">Obstacks</a>.
+
+<p>The characters are written onto the end of the current object. 
+To get at them, you must finish the object with <code>obstack_finish</code>
+(see <a href="Growing-Objects.html#Growing%20Objects">Growing Objects</a>). 
+</td></tr>
+</table>
+
+</body></html>
+

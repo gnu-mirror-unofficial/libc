@@ -1,0 +1,150 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Services%20Database">Services Database</a>,
+Next:<a rel=next accesskey=n href="Byte-Order.html#Byte%20Order">Byte Order</a>,
+Previous:<a rel=previous accesskey=p href="Ports.html#Ports">Ports</a>,
+Up:<a rel=up accesskey=u href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>
+<hr><br>
+
+<h4>The Services Database</h4>
+
+<p>The database that keeps track of "well-known" services is usually
+either the file <code>/etc/services</code> or an equivalent from a name server. 
+You can use these utilities, declared in <code>netdb.h</code>, to access
+the services database.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct servent</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type holds information about entries from the services database. 
+It has the following members:
+
+<dl>
+<dt><code>char *s_name</code>
+<dd>This is the "official" name of the service.
+
+<br><dt><code>char **s_aliases</code>
+<dd>These are alternate names for the service, represented as an array of
+strings.  A null pointer terminates the array.
+
+<br><dt><code>int s_port</code>
+<dd>This is the port number for the service.  Port numbers are given in
+network byte order; see <a href="Byte-Order.html#Byte%20Order">Byte Order</a>.
+
+<br><dt><code>char *s_proto</code>
+<dd>This is the name of the protocol to use with this service. 
+See <a href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>. 
+</dl>
+</td></tr>
+</table>
+
+<p>To get information about a particular service, use the
+<code>getservbyname</code> or <code>getservbyport</code> functions.  The information
+is returned in a statically-allocated structure; you must copy the
+information if you need to save it across calls.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct servent * <b>getservbyname</b><i> (const char *<var>name</var>, const char *<var>proto</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getservbyname</code> function returns information about the
+service named <var>name</var> using protocol <var>proto</var>.  If it can't find
+such a service, it returns a null pointer.
+
+<p>This function is useful for servers as well as for clients; servers
+use it to determine which port they should listen on (see <a href="Listening.html#Listening">Listening</a>). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct servent * <b>getservbyport</b><i> (int <var>port</var>, const char *<var>proto</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getservbyport</code> function returns information about the
+service at port <var>port</var> using protocol <var>proto</var>.  If it can't
+find such a service, it returns a null pointer. 
+</td></tr>
+</table>
+
+<p>You can also scan the services database using <code>setservent</code>,
+<code>getservent</code> and <code>endservent</code>.  Be careful when using these
+functions because they are not reentrant.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setservent</b><i> (int <var>stayopen</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function opens the services database to begin scanning it.
+
+<p>If the <var>stayopen</var> argument is nonzero, this sets a flag so that
+subsequent calls to <code>getservbyname</code> or <code>getservbyport</code> will
+not close the database (as they usually would).  This makes for more
+efficiency if you call those functions several times, by avoiding
+reopening the database for each call. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct servent * <b>getservent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the next entry in the services database.  If
+there are no more entries, it returns a null pointer. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>endservent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function closes the services database. 
+</td></tr>
+</table>
+
+</body></html>
+

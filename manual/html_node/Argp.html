@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp">Argp</a>,
+Next:<a rel=next accesskey=n href="Suboptions.html#Suboptions">Suboptions</a>,
+Previous:<a rel=previous accesskey=p href="Getopt.html#Getopt">Getopt</a>,
+Up:<a rel=up accesskey=u href="Parsing-Program-Arguments.html#Parsing%20Program%20Arguments">Parsing Program Arguments</a>
+<hr><br>
+
+<h3>Parsing Program Options with Argp</h3>
+
+<p><dfn>Argp</dfn> is an interface for parsing unix-style argument vectors. 
+See <a href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>.
+
+<p>Argp provides features unavailable in the more commonly used
+<code>getopt</code> interface.  These features include automatically producing
+output in response to the <code>--help</code> and <code>--version</code> options, as
+described in the GNU coding standards.  Using argp makes it less likely
+that programmers will neglect to implement these additional options or
+keep them up to date.
+
+<p>Argp also provides the ability to merge several independently defined
+option parsers into one, mediating conflicts between them and making the
+result appear seamless.  A library can export an argp option parser that
+user programs might employ in conjunction with their own option parsers,
+resulting in less work for the user programs.  Some programs may use only
+argument parsers exported by libraries, thereby achieving consistent and
+efficient option-parsing for abstractions implemented by the libraries.
+
+<p>The header file <code>&lt;argp.h&gt;</code> should be included to use argp.
+
+<h4>The <code>argp_parse</code> Function</h4>
+
+<p>The main interface to argp is the <code>argp_parse</code> function.  In many
+cases, calling <code>argp_parse</code> is the only argument-parsing code
+needed in <code>main</code>. 
+See <a href="Program-Arguments.html#Program%20Arguments">Program Arguments</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">error_t <b>argp_parse</b><i> (const struct argp *<var>argp</var>, int <var>argc</var>, char **<var>argv</var>, unsigned <var>flags</var>, int *<var>arg_index</var>, void *<var>input</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>argp_parse</code> function parses the arguments in <var>argv</var>, of
+length <var>argc</var>, using the argp parser <var>argp</var>.  See <a href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>.
+
+<p>A value of zero is the same as a <code>struct argp</code>containing all
+zeros.  <var>flags</var> is a set of flag bits that modify the parsing
+behavior.  See <a href="Argp-Flags.html#Argp%20Flags">Argp Flags</a>.  <var>input</var> is passed through to the argp
+parser <var>argp</var>, and has meaning defined by <var>argp</var>.  A typical
+usage is to pass a pointer to a structure which is used for specifying
+parameters to the parser and passing back the results.
+
+<p>Unless the <code>ARGP_NO_EXIT</code> or <code>ARGP_NO_HELP</code> flags are included
+in <var>flags</var>, calling <code>argp_parse</code> may result in the program
+exiting.  This behavior is true if an error is detected, or when an
+unknown option is encountered.  See <a href="Program-Termination.html#Program%20Termination">Program Termination</a>.
+
+<p>If <var>arg_index</var> is non-null, the index of the first unparsed option
+in <var>argv</var> is returned as a value.
+
+<p>The return value is zero for successful parsing, or an error code
+(see <a href="Error-Codes.html#Error%20Codes">Error Codes</a>) if an error is detected.  Different argp parsers
+may return arbitrary error codes, but the standard error codes are:
+<code>ENOMEM</code> if a memory allocation error occurred, or <code>EINVAL</code> if
+an unknown option or option argument is encountered. 
+</td></tr>
+</table>
+
+<ul>
+<li><a accesskey=1 href="Argp-Global-Variables.html#Argp%20Global%20Variables">Globals</a>:   Global argp parameters. 
+<li><a accesskey=2 href="Argp-Parsers.html#Argp%20Parsers">Parsers</a>:         Defining parsers for use with <code>argp_parse</code>. 
+<li><a accesskey=3 href="Argp-Flags.html#Argp%20Flags">Flags</a>:             Flags that modify the behavior of <code>argp_parse</code>. 
+<li><a accesskey=4 href="Argp-Help.html#Argp%20Help">Help</a>:               Printing help messages when not parsing. 
+<li><a accesskey=5 href="Argp-Examples.html#Argp%20Examples">Examples</a>:       Simple examples of programs using argp. 
+<li><a accesskey=6 href="Argp-User-Customization.html#Argp%20User%20Customization">Customization</a>: 
+                                Users may control the <code>--help</code> output format. 
+</ul>
+
+</body></html>
+

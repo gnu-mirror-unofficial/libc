@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Setuid%20Program%20Example">Setuid Program Example</a>,
+Next:<a rel=next accesskey=n href="Tips-for-Setuid.html#Tips%20for%20Setuid">Tips for Setuid</a>,
+Previous:<a rel=previous accesskey=p href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>,
+Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+<hr><br>
+
+<h3>Setuid Program Example</h3>
+
+<p>Here's an example showing how to set up a program that changes its
+effective user ID.
+
+<p>This is part of a game program called <code>caber-toss</code> that manipulates
+a file <code>scores</code> that should be writable only by the game program
+itself.  The program assumes that its executable file will be installed
+with the setuid bit set and owned by the same user as the <code>scores</code>
+file.  Typically, a system administrator will set up an account like
+<code>games</code> for this purpose.
+
+<p>The executable file is given mode <code>4755</code>, so that doing an
+<code>ls -l</code> on it produces output like:
+
+<br><pre>-rwsr-xr-x   1 games    184422 Jul 30 15:17 caber-toss
+</pre>
+
+<p>The setuid bit shows up in the file modes as the <code>s</code>.
+
+<p>The scores file is given mode <code>644</code>, and doing an <code>ls -l</code> on
+it shows:
+
+<br><pre>-rw-r--r--  1 games           0 Jul 31 15:33 scores
+</pre>
+
+<p>Here are the parts of the program that show how to set up the changed
+user ID.  This program is conditionalized so that it makes use of the
+file IDs feature if it is supported, and otherwise uses <code>setreuid</code>
+to swap the effective and real user IDs.
+
+<br><pre>#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+/* Remember the effective and real UIDs. */
+
+static uid_t euid, ruid;
+
+
+/* Restore the effective UID to its original value. */
+
+void
+do_setuid (void)
+{
+  int status;
+
+#ifdef _POSIX_SAVED_IDS
+  status = seteuid (euid);
+#else
+  status = setreuid (ruid, euid);
+#endif
+  if (status &lt; 0) {
+    fprintf (stderr, "Couldn't set uid.\n");
+    exit (status);
+    }
+}
+
+
+/* Set the effective UID to the real UID. */
+
+void
+undo_setuid (void)
+{
+  int status;
+
+#ifdef _POSIX_SAVED_IDS
+  status = seteuid (ruid);
+#else
+  status = setreuid (euid, ruid);
+#endif
+  if (status &lt; 0) {
+    fprintf (stderr, "Couldn't set uid.\n");
+    exit (status);
+    }
+}
+
+/* Main program. */
+
+int
+main (void)
+{
+  /* Remember the real and effective user IDs.  */
+  ruid = getuid ();
+  euid = geteuid ();
+  undo_setuid ();
+
+  /* Do the game and record the score.  */
+  <small>...</small>
+}
+</pre>
+
+<p>Notice how the first thing the <code>main</code> function does is to set the
+effective user ID back to the real user ID.  This is so that any other
+file accesses that are performed while the user is playing the game use
+the real user ID for determining permissions.  Only when the program
+needs to open the scores file does it switch back to the file user ID,
+like this:
+
+<br><pre>/* Record the score. */
+
+int
+record_score (int score)
+{
+  FILE *stream;
+  char *myname;
+
+  /* Open the scores file. */
+  do_setuid ();
+  stream = fopen (SCORES_FILE, "a");
+  undo_setuid ();
+
+  /* Write the score to the file. */
+  if (stream)
+    {
+      myname = cuserid (NULL);
+      if (score &lt; 0)
+        fprintf (stream, "%10s: Couldn't lift the caber.\n", myname);
+      else
+        fprintf (stream, "%10s: %d feet.\n", myname, score);
+      fclose (stream);
+      return 0;
+    }
+  else
+    return -1;
+}
+</pre>
+
+</body></html>
+

@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Linked%20Channels">Linked Channels</a>,
+Next:<a rel=next accesskey=n href="Independent-Channels.html#Independent%20Channels">Independent Channels</a>,
+Up:<a rel=up accesskey=u href="Stream-Descriptor-Precautions.html#Stream%2fDescriptor%20Precautions">Stream/Descriptor Precautions</a>
+<hr><br>
+
+<h4>Linked Channels</h4>
+
+<p>Channels that come from a single opening share the same file position;
+we call them <dfn>linked</dfn> channels.  Linked channels result when you
+make a stream from a descriptor using <code>fdopen</code>, when you get a
+descriptor from a stream with <code>fileno</code>, when you copy a descriptor
+with <code>dup</code> or <code>dup2</code>, and when descriptors are inherited
+during <code>fork</code>.  For files that don't support random access, such as
+terminals and pipes, <em>all</em> channels are effectively linked.  On
+random-access files, all append-type output streams are effectively
+linked to each other.
+
+<p>If you have been using a stream for I/O, and you want to do I/O using
+another channel (either a stream or a descriptor) that is linked to it,
+you must first <dfn>clean up</dfn> the stream that you have been using. 
+See <a href="Cleaning-Streams.html#Cleaning%20Streams">Cleaning Streams</a>.
+
+<p>Terminating a process, or executing a new program in the process,
+destroys all the streams in the process.  If descriptors linked to these
+streams persist in other processes, their file positions become
+undefined as a result.  To prevent this, you must clean up the streams
+before destroying them.
+
+</body></html>
+

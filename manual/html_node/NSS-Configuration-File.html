@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="NSS%20Configuration%20File">NSS Configuration File</a>,
+Next:<a rel=next accesskey=n href="NSS-Module-Internals.html#NSS%20Module%20Internals">NSS Module Internals</a>,
+Previous:<a rel=previous accesskey=p href="NSS-Basics.html#NSS%20Basics">NSS Basics</a>,
+Up:<a rel=up accesskey=u href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>
+<hr><br>
+
+<h3>The NSS Configuration File</h3>
+
+<p>Somehow the NSS code must be told about the wishes of the user.  For
+this reason there is the file <code>/etc/nsswitch.conf</code>.  For each
+database this file contain a specification how the lookup process should
+work.  The file could look like this:
+
+<br><pre>
+
+# /etc/nsswitch.conf
+#
+# Name Service Switch configuration file.
+#
+
+passwd:     db files nis
+shadow:     files
+group:      db files nis
+
+hosts:      files nisplus nis dns
+networks:   nisplus [NOTFOUND=return] files
+
+ethers:     nisplus [NOTFOUND=return] db files
+protocols:  nisplus [NOTFOUND=return] db files
+rpc:        nisplus [NOTFOUND=return] db files
+services:   nisplus [NOTFOUND=return] db files
+</pre>
+
+<p>The first column is the database as you can guess from the table above. 
+The rest of the line specifies how the lookup process works.  Please
+note that you specify the way it works for each database individually. 
+This cannot be done with the old way of a monolithic implementation.
+
+<p>The configuration specification for each database can contain two
+different items:
+
+<ul>
+<li>the service specification like <code>files</code>, <code>db</code>, or <code>nis</code>. 
+<li>the reaction on lookup result like <code>[NOTFOUND=return]</code>. 
+</ul>
+
+<ul>
+<li><a accesskey=1 href="Services-in-the-NSS-configuration.html#Services%20in%20the%20NSS%20configuration">Services in the NSS configuration</a>:   Service names in the NSS configuration. 
+<li><a accesskey=2 href="Actions-in-the-NSS-configuration.html#Actions%20in%20the%20NSS%20configuration">Actions in the NSS configuration</a>:   React appropriately to the lookup result. 
+<li><a accesskey=3 href="Notes-on-NSS-Configuration-File.html#Notes%20on%20NSS%20Configuration%20File">Notes on NSS Configuration File</a>:   Things to take care about while
+                                     configuring NSS. 
+</ul>
+
+</body></html>
+

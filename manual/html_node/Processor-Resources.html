@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Processor%20Resources">Processor Resources</a>,
+Previous:<a rel=previous accesskey=p href="Memory-Resources.html#Memory%20Resources">Memory Resources</a>,
+Up:<a rel=up accesskey=u href="Resource-Usage-And-Limitation.html#Resource%20Usage%20And%20Limitation">Resource Usage And Limitation</a>
+<hr><br>
+
+<h3>Learn about the processors available</h3>
+
+<p>The use of threads or processes with shared memory allows an application
+to take advantage of all the processing power a system can provide.  If
+the task can be parallelized the optimal way to write an application is
+to have at any time as many processes running as there are processors. 
+To determine the number of processors available to the system one can
+run
+
+<br><pre>  sysconf (_SC_NPROCESSORS_CONF)
+</pre>
+
+<p>which returns the number of processors the operating system configured. 
+But it might be possible for the operating system to disable individual
+processors and so the call
+
+<br><pre>  sysconf (_SC_NPROCESSORS_ONLN)
+</pre>
+
+<p>returns the number of processors which are currently inline (i.e.,
+available).
+
+<p>For these two pieces of information the GNU C library also provides
+functions to get the information directly.  The functions are declared
+in <code>sys/sysinfo.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>get_nprocs_conf</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>get_nprocs_conf</code> function returns the number of processors the
+operating system configured.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>get_nprocs</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>get_nprocs</code> function returns the number of available processors.
+
+<p>This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>Before starting more threads it should be checked whether the processors
+are not already overused.  Unix systems calculate something called the
+<dfn>load average</dfn>.  This is a number indicating how many processes were
+running.  This number is average over different periods of times
+(normally 1, 5, and 15 minutes).
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getloadavg</b><i> (double <var>loadavg</var>[], int <var>nelem</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function gets the 1, 5 and 15 minute load averages of the
+system. The values are placed in <var>loadavg</var>.  <code>getloadavg</code> will
+place at most <var>nelem</var> elements into the array but never more than
+three elements.  The return value is the number of elements written to
+<var>loadavg</var>, or -1 on error.
+
+<p>This function is declared in <code>stdlib.h</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

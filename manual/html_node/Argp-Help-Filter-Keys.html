@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20Help%20Filter%20Keys">Argp Help Filter Keys</a>,
+Up:<a rel=up accesskey=u href="Argp-Help-Filtering.html#Argp%20Help%20Filtering">Argp Help Filtering</a>
+<hr><br>
+
+<h5>Special Keys for Argp Help Filter Functions</h5>
+
+<p>The following special values may be passed to an argp help filter
+function as the first argument in addition to key values for user
+options.  They specify which help text the <var>text</var> argument contains:
+
+<dl>
+<dt><code>ARGP_KEY_HELP_PRE_DOC</code>
+<dd>The help text preceding options.
+
+<br><dt><code>ARGP_KEY_HELP_POST_DOC</code>
+<dd>The help text following options.
+
+<br><dt><code>ARGP_KEY_HELP_HEADER</code>
+<dd>The option header string.
+
+<br><dt><code>ARGP_KEY_HELP_EXTRA</code>
+<dd>This is used after all other documentation; <var>text</var> is zero for this key.
+
+<br><dt><code>ARGP_KEY_HELP_DUP_ARGS_NOTE</code>
+<dd>The explanatory note printed when duplicate option arguments have been suppressed.
+
+<br><dt><code>ARGP_KEY_HELP_ARGS_DOC</code>
+<dd>The argument doc string; formally the <code>args_doc</code> field from the argp parser.  See <a href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>. 
+</dl>
+
+</body></html>
+

@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20Global%20Variables">Argp Global Variables</a>,
+Next:<a rel=next accesskey=n href="Argp-Parsers.html#Argp%20Parsers">Argp Parsers</a>,
+Up:<a rel=up accesskey=u href="Argp.html#Argp">Argp</a>
+<hr><br>
+
+<h4>Argp Global Variables</h4>
+
+<p>These variables make it easy for user programs to implement the
+<code>--version</code> option and provide a bug-reporting address in the
+<code>--help</code> output.  These are implemented in argp by default.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">const char * <b>argp_program_version</b><i>
+</i></td>
+<td align="right">Variable</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If defined or set by the user program to a non-zero value, then a
+<code>--version</code> option is added when parsing with <code>argp_parse</code>,
+which will print the <code>--version</code> string followed by a newline and
+exit.  The exception to this is if the <code>ARGP_NO_EXIT</code> flag is used. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">const char * <b>argp_program_bug_address</b><i>
+</i></td>
+<td align="right">Variable</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If defined or set by the user program to a non-zero value,
+<code>argp_program_bug_address</code> should point to a string that will be
+printed at the end of the standard output for the <code>--help</code> option,
+embedded in a sentence that says <code>Report bugs to <var>address</var>.</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>argp_program_version_hook</b><i>
+</i></td>
+<td align="right">Variable</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If defined or set by the user program to a non-zero value, a
+<code>--version</code> option is added when parsing with <code>arg_parse</code>,
+which prints the program version and exits with a status of zero.  This
+is not the case if the <code>ARGP_NO_HELP</code> flag is used.  If the
+<code>ARGP_NO_EXIT</code> flag is set, the exit behavior of the program is
+suppressed or modified, as when the argp parser is going to be used by
+other programs.
+
+<p>It should point to a function with this type of signature:
+
+<br><pre>void <var>print-version</var> (FILE *<var>stream</var>, struct argp_state *<var>state</var>)
+</pre>
+
+<p>See <a href="Argp-Parsing-State.html#Argp%20Parsing%20State">Argp Parsing State</a>, for an explanation of <var>state</var>.
+
+<p>This variable takes precedence over <code>argp_program_version</code>, and is
+useful if a program has version information not easily expressed in a
+simple string. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">error_t <b>argp_err_exit_status</b><i>
+</i></td>
+<td align="right">Variable</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the exit status used when argp exits due to a parsing error.  If
+not defined or set by the user program, this defaults to:
+<code>EX_USAGE</code> from <code>&lt;sysexits.h&gt;</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

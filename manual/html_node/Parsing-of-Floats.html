@@ -1,0 +1,197 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Parsing%20of%20Floats">Parsing of Floats</a>,
+Previous:<a rel=previous accesskey=p href="Parsing-of-Integers.html#Parsing%20of%20Integers">Parsing of Integers</a>,
+Up:<a rel=up accesskey=u href="Parsing-of-Numbers.html#Parsing%20of%20Numbers">Parsing of Numbers</a>
+<hr><br>
+
+<h4>Parsing of Floats</h4>
+
+<p>The <code>str</code> functions are declared in <code>stdlib.h</code> and those
+beginning with <code>wcs</code> are declared in <code>wchar.h</code>.  One might
+wonder about the use of <code>restrict</code> in the prototypes of the
+functions in this section.  It is seemingly useless but the ISO&nbsp;C
+standard uses it (for the functions defined there) so we have to do it
+as well.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>strtod</b><i> (const char *restrict <var>string</var>, char **restrict <var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>strtod</code> ("string-to-double") function converts the initial
+part of <var>string</var> to a floating-point number, which is returned as a
+value of type <code>double</code>.
+
+<p>This function attempts to decompose <var>string</var> as follows:
+
+<ul>
+<li>A (possibly empty) sequence of whitespace characters.  Which characters
+are whitespace is determined by the <code>isspace</code> function
+(see <a href="Classification-of-Characters.html#Classification%20of%20Characters">Classification of Characters</a>).  These are discarded.
+
+<li>An optional plus or minus sign (<code>+</code> or <code>-</code>).
+
+<li>A floating point number in decimal or hexadecimal format.  The
+decimal format is:
+<ul>
+
+<li>A nonempty sequence of digits optionally containing a decimal-point
+character--normally <code>.</code>, but it depends on the locale
+(see <a href="General-Numeric.html#General%20Numeric">General Numeric</a>).
+
+<li>An optional exponent part, consisting of a character <code>e</code> or
+<code>E</code>, an optional sign, and a sequence of digits.
+
+</ul>
+
+<p>The hexadecimal format is as follows:
+<ul>
+
+<li>A 0x or 0X followed by a nonempty sequence of hexadecimal digits
+optionally containing a decimal-point character--normally <code>.</code>, but
+it depends on the locale (see <a href="General-Numeric.html#General%20Numeric">General Numeric</a>).
+
+<li>An optional binary-exponent part, consisting of a character <code>p</code> or
+<code>P</code>, an optional sign, and a sequence of digits.
+
+</ul>
+
+<li>Any remaining characters in the string.  If <var>tailptr</var> is not a null
+pointer, a pointer to this tail of the string is stored in
+<code>*<var>tailptr</var></code>. 
+</ul>
+
+<p>If the string is empty, contains only whitespace, or does not contain an
+initial substring that has the expected syntax for a floating-point
+number, no conversion is performed.  In this case, <code>strtod</code> returns
+a value of zero and the value returned in <code>*<var>tailptr</var></code> is the
+value of <var>string</var>.
+
+<p>In a locale other than the standard <code>"C"</code> or <code>"POSIX"</code> locales,
+this function may recognize additional locale-dependent syntax.
+
+<p>If the string has valid syntax for a floating-point number but the value
+is outside the range of a <code>double</code>, <code>strtod</code> will signal
+overflow or underflow as described in <a href="Math-Error-Reporting.html#Math%20Error%20Reporting">Math Error Reporting</a>.
+
+<p><code>strtod</code> recognizes four special input strings.  The strings
+<code>"inf"</code> and <code>"infinity"</code> are converted to &amp;infin;,
+or to the largest representable value if the floating-point format
+doesn't support infinities.  You can prepend a <code>"+"</code> or <code>"-"</code>
+to specify the sign.  Case is ignored when scanning these strings.
+
+<p>The strings <code>"nan"</code> and <code>"nan(<var>chars...</var>)"</code> are converted
+to NaN.  Again, case is ignored.  If <var>chars...</var> are provided, they
+are used in some unspecified fashion to select a particular
+representation of NaN (there can be several).
+
+<p>Since zero is a valid result as well as the value returned on error, you
+should check for errors in the same way as for <code>strtol</code>, by
+examining <var>errno</var> and <var>tailptr</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">float <b>strtof</b><i> (const char *<var>string</var>, char **<var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>strtold</b><i> (const char *<var>string</var>, char **<var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are analogous to <code>strtod</code>, but return <code>float</code>
+and <code>long double</code> values respectively.  They report errors in the
+same way as <code>strtod</code>.  <code>strtof</code> can be substantially faster
+than <code>strtod</code>, but has less precision; conversely, <code>strtold</code>
+can be much slower but has more precision (on systems where <code>long
+double</code> is a separate type).
+
+<p>These functions have been GNU extensions and are new to ISO&nbsp;C99. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>wcstod</b><i> (const wchar_t *restrict <var>string</var>, wchar_t **restrict <var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>wcstof</b><i> (const wchar_t *<var>string</var>, wchar_t **<var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>wcstold</b><i> (const wchar_t *<var>string</var>, wchar_t **<var>tailptr</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>wcstod</code>, <code>wcstof</code>, and <code>wcstol</code> functions are
+equivalent in nearly all aspect to the <code>strtod</code>, <code>strtof</code>, and
+<code>strtold</code> functions but it handles wide character string.
+
+<p>The <code>wcstod</code> function was introduced in Amendment&nbsp;1 of ISO&nbsp;C90.  The <code>wcstof</code> and <code>wcstold</code> functions were introduced in
+ISO&nbsp;C99. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>atof</b><i> (const char *<var>string</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to the <code>strtod</code> function, except that it
+need not detect overflow and underflow errors.  The <code>atof</code> function
+is provided mostly for compatibility with existing code; using
+<code>strtod</code> is more robust. 
+</td></tr>
+</table>
+
+<p>The GNU C library also provides <code>_l</code> versions of these functions,
+which take an additional argument, the locale to use in conversion. 
+See <a href="Parsing-of-Integers.html#Parsing%20of%20Integers">Parsing of Integers</a>.
+
+</body></html>
+

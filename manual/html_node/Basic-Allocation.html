@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Basic%20Allocation">Basic Allocation</a>,
+Next:<a rel=next accesskey=n href="Malloc-Examples.html#Malloc%20Examples">Malloc Examples</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Basic Memory Allocation</h5>
+
+<p>To allocate a block of memory, call <code>malloc</code>.  The prototype for
+this function is in <code>stdlib.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void * <b>malloc</b><i> (size_t <var>size</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns a pointer to a newly allocated block <var>size</var>
+bytes long, or a null pointer if the block could not be allocated. 
+</td></tr>
+</table>
+
+<p>The contents of the block are undefined; you must initialize it yourself
+(or use <code>calloc</code> instead; see <a href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>). 
+Normally you would cast the value as a pointer to the kind of object
+that you want to store in the block.  Here we show an example of doing
+so, and of initializing the space with zeros using the library function
+<code>memset</code> (see <a href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>):
+
+<br><pre>struct foo *ptr;
+<small>...</small>
+ptr = (struct foo *) malloc (sizeof (struct foo));
+if (ptr == 0) abort ();
+memset (ptr, 0, sizeof (struct foo));
+</pre>
+
+<p>You can store the result of <code>malloc</code> into any pointer variable
+without a cast, because ISO&nbsp;C automatically converts the type
+<code>void *</code> to another type of pointer when necessary.  But the cast
+is necessary in contexts other than assignment operators or if you might
+want your code to run in traditional C.
+
+<p>Remember that when allocating space for a string, the argument to
+<code>malloc</code> must be one plus the length of the string.  This is
+because a string is terminated with a null character that doesn't count
+in the "length" of the string but does need space.  For example:
+
+<br><pre>char *ptr;
+<small>...</small>
+ptr = (char *) malloc (length + 1);
+</pre>
+
+<p>See <a href="Representation-of-Strings.html#Representation%20of%20Strings">Representation of Strings</a>, for more information about this.
+
+</body></html>
+

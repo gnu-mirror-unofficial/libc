@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Blocking%20for%20Handler">Blocking for Handler</a>,
+Next:<a rel=next accesskey=n href="Checking-for-Pending-Signals.html#Checking%20for%20Pending%20Signals">Checking for Pending Signals</a>,
+Previous:<a rel=previous accesskey=p href="Testing-for-Delivery.html#Testing%20for%20Delivery">Testing for Delivery</a>,
+Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+<hr><br>
+
+<h4>Blocking Signals for a Handler</h4>
+
+<p>When a signal handler is invoked, you usually want it to be able to
+finish without being interrupted by another signal.  From the moment the
+handler starts until the moment it finishes, you must block signals that
+might confuse it or corrupt its data.
+
+<p>When a handler function is invoked on a signal, that signal is
+automatically blocked (in addition to any other signals that are already
+in the process's signal mask) during the time the handler is running. 
+If you set up a handler for <code>SIGTSTP</code>, for instance, then the
+arrival of that signal forces further <code>SIGTSTP</code> signals to wait
+during the execution of the handler.
+
+<p>However, by default, other kinds of signals are not blocked; they can
+arrive during handler execution.
+
+<p>The reliable way to block other kinds of signals during the execution of
+the handler is to use the <code>sa_mask</code> member of the <code>sigaction</code>
+structure.
+
+<p>Here is an example:
+
+<br><pre>#include &lt;signal.h&gt;
+#include &lt;stddef.h&gt;
+
+void catch_stop ();
+
+void
+install_handler (void)
+{
+  struct sigaction setup_action;
+  sigset_t block_mask;
+
+  sigemptyset (&amp;block_mask);
+  /* Block other terminal-generated signals while handler runs. */
+  sigaddset (&amp;block_mask, SIGINT);
+  sigaddset (&amp;block_mask, SIGQUIT);
+  setup_action.sa_handler = catch_stop;
+  setup_action.sa_mask = block_mask;
+  setup_action.sa_flags = 0;
+  sigaction (SIGTSTP, &amp;setup_action, NULL);
+}
+</pre>
+
+<p>This is more reliable than blocking the other signals explicitly in the
+code for the handler.  If you block signals explicitly in the handler,
+you can't avoid at least a short interval at the beginning of the
+handler where they are not yet blocked.
+
+<p>You cannot remove signals from the process's current mask using this
+mechanism.  However, you can make calls to <code>sigprocmask</code> within
+your handler to block or unblock signals as you wish.
+
+<p>In any case, when the handler returns, the system restores the mask that
+was in place before the handler was entered.  If any signals that become
+unblocked by this restoration are pending, the process will receive
+those signals immediately, before returning to the code that was
+interrupted.
+
+</body></html>
+

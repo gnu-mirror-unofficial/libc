@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Socket%20Data%20Options">Socket Data Options</a>,
+Previous:<a rel=previous accesskey=p href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>,
+Up:<a rel=up accesskey=u href="Transferring-Data.html#Transferring%20Data">Transferring Data</a>
+<hr><br>
+
+<h5>Socket Data Options</h5>
+
+<p>The <var>flags</var> argument to <code>send</code> and <code>recv</code> is a bit
+mask.  You can bitwise-OR the values of the following macros together
+to obtain a value for this argument.  All are defined in the header
+file <code>sys/socket.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MSG_OOB</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Send or receive out-of-band data.  See <a href="Out-of-Band-Data.html#Out-of-Band%20Data">Out-of-Band Data</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MSG_PEEK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Look at the data but don't remove it from the input queue.  This is
+only meaningful with input functions such as <code>recv</code>, not with
+<code>send</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MSG_DONTROUTE</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Don't include routing information in the message.  This is only
+meaningful with output operations, and is usually only of interest for
+diagnostic or routing programs.  We don't try to explain it here. 
+</td></tr>
+</table>
+
+</body></html>
+

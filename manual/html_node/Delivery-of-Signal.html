@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Delivery%20of%20Signal">Delivery of Signal</a>,
+Previous:<a rel=previous accesskey=p href="Signal-Generation.html#Signal%20Generation">Signal Generation</a>,
+Up:<a rel=up accesskey=u href="Concepts-of-Signals.html#Concepts%20of%20Signals">Concepts of Signals</a>
+<hr><br>
+
+<h4>How Signals Are Delivered</h4>
+
+<p>When a signal is generated, it becomes <dfn>pending</dfn>.  Normally it
+remains pending for just a short period of time and then is
+<dfn>delivered</dfn> to the process that was signaled.  However, if that kind
+of signal is currently <dfn>blocked</dfn>, it may remain pending
+indefinitely--until signals of that kind are <dfn>unblocked</dfn>.  Once
+unblocked, it will be delivered immediately.  See <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>.
+
+<p>When the signal is delivered, whether right away or after a long delay,
+the <dfn>specified action</dfn> for that signal is taken.  For certain
+signals, such as <code>SIGKILL</code> and <code>SIGSTOP</code>, the action is fixed,
+but for most signals, the program has a choice: ignore the signal,
+specify a <dfn>handler function</dfn>, or accept the <dfn>default action</dfn> for
+that kind of signal.  The program specifies its choice using functions
+such as <code>signal</code> or <code>sigaction</code> (see <a href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>).  We
+sometimes say that a handler <dfn>catches</dfn> the signal.  While the
+handler is running, that particular signal is normally blocked.
+
+<p>If the specified action for a kind of signal is to ignore it, then any
+such signal which is generated is discarded immediately.  This happens
+even if the signal is also blocked at the time.  A signal discarded in
+this way will never be delivered, not even if the program subsequently
+specifies a different action for that kind of signal and then unblocks
+it.
+
+<p>If a signal arrives which the program has neither handled nor ignored,
+its <dfn>default action</dfn> takes place.  Each kind of signal has its own
+default action, documented below (see <a href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>).  For most kinds
+of signals, the default action is to terminate the process.  For certain
+kinds of signals that represent "harmless" events, the default action
+is to do nothing.
+
+<p>When a signal terminates a process, its parent process can determine the
+cause of termination by examining the termination status code reported
+by the <code>wait</code> or <code>waitpid</code> functions.  (This is discussed in
+more detail in <a href="Process-Completion.html#Process%20Completion">Process Completion</a>.)  The information it can get
+includes the fact that termination was due to a signal and the kind of
+signal involved.  If a program you run from a shell is terminated by a
+signal, the shell typically prints some kind of error message.
+
+<p>The signals that normally represent program errors have a special
+property: when one of these signals terminates the process, it also
+writes a <dfn>core dump file</dfn> which records the state of the process at
+the time of termination.  You can examine the core dump with a debugger
+to investigate what caused the error.
+
+<p>If you raise a "program error" signal by explicit request, and this
+terminates the process, it makes a core dump file just as if the signal
+had been due directly to an error.
+
+</body></html>
+

@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Signaling%20Yourself">Signaling Yourself</a>,
+Next:<a rel=next accesskey=n href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>,
+Up:<a rel=up accesskey=u href="Generating-Signals.html#Generating%20Signals">Generating Signals</a>
+<hr><br>
+
+<h4>Signaling Yourself</h4>
+
+<p>A process can send itself a signal with the <code>raise</code> function.  This
+function is declared in <code>signal.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>raise</b><i> (int <var>signum</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>raise</code> function sends the signal <var>signum</var> to the calling
+process.  It returns zero if successful and a nonzero value if it fails. 
+About the only reason for failure would be if the value of <var>signum</var>
+is invalid. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>gsignal</b><i> (int <var>signum</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>gsignal</code> function does the same thing as <code>raise</code>; it is
+provided only for compatibility with SVID. 
+</td></tr>
+</table>
+
+<p>One convenient use for <code>raise</code> is to reproduce the default behavior
+of a signal that you have trapped.  For instance, suppose a user of your
+program types the SUSP character (usually <kbd>C-z</kbd>; see <a href="Special-Characters.html#Special%20Characters">Special Characters</a>) to send it an interactive stop signal
+(<code>SIGTSTP</code>), and you want to clean up some internal data buffers
+before stopping.  You might set this up like this:
+
+<br><pre>#include &lt;signal.h&gt;
+
+/* When a stop signal arrives, set the action back to the default
+   and then resend the signal after doing cleanup actions. */
+
+void
+tstp_handler (int sig)
+{
+  signal (SIGTSTP, SIG_DFL);
+  /* Do cleanup actions here. */
+  <small>...</small>
+  raise (SIGTSTP);
+}
+
+/* When the process is continued again, restore the signal handler. */
+
+void
+cont_handler (int sig)
+{
+  signal (SIGCONT, cont_handler);
+  signal (SIGTSTP, tstp_handler);
+}
+
+/* Enable both handlers during program initialization. */
+
+int
+main (void)
+{
+  signal (SIGCONT, cont_handler);
+  signal (SIGTSTP, tstp_handler);
+  <small>...</small>
+}
+</pre>
+
+<p><strong>Portability note:</strong> <code>raise</code> was invented by the ISO&nbsp;C
+committee.  Older systems may not support it, so using <code>kill</code> may
+be more portable.  See <a href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>.
+
+</body></html>
+

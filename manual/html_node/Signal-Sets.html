@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Signal%20Sets">Signal Sets</a>,
+Next:<a rel=next accesskey=n href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>,
+Previous:<a rel=previous accesskey=p href="Why-Block.html#Why%20Block">Why Block</a>,
+Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+<hr><br>
+
+<h4>Signal Sets</h4>
+
+<p>All of the signal blocking functions use a data structure called a
+<dfn>signal set</dfn> to specify what signals are affected.  Thus, every
+activity involves two stages: creating the signal set, and then passing
+it as an argument to a library function.
+
+<p>These facilities are declared in the header file <code>signal.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>sigset_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>sigset_t</code> data type is used to represent a signal set. 
+Internally, it may be implemented as either an integer or structure
+type.
+
+<p>For portability, use only the functions described in this section to
+initialize, change, and retrieve information from <code>sigset_t</code>
+objects--don't try to manipulate them directly. 
+</td></tr>
+</table>
+
+<p>There are two ways to initialize a signal set.  You can initially
+specify it to be empty with <code>sigemptyset</code> and then add specified
+signals individually.  Or you can specify it to be full with
+<code>sigfillset</code> and then delete specified signals individually.
+
+<p>You must always initialize the signal set with one of these two
+functions before using it in any other way.  Don't try to set all the
+signals explicitly because the <code>sigset_t</code> object might include some
+other information (like a version field) that needs to be initialized as
+well.  (In addition, it's not wise to put into your program an
+assumption that the system has no signals aside from the ones you know
+about.)
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigemptyset</b><i> (sigset_t *<var>set</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function initializes the signal set <var>set</var> to exclude all of the
+defined signals.  It always returns <code>0</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigfillset</b><i> (sigset_t *<var>set</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function initializes the signal set <var>set</var> to include
+all of the defined signals.  Again, the return value is <code>0</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigaddset</b><i> (sigset_t *<var>set</var>, int <var>signum</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function adds the signal <var>signum</var> to the signal set <var>set</var>. 
+All <code>sigaddset</code> does is modify <var>set</var>; it does not block or
+unblock any signals.
+
+<p>The return value is <code>0</code> on success and <code>-1</code> on failure. 
+The following <code>errno</code> error condition is defined for this function:
+
+<dl>
+<dt><code>EINVAL</code>
+<dd>The <var>signum</var> argument doesn't specify a valid signal. 
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigdelset</b><i> (sigset_t *<var>set</var>, int <var>signum</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function removes the signal <var>signum</var> from the signal set
+<var>set</var>.  All <code>sigdelset</code> does is modify <var>set</var>; it does not
+block or unblock any signals.  The return value and error conditions are
+the same as for <code>sigaddset</code>. 
+</td></tr>
+</table>
+
+<p>Finally, there is a function to test what signals are in a signal set:
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigismember</b><i> (const sigset_t *<var>set</var>, int <var>signum</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>sigismember</code> function tests whether the signal <var>signum</var> is
+a member of the signal set <var>set</var>.  It returns <code>1</code> if the signal
+is in the set, <code>0</code> if not, and <code>-1</code> if there is an error.
+
+<p>The following <code>errno</code> error condition is defined for this function:
+
+<dl>
+<dt><code>EINVAL</code>
+<dd>The <var>signum</var> argument doesn't specify a valid signal. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

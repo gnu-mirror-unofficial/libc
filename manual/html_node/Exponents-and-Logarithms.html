@@ -1,0 +1,782 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Exponents%20and%20Logarithms">Exponents and Logarithms</a>,
+Next:<a rel=next accesskey=n href="Hyperbolic-Functions.html#Hyperbolic%20Functions">Hyperbolic Functions</a>,
+Previous:<a rel=previous accesskey=p href="Inverse-Trig-Functions.html#Inverse%20Trig%20Functions">Inverse Trig Functions</a>,
+Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+<hr><br>
+
+<h3>Exponentiation and Logarithms</h3>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>exp</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>expf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>expl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute <code>e</code> (the base of natural logarithms) raised
+to the power <var>x</var>.
+
+<p>If the magnitude of the result is too large to be representable,
+<code>exp</code> signals overflow. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>exp2</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>exp2f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>exp2l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute <code>2</code> raised to the power <var>x</var>. 
+Mathematically, <code>exp2 (x)</code> is the same as <code>exp (x * log (2))</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>exp10</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>exp10f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>exp10l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">double <b>pow10</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>pow10f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>pow10l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute <code>10</code> raised to the power <var>x</var>. 
+Mathematically, <code>exp10 (x)</code> is the same as <code>exp (x * log (10))</code>.
+
+<p>These functions are GNU extensions.  The name <code>exp10</code> is
+preferred, since it is analogous to <code>exp</code> and <code>exp2</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>log</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>logf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>logl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions compute the natural logarithm of <var>x</var>.  <code>exp (log
+(<var>x</var>))</code> equals <var>x</var>, exactly in mathematics and approximately in
+C.
+
+<p>If <var>x</var> is negative, <code>log</code> signals a domain error.  If <var>x</var>
+is zero, it returns negative infinity; if <var>x</var> is too close to zero,
+it may signal overflow. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>log10</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>log10f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>log10l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the base-10 logarithm of <var>x</var>. 
+<code>log10 (<var>x</var>)</code> equals <code>log (<var>x</var>) / log (10)</code>.
+
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>log2</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>log2f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>log2l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the base-2 logarithm of <var>x</var>. 
+<code>log2 (<var>x</var>)</code> equals <code>log (<var>x</var>) / log (2)</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>logb</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>logbf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>logbl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions extract the exponent of <var>x</var> and return it as a
+floating-point value.  If <code>FLT_RADIX</code> is two, <code>logb</code> is equal
+to <code>floor (log2 (x))</code>, except it's probably faster.
+
+<p>If <var>x</var> is de-normalized, <code>logb</code> returns the exponent <var>x</var>
+would have if it were normalized.  If <var>x</var> is infinity (positive or
+negative), <code>logb</code> returns &amp;infin;.  If <var>x</var> is zero,
+<code>logb</code> returns &amp;infin;.  It does not signal. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ilogb</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">int <b>ilogbf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">int <b>ilogbl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are equivalent to the corresponding <code>logb</code>
+functions except that they return signed integer values. 
+</td></tr>
+</table>
+
+<p>Since integers cannot represent infinity and NaN, <code>ilogb</code> instead
+returns an integer that can't be the exponent of a normal floating-point
+number.  <code>math.h</code> defines constants so you can check for this.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>FP_ILOGB0</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>ilogb</code> returns this value if its argument is <code>0</code>.  The
+numeric value is either <code>INT_MIN</code> or <code>-INT_MAX</code>.
+
+<p>This macro is defined in ISO&nbsp;C99. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>FP_ILOGBNAN</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>ilogb</code> returns this value if its argument is <code>NaN</code>.  The
+numeric value is either <code>INT_MIN</code> or <code>INT_MAX</code>.
+
+<p>This macro is defined in ISO&nbsp;C99. 
+</td></tr>
+</table>
+
+<p>These values are system specific.  They might even be the same.  The
+proper way to test the result of <code>ilogb</code> is as follows:
+
+<br><pre>i = ilogb (f);
+if (i == FP_ILOGB0 || i == FP_ILOGBNAN)
+  {
+    if (isnan (f))
+      {
+        /* Handle NaN.  */
+      }
+    else if (f  == 0.0)
+      {
+        /* Handle 0.0.  */
+      }
+    else
+      {
+        /* Some other value with large exponent,
+           perhaps +Inf.  */
+      }
+  }
+</pre>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>pow</b><i> (double <var>base</var>, double <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>powf</b><i> (float <var>base</var>, float <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>powl</b><i> (long double <var>base</var>, long double <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These are general exponentiation functions, returning <var>base</var> raised
+to <var>power</var>.
+
+<p>Mathematically, <code>pow</code> would return a complex number when <var>base</var>
+is negative and <var>power</var> is not an integral value.  <code>pow</code> can't
+do that, so instead it signals a domain error. <code>pow</code> may also
+underflow or overflow the destination type. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>sqrt</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>sqrtf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>sqrtl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the nonnegative square root of <var>x</var>.
+
+<p>If <var>x</var> is negative, <code>sqrt</code> signals a domain error. 
+Mathematically, it should return a complex number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>cbrt</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>cbrtf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>cbrtl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the cube root of <var>x</var>.  They cannot
+fail; every representable real value has a representable real cube root. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>hypot</b><i> (double <var>x</var>, double <var>y</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>hypotf</b><i> (float <var>x</var>, float <var>y</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>hypotl</b><i> (long double <var>x</var>, long double <var>y</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return <code>sqrt (<var>x</var>*<var>x</var> +
+<var>y</var>*<var>y</var>)</code>.  This is the length of the hypotenuse of a right
+triangle with sides of length <var>x</var> and <var>y</var>, or the distance
+of the point (<var>x</var>, <var>y</var>) from the origin.  Using this function
+instead of the direct formula is wise, since the error is
+much smaller.  See also the function <code>cabs</code> in <a href="Absolute-Value.html#Absolute%20Value">Absolute Value</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>expm1</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>expm1f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>expm1l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return a value equivalent to <code>exp (<var>x</var>) - 1</code>. 
+They are computed in a way that is accurate even if <var>x</var> is
+near zero--a case where <code>exp (<var>x</var>) - 1</code> would be inaccurate owing
+to subtraction of two numbers that are nearly equal. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>log1p</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>log1pf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>log1pl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions returns a value equivalent to <code>log&nbsp;(1&nbsp;+&nbsp;<var>x</var>)</code>. 
+They are computed in a way that is accurate even if <var>x</var> is
+near zero. 
+</td></tr>
+</table>
+
+<p>ISO&nbsp;C99 defines complex variants of some of the exponentiation and
+logarithm functions.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>cexp</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>cexpf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>cexpl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return <code>e</code> (the base of natural
+logarithms) raised to the power of <var>z</var>. 
+Mathematically, this corresponds to the value
+
+<p>exp (z) = exp (creal (z)) * (cos (cimag (z)) + I * sin (cimag (z)))
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>clog</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>clogf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>clogl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the natural logarithm of <var>z</var>. 
+Mathematically, this corresponds to the value
+
+<p>log (z) = log (cabs (z)) + I * carg (z)
+
+<p><code>clog</code> has a pole at 0, and will signal overflow if <var>z</var> equals
+or is very close to 0.  It is well-defined for all other values of
+<var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>clog10</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>clog10f</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>clog10l</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the base 10 logarithm of the complex value
+<var>z</var>. Mathematically, this corresponds to the value
+
+<p>log (z) = log10 (cabs (z)) + I * carg (z)
+
+<p>These functions are GNU extensions. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>csqrt</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>csqrtf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>csqrtl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the complex square root of the argument <var>z</var>.  Unlike
+the real-valued functions, they are defined for all values of <var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>cpow</b><i> (complex double <var>base</var>, complex double <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>cpowf</b><i> (complex float <var>base</var>, complex float <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>cpowl</b><i> (complex long double <var>base</var>, complex long double <var>power</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return <var>base</var> raised to the power of
+<var>power</var>.  This is equivalent to <code>cexp&nbsp;(y&nbsp;*&nbsp;clog&nbsp;(x))</code>
+</td></tr>
+</table>
+
+</body></html>
+

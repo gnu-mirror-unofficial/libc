@@ -1,0 +1,268 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Classification%20of%20Characters">Classification of Characters</a>,
+Next:<a rel=next accesskey=n href="Case-Conversion.html#Case%20Conversion">Case Conversion</a>,
+Up:<a rel=up accesskey=u href="Character-Handling.html#Character%20Handling">Character Handling</a>
+<hr><br>
+
+<h3>Classification of Characters</h3>
+
+<p>This section explains the library functions for classifying characters. 
+For example, <code>isalpha</code> is the function to test for an alphabetic
+character.  It takes one argument, the character to test, and returns a
+nonzero integer if the character is alphabetic, and zero otherwise.  You
+would use it like this:
+
+<br><pre>if (isalpha (c))
+  printf ("The character `%c' is alphabetic.\n", c);
+</pre>
+
+<p>Each of the functions in this section tests for membership in a
+particular class of characters; each has a name starting with <code>is</code>. 
+Each of them takes one argument, which is a character to test, and
+returns an <code>int</code> which is treated as a boolean value.  The
+character argument is passed as an <code>int</code>, and it may be the
+constant value <code>EOF</code> instead of a real character.
+
+<p>The attributes of any given character can vary between locales. 
+See <a href="Locales.html#Locales">Locales</a>, for more information on locales.
+
+<p>These functions are declared in the header file <code>ctype.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>islower</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a lower-case letter.  The letter need not be
+from the Latin alphabet, any alphabet representable is valid. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isupper</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is an upper-case letter.  The letter need not be
+from the Latin alphabet, any alphabet representable is valid. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isalpha</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is an alphabetic character (a letter).  If
+<code>islower</code> or <code>isupper</code> is true of a character, then
+<code>isalpha</code> is also true.
+
+<p>In some locales, there may be additional characters for which
+<code>isalpha</code> is true--letters which are neither upper case nor lower
+case.  But in the standard <code>"C"</code> locale, there are no such
+additional characters. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isdigit</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a decimal digit (<code>0</code> through <code>9</code>). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isalnum</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is an alphanumeric character (a letter or
+number); in other words, if either <code>isalpha</code> or <code>isdigit</code> is
+true of a character, then <code>isalnum</code> is also true. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isxdigit</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a hexadecimal digit. 
+Hexadecimal digits include the normal decimal digits <code>0</code> through
+<code>9</code> and the letters <code>A</code> through <code>F</code> and
+<code>a</code> through <code>f</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ispunct</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a punctuation character. 
+This means any printing character that is not alphanumeric or a space
+character. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isspace</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a <dfn>whitespace</dfn> character.  In the standard
+<code>"C"</code> locale, <code>isspace</code> returns true for only the standard
+whitespace characters:
+
+<dl>
+<dt><code>' '</code>
+<dd>space
+
+<br><dt><code>'\f'</code>
+<dd>formfeed
+
+<br><dt><code>'\n'</code>
+<dd>newline
+
+<br><dt><code>'\r'</code>
+<dd>carriage return
+
+<br><dt><code>'\t'</code>
+<dd>horizontal tab
+
+<br><dt><code>'\v'</code>
+<dd>vertical tab
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isblank</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a blank character; that is, a space or a tab. 
+This function is a GNU extension. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isgraph</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a graphic character; that is, a character
+that has a glyph associated with it.  The whitespace characters are not
+considered graphic. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isprint</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a printing character.  Printing characters
+include all the graphic characters, plus the space (<code> </code>) character. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>iscntrl</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a control character (that is, a character that
+is not a printing character). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>isascii</b><i> (int <var>c</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Returns true if <var>c</var> is a 7-bit <code>unsigned char</code> value that fits
+into the US/UK ASCII character set.  This function is a BSD extension
+and is also an SVID extension. 
+</td></tr>
+</table>
+
+</body></html>
+

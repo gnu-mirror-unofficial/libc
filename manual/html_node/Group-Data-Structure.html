@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Group%20Data%20Structure">Group Data Structure</a>,
+Next:<a rel=next accesskey=n href="Lookup-Group.html#Lookup%20Group">Lookup Group</a>,
+Up:<a rel=up accesskey=u href="Group-Database.html#Group%20Database">Group Database</a>
+<hr><br>
+
+<h4>The Data Structure for a Group</h4>
+
+<p>The functions and data structures for accessing the system group
+database are declared in the header file <code>grp.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct group</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>group</code> structure is used to hold information about an entry in
+the system group database.  It has at least the following members:
+
+<dl>
+<dt><code>char *gr_name</code>
+<dd>The name of the group.
+
+<br><dt><code>gid_t gr_gid</code>
+<dd>The group ID of the group.
+
+<br><dt><code>char **gr_mem</code>
+<dd>A vector of pointers to the names of users in the group.  Each user name
+is a null-terminated string, and the vector itself is terminated by a
+null pointer. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

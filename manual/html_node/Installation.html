@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Installation">Installation</a>,
+Next:<a rel=next accesskey=n href="Maintenance.html#Maintenance">Maintenance</a>,
+Previous:<a rel=previous accesskey=p href="Library-Summary.html#Library%20Summary">Library Summary</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>Installing the GNU C Library</h2>
+
+<p>Before you do anything else, you should read the file <code>FAQ</code> found
+at the top level of the source tree.  This file answers common questions
+and describes problems you may experience with compilation and
+installation.  It is updated more frequently than this manual.
+
+<p>Features can be added to GNU Libc via <dfn>add-on</dfn> bundles.  These are
+separate tarfiles which you unpack into the top level of the source
+tree.  Then you give <code>configure</code> the <code>--enable-add-ons</code> option
+to activate them, and they will be compiled into the library.  As of the
+2.2 release, one important component of glibc is distributed as
+"official" add-ons: the linuxthreads add-on.  Unless you are doing an
+unusual installation, you should get this.
+
+<p>Support for POSIX threads is maintained by someone else, so it's in a
+separate package.  It is only available for Linux systems, but this will
+change in the future.  Get it from the same place you got the main
+bundle; the file is <code>glibc-linuxthreads-<var>VERSION</var>.tar.gz</code>.
+
+<p>You will need recent versions of several GNU tools: definitely GCC and
+GNU Make, and possibly others.  See <a href="Tools-for-Compilation.html#Tools%20for%20Compilation">Tools for Compilation</a>, below.
+
+<ul>
+<li><a accesskey=1 href="Configuring-and-compiling.html#Configuring%20and%20compiling">Configuring and compiling</a>:    How to compile and test GNU libc. 
+<li><a accesskey=2 href="Running-make-install.html#Running%20make%20install">Running make install</a>:         How to install it once you've got it compiled. 
+<li><a accesskey=3 href="Tools-for-Compilation.html#Tools%20for%20Compilation">Tools for Compilation</a>:        You'll need these first. 
+<li><a accesskey=4 href="Supported-Configurations.html#Supported%20Configurations">Supported Configurations</a>:     What it runs on, what it doesn't. 
+<li><a accesskey=5 href="Linux.html#Linux">Linux</a>:                        Specific advice for Linux systems. 
+<li><a accesskey=6 href="Reporting-Bugs.html#Reporting%20Bugs">Reporting Bugs</a>:               So they'll get fixed. 
+</ul>
+
+</body></html>
+

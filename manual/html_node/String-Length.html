@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="String%20Length">String Length</a>,
+Next:<a rel=next accesskey=n href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>,
+Previous:<a rel=previous accesskey=p href="String-Array-Conventions.html#String%2fArray%20Conventions">String/Array Conventions</a>,
+Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+<hr><br>
+
+<h3>String Length</h3>
+
+<p>You can get the length of a string using the <code>strlen</code> function. 
+This function is declared in the header file <code>string.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>strlen</b><i> (const char *<var>s</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>strlen</code> function returns the length of the null-terminated
+string <var>s</var> in bytes.  (In other words, it returns the offset of the
+terminating null character within the array.)
+
+<p>For example,
+<br><pre>strlen ("hello, world")
+    =&gt; 12
+</pre>
+
+<p>When applied to a character array, the <code>strlen</code> function returns
+the length of the string stored there, not its allocated size.  You can
+get the allocated size of the character array that holds a string using
+the <code>sizeof</code> operator:
+
+<br><pre>char string[32] = "hello, world";
+sizeof (string)
+    =&gt; 32
+strlen (string)
+    =&gt; 12
+</pre>
+
+<p>But beware, this will not work unless <var>string</var> is the character
+array itself, not a pointer to it.  For example:
+
+<br><pre>char string[32] = "hello, world";
+char *ptr = string;
+sizeof (string)
+    =&gt; 32
+sizeof (ptr)
+    =&gt; 4  /* (on a machine with 4 byte pointers) */
+</pre>
+
+<p>This is an easy mistake to make when you are working with functions that
+take string arguments; those arguments are always pointers, not arrays.
+
+<p>It must also be noted that for multibyte encoded strings the return
+value does not have to correspond to the number of characters in the
+string.  To get this value the string can be converted to wide
+characters and <code>wcslen</code> can be used or something like the following
+code can be used:
+
+<br><pre>/* The input is in <code>string</code>.
+   The length is expected in <code>n</code>.  */
+{
+  mbstate_t t;
+  char *scopy = string;
+  /* In initial state.  */
+  memset (&amp;t, '\0', sizeof (t));
+  /* Determine number of characters.  */
+  n = mbsrtowcs (NULL, &amp;scopy, strlen (scopy), &amp;t);
+}
+</pre>
+
+<p>This is cumbersome to do so if the number of characters (as opposed to
+bytes) is needed often it is better to work with wide characters. 
+</td></tr>
+</table>
+
+<p>The wide character equivalent is declared in <code>wchar.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>wcslen</b><i> (const wchar_t *<var>ws</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>wcslen</code> function is the wide character equivalent to
+<code>strlen</code>.  The return value is the number of wide characters in the
+wide character string pointed to by <var>ws</var> (this is also the offset of
+the terminating null wide character of <var>ws</var>).
+
+<p>Since there are no multi wide character sequences making up one
+character the return value is not only the offset in the array, it is
+also the number of wide characters.
+
+<p>This function was introduced in Amendment&nbsp;1 to ISO&nbsp;C90. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>strnlen</b><i> (const char *<var>s</var>, size_t <var>maxlen</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>strnlen</code> function returns the length of the string <var>s</var> in
+bytes if this length is smaller than <var>maxlen</var> bytes.  Otherwise it
+returns <var>maxlen</var>.  Therefore this function is equivalent to
+<code>(strlen (<var>s</var>) &lt; n ? strlen (<var>s</var>) : <var>maxlen</var>)</code> but it
+is more efficient and works even if the string <var>s</var> is not
+null-terminated.
+
+<br><pre>char string[32] = "hello, world";
+strnlen (string, 32)
+    =&gt; 12
+strnlen (string, 5)
+    =&gt; 5
+</pre>
+
+<p>This function is a GNU extension and is declared in <code>string.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>wcsnlen</b><i> (const wchar_t *<var>ws</var>, size_t <var>maxlen</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>wcsnlen</code> is the wide character equivalent to <code>strnlen</code>.  The
+<var>maxlen</var> parameter specifies the maximum number of wide characters.
+
+<p>This function is a GNU extension and is declared in <code>wchar.h</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

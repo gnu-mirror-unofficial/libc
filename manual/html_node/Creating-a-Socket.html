@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Creating%20a%20Socket">Creating a Socket</a>,
+Next:<a rel=next accesskey=n href="Closing-a-Socket.html#Closing%20a%20Socket">Closing a Socket</a>,
+Up:<a rel=up accesskey=u href="Open-Close-Sockets.html#Open%2fClose%20Sockets">Open/Close Sockets</a>
+<hr><br>
+
+<h4>Creating a Socket</h4>
+
+<p>The primitive for creating a socket is the <code>socket</code> function,
+declared in <code>sys/socket.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>socket</b><i> (int <var>namespace</var>, int <var>style</var>, int <var>protocol</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function creates a socket and specifies communication style
+<var>style</var>, which should be one of the socket styles listed in
+<a href="Communication-Styles.html#Communication%20Styles">Communication Styles</a>.  The <var>namespace</var> argument specifies
+the namespace; it must be <code>PF_LOCAL</code> (see <a href="Local-Namespace.html#Local%20Namespace">Local Namespace</a>) or
+<code>PF_INET</code> (see <a href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>).  <var>protocol</var>
+designates the specific protocol (see <a href="Socket-Concepts.html#Socket%20Concepts">Socket Concepts</a>); zero is
+usually right for <var>protocol</var>.
+
+<p>The return value from <code>socket</code> is the file descriptor for the new
+socket, or <code>-1</code> in case of error.  The following <code>errno</code> error
+conditions are defined for this function:
+
+<dl>
+<dt><code>EPROTONOSUPPORT</code>
+<dd>The <var>protocol</var> or <var>style</var> is not supported by the
+<var>namespace</var> specified.
+
+<br><dt><code>EMFILE</code>
+<dd>The process already has too many file descriptors open.
+
+<br><dt><code>ENFILE</code>
+<dd>The system already has too many file descriptors open.
+
+<br><dt><code>EACCES</code>
+<dd>The process does not have the privilege to create a socket of the specified
+<var>style</var> or <var>protocol</var>.
+
+<br><dt><code>ENOBUFS</code>
+<dd>The system ran out of internal buffer space. 
+</dl>
+
+<p>The file descriptor returned by the <code>socket</code> function supports both
+read and write operations.  However, like pipes, sockets do not support file
+positioning operations. 
+</td></tr>
+</table>
+
+<p>For examples of how to call the <code>socket</code> function,
+see <a href="Local-Socket-Example.html#Local%20Socket%20Example">Local Socket Example</a>, or <a href="Inet-Example.html#Inet%20Example">Inet Example</a>.
+
+</body></html>
+

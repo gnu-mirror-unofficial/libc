@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Tips%20for%20the%20Memory%20Debugger">Tips for the Memory Debugger</a>,
+Next:<a rel=next accesskey=n href="Interpreting-the-traces.html#Interpreting%20the%20traces">Interpreting the traces</a>,
+Previous:<a rel=previous accesskey=p href="Using-the-Memory-Debugger.html#Using%20the%20Memory%20Debugger">Using the Memory Debugger</a>,
+Up:<a rel=up accesskey=u href="Allocation-Debugging.html#Allocation%20Debugging">Allocation Debugging</a>
+<hr><br>
+
+<h5>Some more or less clever ideas</h5>
+
+<p>You know the situation.  The program is prepared for debugging and in
+all debugging sessions it runs well.  But once it is started without
+debugging the error shows up.  A typical example is a memory leak that
+becomes visible only when we turn off the debugging.  If you foresee
+such situations you can still win.  Simply use something equivalent to
+the following little program:
+
+<br><pre>#include &lt;mcheck.h&gt;
+#include &lt;signal.h&gt;
+
+static void
+enable (int sig)
+{
+  mtrace ();
+  signal (SIGUSR1, enable);
+}
+
+static void
+disable (int sig)
+{
+  muntrace ();
+  signal (SIGUSR2, disable);
+}
+
+int
+main (int argc, char *argv[])
+{
+  <small>...</small>
+
+  signal (SIGUSR1, enable);
+  signal (SIGUSR2, disable);
+
+  <small>...</small>
+}
+</pre>
+
+<p>I.e., the user can start the memory debugger any time s/he wants if the
+program was started with <code>MALLOC_TRACE</code> set in the environment. 
+The output will of course not show the allocations which happened before
+the first signal but if there is a memory leak this will show up
+nevertheless.
+
+</body></html>
+

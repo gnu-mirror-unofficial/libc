@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="User%20Data%20Structure">User Data Structure</a>,
+Next:<a rel=next accesskey=n href="Lookup-User.html#Lookup%20User">Lookup User</a>,
+Up:<a rel=up accesskey=u href="User-Database.html#User%20Database">User Database</a>
+<hr><br>
+
+<h4>The Data Structure that Describes a User</h4>
+
+<p>The functions and data structures for accessing the system user database
+are declared in the header file <code>pwd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct passwd</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>passwd</code> data structure is used to hold information about
+entries in the system user data base.  It has at least the following members:
+
+<dl>
+<dt><code>char *pw_name</code>
+<dd>The user's login name.
+
+<br><dt><code>char *pw_passwd.</code>
+<dd>The encrypted password string.
+
+<br><dt><code>uid_t pw_uid</code>
+<dd>The user ID number.
+
+<br><dt><code>gid_t pw_gid</code>
+<dd>The user's default group ID number.
+
+<br><dt><code>char *pw_gecos</code>
+<dd>A string typically containing the user's real name, and possibly other
+information such as a phone number.
+
+<br><dt><code>char *pw_dir</code>
+<dd>The user's home directory, or initial working directory.  This might be
+a null pointer, in which case the interpretation is system-dependent.
+
+<br><dt><code>char *pw_shell</code>
+<dd>The user's default shell, or the initial program run when the user logs in. 
+This might be a null pointer, indicating that the system default should
+be used. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,431 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Hyperbolic%20Functions">Hyperbolic Functions</a>,
+Next:<a rel=next accesskey=n href="Special-Functions.html#Special%20Functions">Special Functions</a>,
+Previous:<a rel=previous accesskey=p href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>,
+Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+<hr><br>
+
+<h3>Hyperbolic Functions</h3>
+
+<p>The functions in this section are related to the exponential functions;
+see <a href="Exponents-and-Logarithms.html#Exponents%20and%20Logarithms">Exponents and Logarithms</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>sinh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>sinhf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>sinhl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the hyperbolic sine of <var>x</var>, defined
+mathematically as <code>(exp&nbsp;(<var>x</var>)&nbsp;-&nbsp;exp&nbsp;(-<var>x</var>))&nbsp;/&nbsp;2</code>.  They
+may signal overflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>cosh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>coshf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>coshl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These function return the hyperbolic cosine of <var>x</var>,
+defined mathematically as <code>(exp&nbsp;(<var>x</var>)&nbsp;+&nbsp;exp&nbsp;(-<var>x</var>))&nbsp;/&nbsp;2</code>. 
+They may signal overflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>tanh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>tanhf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>tanhl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the hyperbolic tangent of <var>x</var>,
+defined mathematically as <code>sinh&nbsp;(<var>x</var>)&nbsp;/&nbsp;cosh&nbsp;(<var>x</var>)</code>. 
+They may signal overflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>There are counterparts for the hyperbolic functions which take
+complex arguments.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>csinh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>csinhf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>csinhl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the complex hyperbolic sine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(<var>z</var>)&nbsp;-&nbsp;exp&nbsp;(-<var>z</var>))&nbsp;/&nbsp;2</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>ccosh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>ccoshf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>ccoshl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the complex hyperbolic cosine of <var>z</var>, defined
+mathematically as <code>(exp&nbsp;(<var>z</var>)&nbsp;+&nbsp;exp&nbsp;(-<var>z</var>))&nbsp;/&nbsp;2</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>ctanh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>ctanhf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>ctanhl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the complex hyperbolic tangent of <var>z</var>,
+defined mathematically as <code>csinh&nbsp;(<var>z</var>)&nbsp;/&nbsp;ccosh&nbsp;(<var>z</var>)</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>asinh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>asinhf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>asinhl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse hyperbolic sine of <var>x</var>--the
+value whose hyperbolic sine is <var>x</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>acosh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>acoshf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>acoshl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse hyperbolic cosine of <var>x</var>--the
+value whose hyperbolic cosine is <var>x</var>.  If <var>x</var> is less than
+<code>1</code>, <code>acosh</code> signals a domain error. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>atanh</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>atanhf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>atanhl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse hyperbolic tangent of <var>x</var>--the
+value whose hyperbolic tangent is <var>x</var>.  If the absolute value of
+<var>x</var> is greater than <code>1</code>, <code>atanh</code> signals a domain error;
+if it is equal to 1, <code>atanh</code> returns infinity. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>casinh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>casinhf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>casinhl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse complex hyperbolic sine of
+<var>z</var>--the value whose complex hyperbolic sine is <var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>cacosh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>cacoshf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>cacoshl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse complex hyperbolic cosine of
+<var>z</var>--the value whose complex hyperbolic cosine is <var>z</var>.  Unlike
+the real-valued functions, there are no restrictions on the value of <var>z</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">complex double <b>catanh</b><i> (complex double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex float <b>catanhf</b><i> (complex float <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">complex long double <b>catanhl</b><i> (complex long double <var>z</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the inverse complex hyperbolic tangent of
+<var>z</var>--the value whose complex hyperbolic tangent is <var>z</var>.  Unlike
+the real-valued functions, there are no restrictions on the value of
+<var>z</var>. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Reading%20Attributes">Reading Attributes</a>,
+Next:<a rel=next accesskey=n href="Testing-File-Type.html#Testing%20File%20Type">Testing File Type</a>,
+Previous:<a rel=previous accesskey=p href="Attribute-Meanings.html#Attribute%20Meanings">Attribute Meanings</a>,
+Up:<a rel=up accesskey=u href="File-Attributes.html#File%20Attributes">File Attributes</a>
+<hr><br>
+
+<h4>Reading the Attributes of a File</h4>
+
+<p>To examine the attributes of files, use the functions <code>stat</code>,
+<code>fstat</code> and <code>lstat</code>.  They return the attribute information in
+a <code>struct stat</code> object.  All three functions are declared in the
+header file <code>sys/stat.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>stat</b><i> (const char *<var>filename</var>, struct stat *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>stat</code> function returns information about the attributes of the
+file named by <var>filename</var> in the structure pointed to by <var>buf</var>.
+
+<p>If <var>filename</var> is the name of a symbolic link, the attributes you get
+describe the file that the link points to.  If the link points to a
+nonexistent file name, then <code>stat</code> fails reporting a nonexistent
+file.
+
+<p>The return value is <code>0</code> if the operation is successful, or
+<code>-1</code> on failure.  In addition to the usual file name errors
+(see <a href="File-Name-Errors.html#File%20Name%20Errors">File Name Errors</a>, the following <code>errno</code> error conditions
+are defined for this function:
+
+<dl>
+<dt><code>ENOENT</code>
+<dd>The file named by <var>filename</var> doesn't exist. 
+</dl>
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>stat64</code> since the LFS interface transparently
+replaces the normal implementation. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>stat64</b><i> (const char *<var>filename</var>, struct stat64 *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>stat</code> but it is also able to work on
+files larger then 2^31 bytes on 32-bit systems.  To be able to do
+this the result is stored in a variable of type <code>struct stat64</code> to
+which <var>buf</var> must point.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>stat</code> and so transparently
+replaces the interface for small files on 32-bit machines. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fstat</b><i> (int <var>filedes</var>, struct stat *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>fstat</code> function is like <code>stat</code>, except that it takes an
+open file descriptor as an argument instead of a file name. 
+See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>.
+
+<p>Like <code>stat</code>, <code>fstat</code> returns <code>0</code> on success and <code>-1</code>
+on failure.  The following <code>errno</code> error conditions are defined for
+<code>fstat</code>:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>filedes</var> argument is not a valid file descriptor. 
+</dl>
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>fstat64</code> since the LFS interface transparently
+replaces the normal implementation. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>fstat64</b><i> (int <var>filedes</var>, struct stat64 *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>fstat</code> but is able to work on large
+files on 32-bit platforms.  For large files the file descriptor
+<var>filedes</var> should be obtained by <code>open64</code> or <code>creat64</code>. 
+The <var>buf</var> pointer points to a variable of type <code>struct stat64</code>
+which is able to represent the larger values.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>fstat</code> and so transparently
+replaces the interface for small files on 32-bit machines. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>lstat</b><i> (const char *<var>filename</var>, struct stat *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>lstat</code> function is like <code>stat</code>, except that it does not
+follow symbolic links.  If <var>filename</var> is the name of a symbolic
+link, <code>lstat</code> returns information about the link itself; otherwise
+<code>lstat</code> works like <code>stat</code>.  See <a href="Symbolic-Links.html#Symbolic%20Links">Symbolic Links</a>.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is in fact <code>lstat64</code> since the LFS interface transparently
+replaces the normal implementation. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>lstat64</b><i> (const char *<var>filename</var>, struct stat64 *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>lstat</code> but it is also able to work on
+files larger then 2^31 bytes on 32-bit systems.  To be able to do
+this the result is stored in a variable of type <code>struct stat64</code> to
+which <var>buf</var> must point.
+
+<p>When the sources are compiled with <code>_FILE_OFFSET_BITS == 64</code> this
+function is available under the name <code>lstat</code> and so transparently
+replaces the interface for small files on 32-bit machines. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Tips%20for%20Setuid">Tips for Setuid</a>,
+Next:<a rel=next accesskey=n href="Who-Logged-In.html#Who%20Logged%20In">Who Logged In</a>,
+Previous:<a rel=previous accesskey=p href="Setuid-Program-Example.html#Setuid%20Program%20Example">Setuid Program Example</a>,
+Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+<hr><br>
+
+<h3>Tips for Writing Setuid Programs</h3>
+
+<p>It is easy for setuid programs to give the user access that isn't
+intended--in fact, if you want to avoid this, you need to be careful. 
+Here are some guidelines for preventing unintended access and
+minimizing its consequences when it does occur:
+
+<ul>
+<li>Don't have <code>setuid</code> programs with privileged user IDs such as
+<code>root</code> unless it is absolutely necessary.  If the resource is
+specific to your particular program, it's better to define a new,
+nonprivileged user ID or group ID just to manage that resource. 
+It's better if you can write your program to use a special group than a
+special user.
+
+<li>Be cautious about using the <code>exec</code> functions in combination with
+changing the effective user ID.  Don't let users of your program execute
+arbitrary programs under a changed user ID.  Executing a shell is
+especially bad news. Less obviously, the <code>execlp</code> and <code>execvp</code>
+functions are a potential risk (since the program they execute depends
+on the user's <code>PATH</code> environment variable).
+
+<p>If you must <code>exec</code> another program under a changed ID, specify an
+absolute file name (see <a href="File-Name-Resolution.html#File%20Name%20Resolution">File Name Resolution</a>) for the executable,
+and make sure that the protections on that executable and <em>all</em>
+containing directories are such that ordinary users cannot replace it
+with some other program.
+
+<p>You should also check the arguments passed to the program to make sure
+they do not have unexpected effects.  Likewise, you should examine the
+environment variables.  Decide which arguments and variables are safe,
+and reject all others.
+
+<p>You should never use <code>system</code> in a privileged program, because it
+invokes a shell.
+
+</p><li>Only use the user ID controlling the resource in the part of the program
+that actually uses that resource.  When you're finished with it, restore
+the effective user ID back to the actual user's user ID. 
+See <a href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>.
+
+<li>If the <code>setuid</code> part of your program needs to access other files
+besides the controlled resource, it should verify that the real user
+would ordinarily have permission to access those files.  You can use the
+<code>access</code> function (see <a href="Access-Permission.html#Access%20Permission">Access Permission</a>) to check this; it
+uses the real user and group IDs, rather than the effective IDs. 
+</ul>
+
+</body></html>
+

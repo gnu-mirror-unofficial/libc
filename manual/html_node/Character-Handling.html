@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Character%20Handling">Character Handling</a>,
+Next:<a rel=next accesskey=n href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>,
+Previous:<a rel=previous accesskey=p href="Memory.html#Memory">Memory</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>Character Handling</h2>
+
+<p>Programs that work with characters and strings often need to classify a
+character--is it alphabetic, is it a digit, is it whitespace, and so
+on--and perform case conversion operations on characters.  The
+functions in the header file <code>ctype.h</code> are provided for this
+purpose.
+
+<p>Since the choice of locale and character set can alter the
+classifications of particular character codes, all of these functions
+are affected by the current locale.  (More precisely, they are affected
+by the locale currently selected for character classification--the
+<code>LC_CTYPE</code> category; see <a href="Locale-Categories.html#Locale%20Categories">Locale Categories</a>.)
+
+<p>The ISO&nbsp;C standard specifies two different sets of functions.  The
+one set works on <code>char</code> type characters, the other one on
+<code>wchar_t</code> wide characters (see <a href="Extended-Char-Intro.html#Extended%20Char%20Intro">Extended Char Intro</a>).
+
+<ul>
+<li><a accesskey=1 href="Classification-of-Characters.html#Classification%20of%20Characters">Classification of Characters</a>:        Testing whether characters are
+			                letters, digits, punctuation, etc.
+
+<p>
+</p><li><a accesskey=2 href="Case-Conversion.html#Case%20Conversion">Case Conversion</a>:                     Case mapping, and the like. 
+<li><a accesskey=3 href="Classification-of-Wide-Characters.html#Classification%20of%20Wide%20Characters">Classification of Wide Characters</a>:   Character class determination for
+                                        wide characters. 
+<li><a accesskey=4 href="Using-Wide-Char-Classes.html#Using%20Wide%20Char%20Classes">Using Wide Char Classes</a>:             Notes on using the wide character
+                                        classes. 
+<li><a accesskey=5 href="Wide-Character-Case-Conversion.html#Wide%20Character%20Case%20Conversion">Wide Character Case Conversion</a>:      Mapping of wide characters. 
+</ul>
+
+</body></html>
+

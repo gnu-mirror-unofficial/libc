@@ -1,0 +1,451 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Special%20Functions">Special Functions</a>,
+Next:<a rel=next accesskey=n href="Errors-in-Math-Functions.html#Errors%20in%20Math%20Functions">Errors in Math Functions</a>,
+Previous:<a rel=previous accesskey=p href="Hyperbolic-Functions.html#Hyperbolic%20Functions">Hyperbolic Functions</a>,
+Up:<a rel=up accesskey=u href="Mathematics.html#Mathematics">Mathematics</a>
+<hr><br>
+
+<h3>Special Functions</h3>
+
+<p>These are some more exotic mathematical functions which are sometimes
+useful.  Currently they only have real-valued versions.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>erf</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>erff</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>erfl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>erf</code> returns the error function of <var>x</var>.  The error
+function is defined as
+<br><pre>erf (x) = 2/sqrt(pi) * integral from 0 to x of exp(-t^2) dt
+</pre>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>erfc</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>erfcf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>erfcl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>erfc</code> returns <code>1.0 - erf(<var>x</var>)</code>, but computed in a
+fashion that avoids round-off error when <var>x</var> is large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>lgamma</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>lgammaf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>lgammal</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>lgamma</code> returns the natural logarithm of the absolute value of
+the gamma function of <var>x</var>.  The gamma function is defined as
+<br><pre>gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+</pre>
+
+<p>The sign of the gamma function is stored in the global variable
+<var>signgam</var>, which is declared in <code>math.h</code>.  It is <code>1</code> if
+the intermediate result was positive or zero, or <code>-1</code> if it was
+negative.
+
+<p>To compute the real gamma function you can use the <code>tgamma</code>
+function or you can compute the values as follows:
+<br><pre>lgam = lgamma(x);
+gam  = signgam*exp(lgam);
+</pre>
+
+<p>The gamma function has singularities at the non-positive integers. 
+<code>lgamma</code> will raise the zero divide exception if evaluated at a
+singularity. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>lgamma_r</b><i> (double <var>x</var>, int *<var>signp</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>lgammaf_r</b><i> (float <var>x</var>, int *<var>signp</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>lgammal_r</b><i> (long double <var>x</var>, int *<var>signp</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>lgamma_r</code> is just like <code>lgamma</code>, but it stores the sign of
+the intermediate result in the variable pointed to by <var>signp</var>
+instead of in the <var>signgam</var> global.  This means it is reentrant. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>gamma</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>gammaf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>gammal</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions exist for compatibility reasons.  They are equivalent to
+<code>lgamma</code> etc.  It is better to use <code>lgamma</code> since for one the
+name reflects better the actual computation, moreover <code>lgamma</code> is
+standardized in ISO&nbsp;C99 while <code>gamma</code> is not. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>tgamma</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>tgammaf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>tgammal</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>tgamma</code> applies the gamma function to <var>x</var>.  The gamma
+function is defined as
+<br><pre>gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+</pre>
+
+<p>This function was introduced in ISO&nbsp;C99. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>j0</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>j0f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>j0l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>j0</code> returns the Bessel function of the first kind of order 0 of
+<var>x</var>.  It may signal underflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>j1</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>j1f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>j1l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>j1</code> returns the Bessel function of the first kind of order 1 of
+<var>x</var>.  It may signal underflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>jn</b><i> (int n, double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>jnf</b><i> (int n, float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>jnl</b><i> (int n, long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>jn</code> returns the Bessel function of the first kind of order
+<var>n</var> of <var>x</var>.  It may signal underflow if <var>x</var> is too large. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>y0</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>y0f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>y0l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>y0</code> returns the Bessel function of the second kind of order 0 of
+<var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
+is negative, <code>y0</code> signals a domain error; if it is zero,
+<code>y0</code> signals overflow and returns -&amp;infin;. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>y1</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>y1f</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>y1l</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>y1</code> returns the Bessel function of the second kind of order 1 of
+<var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
+is negative, <code>y1</code> signals a domain error; if it is zero,
+<code>y1</code> signals overflow and returns -&amp;infin;. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>yn</b><i> (int n, double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>ynf</b><i> (int n, float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>ynl</b><i> (int n, long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>yn</code> returns the Bessel function of the second kind of order <var>n</var> of
+<var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
+is negative, <code>yn</code> signals a domain error; if it is zero,
+<code>yn</code> signals overflow and returns -&amp;infin;. 
+</td></tr>
+</table>
+
+</body></html>
+

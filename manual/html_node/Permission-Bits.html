@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Permission%20Bits">Permission Bits</a>,
+Next:<a rel=next accesskey=n href="Access-Permission.html#Access%20Permission">Access Permission</a>,
+Previous:<a rel=previous accesskey=p href="File-Owner.html#File%20Owner">File Owner</a>,
+Up:<a rel=up accesskey=u href="File-Attributes.html#File%20Attributes">File Attributes</a>
+<hr><br>
+
+<h4>The Mode Bits for Access Permission</h4>
+
+<p>The <dfn>file mode</dfn>, stored in the <code>st_mode</code> field of the file
+attributes, contains two kinds of information: the file type code, and
+the access permission bits.  This section discusses only the access
+permission bits, which control who can read or write the file. 
+See <a href="Testing-File-Type.html#Testing%20File%20Type">Testing File Type</a>, for information about the file type code.
+
+<p>All of the symbols listed in this section are defined in the header file
+<code>sys/stat.h</code>.
+
+<p>These symbolic constants are defined for the file mode bits that control
+access permission for the file:
+
+<dl>
+<dt><code>S_IRUSR</code>
+<dt><code>S_IREAD</code>
+<dd>Read permission bit for the owner of the file.  On many systems this bit
+is 0400.  <code>S_IREAD</code> is an obsolete synonym provided for BSD
+compatibility.
+
+<br><dt><code>S_IWUSR</code>
+<dt><code>S_IWRITE</code>
+<dd>Write permission bit for the owner of the file.  Usually 0200. 
+<code>S_IWRITE</code> is an obsolete synonym provided for BSD compatibility.
+
+<br><dt><code>S_IXUSR</code>
+<dt><code>S_IEXEC</code>
+<dd>Execute (for ordinary files) or search (for directories) permission bit
+for the owner of the file.  Usually 0100.  <code>S_IEXEC</code> is an obsolete
+synonym provided for BSD compatibility.
+
+<br><dt><code>S_IRWXU</code>
+<dd>This is equivalent to <code>(S_IRUSR | S_IWUSR | S_IXUSR)</code>.
+
+<br><dt><code>S_IRGRP</code>
+<dd>Read permission bit for the group owner of the file.  Usually 040.
+
+<br><dt><code>S_IWGRP</code>
+<dd>Write permission bit for the group owner of the file.  Usually 020.
+
+<br><dt><code>S_IXGRP</code>
+<dd>Execute or search permission bit for the group owner of the file. 
+Usually 010.
+
+<br><dt><code>S_IRWXG</code>
+<dd>This is equivalent to <code>(S_IRGRP | S_IWGRP | S_IXGRP)</code>.
+
+<br><dt><code>S_IROTH</code>
+<dd>Read permission bit for other users.  Usually 04.
+
+<br><dt><code>S_IWOTH</code>
+<dd>Write permission bit for other users.  Usually 02.
+
+<br><dt><code>S_IXOTH</code>
+<dd>Execute or search permission bit for other users.  Usually 01.
+
+<br><dt><code>S_IRWXO</code>
+<dd>This is equivalent to <code>(S_IROTH | S_IWOTH | S_IXOTH)</code>.
+
+<br><dt><code>S_ISUID</code>
+<dd>This is the set-user-ID on execute bit, usually 04000. 
+See <a href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>.
+
+<br><dt><code>S_ISGID</code>
+<dd>This is the set-group-ID on execute bit, usually 02000. 
+See <a href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>.
+
+<br><dt><code>S_ISVTX</code>
+<dd>This is the <dfn>sticky</dfn> bit, usually 01000.
+
+<p>For a directory it gives permission to delete a file in that directory
+only if you own that file.  Ordinarily, a user can either delete all the
+files in a directory or cannot delete any of them (based on whether the
+user has write permission for the directory).  The same restriction
+applies--you must have both write permission for the directory and own
+the file you want to delete.  The one exception is that the owner of the
+directory can delete any file in the directory, no matter who owns it
+(provided the owner has given himself write permission for the
+directory).  This is commonly used for the <code>/tmp</code> directory, where
+anyone may create files but not delete files created by other users.
+
+<p>Originally the sticky bit on an executable file modified the swapping
+policies of the system.  Normally, when a program terminated, its pages
+in core were immediately freed and reused.  If the sticky bit was set on
+the executable file, the system kept the pages in core for a while as if
+the program were still running.  This was advantageous for a program
+likely to be run many times in succession.  This usage is obsolete in
+modern systems.  When a program terminates, its pages always remain in
+core as long as there is no shortage of memory in the system.  When the
+program is next run, its pages will still be in core if no shortage
+arose since the last run.
+
+<p>On some modern systems where the sticky bit has no useful meaning for an
+executable file, you cannot set the bit at all for a non-directory. 
+If you try, <code>chmod</code> fails with <code>EFTYPE</code>;
+see <a href="Setting-Permissions.html#Setting%20Permissions">Setting Permissions</a>.
+
+<p>Some systems (particularly SunOS) have yet another use for the sticky
+bit.  If the sticky bit is set on a file that is <em>not</em> executable,
+it means the opposite: never cache the pages of this file at all.  The
+main use of this is for the files on an NFS server machine which are
+used as the swap area of diskless client machines.  The idea is that the
+pages of the file will be cached in the client's memory, so it is a
+waste of the server's memory to cache them a second time.  With this
+usage the sticky bit also implies that the filesystem may fail to record
+the file's modification time onto disk reliably (the idea being that
+no-one cares for a swap file).
+
+<p>This bit is only available on BSD systems (and those derived from
+them).  Therefore one has to use the <code>_BSD_SOURCE</code> feature select
+macro to get the definition (see <a href="Feature-Test-Macros.html#Feature%20Test%20Macros">Feature Test Macros</a>). 
+</dl>
+
+<p>The actual bit values of the symbols are listed in the table above
+so you can decode file mode values when debugging your programs. 
+These bit values are correct for most systems, but they are not
+guaranteed.
+
+<p><strong>Warning:</strong> Writing explicit numbers for file permissions is bad
+practice.  Not only is it not portable, it also requires everyone who
+reads your program to remember what the bits mean.  To make your program
+clean use the symbolic names.
+
+</body></html>
+

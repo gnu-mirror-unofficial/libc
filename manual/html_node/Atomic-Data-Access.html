@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Atomic%20Data%20Access">Atomic Data Access</a>,
+Previous:<a rel=previous accesskey=p href="Nonreentrancy.html#Nonreentrancy">Nonreentrancy</a>,
+Up:<a rel=up accesskey=u href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
+<hr><br>
+
+<h4>Atomic Data Access and Signal Handling</h4>
+
+<p>Whether the data in your application concerns atoms, or mere text, you
+have to be careful about the fact that access to a single datum is not
+necessarily <dfn>atomic</dfn>.  This means that it can take more than one
+instruction to read or write a single object.  In such cases, a signal
+handler might be invoked in the middle of reading or writing the object.
+
+<p>There are three ways you can cope with this problem.  You can use data
+types that are always accessed atomically; you can carefully arrange
+that nothing untoward happens if an access is interrupted, or you can
+block all signals around any access that had better not be interrupted
+(see <a href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>).
+
+<ul>
+<li><a accesskey=1 href="Non-atomic-Example.html#Non-atomic%20Example">Non-atomic Example</a>: 		A program illustrating interrupted access. 
+<li><a accesskey=2 href="Atomic-Types.html#Atomic%20Types">Types</a>: 		Data types that guarantee no interruption. 
+<li><a accesskey=3 href="Atomic-Usage.html#Atomic%20Usage">Usage</a>: 		Proving that interruption is harmless. 
+</ul>
+
+</body></html>
+

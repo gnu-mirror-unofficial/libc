@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Blocking%20in%20BSD">Blocking in BSD</a>,
+Previous:<a rel=previous accesskey=p href="BSD-Handler.html#BSD%20Handler">BSD Handler</a>,
+Up:<a rel=up accesskey=u href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
+<hr><br>
+
+<h4>BSD Functions for Blocking Signals</h4>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigmask</b><i> (int <var>signum</var>)
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This macro returns a signal mask that has the bit for signal <var>signum</var>
+set.  You can bitwise-OR the results of several calls to <code>sigmask</code>
+together to specify more than one signal.  For example,
+
+<br><pre>(sigmask (SIGTSTP) | sigmask (SIGSTOP)
+ | sigmask (SIGTTIN) | sigmask (SIGTTOU))
+</pre>
+
+<p>specifies a mask that includes all the job-control stop signals. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigblock</b><i> (int <var>mask</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is equivalent to <code>sigprocmask</code> (see <a href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>) with a <var>how</var> argument of <code>SIG_BLOCK</code>: it adds the
+signals specified by <var>mask</var> to the calling process's set of blocked
+signals.  The return value is the previous set of blocked signals. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigsetmask</b><i> (int <var>mask</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function equivalent to <code>sigprocmask</code> (see <a href="Process-Signal-Mask.html#Process%20Signal%20Mask">Process Signal Mask</a>) with a <var>how</var> argument of <code>SIG_SETMASK</code>: it sets
+the calling process's signal mask to <var>mask</var>.  The return value is
+the previous set of blocked signals. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigpause</b><i> (int <var>mask</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is the equivalent of <code>sigsuspend</code> (see <a href="Waiting-for-a-Signal.html#Waiting%20for%20a%20Signal">Waiting for a Signal</a>):  it sets the calling process's signal mask to <var>mask</var>,
+and waits for a signal to arrive.  On return the previous set of blocked
+signals is restored. 
+</td></tr>
+</table>
+
+</body></html>
+

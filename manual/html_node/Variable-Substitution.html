@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Variable%20Substitution">Variable Substitution</a>,
+Previous:<a rel=previous accesskey=p href="Tilde-Expansion.html#Tilde%20Expansion">Tilde Expansion</a>,
+Up:<a rel=up accesskey=u href="Word-Expansion.html#Word%20Expansion">Word Expansion</a>
+<hr><br>
+
+<h4>Details of Variable Substitution</h4>
+
+<p>Part of ordinary shell syntax is the use of <code>$<var>variable</var></code> to
+substitute the value of a shell variable into a command.  This is called
+<dfn>variable substitution</dfn>, and it is one part of doing word expansion.
+
+<p>There are two basic ways you can write a variable reference for
+substitution:
+
+<dl>
+<dt><code>${<var>variable</var>}</code>
+<dd>If you write braces around the variable name, then it is completely
+unambiguous where the variable name ends.  You can concatenate
+additional letters onto the end of the variable value by writing them
+immediately after the close brace.  For example, <code>${foo}s</code>
+expands into <code>tractors</code>.
+
+<br><dt><code>$<var>variable</var></code>
+<dd>If you do not put braces around the variable name, then the variable
+name consists of all the alphanumeric characters and underscores that
+follow the <code>$</code>.  The next punctuation character ends the variable
+name.  Thus, <code>$foo-bar</code> refers to the variable <code>foo</code> and expands
+into <code>tractor-bar</code>. 
+</dl>
+
+<p>When you use braces, you can also use various constructs to modify the
+value that is substituted, or test it in various ways.
+
+<dl>
+<dt><code>${<var>variable</var>:-<var>default</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but if that is empty or
+undefined, use <var>default</var> instead.
+
+<br><dt><code>${<var>variable</var>:=<var>default</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but if that is empty or
+undefined, use <var>default</var> instead and set the variable to
+<var>default</var>.
+
+<br><dt><code>${<var>variable</var>:?<var>message</var>}</code>
+<dd>If <var>variable</var> is defined and not empty, substitute its value.
+
+<p>Otherwise, print <var>message</var> as an error message on the standard error
+stream, and consider word expansion a failure.
+
+<br><dt><code>${<var>variable</var>:+<var>replacement</var>}</code>
+<dd>Substitute <var>replacement</var>, but only if <var>variable</var> is defined and
+nonempty.  Otherwise, substitute nothing for this construct. 
+</dl>
+
+<dl>
+<dt><code>${#<var>variable</var>}</code>
+<dd>Substitute a numeral which expresses in base ten the number of
+characters in the value of <var>variable</var>.  <code>${#foo}</code> stands for
+<code>7</code>, because <code>tractor</code> is seven characters. 
+</dl>
+
+<p>These variants of variable substitution let you remove part of the
+variable's value before substituting it.  The <var>prefix</var> and
+<var>suffix</var> are not mere strings; they are wildcard patterns, just
+like the patterns that you use to match multiple file names.  But
+in this context, they match against parts of the variable value
+rather than against file names.
+
+<dl>
+<dt><code>${<var>variable</var>%%<var>suffix</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the end that matches the pattern <var>suffix</var>.
+
+<p>If there is more than one alternative for how to match against
+<var>suffix</var>, this construct uses the longest possible match.
+
+<p>Thus, <code>${foo%%r*}</code> substitutes <code>t</code>, because the largest
+match for <code>r*</code> at the end of <code>tractor</code> is <code>ractor</code>.
+
+<br><dt><code>${<var>variable</var>%<var>suffix</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the end that matches the pattern <var>suffix</var>.
+
+<p>If there is more than one alternative for how to match against
+<var>suffix</var>, this construct uses the shortest possible alternative.
+
+<p>Thus, <code>${foo%%r*}</code> substitutes <code>tracto</code>, because the shortest
+match for <code>r*</code> at the end of <code>tractor</code> is just <code>r</code>.
+
+<br><dt><code>${<var>variable</var>##<var>prefix</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the beginning that matches the pattern <var>prefix</var>.
+
+<p>If there is more than one alternative for how to match against
+<var>prefix</var>, this construct uses the longest possible match.
+
+<p>Thus, <code>${foo%%r*}</code> substitutes <code>t</code>, because the largest
+match for <code>r*</code> at the end of <code>tractor</code> is <code>ractor</code>.
+
+<br><dt><code>${<var>variable</var>#<var>prefix</var>}</code>
+<dd>Substitute the value of <var>variable</var>, but first discard from that
+variable any portion at the beginning that matches the pattern <var>prefix</var>.
+
+<p>If there is more than one alternative for how to match against
+<var>prefix</var>, this construct uses the shortest possible alternative.
+
+<p>Thus, <code>${foo%%r*}</code> substitutes <code>tracto</code>, because the shortest
+match for <code>r*</code> at the end of <code>tractor</code> is just <code>r</code>.
+
+</dl>
+
+</body></html>
+

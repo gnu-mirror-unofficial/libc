@@ -1,0 +1,178 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Out-of-Band%20Data">Out-of-Band Data</a>,
+Previous:<a rel=previous accesskey=p href="Server-Example.html#Server%20Example">Server Example</a>,
+Up:<a rel=up accesskey=u href="Connections.html#Connections">Connections</a>
+<hr><br>
+
+<h4>Out-of-Band Data</h4>
+
+<p>Streams with connections permit <dfn>out-of-band</dfn> data that is
+delivered with higher priority than ordinary data.  Typically the
+reason for sending out-of-band data is to send notice of an
+exceptional condition.  To send out-of-band data use
+<code>send</code>, specifying the flag <code>MSG_OOB</code> (see <a href="Sending-Data.html#Sending%20Data">Sending Data</a>).
+
+<p>Out-of-band data are received with higher priority because the
+receiving process need not read it in sequence; to read the next
+available out-of-band data, use <code>recv</code> with the <code>MSG_OOB</code>
+flag (see <a href="Receiving-Data.html#Receiving%20Data">Receiving Data</a>).  Ordinary read operations do not read
+out-of-band data; they read only ordinary data.
+
+<p>When a socket finds that out-of-band data are on their way, it sends a
+<code>SIGURG</code> signal to the owner process or process group of the
+socket.  You can specify the owner using the <code>F_SETOWN</code> command
+to the <code>fcntl</code> function; see <a href="Interrupt-Input.html#Interrupt%20Input">Interrupt Input</a>.  You must
+also establish a handler for this signal, as described in <a href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>, in order to take appropriate action such as reading the
+out-of-band data.
+
+<p>Alternatively, you can test for pending out-of-band data, or wait
+until there is out-of-band data, using the <code>select</code> function; it
+can wait for an exceptional condition on the socket.  See <a href="Waiting-for-I-O.html#Waiting%20for%20I%2fO">Waiting for I/O</a>, for more information about <code>select</code>.
+
+<p>Notification of out-of-band data (whether with <code>SIGURG</code> or with
+<code>select</code>) indicates that out-of-band data are on the way; the data
+may not actually arrive until later.  If you try to read the
+out-of-band data before it arrives, <code>recv</code> fails with an
+<code>EWOULDBLOCK</code> error.
+
+<p>Sending out-of-band data automatically places a "mark" in the stream
+of ordinary data, showing where in the sequence the out-of-band data
+"would have been".  This is useful when the meaning of out-of-band
+data is "cancel everything sent so far".  Here is how you can test,
+in the receiving process, whether any ordinary data was sent before
+the mark:
+
+<br><pre>success = ioctl (socket, SIOCATMARK, &amp;atmark);
+</pre>
+
+<p>The <code>integer</code> variable <var>atmark</var> is set to a nonzero value if
+the socket's read pointer has reached the "mark".
+
+<p>Here's a function to discard any ordinary data preceding the
+out-of-band mark:
+
+<br><pre>int
+discard_until_mark (int socket)
+{
+  while (1)
+    {
+      /* This is not an arbitrary limit; any size will do.  */
+      char buffer[1024];
+      int atmark, success;
+
+      /* If we have reached the mark, return.  */
+      success = ioctl (socket, SIOCATMARK, &amp;atmark);
+      if (success &lt; 0)
+        perror ("ioctl");
+      if (result)
+        return;
+
+      /* Otherwise, read a bunch of ordinary data and discard it.
+         This is guaranteed not to read past the mark
+         if it starts before the mark.  */
+      success = read (socket, buffer, sizeof buffer);
+      if (success &lt; 0)
+        perror ("read");
+    }
+}
+</pre>
+
+<p>If you don't want to discard the ordinary data preceding the mark, you
+may need to read some of it anyway, to make room in internal system
+buffers for the out-of-band data.  If you try to read out-of-band data
+and get an <code>EWOULDBLOCK</code> error, try reading some ordinary data
+(saving it so that you can use it when you want it) and see if that
+makes room.  Here is an example:
+
+<br><pre>struct buffer
+{
+  char *buf;
+  int size;
+  struct buffer *next;
+};
+
+/* Read the out-of-band data from SOCKET and return it
+   as a `struct buffer', which records the address of the data
+   and its size.
+
+   It may be necessary to read some ordinary data
+   in order to make room for the out-of-band data.
+   If so, the ordinary data are saved as a chain of buffers
+   found in the `next' field of the value.  */
+
+struct buffer *
+read_oob (int socket)
+{
+  struct buffer *tail = 0;
+  struct buffer *list = 0;
+
+  while (1)
+    {
+      /* This is an arbitrary limit.
+         Does anyone know how to do this without a limit?  */
+#define BUF_SZ 1024
+      char *buf = (char *) xmalloc (BUF_SZ);
+      int success;
+      int atmark;
+
+      /* Try again to read the out-of-band data.  */
+      success = recv (socket, buf, BUF_SZ, MSG_OOB);
+      if (success &gt;= 0)
+        {
+          /* We got it, so return it.  */
+          struct buffer *link
+            = (struct buffer *) xmalloc (sizeof (struct buffer));
+          link-&gt;buf = buf;
+          link-&gt;size = success;
+          link-&gt;next = list;
+          return link;
+        }
+
+      /* If we fail, see if we are at the mark.  */
+      success = ioctl (socket, SIOCATMARK, &amp;atmark);
+      if (success &lt; 0)
+        perror ("ioctl");
+      if (atmark)
+        {
+          /* At the mark; skipping past more ordinary data cannot help.
+             So just wait a while.  */
+          sleep (1);
+          continue;
+        }
+
+      /* Otherwise, read a bunch of ordinary data and save it.
+         This is guaranteed not to read past the mark
+         if it starts before the mark.  */
+      success = read (socket, buf, BUF_SZ);
+      if (success &lt; 0)
+        perror ("read");
+
+      /* Save this data in the buffer list.  */
+      {
+        struct buffer *link
+          = (struct buffer *) xmalloc (sizeof (struct buffer));
+        link-&gt;buf = buf;
+        link-&gt;size = success;
+
+        /* Add the new link to the end of the list.  */
+        if (tail)
+          tail-&gt;next = link;
+        else
+          list = link;
+        tail = link;
+      }
+    }
+}
+</pre>
+
+</body></html>
+

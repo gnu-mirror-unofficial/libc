@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Structure%20Measurement">Structure Measurement</a>,
+Previous:<a rel=previous accesskey=p href="Floating-Type-Macros.html#Floating%20Type%20Macros">Floating Type Macros</a>,
+Up:<a rel=up accesskey=u href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>
+<hr><br>
+
+<h4>Structure Field Offset Measurement</h4>
+
+<p>You can use <code>offsetof</code> to measure the location within a structure
+type of a particular structure member.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>offsetof</b><i> (<var>type</var>, <var>member</var>)
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This expands to a integer constant expression that is the offset of the
+structure member named <var>member</var> in a the structure type <var>type</var>. 
+For example, <code>offsetof (struct s, elem)</code> is the offset, in bytes,
+of the member <code>elem</code> in a <code>struct s</code>.
+
+<p>This macro won't work if <var>member</var> is a bit field; you get an error
+from the C compiler in that case. 
+</td></tr>
+</table>
+
+</body></html>
+

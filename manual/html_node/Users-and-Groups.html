@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Users%20and%20Groups">Users and Groups</a>,
+Next:<a rel=next accesskey=n href="System-Management.html#System%20Management">System Management</a>,
+Previous:<a rel=previous accesskey=p href="Name-Service-Switch.html#Name%20Service%20Switch">Name Service Switch</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>Users and Groups</h2>
+
+<p>Every user who can log in on the system is identified by a unique number
+called the <dfn>user ID</dfn>.  Each process has an effective user ID which
+says which user's access permissions it has.
+
+<p>Users are classified into <dfn>groups</dfn> for access control purposes.  Each
+process has one or more <dfn>group ID values</dfn> which say which groups the
+process can use for access to files.
+
+<p>The effective user and group IDs of a process collectively form its
+<dfn>persona</dfn>.  This determines which files the process can access. 
+Normally, a process inherits its persona from the parent process, but
+under special circumstances a process can change its persona and thus
+change its access permissions.
+
+<p>Each file in the system also has a user ID and a group ID.  Access
+control works by comparing the user and group IDs of the file with those
+of the running process.
+
+<p>The system keeps a database of all the registered users, and another
+database of all the defined groups.  There are library functions you
+can use to examine these databases.
+
+<ul>
+<li><a accesskey=1 href="User-and-Group-IDs.html#User%20and%20Group%20IDs">User and Group IDs</a>:           Each user has a unique numeric ID;
+				 likewise for groups. 
+<li><a accesskey=2 href="Process-Persona.html#Process%20Persona">Process Persona</a>:              The user IDs and group IDs of a process. 
+<li><a accesskey=3 href="Why-Change-Persona.html#Why%20Change%20Persona">Why Change Persona</a>:           Why a program might need to change
+				 its user and/or group IDs. 
+<li><a accesskey=4 href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>:           Changing the user and group IDs. 
+<li><a accesskey=5 href="Reading-Persona.html#Reading%20Persona">Reading Persona</a>:              How to examine the user and group IDs.
+
+<p>
+</p><li><a accesskey=6 href="Setting-User-ID.html#Setting%20User%20ID">Setting User ID</a>:              Functions for setting the user ID. 
+<li><a accesskey=7 href="Setting-Groups.html#Setting%20Groups">Setting Groups</a>:               Functions for setting the group IDs.
+
+<p>
+</p><li><a accesskey=8 href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>:        Turning setuid access on and off. 
+<li><a accesskey=9 href="Setuid-Program-Example.html#Setuid%20Program%20Example">Setuid Program Example</a>:       The pertinent parts of one sample program. 
+<li><a href="Tips-for-Setuid.html#Tips%20for%20Setuid">Tips for Setuid</a>:              How to avoid granting unlimited access.
+
+<p>
+</p><li><a href="Who-Logged-In.html#Who%20Logged%20In">Who Logged In</a>:                Getting the name of the user who logged in,
+				 or of the real user ID of the current process.
+
+<p>
+</p><li><a href="User-Accounting-Database.html#User%20Accounting%20Database">User Accounting Database</a>:     Keeping information about users and various
+                                 actions in databases.
+
+<p>
+</p><li><a href="User-Database.html#User%20Database">User Database</a>:                Functions and data structures for
+                        	 accessing the user database. 
+<li><a href="Group-Database.html#Group%20Database">Group Database</a>:               Functions and data structures for
+                        	 accessing the group database. 
+<li><a href="Database-Example.html#Database%20Example">Database Example</a>:             Example program showing the use of database
+				 inquiry functions. 
+<li><a href="Netgroup-Database.html#Netgroup%20Database">Netgroup Database</a>:            Functions for accessing the netgroup database. 
+</ul>
+
+</body></html>
+

@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Limits%20for%20Files">Limits for Files</a>,
+Next:<a rel=next accesskey=n href="Options-for-Files.html#Options%20for%20Files">Options for Files</a>,
+Previous:<a rel=previous accesskey=p href="Minimums.html#Minimums">Minimums</a>,
+Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+<hr><br>
+
+<h3>Limits on File System Capacity</h3>
+
+<p>The POSIX.1 standard specifies a number of parameters that describe the
+limitations of the file system.  It's possible for the system to have a
+fixed, uniform limit for a parameter, but this isn't the usual case.  On
+most systems, it's possible for different file systems (and, for some
+parameters, even different files) to have different maximum limits.  For
+example, this is very likely if you use NFS to mount some of the file
+systems from other machines.
+
+<p>Each of the following macros is defined in <code>limits.h</code> only if the
+system has a fixed, uniform limit for the parameter in question.  If the
+system allows different file systems or files to have different limits,
+then the macro is undefined; use <code>pathconf</code> or <code>fpathconf</code> to
+find out the limit that applies to a particular file.  See <a href="Pathconf.html#Pathconf">Pathconf</a>.
+
+<p>Each parameter also has another macro, with a name starting with
+<code>_POSIX</code>, which gives the lowest value that the limit is allowed to
+have on <em>any</em> POSIX system.  See <a href="File-Minimums.html#File%20Minimums">File Minimums</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>LINK_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the number of names for a given
+file.  See <a href="Hard-Links.html#Hard%20Links">Hard Links</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MAX_CANON</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the amount of text in a line of
+input when input editing is enabled.  See <a href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MAX_INPUT</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the total number of characters
+typed ahead as input.  See <a href="I-O-Queues.html#I%2fO%20Queues">I/O Queues</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>NAME_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the length of a file name component. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>PATH_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the length of an entire file name (that
+is, the argument given to system calls such as <code>open</code>). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>PIPE_BUF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The uniform system limit (if any) for the number of bytes that can be
+written atomically to a pipe.  If multiple processes are writing to the
+same pipe simultaneously, output from different processes might be
+interleaved in chunks of this size.  See <a href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>. 
+</td></tr>
+</table>
+
+<p>These are alternative macro names for some of the same information.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>MAXNAMLEN</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the BSD name for <code>NAME_MAX</code>.  It is defined in
+<code>dirent.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>FILENAME_MAX</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that
+represents the maximum length of a file name string.  It is defined in
+<code>stdio.h</code>.
+
+<p>Unlike <code>PATH_MAX</code>, this macro is defined even if there is no actual
+limit imposed.  In such a case, its value is typically a very large
+number.  <strong>This is always the case on the GNU system.</strong>
+
+<p><strong>Usage Note:</strong> Don't use <code>FILENAME_MAX</code> as the size of an
+array in which to store a file name!  You can't possibly make an array
+that big!  Use dynamic allocation (see <a href="Memory-Allocation.html#Memory%20Allocation">Memory Allocation</a>) instead. 
+</td></tr>
+</table>
+
+</body></html>
+

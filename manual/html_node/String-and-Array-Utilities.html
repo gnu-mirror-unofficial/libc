@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="String%20and%20Array%20Utilities">String and Array Utilities</a>,
+Next:<a rel=next accesskey=n href="Character-Set-Handling.html#Character%20Set%20Handling">Character Set Handling</a>,
+Previous:<a rel=previous accesskey=p href="Character-Handling.html#Character%20Handling">Character Handling</a>,
+Up:<a rel=up accesskey=u href="index.html#Top">Top</a>
+<hr><br>
+
+<h2>String and Array Utilities</h2>
+
+<p>Operations on strings (or arrays of characters) are an important part of
+many programs.  The GNU C library provides an extensive set of string
+utility functions, including functions for copying, concatenating,
+comparing, and searching strings.  Many of these functions can also
+operate on arbitrary regions of storage; for example, the <code>memcpy</code>
+function can be used to copy the contents of any kind of array.
+
+<p>It's fairly common for beginning C programmers to "reinvent the wheel"
+by duplicating this functionality in their own code, but it pays to
+become familiar with the library functions and to make use of them,
+since this offers benefits in maintenance, efficiency, and portability.
+
+<p>For instance, you could easily compare one string to another in two
+lines of C code, but if you use the built-in <code>strcmp</code> function,
+you're less likely to make a mistake.  And, since these library
+functions are typically highly optimized, your program may run faster
+too.
+
+<ul>
+<li><a accesskey=1 href="Representation-of-Strings.html#Representation%20of%20Strings">Representation of Strings</a>:    Introduction to basic concepts. 
+<li><a accesskey=2 href="String-Array-Conventions.html#String%2fArray%20Conventions">String/Array Conventions</a>:     Whether to use a string function or an
+				 arbitrary array function. 
+<li><a accesskey=3 href="String-Length.html#String%20Length">String Length</a>:                Determining the length of a string. 
+<li><a accesskey=4 href="Copying-and-Concatenation.html#Copying%20and%20Concatenation">Copying and Concatenation</a>:    Functions to copy the contents of strings
+				 and arrays. 
+<li><a accesskey=5 href="String-Array-Comparison.html#String%2fArray%20Comparison">String/Array Comparison</a>:      Functions for byte-wise and character-wise
+				 comparison. 
+<li><a accesskey=6 href="Collation-Functions.html#Collation%20Functions">Collation Functions</a>:          Functions for collating strings. 
+<li><a accesskey=7 href="Search-Functions.html#Search%20Functions">Search Functions</a>:             Searching for a specific element or substring. 
+<li><a accesskey=8 href="Finding-Tokens-in-a-String.html#Finding%20Tokens%20in%20a%20String">Finding Tokens in a String</a>:   Splitting a string into tokens by looking
+				 for delimiters. 
+<li><a accesskey=9 href="strfry.html#strfry">strfry</a>:                       Function for flash-cooking a string. 
+<li><a href="Trivial-Encryption.html#Trivial%20Encryption">Trivial Encryption</a>:           Obscuring data. 
+<li><a href="Encode-Binary-Data.html#Encode%20Binary%20Data">Encode Binary Data</a>:           Encoding and Decoding of Binary Data. 
+<li><a href="Argz-and-Envz-Vectors.html#Argz%20and%20Envz%20Vectors">Argz and Envz Vectors</a>:        Null-separated string vectors. 
+</ul>
+
+</body></html>
+

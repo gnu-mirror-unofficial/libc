@@ -1,0 +1,330 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Local%20Modes">Local Modes</a>,
+Next:<a rel=next accesskey=n href="Line-Speed.html#Line%20Speed">Line Speed</a>,
+Previous:<a rel=previous accesskey=p href="Control-Modes.html#Control%20Modes">Control Modes</a>,
+Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+<hr><br>
+
+<h4>Local Modes</h4>
+
+<p>This section describes the flags for the <code>c_lflag</code> member of the
+<code>struct termios</code> structure.  These flags generally control
+higher-level aspects of input processing than the input modes flags
+described in <a href="Input-Modes.html#Input%20Modes">Input Modes</a>, such as echoing, signals, and the choice
+of canonical or noncanonical input.
+
+<p>The <code>c_lflag</code> member itself is an integer, and you change the flags
+and fields using the operators <code>&amp;</code>, <code>|</code>, and <code>^</code>.  Don't
+try to specify the entire value for <code>c_lflag</code>--instead, change
+only specific flags and leave the rest untouched (see <a href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>).
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ICANON</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit, if set, enables canonical input processing mode.  Otherwise,
+input is processed in noncanonical mode.  See <a href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHO</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set, echoing of input characters back to the terminal
+is enabled. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHOE</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set, echoing indicates erasure of input with the ERASE
+character by erasing the last character in the current line from the
+screen.  Otherwise, the character erased is re-echoed to show what has
+happened (suitable for a printing terminal).
+
+<p>This bit only controls the display behavior; the <code>ICANON</code> bit by
+itself controls actual recognition of the ERASE character and erasure of
+input, without which <code>ECHOE</code> is simply irrelevant. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHOPRT</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit is like <code>ECHOE</code>, enables display of the ERASE character in
+a way that is geared to a hardcopy terminal.  When you type the ERASE
+character, a <code>\</code> character is printed followed by the first
+character erased.  Typing the ERASE character again just prints the next
+character erased.  Then, the next time you type a normal character, a
+<code>/</code> character is printed before the character echoes.
+
+<p>This is a BSD extension, and exists only in BSD systems and the
+GNU system. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHOK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit enables special display of the KILL character by moving to a
+new line after echoing the KILL character normally.  The behavior of
+<code>ECHOKE</code> (below) is nicer to look at.
+
+<p>If this bit is not set, the KILL character echoes just as it would if it
+were not the KILL character.  Then it is up to the user to remember that
+the KILL character has erased the preceding input; there is no
+indication of this on the screen.
+
+<p>This bit only controls the display behavior; the <code>ICANON</code> bit by
+itself controls actual recognition of the KILL character and erasure of
+input, without which <code>ECHOK</code> is simply irrelevant. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHOKE</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit is similar to <code>ECHOK</code>.  It enables special display of the
+KILL character by erasing on the screen the entire line that has been
+killed.  This is a BSD extension, and exists only in BSD systems and the
+GNU system. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHONL</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set and the <code>ICANON</code> bit is also set, then the
+newline (<code>'\n'</code>) character is echoed even if the <code>ECHO</code> bit
+is not set. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ECHOCTL</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set and the <code>ECHO</code> bit is also set, echo control
+characters with <code>^</code> followed by the corresponding text character. 
+Thus, control-A echoes as <code>^A</code>.  This is usually the preferred mode
+for interactive input, because echoing a control character back to the
+terminal could have some undesired effect on the terminal.
+
+<p>This is a BSD extension, and exists only in BSD systems and the
+GNU system. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ISIG</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit controls whether the INTR, QUIT, and SUSP characters are
+recognized.  The functions associated with these characters are performed
+if and only if this bit is set.  Being in canonical or noncanonical
+input mode has no affect on the interpretation of these characters.
+
+<p>You should use caution when disabling recognition of these characters. 
+Programs that cannot be interrupted interactively are very
+user-unfriendly.  If you clear this bit, your program should provide
+some alternate interface that allows the user to interactively send the
+signals associated with these characters, or to escape from the program.
+
+<p>See <a href="Signal-Characters.html#Signal%20Characters">Signal Characters</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>IEXTEN</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+POSIX.1 gives <code>IEXTEN</code> implementation-defined meaning,
+so you cannot rely on this interpretation on all systems.
+
+<p>On BSD systems and the GNU system, it enables the LNEXT and DISCARD characters. 
+See <a href="Other-Special.html#Other%20Special">Other Special</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>NOFLSH</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Normally, the INTR, QUIT, and SUSP characters cause input and output
+queues for the terminal to be cleared.  If this bit is set, the queues
+are not cleared. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>TOSTOP</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set and the system supports job control, then
+<code>SIGTTOU</code> signals are generated by background processes that
+attempt to write to the terminal.  See <a href="Access-to-the-Terminal.html#Access%20to%20the%20Terminal">Access to the Terminal</a>. 
+</td></tr>
+</table>
+
+<p>The following bits are BSD extensions; they exist only in BSD systems
+and the GNU system.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>ALTWERASE</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This bit determines how far the WERASE character should erase.  The
+WERASE character erases back to the beginning of a word; the question
+is, where do words begin?
+
+<p>If this bit is clear, then the beginning of a word is a nonwhitespace
+character following a whitespace character.  If the bit is set, then the
+beginning of a word is an alphanumeric character or underscore following
+a character which is none of those.
+
+<p>See <a href="Editing-Characters.html#Editing%20Characters">Editing Characters</a>, for more information about the WERASE character. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>FLUSHO</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is the bit that toggles when the user types the DISCARD character. 
+While this bit is set, all output is discarded.  See <a href="Other-Special.html#Other%20Special">Other Special</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>NOKERNINFO</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Setting this bit disables handling of the STATUS character. 
+See <a href="Other-Special.html#Other%20Special">Other Special</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">tcflag_t <b>PENDIN</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set, it indicates that there is a line of input that
+needs to be reprinted.  Typing the REPRINT character sets this bit; the
+bit remains set until reprinting is finished.  See <a href="Editing-Characters.html#Editing%20Characters">Editing Characters</a>. 
+</td></tr>
+</table>
+
+</body></html>
+

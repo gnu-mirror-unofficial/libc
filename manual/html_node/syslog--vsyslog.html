@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="syslog%3b%20vsyslog">syslog; vsyslog</a>,
+Next:<a rel=next accesskey=n href="closelog.html#closelog">closelog</a>,
+Previous:<a rel=previous accesskey=p href="openlog.html#openlog">openlog</a>,
+Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+<hr><br>
+
+<h4>syslog, vsyslog</h4>
+
+<p>The symbols referred to in this section are declared in the file
+<code>syslog.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>syslog</b><i> (int <var>facility_priority</var>, char *<var>format</var>, ...)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p><code>syslog</code> submits a message to the Syslog facility.  It does this by
+writing to the Unix domain socket <code>/dev/log</code>.
+
+<p><code>syslog</code> submits the message with the facility and priority indicated
+by <var>facility_priority</var>.  The macro <code>LOG_MAKEPRI</code> generates a
+facility/priority from a facility and a priority, as in the following
+example:
+
+<br><pre>LOG_MAKEPRI(LOG_USER, LOG_WARNING)
+</pre>
+
+<p>The possible values for the facility code are (macros):
+
+<dl>
+<dt><code>LOG_USER</code>
+<dd>A miscellaneous user process
+<br><dt><code>LOG_MAIL</code>
+<dd>Mail
+<br><dt><code>LOG_DAEMON</code>
+<dd>A miscellaneous system daemon
+<br><dt><code>LOG_AUTH</code>
+<dd>Security (authorization)
+<br><dt><code>LOG_SYSLOG</code>
+<dd>Syslog
+<br><dt><code>LOG_LPR</code>
+<dd>Central printer
+<br><dt><code>LOG_NEWS</code>
+<dd>Network news (e.g. Usenet)
+<br><dt><code>LOG_UUCP</code>
+<dd>UUCP
+<br><dt><code>LOG_CRON</code>
+<dd>Cron and At
+<br><dt><code>LOG_AUTHPRIV</code>
+<dd>Private security (authorization)
+<br><dt><code>LOG_FTP</code>
+<dd>Ftp server
+<br><dt><code>LOG_LOCAL0</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL1</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL2</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL3</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL4</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL5</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL6</code>
+<dd>Locally defined
+<br><dt><code>LOG_LOCAL7</code>
+<dd>Locally defined
+</dl>
+
+<p>Results are undefined if the facility code is anything else.
+
+<p><strong>note:</strong> <code>syslog</code> recognizes one other facility code: that of
+the kernel.  But you can't specify that facility code with these
+functions.  If you try, it looks the same to <code>syslog</code> as if you are
+requesting the default facility.  But you wouldn't want to anyway,
+because any program that uses the GNU C library is not the kernel.
+
+<p>You can use just a priority code as <var>facility_priority</var>.  In that
+case, <code>syslog</code> assumes the default facility established when the
+Syslog connection was opened.  See <a href="Syslog-Example.html#Syslog%20Example">Syslog Example</a>.
+
+<p>The possible values for the priority code are (macros):
+
+<dl>
+<dt><code>LOG_EMERG</code>
+<dd>The message says the system is unusable. 
+<br><dt><code>LOG_ALERT</code>
+<dd>Action on the message must be taken immediately. 
+<br><dt><code>LOG_CRIT</code>
+<dd>The message states a critical condition. 
+<br><dt><code>LOG_ERR</code>
+<dd>The message describes an error. 
+<br><dt><code>LOG_WARNING</code>
+<dd>The message is a warning. 
+<br><dt><code>LOG_NOTICE</code>
+<dd>The message describes a normal but important event. 
+<br><dt><code>LOG_INFO</code>
+<dd>The message is purely informational. 
+<br><dt><code>LOG_DEBUG</code>
+<dd>The message is only for debugging purposes. 
+</dl>
+
+<p>Results are undefined if the priority code is anything else.
+
+<p>If the process does not presently have a Syslog connection open (i.e. 
+it did not call <code>openlog</code>), <code>syslog</code> implicitly opens the
+connection the same as <code>openlog</code> would, with the following defaults
+for information that would otherwise be included in an <code>openlog</code>
+call: The default identification string is the program name.  The
+default default facility is <code>LOG_USER</code>.  The default for all the
+connection options in <var>options</var> is as if those bits were off. 
+<code>syslog</code> leaves the Syslog connection open.
+
+<p>If the <code>dev/log</code> socket is not open and connected, <code>syslog</code>
+opens and connects it, the same as <code>openlog</code> with the
+<code>LOG_NDELAY</code> option would.
+
+<p><code>syslog</code> leaves <code>/dev/log</code> open and connected unless its attempt
+to send the message failed, in which case <code>syslog</code> closes it (with the
+hope that a future implicit open will restore the Syslog connection to a
+usable state).
+
+<p>Example:
+
+<br><pre>
+#include &lt;syslog.h&gt;
+syslog (LOG_MAKEPRI(LOG_LOCAL1, LOG_ERROR),
+        "Unable to make network connection to %s.  Error=%m", host);
+
+</pre>
+
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>vsyslog</b><i> (int <var>facility_priority</var>, char *<var>format</var>, va_list arglist)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p>This is functionally identical to <code>syslog</code>, with the BSD style variable
+length argument.
+
+</td></tr>
+</table>
+
+</body></html>
+

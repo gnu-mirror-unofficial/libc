@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Reading%20Persona">Reading Persona</a>,
+Next:<a rel=next accesskey=n href="Setting-User-ID.html#Setting%20User%20ID">Setting User ID</a>,
+Previous:<a rel=previous accesskey=p href="How-Change-Persona.html#How%20Change%20Persona">How Change Persona</a>,
+Up:<a rel=up accesskey=u href="Users-and-Groups.html#Users%20and%20Groups">Users and Groups</a>
+<hr><br>
+
+<h3>Reading the Persona of a Process</h3>
+
+<p>Here are detailed descriptions of the functions for reading the user and
+group IDs of a process, both real and effective.  To use these
+facilities, you must include the header files <code>sys/types.h</code> and
+<code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>uid_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is an integer data type used to represent user IDs.  In the GNU
+library, this is an alias for <code>unsigned int</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>gid_t</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This is an integer data type used to represent group IDs.  In the GNU
+library, this is an alias for <code>unsigned int</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uid_t <b>getuid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getuid</code> function returns the real user ID of the process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">gid_t <b>getgid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getgid</code> function returns the real group ID of the process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">uid_t <b>geteuid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>geteuid</code> function returns the effective user ID of the process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">gid_t <b>getegid</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getegid</code> function returns the effective group ID of the process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getgroups</b><i> (int <var>count</var>, gid_t *<var>groups</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getgroups</code> function is used to inquire about the supplementary
+group IDs of the process.  Up to <var>count</var> of these group IDs are
+stored in the array <var>groups</var>; the return value from the function is
+the number of group IDs actually stored.  If <var>count</var> is smaller than
+the total number of supplementary group IDs, then <code>getgroups</code>
+returns a value of <code>-1</code> and <code>errno</code> is set to <code>EINVAL</code>.
+
+<p>If <var>count</var> is zero, then <code>getgroups</code> just returns the total
+number of supplementary group IDs.  On systems that do not support
+supplementary groups, this will always be zero.
+
+<p>Here's how to use <code>getgroups</code> to read all the supplementary group
+IDs:
+
+<br><pre>gid_t *
+read_all_groups (void)
+{
+  int ngroups = getgroups (0, NULL);
+  gid_t *groups
+    = (gid_t *) xmalloc (ngroups * sizeof (gid_t));
+  int val = getgroups (ngroups, groups);
+  if (val &lt; 0)
+    {
+      free (groups);
+      return NULL;
+    }
+  return groups;
+}
+</pre>
+</td></tr>
+</table>
+
+</body></html>
+

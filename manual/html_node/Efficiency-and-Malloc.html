@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Efficiency%20and%20Malloc">Efficiency and Malloc</a>,
+Next:<a rel=next accesskey=n href="Aligned-Memory-Blocks.html#Aligned%20Memory%20Blocks">Aligned Memory Blocks</a>,
+Previous:<a rel=previous accesskey=p href="Allocating-Cleared-Space.html#Allocating%20Cleared%20Space">Allocating Cleared Space</a>,
+Up:<a rel=up accesskey=u href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>
+<hr><br>
+
+<h5>Efficiency Considerations for <code>malloc</code></h5>
+
+<p>As opposed to other versions, the <code>malloc</code> in the GNU C Library
+does not round up block sizes to powers of two, neither for large nor
+for small sizes.  Neighboring chunks can be coalesced on a <code>free</code>
+no matter what their size is.  This makes the implementation suitable
+for all kinds of allocation patterns without generally incurring high
+memory waste through fragmentation.
+
+<p>Very large blocks (much larger than a page) are allocated with
+<code>mmap</code> (anonymous or via <code>/dev/zero</code>) by this implementation. 
+This has the great advantage that these chunks are returned to the
+system immediately when they are freed.  Therefore, it cannot happen
+that a large chunk becomes "locked" in between smaller ones and even
+after calling <code>free</code> wastes memory.  The size threshold for
+<code>mmap</code> to be used can be adjusted with <code>mallopt</code>.  The use of
+<code>mmap</code> can also be disabled completely.
+
+</body></html>
+

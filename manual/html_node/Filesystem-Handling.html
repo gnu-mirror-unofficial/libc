@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Filesystem%20Handling">Filesystem Handling</a>,
+Next:<a rel=next accesskey=n href="System-Parameters.html#System%20Parameters">System Parameters</a>,
+Previous:<a rel=previous accesskey=p href="Platform-Type.html#Platform%20Type">Platform Type</a>,
+Up:<a rel=up accesskey=u href="System-Management.html#System%20Management">System Management</a>
+<hr><br>
+
+<h3>Controlling and Querying Mounts</h3>
+
+<p>All files are in filesystems, and before you can access any file, its
+filesystem must be mounted.  Because of Unix's concept of
+<em>Everything is a file</em>, mounting of filesystems is central to doing
+almost anything.  This section explains how to find out what filesystems
+are currently mounted and what filesystems are available for mounting,
+and how to change what is mounted.
+
+<p>The classic filesystem is the contents of a disk drive.  The concept is
+considerably more abstract, though, and lots of things other than disk
+drives can be mounted.
+
+<p>Some block devices don't correspond to traditional devices like disk
+drives.  For example, a loop device is a block device whose driver uses
+a regular file in another filesystem as its medium.  So if that regular
+file contains appropriate data for a filesystem, you can by mounting the
+loop device essentially mount a regular file.
+
+<p>Some filesystems aren't based on a device of any kind.  The "proc"
+filesystem, for example, contains files whose data is made up by the
+filesystem driver on the fly whenever you ask for it.  And when you
+write to it, the data you write causes changes in the system.  No data
+gets stored.
+
+<ul>
+<li><a accesskey=1 href="Mount-Information.html#Mount%20Information">Mount Information</a>:            What is or could be mounted? 
+<li><a accesskey=2 href="Mount-Unmount-Remount.html#Mount-Unmount-Remount">Mount-Unmount-Remount</a>:        Controlling what is mounted and how
+</ul>
+
+</body></html>
+

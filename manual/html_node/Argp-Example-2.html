@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20Example%202">Argp Example 2</a>,
+Next:<a rel=next accesskey=n href="Argp-Example-3.html#Argp%20Example%203">Argp Example 3</a>,
+Previous:<a rel=previous accesskey=p href="Argp-Example-1.html#Argp%20Example%201">Argp Example 1</a>,
+Up:<a rel=up accesskey=u href="Argp-Examples.html#Argp%20Examples">Argp Examples</a>
+<hr><br>
+
+<h5>A Program Using Argp with Only Default Options</h5>
+
+<p>This program doesn't use any options or arguments, it uses argp to be
+compliant with the GNU standard command line format.
+
+<p>In addition to giving no arguments and implementing a <code>--help</code>
+option, this example has a <code>--version</code> option, which will put the
+given documentation string and bug address in the <code>--help</code> output,
+as per GNU standards.
+
+<p>The variable <code>argp</code> contains the argument parser
+specification.  Adding fields to this structure is the way most
+parameters are passed to <code>argp_parse</code>.  The first three fields are
+normally used, but they are not in this small program.  There are also
+two global variables that argp can use defined here,
+<code>argp_program_version</code> and <code>argp_program_bug_address</code>.  They
+are considered global variables because they will almost always be
+constant for a given program, even if they use different argument
+parsers for various tasks.
+
+<br><pre>
+
+/* Argp example #2 - a pretty minimal program using argp */
+
+/* This program doesn't use any options or arguments, but uses
+   argp to be compliant with the GNU standard command line
+   format.
+
+   In addition to making sure no arguments are given, and
+   implementing a -help option, this example will have a
+   -version option, and will put the given documentation string
+   and bug address in the -help output, as per GNU standards.
+
+   The variable ARGP contains the argument parser specification;
+   adding fields to this structure is the way most parameters are
+   passed to argp_parse (the first three fields are usually used,
+   but not in this small program).  There are also two global
+   variables that argp knows about defined here,
+   ARGP_PROGRAM_VERSION and ARGP_PROGRAM_BUG_ADDRESS (they are
+   global variables because they will almost always be constant
+   for a given program, even if it uses different argument
+   parsers for various tasks). */
+
+#include &lt;argp.h&gt;
+
+const char *argp_program_version =
+  "argp-ex2 1.0";
+const char *argp_program_bug_address =
+  "&lt;bug-gnu-utils@gnu.org&gt;";
+
+/* Program documentation. */
+static char doc[] =
+  "Argp example #2 -- a pretty minimal program using argp";
+
+/* Our argument parser.  The <code>options</code>, <code>parser</code>, and
+   <code>args_doc</code> fields are zero because we have neither options or
+   arguments; <code>doc</code> and <code>argp_program_bug_address</code> will be
+   used in the output for <code>--help</code>, and the <code>--version</code>
+   option will print out <code>argp_program_version</code>. */
+static struct argp argp = { 0, 0, 0, doc };
+
+int main (int argc, char **argv)
+{
+  argp_parse (&amp;argp, argc, argv, 0, 0, 0);
+  exit (0);
+}
+</pre>
+
+</body></html>
+

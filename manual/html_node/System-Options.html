@@ -1,0 +1,158 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="System%20Options">System Options</a>,
+Next:<a rel=next accesskey=n href="Version-Supported.html#Version%20Supported">Version Supported</a>,
+Previous:<a rel=previous accesskey=p href="General-Limits.html#General%20Limits">General Limits</a>,
+Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+<hr><br>
+
+<h3>Overall System Options</h3>
+
+<p>POSIX defines certain system-specific options that not all POSIX systems
+support.  Since these options are provided in the kernel, not in the
+library, simply using the GNU C library does not guarantee any of these
+features is supported; it depends on the system you are using.
+
+<p>You can test for the availability of a given option using the macros in
+this section, together with the function <code>sysconf</code>.  The macros are
+defined only if you include <code>unistd.h</code>.
+
+<p>For the following macros, if the macro is defined in <code>unistd.h</code>,
+then the option is supported.  Otherwise, the option may or may not be
+supported; use <code>sysconf</code> to find out.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX_JOB_CONTROL</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system supports job
+control.  Otherwise, the implementation behaves as if all processes
+within a session belong to a single process group.  See <a href="Job-Control.html#Job%20Control">Job Control</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX_SAVED_IDS</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system remembers the
+effective user and group IDs of a process before it executes an
+executable file with the set-user-ID or set-group-ID bits set, and that
+explicitly changing the effective user or group IDs back to these values
+is permitted.  If this option is not defined, then if a nonprivileged
+process changes its effective user or group ID to the real user or group
+ID of the process, it can't change it back again.  See <a href="Enable-Disable-Setuid.html#Enable%2fDisable%20Setuid">Enable/Disable Setuid</a>. 
+</td></tr>
+</table>
+
+<p>For the following macros, if the macro is defined in <code>unistd.h</code>,
+then its value indicates whether the option is supported.  A value of
+<code>-1</code> means no, and any other value means yes.  If the macro is not
+defined, then the option may or may not be supported; use <code>sysconf</code>
+to find out.  See <a href="Sysconf.html#Sysconf">Sysconf</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX2_C_DEV</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system has the POSIX.2
+C compiler command, <code>c89</code>.  The GNU C library always defines this
+as <code>1</code>, on the assumption that you would not have installed it if
+you didn't have a C compiler. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX2_FORT_DEV</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system has the POSIX.2
+Fortran compiler command, <code>fort77</code>.  The GNU C library never
+defines this, because we don't know what the system has. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX2_FORT_RUN</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system has the POSIX.2
+<code>asa</code> command to interpret Fortran carriage control.  The GNU C
+library never defines this, because we don't know what the system has. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX2_LOCALEDEF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system has the POSIX.2
+<code>localedef</code> command.  The GNU C library never defines this, because
+we don't know what the system has. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_POSIX2_SW_DEV</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this symbol is defined, it indicates that the system has the POSIX.2
+commands <code>ar</code>, <code>make</code>, and <code>strip</code>.  The GNU C library
+always defines this as <code>1</code>, on the assumption that you had to have
+<code>ar</code> and <code>make</code> to install the library, and it's unlikely that
+<code>strip</code> would be absent when those are present. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Ports">Ports</a>,
+Next:<a rel=next accesskey=n href="Services-Database.html#Services%20Database">Services Database</a>,
+Previous:<a rel=previous accesskey=p href="Protocols-Database.html#Protocols%20Database">Protocols Database</a>,
+Up:<a rel=up accesskey=u href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>
+<hr><br>
+
+<h4>Internet Ports</h4>
+
+<p>A socket address in the Internet namespace consists of a machine's
+Internet address plus a <dfn>port number</dfn> which distinguishes the
+sockets on a given machine (for a given protocol).  Port numbers range
+from 0 to 65,535.
+
+<p>Port numbers less than <code>IPPORT_RESERVED</code> are reserved for standard
+servers, such as <code>finger</code> and <code>telnet</code>.  There is a database
+that keeps track of these, and you can use the <code>getservbyname</code>
+function to map a service name onto a port number; see <a href="Services-Database.html#Services%20Database">Services Database</a>.
+
+<p>If you write a server that is not one of the standard ones defined in
+the database, you must choose a port number for it.  Use a number
+greater than <code>IPPORT_USERRESERVED</code>; such numbers are reserved for
+servers and won't ever be generated automatically by the system. 
+Avoiding conflicts with servers being run by other users is up to you.
+
+<p>When you use a socket without specifying its address, the system
+generates a port number for it.  This number is between
+<code>IPPORT_RESERVED</code> and <code>IPPORT_USERRESERVED</code>.
+
+<p>On the Internet, it is actually legitimate to have two different
+sockets with the same port number, as long as they never both try to
+communicate with the same socket address (host address plus port
+number).  You shouldn't duplicate a port number except in special
+circumstances where a higher-level protocol requires it.  Normally,
+the system won't let you do it; <code>bind</code> normally insists on
+distinct port numbers.  To reuse a port number, you must set the
+socket option <code>SO_REUSEADDR</code>.  See <a href="Socket-Level-Options.html#Socket-Level%20Options">Socket-Level Options</a>.
+
+<p>These macros are defined in the header file <code>netinet/in.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>IPPORT_RESERVED</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Port numbers less than <code>IPPORT_RESERVED</code> are reserved for
+superuser use. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>IPPORT_USERRESERVED</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Port numbers greater than or equal to <code>IPPORT_USERRESERVED</code> are
+reserved for explicit use; they will never be allocated automatically. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Termination%20Internals">Termination Internals</a>,
+Previous:<a rel=previous accesskey=p href="Aborting-a-Program.html#Aborting%20a%20Program">Aborting a Program</a>,
+Up:<a rel=up accesskey=u href="Program-Termination.html#Program%20Termination">Program Termination</a>
+<hr><br>
+
+<h4>Termination Internals</h4>
+
+<p>The <code>_exit</code> function is the primitive used for process termination
+by <code>exit</code>.  It is declared in the header file <code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>_exit</b><i> (int <var>status</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>_exit</code> function is the primitive for causing a process to
+terminate with status <var>status</var>.  Calling this function does not
+execute cleanup functions registered with <code>atexit</code> or
+<code>on_exit</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>_Exit</b><i> (int <var>status</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>_Exit</code> function is the ISO&nbsp;C equivalent to <code>_exit</code>. 
+The ISO&nbsp;C committee members were not sure whether the definitions of
+<code>_exit</code> and <code>_Exit</code> were compatible so they have not used the
+POSIX name.
+
+<p>This function was introduced in ISO&nbsp;C99 and is declared in
+<code>stdlib.h</code>. 
+</td></tr>
+</table>
+
+<p>When a process terminates for any reason--either because the program
+terminates, or as a result of a signal--the
+following things happen:
+
+<ul>
+<li>All open file descriptors in the process are closed.  See <a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>. 
+Note that streams are not flushed automatically when the process
+terminates; see <a href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>.
+
+<li>A process exit status is saved to be reported back to the parent process
+via <code>wait</code> or <code>waitpid</code>; see <a href="Process-Completion.html#Process%20Completion">Process Completion</a>.  If the
+program exited, this status includes as its low-order 8 bits the program
+exit status.
+
+<li>Any child processes of the process being terminated are assigned a new
+parent process.  (On most systems, including GNU, this is the <code>init</code>
+process, with process ID 1.)
+
+<li>A <code>SIGCHLD</code> signal is sent to the parent process.
+
+<li>If the process is a session leader that has a controlling terminal, then
+a <code>SIGHUP</code> signal is sent to each process in the foreground job,
+and the controlling terminal is disassociated from that session. 
+See <a href="Job-Control.html#Job%20Control">Job Control</a>.
+
+<li>If termination of a process causes a process group to become orphaned,
+and any member of that process group is stopped, then a <code>SIGHUP</code>
+signal and a <code>SIGCONT</code> signal are sent to each process in the
+group.  See <a href="Job-Control.html#Job%20Control">Job Control</a>. 
+</ul>
+
+</body></html>
+

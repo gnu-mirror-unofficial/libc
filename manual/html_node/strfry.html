@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="strfry">strfry</a>,
+Next:<a rel=next accesskey=n href="Trivial-Encryption.html#Trivial%20Encryption">Trivial Encryption</a>,
+Previous:<a rel=previous accesskey=p href="Finding-Tokens-in-a-String.html#Finding%20Tokens%20in%20a%20String">Finding Tokens in a String</a>,
+Up:<a rel=up accesskey=u href="String-and-Array-Utilities.html#String%20and%20Array%20Utilities">String and Array Utilities</a>
+<hr><br>
+
+<h3>strfry</h3>
+
+<p>The function below addresses the perennial programming quandary: "How do
+I take good data in string form and painlessly turn it into garbage?" 
+This is actually a fairly simple task for C programmers who do not use
+the GNU C library string functions, but for programs based on the GNU C
+library, the <code>strfry</code> function is the preferred method for
+destroying string data.
+
+<p>The prototype for this function is in <code>string.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>strfry</b><i> (char *<var>string</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p><code>strfry</code> creates a pseudorandom anagram of a string, replacing the
+input with the anagram in place.  For each position in the string,
+<code>strfry</code> swaps it with a position in the string selected at random
+(from a uniform distribution).  The two positions may be the same.
+
+<p>The return value of <code>strfry</code> is always <var>string</var>.
+
+<p><strong>Portability Note:</strong>  This function is unique to the GNU C library.
+
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Identifying%20the%20Terminal">Identifying the Terminal</a>,
+Next:<a rel=next accesskey=n href="Process-Group-Functions.html#Process%20Group%20Functions">Process Group Functions</a>,
+Up:<a rel=up accesskey=u href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
+<hr><br>
+
+<h4>Identifying the Controlling Terminal</h4>
+
+<p>You can use the <code>ctermid</code> function to get a file name that you can
+use to open the controlling terminal.  In the GNU library, it returns
+the same string all the time: <code>"/dev/tty"</code>.  That is a special
+"magic" file name that refers to the controlling terminal of the
+current process (if it has one).  To find the name of the specific
+terminal device, use <code>ttyname</code>; see <a href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>.
+
+<p>The function <code>ctermid</code> is declared in the header file
+<code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>ctermid</b><i> (char *<var>string</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>ctermid</code> function returns a string containing the file name of
+the controlling terminal for the current process.  If <var>string</var> is
+not a null pointer, it should be an array that can hold at least
+<code>L_ctermid</code> characters; the string is returned in this array. 
+Otherwise, a pointer to a string in a static area is returned, which
+might get overwritten on subsequent calls to this function.
+
+<p>An empty string is returned if the file name cannot be determined for
+any reason.  Even if a file name is returned, access to the file it
+represents is not guaranteed. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>L_ctermid</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that
+represents the size of a string large enough to hold the file name
+returned by <code>ctermid</code>. 
+</td></tr>
+</table>
+
+<p>See also the <code>isatty</code> and <code>ttyname</code> functions, in
+<a href="Is-It-a-Terminal.html#Is%20It%20a%20Terminal">Is It a Terminal</a>.
+
+</body></html>
+

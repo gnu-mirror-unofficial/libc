@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Version%20Supported">Version Supported</a>,
+Next:<a rel=next accesskey=n href="Sysconf.html#Sysconf">Sysconf</a>,
+Previous:<a rel=previous accesskey=p href="System-Options.html#System%20Options">System Options</a>,
+Up:<a rel=up accesskey=u href="System-Configuration.html#System%20Configuration">System Configuration</a>
+<hr><br>
+
+<h3>Which Version of POSIX is Supported</h3>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>_POSIX_VERSION</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant represents the version of the POSIX.1 standard to which
+the implementation conforms.  For an implementation conforming to the
+1995 POSIX.1 standard, the value is the integer <code>199506L</code>.
+
+<p><code>_POSIX_VERSION</code> is always defined (in <code>unistd.h</code>) in any
+POSIX system.
+
+<p><strong>Usage Note:</strong> Don't try to test whether the system supports POSIX
+by including <code>unistd.h</code> and then checking whether
+<code>_POSIX_VERSION</code> is defined.  On a non-POSIX system, this will
+probably fail because there is no <code>unistd.h</code>.  We do not know of
+<em>any</em> way you can reliably test at compilation time whether your
+target system supports POSIX or whether <code>unistd.h</code> exists.
+
+<p>The GNU C compiler predefines the symbol <code>__POSIX__</code> if the target
+system is a POSIX system.  Provided you do not use any other compilers
+on POSIX systems, testing <code>defined (__POSIX__)</code> will reliably
+detect such systems. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long int <b>_POSIX2_C_VERSION</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This constant represents the version of the POSIX.2 standard which the
+library and system kernel support.  We don't know what value this will
+be for the first version of the POSIX.2 standard, because the value is
+based on the year and month in which the standard is officially adopted.
+
+<p>The value of this symbol says nothing about the utilities installed on
+the system.
+
+<p><strong>Usage Note:</strong> You can use this macro to tell whether a POSIX.1
+system library supports POSIX.2 as well.  Any POSIX.1 system contains
+<code>unistd.h</code>, so include that file and then test <code>defined
+(_POSIX2_C_VERSION)</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Protocols%20Database">Protocols Database</a>,
+Next:<a rel=next accesskey=n href="Ports.html#Ports">Ports</a>,
+Previous:<a rel=previous accesskey=p href="Host-Addresses.html#Host%20Addresses">Host Addresses</a>,
+Up:<a rel=up accesskey=u href="Internet-Namespace.html#Internet%20Namespace">Internet Namespace</a>
+<hr><br>
+
+<h4>Protocols Database</h4>
+
+<p>The communications protocol used with a socket controls low-level
+details of how data are exchanged.  For example, the protocol implements
+things like checksums to detect errors in transmissions, and routing
+instructions for messages.  Normal user programs have little reason to
+mess with these details directly.
+
+<p>The default communications protocol for the Internet namespace depends on
+the communication style.  For stream communication, the default is TCP
+("transmission control protocol").  For datagram communication, the
+default is UDP ("user datagram protocol").  For reliable datagram
+communication, the default is RDP ("reliable datagram protocol"). 
+You should nearly always use the default.
+
+<p>Internet protocols are generally specified by a name instead of a
+number.  The network protocols that a host knows about are stored in a
+database.  This is usually either derived from the file
+<code>/etc/protocols</code>, or it may be an equivalent provided by a name
+server.  You look up the protocol number associated with a named
+protocol in the database using the <code>getprotobyname</code> function.
+
+<p>Here are detailed descriptions of the utilities for accessing the
+protocols database.  These are declared in <code>netdb.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct protoent</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is used to represent entries in the network protocols
+database.  It has the following members:
+
+<dl>
+<dt><code>char *p_name</code>
+<dd>This is the official name of the protocol.
+
+<br><dt><code>char **p_aliases</code>
+<dd>These are alternate names for the protocol, specified as an array of
+strings.  The last element of the array is a null pointer.
+
+<br><dt><code>int p_proto</code>
+<dd>This is the protocol number (in host byte order); use this member as the
+<var>protocol</var> argument to <code>socket</code>. 
+</dl>
+</td></tr>
+</table>
+
+<p>You can use <code>getprotobyname</code> and <code>getprotobynumber</code> to search
+the protocols database for a specific protocol.  The information is
+returned in a statically-allocated structure; you must copy the
+information if you need to save it across calls.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct protoent * <b>getprotobyname</b><i> (const char *<var>name</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getprotobyname</code> function returns information about the
+network protocol named <var>name</var>.  If there is no such protocol, it
+returns a null pointer. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct protoent * <b>getprotobynumber</b><i> (int <var>protocol</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>getprotobynumber</code> function returns information about the
+network protocol with number <var>protocol</var>.  If there is no such
+protocol, it returns a null pointer. 
+</td></tr>
+</table>
+
+<p>You can also scan the whole protocols database one protocol at a time by
+using <code>setprotoent</code>, <code>getprotoent</code> and <code>endprotoent</code>. 
+Be careful when using these functions because they are not reentrant.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setprotoent</b><i> (int <var>stayopen</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function opens the protocols database to begin scanning it.
+
+<p>If the <var>stayopen</var> argument is nonzero, this sets a flag so that
+subsequent calls to <code>getprotobyname</code> or <code>getprotobynumber</code> will
+not close the database (as they usually would).  This makes for more
+efficiency if you call those functions several times, by avoiding
+reopening the database for each call. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct protoent * <b>getprotoent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the next entry in the protocols database.  It
+returns a null pointer if there are no more entries. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>endprotoent</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function closes the protocols database. 
+</td></tr>
+</table>
+
+</body></html>
+

@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Miscellaneous%20Signals">Miscellaneous Signals</a>,
+Next:<a rel=next accesskey=n href="Signal-Messages.html#Signal%20Messages">Signal Messages</a>,
+Previous:<a rel=previous accesskey=p href="Operation-Error-Signals.html#Operation%20Error%20Signals">Operation Error Signals</a>,
+Up:<a rel=up accesskey=u href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>
+<hr><br>
+
+<h4>Miscellaneous Signals</h4>
+
+<p>These signals are used for various other purposes.  In general, they
+will not affect your program unless it explicitly uses them for something.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGUSR1</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">int <b>SIGUSR2</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>SIGUSR1</code> and <code>SIGUSR2</code> signals are set aside for you to
+use any way you want.  They're useful for simple interprocess
+communication, if you write a signal handler for them in the program
+that receives the signal.
+
+<p>There is an example showing the use of <code>SIGUSR1</code> and <code>SIGUSR2</code>
+in <a href="Signaling-Another-Process.html#Signaling%20Another%20Process">Signaling Another Process</a>.
+
+<p>The default action is to terminate the process. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGWINCH</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Window size change.  This is generated on some systems (including GNU)
+when the terminal driver's record of the number of rows and columns on
+the screen is changed.  The default action is to ignore it.
+
+<p>If a program does full-screen display, it should handle <code>SIGWINCH</code>. 
+When the signal arrives, it should fetch the new screen size and
+reformat its display accordingly. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SIGINFO</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Information request.  In 4.4 BSD and the GNU system, this signal is sent
+to all the processes in the foreground process group of the controlling
+terminal when the user types the STATUS character in canonical mode;
+see <a href="Signal-Characters.html#Signal%20Characters">Signal Characters</a>.
+
+<p>If the process is the leader of the process group, the default action is
+to print some status information about the system and what the process
+is doing.  Otherwise the default is to do nothing. 
+</td></tr>
+</table>
+
+</body></html>
+

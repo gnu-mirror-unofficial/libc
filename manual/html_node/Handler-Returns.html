@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Handler%20Returns">Handler Returns</a>,
+Next:<a rel=next accesskey=n href="Termination-in-Handler.html#Termination%20in%20Handler">Termination in Handler</a>,
+Up:<a rel=up accesskey=u href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>
+<hr><br>
+
+<h4>Signal Handlers that Return</h4>
+
+<p>Handlers which return normally are usually used for signals such as
+<code>SIGALRM</code> and the I/O and interprocess communication signals.  But
+a handler for <code>SIGINT</code> might also return normally after setting a
+flag that tells the program to exit at a convenient time.
+
+<p>It is not safe to return normally from the handler for a program error
+signal, because the behavior of the program when the handler function
+returns is not defined after a program error.  See <a href="Program-Error-Signals.html#Program%20Error%20Signals">Program Error Signals</a>.
+
+<p>Handlers that return normally must modify some global variable in order
+to have any effect.  Typically, the variable is one that is examined
+periodically by the program during normal operation.  Its data type
+should be <code>sig_atomic_t</code> for reasons described in <a href="Atomic-Data-Access.html#Atomic%20Data%20Access">Atomic Data Access</a>.
+
+<p>Here is a simple example of such a program.  It executes the body of
+the loop until it has noticed that a <code>SIGALRM</code> signal has arrived. 
+This technique is useful because it allows the iteration in progress
+when the signal arrives to complete before the loop exits.
+
+<br><pre>
+
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* This flag controls termination of the main loop. */
+volatile sig_atomic_t keep_going = 1;
+
+/* The signal handler just clears the flag and re-enables itself. */
+void
+catch_alarm (int sig)
+{
+  keep_going = 0;
+  signal (sig, catch_alarm);
+}
+
+void
+do_stuff (void)
+{
+  puts ("Doing stuff while waiting for alarm....");
+}
+
+int
+main (void)
+{
+  /* Establish a handler for SIGALRM signals. */
+  signal (SIGALRM, catch_alarm);
+
+  /* Set an alarm to go off in a little while. */
+  alarm (2);
+
+  /* Check the flag once in a while to see when to quit. */
+  while (keep_going)
+    do_stuff ();
+
+  return EXIT_SUCCESS;
+}
+</pre>
+
+</body></html>
+

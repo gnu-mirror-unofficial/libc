@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="I%2fO%20Concepts">I/O Concepts</a>,
+Next:<a rel=next accesskey=n href="File-Names.html#File%20Names">File Names</a>,
+Up:<a rel=up accesskey=u href="I-O-Overview.html#I%2fO%20Overview">I/O Overview</a>
+<hr><br>
+
+<h3>Input/Output Concepts</h3>
+
+<p>Before you can read or write the contents of a file, you must establish
+a connection or communications channel to the file.  This process is
+called <dfn>opening</dfn> the file.  You can open a file for reading, writing,
+or both.
+
+<p>The connection to an open file is represented either as a stream or as a
+file descriptor.  You pass this as an argument to the functions that do
+the actual read or write operations, to tell them which file to operate
+on.  Certain functions expect streams, and others are designed to
+operate on file descriptors.
+
+<p>When you have finished reading to or writing from the file, you can
+terminate the connection by <dfn>closing</dfn> the file.  Once you have
+closed a stream or file descriptor, you cannot do any more input or
+output operations on it.
+
+<ul>
+<li><a accesskey=1 href="Streams-and-File-Descriptors.html#Streams%20and%20File%20Descriptors">Streams and File Descriptors</a>:     The GNU Library provides two ways
+			             to access the contents of files. 
+<li><a accesskey=2 href="File-Position.html#File%20Position">File Position</a>:                    The number of bytes from the
+                                     beginning of the file. 
+</ul>
+
+</body></html>
+

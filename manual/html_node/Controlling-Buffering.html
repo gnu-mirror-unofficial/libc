@@ -1,0 +1,262 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Controlling%20Buffering">Controlling Buffering</a>,
+Previous:<a rel=previous accesskey=p href="Flushing-Buffers.html#Flushing%20Buffers">Flushing Buffers</a>,
+Up:<a rel=up accesskey=u href="Stream-Buffering.html#Stream%20Buffering">Stream Buffering</a>
+<hr><br>
+
+<h4>Controlling Which Kind of Buffering</h4>
+
+<p>After opening a stream (but before any other operations have been
+performed on it), you can explicitly specify what kind of buffering you
+want it to have using the <code>setvbuf</code> function.
+
+<p>The facilities listed in this section are declared in the header
+file <code>stdio.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>setvbuf</b><i> (FILE *<var>stream</var>, char *<var>buf</var>, int <var>mode</var>, size_t <var>size</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is used to specify that the stream <var>stream</var> should
+have the buffering mode <var>mode</var>, which can be either <code>_IOFBF</code>
+(for full buffering), <code>_IOLBF</code> (for line buffering), or
+<code>_IONBF</code> (for unbuffered input/output).
+
+<p>If you specify a null pointer as the <var>buf</var> argument, then <code>setvbuf</code>
+allocates a buffer itself using <code>malloc</code>.  This buffer will be freed
+when you close the stream.
+
+<p>Otherwise, <var>buf</var> should be a character array that can hold at least
+<var>size</var> characters.  You should not free the space for this array as
+long as the stream remains open and this array remains its buffer.  You
+should usually either allocate it statically, or <code>malloc</code>
+(see <a href="Unconstrained-Allocation.html#Unconstrained%20Allocation">Unconstrained Allocation</a>) the buffer.  Using an automatic array
+is not a good idea unless you close the file before exiting the block
+that declares the array.
+
+<p>While the array remains a stream buffer, the stream I/O functions will
+use the buffer for their internal purposes.  You shouldn't try to access
+the values in the array directly while the stream is using it for
+buffering.
+
+<p>The <code>setvbuf</code> function returns zero on success, or a nonzero value
+if the value of <var>mode</var> is not valid or if the request could not
+be honored. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_IOFBF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that can be
+used as the <var>mode</var> argument to the <code>setvbuf</code> function to
+specify that the stream should be fully buffered. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_IOLBF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that can be
+used as the <var>mode</var> argument to the <code>setvbuf</code> function to
+specify that the stream should be line buffered. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>_IONBF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that can be
+used as the <var>mode</var> argument to the <code>setvbuf</code> function to
+specify that the stream should be unbuffered. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>BUFSIZ</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The value of this macro is an integer constant expression that is good
+to use for the <var>size</var> argument to <code>setvbuf</code>.  This value is
+guaranteed to be at least <code>256</code>.
+
+<p>The value of <code>BUFSIZ</code> is chosen on each system so as to make stream
+I/O efficient.  So it is a good idea to use <code>BUFSIZ</code> as the size
+for the buffer when you call <code>setvbuf</code>.
+
+<p>Actually, you can get an even better value to use for the buffer size
+by means of the <code>fstat</code> system call: it is found in the
+<code>st_blksize</code> field of the file attributes.  See <a href="Attribute-Meanings.html#Attribute%20Meanings">Attribute Meanings</a>.
+
+<p>Sometimes people also use <code>BUFSIZ</code> as the allocation size of
+buffers used for related purposes, such as strings used to receive a
+line of input with <code>fgets</code> (see <a href="Character-Input.html#Character%20Input">Character Input</a>).  There is no
+particular reason to use <code>BUFSIZ</code> for this instead of any other
+integer, except that it might lead to doing I/O in chunks of an
+efficient size. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setbuf</b><i> (FILE *<var>stream</var>, char *<var>buf</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If <var>buf</var> is a null pointer, the effect of this function is
+equivalent to calling <code>setvbuf</code> with a <var>mode</var> argument of
+<code>_IONBF</code>.  Otherwise, it is equivalent to calling <code>setvbuf</code>
+with <var>buf</var>, and a <var>mode</var> of <code>_IOFBF</code> and a <var>size</var>
+argument of <code>BUFSIZ</code>.
+
+<p>The <code>setbuf</code> function is provided for compatibility with old code;
+use <code>setvbuf</code> in all new programs. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setbuffer</b><i> (FILE *<var>stream</var>, char *<var>buf</var>, size_t <var>size</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If <var>buf</var> is a null pointer, this function makes <var>stream</var> unbuffered. 
+Otherwise, it makes <var>stream</var> fully buffered using <var>buf</var> as the
+buffer.  The <var>size</var> argument specifies the length of <var>buf</var>.
+
+<p>This function is provided for compatibility with old BSD code.  Use
+<code>setvbuf</code> instead. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>setlinebuf</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function makes <var>stream</var> be line buffered, and allocates the
+buffer for you.
+
+<p>This function is provided for compatibility with old BSD code.  Use
+<code>setvbuf</code> instead. 
+</td></tr>
+</table>
+
+<p>It is possible to query whether a given stream is line buffered or not
+using a non-standard function introduced in Solaris and available in the
+GNU C library.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>__flbf</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>__flbf</code> function will return a nonzero value in case the
+stream <var>stream</var> is line buffered.  Otherwise the return value is
+zero.
+
+<p>This function is declared in the <code>stdio_ext.h</code> header. 
+</td></tr>
+</table>
+
+<p>Two more extensions allow to determine the size of the buffer and how
+much of it is used.  These functions were also introduced in Solaris.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>__fbufsize</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>__fbufsize</code> function return the size of the buffer in the
+stream <var>stream</var>.  This value can be used to optimize the use of the
+stream.
+
+<p>This function is declared in the <code>stdio_ext.h</code> header. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">size_t <b>__fpending</b><i> (FILE *<var>stream</var>) The <code>__fpending</code>
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+function returns the number of bytes currently in the output buffer. 
+For wide-oriented stream the measuring unit is wide characters.  This
+function should not be used on buffers in read mode or opened read-only.
+
+<p>This function is declared in the <code>stdio_ext.h</code> header. 
+</td></tr>
+</table>
+
+</body></html>
+

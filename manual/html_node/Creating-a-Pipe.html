@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Creating%20a%20Pipe">Creating a Pipe</a>,
+Next:<a rel=next accesskey=n href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>,
+Up:<a rel=up accesskey=u href="Pipes-and-FIFOs.html#Pipes%20and%20FIFOs">Pipes and FIFOs</a>
+<hr><br>
+
+<h3>Creating a Pipe</h3>
+
+<p>The primitive for creating a pipe is the <code>pipe</code> function.  This
+creates both the reading and writing ends of the pipe.  It is not very
+useful for a single process to use a pipe to talk to itself.  In typical
+use, a process creates a pipe just before it forks one or more child
+processes (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>).  The pipe is then used for
+communication either between the parent or child processes, or between
+two sibling processes.
+
+<p>The <code>pipe</code> function is declared in the header file
+<code>unistd.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>pipe</b><i> (int <var>filedes</var><tt>[2]</tt>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>pipe</code> function creates a pipe and puts the file descriptors
+for the reading and writing ends of the pipe (respectively) into
+<code><var>filedes</var>[0]</code> and <code><var>filedes</var>[1]</code>.
+
+<p>An easy way to remember that the input end comes first is that file
+descriptor <code>0</code> is standard input, and file descriptor <code>1</code> is
+standard output.
+
+<p>If successful, <code>pipe</code> returns a value of <code>0</code>.  On failure,
+<code>-1</code> is returned.  The following <code>errno</code> error conditions are
+defined for this function:
+
+<dl>
+<dt><code>EMFILE</code>
+<dd>The process has too many files open.
+
+<br><dt><code>ENFILE</code>
+<dd>There are too many open files in the entire system.  See <a href="Error-Codes.html#Error%20Codes">Error Codes</a>,
+for more information about <code>ENFILE</code>.  This error never occurs in
+the GNU system. 
+</dl>
+</td></tr>
+</table>
+
+<p>Here is an example of a simple program that creates a pipe.  This program
+uses the <code>fork</code> function (see <a href="Creating-a-Process.html#Creating%20a%20Process">Creating a Process</a>) to create
+a child process.  The parent process writes data to the pipe, which is
+read by the child process.
+
+<br><pre>
+
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Read characters from the pipe and echo them to <code>stdout</code>. */
+
+void
+read_from_pipe (int file)
+{
+  FILE *stream;
+  int c;
+  stream = fdopen (file, "r");
+  while ((c = fgetc (stream)) != EOF)
+    putchar (c);
+  fclose (stream);
+}
+
+/* Write some random text to the pipe. */
+
+void
+write_to_pipe (int file)
+{
+  FILE *stream;
+  stream = fdopen (file, "w");
+  fprintf (stream, "hello, world!\n");
+  fprintf (stream, "goodbye, world!\n");
+  fclose (stream);
+}
+
+int
+main (void)
+{
+  pid_t pid;
+  int mypipe[2];
+
+  /* Create the pipe. */
+  if (pipe (mypipe))
+    {
+      fprintf (stderr, "Pipe failed.\n");
+      return EXIT_FAILURE;
+    }
+
+  /* Create the child process. */
+  pid = fork ();
+  if (pid == (pid_t) 0)
+    {
+      /* This is the child process.
+         Close other end first. */
+      close (mypipe[1]);
+      read_from_pipe (mypipe[0]);
+      return EXIT_SUCCESS;
+    }
+  else if (pid &lt; (pid_t) 0)
+    {
+      /* The fork failed. */
+      fprintf (stderr, "Fork failed.\n");
+      return EXIT_FAILURE;
+    }
+  else
+    {
+      /* This is the parent process.
+         Close other end first. */
+      close (mypipe[0]);
+      write_to_pipe (mypipe[1]);
+      return EXIT_SUCCESS;
+    }
+}
+</pre>
+
+</body></html>
+

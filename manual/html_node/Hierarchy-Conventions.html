@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Hierarchy%20Conventions">Hierarchy Conventions</a>,
+Next:<a rel=next accesskey=n href="Porting-to-Unix.html#Porting%20to%20Unix">Porting to Unix</a>,
+Up:<a rel=up accesskey=u href="Porting.html#Porting">Porting</a>
+<hr><br>
+
+<h4>Layout of the <code>sysdeps</code> Directory Hierarchy</h4>
+
+<p>A GNU configuration name has three parts: the CPU type, the
+manufacturer's name, and the operating system.  <code>configure</code> uses
+these to pick the list of system-dependent directories to look for.  If
+the <code>--nfp</code> option is <em>not</em> passed to <code>configure</code>, the
+directory <code><var>machine</var>/fpu</code> is also used.  The operating system
+often has a <dfn>base operating system</dfn>; for example, if the operating
+system is <code>Linux</code>, the base operating system is <code>unix/sysv</code>. 
+The algorithm used to pick the list of directories is simple:
+<code>configure</code> makes a list of the base operating system,
+manufacturer, CPU type, and operating system, in that order.  It then
+concatenates all these together with slashes in between, to produce a
+directory name; for example, the configuration <code>i686-linux-gnu</code>
+results in <code>unix/sysv/linux/i386/i686</code>.  <code>configure</code> then
+tries removing each element of the list in turn, so
+<code>unix/sysv/linux</code> and <code>unix/sysv</code> are also tried, among others. 
+Since the precise version number of the operating system is often not
+important, and it would be very inconvenient, for example, to have
+identical <code>irix6.2</code> and <code>irix6.3</code> directories,
+<code>configure</code> tries successively less specific operating system names
+by removing trailing suffixes starting with a period.
+
+<p>As an example, here is the complete list of directories that would be
+tried for the configuration <code>i686-linux-gnu</code> (with the
+<code>crypt</code> and <code>linuxthreads</code> add-on):
+
+<br><pre>sysdeps/i386/elf
+crypt/sysdeps/unix
+linuxthreads/sysdeps/unix/sysv/linux
+linuxthreads/sysdeps/pthread
+linuxthreads/sysdeps/unix/sysv
+linuxthreads/sysdeps/unix
+linuxthreads/sysdeps/i386/i686
+linuxthreads/sysdeps/i386
+linuxthreads/sysdeps/pthread/no-cmpxchg
+sysdeps/unix/sysv/linux/i386
+sysdeps/unix/sysv/linux
+sysdeps/gnu
+sysdeps/unix/common
+sysdeps/unix/mman
+sysdeps/unix/inet
+sysdeps/unix/sysv/i386/i686
+sysdeps/unix/sysv/i386
+sysdeps/unix/sysv
+sysdeps/unix/i386
+sysdeps/unix
+sysdeps/posix
+sysdeps/i386/i686
+sysdeps/i386/i486
+sysdeps/libm-i387/i686
+sysdeps/i386/fpu
+sysdeps/libm-i387
+sysdeps/i386
+sysdeps/wordsize-32
+sysdeps/ieee754
+sysdeps/libm-ieee754
+sysdeps/generic
+</pre>
+
+<p>Different machine architectures are conventionally subdirectories at the
+top level of the <code>sysdeps</code> directory tree.  For example,
+<code>sysdeps/sparc</code> and <code>sysdeps/m68k</code>.  These contain
+files specific to those machine architectures, but not specific to any
+particular operating system.  There might be subdirectories for
+specializations of those architectures, such as
+<code>sysdeps/m68k/68020</code>. Code which is specific to the
+floating-point coprocessor used with a particular machine should go in
+<code>sysdeps/<var>machine</var>/fpu</code>.
+
+<p>There are a few directories at the top level of the <code>sysdeps</code>
+hierarchy that are not for particular machine architectures.
+
+<dl>
+<dt><code>generic</code>
+<dd>As described above (see <a href="Porting.html#Porting">Porting</a>), this is the subdirectory
+that every configuration implicitly uses after all others.
+
+<br><dt><code>ieee754</code>
+<dd>This directory is for code using the IEEE 754 floating-point format,
+where the C type <code>float</code> is IEEE 754 single-precision format, and
+<code>double</code> is IEEE 754 double-precision format.  Usually this
+directory is referred to in the <code>Implies</code> file in a machine
+architecture-specific directory, such as <code>m68k/Implies</code>.
+
+<br><dt><code>libm-ieee754</code>
+<dd>This directory contains an implementation of a mathematical library
+usable on platforms which use IEEE&nbsp;754 conformant floating-point
+arithmetic.
+
+<br><dt><code>libm-i387</code>
+<dd>This is a special case.  Ideally the code should be in
+<code>sysdeps/i386/fpu</code> but for various reasons it is kept aside.
+
+<br><dt><code>posix</code>
+<dd>This directory contains implementations of things in the library in
+terms of <small>POSIX.1</small> functions.  This includes some of the <small>POSIX.1</small>
+functions themselves.  Of course, <small>POSIX.1</small> cannot be completely
+implemented in terms of itself, so a configuration using just
+<code>posix</code> cannot be complete.
+
+<br><dt><code>unix</code>
+<dd>This is the directory for Unix-like things.  See <a href="Porting-to-Unix.html#Porting%20to%20Unix">Porting to Unix</a>. 
+<code>unix</code> implies <code>posix</code>.  There are some special-purpose
+subdirectories of <code>unix</code>:
+
+<dl>
+<dt><code>unix/common</code>
+<dd>This directory is for things common to both BSD and System V release 4. 
+Both <code>unix/bsd</code> and <code>unix/sysv/sysv4</code> imply <code>unix/common</code>.
+
+<br><dt><code>unix/inet</code>
+<dd>This directory is for <code>socket</code> and related functions on Unix systems. 
+<code>unix/inet/Subdirs</code> enables the <code>inet</code> top-level subdirectory. 
+<code>unix/common</code> implies <code>unix/inet</code>. 
+</dl>
+
+<br><dt><code>mach</code>
+<dd>This is the directory for things based on the Mach microkernel from CMU
+(including the GNU operating system).  Other basic operating systems
+(VMS, for example) would have their own directories at the top level of
+the <code>sysdeps</code> hierarchy, parallel to <code>unix</code> and <code>mach</code>. 
+</dl>
+
+</body></html>
+

@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Special%20Characters">Special Characters</a>,
+Next:<a rel=next accesskey=n href="Noncanonical-Input.html#Noncanonical%20Input">Noncanonical Input</a>,
+Previous:<a rel=previous accesskey=p href="Line-Speed.html#Line%20Speed">Line Speed</a>,
+Up:<a rel=up accesskey=u href="Terminal-Modes.html#Terminal%20Modes">Terminal Modes</a>
+<hr><br>
+
+<h4>Special Characters</h4>
+
+<p>In canonical input, the terminal driver recognizes a number of special
+characters which perform various control functions.  These include the
+ERASE character (usually &lt;DEL&gt;) for editing input, and other editing
+characters.  The INTR character (normally <kbd>C-c</kbd>) for sending a
+<code>SIGINT</code> signal, and other signal-raising characters, may be
+available in either canonical or noncanonical input mode.  All these
+characters are described in this section.
+
+<p>The particular characters used are specified in the <code>c_cc</code> member
+of the <code>struct termios</code> structure.  This member is an array; each
+element specifies the character for a particular role.  Each element has
+a symbolic constant that stands for the index of that element--for
+example, <code>VINTR</code> is the index of the element that specifies the INTR
+character, so storing <code>'='</code> in <code><var>termios</var>.c_cc[VINTR]</code>
+specifies <code>=</code> as the INTR character.
+
+<p>On some systems, you can disable a particular special character function
+by specifying the value <code>_POSIX_VDISABLE</code> for that role.  This
+value is unequal to any possible character code.  See <a href="Options-for-Files.html#Options%20for%20Files">Options for Files</a>, for more information about how to tell whether the operating
+system you are using supports <code>_POSIX_VDISABLE</code>.
+
+<ul>
+<li><a accesskey=1 href="Editing-Characters.html#Editing%20Characters">Editing Characters</a>:           Special characters that terminate lines and
+                                  delete text, and other editing functions. 
+<li><a accesskey=2 href="Signal-Characters.html#Signal%20Characters">Signal Characters</a>:            Special characters that send or raise signals
+                                  to or for certain classes of processes. 
+<li><a accesskey=3 href="Start-Stop-Characters.html#Start%2fStop%20Characters">Start/Stop Characters</a>:        Special characters that suspend or resume
+                                  suspended output. 
+<li><a accesskey=4 href="Other-Special.html#Other%20Special">Other Special</a>: 		Other special characters for BSD systems:
+				  they can discard output, and print status. 
+</ul>
+
+</body></html>
+

@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Terminal%20Modes">Terminal Modes</a>,
+Next:<a rel=next accesskey=n href="BSD-Terminal-Modes.html#BSD%20Terminal%20Modes">BSD Terminal Modes</a>,
+Previous:<a rel=previous accesskey=p href="Canonical-or-Not.html#Canonical%20or%20Not">Canonical or Not</a>,
+Up:<a rel=up accesskey=u href="Low-Level-Terminal-Interface.html#Low-Level%20Terminal%20Interface">Low-Level Terminal Interface</a>
+<hr><br>
+
+<h3>Terminal Modes</h3>
+
+<p>This section describes the various terminal attributes that control how
+input and output are done.  The functions, data structures, and symbolic
+constants are all declared in the header file <code>termios.h</code>.
+
+<p>Don't confuse terminal attributes with file attributes.  A device special
+file which is associated with a terminal has file attributes as described
+in <a href="File-Attributes.html#File%20Attributes">File Attributes</a>.  These are unrelated to the attributes of the
+terminal device itself, which are discussed in this section.
+
+<ul>
+<li><a accesskey=1 href="Mode-Data-Types.html#Mode%20Data%20Types">Mode Data Types</a>:              The data type <code>struct termios</code> and
+                                 related types. 
+<li><a accesskey=2 href="Mode-Functions.html#Mode%20Functions">Mode Functions</a>:               Functions to read and set the terminal
+                                 attributes. 
+<li><a accesskey=3 href="Setting-Modes.html#Setting%20Modes">Setting Modes</a>:                The right way to set terminal attributes
+                                 reliably. 
+<li><a accesskey=4 href="Input-Modes.html#Input%20Modes">Input Modes</a>:                  Flags controlling low-level input handling. 
+<li><a accesskey=5 href="Output-Modes.html#Output%20Modes">Output Modes</a>:                 Flags controlling low-level output handling. 
+<li><a accesskey=6 href="Control-Modes.html#Control%20Modes">Control Modes</a>:                Flags controlling serial port behavior. 
+<li><a accesskey=7 href="Local-Modes.html#Local%20Modes">Local Modes</a>:                  Flags controlling high-level input handling. 
+<li><a accesskey=8 href="Line-Speed.html#Line%20Speed">Line Speed</a>:                   How to read and set the terminal line speed. 
+<li><a accesskey=9 href="Special-Characters.html#Special%20Characters">Special Characters</a>:           Characters that have special effects,
+			         and how to change them. 
+<li><a href="Noncanonical-Input.html#Noncanonical%20Input">Noncanonical Input</a>:           Controlling how long to wait for input. 
+</ul>
+
+</body></html>
+

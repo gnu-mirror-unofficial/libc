@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Writing%20a%20User%20Entry">Writing a User Entry</a>,
+Previous:<a rel=previous accesskey=p href="Scanning-All-Users.html#Scanning%20All%20Users">Scanning All Users</a>,
+Up:<a rel=up accesskey=u href="User-Database.html#User%20Database">User Database</a>
+<hr><br>
+
+<h4>Writing a User Entry</h4>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>putpwent</b><i> (const struct passwd *<var>p</var>, FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function writes the user entry <code>*<var>p</var></code> to the stream
+<var>stream</var>, in the format used for the standard user database
+file.  The return value is zero on success and nonzero on failure.
+
+<p>This function exists for compatibility with SVID.  We recommend that you
+avoid using it, because it makes sense only on the assumption that the
+<code>struct passwd</code> structure has no members except the standard ones;
+on a system which merges the traditional Unix data base with other
+extended information about users, adding an entry using this function
+would inevitably leave out much of the important information.
+
+<p>The function <code>putpwent</code> is declared in <code>pwd.h</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

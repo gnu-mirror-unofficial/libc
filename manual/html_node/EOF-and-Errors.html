@@ -1,0 +1,150 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="EOF%20and%20Errors">EOF and Errors</a>,
+Next:<a rel=next accesskey=n href="Error-Recovery.html#Error%20Recovery">Error Recovery</a>,
+Previous:<a rel=previous accesskey=p href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>End-Of-File and Errors</h3>
+
+<p>Many of the functions described in this chapter return the value of the
+macro <code>EOF</code> to indicate unsuccessful completion of the operation. 
+Since <code>EOF</code> is used to report both end of file and random errors,
+it's often better to use the <code>feof</code> function to check explicitly
+for end of file and <code>ferror</code> to check for errors.  These functions
+check indicators that are part of the internal state of the stream
+object, indicators set if the appropriate condition was detected by a
+previous I/O operation on that stream.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>EOF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This macro is an integer value that is returned by a number of narrow
+stream functions to indicate an end-of-file condition, or some other
+error situation.  With the GNU library, <code>EOF</code> is <code>-1</code>.  In
+other libraries, its value may be some other negative number.
+
+<p>This symbol is declared in <code>stdio.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>WEOF</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This macro is an integer value that is returned by a number of wide
+stream functions to indicate an end-of-file condition, or some other
+error situation.  With the GNU library, <code>WEOF</code> is <code>-1</code>.  In
+other libraries, its value may be some other negative number.
+
+<p>This symbol is declared in <code>wchar.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>feof</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>feof</code> function returns nonzero if and only if the end-of-file
+indicator for the stream <var>stream</var> is set.
+
+<p>This symbol is declared in <code>stdio.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>feof_unlocked</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>feof_unlocked</code> function is equivalent to the <code>feof</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension.
+
+<p>This symbol is declared in <code>stdio.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ferror</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>ferror</code> function returns nonzero if and only if the error
+indicator for the stream <var>stream</var> is set, indicating that an error
+has occurred on a previous operation on the stream.
+
+<p>This symbol is declared in <code>stdio.h</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>ferror_unlocked</b><i> (FILE *<var>stream</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>ferror_unlocked</code> function is equivalent to the <code>ferror</code>
+function except that it does not implicitly lock the stream.
+
+<p>This function is a GNU extension.
+
+<p>This symbol is declared in <code>stdio.h</code>. 
+</td></tr>
+</table>
+
+<p>In addition to setting the error indicator associated with the stream,
+the functions that operate on streams also set <code>errno</code> in the same
+way as the corresponding low-level functions that operate on file
+descriptors.  For example, all of the functions that perform output to a
+stream--such as <code>fputc</code>, <code>printf</code>, and <code>fflush</code>--are
+implemented in terms of <code>write</code>, and all of the <code>errno</code> error
+conditions defined for <code>write</code> are meaningful for these functions. 
+For more information about the descriptor-level I/O functions, see
+<a href="Low-Level-I-O.html#Low-Level%20I%2fO">Low-Level I/O</a>.
+
+</body></html>
+

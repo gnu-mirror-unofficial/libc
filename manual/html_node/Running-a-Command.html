@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Running%20a%20Command">Running a Command</a>,
+Next:<a rel=next accesskey=n href="Process-Creation-Concepts.html#Process%20Creation%20Concepts">Process Creation Concepts</a>,
+Up:<a rel=up accesskey=u href="Processes.html#Processes">Processes</a>
+<hr><br>
+
+<h3>Running a Command</h3>
+
+<p>The easy way to run another program is to use the <code>system</code>
+function.  This function does all the work of running a subprogram, but
+it doesn't give you much control over the details: you have to wait
+until the subprogram terminates before you can do anything else.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>system</b><i> (const char *<var>command</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function executes <var>command</var> as a shell command.  In the GNU C
+library, it always uses the default shell <code>sh</code> to run the command. 
+In particular, it searches the directories in <code>PATH</code> to find
+programs to execute.  The return value is <code>-1</code> if it wasn't
+possible to create the shell process, and otherwise is the status of the
+shell process.  See <a href="Process-Completion.html#Process%20Completion">Process Completion</a>, for details on how this
+status code can be interpreted.
+
+<p>If the <var>command</var> argument is a null pointer, a return value of zero
+indicates that no command processor is available.
+
+<p>This function is a cancellation point in multi-threaded programs.  This
+is a problem if the thread allocates some resources (like memory, file
+descriptors, semaphores or whatever) at the time <code>system</code> is
+called.  If the thread gets canceled these resources stay allocated
+until the program ends.  To avoid this calls to <code>system</code> should be
+protected using cancellation handlers.
+
+<p>The <code>system</code> function is declared in the header file
+<code>stdlib.h</code>. 
+</td></tr>
+</table>
+
+<p><strong>Portability Note:</strong> Some C implementations may not have any
+notion of a command processor that can execute other programs.  You can
+determine whether a command processor exists by executing
+<code>system&nbsp;(NULL)</code>; if the return value is nonzero, a command
+processor is available.
+
+<p>The <code>popen</code> and <code>pclose</code> functions (see <a href="Pipe-to-a-Subprocess.html#Pipe%20to%20a%20Subprocess">Pipe to a Subprocess</a>) are closely related to the <code>system</code> function.  They
+allow the parent process to communicate with the standard input and
+output channels of the command being executed.
+
+</body></html>
+

@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Lookup%20Group">Lookup Group</a>,
+Next:<a rel=next accesskey=n href="Scanning-All-Groups.html#Scanning%20All%20Groups">Scanning All Groups</a>,
+Previous:<a rel=previous accesskey=p href="Group-Data-Structure.html#Group%20Data%20Structure">Group Data Structure</a>,
+Up:<a rel=up accesskey=u href="Group-Database.html#Group%20Database">Group Database</a>
+<hr><br>
+
+<h4>Looking Up One Group</h4>
+
+<p>You can search the group database for information about a specific
+group using <code>getgrgid</code> or <code>getgrnam</code>.  These functions are
+declared in <code>grp.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct group * <b>getgrgid</b><i> (gid_t <var>gid</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns a pointer to a statically-allocated structure
+containing information about the group whose group ID is <var>gid</var>. 
+This structure may be overwritten by subsequent calls to
+<code>getgrgid</code>.
+
+<p>A null pointer indicates there is no group with ID <var>gid</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getgrgid_r</b><i> (gid_t <var>gid</var>, struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>getgrgid</code> in that it returns
+information about the group whose group ID is <var>gid</var>.  However, it
+fills the user supplied structure pointed to by <var>result_buf</var> with
+the information instead of using a static buffer.  The first
+<var>buflen</var> bytes of the additional buffer pointed to by <var>buffer</var>
+are used to contain additional information, normally strings which are
+pointed to by the elements of the result structure.
+
+<p>If a group with ID <var>gid</var> is found, the pointer returned in
+<var>result</var> points to the record which contains the wanted data (i.e.,
+<var>result</var> contains the value <var>result_buf</var>).  If no group is found
+or if an error occurred, the pointer returned in <var>result</var> is a null
+pointer.  The function returns zero or an error code.  If the buffer
+<var>buffer</var> is too small to contain all the needed information, the
+error code <code>ERANGE</code> is returned and <var>errno</var> is set to
+<code>ERANGE</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">struct group * <b>getgrnam</b><i> (const char *<var>name</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns a pointer to a statically-allocated structure
+containing information about the group whose group name is <var>name</var>. 
+This structure may be overwritten by subsequent calls to
+<code>getgrnam</code>.
+
+<p>A null pointer indicates there is no group named <var>name</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>getgrnam_r</b><i> (const char *<var>name</var>, struct group *<var>result_buf</var>, char *<var>buffer</var>, size_t <var>buflen</var>, struct group **<var>result</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is similar to <code>getgrnam</code> in that is returns
+information about the group whose group name is <var>name</var>.  Like
+<code>getgrgid_r</code>, it uses the user supplied buffers in
+<var>result_buf</var> and <var>buffer</var>, not a static buffer.
+
+<p>The return values are the same as for <code>getgrgid_r</code>
+<code>ERANGE</code>. 
+</td></tr>
+</table>
+
+</body></html>
+

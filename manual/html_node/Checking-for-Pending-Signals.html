@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Checking%20for%20Pending%20Signals">Checking for Pending Signals</a>,
+Next:<a rel=next accesskey=n href="Remembering-a-Signal.html#Remembering%20a%20Signal">Remembering a Signal</a>,
+Previous:<a rel=previous accesskey=p href="Blocking-for-Handler.html#Blocking%20for%20Handler">Blocking for Handler</a>,
+Up:<a rel=up accesskey=u href="Blocking-Signals.html#Blocking%20Signals">Blocking Signals</a>
+<hr><br>
+
+<h4>Checking for Pending Signals</h4>
+
+<p>You can find out which signals are pending at any time by calling
+<code>sigpending</code>.  This function is declared in <code>signal.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigpending</b><i> (sigset_t *<var>set</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>sigpending</code> function stores information about pending signals
+in <var>set</var>.  If there is a pending signal that is blocked from
+delivery, then that signal is a member of the returned set.  (You can
+test whether a particular signal is a member of this set using
+<code>sigismember</code>; see <a href="Signal-Sets.html#Signal%20Sets">Signal Sets</a>.)
+
+<p>The return value is <code>0</code> if successful, and <code>-1</code> on failure. 
+</td></tr>
+</table>
+
+<p>Testing whether a signal is pending is not often useful.  Testing when
+that signal is not blocked is almost certainly bad design.
+
+<p>Here is an example.
+
+<br><pre>#include &lt;signal.h&gt;
+#include &lt;stddef.h&gt;
+
+sigset_t base_mask, waiting_mask;
+
+sigemptyset (&amp;base_mask);
+sigaddset (&amp;base_mask, SIGINT);
+sigaddset (&amp;base_mask, SIGTSTP);
+
+/* Block user interrupts while doing other processing. */
+sigprocmask (SIG_SETMASK, &amp;base_mask, NULL);
+<small>...</small>
+
+/* After a while, check to see whether any signals are pending. */
+sigpending (&amp;waiting_mask);
+if (sigismember (&amp;waiting_mask, SIGINT)) {
+  /* User has tried to kill the process. */
+}
+else if (sigismember (&amp;waiting_mask, SIGTSTP)) {
+  /* User has tried to stop the process. */
+}
+</pre>
+
+<p>Remember that if there is a particular signal pending for your process,
+additional signals of that same type that arrive in the meantime might
+be discarded.  For example, if a <code>SIGINT</code> signal is pending when
+another <code>SIGINT</code> signal arrives, your program will probably only
+see one of them when you unblock this signal.
+
+<p><strong>Portability Note:</strong> The <code>sigpending</code> function is new in
+POSIX.1.  Older systems have no equivalent facility.
+
+</body></html>
+

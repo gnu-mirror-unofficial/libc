@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Range%20of%20Type">Range of Type</a>,
+Next:<a rel=next accesskey=n href="Floating-Type-Macros.html#Floating%20Type%20Macros">Floating Type Macros</a>,
+Previous:<a rel=previous accesskey=p href="Width-of-Type.html#Width%20of%20Type">Width of Type</a>,
+Up:<a rel=up accesskey=u href="Data-Type-Measurements.html#Data%20Type%20Measurements">Data Type Measurements</a>
+<hr><br>
+
+<h4>Range of an Integer Type</h4>
+
+<p>Suppose you need to store an integer value which can range from zero to
+one million.  Which is the smallest type you can use?  There is no
+general rule; it depends on the C compiler and target machine.  You can
+use the <code>MIN</code> and <code>MAX</code> macros in <code>limits.h</code> to determine
+which type will work.
+
+<p>Each signed integer type has a pair of macros which give the smallest
+and largest values that it can hold.  Each unsigned integer type has one
+such macro, for the maximum value; the minimum value is, of course,
+zero.
+
+<p>The values of these macros are all integer constant expressions.  The
+<code>MAX</code> and <code>MIN</code> macros for <code>char</code> and <code>short&nbsp;int</code> types have values of type <code>int</code>.  The <code>MAX</code> and
+<code>MIN</code> macros for the other types have values of the same type
+described by the macro--thus, <code>ULONG_MAX</code> has type
+<code>unsigned&nbsp;long&nbsp;int</code>.
+
+<dl>
+<dt><code>SCHAR_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>signed&nbsp;char</code>.
+
+<br><dt><code>SCHAR_MAX</code>
+<dt><code>UCHAR_MAX</code>
+<dd>
+These are the maximum values that can be represented by a
+<code>signed&nbsp;char</code> and <code>unsigned&nbsp;char</code>, respectively.
+
+<br><dt><code>CHAR_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>char</code>. 
+It's equal to <code>SCHAR_MIN</code> if <code>char</code> is signed, or zero
+otherwise.
+
+<br><dt><code>CHAR_MAX</code>
+<dd>
+This is the maximum value that can be represented by a <code>char</code>. 
+It's equal to <code>SCHAR_MAX</code> if <code>char</code> is signed, or
+<code>UCHAR_MAX</code> otherwise.
+
+<br><dt><code>SHRT_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>signed&nbsp;short&nbsp;int</code>.  On most machines that the GNU C library runs on,
+<code>short</code> integers are 16-bit quantities.
+
+<br><dt><code>SHRT_MAX</code>
+<dt><code>USHRT_MAX</code>
+<dd>
+These are the maximum values that can be represented by a
+<code>signed&nbsp;short&nbsp;int</code> and <code>unsigned&nbsp;short&nbsp;int</code>,
+respectively.
+
+<br><dt><code>INT_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>signed&nbsp;int</code>.  On most machines that the GNU C system runs on, an <code>int</code> is
+a 32-bit quantity.
+
+<br><dt><code>INT_MAX</code>
+<dt><code>UINT_MAX</code>
+<dd>
+These are the maximum values that can be represented by, respectively,
+the type <code>signed&nbsp;int</code> and the type <code>unsigned&nbsp;int</code>.
+
+<br><dt><code>LONG_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>signed&nbsp;long&nbsp;int</code>.  On most machines that the GNU C system runs on, <code>long</code>
+integers are 32-bit quantities, the same size as <code>int</code>.
+
+<br><dt><code>LONG_MAX</code>
+<dt><code>ULONG_MAX</code>
+<dd>
+These are the maximum values that can be represented by a
+<code>signed&nbsp;long&nbsp;int</code> and <code>unsigned long int</code>, respectively.
+
+<br><dt><code>LONG_LONG_MIN</code>
+<dd>
+This is the minimum value that can be represented by a <code>signed&nbsp;long&nbsp;long&nbsp;int</code>.  On most machines that the GNU C system runs on,
+<code>long&nbsp;long</code> integers are 64-bit quantities.
+
+<br><dt><code>LONG_LONG_MAX</code>
+<dt><code>ULONG_LONG_MAX</code>
+<dd>
+These are the maximum values that can be represented by a <code>signed
+long long int</code> and <code>unsigned long long int</code>, respectively.
+
+<br><dt><code>WCHAR_MAX</code>
+<dd>
+This is the maximum value that can be represented by a <code>wchar_t</code>. 
+See <a href="Extended-Char-Intro.html#Extended%20Char%20Intro">Extended Char Intro</a>. 
+</dl>
+
+<p>The header file <code>limits.h</code> also defines some additional constants
+that parameterize various operating system and file system limits.  These
+constants are described in <a href="System-Configuration.html#System%20Configuration">System Configuration</a>.
+
+</body></html>
+

@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Non-Local%20Details">Non-Local Details</a>,
+Next:<a rel=next accesskey=n href="Non-Local-Exits-and-Signals.html#Non-Local%20Exits%20and%20Signals">Non-Local Exits and Signals</a>,
+Previous:<a rel=previous accesskey=p href="Non-Local-Intro.html#Non-Local%20Intro">Non-Local Intro</a>,
+Up:<a rel=up accesskey=u href="Non-Local-Exits.html#Non-Local%20Exits">Non-Local Exits</a>
+<hr><br>
+
+<h3>Details of Non-Local Exits</h3>
+
+<p>Here are the details on the functions and data structures used for
+performing non-local exits.  These facilities are declared in
+<code>setjmp.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>jmp_buf</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Objects of type <code>jmp_buf</code> hold the state information to
+be restored by a non-local exit.  The contents of a <code>jmp_buf</code>
+identify a specific place to return to. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>setjmp</b><i> (jmp_buf <var>state</var>)
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+When called normally, <code>setjmp</code> stores information about the
+execution state of the program in <var>state</var> and returns zero.  If
+<code>longjmp</code> is later used to perform a non-local exit to this
+<var>state</var>, <code>setjmp</code> returns a nonzero value. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>longjmp</b><i> (jmp_buf <var>state</var>, int <var>value</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function restores current execution to the state saved in
+<var>state</var>, and continues execution from the call to <code>setjmp</code> that
+established that return point.  Returning from <code>setjmp</code> by means of
+<code>longjmp</code> returns the <var>value</var> argument that was passed to
+<code>longjmp</code>, rather than <code>0</code>.  (But if <var>value</var> is given as
+<code>0</code>, <code>setjmp</code> returns <code>1</code>). 
+</td></tr>
+</table>
+
+<p>There are a lot of obscure but important restrictions on the use of
+<code>setjmp</code> and <code>longjmp</code>.  Most of these restrictions are
+present because non-local exits require a fair amount of magic on the
+part of the C compiler and can interact with other parts of the language
+in strange ways.
+
+<p>The <code>setjmp</code> function is actually a macro without an actual
+function definition, so you shouldn't try to <code>#undef</code> it or take
+its address.  In addition, calls to <code>setjmp</code> are safe in only the
+following contexts:
+
+<ul>
+<li>As the test expression of a selection or iteration
+statement (such as <code>if</code>, <code>switch</code>, or <code>while</code>).
+
+<li>As one operand of a equality or comparison operator that appears as the
+test expression of a selection or iteration statement.  The other
+operand must be an integer constant expression.
+
+<li>As the operand of a unary <code>!</code> operator, that appears as the
+test expression of a selection or iteration statement.
+
+<li>By itself as an expression statement. 
+</ul>
+
+<p>Return points are valid only during the dynamic extent of the function
+that called <code>setjmp</code> to establish them.  If you <code>longjmp</code> to
+a return point that was established in a function that has already
+returned, unpredictable and disastrous things are likely to happen.
+
+<p>You should use a nonzero <var>value</var> argument to <code>longjmp</code>.  While
+<code>longjmp</code> refuses to pass back a zero argument as the return value
+from <code>setjmp</code>, this is intended as a safety net against accidental
+misuse and is not really good programming style.
+
+<p>When you perform a non-local exit, accessible objects generally retain
+whatever values they had at the time <code>longjmp</code> was called.  The
+exception is that the values of automatic variables local to the
+function containing the <code>setjmp</code> call that have been changed since
+the call to <code>setjmp</code> are indeterminate, unless you have declared
+them <code>volatile</code>.
+
+</body></html>
+

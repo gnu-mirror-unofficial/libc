@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Terminal%20Access%20Functions">Terminal Access Functions</a>,
+Previous:<a rel=previous accesskey=p href="Process-Group-Functions.html#Process%20Group%20Functions">Process Group Functions</a>,
+Up:<a rel=up accesskey=u href="Functions-for-Job-Control.html#Functions%20for%20Job%20Control">Functions for Job Control</a>
+<hr><br>
+
+<h4>Functions for Controlling Terminal Access</h4>
+
+<p>These are the functions for reading or setting the foreground
+process group of a terminal.  You should include the header files
+<code>sys/types.h</code> and <code>unistd.h</code> in your application to use
+these functions.
+
+<p>Although these functions take a file descriptor argument to specify
+the terminal device, the foreground job is associated with the terminal
+file itself and not a particular open file descriptor.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">pid_t <b>tcgetpgrp</b><i> (int <var>filedes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function returns the process group ID of the foreground process
+group associated with the terminal open on descriptor <var>filedes</var>.
+
+<p>If there is no foreground process group, the return value is a number
+greater than <code>1</code> that does not match the process group ID of any
+existing process group.  This can happen if all of the processes in the
+job that was formerly the foreground job have terminated, and no other
+job has yet been moved into the foreground.
+
+<p>In case of an error, a value of <code>-1</code> is returned.  The
+following <code>errno</code> error conditions are defined for this function:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>filedes</var> argument is not a valid file descriptor.
+
+<br><dt><code>ENOSYS</code>
+<dd>The system doesn't support job control.
+
+<br><dt><code>ENOTTY</code>
+<dd>The terminal file associated with the <var>filedes</var> argument isn't the
+controlling terminal of the calling process. 
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>tcsetpgrp</b><i> (int <var>filedes</var>, pid_t <var>pgid</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is used to set a terminal's foreground process group ID. 
+The argument <var>filedes</var> is a descriptor which specifies the terminal;
+<var>pgid</var> specifies the process group.  The calling process must be a
+member of the same session as <var>pgid</var> and must have the same
+controlling terminal.
+
+<p>For terminal access purposes, this function is treated as output.  If it
+is called from a background process on its controlling terminal,
+normally all processes in the process group are sent a <code>SIGTTOU</code>
+signal.  The exception is if the calling process itself is ignoring or
+blocking <code>SIGTTOU</code> signals, in which case the operation is
+performed and no signal is sent.
+
+<p>If successful, <code>tcsetpgrp</code> returns <code>0</code>.  A return value of
+<code>-1</code> indicates an error.  The following <code>errno</code> error
+conditions are defined for this function:
+
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>filedes</var> argument is not a valid file descriptor.
+
+<br><dt><code>EINVAL</code>
+<dd>The <var>pgid</var> argument is not valid.
+
+<br><dt><code>ENOSYS</code>
+<dd>The system doesn't support job control.
+
+<br><dt><code>ENOTTY</code>
+<dd>The <var>filedes</var> isn't the controlling terminal of the calling process.
+
+<br><dt><code>EPERM</code>
+<dd>The <var>pgid</var> isn't a process group in the same session as the calling
+process. 
+</dl>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">pid_t <b>tcgetsid</b><i> (int <var>fildes</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is used to obtain the process group ID of the session
+for which the terminal specified by <var>fildes</var> is the controlling terminal. 
+If the call is successful the group ID is returned.  Otherwise the
+return value is <code>(pid_t) -1</code> and the global variable <var>errno</var>
+is set to the following value:
+<dl>
+<dt><code>EBADF</code>
+<dd>The <var>filedes</var> argument is not a valid file descriptor.
+
+<br><dt><code>ENOTTY</code>
+<dd>The calling process does not have a controlling terminal, or the file
+is not the controlling terminal. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

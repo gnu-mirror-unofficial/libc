@@ -1,0 +1,334 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Advanced%20gettext%20functions">Advanced gettext functions</a>,
+Next:<a rel=next accesskey=n href="Charset-conversion-in-gettext.html#Charset%20conversion%20in%20gettext">Charset conversion in gettext</a>,
+Previous:<a rel=previous accesskey=p href="Locating-gettext-catalog.html#Locating%20gettext%20catalog">Locating gettext catalog</a>,
+Up:<a rel=up accesskey=u href="Message-catalogs-with-gettext.html#Message%20catalogs%20with%20gettext">Message catalogs with gettext</a>
+<hr><br>
+
+<h5>Additional functions for more complicated situations</h5>
+
+<p>The functions of the <code>gettext</code> family described so far (and all the
+<code>catgets</code> functions as well) have one problem in the real world
+which have been neglected completely in all existing approaches.  What
+is meant here is the handling of plural forms.
+
+<p>Looking through Unix source code before the time anybody thought about
+internationalization (and, sadly, even afterwards) one can often find
+code similar to the following:
+
+<br><pre>   printf ("%d file%s deleted", n, n == 1 ? "" : "s");
+</pre>
+
+<p>After the first complaints from people internationalizing the code people
+either completely avoided formulations like this or used strings like
+<code>"file(s)"</code>.  Both look unnatural and should be avoided.  First
+tries to solve the problem correctly looked like this:
+
+<br><pre>   if (n == 1)
+     printf ("%d file deleted", n);
+   else
+     printf ("%d files deleted", n);
+</pre>
+
+<p>But this does not solve the problem.  It helps languages where the
+plural form of a noun is not simply constructed by adding an `s' but
+that is all.  Once again people fell into the trap of believing the
+rules their language is using are universal.  But the handling of plural
+forms differs widely between the language families.  There are two
+things we can differ between (and even inside language families);
+
+<ul>
+<li>The form how plural forms are build differs.  This is a problem with
+language which have many irregularities.  German, for instance, is a
+drastic case.  Though English and German are part of the same language
+family (Germanic), the almost regular forming of plural noun forms
+(appending an `s') is hardly found in German.
+
+<li>The number of plural forms differ.  This is somewhat surprising for
+those who only have experiences with Romanic and Germanic languages
+since here the number is the same (there are two).
+
+<p>But other language families have only one form or many forms.  More
+information on this in an extra section. 
+</ul>
+
+<p>The consequence of this is that application writers should not try to
+solve the problem in their code.  This would be localization since it is
+only usable for certain, hardcoded language environments.  Instead the
+extended <code>gettext</code> interface should be used.
+
+<p>These extra functions are taking instead of the one key string two
+strings and an numerical argument.  The idea behind this is that using
+the numerical argument and the first string as a key, the implementation
+can select using rules specified by the translator the right plural
+form.  The two string arguments then will be used to provide a return
+value in case no message catalog is found (similar to the normal
+<code>gettext</code> behavior).  In this case the rules for Germanic language
+is used and it is assumed that the first string argument is the singular
+form, the second the plural form.
+
+<p>This has the consequence that programs without language catalogs can
+display the correct strings only if the program itself is written using
+a Germanic language.  This is a limitation but since the GNU C library
+(as well as the GNU <code>gettext</code> package) are written as part of the
+GNU package and the coding standards for the GNU project require program
+being written in English, this solution nevertheless fulfills its
+purpose.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>ngettext</b><i> (const char *<var>msgid1</var>, const char *<var>msgid2</var>, unsigned long int <var>n</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>ngettext</code> function is similar to the <code>gettext</code> function
+as it finds the message catalogs in the same way.  But it takes two
+extra arguments.  The <var>msgid1</var> parameter must contain the singular
+form of the string to be converted.  It is also used as the key for the
+search in the catalog.  The <var>msgid2</var> parameter is the plural form. 
+The parameter <var>n</var> is used to determine the plural form.  If no
+message catalog is found <var>msgid1</var> is returned if <code>n == 1</code>,
+otherwise <code>msgid2</code>.
+
+<p>An example for the us of this function is:
+
+<br><pre>  printf (ngettext ("%d file removed", "%d files removed", n), n);
+</pre>
+
+<p>Please note that the numeric value <var>n</var> has to be passed to the
+<code>printf</code> function as well.  It is not sufficient to pass it only to
+<code>ngettext</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>dngettext</b><i> (const char *<var>domain</var>, const char *<var>msgid1</var>, const char *<var>msgid2</var>, unsigned long int <var>n</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>dngettext</code> is similar to the <code>dgettext</code> function in the
+way the message catalog is selected.  The difference is that it takes
+two extra parameter to provide the correct plural form.  These two
+parameters are handled in the same way <code>ngettext</code> handles them. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">char * <b>dcngettext</b><i> (const char *<var>domain</var>, const char *<var>msgid1</var>, const char *<var>msgid2</var>, unsigned long int <var>n</var>, int <var>category</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>dcngettext</code> is similar to the <code>dcgettext</code> function in the
+way the message catalog is selected.  The difference is that it takes
+two extra parameter to provide the correct plural form.  These two
+parameters are handled in the same way <code>ngettext</code> handles them. 
+</td></tr>
+</table>
+
+<h5>The problem of plural forms</h5>
+
+<p>A description of the problem can be found at the beginning of the last
+section.  Now there is the question how to solve it.  Without the input
+of linguists (which was not available) it was not possible to determine
+whether there are only a few different forms in which plural forms are
+formed or whether the number can increase with every new supported
+language.
+
+<p>Therefore the solution implemented is to allow the translator to specify
+the rules of how to select the plural form.  Since the formula varies
+with every language this is the only viable solution except for
+hardcoding the information in the code (which still would require the
+possibility of extensions to not prevent the use of new languages).  The
+details are explained in the GNU <code>gettext</code> manual.  Here only a a
+bit of information is provided.
+
+<p>The information about the plural form selection has to be stored in the
+header entry (the one with the empty (<code>msgid</code> string).  It looks
+like this:
+
+<br><pre>Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;
+</pre>
+
+<p>The <code>nplurals</code> value must be a decimal number which specifies how
+many different plural forms exist for this language.  The string
+following <code>plural</code> is an expression which is using the C language
+syntax.  Exceptions are that no negative number are allowed, numbers
+must be decimal, and the only variable allowed is <code>n</code>.  This
+expression will be evaluated whenever one of the functions
+<code>ngettext</code>, <code>dngettext</code>, or <code>dcngettext</code> is called.  The
+numeric value passed to these functions is then substituted for all uses
+of the variable <code>n</code> in the expression.  The resulting value then
+must be greater or equal to zero and smaller than the value given as the
+value of <code>nplurals</code>.
+
+<p>The following rules are known at this point.  The language with families
+are listed.  But this does not necessarily mean the information can be
+generalized for the whole family (as can be easily seen in the table
+below).<a rel=footnote href="#fn-1"><sup>1</sup></a>
+
+<dl>
+<dt>Only one form:
+<dd>Some languages only require one single form.  There is no distinction
+between the singular and plural form.  An appropriate header entry
+would look like this:
+
+<br><pre>Plural-Forms: nplurals=1; plural=0;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Finno-Ugric family
+<dd>Hungarian
+<br><dt>Asian family
+<dd>Japanese
+<br><dt>Turkic/Altaic family
+<dd>Turkish
+</dl>
+
+<br><dt>Two forms, singular used for one only
+<dd>This is the form used in most existing programs since it is what English
+is using.  A header entry would look like this:
+
+<br><pre>Plural-Forms: nplurals=2; plural=n != 1;
+</pre>
+
+<p>(Note: this uses the feature of C expressions that boolean expressions
+have to value zero or one.)
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Germanic family
+<dd>Danish, Dutch, English, German, Norwegian, Swedish
+<br><dt>Finno-Ugric family
+<dd>Estonian, Finnish
+<br><dt>Latin/Greek family
+<dd>Greek
+<br><dt>Semitic family
+<dd>Hebrew
+<br><dt>Romance family
+<dd>Italian, Spanish
+<br><dt>Artificial
+<dd>Esperanto
+</dl>
+
+<br><dt>Two forms, singular used for zero and one
+<dd>Exceptional case in the language family.  The header entry would be:
+
+<br><pre>Plural-Forms: nplurals=2; plural=n&gt;1;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Romanic family
+<dd>French
+</dl>
+
+<br><dt>Three forms, special cases for one and two
+<dd>The header entry would be:
+
+<br><pre>Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Celtic
+<dd>Gaeilge
+</dl>
+
+<br><dt>Three forms, special cases for numbers ending in 1 and 2, 3, 4, except those ending in 1[1-4]
+<dd>The header entry would look like this:
+
+<br><pre>Plural-Forms: nplurals=3; \
+    plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10&gt;3 ? 2 : 1;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Slavic family
+<dd>Czech, Russian
+</dl>
+
+<br><dt>Three forms, special cases for 1 and 2, 3, 4
+<dd>The header entry would look like this:
+
+<br><pre>Plural-Forms: nplurals=3; \
+    plural=(n==1) ? 1 : (n&gt;=2 &amp;&amp; n&lt;=4) ? 2 : 0;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Slavic family
+<dd>Slovak
+</dl>
+
+<br><dt>Three forms, special case for one and some numbers ending in 2, 3, or 4
+<dd>The header entry would look like this:
+
+<br><pre>Plural-Forms: nplurals=3; \
+    plural=n==1 ? 0 : \
+           n%10&gt;=2 &amp;&amp; n%10&lt;=4 &amp;&amp; (n%100&lt;10 || n%100&gt;=20) ? 1 : 2;
+</pre>
+
+<p>(Continuation in the next line is possible.)
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Slavic family
+<dd>Polish
+</dl>
+
+<br><dt>Four forms, special case for one and all numbers ending in 2, 3, or 4
+<dd>The header entry would look like this:
+
+<br><pre>Plural-Forms: nplurals=4; \
+    plural=n==1 ? 0 : n%10==2 ? 1 : n%10==3 || n%10==4 ? 2 : 3;
+</pre>
+
+<p>Languages with this property include:
+
+<dl>
+<dt>Slavic family
+<dd>Slovenian
+</dl>
+</dl>
+
+<hr><h4>Footnotes</h4>
+<ol type="1">
+<li><a name="fn-1"></a>
+<p>Additions are welcome.  Send appropriate information to
+<a href="mailto:bug-glibc-manual@gnu.org">bug-glibc-manual@gnu.org</a>.</p>
+
+</ol><hr>
+
+</body></html>
+

@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Calendar%20Time">Calendar Time</a>,
+Next:<a rel=next accesskey=n href="Setting-an-Alarm.html#Setting%20an%20Alarm">Setting an Alarm</a>,
+Previous:<a rel=previous accesskey=p href="Processor-And-CPU-Time.html#Processor%20And%20CPU%20Time">Processor And CPU Time</a>,
+Up:<a rel=up accesskey=u href="Date-and-Time.html#Date%20and%20Time">Date and Time</a>
+<hr><br>
+
+<h3>Calendar Time</h3>
+
+<p>This section describes facilities for keeping track of calendar time. 
+See <a href="Time-Basics.html#Time%20Basics">Time Basics</a>.
+
+<p>The GNU C library represents calendar time three ways:
+
+<ul>
+<li><dfn>Simple time</dfn> (the <code>time_t</code> data type) is a compact
+representation, typically giving the number of seconds of elapsed time
+since some implementation-specific base time.
+
+<li>There is also a "high-resolution time" representation.  Like simple
+time, this represents a calendar time as an elapsed time since a base
+time, but instead of measuring in whole seconds, it uses a <code>struct
+timeval</code> data type, which includes fractions of a second.  Use this time
+representation instead of simple time when you need greater precision.
+
+<li><dfn>Local time</dfn> or <dfn>broken-down time</dfn> (the <code>struct tm</code> data
+type) represents a calendar time as a set of components specifying the
+year, month, and so on in the Gregorian calendar, for a specific time
+zone.  This calendar time representation is usually used only to
+communicate with people. 
+</ul>
+
+<ul>
+<li><a accesskey=1 href="Simple-Calendar-Time.html#Simple%20Calendar%20Time">Simple Calendar Time</a>:         Facilities for manipulating calendar time. 
+<li><a accesskey=2 href="High-Resolution-Calendar.html#High-Resolution%20Calendar">High-Resolution Calendar</a>:     A time representation with greater precision. 
+<li><a accesskey=3 href="Broken-down-Time.html#Broken-down%20Time">Broken-down Time</a>:             Facilities for manipulating local time. 
+<li><a accesskey=4 href="High-Accuracy-Clock.html#High%20Accuracy%20Clock">High Accuracy Clock</a>:          Maintaining a high accuracy system clock. 
+<li><a accesskey=5 href="Formatting-Calendar-Time.html#Formatting%20Calendar%20Time">Formatting Calendar Time</a>:     Converting times to strings. 
+<li><a accesskey=6 href="Parsing-Date-and-Time.html#Parsing%20Date%20and%20Time">Parsing Date and Time</a>:        Convert textual time and date information back
+                                 into broken-down time values. 
+<li><a accesskey=7 href="TZ-Variable.html#TZ%20Variable">TZ Variable</a>:                  How users specify the time zone. 
+<li><a accesskey=8 href="Time-Zone-Functions.html#Time%20Zone%20Functions">Time Zone Functions</a>:          Functions to examine or specify the time zone. 
+<li><a accesskey=9 href="Time-Functions-Example.html#Time%20Functions%20Example">Time Functions Example</a>:       An example program showing use of some of
+				 the time functions. 
+</ul>
+
+</body></html>
+

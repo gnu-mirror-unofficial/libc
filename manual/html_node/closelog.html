@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="closelog">closelog</a>,
+Next:<a rel=next accesskey=n href="setlogmask.html#setlogmask">setlogmask</a>,
+Previous:<a rel=previous accesskey=p href="syslog--vsyslog.html#syslog%3b%20vsyslog">syslog; vsyslog</a>,
+Up:<a rel=up accesskey=u href="Submitting-Syslog-Messages.html#Submitting%20Syslog%20Messages">Submitting Syslog Messages</a>
+<hr><br>
+
+<h4>closelog</h4>
+
+<p>The symbols referred to in this section are declared in the file
+<code>syslog.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">void <b>closelog</b><i> (void)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<p><code>closelog</code> closes the current Syslog connection, if there is one. 
+This include closing the <code>dev/log</code> socket, if it is open.
+
+<p>There is very little reason to use this function.  It does not flush any
+buffers; you can reopen a Syslog connection without closing it first;
+The connection gets closed automatically on exec or exit. 
+<code>closelog</code> has primarily aesthetic value.
+
+</td></tr>
+</table>
+
+</body></html>
+

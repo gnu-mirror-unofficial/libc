@@ -1,0 +1,62 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Defining%20Handlers">Defining Handlers</a>,
+Next:<a rel=next accesskey=n href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>,
+Previous:<a rel=previous accesskey=p href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>,
+Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+<hr><br>
+
+<h3>Defining Signal Handlers</h3>
+
+<p>This section describes how to write a signal handler function that can
+be established with the <code>signal</code> or <code>sigaction</code> functions.
+
+<p>A signal handler is just a function that you compile together with the
+rest of the program.  Instead of directly invoking the function, you use
+<code>signal</code> or <code>sigaction</code> to tell the operating system to call
+it when a signal arrives.  This is known as <dfn>establishing</dfn> the
+handler.  See <a href="Signal-Actions.html#Signal%20Actions">Signal Actions</a>.
+
+<p>There are two basic strategies you can use in signal handler functions:
+
+<ul>
+<li>You can have the handler function note that the signal arrived by
+tweaking some global data structures, and then return normally.
+
+<li>You can have the handler function terminate the program or transfer
+control to a point where it can recover from the situation that caused
+the signal. 
+</ul>
+
+<p>You need to take special care in writing handler functions because they
+can be called asynchronously.  That is, a handler might be called at any
+point in the program, unpredictably.  If two signals arrive during a
+very short interval, one handler can run within another.  This section
+describes what your handler should do, and what you should avoid.
+
+<ul>
+<li><a accesskey=1 href="Handler-Returns.html#Handler%20Returns">Handler Returns</a>:              Handlers that return normally, and what
+                                 this means. 
+<li><a accesskey=2 href="Termination-in-Handler.html#Termination%20in%20Handler">Termination in Handler</a>:       How handler functions terminate a program. 
+<li><a accesskey=3 href="Longjmp-in-Handler.html#Longjmp%20in%20Handler">Longjmp in Handler</a>:           Nonlocal transfer of control out of a
+                                 signal handler. 
+<li><a accesskey=4 href="Signals-in-Handler.html#Signals%20in%20Handler">Signals in Handler</a>:           What happens when signals arrive while
+                                 the handler is already occupied. 
+<li><a accesskey=5 href="Merged-Signals.html#Merged%20Signals">Merged Signals</a>: 		When a second signal arrives before the
+				 first is handled. 
+<li><a accesskey=6 href="Nonreentrancy.html#Nonreentrancy">Nonreentrancy</a>:                Do not call any functions unless you know they
+                                 are reentrant with respect to signals. 
+<li><a accesskey=7 href="Atomic-Data-Access.html#Atomic%20Data%20Access">Atomic Data Access</a>:           A single handler can run in the middle of
+                                 reading or writing a single object. 
+</ul>
+
+</body></html>
+

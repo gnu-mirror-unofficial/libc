@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Reporting%20Bugs">Reporting Bugs</a>,
+Previous:<a rel=previous accesskey=p href="Linux.html#Linux">Linux</a>,
+Up:<a rel=up accesskey=u href="Installation.html#Installation">Installation</a>
+<hr><br>
+
+<h3>Reporting Bugs</h3>
+
+<p>There are probably bugs in the GNU C library.  There are certainly
+errors and omissions in this manual.  If you report them, they will get
+fixed.  If you don't, no one will ever know about them and they will
+remain unfixed for all eternity, if not longer.
+
+<p>It is a good idea to verify that the problem has not already been
+reported.  Bugs are documented in two places: The file <code>BUGS</code>
+describes a number of well known bugs and the bug tracking system has a
+WWW interface at
+&lt;<code>http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl</code>&gt;.  The WWW
+interface gives you access to open and closed reports.  The closed
+reports normally include a patch or a hint on solving the problem.
+
+<p>To report a bug, first you must find it.  Hopefully, this will be the
+hard part.  Once you've found a bug, make sure it's really a bug.  A
+good way to do this is to see if the GNU C library behaves the same way
+some other C library does.  If so, probably you are wrong and the
+libraries are right (but not necessarily).  If not, one of the libraries
+is probably wrong.  It might not be the GNU library.  Many historical
+Unix C libraries permit things that we don't, such as closing a file
+twice.
+
+<p>If you think you have found some way in which the GNU C library does not
+conform to the ISO and POSIX standards (see <a href="Standards-and-Portability.html#Standards%20and%20Portability">Standards and Portability</a>), that is definitely a bug.  Report it!
+
+<p>Once you're sure you've found a bug, try to narrow it down to the
+smallest test case that reproduces the problem.  In the case of a C
+library, you really only need to narrow it down to one library
+function call, if possible.  This should not be too difficult.
+
+<p>The final step when you have a simple test case is to report the bug. 
+Do this using the <code>glibcbug</code> script.  It is installed with libc, or
+if you haven't installed it, will be in your build directory.  Send your
+test case, the results you got, the results you expected, and what you
+think the problem might be (if you've thought of anything). 
+<code>glibcbug</code> will insert the configuration information we need to
+see, and ship the report off to <a href="mailto:bugs@gnu.org">bugs@gnu.org</a>.  Don't send
+a message there directly; it is fed to a program that expects mail to be
+formatted in a particular way.  Use the script.
+
+<p>If you are not sure how a function should behave, and this manual
+doesn't tell you, that's a bug in the manual.  Report that too!  If the
+function's behavior disagrees with the manual, then either the library
+or the manual has a bug, so report the disagreement.  If you find any
+errors or omissions in this manual, please report them to the Internet
+address <a href="mailto:bug-glibc-manual@gnu.org">bug-glibc-manual@gnu.org</a>.  If you refer to specific
+sections of the manual, please include the section names for easier
+identification.
+
+</body></html>
+

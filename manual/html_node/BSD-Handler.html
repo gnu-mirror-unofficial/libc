@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="BSD%20Handler">BSD Handler</a>,
+Next:<a rel=next accesskey=n href="Blocking-in-BSD.html#Blocking%20in%20BSD">Blocking in BSD</a>,
+Up:<a rel=up accesskey=u href="BSD-Signal-Handling.html#BSD%20Signal%20Handling">BSD Signal Handling</a>
+<hr><br>
+
+<h4>BSD Function to Establish a Handler</h4>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct sigvec</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This data type is the BSD equivalent of <code>struct sigaction</code>
+(see <a href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>); it is used to specify signal actions
+to the <code>sigvec</code> function.  It contains the following members:
+
+<dl>
+<dt><code>sighandler_t sv_handler</code>
+<dd>This is the handler function.
+
+<br><dt><code>int sv_mask</code>
+<dd>This is the mask of additional signals to be blocked while the handler
+function is being called.
+
+<br><dt><code>int sv_flags</code>
+<dd>This is a bit mask used to specify various flags which affect the
+behavior of the signal.  You can also refer to this field as
+<code>sv_onstack</code>. 
+</dl>
+</td></tr>
+</table>
+
+<p>These symbolic constants can be used to provide values for the
+<code>sv_flags</code> field of a <code>sigvec</code> structure.  This field is a bit
+mask value, so you bitwise-OR the flags of interest to you together.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SV_ONSTACK</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set in the <code>sv_flags</code> field of a <code>sigvec</code>
+structure, it means to use the signal stack when delivering the signal. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SV_INTERRUPT</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set in the <code>sv_flags</code> field of a <code>sigvec</code>
+structure, it means that system calls interrupted by this kind of signal
+should not be restarted if the handler returns; instead, the system
+calls should return with a <code>EINTR</code> error status.  See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>SV_RESETHAND</b><i>
+</i></td>
+<td align="right">Macro</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+If this bit is set in the <code>sv_flags</code> field of a <code>sigvec</code>
+structure, it means to reset the action for the signal back to
+<code>SIG_DFL</code> when the signal is received. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>sigvec</b><i> (int <var>signum</var>, const struct sigvec *<var>action</var>,struct sigvec *<var>old-action</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function is the equivalent of <code>sigaction</code> (see <a href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>); it installs the action <var>action</var> for the signal <var>signum</var>,
+returning information about the previous action in effect for that signal
+in <var>old-action</var>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">int <b>siginterrupt</b><i> (int <var>signum</var>, int <var>failflag</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This function specifies which approach to use when certain primitives
+are interrupted by handling signal <var>signum</var>.  If <var>failflag</var> is
+false, signal <var>signum</var> restarts primitives.  If <var>failflag</var> is
+true, handling <var>signum</var> causes these primitives to fail with error
+code <code>EINTR</code>.  See <a href="Interrupted-Primitives.html#Interrupted%20Primitives">Interrupted Primitives</a>. 
+</td></tr>
+</table>
+
+</body></html>
+

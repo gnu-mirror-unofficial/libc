@@ -1,0 +1,251 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Normalization%20Functions">Normalization Functions</a>,
+Next:<a rel=next accesskey=n href="Rounding-Functions.html#Rounding%20Functions">Rounding Functions</a>,
+Previous:<a rel=previous accesskey=p href="Absolute-Value.html#Absolute%20Value">Absolute Value</a>,
+Up:<a rel=up accesskey=u href="Arithmetic-Functions.html#Arithmetic%20Functions">Arithmetic Functions</a>
+<hr><br>
+
+<h4>Normalization Functions</h4>
+
+<p>The functions described in this section are primarily provided as a way
+to efficiently perform certain low-level manipulations on floating point
+numbers that are represented internally using a binary radix;
+see <a href="Floating-Point-Concepts.html#Floating%20Point%20Concepts">Floating Point Concepts</a>.  These functions are required to
+have equivalent behavior even if the representation does not use a radix
+of 2, but of course they are unlikely to be particularly efficient in
+those cases.
+
+<p>All these functions are declared in <code>math.h</code>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>frexp</b><i> (double <var>value</var>, int *<var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>frexpf</b><i> (float <var>value</var>, int *<var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>frexpl</b><i> (long double <var>value</var>, int *<var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions are used to split the number <var>value</var>
+into a normalized fraction and an exponent.
+
+<p>If the argument <var>value</var> is not zero, the return value is <var>value</var>
+times a power of two, and is always in the range 1/2 (inclusive) to 1
+(exclusive).  The corresponding exponent is stored in
+<code>*<var>exponent</var></code>; the return value multiplied by 2 raised to this
+exponent equals the original number <var>value</var>.
+
+<p>For example, <code>frexp (12.8, &amp;exponent)</code> returns <code>0.8</code> and
+stores <code>4</code> in <code>exponent</code>.
+
+<p>If <var>value</var> is zero, then the return value is zero and
+zero is stored in <code>*<var>exponent</var></code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>ldexp</b><i> (double <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>ldexpf</b><i> (float <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>ldexpl</b><i> (long double <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+These functions return the result of multiplying the floating-point
+number <var>value</var> by 2 raised to the power <var>exponent</var>.  (It can
+be used to reassemble floating-point numbers that were taken apart
+by <code>frexp</code>.)
+
+<p>For example, <code>ldexp (0.8, 4)</code> returns <code>12.8</code>. 
+</td></tr>
+</table>
+
+<p>The following functions, which come from BSD, provide facilities
+equivalent to those of <code>ldexp</code> and <code>frexp</code>.  See also the
+ISO&nbsp;C function <code>logb</code> which originally also appeared in BSD.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">double <b>scalb</b><i> (double <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">float <b>scalbf</b><i> (float <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long double <b>scalbl</b><i> (long double <var>value</var>, int <var>exponent</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+The <code>scalb</code> function is the BSD name for <code>ldexp</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long long int <b>scalbn</b><i> (double <var>x</var>, int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>scalbnf</b><i> (float <var>x</var>, int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>scalbnl</b><i> (long double <var>x</var>, int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>scalbn</code> is identical to <code>scalb</code>, except that the exponent
+<var>n</var> is an <code>int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long long int <b>scalbln</b><i> (double <var>x</var>, long int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>scalblnf</b><i> (float <var>x</var>, long int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>scalblnl</b><i> (long double <var>x</var>, long int n)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>scalbln</code> is identical to <code>scalb</code>, except that the exponent
+<var>n</var> is a <code>long int</code> instead of a floating-point number. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left">long long int <b>significand</b><i> (double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>significandf</b><i> (float <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+
+<tr>
+<td align="left">long long int <b>significandl</b><i> (long double <var>x</var>)
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+<code>significand</code> returns the mantissa of <var>x</var> scaled to the range
+[1, 2). 
+It is equivalent to <code>scalb&nbsp;(<var>x</var>,&nbsp;(double)&nbsp;-ilogb&nbsp;(<var>x</var>))</code>.
+
+<p>This function exists mainly for use in certain standardized tests
+of IEEE&nbsp;754 conformance. 
+</td></tr>
+</table>
+
+</body></html>
+

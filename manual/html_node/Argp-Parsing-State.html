@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Argp%20Parsing%20State">Argp Parsing State</a>,
+Next:<a rel=next accesskey=n href="Argp-Helper-Functions.html#Argp%20Helper%20Functions">Argp Helper Functions</a>,
+Previous:<a rel=previous accesskey=p href="Argp-Special-Keys.html#Argp%20Special%20Keys">Argp Special Keys</a>,
+Up:<a rel=up accesskey=u href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>
+<hr><br>
+
+<h5>Argp Parsing State</h5>
+
+<p>The third argument to argp parser functions (see <a href="Argp-Parser-Functions.html#Argp%20Parser%20Functions">Argp Parser Functions</a>) is a pointer to a <code>struct argp_state</code>, which contains
+information about the state of the option parsing.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>struct argp_state</b><i>
+</i></td>
+<td align="right">Data Type</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+This structure has the following fields, which may be modified as noted:
+
+<dl>
+<dt><code>const struct argp *const root_argp</code>
+<dd>The top level argp parser being parsed.  Note that this is often
+<em>not</em> the same <code>struct argp</code> passed into <code>argp_parse</code> by
+the invoking program.  See <a href="Argp.html#Argp">Argp</a>.  It is an internal argp parser that
+contains options implemented by <code>argp_parse</code> itself, such as
+<code>--help</code>.
+
+<br><dt><code>int argc</code>
+<dt><code>char **argv</code>
+<dd>The argument vector being parsed.  This may be modified.
+
+<br><dt><code>int next</code>
+<dd>The index in <code>argv</code> of the next argument to be parsed.  This may be
+modified.
+
+<p>One way to consume all remaining arguments in the input is to set
+<code><var>state</var>-&gt;next = <var>state</var>-&gt;argc</code>, perhaps after recording
+the value of the <code>next</code> field to find the consumed arguments.  The
+current option can be re-parsed immediately by decrementing this field,
+then modifying <code><var>state</var>-&gt;argv[<var>state</var>-&gt;next]</code> to reflect
+the option that should be reexamined.
+
+<br><dt><code>unsigned flags</code>
+<dd>The flags supplied to <code>argp_parse</code>.  These may be modified, although
+some flags may only take effect when <code>argp_parse</code> is first
+invoked.  See <a href="Argp-Flags.html#Argp%20Flags">Argp Flags</a>.
+
+<br><dt><code>unsigned arg_num</code>
+<dd>While calling a parsing function with the <var>key</var> argument
+<code>ARGP_KEY_ARG</code>, this represents the number of the current arg,
+starting at 0.  It is incremented after each <code>ARGP_KEY_ARG</code> call
+returns.  At all other times, this is the number of <code>ARGP_KEY_ARG</code>
+arguments that have been processed.
+
+<br><dt><code>int quoted</code>
+<dd>If non-zero, the index in <code>argv</code> of the first argument following a
+special <code>--</code> argument.  This prevents anything that follows from
+being interpreted as an option.  It is only set after argument parsing
+has proceeded past this point.
+
+<br><dt><code>void *input</code>
+<dd>An arbitrary pointer passed in from the caller of <code>argp_parse</code>, in
+the <var>input</var> argument.
+
+<br><dt><code>void **child_inputs</code>
+<dd>These are values that will be passed to child parsers.  This vector will
+be the same length as the number of children in the current parser.  Each
+child parser will be given the value of
+<code><var>state</var>-&gt;child_inputs[<var>i</var>]</code> as <em>its</em>
+<code><var>state</var>-&gt;input</code> field, where <var>i</var> is the index of the child
+in the this parser's <code>children</code> field.  See <a href="Argp-Children.html#Argp%20Children">Argp Children</a>.
+
+<br><dt><code>void *hook</code>
+<dd>For the parser function's use.  Initialized to 0, but otherwise ignored
+by argp.
+
+<br><dt><code>char *name</code>
+<dd>The name used when printing messages.  This is initialized to
+<code>argv[0]</code>, or <code>program_invocation_name</code> if <code>argv[0]</code> is
+unavailable.
+
+<br><dt><code>FILE *err_stream</code>
+<dt><code>FILE *out_stream</code>
+<dd>The stdio streams used when argp prints.  Error messages are printed to
+<code>err_stream</code>, all other output, such as <code>--help</code> output) to
+<code>out_stream</code>.  These are initialized to <code>stderr</code> and
+<code>stdout</code> respectively.  See <a href="Standard-Streams.html#Standard%20Streams">Standard Streams</a>.
+
+<br><dt><code>void *pstate</code>
+<dd>Private, for use by the argp implementation. 
+</dl>
+</td></tr>
+</table>
+
+</body></html>
+

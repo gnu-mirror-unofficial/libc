@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Signal%20Actions">Signal Actions</a>,
+Next:<a rel=next accesskey=n href="Defining-Handlers.html#Defining%20Handlers">Defining Handlers</a>,
+Previous:<a rel=previous accesskey=p href="Standard-Signals.html#Standard%20Signals">Standard Signals</a>,
+Up:<a rel=up accesskey=u href="Signal-Handling.html#Signal%20Handling">Signal Handling</a>
+<hr><br>
+
+<h3>Specifying Signal Actions</h3>
+
+<p>The simplest way to change the action for a signal is to use the
+<code>signal</code> function.  You can specify a built-in action (such as to
+ignore the signal), or you can <dfn>establish a handler</dfn>.
+
+<p>The GNU library also implements the more versatile <code>sigaction</code>
+facility.  This section describes both facilities and gives suggestions
+on which to use when.
+
+<ul>
+<li><a accesskey=1 href="Basic-Signal-Handling.html#Basic%20Signal%20Handling">Basic Signal Handling</a>:        The simple <code>signal</code> function. 
+<li><a accesskey=2 href="Advanced-Signal-Handling.html#Advanced%20Signal%20Handling">Advanced Signal Handling</a>:     The more powerful <code>sigaction</code> function. 
+<li><a accesskey=3 href="Signal-and-Sigaction.html#Signal%20and%20Sigaction">Signal and Sigaction</a>:         How those two functions interact. 
+<li><a accesskey=4 href="Sigaction-Function-Example.html#Sigaction%20Function%20Example">Sigaction Function Example</a>:   An example of using the sigaction function. 
+<li><a accesskey=5 href="Flags-for-Sigaction.html#Flags%20for%20Sigaction">Flags for Sigaction</a>:          Specifying options for signal handling. 
+<li><a accesskey=6 href="Initial-Signal-Actions.html#Initial%20Signal%20Actions">Initial Signal Actions</a>:       How programs inherit signal actions. 
+</ul>
+
+</body></html>
+

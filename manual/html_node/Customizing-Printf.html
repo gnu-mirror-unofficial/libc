@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>The GNU C Library</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="The GNU C Library">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Customizing%20Printf">Customizing Printf</a>,
+Next:<a rel=next accesskey=n href="Formatted-Input.html#Formatted%20Input">Formatted Input</a>,
+Previous:<a rel=previous accesskey=p href="Formatted-Output.html#Formatted%20Output">Formatted Output</a>,
+Up:<a rel=up accesskey=u href="I-O-on-Streams.html#I%2fO%20on%20Streams">I/O on Streams</a>
+<hr><br>
+
+<h3>Customizing <code>printf</code></h3>
+
+<p>The GNU C library lets you define your own custom conversion specifiers
+for <code>printf</code> template strings, to teach <code>printf</code> clever ways
+to print the important data structures of your program.
+
+<p>The way you do this is by registering the conversion with the function
+<code>register_printf_function</code>; see <a href="Registering-New-Conversions.html#Registering%20New%20Conversions">Registering New Conversions</a>. 
+One of the arguments you pass to this function is a pointer to a handler
+function that produces the actual output; see <a href="Defining-the-Output-Handler.html#Defining%20the%20Output%20Handler">Defining the Output Handler</a>, for information on how to write this function.
+
+<p>You can also install a function that just returns information about the
+number and type of arguments expected by the conversion specifier. 
+See <a href="Parsing-a-Template-String.html#Parsing%20a%20Template%20String">Parsing a Template String</a>, for information about this.
+
+<p>The facilities of this section are declared in the header file
+<code>printf.h</code>.
+
+<ul>
+<li><a accesskey=1 href="Registering-New-Conversions.html#Registering%20New%20Conversions">Registering New Conversions</a>:          Using <code>register_printf_function</code>
+                                         to register a new output conversion. 
+<li><a accesskey=2 href="Conversion-Specifier-Options.html#Conversion%20Specifier%20Options">Conversion Specifier Options</a>:         The handler must be able to get
+                                         the options specified in the
+                                         template when it is called. 
+<li><a accesskey=3 href="Defining-the-Output-Handler.html#Defining%20the%20Output%20Handler">Defining the Output Handler</a>:          Defining the handler and arginfo
+                                         functions that are passed as arguments
+                                         to <code>register_printf_function</code>. 
+<li><a accesskey=4 href="Printf-Extension-Example.html#Printf%20Extension%20Example">Printf Extension Example</a>:             How to define a <code>printf</code>
+                                         handler function. 
+<li><a accesskey=5 href="Predefined-Printf-Handlers.html#Predefined%20Printf%20Handlers">Predefined Printf Handlers</a>:           Predefined <code>printf</code> handlers. 
+</ul>
+
+<p><strong>Portability Note:</strong> The ability to extend the syntax of
+<code>printf</code> template strings is a GNU extension.  ISO standard C has
+nothing similar.
+
+</body></html>
+
