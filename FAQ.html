@@ -247,6 +247,8 @@ please let me know.
 <a href="#s-3.22"> 3.22. My program segfaults when I call fclose() on the FILE* returned
 	from setmntent().  Is this a glibc bug?</a>
 <p>
+<a href="#s-3.23"> 3.23. I get &quot;undefined reference to `atexit'&quot;</a>
+<p>
 
 <a href="#s-4"> 4. Miscellaneous</a>
 
@@ -277,6 +279,9 @@ what I expect.</a>
 <p>
 <a href="#s-4.9"> 4.9. How can I find out which version of glibc I am using in the moment?</a>
 <p>
+<a href="#s-4.10"> 4.10. Context switching with setcontext() does not work from within
+	signal handlers.</a>
+<p>
 
 <p><hr>
 <h3><a name="s-1"> 1.</a> Compiling glibc</h3>
@@ -303,6 +308,8 @@ in the future, are:
 	mips*-*-linux-gnu	Linux-2.x on MIPS
 	ia64-*-linux-gnu	Linux-2.x on ia64
 	s390-*-linux-gnu	Linux-2.x on IBM S/390
+	s390x-*-linux-gnu	Linux-2.x on IBM S/390 64-bit
+	cris-*-linux-gnu	Linux-2.4+ on CRIS
 </pre><p>
 Ports to other Linux platforms are in development, and may in fact work
 already, but no one has sent us success reports for them.  Currently no
@@ -362,7 +369,7 @@ them.
 <h4><a name="s-1.5">1.5.</a> Which compiler should I use for powerpc?</h4>
 
 {GK} You want to use at least gcc 2.95 (together with the right versions
-of all the other tools, of course).  See also question question <a href="#s-2.8">2.8</a>.
+of all the other tools, of course).  See also question <a href="#s-2.8">2.8</a>.
 
 <h4><a name="s-1.6">1.6.</a> Which tools should I use for ARM?</h4>
 
@@ -383,9 +390,7 @@ Binutils 2.10.1 or later is also required.
   `message catalog' files containing translated versions of system
   messages. See ftp://ftp.gnu.org/pub/gnu or better any mirror
   site.  (We distribute compiled message catalogs, but they may not be
-  updated in patches.)  Please note that the required minimal version
-  (0.10.35) of gettext is alpha software and available from
-  ftp://alpha.gnu.org/gnu .
+  updated in patches.)
 <p>
 <li>  Some files are built with special tools.  E.g., files ending in .gperf
   need a `gperf' program.  The GNU version (now available in a separate
@@ -642,7 +647,11 @@ gcc 2.95.x does not work correctly on mips-linux.
 <p>
 You need also recent binutils, anything before and including 2.10 will not
 work correctly.  Either try the Linux binutils 2.10.0.33 from HJ Lu or the
-current development version from CVS of binutils.
+current development version of binutils from CVS.
+<p>
+Please note that `make check' might fail for a number of the math tests
+because of problems of the FPU emulation in the Linux kernel (the MIPS FPU
+doesn't handle all cases and needs help from the kernel).
 <p>
 For details check also my page <a href=http://www.suse.de/~aj/glibc-mips.html>http://www.suse.de/~aj/glibc-mips.html</a>.
 <p><hr>
@@ -993,7 +1002,7 @@ necessary conversion and calls to create those files.  The file is
 `db-Makefile' in the subdirectory `nss' and you can call it with `make -f
 db-Makefile'.  Please note that not all services are capable of using a
 database.  Currently passwd, group, ethers, protocol, rpc, services shadow
-and netgroup are implemented.  See also question question <a href="#s-2.31">2.31</a>.
+and netgroup are implemented.  See also question <a href="#s-2.31">2.31</a>.
 
 <h4><a name="s-2.17">2.17.</a> I have /usr/include/net and /usr/include/scsi as symlinks
 	into my Linux source tree.  Is that wrong?</h4>
@@ -1298,9 +1307,9 @@ type has changed in glibc 2.2.  The patch is at
 
 <h4><a name="s-2.35">2.35.</a> When recompiling GCC, I get compilation errors in libio.</h4>
 
-{BH} You are trying to recompile gcc 2.95.2?  Use gcc 2.95.2.1 instead.
+{BH} You are trying to recompile gcc 2.95.2?  Use gcc 2.95.3 instead.
 This version is needed because the fpos_t type and a few libio internals
-have changed in glibc 2.2, and gcc 2.95.2.1 contains a corresponding patch.
+have changed in glibc 2.2, and gcc 2.95.3 contains a corresponding patch.
 <p><hr>
 <h3><a name="s-3"> 3.</a> Source and binary incompatibilities, and what to do about them</h3>
 
@@ -1716,6 +1725,16 @@ fclose(), not free(), even though the FILE * is also a pointer.
 In the case of setmntent(), it may appear to work in most cases, but it
 won't always work.  Unfortunately, for compatibility reasons, we can't
 change the return type of setmntent() to something other than FILE *.
+
+<h4><a name="s-3.23">3.23.</a> I get &quot;undefined reference to `atexit'&quot;</h4>
+
+{UD} This means that your installation is somehow broken.  The situation is
+the same as for 'stat', 'fstat', etc (see question <a href="#s-2.7">2.7</a>).  Investigate why the
+linker does not pick up libc_nonshared.a.
+<p>
+If a similar message is issued at runtime this means that the application or
+DSO is not linked against libc.  This can cause problems since 'atexit' is
+not exported anymore.
 <p><hr>
 <h3><a name="s-4"> 4.</a> Miscellaneous</h3>
 
@@ -1867,10 +1886,55 @@ int main (void) { puts (gnu_get_libc_version ()); return 0; }
 <p>
 This interface can also obviously be used to perform tests at runtime if
 this should be necessary.
+
+<h4><a name="s-4.10">4.10.</a> Context switching with setcontext() does not work from within
+	signal handlers.</h4>
+
+{DMT} The Linux implementations (IA-64, S390 so far) of setcontext()
+supports synchronous context switches only.  There are several reasons for
+this:
+<p>
+<ul>
+<li>  UNIX provides no other (portable) way of effecting a synchronous
+  context switch (also known as co-routine switch).  Some versions
+  support this via setjmp()/longjmp() but this does not work
+  universally.
+<p>
+<li>  As defined by the UNIX '98 standard, the only way setcontext()
+  could trigger an asychronous context switch is if this function
+  were invoked on the ucontext_t pointer passed as the third argument
+  to a signal handler.  But according to draft 5, XPG6, XBD 2.4.3,
+  setcontext() is not among the set of routines that may be called
+  from a signal handler.
+<p>
+<li>  If setcontext() were to be used for asynchronous context switches,
+  all kinds of synchronization and re-entrancy issues could arise and
+  these problems have already been solved by real multi-threading
+  libraries (e.g., POSIX threads or Linux threads).
+<p>
+<li>  Synchronous context switching can be implemented entirely in
+  user-level and less state needs to be saved/restored than for an
+  asynchronous context switch.  It is therefore useful to distinguish
+  between the two types of context switches.  Indeed, some
+  application vendors are known to use setcontext() to implement
+  co-routines on top of normal (heavier-weight) pre-emptable threads.
+<p>
+</ul>
+It should be noted that if someone was dead-bent on using setcontext()
+on the third arg of a signal handler, then IA-64 Linux could support
+this via a special version of sigaction() which arranges that all
+signal handlers start executing in a shim function which takes care of
+saving the preserved registers before calling the real signal handler
+and restoring them afterwards.  In other words, we could provide a
+compatibility layer which would support setcontext() for asynchronous
+context switches.  However, given the arguments above, I don't think
+that makes sense.  setcontext() provides a decent co-routine interface
+and we should just discourage any asynchronous use (which just calls
+for trouble at any rate).
 <p><hr>
 Answers were given by:<br>
-{UD} Ulrich Drepper, &lt;<a href="mailto:drepper@cygnus.com">drepper@cygnus.com</a>&gt;<br>
-{DMT} David Mosberger-Tang, &lt;<a href="mailto:davidm@AZStarNet.com">davidm@AZStarNet.com</a>&gt;<br>
+{UD} Ulrich Drepper, &lt;<a href="mailto:drepper@redhat.com">drepper@redhat.com</a>&gt;<br>
+{DMT} David Mosberger-Tang, &lt;<a href="mailto:davidm@hpl.hp.com">davidm@hpl.hp.com</a>&gt;<br>
 {RM} Roland McGrath, &lt;<a href="mailto:roland@gnu.org">roland@gnu.org</a>&gt;<br>
 {AJ} Andreas Jaeger, &lt;<a href="mailto:aj@suse.de">aj@suse.de</a>&gt;<br>
 {EY} Eric Youngdale, &lt;<a href="mailto:eric@andante.jic.com">eric@andante.jic.com</a>&gt;<br>
@@ -1878,10 +1942,10 @@ Answers were given by:<br>
 {MK} Mark Kettenis, &lt;<a href="mailto:kettenis@phys.uva.nl">kettenis@phys.uva.nl</a>&gt;<br>
 {ZW} Zack Weinberg, &lt;<a href="mailto:zack@rabi.phys.columbia.edu">zack@rabi.phys.columbia.edu</a>&gt;<br>
 {TK} Thorsten Kukuk, &lt;<a href="mailto:kukuk@suse.de">kukuk@suse.de</a>&gt;<br>
-{GK} Geoffrey Keating, &lt;<a href="mailto:geoffk@ozemail.com.au">geoffk@ozemail.com.au</a>&gt;<br>
+{GK} Geoffrey Keating, &lt;<a href="mailto:geoffk@redhat.com">geoffk@redhat.com</a>&gt;<br>
 {HJ} H.J. Lu, &lt;<a href="mailto:hjl@gnu.org">hjl@gnu.org</a>&gt;<br>
 {CG} Cristian Gafton, &lt;<a href="mailto:gafton@redhat.com">gafton@redhat.com</a>&gt;<br>
-{AO} Alexandre Oliva, &lt;<a href="mailto:oliva@lsd.ic.unicamp.br">oliva@lsd.ic.unicamp.br</a>&gt;<br>
+{AO} Alexandre Oliva, &lt;<a href="mailto:aoliva@redhat.com">aoliva@redhat.com</a>&gt;<br>
 {BH} Bruno Haible, &lt;<a href="mailto:haible@clisp.cons.org">haible@clisp.cons.org</a>&gt;<br>
 <br>
 <br>
@@ -1890,6 +1954,6 @@ Please note that the original version doesn't use HTML and this page is generate
 automatically with a simple script to just add a few HTML tags.
 I know that the HTML is not perfect. <p>
     <address><a href="mailto:aj@suse.de">Andreas Jaeger</a></address>
-Last modified: Wed Jan 24 09:24:18 2001
+Last modified: Sat May  5 16:41:19 2001
   </body>
 </html>
