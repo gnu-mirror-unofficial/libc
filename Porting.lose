@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>Porting GNU C Library - GNU Project - Free Software Foundation
+(FSF)</TITLE>
+<LINK rev="made" href="mailto:webmasters@www.gnu.ai.mit.edu">
+</HEAD>
+<BODY bgcolor="#FFFFFF">
+<H3>Porting the GNU C Library</H3>
+<P>Unlike many other GNU package the C library does not yet run on many
+platforms.  This is partly due to the size of the package but also due to the
+fact that using C library is not so easy since binaries using the GNU libc
+might not run on another system if dynamic linking is used and if the other
+system does not have GNU libc installed.  But of course there are lots of good
+reasons to drop the system's libc and use the GNU implementation.</P>
+<P></P>
+<P>To be abe to do this the GNU libc must be ported to your system.  The
+current version of GNU libc, version 2.0, is today only available on these
+systems:</P>
+<UL>
+<LI><STRONG>GNU/Hurd</STRONG> We believe all platforms the Hurd runs on are
+also supported by GNU libc.
+<LI><STRONG>GNU/Linux </STRONG>GNU libc 2.0 works with the Linux kernel,
+version 2.0.10 or later, on the following architectures:
+<UL>
+<LI>Intel ix86
+<LI>Motorola 680x0
+<LI>DEC Alpha
+</UL>
+<P>Ports for MIPS and Sparc are actively developed.  Developers for other
+architectures should contact the<A href="mailto:drepper@gnu.ai.mit.edu"> GNU
+libc maintainer</A>.</P>
+</UL>
+<P>It should be possible without many problems to port the GNU libc to
+<EM>modern</EM> systems like Solaris (perhaps even SunOS-4), Irix, DEC Unix
+(OSF/1), and perhaps HP-UX.  Older systems such as Ultrix or SysVr3 systems
+cannot support GNU libc as a shared library, and some of the code---the part
+which assumes some parts of GNU libc are in separate libraries---needs to be
+changed as well.  But in principle it should be possible to build a completely
+static library from mostly the same sources.</P>
+<P></P>
+<H4>Volunteers doing ports</H4>
+<P>Currently a few volunteers are working on ports of GNU libc to other
+platforms.  Before you start working on a port you should look at the
+following list and find out whether somebody already works on the same or a
+related target system.  It is especially important to recognize that the GNU
+libc consist of two parts which have to be treated by the libc different for
+each platform:</P>
+<DL>
+<DT>Architecture dependent</DT>
+<DD>The are functions which are written in assembler or are specially
+optimized for a processor and which can be used on every system using this
+processor.
+</DD>
+<DT>System dependent</DT>
+<DD>Several functions only depend on the underlying system but do not vary
+among different processor types.
+</DD>
+</DL>
+<P>That means a possible porter should contact the people who support files
+for the appropriate system as well as people who maintain some more general
+family of system.  See the table below to get an impression what is meant by
+this.</P>
+<P></P>
+<H4>Responsibility for subtrees</H4>
+<P>The system dependent part of the GNU libc is organized in subtrees which
+are used for different systems or different architectures.  While the GNU libc
+maintainer is responsible for the whole system some of the subtrees are taken
+care by some other people as well.  The following people list the
+subdirectories, describe briefly the contents and show who can be contacted. 
+Every directory listed includes all directories below it as well.</P>
+<P>All directories in the <CODE>sysdeps/</CODE> hierachy not listed here are
+not (actively) maintained by somebody.  For these an all directories outside
+the <CODE>sysdeps/</CODE> hierachy the GNU libc maintainer is responsible for.
+ This currently is Ulrich Drepper<A href="mailto:drepper@gnu.ai.mit.edu">
+&lt;drepper@gnu.ai.mit.edu&gt;</A>.</P>
+<DL>
+<DT><CODE>hurd/</CODE></DT>
+<DT><CODE>mach/</CODE></DT>
+<DT><CODE>sysdeps/mach/</CODE></DT>
+<DD><STRONG>GNU Hurd</STRONG> is built on top of <STRONG>Mach</STRONG> and the
+people writing the Hurd are also responsible for the sources in the listed
+directories.
+<P>Responsible: Thomas Bushnell <A
+href="mailto:thomas@gnu.ai.mit.edu">&lt;thomas@gnu.ai.mit.edu&gt;</A> and
+Miles Bader <A
+href="mailto:miles@gnu.ai.mit.edu">&lt;miles@gnu.ai.mit.edu&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/alpha/</CODE></DT>
+<DD>DEC Alpha specific functions.
+<P>Responsible: Richard Henderson <A
+href="mailto:richard@atheist.tamu.edu">&lt;richard@atheist.tamu.edu&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/m68k/</CODE></DT>
+<DD>Motorola 680x0 specific functions.
+<P>Responsible: Andreas Schwab <A
+href="mailto:schwab@issan.informatik.uni-dortmund.de">&lt;schwab@issan.informatik.uni-dortmund.de&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/i386/</CODE></DT>
+<DD>Intel ix86 specific functions.
+<P>Responsible: Ulrich Drepper <A
+href="mailto:drepper@gnu.ai.mit.edu">&lt;drepper@gnu.ai.mit.edu&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/alpha/</CODE></DT>
+<DD>DEC Alpha port of Linux.
+<P>Responsible:  Richard Henderson <A
+href="mailto:richard@atheist.tamu.edu">&lt;richard@atheist.tamu.edu&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/m68k/</CODE></DT>
+<DD>Motorola 680x0 port of Linux.
+<P>Responsible: Andreas Schwab <A
+href="mailto:schwab@issan.informatik.uni-dortmund.de">&lt;schwab@issan.informatik.uni-dortmund.de&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/i386/</CODE></DT>
+<DD>Intel ix86 port of Linux.
+<P>Responsible: Ulrich Drepper <A
+href="mailto:drepper@gnu.ai.mit.edu">&lt;drepper@gnu.ai.mit.edu&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/mips/</CODE></DT>
+<DD>MIPS R[23458]000 port of Linux.
+<P>Responsible: Ralf Baechle <A
+href="mailto:ralf@mailhost.uni-koblenz.de">&lt;ralf@mailhost.uni-koblenz.de&gt;</A>.</P>
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/sparc/</CODE></DT>
+<DD>Sparc port of Linux.
+<P>Responsible: Miguel de Icaza <A
+href="mailto:miguel@nuclecu.unam.mx">&lt;miguel@nuclecu.unam.mx&gt;</A>.</P>
+</DD>
+</DL>
+<H4>Ongoing work</H4>
+<P>There are some people working on other ports but the status is not yet at a
+stage it can be called supported.   If you are interested in porting GNU libc
+you should examine the table whether somebody is already working on this or a
+related system.</P>
+<DL>
+<DT><CODE>sysdeps/unix/sysv/sysv4/</CODE></DT>
+<DD>Harmanjit Singh <A
+href="mailto:harman@netearth.iitd.ernet.in">&lt;harman@netearth.iitd.ernet.in&gt;</A>
+said he will try to port GNU libc to a System V R4 system running on Sparc
+systems.  This port will share several things with the port to Solaris 2.x on
+Sparc.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/sysv4/solaris2/</CODE></DT>
+<DD>Chris Brown &lt;c4-brown@uwe.ac.uk&gt; showed interest in doing a port to
+Solaris 2.x on Sparc.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/irix5/</CODE></DT>
+<DT><CODE>sysdeps/unix/sysv/irix6/</CODE></DT>
+<DD>Robert Glamm <A
+href="mailto:glamm@mountains.ee.umn.edu">&lt;glamm@mountains.ee.umn.edu&gt;</A>
+is working on a port to Irix 5.x and Irix 6.x systems running on MIPS.  Magnus
+Danielson <A href="mailto:magda@it.kth.se">&lt;magda@it.kth.se&gt;</A> also
+showed interest.
+</DD>
+<DT><CODE>sysdeps/unix/bsd/bsd4.4/bsdi/</CODE></DT>
+<DD>Bradley Slavik <A
+href="mailto:fire@wddataflo.dataflo.net">&lt;fire@wddataflo.dataflo.net&gt;</A>
+is working on a port to BSDI 2.x.
+</DD>
+</DL>
+<P> If you have interest in working on one of the listed system please contact
+the listed people and also drop a note to the <A
+href="mailto:drepper@gnu.ai.mit.edu">GNU libc maintainer</A> so that this
+table can be updated.</P>
+<P>If you have interest in working on a yet unlisted system please identify
+the position in the hierachy and contact the appropriate people listed in one
+of the above tables (if any).  Before getting starting please contact the <A
+href="mailto:drepper@gnu.ai.mit.edu">GNU libc maintainer</A> so that duplicate
+work or wrong implementations can be avoided.</P>
+<P></P>
+
+<HR>
+<P>Return to the <A href="/software/libc/libc.html">GNU libc page</A>.</P>
+<P>Please send FSF &amp; GNU inquiries &amp; questions to <A
+href="mailto:gnu@prep.ai.mit.edu"><EM>gnu@prep.ai.mit.edu</EM></A>. There are
+also <A href="/home.html#ContactInfo">other ways to contact</A> the FSF.</P>
+<P>Please send comments on these web pages to <A
+href="mailto:webmasters@www.gnu.ai.mit.edu"><EM>webmasters@www.gnu.ai.mit.edu</EM></A>.</P>
+<P>Copyright (C) 1996, 1997 Free Software Foundation, Inc., 59 Temple Place -
+Suite 330, Boston, MA  02111,  USA</P>
+<P>Verbatim copying and distribution is permitted in any medium, provided this
+notice is preserved.</P>
+<P>Updated: <!-- hhmts start -->
+ 3 Jan 1997 tower <!-- hhmts end -->
+</P>
+
+<HR>
+</BODY>
+</HTML>

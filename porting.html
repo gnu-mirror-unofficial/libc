@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>Porting the GNU C Library - GNU Project - Free Software Foundation
+(FSF)</TITLE>
+<LINK rev="made" href="mailto:webmasters@www.gnu.org">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+<H3>Porting the GNU C Library</H3>
+<P>
+Unlike most GNU packages, the C library does not yet run on many
+platforms.  The main reason for this is that the C library cannot
+be written portably; it depends directly on the most intimate details
+of the kernel as well as the hardware.
+<P>
+The current version of GNU libc, version 2.2.1, now supports these
+systems:
+<UL>
+  <LI><STRONG>GNU/Hurd</STRONG>.  We believe all platforms the Hurd runs on
+       are also supported by GNU libc.
+  <LI><STRONG>GNU/Linux</STRONG>.  GNU libc 2.2 works with the Linux kernel,
+       version 2.0.10 or later, on the following architectures:
+       <UL>
+	 <LI>Intel ix86</LI>
+	 <LI>Motorola 680x0</LI>
+	 <LI>DEC Alpha</LI>
+	 <LI>Sparc</LI>
+	 <LI>Sparc64</LI>
+	 <LI>ARM</LI>
+	 <LI>MIPS (only supported with Linux kernel 2.2.15 and newer)</LI>
+	 <LI>Intel ia64 (only supported with Linux kernel 2.4.0 and newer)</LI>
+	 <LI>IBM S/390</LI>
+         <LI>SH</LI>
+       </UL>
+       <P>
+       Ports for HPPA and AMD x86-64 are being developed actively.
+       Developers for other architectures should contact
+
+       <A HREF="mailto:bug-glibc@gnu.org">the GNU libc maintainers</A>.
+</UL>
+
+<P>
+It should be possible without many problems to port the GNU libc to
+<EM>modern</EM> systems like Solaris (perhaps even SunOS-4), Irix, DEC
+Unix (OSF/1), and perhaps HP-UX.  Older systems such as Ultrix or
+SysVr3 systems cannot support GNU libc as a shared library, and some
+of the code---the part which assumes some parts of GNU libc are in
+separate libraries---needs to be changed as well.  But in principle it
+should be possible to build a completely static library from mostly
+the same sources.
+<P>
+<H4>Volunteers doing ports</H4>
+<P>
+Currently a few volunteers are working on ports of GNU libc to other
+platforms.  Before you start working on a port you should look at the
+following list and find out whether somebody already works on the same or a
+related target system.  It is especially important to recognize that the GNU
+libc consist of two parts which have to be treated by the libc different for
+each platform:
+<DL>
+<DT>Architecture dependent</DT>
+<DD>The are functions which are written in assembler or are specially
+optimized for a processor and which can be used on every system using this
+processor.
+</DD>
+<DT>System dependent</DT>
+<DD>Several functions only depend on the underlying system but do not vary
+among different processor types.
+</DD>
+</DL>
+<P>
+That means a possible porter should contact the people who support files
+for the appropriate system as well as people who maintain some more general
+family of system.  See the table below for more information about this.
+<P>
+<H4>Responsibility for subtrees</H4>
+<P>
+The system-dependent part of the GNU libc is organized in subtrees
+which are used for different systems or different architectures.
+While the GNU libc maintainer is responsible for the whole system,
+some of the subtrees are maintained by other people as well.  The
+following people list the subdirectories, describe briefly the
+contents and show who can be contacted.  Every directory listed
+includes all directories below it as well.
+<P>
+All architecture-specific or system-specific directories not listed
+here are currently not actively maintained.
+<DL>
+<DT><CODE>hurd/</CODE></DT>
+<DT><CODE>mach/</CODE></DT>
+<DT><CODE>sysdeps/mach/</CODE></DT>
+<DD>
+<STRONG>GNU Hurd</STRONG> is built on top of <STRONG>Mach</STRONG>,
+and the Hurd developers are responsible for these directories.
+<P>
+Responsible: Roland McGrath 
+
+<A HREF="mailto:roland@gnu.org">&lt;roland@gnu.org&gt;</A> and
+Mark Kettenis
+
+<A HREF="mailto:kettenis@gnu.org">&lt;kettenis@gnu.org&gt;</A>.
+<DT><CODE>sysdeps/alpha/</CODE></DT>
+<DD>
+DEC Alpha specific functions.
+<P>
+Responsible: Richard Henderson 
+
+<A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/i386/</CODE></DT>
+<DD>Intel ix86 specific functions.
+<P>
+Responsible: Ulrich Drepper 
+
+<A HREF="mailto:drepper@cygnus.com">&lt;drepper@cygnus.com&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/m68k/</CODE></DT>
+<DD>
+Motorola 680x0 specific functions.
+<P>
+Responsible: Andreas Schwab 
+
+<A HREF="mailto:schwab@suse.de">&lt;schwab@suse.de&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/mips/</CODE></DT>
+<DD>
+MIPS R[23458]000 specific functions.
+<P>
+Responsible: Andreas Jaeger
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/alpha/</CODE></DT>
+<DD>
+Kernel-dependent functions for the DEC Alpha port of Linux
+<P>
+Responsible:  Richard Henderson 
+
+<A HREF="mailto:rth@redhat.com">&lt;rth@redhat.com&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/i386/</CODE></DT>
+<DD>Intel ix86 port of Linux.
+<P>
+Responsible: Ulrich Drepper 
+
+<A HREF="mailto:drepper@cygnus.com">&lt;drepper@cygnus.com&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/m68k/</CODE></DT>
+<DD>
+Kernel-dependent functions for the Motorola 680x0 port of Linux.
+<P>
+Responsible: Andreas Schwab 
+
+<A HREF="mailto:schwab@suse.de">&lt;schwab@suse.de&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/mips/</CODE></DT>
+<DD>
+Kernel-dependent functions for the MIPS R[23458]000 port of Linux.
+<P>
+Responsible: Andreas Jaeger
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/ppc/</CODE></DT>
+<DD>
+Kernel-dependent functions for the Power PC port of Linux.
+<P>
+Responsible: Geoffrey Keating
+
+<A HREF="mailto:geoffk@geoffk.org">&lt;geoffk@geoffk.org&gt;</A>.
+</DD>
+<DT><CODE>sysdeps/unix/sysv/linux/sparc/</CODE></DT>
+<DD>
+Kernel-dependent functions for the SPARC port of Linux.
+<P>
+Responsible: Jakub Jelinek
+
+<A HREF="mailto:jakub@redhat.com">&lt;jakub@redhat.com&gt;</A>.
+</DD>
+</DL>
+<H4>Ongoing work</H4>
+<P>
+Other ports are being developed but are not yet usable.  If you are
+interested in porting GNU libc, please check this table to see whether
+somebody is already working on your system or a related system.
+<DT><CODE>sysdeps/x86_64/</CODE></DT>
+<DT><CODE>sysdeps/unix/sysv/linux/x86_64/</CODE></DT>
+<DD>
+Andreas Jaeger
+
+<A HREF="mailto:aj@suse.de">&lt;aj@suse.de&gt;</A>
+is working on a port to Linux on AMD x86-64.
+</DD>
+<P>
+If you have interest in working on one of the systems listed above,
+please contact the appropriate people and also drop a note to the 
+
+<A HREF="mailto:bug-glibc@gnu.org">GNU libc maintainers</A> so that
+this table can be updated.
+<P>
+If you have interest in working on a system not listed above, please
+contact the <A href="mailto:bug-glibc@gnu.org">GNU libc
+maintainers</A> so that duplicate work can be avoided.
+<P>
+<HR>
+<P>
+Return to the <A href="/software/libc/libc.html">GNU libc page</A>.
+<P>
+<HR>
+
+Return to <A HREF="/home.html">GNU's home page</A>.
+<P>
+Please send FSF &amp; GNU inquiries &amp; questions to 
+
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>. There are
+also <A href="/home.html#ContactInfo">other ways to contact</A> the FSF.
+<P>
+Please send comments on these web pages to 
+
+<A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>,
+send other questions to
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+<P>
+Copyright (C) 1996, 1997, 1998, 2001 Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111,  USA
+<P>
+Verbatim copying and distribution of this entire article is
+permitted in any medium, provided this notice is preserved.
+<P>
+Updated:
+<!-- hhmts start -->
+24 Jan 2001 jaeger
+<!-- hhmts end -->
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,142 @@
+<!doctype html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><TITLE>Extended Unix&reg; ABI</TITLE>
+<LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
+</HEAD>
+<BODY>
+
+<CENTER>
+<H1>GNU C Library compatibility report</H1>
+</CENTER>
+
+<P>The following links provide access to a list of the function, macro
+and variable names which are prescribed in the Unix&reg; specification
+and/or are available in the GNU C Library.  Since the goal of the GNU
+C Library is to be cover 100% of the Unix specification empty places
+mark where work is needed.
+
+
+<P>The functions are not all in the <tt>libc</tt> itself.  In fact we
+have six libraries:
+
+<UL TYPE=bullet>
+<LI>the <TT>libc</TT> object, which contains the major part</LI>
+<LI>the <TT>libm</TT> object, which contains the mathematics functions</LI>
+<LI>the <TT>libdl</TT> object, which contains functions for dynamic
+     linking</LI>
+<LI>the <TT>libpthread</TT> object, which contains the function for
+     thread handling</LI>
+<LI>the <TT>libdb</TT> object, which contains the database functions</LI>
+<LI>the <TT>libncurses</TT> object, which contains the Curses
+     implementation</LI>
+</UL>
+
+<P>The list was produced on a Linux/GNU system and since some of the
+libraries or parts of the libraries is system dependent the result
+might not be 100% portable for all platform the GNU C Library runs on.
+
+<P>Since the list is too long for a single page it is splitted and
+each function is on a page identified by the starting character of the
+function name.  These pages are automatically generated and are
+probably not checked exactly for correctness.  Extracting the
+information from the various sources is also done automatically and so
+might introduce some more errors.  So take all this with a grain of
+salt.
+
+<P><B>Warning:</B> These pages almost exclusively consist of big
+tables.  Some browsers still have problems with them so you might want
+to avoid looking at the pages.  If your browser is rather slow and you
+just want to take a look it is now the time to reconsider downloading
+them.
+
+<CENTER>
+<TABLE>
+<TR><TD><A HREF="all-_.html">&nbsp;&nbsp;_*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-A.html">&nbsp;&nbsp;A*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-B.html">&nbsp;&nbsp;B*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-C.html">&nbsp;&nbsp;C*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-D.html">&nbsp;&nbsp;D*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-E.html">&nbsp;&nbsp;E*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-F.html">&nbsp;&nbsp;F*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-G.html">&nbsp;&nbsp;G*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-H.html">&nbsp;&nbsp;H*&nbsp;&nbsp;</A></TD></TR>
+<TR><TD><A HREF="all-I.html">&nbsp;&nbsp;I*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-J.html">&nbsp;&nbsp;J*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-K.html">&nbsp;&nbsp;K*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-L.html">&nbsp;&nbsp;L*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-M.html">&nbsp;&nbsp;M*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-N.html">&nbsp;&nbsp;N*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-O.html">&nbsp;&nbsp;O*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-P.html">&nbsp;&nbsp;P*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-Q.html">&nbsp;&nbsp;Q*&nbsp;&nbsp;</A></TD></TR>
+<TR><TD><A HREF="all-R.html">&nbsp;&nbsp;R*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-S.html">&nbsp;&nbsp;S*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-T.html">&nbsp;&nbsp;T*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-U.html">&nbsp;&nbsp;U*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-V.html">&nbsp;&nbsp;V*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-W.html">&nbsp;&nbsp;W*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-X.html">&nbsp;&nbsp;X*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-Y.html">&nbsp;&nbsp;Y*&nbsp;&nbsp;</A></TD>
+    <TD><A HREF="all-Z.html">&nbsp;&nbsp;Z*&nbsp;&nbsp;</A></TD></TR>
+</TABLE>
+</CENTER>
+
+<P>Some more information on the tables.  Normally the cell entries
+contain an <TT>X</TT> in case the function is available for the
+appropriate standard.  But there are some exceptions or variants of
+the standard.  The following can happen:
+
+<DL>
+<DT>feat</DT>
+  <DD>it's a feature for this standard; special rules decide whether
+      the symbol is mandatory or not</DD>
+<DT>Amend1</DT>
+  <DD>the symbol is defined in the first Amendment to ISO C 89</DD>
+<DT>C9X</DT>
+  <DD>the symbol is defined in the to-be-finished ISO C 9X standard</DD>
+<DT>.1g</DT>
+  <DD>The function is desribed in the to-be-finished POSIX.1g standard
+      for networking</DD>
+<DT>Unix</DT>
+  <DD>The function is required for full Unix compliance.</DD>
+<DT>XStd</DT>
+  <DD>The function is part of the extended X/Open standard and all XSI
+      compliant systems have to provide this function.</DD>
+<DT>XCur</DT>
+  <DD>The function is required for the extended Curses interface.</DD>
+</DL>
+
+<P>The entries in the column for the GNU C Library consist of an X and
+an additional extension which specified from which library this
+function comes from.  The symbol is
+<DL>
+<DT>c</DT>
+  <DD>(mainly) defined in the C library <B><TT>libc</TT></B></DD>
+<DT>m</DT>
+  <DD>defined in the math library <B><TT>libm</TT></B></DD>
+<DT>dl</DT>
+  <DD>defined in the dynamic link library <B><TT>libdl</TT></B></DD>
+<DT>db</DT>
+  <DD>defined in the database library <B><TT>libdb</TT></B></DD>
+<DT>cry</DT>
+  <DD>defined in the encryption library <B><TT>libcrypt</TT></B></DD>
+<DT>cur</DT>
+  <DD>defined in the curses library <B><TT>libncurses</TT></B></DD>
+<DT>pt</DT>
+  <DD>defined in the thread library <B><TT>libpthread</TT></B></DD>
+</DL>
+
+<HR>
+Ulrich Drepper
+<ADDRESS><A HREF="mailto:drepper@gnu.org">drepper@cygnus.com</A></ADDRESS>
+
+</BODY>
+</HTML>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:nil
+End:
+-->

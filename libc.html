@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+<HTML>
+  
+  <HEAD>
+    <TITLE>
+      GNU C Library - GNU Project - Free Software Foundation (FSF)
+    </TITLE>
+    <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
+  </HEAD>
+
+
+  <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+
+
+    <H3>GNU C Library</H3>
+
+
+    <A HREF="/graphics/agnuhead.html">
+      <IMG SRC="/graphics/gnu-head-sm.jpg"
+	   ALT=" [image of the Head of a GNU] "
+	   WIDTH="129" HEIGHT="122">
+    </A>
+
+    <HR>
+    <H4>Table of Contents</H4>
+    <UL>
+      <LI><A HREF="#Overview" NAME="TOCOverview">Overview</A>
+      <LI><A HREF="#CurrentStatus" NAME="TOCCurrentStatus">Current Status</A>
+      <LI><A HREF="#Availability" NAME="TOCAvailability">Availability</A>
+      <LI><A HREF="#Supported Systems" NAME="TOCSupported Systems">Supported Systems</A>
+      <LI><A HREF="#OpenTasks" NAME="TOCOpenTasks">Open Tasks</A>
+      <LI><A HREF="#Bugs" NAME="TOCBugs">Bugs</A>
+      <LI><A HREF="#WhoIsWho" NAME="TOCWhoIsWho">Who Is Who</A>
+    </UL>
+    <HR>
+
+
+      
+    <P>
+    <H4><A HREF="#TOCOverview" NAME="Overview">Overview</A></H4>
+    <P>
+
+    <P>
+      Any Unix-like operating system needs a C library: the library which
+      defines the ``system calls'' and other basic facilities such as
+      open, malloc, printf, exit...
+
+    <P>
+      The GNU C library is used as <EM>the</EM> C library in the GNU system
+      and most newer systems with the Linux kernel.
+
+    <P>
+      The history of Unix and various standards determine much of the
+      interface of the C library.  In general the GNU C library supports the
+      ISO C and POSIX standards.  We also try to support the features of
+      popular Unix variants (including BSD and System V) when those do not
+      conflict with the standards.  Different compatibility modes
+      (selectable when you compile an application) allow the peaceful
+      coexistence of compatibility support for different varieties of Unix.
+
+    <P>
+      Today the GNU C library should be almost complete: nearly all
+      known and useful functions from any other C library are
+      available.  However, there is still room for improvement.  If
+      you would like to add or improve features in the GNU C library,
+      please look through the list of <A NAME="TOCOpenTasks"
+      HREF="#OpenTasks">open tasks</A>, then coordinate your work
+      with the maintainers 
+      <A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>.
+
+    <P>
+      The GNU C library is designed to be portable.  Although the
+      library sources are very complex, you can build it for any
+      supported system with the simple commands <CODE>configure</CODE>
+      &amp; <CODE>make</CODE> --- provided your platform is supported!
+
+    <P>
+      <A HREF="/software/libc/missing-docs.html">Some functions</A>
+      are not yet documented in the GNU C library manual.  It would be
+      very helpful if you could spend a bit of your time on writing
+      the missing parts.  Please coordinate your work with the
+      maintainers 
+      <A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>.
+
+    <P>
+      We also have a page describing the 
+      <A HREF="/software/libc/glibc-idx.html">compliance</A> with
+      various standards.  This list also shows where GNU libc needs to
+      be improved.
+
+    <P>
+      For more information on porting and the status of ports for
+      Version 2, see <A HREF="/software/libc/porting.html">Porting the
+      GNU C Library</A>.  If you are interested in porting GNU libc to
+      additional system types, please contact the maintainers 
+      <A HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>.
+
+    <P>
+    There are some more mailing lists: libc-hacker is the private
+    mailing list of the developers, <A
+    HREF="mailto:libc-alpha@sources.redhat.com">libc-alpha@sources.redhat.com</A>
+    discusses some development issues and carries announcements about
+    alpha quality releases.  Mailing list subscription information,
+    archives of all lists and the CVS archive can be found at <A
+    HREF="http://sources.redhat.com/glibc">http://sources.redhat.com/glibc</A>.
+
+
+    <P>
+    <H4><A HREF="#TOCCurrentStatus" NAME="CurrentStatus">Current Status</A></H4>
+    <P>
+
+    <P>
+      The current version is <A
+      HREF="ftp://ftp.gnu.org/pub/gnu/glibc/glibc-2.2.1.tar.gz">2.2.1</A>.
+      The new major version number reflects major changes, several
+      years of work.  1.09.1 was a static library in the style of the
+      80s; the new version implements the state of the art in C
+      library technology.  It follows even the most recent standards
+      (ISO C 99, POSIX.1c, POSIX.1j, POSIX.1d, Unix98).  It is also
+      internationalized and might have the most complete
+      internationalization interface known.
+
+    <P>
+      See the <A HREF="/software/libc/NEWS-2.2">NEWS</A> file for more information.
+
+    <P>
+      Version 2 is built as a shared library --- in fact, multiple
+      shared libraries.  Several parts of the library are separated
+      out and are dynamically linked into the process when needed.
+
+    <P>
+      Please read the 
+      <A HREF="/software/libc/ANNOUNCE-2.0.html">glibc 2.0 announcement</A> for
+      more information about the GNU libc.  If you use GNU's C library
+      on a GNU/Linux system, please read the also
+      <A HREF="/software/libc/ANNOUNCE-2.0-linux.html">extended
+      announcement</A>.
+
+    <P>
+      There is a <A HREF="/software/libc/FAQ.html">FAQ</A> which
+      you should read first.
+
+
+
+    <P>
+    <H4><A HREF="#TOCAvailability" NAME="Availability">Availability</A></H4>
+    <P>
+      
+    <P>
+      The releases are available at <A
+      HREF="ftp://ftp.gnu.org/gnu/glibc">ftp://ftp.gnu.org/gnu/glibc/</A>
+      and its mirrors.  In the same directory there are probably
+      several additional packages which can be used with the GNU libc.
+      These are distributed separately either because of legal
+      problems or because they are maintained by people outside the
+      GNU libc developers group.
+
+    <P>
+      At the moment there are three add-on packages available:
+
+    <UL>
+      <LI>
+	A <CODE>clone</CODE> based <EM>thread library</EM>.  This is
+	currently only usable for the supported GNU/Linux systems.
+	You'll find this in the <CODE>glibc-linuxthreads</CODE>
+	add-on.</LI>
+
+      <LI>
+        The Berkeley DB NSS module, which has been an integral part of
+	previous C Library versions, is now separately available as
+	the <CODE>nss-db</CODE> module.</LI>
+      <LI>
+
+	The <CODE>nss-lwres</CODE> module is meant to support the lightweight
+	resolver in BIND 9 when running on systems that use glibc.</LI>
+     </UL>
+
+    <P>
+      Please consult the <A HREF="/software/libc/FAQ.html">FAQ</a> to
+      find out how to handle add-ons.  The previously available
+      <EM>locale data</EM> add-on is now an integral part of the GNU
+      libc itself.  Fortunately, the U.S. Exports Regulations have
+      been relaxed and so the <EM>DES cryptographic functions</EM> are
+      now also part of the base GNU C library distribution!
+
+
+    <P>
+    <H4><A HREF="#TOCSupported Systems" NAME="Supported Systems">Supported Systems</A></H4>
+    <P>
+
+    <P>
+      Version 2 currently supports only GNU systems --- both
+      Hurd-based and Linux-based GNU systems.  Version 1.09.1
+      supported many more systems; we hope that version 2 will be
+      ported to them.  For more information on porting and the status
+      of ports, see <A HREF="/software/libc/porting.html">Porting the
+      GNU C Library</A>.
+
+
+
+    <P>
+    <H4><A HREF="#TOCOpenTasks" name="OpenTasks">Open Tasks</A></H4>
+    <P>
+
+    <P>
+      This list is not the most up-to-date list of pending tasks.
+      Consult the file <CODE>PROJECTS</CODE> in the GNU C library
+      distribution for most recent changes.
+
+    <P>
+    <UL>
+      <LI>
+	Port the GNU C library version 2 to currently unsupported
+	systems.  See <A HREF="/software/libc/porting.html">Porting
+	the GNU C Library.</A>
+      <LI>
+	The messages in the GNU C library are currently translated
+	into German, Spanish, French, Dutch, Korean, Polish, Swedish,
+	Czech, Danish, Greek, Galician, Italian, Japanese, Korean,
+	Norwegian, Brazilian Portuguese, Slovak, and Chinese.
+	Volunteers for other languages should contact the GNU
+	translation manager <A
+	HREF="mailto:gnu-translation@gnu.org">&lt;gnu-translation@gnu.org&gt;</A>.
+      <LI>
+	Some of the <CODE>long double</CODE> math functions are still
+	missing.  We need advice from people having good knowledge of
+	numeric mathematics.
+      <LI>
+	Currently there are fast, optimized assembler versions for the
+	string and memory handling functions for ix86, Alpha, and MIPS
+	processors.  Contributions for other architectures are
+	welcome.
+      <LI>
+	The regular expression matching functions need to be
+	extended/rewritten for full internationalization support.
+	This includes support for character and collation classes.
+	Wide character versions are also necessary.
+    </UL>
+
+
+
+    <P>
+    <H4><A HREF="#TOCBugs" name="Bugs">Bugs</A></H4>
+    <P>
+
+    <P>
+      You can report bugs in the GNU C Library by:
+
+    <P>
+    <UL>
+      <LI>
+	using GNU's
+
+	<A HREF="http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl">
+	  web-based interface</A> to
+
+	<A HREF="http://www-gnats.gnu.org:8080/cgi-bin/info2www?(gnats)">GNATS</A>,
+	the GNU Problem Report Management System.  You can also review
+	the <A HREF="http://www-gnats.gnu.org:8080/cgi-bin/wwwgnats.pl">database</A>
+	of bug reports (use guest/guest as login/password, GNATS is currently
+	reworked).
+      <LI>
+	mailing them to the maintainers <A
+	HREF="mailto:bug-glibc@gnu.org">&lt;bug-glibc@gnu.org&gt;</A>
+	(you can also send general inquires about the GNU C Library
+	here).
+    </UL>
+
+
+
+    <P>
+    <H4><A HREF="#TOCWhoIsWho" name="WhoIsWho">Who Is Who</A></H4>
+    <P>
+
+    <P>
+      The GNU libc was mainly written by Roland McGrath 
+      <A HREF="mailto:roland@gnu.org">&lt;roland@gnu.org&gt;</A> when
+      he worked for the FSF.  Currently the GNU libc is maintained by
+      Ulrich Drepper 
+      <A HREF="mailto:drepper@gnu.org">&lt;drepper@cygnus.com&gt;</A>.
+      Many others contributed in large amounts.
+
+    <P>
+      The support for the GNU Hurd was partly written by Thomas
+      Bushnell, n/BSG 
+      <A HREF="mailto:thomas@gnu.org">&lt;thomas@gnu.org&gt;</A> and
+      Miles Bader 
+      <A HREF="mailto:miles@gnu.org">&lt;miles@gnu.org&gt;</A>.  The
+      port for GNU/Linux on the m68k was done and is maintained by
+      Andreas Schwab 
+      <A HREF="mailto:schwab@suse.de">&lt;schwab@suse.de&gt;</A>,
+      the port for GNU/Linux on the Alpha is due to Richard Henderson
+      <A HREF="mailto:rth@tamu.edu">&lt;rth@cygnus.com&gt;</A> and
+      David Mosberger-Tang 
+      <A HREF="mailto:David.Mosberger@acm.org">&lt;David.Mosberger@acm.org&gt;</A>.
+    <P>
+
+
+    <HR>
+
+    Return to <A HREF="/home.html">GNU's home page</A>.
+
+    <P>
+      Please send FSF &amp; GNU inquiries &amp; questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
+      are also <A HREF="/home.html#ContactInfo">other ways to
+      contact</A> the FSF.
+
+    <P>
+      Please send comments on these web pages to 
+      <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>,
+      send other questions to 
+      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+
+    <P>
+      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001 Free Software Foundation, Inc.,
+      59 Temple Place - Suite 330, Boston, MA  02111,  USA
+
+    <P>
+      Verbatim copying and distribution of this entire article is
+      permitted in any medium, provided this notice is preserved.
+
+    <P>
+<!-- hhmts start -->
+26 Jan 2001 sub
+<!-- hhmts end -->
+    <HR>
+  </BODY>
+</HTML>

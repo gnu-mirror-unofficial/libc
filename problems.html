@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Glibc Problems</title>
+  </head>
+
+  <body BGCOLOR="white">
+      <CENTER><h1>Glibc Problems</h1></CENTER>
+
+<H3><U>Contents</U></H3>
+<UL>
+<LI><A HREF="#patches">Unoffical patches</A>
+<LI><A HREF="#gencomp">General problems compiling</A>
+<LI><A HREF="#resolve">Host Name Resolution Problems</A>
+<LI><A HREF="#programs">Problems with specific programs and libraries</A>
+<LI><A HREF="#versions">Programs with new versions supporting glibc</A>
+<LI><A HREF="#solaris">Problems with Solaris</A>
+</UL>
+<P>
+If you have patches or solutions to other problems using glibc 2, or know
+of a program fixed for glibc 2 in a recent release, please send them me at
+<A HREF="mailto:thrytis@imaxx.net">thrytis@imaxx.net</A>
+so I can add them to this list.  Please include the version number.
+<P>
+<HR>
+<CENTER><H2>
+<A NAME="patches">Unofficial patches</A>
+</H2></CENTER>
+<P>
+H.J. Lu &lt;hjl@lucon.org&gt;, maintainer of several of the development
+tools and libraries for Linux, has made his patches available at:
+<UL>
+<LI><A HREF="ftp://ftp.yggdrasil.com/private/hjl">
+    ftp://ftp.yggdrasil.com/private/hjl</A> and
+<LI><A HREF="ftp://ftp.yggdrasil.com/private/hjl/glibc-port">
+    ftp://ftp.yggdrasil.com/private/hjl/glibc-port</A>
+</UL>
+Current patches available there include:
+<UL>
+  <LI>NetKit, 0.9
+  <LI>XF86_SVGA, 3.2Xf
+  <LI>autoconf, 2.12
+  <LI>cvs, 1.9
+  <LI>ncurses, 4.0, 4.1
+  <LI>readline, 2.0
+  <LI>pine, 3.96
+  <LI>procps, 1.01
+  <LI>sysvinit, 2.69, 2.70
+  <LI>tcsh, 6.07.02
+  <LI>util-linux, 2.6
+</UL>
+<P>
+Trevor Johnson &lt;trevor@jpj.net&gt; also has a collection of patches
+for glibc2, located at <A HREF="http://jpj.net/~trevor/glibc-patches">
+http://jpj.net/~trevor/glibc-patches</A>.  Patches currently available there
+include:
+<UL>
+  <LI>bind 8.1.1
+  <LI>bmv 1.2
+  <LI>BSD cal
+  <LI>cku192
+  <LI>emacs 19.34b
+  <LI>gzip 1.2.4
+  <LI>libpcap 0.4a2
+  <LI>lockvc 2.0b (configed for shadow pwds)
+  <LI>mc 3.2.2
+  <LI>mingetty 0.9.4
+  <LI>netkit-base 0.10
+  <LI>ppp 2.3.1
+  <LI>s3mod 1.09 (linux specific fix)
+  <LI>sed 2.05-12
+  <LI>strace 3.1
+  <LI>svgalib 1.2.11
+  <LI>sysklogd 1.3-3
+  <LI>sysvinit 2.71
+  <LI>taper 6.7.4
+  <LI>tcpdump 3.2.1
+  <LI>timidity 0.2i
+  <LI>vimage 1.1
+  <LI>workbone 2.3
+  <LI>xdm-photo 1.1
+  <LI>xscreensaver 1.27 (configured for shadow pwds)
+  <LI>ytalk 3.0.2-8bit
+</UL>
+<P>
+If you can't find a patch for a library or tool, or want to check for the
+latest patch or binary, you may want to check in one of these places.
+<P>
+<HR>
+<CENTER><H2>
+<A NAME="gencomp">General problems compiling</A>
+</H2></CENTER>
+<P>
+<DL>
+<DT><H3>C++ programs won't link</H3>
+<DD>
+<U>Problem:</U>  When linking C++ programs, you get an error message
+<tt>ld: error: libm.so.5, needed by /usr/lib/libg++.so, conflicts with libm.so.6
+</tt>
+<P>
+<U>Solution:</U> You need a copy of libg++ linked to libm.so.6.  You can get
+a binary copy from 
+<A HREF="ftp://ftp.yggdrasil.com/private/hjl/libg++-2.7.2.8-glibc.bin.tar.gz">
+ftp://ftp.yggdrasil.com/private/hjl/libg++-2.7.2.8-glibc.bin.tar.gz</A>.<BR>
+If you want to recompile the library for yourself, you can get the glibc
+compatible source from
+<A HREF="ftp://ftp.yggdrasil.com/private/hjl/libg++-2.7.2.8.tar.gz">
+ftp://ftp.yggdrasil.com/private/hjl/libg++-2.7.2.8.tar.gz</A>.
+<P>
+
+<DT><H3>dev_t</H3>
+<DD>
+Changes were made to the dev_t type, and code using this may need fixing.
+The new header file &lt;sys/sysmacros.h&gt; provides new macros <tt>major</tt>,
+<tt>minor</tt>, and <tt>makedev</tt> to replace the old macros from
+&lt;linux/kdev_t.h&gt;, <tt>MAJOR</tt>, <tt>MINOR</tt>, and <tt>MKDEV</tt>.
+<P>
+<I>Bernd Schmidt &lt;crux@informatik.rwth-aachen.de&gt;</I>
+<P>
+<DT><H3>Linux Specific code</H3>
+<DD>
+Glibc tries not to use linux specific headers.  Patches may be needed for
+code which directly includes linux headers.  The <A HREF="glibc-FAQ.html">
+Glibc FAQ</A> details several problems and solutions with compiling Linux
+programs.
+<P>
+</DL>
+<HR>
+<CENTER><H2>
+<A NAME="resolve">Host Name Resolution Problems</A>
+</H2></CENTER>
+<P>
+<PRE>
+> When no nameserver is available IP's are looked up as usual from
+> /etc/hosts.  However, when a nameserver, specified in /etc/resolv.conf
+> is available, /etc/hosts seems to be ignored.
+</PRE>
+
+Glibc uses an /etc/nsswitch.conf to configure name services.  More
+information about this file can be found in the NSS documentation.  The
+configuration which comes with glibc is:
+
+<PRE>
+    # /etc/nsswitch.conf
+    #
+    # Example configuration of GNU Name Service Switch functionality.
+    #
+
+    passwd:         db files
+    group:          db files
+    shadow:         db files
+
+    hosts:          files dns
+    networks:       files dns
+
+    protocols:      db files
+    services:       db files
+    ethers:         db files
+    rpc:            db files
+
+    netgroup:       db files
+</PRE>
+
+<I>Vann Doussot &lt;doussot@angel.via.ecp.fr&gt;,
+Thorsten Kukuk &lt;kukuk@uni-paderborn.de&gt;</I>
+<P>
+<HR>
+
+<CENTER><H2>
+<A NAME="programs">Problems with specific programs and libraries</A>
+</H2></CENTER>
+<P>
+
+<DL>
+<DT><H3>CVS, Bison</H3>
+<DD>
+<U>Problem:</U>  Attempting to start these programs with certain options
+results in a segmentation fault.  This bug may affect make also.
+(CVS Version 1.9, Bison version 1.25)<P>
+<U>Solution:</U>  The function getopt is defined in these packages, and the
+code for it is broken.  Glibc provides its own version of getopt that will
+work if the defines in these programs' code are altered so that the libc
+version is used.  For CVS, you can find a patch at 
+<A HREF="ftp://ftp.yggdrasil.com/private/hjl/glibc-port/cvs-1.9-glibc-1.diff">
+ftp://ftp.yggdrasil.com/private/hjl/glibc-port/cvs-1.9-glibc-1.diff</A>
+<P>
+<I>Bernd Schmidt &lt;crux@informatik.rwth-aachen.de&gt;, and other sources</I>
+<P>
+
+<DT><H3>iBCS</H3>
+<DD>
+(Reported for iBCS version 2.0-970212)<P>
+<UL>
+<LI>Remove inclusion of &lt;signal.h&gt; in iBCSemul/signal.c
+<LI>Remove the following includes from iBCSemul/xstat.c:<BR>
+<pre>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/time.h&gt;
+</pre>
+<LI>In tools/trace.c you don't need to include &lt;stdlib.h&gt; and if
+you put the inclusion of &lt;stdio.h&gt; last the program compiles and
+runs fine.
+</UL>
+<P>
+<I>Andreas Jaeger &lt;aj@arthur.pfalz.de&gt;</I>
+<P>
+
+<DT><H3>GDB</H3>
+<DD>
+<U>Problem:</U>  When trying to run GDB, it gives the message "gdb
+internal error: memory corruption." (version 4.16)<P>
+<U>Solution:</U>  Gdb has a bug with the malloc functions.  You must
+make sure the calloc function is used from the malloc implementation in gdb.
+e.g. you can add
+<PRE>
+        (void) calloc(1);
+</PRE>
+right at the beginning of gdb's main() function.  This problem is corrected
+in the next release of gdb.
+<P>
+<I>Ulrich Drepper &lt;drepper@gnu.org&gt;</I>
+<P>
+
+<DT><H3>Linux Kernel</H3>
+<DD>
+<U>Problem:</U>  The Linux kernel 2.1.36 fails to compile.<P>
+<U>Solution:</U>  Upgrade to a newer kernel, or if you must use this one,
+apply the <A HREF="kernel-2.1.36.patch">patch</A>
+<P>
+<I>H.J. Lu &lt;hjl@lucon.org&gt;</I>
+<P>
+
+<DT><H3>Linux NFS Tools</H3>
+<DD>
+<U>Problem:</U>  The linux-nfs tools package fails to compile.
+(version 0.4.21)<P>
+<U>Solution:</U>Apply the <A HREF="http://www.contrib.andrew.cmu.edu/~poole/linux/linux-nfs.diff">patch</A> for it.
+<P>
+<I>Michael Poole &lt;poole+@andrew.cmu.edu&gt;</I>
+<P>
+
+</DL>
+<HR>
+<P>
+<CENTER><H2><A NAME="versions">Programs with new versions supporting glibc</A>
+</H2></CENTER>
+<P>
+The following programs have been modified in their official release to
+work with glibc 2 (as well as libc 5).  The versions given are the earliest
+release known to support glibc without patches.
+<P>
+<UL>
+<LI><B>E2fsprogs 1.07</B><BR>
+       Source location: <A HREF="ftp://tsx-11.mit.edu/pub/linux/packages/ext2fs/">ftp://tsx-11.mit.edu/pub/linux/packages/ext2fs/</A><P>
+<LI><B>Fetchmail 3.5</B><BR>
+       Source location: <A HREF="ftp://ftp.ccil.org/pub/esr/fetchmail/">ftp://ftp.ccil.org/pub/esr/fetchmail/</A><P>
+<LI><B>GCC 2.7.2.3</B><BR>
+       Source location: <A HREF="ftp://ftp.gnu.org/pub/gnu/">ftp://ftp.gnu.org/pub/gnu/</A><P>
+<LI><B>ISA PnP Util 1.10</B><BR>
+       Source location: <A HREF="ftp://sunsite.unc.edu/pub/Linux/system/hardware/">ftp://sunsite.unc.edu/pub/Linux/system/hardware</A><P>
+<LI><B>Mgetty 1.1.2-Feb20</B><BR>
+       Source location: <A HREF="ftp://ftp.leo.org/pub/comp/networking/communication/modem/mgetty/">ftp://ftp.leo.org/pub/comp/networking/communication/modem/mgetty/</A><P>
+<LI><B>Midnight Commander 4.0.6</B><BR>
+       Source location: <A HREF="http://mc.blackdown.org">http://mc.blackdown.org</A><P>
+<LI><B>Sysvinit 2.72</B><BR>
+       Source location: <A HREF="ftp://sunsite.unc.edu/pub/Linux/system/daemons/init">ftp://sunsite.unc.edu/pub/Linux/system/daemons/init</A><P>
+<LI><B>Updated 1.3</B><BR>
+       Source location: <A HREF="ftp://sunsite.unc.edu/pub/Linux/system/Daemons/">ftp://sunsite.unc.edu/pub/Linux/system/Daemons/</A><P>
+<LI><B>XFree86 3.2A</B><BR>
+       Source location: <A HREF="ftp://ftp.xfree86.org/pub/XFree86/current/">ftp://ftp.xfree86.org/pub/XFree86/current/</A><P>
+</UL>
+<P>
+<I>Andreas Jaeger &lt;aj@arthur.pfalz.de&gt;, Theodore Tso &lt;tytso@mit.edu&gt;, Dimitri Maziuk</I>
+<P>
+<HR>
+<P>
+<CENTER><H2><A NAME="solaris">Problems with Solaris</A></H2></CENTER>
+<P>
+Solaris is not ported yet since nobody has done it (see README). Feel
+free to start the port yourself. For details about porting glibc see
+the INSTALL file.
+<P>
+Please don't send bug reports for Solaris until someone has actually
+started the port.
+<P>
+      <hr>
+      <address><a href="mailto:thrytis@imaxx.net">Eric Green</a></address>
+<!-- Created: Tue Feb 18 01:48:34 EST 1997 -->
+<!-- hhmts start -->
+23 Feb 1998 grat-w
+<!-- hhmts end -->
+  </body>
+</html>
