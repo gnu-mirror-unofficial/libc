@@ -77,8 +77,7 @@
       &amp; <CODE>make</CODE> --- provided your platform is supported!
 
     <P>
-      <A HREF="/software/libc/missing-docs.html">Some functions</A>
-      are not yet documented in the GNU C library manual.  It would be
+      The GNU C library manual is incomplete.  It would be
       very helpful if you could spend a bit of your time on writing
       the missing parts.  Please coordinate your work with the
       maintainers 
@@ -86,7 +85,7 @@
 
     <P>
       We also have a page describing the 
-      <A HREF="/software/libc/glibc-idx.html">compliance</A> with
+      <a href="/software/libc/CONFORMANCE">conformance</a> with
       various standards.  This list also shows where GNU libc needs to
       be improved.
 
@@ -123,20 +122,12 @@
       internationalization interface known.
 
     <P>
-      See the <A HREF="/software/libc/NEWS-2.2">NEWS</A> file for more information.
+      See the <A HREF="/software/libc/NEWS">NEWS</A> file for more information.
 
     <P>
       Version 2 is built as a shared library --- in fact, multiple
       shared libraries.  Several parts of the library are separated
       out and are dynamically linked into the process when needed.
-
-    <P>
-      Please read the 
-      <A HREF="/software/libc/ANNOUNCE-2.0.html">glibc 2.0 announcement</A> for
-      more information about the GNU libc.  If you use GNU's C library
-      on a GNU/Linux system, please read the also
-      <A HREF="/software/libc/ANNOUNCE-2.0-linux.html">extended
-      announcement</A>.
 
     <P>
       There is a <A HREF="/software/libc/FAQ.html">FAQ</A> which
@@ -212,14 +203,17 @@
     <P>
     <UL>
       <LI>
+	Write a more complete test suite.
+      <LI>
 	Port the GNU C library version 2 to currently unsupported
 	systems.  See <A HREF="/software/libc/porting.html">Porting
 	the GNU C Library.</A>
       <LI>
 	The messages in the GNU C library are currently translated
-	into German, Spanish, French, Dutch, Korean, Polish, Swedish,
-	Czech, Danish, Greek, Galician, Italian, Japanese, Korean,
-	Norwegian, Brazilian Portuguese, Slovak, and Chinese.
+	from American English into Brazilian Portuguese, British
+	English, Chinese, Czech, Danish, Dutch, French, Galician,
+	German, Greek, Italian, Japanese, Korean, Norwegian, Polish,
+	Slovak, Spanish, Swedish, and Turkish.
 	Volunteers for other languages should contact the GNU
 	translation manager <A
 	HREF="mailto:gnu-translation@gnu.org">&lt;gnu-translation@gnu.org&gt;</A>.
@@ -281,13 +275,20 @@
       worked for the FSF.  During the development of version 2, Ulrich
       Drepper <A HREF="mailto:drepper@redhat.com">&lt;drepper@redhat.com&gt;</A>
       volunteered his efforts and became the foremost contributor.
-      Ulrich took over as the maintainer when Roland left the
-      FSF, and made the releases of versions 2.0 and later.
+      He became the maintainer after Roland left the FSF in 1996.
 
       <p>
-      The GNU C Library Steering Committee is the governance body for
-      this GNU project and consists of Mark Brown, Paul Eggert
+      The GNU C Library Steering Committee
+      <a href="mailto:glibc-sc@gnu.org">&lt;glibc-sc@gnu.org&gt;</a>,
+      formed in 2001, is the governance body and has overall
+      responsibility for the maintenance of the GNU C Library
+      as part of the GNU project.
+      It currently consists of Mark Brown, Paul Eggert,
       Andreas Jaeger, Jakub Jelinek, Roland McGrath and Andreas Schwab.
+      The Steering Committee provides a focus for discussion and
+      decision of policy and planning issues facing the project,
+      allowing more actual development work to be done by the code
+      maintainers.
 
       <p>
       Many others contributed in large amounts.
