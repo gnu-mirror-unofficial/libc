@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
 <HTML>
-  
+
   <HEAD>
     <link rel="stylesheet" type="text/css" href="gnu.css" />
     <TITLE>
@@ -41,7 +41,7 @@
   <li><a href="#external_resources" name="TOCexternal_resources">External Resources</a></li>
   </ul>
 </div>
-    
+
 <h2 class="section"><a href="#TOCprojectweb" name="projectweb">Project Website</a></h2>
 
 <p> Mailing list subscription information,
@@ -69,13 +69,10 @@ development.<br>
   </li>
   <li><a href="http://sources.redhat.com/ml/glibc-cvs/"><tt>glibc-cvs</tt></a>
 : glibc CVS commits.</li>
-  <li><a href="http://www.redhat.com/archives/phil-list/"><tt>phil-list</tt></a>
-: discussion about the NPTL library.<br>
-  </li>
-</ul>  
-    
+</ul>
+
 </p>
-  
+
 <h3 class="subsection"><a name="check_cvs"></a>Getting CVS sources</h2>
 <p>
 CVS sources are available from the project website (as per the <a
@@ -96,7 +93,7 @@ directory to update via anonymous CVS.
 
 <h2 class="section"><a name="building" href="#TOCbuilding">Building</a></h2>
 <p>
-Building <tt>glibc</tt> is quite tricky and has a number of pitfalls, not the least of which include 
+Building <tt>glibc</tt> is quite tricky and has a number of pitfalls, not the least of which include
 <ul>
  <li><b>Never</b> install over a live system.  The connection between
     the individual parts of the <tt>glibc</tt> shared libraries is
@@ -112,7 +109,7 @@ Building <tt>glibc</tt> is quite tricky and has a number of pitfalls, not the le
   public ABI.  If you were to begin distributing binaries they would
   at a minimum not work, and at best create a lot of confusion.</li>
 </ul>
-	      
+
 </p>If you find yourself needing to build a customised version of
 <tt>glibc</tt>, you are best to use the framework offered by your
 distribution (i.e. the <tt>rpm</tt> or <tt>deb</tt> package build
@@ -160,11 +157,11 @@ to gdb</li>
   programs.
   <li>Profiling utilities
   <ul>
-   <li><tt>gprof</tt> is the standard profiler distributed with GNU binutils.	
+   <li><tt>gprof</tt> is the standard profiler distributed with GNU binutils.
 
    <li><tt><a href="http://www.hpl.hp.com/research/linux/qprof/">qprof</a></tt>
   is an alternative profiler for Linux on IA64 and i386 platforms.
-  
+
    <li><tt><a
   href="http://oprofile.sourceforge.net/news/">oprofile</a></tt> is a
   Linux based system wide profiling tool.
@@ -174,9 +171,9 @@ to gdb</li>
 </ul>
 <h3 class="subsection">Projects</h3>
 <ul>
-<li>A few modules of the C library can be used on their own, as part of standalone applications 
-intended to be portable to hosts based on non-GNU C libraries.  The 
-<a href='http://www.gnu.org/software/gnulib/'>GNU Portability Library (gnulib)</a> 
+<li>A few modules of the C library can be used on their own, as part of standalone applications
+intended to be portable to hosts based on non-GNU C libraries.  The
+<a href='http://www.gnu.org/software/gnulib/'>GNU Portability Library (gnulib)</a>
 has packaged some of these modules and provides instructions how to modify makefiles,
 <samp>configure.ac</samp> files, etc.
 </li>
@@ -185,20 +182,20 @@ has packaged some of these modules and provides instructions how to modify makef
 testing and tracing</a> : A project aimed at providing test/stress
 programs and a tracing mechanism for the NPTL thread suite.</li>
 
-</ul>       
+</ul>
 
 
 <div class="copyright">
     <P>
-      Please send FSF &amp; GNU inquiries &amp; questions to 
+      Please send FSF &amp; GNU inquiries &amp; questions to
       <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
       are also <A HREF="/home.html#ContactInfo">other ways to
       contact</A> the FSF.
 
     <P>
-      Please send comments on these web pages to 
+      Please send comments on these web pages to
       <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
-      Send other questions to 
+      Send other questions to
       <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
 
     <P>
@@ -212,7 +209,7 @@ programs and a tracing mechanism for the NPTL thread suite.</li>
     <P>
       Updated:
 <!-- timestamp start -->
-$Date: 2004/10/04 15:20:51 $ $Author: jlpence $
+$Date: 2004/10/24 19:34:37 $ $Author: roland $
 <!-- timestamp end -->
 </div>
   </BODY>
