@@ -82,8 +82,16 @@ $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc login
 {enter "anoncvs" as the password}
 $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co libc
 </pre>
-The CVS tree is also viewable via <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/?cvsroot=glibc">cvsweb</a>.
+
+<p>
+To also get the contributed <tt>ports</tt> add-on, follow that with:
+$ cd libc
+$ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co ports
 </p>
+
+The CVS tree is also viewable via <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/?cvsroot=glibc">cvsweb</a>.
+</p>
+
 <p>
 Weekly snapshots are published at <a
 href="ftp://sources.redhat.com/pub/glibc/snapshots/">&lt;ftp://sources.redhat.com/pub/glibc/snapshots&gt;</a>.
@@ -209,7 +217,7 @@ programs and a tracing mechanism for the NPTL thread suite.</li>
     <P>
       Updated:
 <!-- timestamp start -->
-$Date: 2004/10/24 19:34:37 $ $Author: roland $
+$Date: 2004/12/19 09:05:04 $ $Author: roland $
 <!-- timestamp end -->
 </div>
   </BODY>
