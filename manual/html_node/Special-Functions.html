@@ -80,7 +80,7 @@ fashion that avoids round-off error when <var>x</var> is large.
 &mdash; Function: long double <b>lgammal</b> (<var>long double x</var>)<var><a name="index-lgammal-2238"></a></var><br>
 <blockquote><p><code>lgamma</code> returns the natural logarithm of the absolute value of
 the gamma function of <var>x</var>.  The gamma function is defined as
-     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;&infin; of t^(x-1) e^-t dt
      </pre>
         <p><a name="index-signgam-2239"></a>The sign of the gamma function is stored in the global variable
 <var>signgam</var>, which is declared in <samp><span class="file">math.h</span></samp>.  It is <code>1</code> if
@@ -140,7 +140,7 @@ standardized in ISO&nbsp;C99<!-- /@w --> while <code>gamma</code> is not.
 &mdash; Function: long double <b>tgammal</b> (<var>long double x</var>)<var><a name="index-tgammal-2248"></a></var><br>
 <blockquote><p><code>tgamma</code> applies the gamma function to <var>x</var>.  The gamma
 function is defined as
-     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;infin; of t^(x-1) e^-t dt
+     <pre class="smallexample">          gamma (x) = integral from 0 to &amp;&infin; of t^(x-1) e^-t dt
      </pre>
         <p>This function was introduced in ISO&nbsp;C99<!-- /@w -->. 
 </p></blockquote></div>
@@ -200,7 +200,7 @@ function is defined as
 <blockquote><p><code>y0</code> returns the Bessel function of the second kind of order 0 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>y0</code> signals a domain error; if it is zero,
-<code>y0</code> signals overflow and returns -&amp;infin;. 
+<code>y0</code> signals overflow and returns -&amp;&infin;. 
 </p></blockquote></div>
 
 <!-- math.h -->
@@ -216,7 +216,7 @@ is negative, <code>y0</code> signals a domain error; if it is zero,
 <blockquote><p><code>y1</code> returns the Bessel function of the second kind of order 1 of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>y1</code> signals a domain error; if it is zero,
-<code>y1</code> signals overflow and returns -&amp;infin;. 
+<code>y1</code> signals overflow and returns -&amp;&infin;. 
 </p></blockquote></div>
 
 <!-- math.h -->
@@ -232,7 +232,7 @@ is negative, <code>y1</code> signals a domain error; if it is zero,
 <blockquote><p><code>yn</code> returns the Bessel function of the second kind of order <var>n</var> of
 <var>x</var>.  It may signal underflow if <var>x</var> is too large.  If <var>x</var>
 is negative, <code>yn</code> signals a domain error; if it is zero,
-<code>yn</code> signals overflow and returns -&amp;infin;. 
+<code>yn</code> signals overflow and returns -&amp;&infin;. 
 </p></blockquote></div>
 
    </body></html>

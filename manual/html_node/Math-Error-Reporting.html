@@ -45,8 +45,8 @@ underflow.
    <p>When a math function suffers a domain error, it raises the invalid
 exception and returns NaN.  It also sets <var>errno</var> to <code>EDOM</code>;
 this is for compatibility with old systems that do not support IEEE&nbsp;754<!-- /@w --> exception handling.  Likewise, when overflow occurs, math
-functions raise the overflow exception and return &amp;infin; or
--&amp;infin; as appropriate.  They also set <var>errno</var> to
+functions raise the overflow exception and return &amp;&infin; or
+-&amp;&infin; as appropriate.  They also set <var>errno</var> to
 <code>ERANGE</code>.  When underflow occurs, the underflow exception is
 raised, and zero (appropriately signed) is returned.  <var>errno</var> may be
 set to <code>ERANGE</code>, but this is not guaranteed.
