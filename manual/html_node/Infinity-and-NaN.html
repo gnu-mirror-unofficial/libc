@@ -42,8 +42,8 @@ accurately.  You can also deliberately set a floating-point variable to
 any of them, which is sometimes useful.  Some examples of calculations
 that produce infinity or NaN:
 
-<pre class="smallexample">     1/0 = &amp;&infin;
-     log (0) = -&amp;&infin;
+<pre class="smallexample">     1/0 = &infin;
+     log (0) = -&infin;
      sqrt (-1) = NaN
 </pre>
    <p>When a calculation produces any of these values, an exception also
@@ -51,8 +51,8 @@ occurs; see <a href="FP-Exceptions.html#FP-Exceptions">FP Exceptions</a>.
 
    <p>The basic operations and math functions all accept infinity and NaN and
 produce sensible output.  Infinities propagate through calculations as
-one would expect: for example, 2 + &amp;&infin; = &amp;&infin;,
-4/&amp;&infin; = 0, atan (&amp;&infin;) = &amp;pi;/2.  NaN, on
+one would expect: for example, 2 + &infin; = &infin;,
+4/&infin; = 0, atan (&infin;) = &amp;pi;/2.  NaN, on
 the other hand, infects any calculation that involves it.  Unless the
 calculation would produce the same result no matter what real value
 replaced NaN, the result is NaN.
