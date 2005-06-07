@@ -1,230 +1,260 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<HTML>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="gnu.css">
 
-  <HEAD>
-    <link rel="stylesheet" type="text/css" href="gnu.css" />
-    <TITLE>
-      Resources - GNU C Library - GNU Project - Free Software Foundation (FSF)
-    </TITLE>
-    <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
-    <META NAME="keywords" CONTENT="libc">
-  </HEAD>
+  <title>Resources - GNU C Library - GNU Project - Free Software
+  Foundation (FSF)</title>
+  <link rev="made" href="mailto:webmasters@www.gnu.org">
+  <meta name="keywords" content="libc">
+</head>
 
+<body>
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td rowspan="2" width="150"><a href=
+      "/graphics/agnuhead.html"><img src="./img/gnu-head-sm.png"
+      alt="[image of the Head of a GNU]" border="0"></a></td>
 
-  <BODY>
+      <td colspan="4">
+        <h1>Resources</h1>
+      </td>
+    </tr>
 
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-	<td rowspan="2" width="150">
-    <A HREF="/graphics/agnuhead.html"><IMG SRC="./img/gnu-head-sm.png" ALT="[image of the Head of a GNU]" border="0"></A>
-	</td>
-	<td colspan="4">
-		<h1>Resources</h1>
-	</td>
-	</tr>
-	<tr>
-		<td width="100" height="25" class="toc_inactive"><a href="libc.html">Main page</a></td>
-		<td width="100" height="25" class="toc_inactive"><a href="bugs.html">Bugs</a></td>
-		<td width="100" height="25" class="toc_inactive"><a HREF="/software/libc/manual/">Manual</a></td>
-		<td width="100" height="25" class="toc_inactive"><a href="resources.html">Resources</a></td>
-		<td>&nbsp;</td>
-	</tr>
-	</table>
-	<br>
+    <tr>
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "libc.html">Main page</a></td>
 
-<div class="toc">
-    <H2>Table of Contents</H2 class="section">
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "bugs.html">Bugs</a></td>
+
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "/software/libc/manual/">Manual</a></td>
+
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "resources.html">Resources</a></td>
+
+      <td>&nbsp;</td>
+    </tr>
+  </table><br>
+
+  <div class="toc">
+    <h2>Table of Contents</h2>
+
+    <ul>
+      <li><a href="#projectweb" name="TOCprojectweb" id=
+      "TOCprojectweb">Project Website</a></li>
+
+      <li><a href="#building" name="TOCbuilding" id=
+      "TOCbuilding">Building</a></li>
+
+      <li><a href="#external_resources" name=
+      "TOCexternal_resources" id="TOCexternal_resources">External
+      Resources</a></li>
+    </ul>
+  </div>
+
+  <h2 class="section"><a href="#TOCprojectweb" name="projectweb"
+  id="projectweb">Project Website</a></h2>
+
+  <p>Mailing list subscription information, archives of all lists
+  and the CVS archive can be found at the project website <a href=
+  "http://sources.redhat.com/glibc">&lt;http://sources.redhat.com/glibc&gt;</a>.</p>
+
+  <h3 class="subsection">Mailing Lists</h3>
+
+  <p>There are a number of mailing lists relevant to glibc
+  development.&nbsp; If you are interested in ongoing development
+  you should subscribe to libc-alpha, other lists are more
+  specific.</p>
+
   <ul>
-  <li><a href="#projectweb" name="TOCprojectweb">Project Website</a>
-  <li><a href="#building" name="TOCbuilding">Building</a></li>
-  <li><a href="#external_resources" name="TOCexternal_resources">External Resources</a></li>
+    <li><a href=
+    "http://sources.redhat.com/ml/libc-announce/"><tt>libc-announce</tt></a>
+    : general announcements about glibc releases.<br></li>
+
+    <li><a href=
+    "http://sources.redhat.com/ml/libc-alpha/"><tt>libc-alpha</tt></a>
+    : public discussion about glibc development.&nbsp; Questions or
+    queries (not bugs) are appropriately discussed here.<br></li>
+
+    <li><a href=
+    "http://sources.redhat.com/ml/libc-hacker/"><tt>libc-hacker</tt></a>
+    : private (but archived) list for glibc development.<br></li>
+
+    <li><a href=
+    "http://sources.redhat.com/ml/glibc-cvs/"><tt>glibc-cvs</tt></a>
+    : glibc CVS commits.</li>
+
+    <li><a href=
+    "http://sources.redhat.com/ml/glibc-bugs/"><tt>glibc-bugs</tt></a>
+    : every bug update from <a href=
+    "http://sources.redhat.com/bugzilla/">glibc bugzilla</a></li>
   </ul>
-</div>
 
-<h2 class="section"><a href="#TOCprojectweb" name="projectweb">Project Website</a></h2>
+  <h3 class="subsection"><a name="check_cvs" id=
+  "check_cvs"></a>Getting CVS sources</h3>
 
-<p> Mailing list subscription information,
-    archives of all lists and the CVS archive can be found at the project website <A
-    HREF="http://sources.redhat.com/glibc">&lt;http://sources.redhat.com/glibc&gt;</A>.
-</p>
-
-<h3 class="subsection">Mailing Lists</h3>
-<p>
-There are a number of mailing lists relevant to glibc
-development.&nbsp; If you are interested in ongoing development you
-should subscribe to libc-alpha, other lists are more specific.
-</p>
-<ul>
-  <li><a href="http://sources.redhat.com/ml/libc-announce/"><tt>libc-announce</tt></a>
-: general announcements about glibc releases.<br>
-  </li>
-  <li><a href="http://sources.redhat.com/ml/libc-alpha/"><tt>libc-alpha</tt></a>
-: public discussion about glibc development.&nbsp; Questions or queries
-(not bugs) are appropriately discussed here.<br>
-  </li>
-  <li><a href="http://sources.redhat.com/ml/libc-hacker/"><tt>libc-hacker</tt></a>
-: private (but archived) list for glibc
-development.<br>
-  </li>
-  <li><a href="http://sources.redhat.com/ml/glibc-cvs/"><tt>glibc-cvs</tt></a>
-: glibc CVS commits.</li>
-  <li><a href="http://sources.redhat.com/ml/glibc-bugs/"><tt>glibc-bugs</tt></a>
-: every bug update from
- <a href="http://sources.redhat.com/bugzilla/>glibc bugzilla</a>
-</li>
-</ul>
-
-</p>
-
-<h3 class="subsection"><a name="check_cvs"></a>Getting CVS sources</h2>
-<p>
-CVS sources are available from the project website (as per the <a
- href="http://sources.redhat.com/glibc">instructions</a>).</p>
-<pre class="code">
+  <p>CVS sources are available from the project website (as per the
+  <a href="http://sources.redhat.com/glibc">instructions</a>).</p>
+  <pre class="code">
 $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc login
 {enter "anoncvs" as the password}
 $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co libc
 </pre>
 
-<p>
-To also get the contributed <tt>ports</tt> add-on, follow that with:
-<pre class="code">
+  <p>To also get the contributed <tt>ports</tt> add-on, follow that
+  with:</p>
+  <pre class="code">
 $ cd libc
 $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co ports
-</pre>
-</p>
+</pre>The CVS tree is also viewable via <a href=
+"http://sources.redhat.com/cgi-bin/cvsweb.cgi/?cvsroot=glibc">cvsweb</a>.
 
-The CVS tree is also viewable via <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/?cvsroot=glibc">cvsweb</a>.
-</p>
+  <p>Weekly snapshots are published at <a href=
+  "ftp://sources.redhat.com/pub/glibc/snapshots/">&lt;ftp://sources.redhat.com/pub/glibc/snapshots&gt;</a>.
+  Once untarred, you can immediatley do <tt>cvs update</tt> in that
+  directory to update via anonymous CVS.</p>
 
-<p>
-Weekly snapshots are published at <a
-href="ftp://sources.redhat.com/pub/glibc/snapshots/">&lt;ftp://sources.redhat.com/pub/glibc/snapshots&gt;</a>.
-Once untarred, you can immediatley do <tt>cvs update</tt> in that
-directory to update via anonymous CVS.
-</p>
+  <h2 class="section"><a name="building" href="#TOCbuilding" id=
+  "building">Building</a></h2>
 
-<h2 class="section"><a name="building" href="#TOCbuilding">Building</a></h2>
-<p>
-Building <tt>glibc</tt> is quite tricky and has a number of pitfalls, not the least of which include
-<ul>
- <li><b>Never</b> install over a live system.  The connection between
-    the individual parts of the <tt>glibc</tt> shared libraries is
-    special.  The <tt>libc.so</tt> shared library uses private
-    interfaces in <tt>ld.so</tt> and vice versa.  On a live system
-    with dynamically linked applications if a new <tt>libc.so</tt>
-    replaces an old one with a different internal ABI your system will
-    be broken.  <tt>libpthread.so</tt>, <tt>libm.so</tt>, and
-    <tt>librt.so</tt> have similar problems.  At a minimum, install
-    into a separate chroot environment.
-  </li>
-  <li> There is a high possibility you will end up creating a different
-  public ABI.  If you were to begin distributing binaries they would
-  at a minimum not work, and at best create a lot of confusion.</li>
-</ul>
+  <p>Building <tt>glibc</tt> is quite tricky and has a number of
+  pitfalls, not the least of which include</p>
 
-</p>If you find yourself needing to build a customised version of
-<tt>glibc</tt>, you are best to use the framework offered by your
-distribution (i.e. the <tt>rpm</tt> or <tt>deb</tt> package build
-facilities).</p>
-
-<h2 class="section"><a name="external_resources" href="#TOCexternal_resources">External Resources</a></h2>
-<p>
-Below are some tools that may help you to work with <tt>glibc</tt>
-</p>
-<h3 class="subsection">Documentation</h3>
-<ul>
-  <li><a href="http://www.kegel.com/crosstool/">Building and Testing
-gcc/glibc cross toolchains</a></li>
-  <li><a href="http://javierlinares.com/debian/docs/chroot/chroot.pdf">Setting
-up a chroot Debian system</a></li>
-  <li>The <a
- href="http://www.unix-systems.org/single_unix_specification/">Single
-Unix Specification</a> (for an overview of the standard and it's
-history see <a href="http://www.unix.org/version3/overview.html">this</a>
-or <a href="http://www.gelato.unsw.edu.au/IA64wiki/WhatIsPOSIX">this</a>).
-  </li>
-  <li><a href="http://people.redhat.com/drepper/">Ulrich Drepper's</a> page contains many documents relevant to <tt>glibc</tt> development.
-  </li>
-
-</ul>
-<h3 class="subsection">Tools</h3>
-<ul>
-  <li><a href="http://www.liacs.nl/%7Ewichert/strace/">strace</a> :
-Strace is a debugging tool which prints out
-a trace of all the system calls made by a program.</li>
-  <li><a href="http://packages.debian.org/unstable/utils/ltrace.html">ltrace</a>
-: Ltrace intercepts and records
-the dynamic library calls which are called by
-the executed process and the signals received by that process.</li>
-  <li><a href="http://www.gnu.org/software/ddd/">ddd</a> : An interface
-to gdb</li>
-  <li>The standard ELF tools nm, objdump and readelf (see man pages
-  and the <a href="http://sources.redhat.com/binutils/">GNU
-  binutils</a> documentation).</li>
-  <li><a href="http://valgrind.kde.org">Valgrind</a> (x86 Linux) : With the tools
-  that come with Valgrind, you can automatically detect many memory
-  management and threading bugs, avoiding hours of frustrating
-  bug-hunting, making your programs more stable. You can also perform
-  detailed profiling, to speed up and reduce memory use of your
-  programs.
-  <li>Profiling utilities
   <ul>
-   <li><tt>gprof</tt> is the standard profiler distributed with GNU binutils.
+    <li><b>Never</b> install over a live system. The connection
+    between the individual parts of the <tt>glibc</tt> shared
+    libraries is special. The <tt>libc.so</tt> shared library uses
+    private interfaces in <tt>ld.so</tt> and vice versa. On a live
+    system with dynamically linked applications if a new
+    <tt>libc.so</tt> replaces an old one with a different internal
+    ABI your system will be broken. <tt>libpthread.so</tt>,
+    <tt>libm.so</tt>, and <tt>librt.so</tt> have similar problems.
+    At a minimum, install into a separate chroot environment.</li>
 
-   <li><tt><a href="http://www.hpl.hp.com/research/linux/qprof/">qprof</a></tt>
-  is an alternative profiler for Linux on IA64 and i386 platforms.
+    <li>There is a high possibility you will end up creating a
+    different public ABI. If you were to begin distributing
+    binaries they would at a minimum not work, and at best create a
+    lot of confusion.</li>
+  </ul>If you find yourself needing to build a customised version
+  of <tt>glibc</tt>, you are best to use the framework offered by
+  your distribution (i.e. the <tt>rpm</tt> or <tt>deb</tt> package
+  build facilities).
 
-   <li><tt><a
-  href="http://oprofile.sourceforge.net/news/">oprofile</a></tt> is a
-  Linux based system wide profiling tool.
+  <h2 class="section"><a name="external_resources" href=
+  "#TOCexternal_resources" id="external_resources">External
+  Resources</a></h2>
 
+  <p>Below are some tools that may help you to work with
+  <tt>glibc</tt></p>
+
+  <h3 class="subsection">Documentation</h3>
+
+  <ul>
+    <li><a href="http://www.kegel.com/crosstool/">Building and
+    Testing gcc/glibc cross toolchains</a></li>
+
+    <li><a href=
+    "http://javierlinares.com/debian/docs/chroot/chroot.pdf">Setting
+    up a chroot Debian system</a></li>
+
+    <li>The <a href=
+    "http://www.unix-systems.org/single_unix_specification/">Single
+    Unix Specification</a> (for an overview of the standard and
+    it's history see <a href=
+    "http://www.unix.org/version3/overview.html">this</a> or
+    <a href=
+    "http://www.gelato.unsw.edu.au/IA64wiki/WhatIsPOSIX">this</a>).</li>
+
+    <li><a href="http://people.redhat.com/drepper/">Ulrich
+    Drepper's</a> page contains many documents relevant to
+    <tt>glibc</tt> development.</li>
   </ul>
 
-</ul>
-<h3 class="subsection">Projects</h3>
-<ul>
-<li>A few modules of the C library can be used on their own, as part of standalone applications
-intended to be portable to hosts based on non-GNU C libraries.  The
-<a href='http://www.gnu.org/software/gnulib/'>GNU Portability Library (gnulib)</a>
-has packaged some of these modules and provides instructions how to modify makefiles,
-<samp>configure.ac</samp> files, etc.
-</li>
+  <h3 class="subsection">Tools</h3>
 
-<li><a href="http://nptl.bullopensource.org/">NPTL
-testing and tracing</a> : A project aimed at providing test/stress
-programs and a tracing mechanism for the NPTL thread suite.</li>
+  <ul>
+    <li><a href="http://www.liacs.nl/%7Ewichert/strace/">strace</a>
+    : Strace is a debugging tool which prints out a trace of all
+    the system calls made by a program.</li>
 
-</ul>
+    <li><a href=
+    "http://packages.debian.org/unstable/utils/ltrace.html">ltrace</a>
+    : Ltrace intercepts and records the dynamic library calls which
+    are called by the executed process and the signals received by
+    that process.</li>
 
+    <li><a href="http://www.gnu.org/software/ddd/">ddd</a> : An
+    interface to gdb</li>
 
-<div class="copyright">
-    <P>
-      Please send FSF &amp; GNU inquiries &amp; questions to
-      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
-      are also <A HREF="/home.html#ContactInfo">other ways to
-      contact</A> the FSF.
+    <li>The standard ELF tools nm, objdump and readelf (see man
+    pages and the <a href="http://sources.redhat.com/binutils/">GNU
+    binutils</a> documentation).</li>
 
-    <P>
-      Please send comments on these web pages to
-      <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
-      Send other questions to
-      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+    <li><a href="http://valgrind.kde.org">Valgrind</a> (x86 Linux)
+    : With the tools that come with Valgrind, you can automatically
+    detect many memory management and threading bugs, avoiding
+    hours of frustrating bug-hunting, making your programs more
+    stable. You can also perform detailed profiling, to speed up
+    and reduce memory use of your programs.</li>
 
-    <P>
-      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.,
-      59 Temple Place - Suite 330, Boston, MA  02111,  USA
+    <li>Profiling utilities
 
-    <P>
-      Verbatim copying and distribution of this entire article is
-      permitted in any medium, provided this notice is preserved.
+      <ul>
+        <li><tt>gprof</tt> is the standard profiler distributed
+        with GNU binutils.</li>
 
-    <P>
-      Updated:
-<!-- timestamp start -->
-$Date: 2004/12/19 09:11:28 $ $Author: roland $
-<!-- timestamp end -->
-</div>
-  </BODY>
-</HTML>
+        <li><tt><a href=
+        "http://www.hpl.hp.com/research/linux/qprof/">qprof</a></tt>
+        is an alternative profiler for Linux on IA64 and i386
+        platforms.</li>
+
+        <li><tt><a href=
+        "http://oprofile.sourceforge.net/news/">oprofile</a></tt>
+        is a Linux based system wide profiling tool.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3 class="subsection">Projects</h3>
+
+  <ul>
+    <li>A few modules of the C library can be used on their own, as
+    part of standalone applications intended to be portable to
+    hosts based on non-GNU C libraries. The <a href=
+    'http://www.gnu.org/software/gnulib/'>GNU Portability Library
+    (gnulib)</a> has packaged some of these modules and provides
+    instructions how to modify makefiles, <samp>configure.ac</samp>
+    files, etc.</li>
+
+    <li><a href="http://nptl.bullopensource.org/">NPTL testing and
+    tracing</a> : A project aimed at providing test/stress programs
+    and a tracing mechanism for the NPTL thread suite.</li>
+  </ul>
+
+  <div class="copyright">
+    <p>Please send FSF &amp; GNU inquiries &amp; questions to
+    <a href="mailto:gnu@gnu.org"><em>gnu@gnu.org</em></a>. There
+    are also <a href="/home.html#ContactInfo">other ways to
+    contact</a> the FSF.</p>
+
+    <p>Please send comments on these web pages to <a href=
+    "mailto:webmasters@www.gnu.org"><em>webmasters@www.gnu.org</em></a>.
+    Send other questions to <a href=
+    "mailto:gnu@gnu.org"><em>gnu@gnu.org</em></a>.</p>
+
+    <p>Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002,
+    2003, 2004, 2005 Free Software Foundation, Inc., 59 Temple Place -
+    Suite 330, Boston, MA 02111, USA</p>
+
+    <p>Verbatim copying and distribution of this entire article is
+    permitted in any medium, provided this notice is preserved.</p>
+
+    <p>Updated: <!-- timestamp start -->
+    $Date: 2005/06/07 23:52:08 $ $Author: ianw $ 
+    <!-- timestamp end --></p>
+  </div>
+</body>
+</html>
