@@ -1,215 +1,220 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<HTML>
-  <HEAD>
-    <link rel="stylesheet" type="text/css" href="gnu.css" />
-    <TITLE>
-      GNU C Library - GNU Project - Free Software Foundation (FSF)
-    </TITLE>
-    <LINK REV="made" HREF="mailto:webmasters@www.gnu.org">
-    <META NAME="keywords" CONTENT="libc">
-  </HEAD>
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux (vers 12 April 2005), see www.w3.org">
+  <link rel="stylesheet" type="text/css" href="gnu.css">
 
+  <title>GNU C Library - GNU Project - Free Software Foundation
+  (FSF)</title>
+  <link rev="made" href="mailto:webmasters@www.gnu.org">
+  <meta name="keywords" content="libc">
+</head>
 
-  <BODY>
+<body>
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td rowspan="2" width="150"><a href=
+      "/graphics/agnuhead.html"><img src="./img/gnu-head-sm.png"
+      alt="[image of the Head of a GNU]" border="0"></a></td>
 
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-	<td rowspan="2" width="150">
-    <A HREF="/graphics/agnuhead.html"><IMG SRC="./img/gnu-head-sm.png" ALT="[image of the Head of a GNU]" border="0"></A>
-	</td>
-	<td colspan="4">
-		<h1>GNU C Library</h1>
-	</td>
-	</tr>
-	<tr>
-		<td width="100" height="25" class="toc_inactive"><a href="libc.html">Main page</a></td>
-		<td width="100" height="25" class="toc_inactive"><a href="bugs.html">Bugs</a></td>
-		<td width="100" height="25" class="toc_inactive"><a HREF="/software/libc/manual/">Manual</a></td>
-		<td width="100" height="25" class="toc_inactive"><a href="resources.html">Resources</a></td>
-		<td>&nbsp;</td>
-	</tr>
-	</table>
-	<br>
+      <td colspan="4">
+        <h1>GNU C Library</h1>
+      </td>
+    </tr>
 
-<div class="toc">
-    <H2>Table of Contents</H2 class="section">
-    <UL>
-      <LI><A HREF="#Overview" NAME="TOCOverview">Overview</A>
-      <LI><A HREF="#CurrentStatus" NAME="TOCCurrentStatus">Current Status</A>
-      <LI><A HREF="#Availability" NAME="TOCAvailability">Availability</A>
-      <LI><A HREF="#Bugs" NAME="TOCBugs">Bugs</A>
-		<LI><A HREF="#Resources" NAME="TOCResources">Resources</A>
-      <LI><A HREF="#People" NAME="TOCPeople">People</A>
-    </UL>
-</div>
+    <tr>
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "libc.html">Main page</a></td>
 
-    <H2 class="section"><A HREF="#TOCOverview" NAME="Overview">Overview</A></H2 class="section">
-<p>
-Any Unix-like operating system needs a C library: the library which
-defines the ``system calls'' and other basic facilities such as
-open, malloc, printf, exit...
-</p>
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "bugs.html">Bugs</a></td>
 
-<p>
-      The GNU C library is used as <EM>the</EM> C library in the GNU system
-      and most systems with the Linux kernel.
-</p>
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "/software/libc/manual/">Manual</a></td>
 
-<h3 class="subsection">History</h3>
-<p>
-      The history of Unix and various standards determine much of the
-      interface of the C library.  In general the GNU C library supports the
-      ISO C and POSIX standards.  We also try to support the features of
-      popular Unix variants (including BSD and System V) when those do not
-      conflict with the standards.  Different compatibility modes
-      (selectable when you compile an application) allow the peaceful
-      coexistence of compatibility support for different varieties of Unix.
-</p>
+      <td width="100" height="25" class="toc_inactive"><a href=
+      "resources.html">Resources</a></td>
 
-<h3 class="subsection">Project Goals</h3>
-<p>
-The GNU C library is primarily designed to be a portable and high performance C library.
-</p>
+      <td>&nbsp;</td>
+    </tr>
+  </table><br>
 
-<p>
-It follows all relevant standards (ISO C 99, POSIX.1c, POSIX.1j,
-POSIX.1d, Unix98, Single Unix Specification).
+  <div class="toc">
+    <h2>Table of Contents</h2>
 
-It is also internationalized and has one of the most complete
-internationalization interfaces known.
-</p>
+    <ul>
+      <li><a href="#Overview" name="TOCOverview" id=
+      "TOCOverview">Overview</a></li>
 
-<h3 class="subsection">Contributing</h3>
-<p>
-      Today the GNU C library is almost complete: nearly all known and
-      useful functions from any other C library are available.
-      However, there is still room for improvement.  If you would like
-      to add or improve features in the GNU C library, please look
-      through at the latest <a
-      href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/PROJECTS?cvsroot=glibc">PROJECTS</a>
-      file distributed with the <tt>glibc</tt> source, and coordinate
-      your work with the maintainers at <A
-      HREF="mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</A>.
-</p>
+      <li><a href="#CurrentStatus" name="TOCCurrentStatus" id=
+      "TOCCurrentStatus">Current Status</a></li>
 
-<p>Note that most large contributions to the code base will require authors to file copyright papers with the FSF.
-Please contact the maintainers with any queries.</p>
+      <li><a href="#Availability" name="TOCAvailability" id=
+      "TOCAvailability">Availability</a></li>
 
-<h4>Standards Conformance</h4>
-<p>
-      <tt>glibc</tt> distributes a <a
-      href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/CONFORMANCE?cvsroot=glibc">CONFORMANCE</a>
-      report detailing adherence to various standards.  This list also
-      shows where GNU libc needs to be improved.
-</p>
+      <li><a href="#Bugs" name="TOCBugs" id="TOCBugs">Bugs</a></li>
 
-<h4>Manual</h4>
-<p>
-      The GNU C library manual is incomplete.  It would be
-      very helpful if you could spend a bit of your time on writing
-      the missing parts.  Please coordinate your work with the
-      maintainers 
-      <A HREF="mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</A>.
-</p>
+      <li><a href="#Resources" name="TOCResources" id=
+      "TOCResources">Resources</a></li>
 
-<h4>Porting</h4>
-<p>
-      For more information on the process of porting see <a href="http://www.gnu.org/software/libc/manual/html_node/Porting.html">
-      Porting the C Library</a> in the <tt>glibc</tt> manual.  The status of ports and their sub-maintainers is currently documented on the 
-      <A HREF="./ports.html">ports</A> page.  If you are interested in porting GNU libc to
-      additional system types, please contact the maintainers 
-      <A HREF="mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</A> before beginning your port.
-</p>
+      <li><a href="#People" name="TOCPeople" id=
+      "TOCPeople">People</a></li>
+    </ul>
+  </div>
 
-   
-    <H2 class="section"><A HREF="#TOCCurrentStatus" NAME="CurrentStatus">Current Status</A></H2 class="section">
+  <h2 class="section"><a href="#TOCOverview" name="Overview" id=
+  "Overview">Overview</a></h2>
 
-    <p>
-      The current version is <A
-      HREF="http://ftp.gnu.org/pub/gnu/glibc/glibc-2.3.5.tar.gz">2.3.5</A>.
-	</p>
-	
-    <p>
-      See the <A HREF="http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/NEWS?cvsroot=glibc">NEWS</A> file for more information.
-    </p>
+  <p>Any Unix-like operating system needs a C library: the library
+  which defines the ``system calls'' and other basic facilities
+  such as open, malloc, printf, exit...</p>
 
-    <P>
-      There is a <A HREF="FAQ.html">FAQ</A> which
-      you should read first.
+  <p>The GNU C library is used as <em>the</em> C library in the GNU
+  system and most systems with the Linux kernel.</p>
 
+  <h3 class="subsection">History</h3>
 
+  <p>The history of Unix and various standards determine much of
+  the interface of the C library. In general the GNU C library
+  supports the ISO C and POSIX standards. We also try to support
+  the features of popular Unix variants (including BSD and System
+  V) when those do not conflict with the standards. Different
+  compatibility modes (selectable when you compile an application)
+  allow the peaceful coexistence of compatibility support for
+  different varieties of Unix.</p>
 
-    <H2 class="section"><A HREF="#TOCAvailability" NAME="Availability">Availability</A></H2 class="section">
+  <h3 class="subsection">Project Goals</h3>
 
-    <p>
-      The releases are available at <A
-      HREF="http://ftp.gnu.org/gnu/glibc">http://ftp.gnu.org/gnu/glibc/</A>
-      and its mirrors.  
-    </p>
+  <p>The GNU C library is primarily designed to be a portable and
+  high performance C library.</p>
 
-    
-<p>
-        For more information on porting see <A HREF="http://www.gnu.org/software/libc/manual/html_node/Porting.html">Porting the
-      GNU C Library</A>.
-</p>
+  <p>It follows all relevant standards (ISO C 99, POSIX.1c,
+  POSIX.1j, POSIX.1d, Unix98, Single Unix Specification). It is
+  also internationalized and has one of the most complete
+  internationalization interfaces known.</p>
 
-    <H2 class="section"><A HREF="#TOCBugs" name="Bugs">Bugs</A></H2 class="section">
+  <h3 class="subsection">Contributing</h3>
 
-    <p>
-      See <A HREF="bugs.html">this page</A> for information
-      on reporting bugs in the GNU C Library.
-    </p>
+  <p>Today the GNU C library is almost complete: nearly all known
+  and useful functions from any other C library are available.
+  However, there is still room for improvement. If you would like
+  to add or improve features in the GNU C library, please look
+  through at the latest <a href=
+  "http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/PROJECTS?cvsroot=glibc">
+  PROJECTS</a> file distributed with the <tt>glibc</tt> source, and
+  coordinate your work with the maintainers at <a href=
+  "mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</a>.</p>
 
-	<H2 class="section"><A HREF="#TOCResources" name="Resources">Resources</A></H2>
-<p>
-    The canonical source for information about the GNU C Library the reference manual available at
-    <A HREF="/software/libc/manual/">&lt;http://www.gnu.org/software/libc/manual/&gt;</A>
-</p>
+  <p>Note that most large contributions to the code base will
+  require authors to file copyright papers with the FSF. Please
+  contact the maintainers with any queries.</p>
 
-	<p>
-		Also see <A HREF="resources.html">this page</A> for some resources relevant to the GNU C Library.
-	</p>
+  <h4>Standards Conformance</h4>
 
-    <H2 class="section"><A HREF="#TOCPeople" name="People">People</A></H2>
+  <p><tt>glibc</tt> distributes a <a href=
+  "http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/CONFORMANCE?cvsroot=glibc">
+  CONFORMANCE</a> report detailing adherence to various standards.
+  This list also shows where GNU libc needs to be improved.</p>
 
-      The GNU C library was originally written primarily by Roland McGrath <a href="mailto:roland@gnu.org">&lt;roland@gnu.org&gt;</a> when he worked for the FSF.
-      In 2001 The GNU C Library Steering Committee
-      <a href="mailto:glibc-sc@gnu.org">&lt;glibc-sc@gnu.org&gt;</a>,
-      was formed and currently consists of Mark Brown, Paul Eggert,
-      Andreas Jaeger, Jakub Jelinek, Roland McGrath and Andreas Schwab. 
-      Ulrich Drepper is currently the foremost contributor and has overall responsibility for maintenance and development. 
- 
-      <p>
-      Many others have contributed in large amounts as documented in the <tt>glibc</tt> <a href="http://www.gnu.org/software/libc/manual/html_node/Contributors.html#Contributors">Contributors</a>.
-      </p>
+  <h4>Manual</h4>
 
-<div class="copyright">
-    <P>
-      Please send FSF &amp; GNU inquiries &amp; questions to 
-      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.  There
-      are also <A HREF="/home.html#ContactInfo">other ways to
-      contact</A> the FSF.
+  <p>The GNU C library manual is incomplete. It would be very
+  helpful if you could spend a bit of your time on writing the
+  missing parts. Please coordinate your work with the maintainers
+  <a href=
+  "mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</a>.</p>
 
-    <P>
-      Please send comments on these web pages to 
-      <A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>.
-      Send other questions to 
-      <A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+  <h4>Porting</h4>
 
-    <P>
-      Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.,
-      59 Temple Place - Suite 330, Boston, MA  02111,  USA
+  <p>For more information on the process of porting see <a href=
+  "http://www.gnu.org/software/libc/manual/html_node/Porting.html">Porting
+  the C Library</a> in the <tt>glibc</tt> manual. The status of
+  ports and their sub-maintainers is currently documented on the
+  <a href="./ports.html">ports</a> page. If you are interested in
+  porting GNU libc to additional system types, please contact the
+  maintainers <a href=
+  "mailto:libc-alpha@sources.redhat.com">&lt;libc-alpha@sources.redhat.com&gt;</a>
+  before beginning your port.</p>
 
-    <P>
-      Verbatim copying and distribution of this entire article is
-      permitted in any medium, provided this notice is preserved.
+  <h2 class="section"><a href="#TOCCurrentStatus" name=
+  "CurrentStatus" id="CurrentStatus">Current Status</a></h2>
 
-    <P>
-      Updated:
-<!-- timestamp start -->
-$Date: 2005/06/07 23:46:07 $ $Author: ianw $
-<!-- timestamp end -->
-</div>
-  </BODY>
-</HTML>
+  <p>The current version is <a href=
+  "http://ftp.gnu.org/pub/gnu/glibc/glibc-2.3.5.tar.gz">2.3.5</a>.</p>
+
+  <p>See the <a href=
+  "http://sources.redhat.com/cgi-bin/cvsweb.cgi/libc/NEWS?cvsroot=glibc">
+  NEWS</a> file for more information.</p>
+
+  <p>There is a <a href="FAQ.html">FAQ</a> which you should read
+  first.</p>
+
+  <h2 class="section"><a href="#TOCAvailability" name=
+  "Availability" id="Availability">Availability</a></h2>
+
+  <p>The releases are available at <a href=
+  "http://ftp.gnu.org/gnu/glibc">http://ftp.gnu.org/gnu/glibc/</a>
+  and its mirrors.</p>
+
+  <p>For more information on porting see <a href=
+  "http://www.gnu.org/software/libc/manual/html_node/Porting.html">Porting
+  the GNU C Library</a>.</p>
+
+  <h2 class="section"><a href="#TOCBugs" name="Bugs" id=
+  "Bugs">Bugs</a></h2>
+
+  <p>See <a href="bugs.html">this page</a> for information on
+  reporting bugs in the GNU C Library.</p>
+
+  <h2 class="section"><a href="#TOCResources" name="Resources" id=
+  "Resources">Resources</a></h2>
+
+  <p>The canonical source for information about the GNU C Library
+  the reference manual available at <a href=
+  "/software/libc/manual/">&lt;http://www.gnu.org/software/libc/manual/&gt;</a></p>
+
+  <p>Also see <a href="resources.html">this page</a> for some
+  resources relevant to the GNU C Library.</p>
+
+  <h2 class="section"><a href="#TOCPeople" name="People" id=
+  "People">People</a></h2>The GNU C library was originally written
+  primarily by Roland McGrath <a href=
+  "mailto:roland@gnu.org">&lt;roland@gnu.org&gt;</a> when he worked
+  for the FSF. In 2001 The GNU C Library Steering Committee
+  <a href="mailto:glibc-sc@gnu.org">&lt;glibc-sc@gnu.org&gt;</a>,
+  was formed and currently consists of Mark Brown, Paul Eggert,
+  Andreas Jaeger, Jakub Jelinek, Roland McGrath and Andreas Schwab.
+  Ulrich Drepper is currently the foremost contributor and has
+  overall responsibility for maintenance and development.
+
+  <p>Many others have contributed in large amounts as documented in
+  the <tt>glibc</tt> <a href=
+  "http://www.gnu.org/software/libc/manual/html_node/Contributors.html#Contributors">
+  Contributors</a>.</p>
+
+  <div class="copyright">
+    <p>Please send FSF &amp; GNU inquiries &amp; questions to
+    <a href="mailto:gnu@gnu.org"><em>gnu@gnu.org</em></a>. There
+    are also <a href="/home.html#ContactInfo">other ways to
+    contact</a> the FSF.</p>
+
+    <p>Please send comments on these web pages to <a href=
+    "mailto:webmasters@www.gnu.org"><em>webmasters@www.gnu.org</em></a>.
+    Send other questions to <a href=
+    "mailto:gnu@gnu.org"><em>gnu@gnu.org</em></a>.</p>
+
+    <p>Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002,
+    2003, 2004, 2005 Free Software Foundation, Inc., 59 Temple
+    Place - Suite 330, Boston, MA 02111, USA</p>
+
+    <p>Verbatim copying and distribution of this entire article is
+    permitted in any medium, provided this notice is preserved.</p>
+
+    <p>Updated: <!-- timestamp start -->
+    $Date: 2005/06/07 23:48:34 $ $Author: ianw $ 
+    <!-- timestamp end --></p>
+  </div>
+</body>
+</html>
