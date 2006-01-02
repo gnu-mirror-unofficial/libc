@@ -99,6 +99,11 @@
     "http://sources.redhat.com/bugzilla/">glibc bugzilla</a></li>
   </ul>
 
+  <h3 class="subsection">IRC</h3>
+
+  <p>The <tt>#glibc</tt> channel is registered on <tt>oftc.net</tt>
+  and <tt>irc.freenode.net</tt>.
+
   <h3 class="subsection">Getting CVS sources</h3>
 
   <p>CVS sources are available from the project website (as per the
@@ -235,6 +240,33 @@ $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co ports
 
   </ul>
 
+  <h3 class="subsection">Coding Standards</h3>
+
+  <p>In general, follow the <a
+href="http://www.gnu.org/prep/standards/standards.html">GNU Coding
+Standards</a>.  Specific areas to be considered include</p>
+
+  <ul>
+    <li>Correct formatting of changelog entries; see the GNU standards
+and follow what already exists.</li>
+
+    <li>Update copyright strings in modified files.  Emacs users can
+use <tt>upd-copyr.el</tt> to do this automatically.</li>
+
+    <li>Avoid trailing whitespace.  Emacs users can use
+<tt>whitespace.el</tt> or a snippet like
+<pre>
+(defun fc-turn-on-show-trailing-whitespace ()
+  "Set `show-trailing-whitespace' to t."
+  (setq show-trailing-whitespace t))
+
+(mapc (lambda (hook)
+        (add-hook hook 'fc-turn-on-show-trailing-whitespace))
+      '(c-mode-hook))
+</pre>
+  </li>
+
+  </ul>
 
   <h3 class="subsection">Projects</h3>
 
@@ -284,7 +316,7 @@ $ cvs -z 9 -d :pserver:anoncvs@sources.redhat.com:/cvs/glibc co ports
     permitted in any medium, provided this notice is preserved.</p>
 
     <p>Updated: <!-- timestamp start -->
-    $Date: 2005/09/22 23:50:38 $ $Author: ianw $ 
+    $Date: 2006/01/02 22:46:42 $ $Author: ianw $ 
     <!-- timestamp end --></p>
   </div>
 </body>
